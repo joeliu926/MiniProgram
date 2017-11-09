@@ -112,7 +112,7 @@ Page({
   selectItem:function(item){
    console.log(item.target.dataset.iname);
    wx.navigateTo({
-     url: 'cdetail/cdetail',
+     url: 'citem/citem',
    })
   },
   selectTitle:function(){

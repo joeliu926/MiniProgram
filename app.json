@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/pcase/citem/citem",
-    "pages/pcase/csdetail/csdetail",
-
+        "pages/pcase/citem/citem",
     "pages/pcase/pcase",
+
+    "pages/pcase/csdetail/csdetail",
     "pages/index/index",
     "pages/logs/logs"
   ],

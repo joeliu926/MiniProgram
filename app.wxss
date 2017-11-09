@@ -15,6 +15,11 @@ page{
 .flex{
   display: flex;
 }
+.flex-c{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
 .fx-d-row{
   flex-direction: row;
 }
@@ -26,6 +31,9 @@ page{
 }
 .fx-jc-sb{
    justify-content:space-between;
+}
+.fx-jc-ed{
+  justify-content:flex-end;
 }
 .fx-wp{
   flex-wrap:wrap;
@@ -43,6 +51,7 @@ page{
 }
 .w-10{
   width: 100%;
+  padding: 0;
 }
 .b-s{
     box-sizing: border-box;

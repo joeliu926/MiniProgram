@@ -72,5 +72,11 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  fCaseDetail:function(item){
+    console.log(item.target.dataset.uid);
+    wx.navigateTo({
+      url: '../csdetail/csdetail',
+    })
   }
 })

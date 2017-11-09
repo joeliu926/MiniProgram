@@ -1,4 +1,8 @@
 /**app.wxss**/
+page{
+  height: 100%;
+  background-color: #F7F7F7;
+}
 .container {
   height: 100%;
   display: flex;
@@ -8,3 +12,8 @@
  /* padding: 200rpx 0;*/
   box-sizing: border-box;
 } 
+::-webkit-scrollbar{
+  height: 0;
+  width: 0;
+ 
+}

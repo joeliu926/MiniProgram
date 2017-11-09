@@ -1,6 +1,6 @@
 <view class='o-flex o-content'>
   <view class='o-title o-width'>
-    <text>开眼角</text>
+    <text>开眼角</text><text style="display:none;">3/4</text>
   </view>
   <view class='o-project o-width'>
     <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' circular="true"
@@ -9,7 +9,7 @@
         <swiper-item>
            <view class='o-item'>
                 <view class='o-width'>      
-                  <image src='{{item}}' mode='scaleToFill' class='o-width'></image>                           
+                  <image src='{{item}}' mode='scaleToFill' class='o-width cmp-img'></image>                           
                    <view class='o-width user-info'>
                       <view><image class='o-img-title' src='../../../public/images/case.png' mode='scaleToFill'></image> </view>
                           <view class='u-info'>
@@ -32,9 +32,13 @@
   </view>
 
 
-   <view class='share-friend'>
+   <view class='share-friend' >
        <image src='../../../public/images/case.png' class='share-icon'></image> <text class='share-txt'>分享给好友 </text>
        <text class='tip'>15</text>
+    </view>  
+    <view class='like-content o-width footer'  style="display:none;">
+       <image src='../../../public/images/case.png' class='like-icon'></image>  
+        <image src='../../../public/images/case.png' class='like-icon'></image>   
     </view>  
 </view>
 

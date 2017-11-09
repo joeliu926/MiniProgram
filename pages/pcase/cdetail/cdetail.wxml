@@ -1,0 +1,41 @@
+<view class='o-flex o-content'>
+  <view class='o-title o-width'>
+    <text>开眼角</text>
+  </view>
+  <view class='o-project o-width'>
+    <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' circular="true"
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+           <view class='o-item'>
+                <view class='o-width'>      
+                  <image src='{{item}}' mode='scaleToFill' class='o-width'></image>                           
+                   <view class='o-width user-info'>
+                      <view><image class='o-img-title' src='../../../public/images/case.png' mode='scaleToFill'></image> </view>
+                          <view class='u-info'>
+                            <text class='u-name'>张晓晓</text>
+                            <text class='u-time'>诊疗于 2017-10-12</text>
+                        </view>
+                      </view>              
+              </view> 
+              <view style="padding:15px;">
+                <view><text class='u-time txt-item'>开内眼角</text></view>
+                <view class='ho-info'>深圳娜妹儿朱灿医生做眼角综合</view> 
+              </view>
+              <view>
+                 <view class="add-share"><text class='u-time txt-item' >加入分享</text></view>         
+              </view>
+          </view> 
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+
+   <view class='share-friend'>
+       <image src='../../../public/images/case.png' class='share-icon'></image> <text class='share-txt'>分享给好友 </text>
+       <text class='tip'>15</text>
+    </view>  
+</view>
+
+

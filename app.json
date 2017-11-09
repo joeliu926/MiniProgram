@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/pcase/cdetail/cdetail",
+    "pages/pcase/pcase",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "咨询师助手",
+    "navigationBarTextStyle": "#ffffff"
+  }
+}

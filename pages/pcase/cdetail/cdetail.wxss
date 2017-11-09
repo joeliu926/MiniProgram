@@ -1,0 +1,98 @@
+.o-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.o-width{
+  width: 100%;
+  padding: 0px;
+}
+.o-content{ 
+    padding: 15px;
+    height: 100%;
+}
+.o-swiper{
+   height: 500px;
+
+
+}
+.o-item{
+    display: flex;
+    flex-direction:column;
+    height: 96%;
+    border: 1px solid rebeccapurple;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.o-project{
+  width: 100%;
+}
+.o-title{
+  text-align: center;
+  padding: 5px 0;
+  font-size: 16px;
+}
+
+.o-img-title{
+  height: 40px;
+  width: 40px;
+}
+.user-info{
+    display: flex;
+    padding:  5px 10px;
+ }
+ .u-info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px; 
+ }
+ .u-name{
+    font-size: 16px;
+    color: #7B7B7B;
+ }
+ .u-time{
+   font-size: 14px;
+   color: #A3A3A3;
+ }
+ .txt-item{
+   border: 1px solid #999999;
+   border-radius: 13px;
+   padding: 2px 10px;
+ }
+ .ho-info{
+     font-size: 16px;
+     color: #666666;
+     margin: 10px 0;
+ }
+ .add-share{
+   padding:0 15px;
+   text-align:right;
+ }
+.share-friend{
+     text-align:center;
+     background-color: #9184EE;
+     color: #ffffff;
+     padding: 10px 15px;
+     border-radius: 20px;
+     font-size: 14px;
+     position:absolute;
+     bottom: 30px;  
+     display: flex;
+      justify-content: center;
+     align-items: center;
+}
+.share-icon{
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+.tip{
+  position:absolute;
+  top:-2px;
+  color:#ffffff;
+  right:-2px;
+  background-color: #E75858;
+  border-radius: 50%;
+  font-size: 12px;
+}

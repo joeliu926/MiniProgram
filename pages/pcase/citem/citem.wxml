@@ -1,58 +1,65 @@
 <view class='o-flex o-content'>
   <view class='o-title w-10'>
-    <text>开眼角</text><text style="display:none;">3/4</text>
+    <text class='{{isConsult?"show":"hide"}}'>开眼角</text>
+    <text class='{{!isConsult?"show":"hide"}}'>3/4</text>
   </view>
   <view class='o-project w-10'>
-    <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' circular="true"
-      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' circular="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
       <block wx:for="{{imgUrls}}">
         <swiper-item>
-           <view class='o-item'>
-                <view class='w-10'> 
-                <view>
-                   <view class='flex b-s'> 
-     <image src='../../../public/images/img-demo.png' mode='scaleToFill' data-uid='{{item}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l'></image> 
-      <image src='../../../public/images/img-demo.png' mode='scaleToFill' data-uid='{{item}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r'></image> 
-                   </view>
-                </view>
-
-                   <view class='user-info'>
-                      <view class='bef-aft flex'><image class='o-img-title' src='../../../public/images/default-title.png' mode='scaleToFill'></image>
-                      
-                       </view>
-                          <view class='u-info'>
-                            <text class='u-name'>张晓晓</text>
-                            <text class='f-14'>诊疗于 2017-10-12</text>
-                        </view>
-                      </view>              
-              </view> 
-              <view style="padding:15px;">
-                <view><text class='f-14 txt-item'>开内眼角</text></view>
-                <view class='ho-info'>深圳娜妹儿朱灿医生做眼角综合</view> 
-              </view>
+          <view class='o-item'>
+            <view class='w-10'>
               <view>
-                 <view class="flex fx-jc-ed">
-                 <view class='flex-c txt-item'>
-                      <image src='../../../public/images/icon-addshare.png' class='share-icon'></image>
-                      <text class='f-14' >加入分享</text>
-                 </view>       
-                 </view>         
+                <view class='flex b-s'>
+                  <image src='../../../public/images/img-demo.png' mode='scaleToFill' data-uid='{{item}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l'></image>
+                  <image src='../../../public/images/img-demo.png' mode='scaleToFill' data-uid='{{item}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r'></image>
+                </view>
               </view>
-          </view> 
+
+              <view class='user-info'>
+                <view class='bef-aft flex'>
+                  <image class='o-img-title' src='../../../public/images/default-title.png' mode='scaleToFill'></image>
+
+                </view>
+                <view class='u-info'>
+                  <text class='u-name'>张晓晓</text>
+                  <text class='f-14'>诊疗于 2017-10-12</text>
+                </view>
+              </view>
+            </view>
+            <view style="padding:15px;">
+              <view>
+                <text class='f-14 txt-item'>开内眼角</text>
+              </view>
+              <view class='ho-info'>深圳娜妹儿朱灿医生做眼角综合</view>
+            </view>
+            <view>
+              <view class="flex fx-jc-ed">
+                <view class='flex-c txt-item' style='display:{{isConsult?"show":"none"}};'>
+                  <image src='../../../public/images/icon-addshare.png' class='share-icon'></image>
+                  <text class='f-14'>加入分享</text>
+                </view>
+              </view>
+            </view>
+          </view>
         </swiper-item>
       </block>
     </swiper>
   </view>
 
 
-   <view class='share-friend'>
-       <image src='../../../public/images/icon-share.png' class='share-icon'></image> <text class='share-txt'>分享给好友 </text>
-       <text class='tip'>15</text>
-    </view>  
-    <view class='like-content w-10 footer' style="display:none;" >
-       <image src='../../../public/images/icon-unlike.png' class='like-icon'></image>  
-        <image src='../../../public/images/icon-like.png' class='like-icon'></image>   
-    </view>  
+
+
+
+  <button class='share-btn flex-c' style='display:{{isConsult?"flex":"none"}};' open-type="share">
+    <image src='../../../public/images/icon-share.png' class='share-icon'></image>
+    <text class='share-txt'>分享给好友 </text>
+    <text class='tip'>15</text>
+  </button>
+
+  <view class='like-content w-10 footer' style='display:{{!isConsult?"show":"none"}};'>
+
+    <image src='../../../public/images/icon-unlike.png' class='like-icon' bindtap='fUnlikeCase'></image>
+    <image src='../../../public/images/icon-like.png' class='like-icon' bindtap='fLikeCase'></image>
+  </view>
 </view>
-
-

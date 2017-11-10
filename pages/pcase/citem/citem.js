@@ -14,69 +14,95 @@ Page({
     autoplay: false,
     interval: 5000,
     duration: 1000,
+    isConsult: true
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var test = options.test;
+    if (test) {
+      this.setData({
+        isConsult: false
+      });
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   /* wx.setNavigationBarTitle({
-      title:"This is a title"
-    })*/
+    /* wx.setNavigationBarTitle({
+       title:"This is a title"
+     })*/
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+    console.log("ffff");
+    return {
+      title: '自定义分享标题',
+      path: '/pages/pcase/citem/citem?test=123'
+    }
   },
-  fCaseDetail:function(item){
+  fCaseDetail: function (item) {
     console.log(item.target.dataset.uid);
     wx.navigateTo({
       url: '../csdetail/csdetail',
     })
+  },
+  fLikeCase: function () {
+    wx.navigateTo({
+      url: '/pages/pcase/tkphoto/tkphoto',
+    })
+  },
+  fUnlikeCase: function () {
+
+  },
+  fShareMessage: function () {
+    console.log("show share");
+ 
+    wx.showShareMenu({
+      withShareTicket: true
+    });
   }
 })

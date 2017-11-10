@@ -1,19 +1,12 @@
-// pages/pcase/cdetail/cdetail.js
+// pages/home/home.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
-    indicatorDots: false,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000,
+    showicon:false,
+    phonenum:""
   },
 
   /**
@@ -27,9 +20,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   /* wx.setNavigationBarTitle({
-      title:"This is a title"
-    })*/
+  
   },
 
   /**
@@ -73,10 +64,32 @@ Page({
   onShareAppMessage: function () {
   
   },
-  fCaseDetail:function(item){
-    console.log(item.target.dataset.uid);
+
+  fInputSearch:function(e){ 
+   
+    if (e.detail.value.length>0){
+      this.setData({
+        showicon: true,
+        phonenum: e.detail.value
+      });
+    }else{
+      this.setData({
+        showicon: false,
+        phonenum: ""
+      });
+    }
+    console.log(this.data);
+  },
+  fClearData:function(){
+    this.setData({
+      showicon: false,
+      phonenum: ""
+    });
+    console.log(this.data);
+  },
+  fAddNew:function(){
     wx.navigateTo({
-      url: '../csdetail/csdetail',
+      url: '../pcase/pcase',
     })
   }
 })

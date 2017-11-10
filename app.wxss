@@ -48,6 +48,7 @@ page{
 }
 .f-16{
   font-size: 16px;
+  color: #333333;
 }
 .w-10{
   width: 100%;
@@ -61,6 +62,9 @@ page{
 }
 .bk-c-w{
 background-color: #ffffff;
+}
+.hide{
+  display: none;
 }
 ::-webkit-scrollbar{
   height: 0;

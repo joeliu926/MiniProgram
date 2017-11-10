@@ -1,0 +1,48 @@
+.h-ct{
+height: 100%;
+}
+.s-ct{
+  height: 65px;
+}
+.input-o{
+  width: 60%;
+  margin: 0 auto;
+  padding: 3px 10px;
+  border-radius: 18px;
+  border: 1px solid #9E9E9E;
+  align-items: center;
+}
+.s-input{
+  height: 16px;
+  text-align: center;
+  padding-left: 2px;
+}
+ 
+
+.n-cst{
+  padding: 0px 12px;
+ height: 65px;
+ align-items: center;
+ margin: 2px 0 10px;
+}
+.cst-img{
+  height: 50px;
+  width: 50px;
+}
+.txt-cst{
+  margin-left: 10px;
+  color: #333333;
+}
+.ex-ct{
+  padding: 8px 12px 1px 12px;
+  margin-top: 2px;
+}
+.ex-item{
+  margin-left: 10px;
+}
+.istatus{
+  background-color: #FD937A;
+  border-radius: 10px;
+  padding: 0px 10px;
+  color: #ffffff;
+}

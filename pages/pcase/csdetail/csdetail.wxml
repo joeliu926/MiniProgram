@@ -16,7 +16,7 @@
 <view class='bk-c-w b-pd mg-b w-10 b-s'> 
       <view class='f-16 mg-b'>术前照片</view>
       <view class='flex fx-wp w-10'>
-         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
+         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png' mode='center'></image></view>
          <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
          <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
          <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>

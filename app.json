@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/index/index",
+    "pages/pcase/csdetail/csdetail",
     "pages/pcase/pcase",
     "pages/pcase/citem/citem",
-    "pages/pcase/csdetail/csdetail",
-    "pages/pcase/tkphoto/tkphoto",
-    "pages/index/index",
+     "pages/pcase/tkphoto/tkphoto",
     "pages/logs/logs"
   ],
   "window": {

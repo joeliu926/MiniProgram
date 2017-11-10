@@ -37,6 +37,8 @@ Page({
     /* wx.setNavigationBarTitle({
        title:"This is a title"
      })*/
+     console.log("-----------+++++++++---------");
+     console.log(getApp().globalData.userInfo)
   },
 
   /**

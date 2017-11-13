@@ -28,6 +28,10 @@ Page({
         isConsult: false
       });
     }
+    getApp().getUserData(function(uinfo){
+        //console.log("----------------============");
+       // console.log(uinfo);
+    });
   },
 
   /**
@@ -37,8 +41,8 @@ Page({
     /* wx.setNavigationBarTitle({
        title:"This is a title"
      })*/
-     console.log("-----------+++++++++---------");
-     console.log(getApp().globalData.userInfo)
+     //console.log("-----------+++++++++---------");
+     //console.log(getApp().globalData.userInfo)
   },
 
   /**

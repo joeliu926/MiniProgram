@@ -1,56 +1,7 @@
 // pages/pcase/pcase.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-      projectItem:[
-        {
-          projectName:"眼部整形",
-          projectItem:[{
-            name:"内开眼角",url:""
-          },{
-              name: "外开眼角", url: ""
-          },{
-              name: "双眼皮", url: ""
-          },{
-              name: "切开双眼皮", url: ""
-          }, {
-            name: "单眼皮", url: ""
-          }, {
-            name: "定点双眼皮", url: ""
-          }]
-        },{
-          projectName: "鼻部整形",
-          projectItem: [{
-            name: "高鼻梁", url: ""
-          }, {
-            name: "矮鼻梁", url: ""
-          }, {
-            name: "大鼻子", url: ""
-          }, {
-            name: "小鼻子", url: ""
-          }, {
-            name: "其他鼻子", url: ""
-          }, {
-            name: "others", url: ""
-          }]
-        },{
-          projectName: "面部轮廓",
-          projectItem: [{
-            name: "左脸", url: ""
-          }, {
-            name: "右脸", url: ""
-          }, {
-            name: "额头", url: ""
-          }, {
-            name: "下巴", url: ""
-          }, {
-            name: "其他", url: ""
-          }]
-        }
-      ],
+      projectItems:[],
       uicondata:"adsffsdf"
   },
 
@@ -58,7 +9,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let _This=this;
+    getApp().getUserData(function (uinfo) {
+      uinfo && _This.getProjectList(uinfo.unionId);
+    });
   },
 
   /**
@@ -110,13 +64,36 @@ Page({
   
   },
   selectItem:function(item){
-   console.log(item.target.dataset.iname);
+    let seletItem=item.target.dataset;
+   //console.log(item.target.dataset.iname);
+   let iname = seletItem.iname;
+   let itemid = seletItem.itemid;
+   let paid = seletItem.paid;
    wx.navigateTo({
-     url: 'citem/citem',
-   })
+     url: 'citem/citem?iname=' + iname+'&itemid='+itemid+'&paid='+paid,
+   });
   },
   selectTitle:function(){
-console.log("this is select title");
+     console.log("this is select title");
+  },
+  getProjectList(param){
+    let _This=this;
+    wx.request({
+      url: "https://27478500.qcloud.la/wxa/product/list",
+      method: "POST",
+      data: {
+        unionId: param
+      },
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (result) {
+        if(result.data.code==0){
+          _This.setData({projectItems: result.data.data});
+        }else{
+          console.log(result);
+        }
+      }});
   }
 
 })

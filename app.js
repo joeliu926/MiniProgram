@@ -26,7 +26,7 @@ App({
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
-                console.log("----this.userInfoReadyCallback------");
+                //console.log("----this.userInfoReadyCallback------");
                 this.userInfoReadyCallback(res)
               }
             }
@@ -39,15 +39,12 @@ App({
    userInfo: null
   },
  getUserData:function(callback){
-   console.log(!this.globalData.userInfo);
    if (this.globalData.userInfo&&this.globalData.userInfo.unionId){
-     console.log("------------exist--------");
      if (callback) {
-       callback(resAll.data.userinfo);
+       callback(this.globalData.userInfo);
      }
      return false;
    }
-   console.log("-=-=-=-=-=-=-=-=-=-=-");
    wx.login({
      success: function (res) {
        if (res.code) {
@@ -80,7 +77,6 @@ App({
                    success: function (resAll) {
                      //console.log(resAll);
                      getApp().globalData.userInfo = resAll.data.userinfo;
-                     //return resAll.data.userinfo;
                      if (callback){
                        callback(resAll.data.userinfo);
                      }

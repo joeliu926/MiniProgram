@@ -1,12 +1,12 @@
 <view class='case-content'>
 
 <button hover-class=''></button>
-<block wx:for="{{projectItem}}" wx:for-item="oitem">
+<block wx:for="{{projectItems}}" wx:for-item="oitem">
   <view class='o-flex case-item-content'>
-    <text class='case-title'  bindtap='selectTitle'>{{oitem.projectName}}</text>
+    <text class='case-title'  bindtap='selectTitle'>{{oitem.productName}}</text>
     <view class='case-item-detail'>
-       <block wx:for="{{oitem.projectItem}}" wx:for-item="item">
-         <text class='case-item' data-iname='{{item.name}}' bindtap='selectItem'>{{item.name}}</text>
+       <block wx:for="{{oitem.productList}}" wx:for-item="item">
+         <text class='case-item' data-paid='{{item.parentCode}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}' bindtap='selectItem'>{{item.productName}}</text>
        </block>
     </view>
   </view>
@@ -20,41 +20,6 @@
 </view>
 
 
-
-
-<view class='o-flex case-item-content'>
-   <text class='case-title' bindtap='selectItem'>眼部整形</text>
-   <view class='case-item-detail'>
-    <text class='case-item'>开内眼角</text>
-    <text class='case-item'>开外眼角</text>
-    <text class='case-item'>双眼皮</text>
-   </view>
-</view>
-<view class='o-flex case-item-content'>
-   <text class='case-title'>鼻部整形</text>
-   <view class='case-item-detail'> 
-      <text class='case-item'>开内眼角</text>
-      <text class='case-item'>开外眼角</text>
-       <text class='case-item'>双眼皮</text>
-        <text class='case-item'>开内眼角</text>
-      <text class='case-item'>开外眼角</text>
-       <text class='case-item'>双眼皮</text>
-        <text class='case-item'>开内眼角</text>
-      <text class='case-item'>开外眼角</text>
-       <text class='case-item'>双眼皮</text>
-    </view>
-</view>
-<view class='o-flex case-item-content'>
-   <text class='case-title'>面部轮廓</text>
-   <view class='case-item-detail'>
-      <text class='case-item'>开内眼角</text>
-      <text class='case-item'>开外眼角</text>
-      <text class='case-item'>双眼皮</text>
-       <text class='case-item'>开内眼角</text>
-      <text class='case-item'>开外眼角</text>
-       <text class='case-item'>双眼皮</text>
-   </view>
-</view>
 
 </view>
 

@@ -21,12 +21,12 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log("---------2222-----------------");
+    //console.log("---------2222-----------------");
     getApp().getUserData(function(result){
-      console.log(result)
+      //console.log(result)
     });
   
-    console.log("+++++++++33333+++++++++++++++++");
+    //console.log("+++++++++33333+++++++++++++++++");
    
   },
 

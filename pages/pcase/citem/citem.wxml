@@ -5,14 +5,15 @@
   </view>
   <view class='o-project w-10'>
     <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' circular="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{imgUrls}}">
+      <block wx:for="{{caseList}}" wx:for-item="oitem">
+
         <swiper-item>
           <view class='o-item'>
             <view class='w-10'>
               <view>
                 <view class='flex b-s'>
                   <image src='../../../public/images/img-demo.png' mode='scaleToFill' data-uid='{{item}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l'></image>
-                  <image src='../../../public/images/img-demo.png' mode='scaleToFill' data-uid='{{item}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r'></image>
+                  <image src='http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/8cd0f341-fd25-4774-aa09-83daa49aa23d' mode='scaleToFill' data-uid='{{item}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r'></image>
                 </view>
               </view>
 

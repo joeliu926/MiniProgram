@@ -1,6 +1,4 @@
 <view class='case-content'>
-
-<button hover-class=''></button>
 <block wx:for="{{projectItems}}" wx:for-item="oitem">
   <view class='o-flex case-item-content'>
     <text class='case-title'  bindtap='selectTitle'>{{oitem.productName}}</text>
@@ -11,15 +9,13 @@
     </view>
   </view>
 </block>
+<view class='b-pos' style=''> </view>
+</view>
 
 <view class='case-btn-content'>
-<view class='o-flex'>
-    <image class='case-img-btn' src='../../public/images/case.png' mode='aspectFill'></image>
-    <text class='case-btn-name'>案例</text>
-</view>
-</view>
-
-
-
+  <view class='o-flex'>
+      <image class='case-img-btn' src='../../public/images/case.png' mode='aspectFill'></image>
+      <text class='case-btn-name'>案例</text>
+  </view>
 </view>
 

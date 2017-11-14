@@ -1,43 +1,44 @@
+<wxs src="./citem.wxs" module="util" />
 <view class='o-flex o-content'>
   <view class='o-title w-10'>
-    <text class='{{isConsult?"show":"hide"}}'>开眼角</text>
-    <text class='{{!isConsult?"show":"hide"}}'>3/4</text>
+    <text class='{{isConsult?"show":"hide"}}'>{{projectName}}</text>
+    <text class='{{!isConsult?"show":"hide"}}'>{{currentPage}}/{{totalCount}}</text>
   </view>
   <view class='o-project w-10'>
-    <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' circular="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' circular="false" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
       <block wx:for="{{caseList}}" wx:for-item="oitem">
-
-        <swiper-item>
+        <swiper-item>       
           <view class='o-item'>
             <view class='w-10'>
               <view>
                 <view class='flex b-s'>
-                  <image src='../../../public/images/img-demo.png' mode='scaleToFill' data-uid='{{item}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l'></image>
-                  <image src='http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/8cd0f341-fd25-4774-aa09-83daa49aa23d' mode='scaleToFill' data-uid='{{item}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r'></image>
+                  <image src='{{oitem.frondFile}}' mode='scaleToFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l'></image>
+                  <image src='{{oitem.backFile}}' mode='scaleToFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r'></image>
                 </view>
               </view>
 
               <view class='user-info'>
                 <view class='bef-aft flex'>
-                  <image class='o-img-title' src='../../../public/images/default-title.png' mode='scaleToFill'></image>
+                  <image class='o-img-title' src='{{oitem.customerLogo}}' mode='scaleToFill'></image>
 
                 </view>
                 <view class='u-info'>
-                  <text class='u-name'>张晓晓</text>
-                  <text class='f-14'>诊疗于 2017-10-12</text>
+                  <text class='u-name'>{{oitem.customerName}}</text>
+                  <text class='f-14'>诊疗于 {{util.formatTime(oitem.operationDate,"yyyy-MM-dd")}}</text>
                 </view>
               </view>
             </view>
             <view style="padding:15px;">
               <view>
-                <text class='f-14 txt-item'>开内眼角</text>
+                <text class='f-14 txt-item'>{{oitem.caseName}}</text>
               </view>
-              <view class='ho-info'>深圳娜妹儿朱灿医生做眼角综合</view>
+              <view class='ho-info'>{{oitem.hospitalName}}</view>
             </view>
             <view>
               <view class="flex fx-jc-ed">
-                <view class='flex-c txt-item' style='display:{{isConsult?"show":"none"}};'>
-                  <image src='../../../public/images/icon-addshare.png' class='share-icon'></image>
+                <view class='flex-c txt-item' bindtap='fChangeShare' data-indexi='{{index}}' data-itemid='{{oitem.id}}'  style='display:{{isConsult?"show":"none"}};'>
+                  <image wx:if='{{oitem.current==oitem.id}}' src='../../../public/images/icon-ashare.png' class='share-icon'></image>
+                  <image wx:if='{{oitem.current!=oitem.id}}' src='../../../public/images/icon-rshare.png' class='share-icon'></image>
                   <text class='f-14'>加入分享</text>
                 </view>
               </view>
@@ -55,7 +56,7 @@
   <button class='share-btn flex-c' style='display:{{isConsult?"flex":"none"}};' open-type="share">
     <image src='../../../public/images/icon-share.png' class='share-icon'></image>
     <text class='share-txt'>分享给好友 </text>
-    <text class='tip'>15</text>
+    <text class='tip' wx:if='{{aCaseIds.length>0}}'>{{aCaseIds.length}}</text>
   </button>
 
   <view class='like-content w-10 footer' style='display:{{!isConsult?"show":"none"}};'>

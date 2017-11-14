@@ -1,4 +1,4 @@
-// pages/pcase/cdetail/cdetail.js
+//const util = require('../../../utils/util.js')
 Page({
 
   /**
@@ -9,19 +9,23 @@ Page({
       {
         "id": 1,
         "doctorName": "刘德华",
-        "customerLogo": "http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/7cb3da9e-f690-4b79-b32c-6a69bdcf629b",
+        "customerLogo": "http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/8cd0f341-fd25-4774-aa09-83daa49aa23d",
         "customerName": "吴彦祖",
         "caseName": "我要隆个鼻",
         "productName": "你猜",
-        "frondFile": "http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/7cb3da9e-f690-4b79-b32c-6a69bdcf629b",
-        "backFile": "http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/7da37ca3-dde3-4d9a-ab9b-f40c181c4b83"
+        "frondFile": "http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/8cd0f341-fd25-4774-aa09-83daa49aa23d",
+        "backFile": "http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/8cd0f341-fd25-4774-aa09-83daa49aa23d"
       }
     ],
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
+    caseIds:"",
+    aCaseIds:[],
+    currentPage:1,
+    totalCount:0,
+    cstUid:"",
+    productCode:"",
+    projectName:"",
+
+/////////////////////////////////////////////////////
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
@@ -34,16 +38,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
-    var test = options.test;
-    if (test) {
-      this.setData({
-        isConsult: false
-      });
-    }
+    //console.log(util.formatTime(1510724649000))
+
+    //console.log(options);
+    var _This=this;
+    var caseIds = options.caseIds;
+    //console.log("caseIds----",caseIds);
+
     getApp().getUserData(function(uinfo){
-        //console.log("----------------============");
-       // console.log(uinfo);
+      //console.log(uinfo);
+      _This.setData({
+        isConsult: caseIds ? false : true,
+        caseIds: caseIds || "",
+        projectName:options.iname,
+        productCode: options.itemid,
+        cstUid: uinfo.unionId
+      });
+      _This.getCaseList(uinfo);
+
     });
   },
 
@@ -97,14 +109,15 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    console.log("ffff");
+    //console.log("ffff");
+    var _This=this;
     return {
-      title: '自定义分享标题',
-      path: '/pages/pcase/citem/citem?test=123'
+      title: '案例分享',
+      path: '/pages/pcase/citem/citem?caseIds=' + _This.data.caseIds + "&cstUid" + _This.data.cstUid + "&prodcutCode=" + _This.data.productCode
     }
   },
   fCaseDetail: function (item) {
-    console.log(item.target.dataset.uid);
+    //console.log(item.target.dataset.uid);
     wx.navigateTo({
       url: '../csdetail/csdetail',
     })
@@ -124,20 +137,47 @@ Page({
       withShareTicket: true
     });
   },
-  getCaseList(param) {
+  fChangeShare(e){
+    var citem = e.currentTarget.dataset.itemid;
+    var cindex = e.currentTarget.dataset.indexi;
+    var tmpList = this.data.caseList;
+    var oItems = this.data.aCaseIds;
+    var dindex = oItems.indexOf(citem);
+    if (dindex<0){
+       oItems.push(citem);
+       tmpList[cindex]["current"] = citem;
+     }else{
+      tmpList[cindex]["current"] =-1;
+      oItems.splice(dindex,1);
+     }
+    this.setData({
+      aCaseIds: oItems,
+      caseList: tmpList,
+      caseIds: oItems.toString()
+    });
+  },
+  fSwiperChange:function(e){
+    this.setData({currentPage:e.detail.current+1});
+  },
+  getCaseList(uinfo) {
     let _This = this;
     wx.request({
-      url: "https://27478500.qcloud.la/wxa/product/list",
+      url: "https://27478500.qcloud.la/wxa/case/list",
       method: "POST",
       data: {
-        unionId: param
+        unionId: uinfo.unionId,
+        productCode: _This.data.productCode,
+        caseIds: _This.data.caseIds
       },
       header: {
         'Content-Type': 'application/json'
       },
       success: function (result) {
         if (result.data.code == 0) {
-          _This.setData({ projectItems: result.data.data });
+          console.log(result);
+          _This.setData({ 
+            caseList: result.data.data      
+           });
         } else {
           console.log(result);
         }

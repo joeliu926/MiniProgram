@@ -64,13 +64,10 @@ Page({
   
   },
   selectItem:function(item){
-    let seletItem=item.target.dataset;
+    let sItem=item.target.dataset;
    //console.log(item.target.dataset.iname);
-   let iname = seletItem.iname;
-   let itemid = seletItem.itemid;
-   let paid = seletItem.paid;
    wx.navigateTo({
-     url: 'citem/citem?iname=' + iname+'&itemid='+itemid+'&paid='+paid,
+     url: 'citem/citem?iname=' + sItem.iname + '&itemid=' + sItem.itemid + '&paid=' + sItem.paid + '&paname=' + sItem.paname,
    });
   },
   selectTitle:function(){

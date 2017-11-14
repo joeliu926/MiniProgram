@@ -9,7 +9,7 @@
     box-sizing: border-box;
 }
 .o-swiper{
-   height: 420px;
+   height: 425px;
 }
 .o-item{ 
     box-sizing: border-box;

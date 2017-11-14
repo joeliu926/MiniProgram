@@ -5,16 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
+    oUserInfo:{},
+    consultationId:"",
     caseList: [
       {
-        "id": 1,
-        "doctorName": "刘德华",
-        "customerLogo": "http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/8cd0f341-fd25-4774-aa09-83daa49aa23d",
-        "customerName": "吴彦祖",
-        "caseName": "我要隆个鼻",
-        "productName": "你猜",
-        "frondFile": "http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/8cd0f341-fd25-4774-aa09-83daa49aa23d",
-        "backFile": "http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/8cd0f341-fd25-4774-aa09-83daa49aa23d"
+        "id": 0,
+        "doctorName": "",
+        "customerLogo": "",
+        "customerName": "",
+        "caseName": "",
+        "productName": "",
+        "frondFile": "",
+        "backFile": ""
       }
     ],
     caseIds:"",
@@ -38,24 +40,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //console.log(util.formatTime(1510724649000))
-
-    //console.log(options);
+   // console.log("+++++++++++++++++++++++++");
+   // console.log(options);
+   // console.log("+++++++++++++++++++++++++");
     var _This=this;
     var caseIds = options.caseIds;
-    //console.log("caseIds----",caseIds);
-
     getApp().getUserData(function(uinfo){
-      //console.log(uinfo);
+     // console.log("===========================");
+     // console.log(uinfo);
+
       _This.setData({
         isConsult: caseIds ? false : true,
         caseIds: caseIds || "",
         projectName:options.iname,
         productCode: options.itemid,
-        cstUid: uinfo.unionId
+        cstUid: uinfo.unionId,
+        oUserInfo: uinfo,
+        consultationId: options.consultationId||""
       });
       _This.getCaseList(uinfo);
-
+      if (!caseIds||caseIds.length<=0){
+        _This.fConsultation(options.itemid, function (result) {
+          _This.setData({
+            consultationId: result || ""
+          });
+        });
+      };
+      _This.fCustomerAdd();
     });
   },
 
@@ -113,16 +124,17 @@ Page({
     var _This=this;
     return {
       title: '案例分享',
-      path: '/pages/pcase/citem/citem?caseIds=' + _This.data.caseIds + "&cstUid" + _This.data.cstUid + "&prodcutCode=" + _This.data.productCode
+      path: '/pages/pcase/citem/citem?caseIds=' + _This.data.caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId
     }
   },
   fCaseDetail: function (item) {
-    //console.log(item.target.dataset.uid);
+    var did=item.target.dataset.uid;
     wx.navigateTo({
-      url: '../csdetail/csdetail',
+      url: '../csdetail/csdetail?did=' + did,
     })
   },
   fLikeCase: function () {
+
     wx.navigateTo({
       url: '/pages/pcase/tkphoto/tkphoto',
     })
@@ -174,14 +186,110 @@ Page({
       },
       success: function (result) {
         if (result.data.code == 0) {
-          console.log(result);
+         // console.log(result);
           _This.setData({ 
-            caseList: result.data.data      
+            caseList: result.data.data,
+            totalCount: result.data.data.length    
            });
         } else {
           console.log(result);
         }
       }
     });
+  },
+  fConsultation(sItem, callback) {
+    let _This = this;
+    wx.request({
+      url: "https://27478500.qcloud.la/wxa/consult/addconsultation",
+      method: "POST",
+      data: {
+        wxaOpenId: _This.data.oUserInfo.openId,
+        unionId: _This.data.oUserInfo.unionId,
+        consultationId: _This.data.consultationId,
+        userLoginName: "",
+        productCode: sItem,
+        wxNickName: _This.data.oUserInfo.nickName,
+      },
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (result) {
+        //console.log(result);
+        if (result.data.code == 0) {
+          callback(result.data.data);
+        } else {
+          console.log(result);
+        }
+      }
+    });
+  },
+    fCustomerAdd() {
+    let _This = this;
+    wx.request({
+      url: "https://27478500.qcloud.la/wxa/customer/addcustomer",
+      method: "POST",
+      data: {
+        openid: _This.data.oUserInfo.openId,
+        wxNickname: _This.data.oUserInfo.nickName,
+        gender: _This.data.oUserInfo.gender,
+        province: _This.data.oUserInfo.province,
+        city: _This.data.oUserInfo.city,
+        country: _This.data.oUserInfo.country,
+        logo: _This.data.oUserInfo.avatarUrl,
+        unionid: _This.data.oUserInfo.unionId
+      },
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (result) {
+       // console.log("--------------------");
+        //console.log(result);
+        //console.log("--------------------");
+        if (result.data.code == 0) {
+         // callback(result.data.data);
+        } else {
+          console.log(result);
+        }
+      }
+    });
+  },
+  fUserEvent(){
+    let _This = this;
+    wx.request({
+      url: "https://27478500.qcloud.la/wxa/event/add",
+      method: "POST",
+      data: {
+        code: "case_like", 
+        eventAttrs: {
+          triggered_time:new Date().valueOf(),
+          app: "app",
+          consultant: "咨询师union id",
+          caseId: "案例id",
+          isLike: "是否喜欢（1是 0否 2未知）"
+
+        },
+        subjectAttrs: {
+          appid: "公众号id",
+          openid: "用户openid",
+          unionid: "用户unionid",
+          手机号码: "mobile"
+        }
+      },
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (result) {
+        //console.log("--------------------");
+       // console.log(result);
+        //console.log("--------------------");
+        if (result.data.code == 0) {
+          // callback(result.data.data);
+        } else {
+          console.log(result);
+        }
+      }
+    });
   }
+  
+
 })

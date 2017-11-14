@@ -2,7 +2,9 @@
 Page({
   data: {
       projectItems:[],
-      uicondata:"adsffsdf"
+      uicondata:"adsffsdf",
+      oUserInfo:{},
+      consultationId:""
   },
 
   /**
@@ -65,10 +67,11 @@ Page({
   },
   selectItem:function(item){
     let sItem=item.target.dataset;
-   //console.log(item.target.dataset.iname);
-   wx.navigateTo({
-     url: 'citem/citem?iname=' + sItem.iname + '&itemid=' + sItem.itemid + '&paid=' + sItem.paid + '&paname=' + sItem.paname,
-   });
+      wx.navigateTo({
+        url: 'citem/citem?iname=' + sItem.iname + '&itemid=' + sItem.itemid + '&paid=' + sItem.paid + '&paname=' + sItem.paname
+      });
+
+
   },
   selectTitle:function(){
      console.log("this is select title");

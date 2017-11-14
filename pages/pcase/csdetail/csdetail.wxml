@@ -1,63 +1,56 @@
+<wxs src="./csdetail.wxs" module="util" />
 <view class='d-ct'>
    <view class='u-ct flex b-pd bk-c-w'>
       <view>
-        <image class='u-title' src='../../../public/images/default-title.png' mode='scaleToFill'></image>
+        <image class='u-title' src='{{detailInfo.customerLogo}}' mode='scaleToFill'></image>
       </view>
       <view class='u-info flex fx-d-col fx-jc-sa w-10'>
-        <view class='flex fx-jc-sb'><text class='f-16 u-name'>张晓晓</text><text class='f-14 u-item' style=''>开内眼角</text></view> 
-        <text class='f-14 u-time'>男 28岁</text>
+        <view class='flex fx-jc-sb'><text class='f-16 u-name'>{{detailInfo.doctorName}}</text><text class='f-14 u-item' style=''>{{detailInfo.productName}}</text></view> 
+        <text class='f-14 u-time'>{{util.genderFilter(detailInfo.customerGender)}} {{detailInfo.customerAge}}岁</text>
       </view>
   </view>    
   <view class='flex fx-d-col b-pd bk-c-w mg-b'>
-   <view class='flex mg-b'><image class='u-icon' src='../../../public/images/icon-hos.png' mode='scaleToFill'></image><text class='f-14 u-local mg-l'>北京神码医院</text></view>
-   <view class='flex'><image class='u-icon' src='../../../public/images/icon-doc.png' mode='scaleToFill'></image><text class='f-14 mg-l'>神码医生</text></view>
+   <view class='flex mg-b'><image class='u-icon' src='../../../public/images/icon-hos.png' mode='scaleToFill'></image><text class='f-14 u-local mg-l'>{{detailInfo.hospitalName}}</text></view>
+   <view class='flex'><image class='u-icon' src='../../../public/images/icon-doc.png' mode='scaleToFill'></image><text class='f-14 mg-l'>{{detailInfo.doctorName}}</text></view>
   </view>
 
 <view class='bk-c-w b-pd mg-b w-10 b-s'> 
       <view class='f-16 mg-b'>术前照片</view>
+      <block wx:for="{{detailInfo.contentList}}" wx:for-item="oitem" wx:if="{{oitem.nodeType==0}}">
       <view class='flex fx-wp w-10'>
-         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png' mode='center'></image></view>
-         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
-         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
-         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
-         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
+        <block wx:for="{{oitem.fileList}}" wx:for-item="imgItem" >
+         <view class='img-c b-s'><image class='c-image' src='{{imgItem}}' mode='center'></image></view>
+         </block>
       </view>
       <view class=''>
-        <text class='f-14'>术前特征：</text><text class='f-14 mg-l item-icon'>开内眼角</text><text class='f-14 mg-l item-icon'>脸长长</text><text class='f-14 mg-l item-icon'>外眼角</text>
+        <text class='f-14'>术前特征：</text>
+         <block wx:for="{{util.featureFilter(oitem.caseFeature)}}" wx:for-item="item" >
+            <text class='f-14 mg-l item-icon'>{{item}}</text>
+        </block>
       </view>
+    </block>
 </view>
 <view class='b-pd f-16 bk-c-w'>
    <text>术后日记</text>
 </view>
-<view class='bk-c-w mg-b'>
-    <text class='f-14 diary'>术后180天</text>
-    <view class='b-pd w-10  b-s'>
-        <view class='flex fx-wp w-10 b-s'>
-         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
-         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
-         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
-    </view>
-    <view>
-      <text class='f-14'>这是消息内容反反复复付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付</text>
-    </view>
-    <text class='f-12'>2017-11-12</text>
-    </view>
-</view>
-<view class='bk-c-w'>
-    <text class='f-14 diary'>术后120天</text>
-    <view class='b-pd w-10  b-s'>
-        <view class='flex fx-wp w-10 b-s'>
-         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
-         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
-         <view class='img-c b-s'><image class='c-image' src='../../../public/images/img-demo.png'></image></view>
-    </view>
-    <view>
-      <text class='f-14'>这是消息内容反反复复付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付</text>
-    </view>
-    <text class='f-12'>2017-11-12</text>
-    </view>
-</view>
 
+<block wx:for="{{detailInfo.contentList}}" wx:for-item="oitem" wx:if="{{oitem.nodeType==1}}">
+  <view class='bk-c-w mg-b'>
+      <text class='f-14 diary'>{{oitem.title}}</text>
+      
+      <view class='b-pd w-10  b-s'>
+          <view class='flex fx-wp w-10 b-s'>
+             <block wx:for="{{oitem.fileList}}" wx:for-item="imgItem" >
+              <view class='img-c b-s'><image class='c-image' src='{{imgItem}}' ></image></view>
+            </block>
+         </view>
+         <view>
+           <text class='f-14'>{{oitem.description}}</text>
+          </view>
+         <text class='f-12'>{{util.formatTime(oitem.definitionDate,"yyyy-MM-dd")}}</text>
+      </view>
+  </view>
+</block>
 
 </view>
 

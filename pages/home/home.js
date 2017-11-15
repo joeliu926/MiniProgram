@@ -6,7 +6,9 @@ Page({
    */
   data: {
     showicon: false,
-    phonenum: ""
+    phonenum: "",
+    customerList:[],
+    oUInfo:{}
   },
 
   /**
@@ -22,8 +24,13 @@ Page({
    */
   onReady: function () {
     //console.log("---------2222-----------------");
+     var _This=this;
     getApp().getUserData(function(result){
-      //console.log(result)
+     
+      _This.setData({
+        oUInfo: result
+      });
+      _This.getProjectList(result.unionId);
     });
   
     //console.log("+++++++++33333+++++++++++++++++");
@@ -73,7 +80,6 @@ Page({
   },
 
   fInputSearch: function (e) {
-
     if (e.detail.value.length > 0) {
       this.setData({
         showicon: true,
@@ -98,5 +104,30 @@ Page({
     wx.navigateTo({
       url: '../pcase/pcase',
     })
+  },
+  getProjectList(unionId,mobile) {
+    let _This = this;
+    wx.request({
+      url: "https://27478500.qcloud.la/wxa/consult/list",
+      method: "POST",
+      data: {
+        unionId: unionId||"",
+        mobile: mobile||""
+      },
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (result) {
+        console.log(result);
+        if (result.data.code == 0) {
+          _This.setData({ customerList: result.data.data.list });
+          console.log(result.data.data.list);
+        } else {
+          console.log(result);
+        }
+      }
+    });
   }
+
+
 })

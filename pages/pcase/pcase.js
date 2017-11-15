@@ -88,6 +88,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
+        console.log(result);
         if(result.data.code==0){
           _This.setData({projectItems: result.data.data});
         }else{

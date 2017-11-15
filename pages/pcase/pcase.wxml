@@ -3,8 +3,10 @@
   <view class='o-flex case-item-content'>
     <text class='case-title'  bindtap='selectTitle'>{{oitem.productName}}</text>
     <view class='case-item-detail'>
-       <block wx:for="{{oitem.productList}}" wx:for-item="item">
-         <text class='case-item' data-paid='{{item.parentCode}}' data-paname='{{oitem.productName}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}' bindtap='selectItem'>{{item.productName}}</text>
+       <block wx:for="{{oitem.productList}}" wx:for-item="secitem">
+           <block wx:for="{{secitem.productList}}" wx:for-item="item">
+             <text class='case-item' data-paid='{{item.parentCode}}' data-paname='{{oitem.productName}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}' bindtap='selectItem'>{{item.productName}}</text>
+          </block>
        </block>
     </view>
   </view>

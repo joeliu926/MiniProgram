@@ -1,3 +1,4 @@
+<wxs src="../pcase/citem/citem.wxs" module="util" />
 <view class='h-ct b-s'>
   <view class='flex-c b-s w-10 bk-c-w s-ct'>
     <view class='flex input-o'>
@@ -11,23 +12,27 @@
     <text class='f-16 txt-cst'>新的咨询</text>
   </view>
 
+
+<block  wx:for="{{customerList}}" wx:for-item="oitem">
   <view class='flex w-10 b-s bk-c-w ex-ct'>
     <view>
-      <image class='cst-img' src='../../public/images/default-title.png'></image>
+      <image class='cst-img' src='{{oitem.wxHeadPhoto||"../../public/images/default-title.png"}}'></image>
     </view>
     <view class='flex fx-d-col w-10 fx-jc-sa ex-item '>
       <view class='flex fx-jc-sb'>
-        <text class='f-16'>喜洋洋</text>
-        <text class='f-14'>2017/12/10</text>
+        <text class='f-16'>{{oitem.wxNickName}}</text>
+        <text class='f-14'>{{util.formatTime(oitem.createTime,"yyyy-MM-dd")}}</text>
       </view>
       <view class='flex fx-jc-sb'>
-        <text class='f-14'>项目：开眼皮 双眼皮</text>
+        <text class='f-14'>项目：{{oitem.productName}}</text>
         <text class='f-12 istatus'>术前</text>
       </view>
     </view>
   </view>
+</block>
 
 
+<!--
     <view class='flex w-10 b-s bk-c-w ex-ct'>
     <view>
       <image class='cst-img' src='../../public/images/default-title.png'></image>
@@ -44,5 +49,6 @@
     </view>
   </view>
 
+-->
 
 </view>

@@ -3,15 +3,16 @@
 <view class='flex fx-d-col p-c b-s w-10'>
     <view class='photo-content w-10'>
         <view class='bk-c-w b-s  fx-d-col photo'>
-            <image class='b-s w-10' src='../../../public/images/bk-photo.png' mode='widthFix'></image>
-            <image class='cam' src='../../../public/images/icon-came.png' ></image>
+            <image class='b-s w-10 {{photoSide?"":"hide"}}'  src='{{fronface||"../../../public/images/bk-photo.png"}}' mode='widthFix'></image>
+            <image class='b-s w-10 {{!photoSide?"":"hide"}}' src='../../../public/images/bk-photo.png' mode='widthFix'></image>
+            <image class='cam' bindtap='fTakePhoto' src='../../../public/images/icon-came.png' ></image>
         </view>
         <view class='flex-c'>
-          <text class='face f-14'>正面</text>
-          <text class='face f-14'>侧面</text>
+          <text class='face f-14 {{photoSide?"s-side":""}}' data-choose='{{photoSide}}' bindtap='fChangeSide'>正面</text>
+          <text class='face f-14 {{!photoSide?"s-side":""}}'  data-choose='{{!photoSide}}' bindtap='fChangeSide'>侧面</text>
         </view>
     </view>
     <view class='footer w-10 b-s'>
-           <text class='btn-sub'>把资料给医生</text>      
+           <text class='btn-sub' bindtap='fSendMsg'>把资料给医生</text>      
     </view>
 </view>

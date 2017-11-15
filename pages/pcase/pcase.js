@@ -12,6 +12,9 @@ Page({
    */
   onLoad: function (options) {
     let _This=this;
+    wx.showLoading({
+      title: 'loading...',
+    });
     getApp().getUserData(function (uinfo) {
       uinfo && _This.getProjectList(uinfo.unionId);
     });
@@ -88,13 +91,16 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
-        console.log(result);
+        //console.log(result);
+        //console.log(result.data.code);
         if(result.data.code==0){
           _This.setData({projectItems: result.data.data});
         }else{
           console.log(result);
         }
-      }});
+        wx.hideLoading();
+      }
+      });
   }
 
 })

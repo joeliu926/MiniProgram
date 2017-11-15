@@ -6,6 +6,7 @@ align-items: center;
 }
 .photo-content{
   height: 80%;
+  overflow: hidden;
   align-items: center;
 }
 .cam{
@@ -16,8 +17,9 @@ align-items: center;
   left:90px;
 }
 .photo{
-  height:360px;
+  height:80%;
   width: 240px;
+  overflow: hidden;
   margin: 0 auto;
   position: relative;
 }

@@ -118,10 +118,10 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
-        console.log(result);
+       // console.log(result);
         if (result.data.code == 0) {
           _This.setData({ customerList: result.data.data.list });
-          console.log(result.data.data.list);
+         // console.log(result.data.data.list);
         } else {
           console.log(result);
         }

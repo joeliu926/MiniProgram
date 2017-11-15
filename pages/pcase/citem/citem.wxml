@@ -5,7 +5,7 @@
     <text class='{{!isConsult?"show":"hide"}}'>{{currentPage}}/{{totalCount}}</text>
   </view>
   <view class='o-project w-10'>
-    <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' circular="false" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
+    <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
       <block wx:for="{{caseList}}" wx:for-item="oitem">
         <swiper-item>       
           <view class='o-item'>
@@ -34,12 +34,12 @@
               </view>
               <view class='ho-info'>{{oitem.hospitalName}}</view>
             </view>
-            <view>
+            <view style='padding-right:10px;'>
               <view class="flex fx-jc-ed">
-                <view class='flex-c txt-item' bindtap='fChangeShare' data-indexi='{{index}}' data-itemid='{{oitem.id}}'  style='display:{{isConsult?"show":"none"}};'>
+                <view class='flex-c txt-item b-s'  bindtap='fChangeShare' data-indexi='{{index}}' data-itemid='{{oitem.id}}'  style='display:{{isConsult?"show":"none"}};'>
                   <image wx:if='{{oitem.current==oitem.id}}' src='../../../public/images/icon-ashare.png' class='share-icon'></image>
                   <image wx:if='{{oitem.current!=oitem.id}}' src='../../../public/images/icon-rshare.png' class='share-icon'></image>
-                  <text class='f-14'>加入分享</text>
+                  <text class='f-14' >加入分享</text>
                 </view>
               </view>
             </view>
@@ -48,7 +48,8 @@
       </block>
     </swiper>
   </view>
-
+<view class='extr-v' style=''></view>
+<view class='extr-v extr-b' style=''></view>
 
 
 

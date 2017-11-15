@@ -1,6 +1,5 @@
 const formatTime = date => {
-  console.log("==============================");
-  console.log(date)
+  date = date||new Date().valueOf();
   date=new Date(date);
   const year = date.getFullYear()
   const month = date.getMonth() + 1

@@ -1,5 +1,8 @@
 
-const cmsg = require('../../../public/cmsg.js')
+const cmsg = require('../../../public/cmsg.js');
+const event = require('../../../public/event.js');
+const apiUser= require('../../../utils/APIUinfo.js');
+const tools = require('../../../utils/util.js');
 Page({
 
   /**
@@ -7,8 +10,29 @@ Page({
    */
   data: {
     photoSide:true,
-    fronface:null,
-    sideface:null
+    frontface:null,
+    sideface:null,
+    oUserInfo:{},
+    oEvent: {
+      code: "",
+      eventAttrs: {
+        appletId: "hldn",
+        consultingId: 0,
+        consultantId: "",
+        triggeredTime: "",
+        case: "",
+        isLike: "",
+        image: ""
+
+      },
+      subjectAttrs: {
+        appid: "yxy",
+        consultantId: "",
+        openid: "",
+        unionid: "",
+        mobile: ""
+      }
+    }
   },
 
   /**
@@ -17,17 +41,9 @@ Page({
   onLoad: function (options) {
   ///ｕｒｌ/wx/msg/sendmessage
     console.log(cmsg.custom);
-    var oCustom = cmsg.custom;
-    oCustom={
-        touser:"oh3NkxCV0gJ0-GtvC7LO5hKBsKio",
-        msgtype:"text",
-        text:{
-           content:"This is a test data"
-        }
-      };
 
      ///oh3NkxCV0gJ0-GtvC7LO5hKBsKio
-    wx.request({
+  /*  wx.request({
       url: "https://27478500.qcloud.la/wx/msg/sendmessage",
       method: "POST",
       data: oCustom,
@@ -40,12 +56,25 @@ Page({
       fail:function(result){
         console.log(result);
       }
-    });
+    });*/
 
+    var _This = this;
+
+    var oEvent = _This.data.oEvent;
     getApp().getUserData(function (uinfo) {
       console.log(uinfo);
+      _This.setData({
+        oUserInfo:uinfo,
+        cstUid: options.consultantId,
+        consultationId: options.consultationId
+      });
+      //console.log("cstUid----", _This.data.cstUid);
+  
     });
 
+
+
+ 
 
   },
 
@@ -97,26 +126,37 @@ Page({
   onShareAppMessage: function () {
   },
   fTakePhoto(){
-    var ids="ids";
-    var tType = "1";
+    var _This=this;
     wx.chooseImage({
       success: function (res) {
+        wx.showLoading({
+          title: '上传中...',
+        });
         var tempFilePaths = res.tempFilePaths
-        console.log(tempFilePaths);
-        wx.uploadFile({
-          url: 'https://27478500.qcloud.la/uploadimg/api/customer/uploadPicture/' + ids + '/' + tType, //仅为示例，非真实的接口地址
+        wx.uploadFile({    
+          url: "https://27478500.qcloud.la/uploadimg/attachment/upload",
           filePath: tempFilePaths[0],
           name: 'file',
           formData: {
             'user': 'test'
           },
           success: function (res) {
-            var data = res.data
-
-            console.log('res', res);
-            //do something
+           // console.log(res);
+                  var oData=JSON.parse(res.data);
+                  console.log(oData);
+                  if (oData.code==0){
+                    var iurl = oData.data[0];
+                  if (_This.data.photoSide) {
+                    _This.setData({ frontface: iurl});
+                  } else {
+                    _This.setData({ sideface: iurl});
+                 }
+            }
+           // console.log('res', res);
+            wx.hideLoading();
           },
           fail:function(res){
+              wx.hideLoading();
               console.log(res);
           }
         })
@@ -133,11 +173,21 @@ Page({
     }
   },
   fSendMsg(){
+
+    var _This=this;
+    if(!_This.data.frontface && !_This.data.sideface){
+      wx.showToast({
+        title: '请选择图片',
+        icon:"loading",
+        duration: 1000
+      });
+      return false;
+    }
     wx.showLoading({
       title: '上传中...',
     })
-
-
+    _This.fUserEvent(event.eType.informationSubmit);
+    _This.fCustomerMsg();
     setTimeout(function () {
       wx.hideLoading();
       wx.showToast({
@@ -145,8 +195,87 @@ Page({
         icon: 'success',
         duration: 2000
       })
-    }, 2000)
+    }, 2000);
 
-    console.log("send ,msg=====");
+
+  },
+  /*
+ *事件参数 
+ */
+  fGetTempEvent() {
+    var _This = this;
+    var oTempEvent = _This.data.oEvent;
+    oTempEvent.eventAttrs = {
+
+      appletId: "hldn",
+      consultingId: _This.data.consultationId,
+      consultantId: _This.data.cstUid,
+      isLike: _This.data.isLike,
+      caseId: _This.data.likeItem
+    }
+    oTempEvent.subjectAttrs = {
+      appid: "yxy",
+      openid: _This.data.oUserInfo.openId,
+      unionid: _This.data.oUserInfo.unionId,
+      consultantId: _This.data.cstUid,
+      mobile: ""
+    };
+    _This.setData({
+      oEvent: oTempEvent
+    });
+  },
+  fUserEvent(eType) {
+    console.log("---post---");
+    let _This = this;
+    _This.fGetTempEvent();
+    var oData = _This.data.oEvent;
+    oData.eventAttrs.triggeredTime = new Date().valueOf();
+    oData.code = eType;
+    wx.request({
+      url: "https://27478500.qcloud.la/wxa/event/add",
+      method: "POST",
+      data: oData,
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (result) {
+        console.log(result);
+        if (result.data.code == 0) {
+        } else {
+          console.log("add  event error---", result);
+        }
+      }
+    });
+  },
+  fCustomerMsg(){
+    var _This=this;
+    var oCustom = cmsg.custom;
+    oCustom = {
+      touser: "oh3NkxCV0gJ0-GtvC7LO5hKBsKio",
+      msgtype: "text",
+      text: {
+        content: "This is a test data" + (new Date().valueOf())
+      }
+    };
+    apiUser.uinfo(_This.data.cstUid, function (result) {
+      console.log("uinfo----", result.data.data.wxOpenId);
+      oCustom.touser = result.data.data.wxOpenId;
+      oCustom.text.content = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 提交了个人资料";
+      wx.request({
+        url: "https://27478500.qcloud.la/wx/msg/sendmessage",
+        method: "POST",
+        data: oCustom,
+        header: {
+          'Content-Type': 'application/json'
+        },
+        success: function (result) {
+          console.log("OK-----", result);
+        },
+        fail: function (result) {
+          console.log("false----", result);
+        }
+      });
+
+    });
   }
 })

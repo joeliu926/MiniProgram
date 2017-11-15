@@ -1,4 +1,7 @@
-const event= require('../../../public/event.js')
+const event= require('../../../public/event.js');
+const cmsg = require('../../../public/cmsg.js');
+const apiUser = require('../../../utils/APIUinfo.js');
+const tools = require('../../../utils/util.js');
 Page({
 
   /**
@@ -90,6 +93,8 @@ Page({
           });
           _This.fUserEvent(event.eType.appOpen);//进入程序
         });
+      }else{
+        _This.fCustomerMsg();
       };
       _This.fCustomerAdd();
     });
@@ -158,9 +163,10 @@ Page({
   */
 
   fLikeCase: function () {
-    _This.fUserEvent(event.eType.appShare);
+    var _This = this;
+    _This.fUserEvent(event.eType.caseLike);
     wx.navigateTo({
-      url: '/pages/pcase/tkphoto/tkphoto',
+      url: '/pages/pcase/tkphoto/tkphoto?consultantId=' + _This.data.cstUid + "&consultationId=" + _This.data.consultationId,
     })
   },
 
@@ -168,7 +174,8 @@ Page({
    * click unlike 
   */
   fUnlikeCase: function () {
-
+    var _This = this;
+    _This.fUserEvent(event.eType.caseLike);
   },
   fShareMessage: function () {
     console.log("show share");
@@ -309,12 +316,43 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
-        console.log(result);
+        console.log("UserEvent------",result);
         if (result.data.code == 0) {
         } else {
           console.log("add  event error---",result);
         }
       }
+    });
+  },
+  fCustomerMsg() {
+    var _This = this;
+    var oCustom = cmsg.custom;
+    oCustom = {
+      touser: "oh3NkxCV0gJ0-GtvC7LO5hKBsKio",
+      msgtype: "text",
+      text: {
+        content: "This is a test data" + (new Date().valueOf())
+      }
+    };
+    apiUser.uinfo(_This.data.cstUid, function (result) {
+      console.log("uinfo----", result.data.data.wxOpenId);
+      oCustom.touser = result.data.data.wxOpenId;
+      oCustom.text.content = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 查看了您的案例分享";
+      wx.request({
+        url: "https://27478500.qcloud.la/wx/msg/sendmessage",
+        method: "POST",
+        data: oCustom,
+        header: {
+          'Content-Type': 'application/json'
+        },
+        success: function (result) {
+          console.log("OK-----", result);
+        },
+        fail: function (result) {
+          console.log("false----", result);
+        }
+      });
+
     });
   }
   

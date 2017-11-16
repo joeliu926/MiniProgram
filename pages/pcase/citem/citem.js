@@ -141,12 +141,16 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-   // console.log("----------share----------"); 
     var _This=this;
-    _This.fUserEvent(event.eType.appShare);
+    _This.fUserEvent(event.eType.appShare); 
+    var caseIds = _This.data.caseIds;
+    var currentPage = _This.data.currentPage;
+    if (caseIds==""){
+      caseIds = _This.data.caseList[currentPage - 1].id;
+    }
     return {
       title: '案例分享',
-      path: '/pages/pcase/citem/citem?caseIds=' + _This.data.caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId
+      path: '/pages/pcase/citem/citem?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId
     }
   },
   fCaseDetail: function (item) {
@@ -166,7 +170,6 @@ Page({
       isLike:1
     });
     _This.fUserEvent(event.eType.caseLike);
-
     _This.fSelectIsLike(function(result){
       if(result){
         wx.navigateTo({

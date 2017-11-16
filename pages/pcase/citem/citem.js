@@ -39,7 +39,6 @@ Page({
         case: "",
         isLike: "",
         image:""
-
       },
       subjectAttrs: {
         appid:"yxy",
@@ -50,6 +49,8 @@ Page({
       }
     },
     likeItem:"",
+    likeCount:0,
+    isLikeItems:{},
 /////////////////////////////////////////////////////
     indicatorDots: false,
     autoplay: false,
@@ -63,10 +64,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("onload--------------");
-   // console.log("+++++++++++++++++++++++++");
-   // console.log(options);
-   // console.log("+++++++++++++++++++++++++");
     var _This=this;
     var caseIds = options.caseIds;
     getApp().getUserData(function(uinfo){
@@ -83,20 +80,20 @@ Page({
          oEvent:event.oEvent
       });
 
-      console.log("caseIds------", caseIds);
-      _This.getCaseList(uinfo);
+
+      _This.getCaseList(uinfo);//获取案例
       if (!caseIds||caseIds.length<=0){
         _This.fConsultation(options.itemid, function (result) {
-          console.log("---22222222222------", result);
           _This.setData({
             consultationId: result || ""
           });
-          _This.fUserEvent(event.eType.appOpen);//进入程序
+       
         });
       }else{
         _This.fCustomerMsg();
+        _This.fUserEvent(event.eType.appOpen);//进入程序
+        _This.fCustomerAdd();
       };
-      _This.fCustomerAdd();
     });
   },
 
@@ -121,9 +118,10 @@ Page({
   fGetTempEvent(){
     var _This = this;
     var oTempEvent = _This.data.oEvent;
+    var currentPage = _This.data.currentPage;
     oTempEvent.eventAttrs={
         consultantId: _This.data.cstUid,
-        caseId:_This.data.likeItem,
+        caseId: _This.data.caseList[currentPage-1].id,//
         appletId:"hldn",
         consultingId: _This.data.consultationId,
         isLike: _This.data.isLike
@@ -143,8 +141,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    console.log("----------share----------");
-    
+   // console.log("----------share----------"); 
     var _This=this;
     _This.fUserEvent(event.eType.appShare);
     return {
@@ -153,9 +150,10 @@ Page({
     }
   },
   fCaseDetail: function (item) {
+    var _This = this;
     var did=item.target.dataset.uid;
     wx.navigateTo({
-      url: '../csdetail/csdetail?did=' + did,
+      url: '../csdetail/csdetail?did=' + did + "&cstUid=" + _This.data.cstUid+'&consultationId=' + _This.data.consultationId
     })
   },
   /** 
@@ -164,10 +162,20 @@ Page({
 
   fLikeCase: function () {
     var _This = this;
+    _This.setData({
+      isLike:1
+    });
     _This.fUserEvent(event.eType.caseLike);
-    wx.navigateTo({
-      url: '/pages/pcase/tkphoto/tkphoto?consultantId=' + _This.data.cstUid + "&consultationId=" + _This.data.consultationId,
-    })
+
+    _This.fSelectIsLike(function(result){
+      if(result){
+        wx.navigateTo({
+          url: '/pages/pcase/tkphoto/tkphoto?consultantId=' + _This.data.cstUid + "&consultationId="+           _This.data.consultationId,
+        })
+      }
+    });
+
+
   },
 
   /** 
@@ -175,11 +183,19 @@ Page({
   */
   fUnlikeCase: function () {
     var _This = this;
+    _This.setData({
+      isLike: 0
+    });
     _This.fUserEvent(event.eType.caseLike);
+    _This.fSelectIsLike(function (result) {
+      if (result) {
+        wx.navigateTo({
+          url: '/pages/pcase/tkphoto/tkphoto?consultantId=' + _This.data.cstUid + "&consultationId=" + _This.data.consultationId,
+        })
+      }
+    });
   },
   fShareMessage: function () {
-    console.log("show share");
- 
     wx.showShareMenu({
       withShareTicket: true
     });
@@ -208,7 +224,32 @@ Page({
     });
   },
   fSwiperChange:function(e){
-    this.setData({currentPage:e.detail.current+1});
+   
+
+
+    this.setData({
+      currentPage:e.detail.current+1
+      });
+  },
+  /**
+   * choose like or unlike count
+   */
+  fSelectIsLike(callback){
+    var _This = this;
+    var selectItems = _This.data.isLikeItems;
+    if (!selectItems["" + _This.data.currentPage + ""]) {
+      selectItems["" + _This.data.currentPage + ""] = "y";
+      _This.setData({
+        isLikeItems: selectItems,
+        likeCount: _This.data.likeCount + 1
+      });
+    }
+    if (_This.data.likeCount == _This.data.caseList.length){
+      callback(true);
+    }else{
+      callback(false);
+    }
+ 
   },
   /**
    * get case list
@@ -228,7 +269,7 @@ Page({
       },
       success: function (result) {
         if (result.data.code == 0) {
-         // console.log(result);
+          //console.log("result.data.data----->",result.data.data);
           _This.setData({ 
             caseList: result.data.data,
             totalCount: result.data.data.length    
@@ -290,9 +331,6 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
-       // console.log("--------------------");
-        //console.log(result);
-        //console.log("--------------------");
         if (result.data.code == 0) {
          // callback(result.data.data);
         } else {
@@ -316,7 +354,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
-        console.log("UserEvent------",result);
+        //console.log("UserEvent------",result);
         if (result.data.code == 0) {
         } else {
           console.log("add  event error---",result);
@@ -328,14 +366,14 @@ Page({
     var _This = this;
     var oCustom = cmsg.custom;
     oCustom = {
-      touser: "oh3NkxCV0gJ0-GtvC7LO5hKBsKio",
+      touser: "",
       msgtype: "text",
       text: {
-        content: "This is a test data" + (new Date().valueOf())
+        content: ""
       }
     };
     apiUser.uinfo(_This.data.cstUid, function (result) {
-      console.log("uinfo----", result.data.data.wxOpenId);
+      //console.log("uinfo----", result.data.data.wxOpenId);
       oCustom.touser = result.data.data.wxOpenId;
       oCustom.text.content = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 查看了您的案例分享";
       wx.request({

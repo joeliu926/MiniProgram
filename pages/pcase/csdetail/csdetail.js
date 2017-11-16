@@ -1,4 +1,7 @@
-// pages/pcase/csdetail/csdetail.js
+const cmsg = require('../../../public/cmsg.js');
+const event = require('../../../public/event.js');
+const apiUser = require('../../../utils/APIUinfo.js');
+const tools = require('../../../utils/util.js');
 Page({
 
   /**
@@ -37,8 +40,32 @@ Page({
           ]
         }
       ]
+    },
 
+    oUserInfo: {},
+    oEvent: {
+      code: "",
+      eventAttrs: {
+        appletId: "hldn",
+        consultingId: 0,
+        consultantId: "",
+        triggeredTime: "",
+        case: "",
+        isLike: "",
+        image: {}
+
+      },
+      subjectAttrs: {
+        appid: "yxy",
+        consultantId: "",
+        openid: "",
+        unionid: "",
+        mobile: ""
+      }
     }
+
+
+
   },
 
   /**
@@ -49,7 +76,10 @@ Page({
     var detailId = options.did;
     getApp().getUserData(function (uinfo) {
       _This.setData({
-        detailId: detailId
+        detailId: detailId,
+        oUserInfo: uinfo,
+        cstUid: options.cstUid,
+        consultationId: options.consultationId
       });
       _This.getCaseDetaul(uinfo);
 
@@ -60,7 +90,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    var _This =this;
+    _This.fUserEvent(event.eType.caseLike);
   },
 
   /**
@@ -122,6 +153,52 @@ Page({
           });
         } else {
           console.log(result);
+        }
+      }
+    });
+  },
+  /*
+*事件参数 
+*/
+  fGetTempEvent() {
+    var _This = this;
+    var oTempEvent = _This.data.oEvent;
+    oTempEvent.eventAttrs = {
+      appletId: "hldn",
+      consultingId: _This.data.consultationId,
+      consultantId: _This.data.cstUid,
+      isLike: _This.data.isLike,
+      caseId: _This.data.detailId
+    }
+    oTempEvent.subjectAttrs = {
+      appid: "yxy",
+      openid: _This.data.oUserInfo.openId,
+      unionid: _This.data.oUserInfo.unionId,
+      consultantId: _This.data.cstUid,
+      mobile: ""
+    };
+    _This.setData({
+      oEvent: oTempEvent
+    });
+  },
+  fUserEvent(eType) {
+    let _This = this;
+    _This.fGetTempEvent();
+    var oData = _This.data.oEvent;
+    oData.eventAttrs.triggeredTime = new Date().valueOf();
+    oData.code = eType;
+    wx.request({
+      url: "https://27478500.qcloud.la/wxa/event/add",
+      method: "POST",
+      data: oData,
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (result) {
+        console.log(result);
+        if (result.data.code == 0) {
+        } else {
+          console.log("add  event error---", result);
         }
       }
     });

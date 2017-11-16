@@ -22,8 +22,7 @@ Page({
         triggeredTime: "",
         case: "",
         isLike: "",
-        image: ""
-
+        image: {}
       },
       subjectAttrs: {
         appid: "yxy",
@@ -41,22 +40,6 @@ Page({
   onLoad: function (options) {
   ///ｕｒｌ/wx/msg/sendmessage
     console.log(cmsg.custom);
-
-     ///oh3NkxCV0gJ0-GtvC7LO5hKBsKio
-  /*  wx.request({
-      url: "https://27478500.qcloud.la/wx/msg/sendmessage",
-      method: "POST",
-      data: oCustom,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
-           console.log(result);
-      },
-      fail:function(result){
-        console.log(result);
-      }
-    });*/
 
     var _This = this;
 
@@ -211,7 +194,11 @@ Page({
       consultingId: _This.data.consultationId,
       consultantId: _This.data.cstUid,
       isLike: _This.data.isLike,
-      caseId: _This.data.likeItem
+      caseId: _This.data.likeItem,
+      image:{
+        frontface: _This.data.frontface,
+        sideface: _This.data.sideface
+      }
     }
     oTempEvent.subjectAttrs = {
       appid: "yxy",

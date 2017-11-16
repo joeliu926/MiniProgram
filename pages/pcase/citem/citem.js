@@ -66,6 +66,8 @@ Page({
   onLoad: function (options) {
     var _This=this;
     var caseIds = options.caseIds;
+    console.log("options===>", options)
+
     getApp().getUserData(function(uinfo){
      // console.log(uinfo);
       _This.setData({
@@ -82,8 +84,9 @@ Page({
 
 
       _This.getCaseList(uinfo);//获取案例
-      if (!caseIds||caseIds.length<=0){
+      if ((!caseIds || caseIds.length <= 0) &&!options.consultationId){
         _This.fConsultation(options.itemid, function (result) {
+          console.log("result----->", result);
           _This.setData({
             consultationId: result || ""
           });

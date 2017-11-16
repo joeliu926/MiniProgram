@@ -11,9 +11,11 @@
           <view class='o-item'>
             <view class='w-10'>
               <view>
-                <view class='flex b-s'>
-                  <image src='{{oitem.frondFile}}' mode='scaleToFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l'></image>
-                  <image src='{{oitem.backFile}}' mode='scaleToFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r'></image>
+                <view class='flex b-s' style="position: relative;">
+                <text class='before f-12 bcommon'>before</text>
+                 <text class='after f-12 bcommon'>after</text>
+                  <image src='{{oitem.frondFile||"../../../public/images/bk-photo.png"}}' mode='scaleToFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l'></image>
+                  <image  src='{{oitem.backFile||"../../../public/images/bk-photo.png"}}' mode='scaleToFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r'></image>
                 </view>
               </view>
 

@@ -1,4 +1,4 @@
-// pages/home/home.js
+const apiUser = require('../../utils/APIUinfo.js');
 Page({
 
   /**
@@ -8,14 +8,23 @@ Page({
     showicon: false,
     phonenum: "",
     customerList:[],
-    oUInfo:{}
+    oUInfo:{},
+    showData:true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var _This = this;
+    getApp().getUserData(function (result) {
+      _This.fGetCUserInfo(result.unionId);
+      _This.setData({
+        oUInfo: result
+      });
+      _This.getProjectList();
+    });
+  
     // console.log(getApp().globalData.userInfo);
   },
 
@@ -24,14 +33,7 @@ Page({
    */
   onReady: function () {
     //console.log("---------2222-----------------");
-     var _This=this;
-    getApp().getUserData(function(result){
-     
-      _This.setData({
-        oUInfo: result
-      });
-      _This.getProjectList(result.unionId);
-    });
+ 
   
     //console.log("+++++++++33333+++++++++++++++++");
    
@@ -78,7 +80,9 @@ Page({
   onShareAppMessage: function () {
 
   },
-
+  fSearchData(){
+    this.getProjectList();
+  },
   fInputSearch: function (e) {
     if (e.detail.value.length > 0) {
       this.setData({
@@ -91,14 +95,21 @@ Page({
         phonenum: ""
       });
     }
-    console.log(this.data);
   },
   fClearData: function () {
     this.setData({
       showicon: false,
       phonenum: ""
     });
-    console.log(this.data);
+    this.getProjectList();
+  },
+  fNavCase(e){
+    var _This=this;
+    //console.log("aaaaaaaaa",e.currentTarget.dataset);
+    var dataset = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: '../pcase/pcase?consultationId=' + dataset.consultationid + '&iname=' + dataset.iname + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + dataset.productcode
+    })
   },
   fAddNew: function () {
     wx.navigateTo({
@@ -107,18 +118,20 @@ Page({
   },
   getProjectList(unionId,mobile) {
     let _This = this;
+    //console.log(_This.data.phonenum);
     wx.request({
       url: "https://27478500.qcloud.la/wxa/consult/list",
       method: "POST",
       data: {
-        unionId: unionId||"",
-        mobile: mobile||""
+        unionId: _This.data.oUInfo.unionId||"",
+        mobile: _This.data.phonenum||"",
+        pageSize:10000
       },
       header: {
         'Content-Type': 'application/json'
       },
       success: function (result) {
-       // console.log(result);
+       // console.log("resuslt====>", result.data.data.list);
         if (result.data.code == 0) {
           _This.setData({ customerList: result.data.data.list });
          // console.log(result.data.data.list);
@@ -126,6 +139,18 @@ Page({
           console.log(result);
         }
       }
+    });
+  },
+  fGetCUserInfo(unionid){
+    var _This=this;
+    apiUser.uinfo(unionid, function (result) {
+        console.log(result);
+        if(result.data.code!=0||result.data.data.type!="1"){
+          _This.setData({
+            showData:false
+          });
+        }
+
     });
   }
 

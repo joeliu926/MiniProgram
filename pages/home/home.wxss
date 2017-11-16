@@ -46,3 +46,12 @@ height: 100%;
   padding: 0px 10px;
   color: #ffffff;
 }
+.d-img{
+  height:69px;
+  width:69px;
+  position: absolute;
+  z-index: 100;
+  bottom:20px;
+  left: 40%;
+
+}

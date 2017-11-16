@@ -4,17 +4,25 @@ Page({
       projectItems:[],
       uicondata:"adsffsdf",
       oUserInfo:{},
-      consultationId:""
+      consultationId:"",
+      jSelect:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("options-->",options);
+
     let _This=this;
     wx.showLoading({
       title: 'loading...',
     });
+    _This.setData({ 
+      consultationId: options.consultationId,
+      jSelect: options.productCode
+      });
+    console.log("_This.data====>",_This.data);
     getApp().getUserData(function (uinfo) {
       uinfo && _This.getProjectList(uinfo.unionId);
     });
@@ -70,8 +78,11 @@ Page({
   },
   selectItem:function(item){
     let sItem=item.target.dataset;
+    this.setData({
+      jSelect: sItem.itemid
+    });
       wx.navigateTo({
-        url: 'citem/citem?iname=' + sItem.iname + '&itemid=' + sItem.itemid + '&paid=' + sItem.paid + '&paname=' + sItem.paname
+        url: 'citem/citem?iname=' + sItem.iname + '&itemid=' + sItem.itemid + '&paid=' + sItem.paid + '&paname=' + sItem.paname + '&consultationId=' + (this.data.consultationId||'')
       });
 
 

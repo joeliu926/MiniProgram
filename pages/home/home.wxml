@@ -1,8 +1,8 @@
-<wxs src="../pcase/citem/citem.wxs" module="util" />
-<view class='h-ct b-s'>
+<wxs src="../pcase/citem/citem.wxs" module="util"  />
+<view class='h-ct b-s' style='display:{{showData?"":"none"}}'>
   <view class='flex-c b-s w-10 bk-c-w s-ct'>
     <view class='flex input-o'>
-      <icon type='search'></icon> <input class='s-input f-16'  name="phonenum" value="{{phonenum}}" bindinput="fInputSearch"  placeholder='搜索' maxlength='16' placeholder-class="place"></input> <icon bindtap='fClearData' type='clear' class='{{showicon?"show":"hide"}}' ></icon>
+      <icon type='search' size='16' bindtap='fSearchData'></icon> <input class='s-input f-16'  name="phonenum" value="{{phonenum}}" bindinput="fInputSearch"  placeholder='搜索' maxlength='16' placeholder-class="place"></input> <icon bindtap='fClearData' type='clear' class='{{showicon?"show":"hide"}}' ></icon>
     </view>
   </view>
 
@@ -14,7 +14,7 @@
 
 
 <block  wx:for="{{customerList}}" wx:for-item="oitem">
-  <view class='flex w-10 b-s bk-c-w ex-ct'>
+  <view class='flex w-10 b-s bk-c-w ex-ct' bindtap='fNavCase' data-consultationId='{{oitem.id}}' data-iname='{{oitem.productName}}' data-productCode='{{oitem.productCode}}'>
     <view>
       <image class='cst-img' src='{{oitem.wxHeadPhoto||"../../public/images/default-title.png"}}'></image>
     </view>
@@ -30,6 +30,7 @@
     </view>
   </view>
 </block>
+
 
 
 <!--
@@ -50,4 +51,11 @@
   </view>
 -->
 
+</view>
+<!--default-c-icon.png-->
+<view class='h-ct w-10' style='display:{{!showData?"":"none"}}'>
+<view class='b-d'> 
+ <image class='h-ct w-10 d-img' style=''  src="../../public/images/default-c-icon.png" mode='aspectFill'> </image>
+ </view>
+  <image class='h-ct w-10' style=''  src="../../public/images/appload.png" mode='aspectFill'> </image>
 </view>

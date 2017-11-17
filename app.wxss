@@ -39,17 +39,18 @@ page{
   flex-wrap:wrap;
 }
 .f-14{
-  font-size: 14px;
-  color: #777777;
+  font-size: 28rpx;
+  color: #999999;
 }
 .f-12{
-  font-size: 12px;
-  color: #777777;
+  font-size: 24rpx;
+  color: #999999;
 }
 .f-16{
-  font-size: 16px;
+  font-size: 32rpx;
   color: #333333;
 }
+
 .w-10{
   width: 100%;
   padding: 0;
@@ -58,7 +59,10 @@ page{
     box-sizing: border-box;
 }
 .b-d{
-  border: 1px solid green;
+  border: 2rpx solid green;
+}
+.b-r{
+  border-radius: 50%;
 }
 .bk-c-w{
 background-color: #ffffff;

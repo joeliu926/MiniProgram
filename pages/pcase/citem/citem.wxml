@@ -30,7 +30,7 @@
                 </view>
               </view>
             </view>
-            <view style="padding:15px;">
+            <view style="padding:15px 15px 0 15px;">
               <view>
                 <text class='f-14 txt-item'>{{oitem.caseName}}</text>
               </view>
@@ -63,8 +63,15 @@
   </button>
 
   <view class='like-content w-10 footer' style='display:{{!isConsult?"show":"none"}};'>
+<view class='b-r b-s {{isLikeItems[currentPage]!="n"?"":"ulk-b-d"}}'  bindtap='fUnlikeCase'>
+   <image src='../../../public/images/icon-unlike.png' class='like-icon' ></image>
+</view>
+<view class='b-r b-s {{isLikeItems[currentPage]!="y"?"":"lk-b-d"}}'  bindtap='fLikeCase'>
+ <image src='../../../public/images/icon-like.png' class='like-icon'></image>
+</view>
 
-    <image src='../../../public/images/icon-unlike.png' class='like-icon' bindtap='fUnlikeCase'></image>
-    <image src='../../../public/images/icon-like.png' class='like-icon' bindtap='fLikeCase'></image>
+
+ 
+   
   </view>
 </view>

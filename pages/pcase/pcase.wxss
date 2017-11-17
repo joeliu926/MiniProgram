@@ -36,13 +36,12 @@ page{
 .case-item{
   box-sizing: border-box;
   background-color: #F7F7F7;
-  border-radius: 20px; 
-  padding: 0 6px;
-  margin:0 5px 15px 0px; 
+  border-radius: 40rpx; 
+  padding: 10rpx 34rpx;
+  margin:0 20rpx 30rpx 0px; 
   color: #666666;
-  font-size: 14px;
-  height: 25px;
-  line-height: 25px;
+  font-size: 28rpx;
+
 }
 .case-item:hover{
  /* background-color: #9083ed;

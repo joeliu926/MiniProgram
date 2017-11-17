@@ -173,7 +173,7 @@ Page({
       isLike:1
     });
     _This.fUserEvent(event.eType.caseLike);
-    _This.fSelectIsLike(function(result){
+    _This.fSelectIsLike("y",function(result){
       if(result){
         wx.navigateTo({
           url: '/pages/pcase/tkphoto/tkphoto?consultantId=' + _This.data.cstUid + "&consultationId="+           _This.data.consultationId,
@@ -193,7 +193,7 @@ Page({
       isLike: 0
     });
     _This.fUserEvent(event.eType.caseLike);
-    _This.fSelectIsLike(function (result) {
+    _This.fSelectIsLike("n",function (result) {
       if (result) {
         wx.navigateTo({
           url: '/pages/pcase/tkphoto/tkphoto?consultantId=' + _This.data.cstUid + "&consultationId=" + _This.data.consultationId,
@@ -240,22 +240,25 @@ Page({
   /**
    * choose like or unlike count
    */
-  fSelectIsLike(callback){
+  fSelectIsLike(param,callback){
     var _This = this;
     var selectItems = _This.data.isLikeItems;
+    var lcount = _This.data.likeCount;
     if (!selectItems["" + _This.data.currentPage + ""]) {
-      selectItems["" + _This.data.currentPage + ""] = "y";
-      _This.setData({
-        isLikeItems: selectItems,
-        likeCount: _This.data.likeCount + 1
-      });
+      lcount +=1;
     }
+
+    selectItems["" + _This.data.currentPage + ""] = param;
+    _This.setData({
+      isLikeItems: selectItems,
+      likeCount: lcount
+    });
+
     if (_This.data.likeCount == _This.data.caseList.length){
       callback(true);
     }else{
       callback(false);
-    }
- 
+    }  
   },
   /**
    * get case list
@@ -331,7 +334,9 @@ Page({
         city: _This.data.oUserInfo.city,
         country: _This.data.oUserInfo.country,
         logo: _This.data.oUserInfo.avatarUrl,
-        unionid: _This.data.oUserInfo.unionId
+        unionid: _This.data.oUserInfo.unionId,
+        userUnionid: _This.data.cstUid,
+        consultationId: _This.data.consultationId
       },
       header: {
         'Content-Type': 'application/json'
@@ -370,6 +375,9 @@ Page({
   },
   fCustomerMsg() {
     var _This = this;
+    if (_This.data.oUserInfo.unionId == _This.data.cstUid){
+      return false;
+    }
     var oCustom = cmsg.custom;
     oCustom = {
       touser: "",
@@ -378,6 +386,7 @@ Page({
         content: ""
       }
     };
+    
     apiUser.uinfo(_This.data.cstUid, function (result) {
       //console.log("uinfo----", result.data.data.wxOpenId);
       oCustom.touser = result.data.data.wxOpenId;

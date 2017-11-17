@@ -29,10 +29,22 @@ align-items: center;
   text-align: center;
 }
 .btn-sub{
-  padding: 10px 20px;
+  padding: 10rpx 40rpx;
   border-radius: 20px;
   background-color: #9184EE;
   color: #ffffff;
+ height: 50rpx;
+}
+.f-32{
+  font-size: 28rpx;
+}
+.icon-we{
+  height:50rpx;
+  width:50rpx;
+  padding-right: 20rpx;
+}
+.btn-back{
+ padding:15rpx 9rpx;
 }
 .face{
   padding: 3px 25px;

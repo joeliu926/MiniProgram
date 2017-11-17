@@ -55,7 +55,7 @@
 <!--default-c-icon.png-->
 <view class='h-ct w-10' style='display:{{!showData?"":"none"}}'>
 <view class='b-d'> 
- <image class='h-ct w-10 d-img' style=''  src="../../public/images/default-c-icon.png" mode='aspectFill'> </image>
+ <image class='h-ct w-10 d-img' style='display:none;'  src="../../public/images/default-c-icon.png" mode='aspectFill'> </image>
  </view>
   <image class='h-ct w-10' style=''  src="../../public/images/appload.png" mode='aspectFill'> </image>
 </view>

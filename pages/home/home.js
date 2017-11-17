@@ -95,6 +95,7 @@ Page({
         phonenum: ""
       });
     }
+    this.getProjectList();
   },
   fClearData: function () {
     this.setData({
@@ -117,6 +118,9 @@ Page({
     })
   },
   getProjectList(unionId,mobile) {
+    wx.showLoading({
+      title: 'loading...',
+    });
     let _This = this;
     //console.log(_This.data.phonenum);
     wx.request({
@@ -131,20 +135,21 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
-       // console.log("resuslt====>", result.data.data.list);
+      // console.log("project====>", result.data.data.list);
         if (result.data.code == 0) {
           _This.setData({ customerList: result.data.data.list });
          // console.log(result.data.data.list);
         } else {
           console.log(result);
         }
+        wx.hideLoading();
       }
     });
   },
   fGetCUserInfo(unionid){
     var _This=this;
     apiUser.uinfo(unionid, function (result) {
-        console.log(result);
+        //console.log(result);
         if(result.data.code!=0||result.data.data.type!="1"){
           _This.setData({
             showData:false

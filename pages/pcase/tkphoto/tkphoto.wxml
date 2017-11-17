@@ -12,7 +12,17 @@
           <text class='face f-14 {{!photoSide?"s-side":""}}'  data-choose='{{!photoSide}}' bindtap='fChangeSide'>侧面</text>
         </view>
     </view>
-    <view class='footer w-10 b-s'>
-           <text class='btn-sub' bindtap='fSendMsg'>把资料给医生</text>      
+
+   <view class='footer  b-s' style='display:{{!isUpload?"":"none"}}' >  
+      <view class='flex-c btn-sub'> 
+            <text class='f-32 btn-back'  bindtap='fSendMsg' style='' >把资料给医生</text>
+      </view>           
+    </view>
+
+    <view class='footer  b-s' style='display:{{isUpload?"":"none"}}' >  
+      <view class='flex-c btn-sub'> 
+          <image src='../../../public/images/icon-we.png' class='icon-we' style=''></image>
+           <text class='f-32'>返回咨询</text>
+      </view>           
     </view>
 </view>

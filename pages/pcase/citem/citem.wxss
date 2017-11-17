@@ -4,12 +4,12 @@
     flex-direction: column;
 }
 .o-content{ 
-    padding: 15px;
+    padding: 30rpx 30rpx 0rpx 30rpx;
     height: 100%;
     box-sizing: border-box;
 }
 .o-swiper{
-   height: 425px;
+   height: 820rpx;
 }
 .o-item{ 
     box-sizing: border-box;
@@ -138,6 +138,14 @@ width:90%;
 }
 .after{
   left: 53%;
+}
+.lk-b-d{
+border:1rpx solid  #00D8B4;
+height:56px;
+}
+.ulk-b-d{
+  height:56px;
+border: 1rpx solid #FF334B;
 }
 
 

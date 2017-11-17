@@ -13,6 +13,7 @@ Page({
     frontface:null,
     sideface:null,
     oUserInfo:{},
+    isUpload:false,
     oEvent: {
       code: "",
       eventAttrs: {
@@ -38,14 +39,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  ///ｕｒｌ/wx/msg/sendmessage
-    console.log(cmsg.custom);
-
     var _This = this;
-
     var oEvent = _This.data.oEvent;
     getApp().getUserData(function (uinfo) {
-      console.log(uinfo);
+      //console.log(uinfo);
       _This.setData({
         oUserInfo:uinfo,
         cstUid: options.consultantId,
@@ -126,7 +123,7 @@ Page({
           success: function (res) {
            // console.log(res);
                   var oData=JSON.parse(res.data);
-                  console.log(oData);
+                  //console.log(oData);
                   if (oData.code==0){
                     var iurl = oData.data[0];
                   if (_This.data.photoSide) {
@@ -134,6 +131,7 @@ Page({
                   } else {
                     _This.setData({ sideface: iurl});
                  }
+                  _This.fUserEvent(event.eType.photoUpload);
             }
            // console.log('res', res);
             wx.hideLoading();
@@ -156,7 +154,6 @@ Page({
     }
   },
   fSendMsg(){
-
     var _This=this;
     if(!_This.data.frontface && !_This.data.sideface){
       wx.showToast({
@@ -177,7 +174,8 @@ Page({
         title: '成功',
         icon: 'success',
         duration: 2000
-      })
+      });
+      _This.setData({isUpload:true});
     }, 2000);
 
 
@@ -236,6 +234,9 @@ Page({
   },
   fCustomerMsg(){
     var _This=this;
+    if (_This.data.oUserInfo.unionId == _This.data.cstUid) {
+      return false;
+    }
     var oCustom = cmsg.custom;
     oCustom = {
       touser: "oh3NkxCV0gJ0-GtvC7LO5hKBsKio",
@@ -245,7 +246,7 @@ Page({
       }
     };
     apiUser.uinfo(_This.data.cstUid, function (result) {
-      console.log("uinfo----", result.data.data.wxOpenId);
+      //console.log("uinfo----", result.data.data.wxOpenId);
       oCustom.touser = result.data.data.wxOpenId;
       oCustom.text.content = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 提交了个人资料";
       wx.request({

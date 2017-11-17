@@ -7,7 +7,7 @@ height: 100%;
 .input-o{
   width: 60%;
   margin: 0 auto;
-  padding: 3px 10px;
+  padding: 6rpx 10rpx;
   border-radius: 18px;
   border: 1px solid #9E9E9E;
   align-items: center;

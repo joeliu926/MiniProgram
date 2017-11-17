@@ -50,9 +50,16 @@ page{
   font-size: 32rpx;
   color: #333333;
 }
-
+.pd-mg{
+  padding: 0;
+  margin: 0;
+}
 .w-10{
   width: 100%;
+  padding: 0;
+}
+.w-5{
+  width: 50%;
   padding: 0;
 }
 .b-s{
@@ -67,8 +74,14 @@ page{
 .bk-c-w{
 background-color: #ffffff;
 }
+.t-a-c{
+  text-align: center;
+}
 .hide{
   display: none;
+}
+.mg-b{
+  margin-bottom: 30rpx;
 }
 ::-webkit-scrollbar{
   height: 0;

@@ -1,0 +1,93 @@
+<wxs src="../casetrail/casetrail.wxs" module="util" />
+<view class='d-ct'>
+
+
+  <view class='u-ct flex b-pd bk-c-w'>
+    <view>
+      <image class='u-title' src='../../../public/images/default-title.png' mode='scaleToFill'></image>
+    </view>
+    <view class='u-info flex fx-d-col fx-jc-sa w-10'>
+      <view class='flex fx-jc-sb'>
+        <text class='f-16 u-name'></text>
+        <text class='f-14' style=''>术前前端</text>
+      </view>
+      <view class='flex fx-jc-sb'>
+        <text class='f-16 u-name'>杨宏伟</text>
+        <text class='f-14' style=''>咨询师 杨宏伟</text>
+      </view>
+    </view>
+  </view>
+
+
+
+
+  <view class='flex fx-d-col b-pd bk-c-w mg-b'>
+    <view class='flex mg-b fx-jc-sb'>
+      <text class='f-14 u-local mg-l'>咨询项目</text>
+      <text class='f-14' style=''>发送案例</text>
+    </view>
+    <view class='flex'>
+      <text class='f-14 mg-l'>双眼皮   去眼袋</text>
+    </view>
+  </view>
+  <view class='flex fx-d-col b-pd bk-c-w'>
+    <view class='flex'>
+      <text class='f-16 u-local mg-l'>互动轨迹</text>
+    </view>
+  </view>
+
+
+
+
+
+
+
+
+  <view class='b-s pd-mg  b-pd bk-c-w rail-ct'>
+     <block>
+        <view class='b-s pd-mg share-c w-10'>  
+            <view class='flex'>
+               <view class='i-left w-5 b-s item-h item-pd '>
+                   <view class='f-14 b-s item-pd i-btm-bd '>杨宏伟分享了APP</view> 
+                   <view class='f-12 b-s item-pd'>2017-10-12 12:34:11</view> 
+               </view>
+               <view class='i-right w-5 '>              
+                   <view class='right-i i-lt-bd item-h'>
+                     
+                    </view>  
+                    <view class='right-i i-lt-bd item-h'>
+                      <view class='b-s f-14 item-pd  i-btm-bd  '>大伟宏看了你分分享</view> 
+                      <view class='b-s f-12 item-pd '>2017-10-12 12:34:11</view> 
+                    </view>
+                    <view class='right-i i-lt-bd  item-h'>
+                      <view class='b-s f-14 item-pd i-btm-bd'>杨宏伟喜欢了双眼皮案例</view> 
+                      <view class='b-s f-12 item-pd '>2017-10-12 12:34:11</view> 
+                    </view>
+                       <view class='right-i i-lt-bd  item-h'>
+                      <view class='b-s f-14 item-pd i-btm-bd'>大伟宏不喜欢案例2</view> 
+                      <view class='b-s f-12 item-pd '>2017-10-12 12:34:11</view> 
+                    </view>
+                       <view class='right-i i-lt-bd item-h'>
+                      <view class='b-s f-14 item-pd i-btm-bd'>大伟宏喜欢了案例3</view> 
+                      <view class='b-s f-12 item-pd '>2017-10-12 12:34:11</view> 
+                    </view>
+                    <view class='right-i i-lt-bd item-h '>
+                      <view class='f-14 item-pd i-btm-bd'>大伟宏退出了你的案例分享</view> 
+                      <view class='f-12 item-pd '>2017-10-12 12:34:11</view> 
+                    </view>
+               </view>
+            </view>   
+   
+        </view>
+      </block>
+  </view>
+  
+
+
+
+
+
+
+
+
+</view>

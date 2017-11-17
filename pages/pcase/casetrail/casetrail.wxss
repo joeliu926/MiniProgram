@@ -1,0 +1,41 @@
+.d-ct{
+    align-items:flex-start;
+}
+.b-pd{
+    padding: 20rpx;
+}
+.u-ct{
+    margin-bottom: 2rpx;
+}
+.u-title{
+  height: 120rpx;
+  width: 120rpx;
+}
+.u-info{
+ margin-left: 30rpx;
+}
+.rail-ct{
+padding: 80rpx 20rpx 80rpx 20rpx;
+margin-bottom: 40rpx;
+}
+.item-h{
+  height: 100rpx;
+  padding: 30rpx;
+}
+.item-pd{
+  padding: 10rpx;
+}
+.i-btm-bd{
+  border-bottom: 4rpx solid #333333;
+}
+.i-lt-bd{
+    border-left: 6rpx solid #ee34cc;
+}
+
+
+
+
+
+
+
+

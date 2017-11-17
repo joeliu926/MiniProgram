@@ -106,11 +106,14 @@ Page({
   },
   fNavCase(e){
     var _This=this;
-    //console.log("aaaaaaaaa",e.currentTarget.dataset);
     var dataset = e.currentTarget.dataset;
     wx.navigateTo({
+      url: '../pcase/casetrail/casetrail?consultationId=' + dataset.consultationid + '&iname=' + dataset.iname + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + dataset.productcode
+    });
+
+  /*  wx.navigateTo({
       url: '../pcase/pcase?consultationId=' + dataset.consultationid + '&iname=' + dataset.iname + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + dataset.productcode
-    })
+    });*/
   },
   fAddNew: function () {
     wx.navigateTo({
@@ -135,7 +138,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
-      // console.log("project====>", result.data.data.list);
+       console.log("project====>", result.data.data.list);
         if (result.data.code == 0) {
           _This.setData({ customerList: result.data.data.list });
          // console.log(result.data.data.list);

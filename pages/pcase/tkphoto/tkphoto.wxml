@@ -22,7 +22,7 @@
     <view class='footer  b-s' style='display:{{isUpload?"":"none"}}' >  
       <view class='flex-c btn-sub'> 
           <image src='../../../public/images/icon-we.png' class='icon-we' style=''></image>
-           <text class='f-32'>返回咨询</text>
+           <text class='f-32' bindtap='fClose'>返回咨询</text>
       </view>           
     </view>
 </view>

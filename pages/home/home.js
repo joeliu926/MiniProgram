@@ -16,6 +16,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (getApp().globalData.flag) {
+      wx.navigateBack({
+        delta: 1
+      })
+      wx.navigateBack({
+        delta: 1
+      })
+    } 
     var _This = this;
     getApp().getUserData(function (result) {
       _This.fGetCUserInfo(result.unionId);
@@ -108,7 +116,7 @@ Page({
     var _This=this;
     var dataset = e.currentTarget.dataset;
     wx.navigateTo({
-      url: '../pcase/casetrail/casetrail?consultationId=' + dataset.consultationid + '&iname=' + dataset.iname + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + dataset.productcode
+      url: '../pcase/casetrail/casetrail?consultingId=' + dataset.consultationid + '&iname=' + dataset.iname + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + dataset.productcode
     });
 
   /*  wx.navigateTo({
@@ -138,7 +146,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
-       console.log("project====>", result.data.data.list);
+       //console.log("project====>", result.data.data.list);
         if (result.data.code == 0) {
           _This.setData({ customerList: result.data.data.list });
          // console.log(result.data.data.list);

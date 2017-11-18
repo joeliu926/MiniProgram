@@ -6,7 +6,7 @@
   </view>
   <view class='o-project w-10'>
     <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
-      <block wx:for="{{caseList}}" wx:for-item="oitem">
+      <block wx:for="{{caseList}}" wx:for-item="oitem" wx:key="id">
         <swiper-item>       
           <view class='o-item'>
             <view class='w-10'>
@@ -19,7 +19,7 @@
                 </view>
               </view>
 
-              <view class='user-info'>
+              <view class='user-info'  bindtap='fCaseDetail'>
                 <view class='bef-aft flex'>
                   <image class='o-img-title' src='{{oitem.customerLogo}}' mode='scaleToFill'></image>
 

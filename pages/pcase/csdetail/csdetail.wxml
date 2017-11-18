@@ -5,7 +5,7 @@
         <image class='u-title' src='{{detailInfo.customerLogo}}' mode='scaleToFill'></image>
       </view>
       <view class='u-info flex fx-d-col fx-jc-sa w-10'>
-        <view class='flex fx-jc-sb'><text class='f-16 u-name'>{{detailInfo.doctorName}}</text><text class='f-14 u-item' style=''>{{detailInfo.productName}}</text></view> 
+        <view class='flex fx-jc-sb'><text class='f-16 u-name'>{{detailInfo.customerName}}</text><text class='f-14 u-item' style=''>{{detailInfo.productName}}</text></view> 
         <text class='f-14 u-time'>{{util.genderFilter(detailInfo.customerGender)}} {{detailInfo.customerAge}}岁</text>
       </view>
   </view>    
@@ -16,15 +16,15 @@
 
 <view class='bk-c-w b-pd mg-b w-10 b-s'> 
       <view class='f-16 mg-b'>术前照片</view>
-      <block wx:for="{{detailInfo.contentList}}" wx:for-item="oitem" wx:if="{{oitem.nodeType==0}}">
+      <block wx:for="{{detailInfo.contentList}}" wx:for-item="oitem" wx:if="{{oitem.nodeType==0}}" wx:key="id">
       <view class='flex fx-wp w-10'>
-        <block wx:for="{{oitem.fileList}}" wx:for-item="imgItem" >
-         <view class='img-c b-s'><image class='c-image' src='{{imgItem}}' mode='center'></image></view>
+        <block wx:for="{{oitem.fileList}}" wx:for-item="imgItem" wx:key="id">
+         <view class='img-c b-s'><image class='c-image' src='{{imgItem}}' mode='aspectFit'></image></view>
          </block>
       </view>
       <view class=''>
         <text class='f-14'>术前特征：</text>
-         <block wx:for="{{util.featureFilter(oitem.caseFeature)}}" wx:for-item="item" >
+         <block wx:for="{{util.featureFilter(oitem.caseFeature)}}" wx:for-item="item" wx:key="id" >
             <text class='f-14 mg-l item-icon'>{{item}}</text>
         </block>
       </view>
@@ -34,18 +34,19 @@
    <text>术后日记</text>
 </view>
 
-<block wx:for="{{detailInfo.contentList}}" wx:for-item="oitem" wx:if="{{oitem.nodeType==1}}">
+<block wx:for="{{detailInfo.contentList}}" wx:for-item="oitem" wx:if="{{oitem.nodeType==1}}" wx:key="id">
   <view class='bk-c-w mg-b'>
       <text class='f-14 diary'>{{oitem.title}}</text>
       
       <view class='b-pd w-10  b-s'>
           <view class='flex fx-wp w-10 b-s'>
-             <block wx:for="{{oitem.fileList}}" wx:for-item="imgItem" >
-              <view class='img-c b-s'><image class='c-image' src='{{imgItem}}' ></image></view>
+             <block wx:for="{{oitem.fileList}}" wx:for-item="imgItem" wx:key="ids" >
+              <view class='img-c b-s'><image mode='aspectFit' class='c-image' src='{{imgItem}}' ></image></view>
             </block>
          </view>
          <view>
            <text class='f-14'>{{oitem.description}}</text>
+
           </view>
          <text class='f-12'>{{util.formatTime(oitem.definitionDate,"yyyy-MM-dd")}}</text>
       </view>

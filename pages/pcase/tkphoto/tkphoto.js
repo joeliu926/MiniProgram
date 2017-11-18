@@ -12,8 +12,10 @@ Page({
     photoSide:true,
     frontface:null,
     sideface:null,
+    imgKey:1,
     oUserInfo:{},
     isUpload:false,
+    shareEventId:"",
     oEvent: {
       code: "",
       eventAttrs: {
@@ -46,7 +48,8 @@ Page({
       _This.setData({
         oUserInfo:uinfo,
         cstUid: options.consultantId,
-        consultationId: options.consultationId
+        consultationId: options.consultationId,
+        shareEventId: options.shareEventId||""
       });
       //console.log("cstUid----", _This.data.cstUid);
   
@@ -127,9 +130,15 @@ Page({
                   if (oData.code==0){
                     var iurl = oData.data[0];
                   if (_This.data.photoSide) {
-                    _This.setData({ frontface: iurl});
+                    _This.setData({ 
+                      frontface: iurl, 
+                      imgKey:1
+                      });
                   } else {
-                    _This.setData({ sideface: iurl});
+                    _This.setData({ 
+                      sideface: iurl,
+                      imgKey:0
+                      });
                  }
                   _This.fUserEvent(event.eType.photoUpload);
             }
@@ -180,12 +189,19 @@ Page({
 
 
   },
+  fClose(){
+    getApp().globalData.flag = true;  
+    wx.reLaunch({
+      url: '../../home/home',
+    }) 
+  },
   /*
  *事件参数 
  */
   fGetTempEvent() {
     var _This = this;
     var oTempEvent = _This.data.oEvent;
+    oTempEvent.shareEventId = _This.data.shareEventId;
     oTempEvent.eventAttrs = {
 
       appletId: "hldn",
@@ -194,6 +210,7 @@ Page({
       isLike: _This.data.isLike,
       caseId: _This.data.likeItem,
       image:{
+        imgKey: _This.data.imgKey,
         frontface: _This.data.frontface,
         sideface: _This.data.sideface
       }

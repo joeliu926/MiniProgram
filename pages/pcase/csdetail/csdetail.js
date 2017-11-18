@@ -79,7 +79,8 @@ Page({
         detailId: detailId,
         oUserInfo: uinfo,
         cstUid: options.cstUid,
-        consultationId: options.consultationId
+        consultationId: options.consultationId,
+        shareEventId: options.shareEventId||""
       });
       _This.getCaseDetaul(uinfo);
 
@@ -91,7 +92,7 @@ Page({
    */
   onReady: function () {
     var _This =this;
-    _This.fUserEvent(event.eType.caseLike);
+   // _This.fUserEvent(event.eType.caseLike);
   },
 
   /**
@@ -163,6 +164,7 @@ Page({
   fGetTempEvent() {
     var _This = this;
     var oTempEvent = _This.data.oEvent;
+    oTempEvent.shareEventId = _This.data.shareEventId;
     oTempEvent.eventAttrs = {
       appletId: "hldn",
       consultingId: _This.data.consultationId,
@@ -195,7 +197,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
-        console.log(result);
+       // console.log(result);
         if (result.data.code == 0) {
         } else {
           console.log("add  event error---", result);

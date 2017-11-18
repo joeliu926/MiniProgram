@@ -2,14 +2,17 @@
     align-items:flex-start;
 }
 .b-pd{
-    padding: 20rpx;
+    padding: 30rpx;
 }
 .u-ct{
     margin-bottom: 2rpx;
 }
 .u-title{
-  height: 120rpx;
-  width: 120rpx;
+  height: 100rpx;
+  width: 100rpx;
+}
+.u-local{
+  color: #333333;
 }
 .u-info{
  margin-left: 30rpx;
@@ -26,10 +29,25 @@ margin-bottom: 40rpx;
   padding: 10rpx;
 }
 .i-btm-bd{
-  border-bottom: 4rpx solid #333333;
+  border-bottom: 2rpx solid #bcb4f7;
+}
+.i-tp-bd{
+   border-top: 2rpx solid #bcb4f7;
 }
 .i-lt-bd{
-    border-left: 6rpx solid #ee34cc;
+    border-left: 2rpx solid #e8e8e8;
+}
+.p-mg{
+  margin-bottom: 10rpx;
+}
+.up-img{
+  height:180rpx;width:140rpx;
+}
+.sed-btn{
+  padding:10rpx 35rpx;
+  border-radius:30rpx;
+  background:#9083ed;
+  color:#ffffff;
 }
 
 

@@ -36,7 +36,8 @@ App({
     })
   },
   globalData: {
-   userInfo: null
+   userInfo: null,
+   flag: false  
   },
  getUserData:function(callback){
    if (this.globalData.userInfo&&this.globalData.userInfo.unionId){

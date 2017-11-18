@@ -12,8 +12,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("options-->",options);
+    //console.log("options-->",options);
+    console.log("---------------");
 
+   
+    console.log("++++++++++++++++++");
     let _This=this;
     wx.showLoading({
       title: 'loading...',
@@ -22,7 +25,7 @@ Page({
       consultationId: options.consultationId,
       jSelect: options.productCode
       });
-    console.log("_This.data====>",_This.data);
+   // console.log("_This.data====>",_This.data);
     getApp().getUserData(function (uinfo) {
       uinfo && _This.getProjectList(uinfo.unionId);
     });

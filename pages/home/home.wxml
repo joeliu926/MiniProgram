@@ -2,7 +2,7 @@
 <view class='h-ct b-s' style='display:{{showData?"":"none"}}'>
   <view class='flex-c b-s w-10 bk-c-w s-ct'>
     <view class='flex input-o'>
-      <icon type='search' size='16' bindtap='fSearchData'></icon> <input class='s-input f-16'  name="phonenum" value="{{phonenum}}" bindinput="fInputSearch"  placeholder='搜索' maxlength='16' placeholder-class="place"></input> <icon bindtap='fClearData' type='clear' class='{{showicon?"show":"hide"}}' ></icon>
+      <icon type='search' size='16' bindtap='fSearchData'></icon> <input class='s-input f-16'  name="phonenum" value="{{phonenum}}" bindinput="fInputSearch"  placeholder='手机号搜索' maxlength='16' placeholder-class="place"></input> <icon bindtap='fClearData' type='clear' class='{{showicon?"show":"hide"}}' ></icon>
     </view>
   </view>
 
@@ -13,7 +13,7 @@
   </view>
 
 
-<block  wx:for="{{customerList}}" wx:for-item="oitem">
+<block  wx:for="{{customerList}}" wx:for-item="oitem" wx:key="id">
   <view class='flex w-10 b-s bk-c-w ex-ct' bindtap='fNavCase' data-consultationId='{{oitem.id}}' data-iname='{{oitem.productName}}' data-productCode='{{oitem.productCode}}'>
     <view>
       <image class='cst-img' src='{{oitem.wxHeadPhoto||"../../public/images/default-title.png"}}'></image>

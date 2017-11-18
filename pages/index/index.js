@@ -13,6 +13,13 @@ Page({
     })
   },
   onLoad: function () {
+    wx.navigateBack({
+      delta:4 
+    });
+    wx.navigateBack({
+      delta: 1
+    });
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

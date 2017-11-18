@@ -5,41 +5,135 @@ Page({
    * 页面的初始数据
    */
   data: {
-    detailId: "",
-    detailInfo: {
-      "doctorName": "刘德华",
-      "customerGender": 0,
-      "customerLogo": "http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/7cb3da9e-f690-4b79-b32c-6a69bdcf629b",
-      "customerName": "吴彦祖",
-      "customerAge": 12,
-      "operationDate": 1510724649000,
-      "hospitalName": "协和医院",
-      "productName": "你猜",
-      "contentList": [
-        {
-          "title": "",
-          "definitionDate": 1510206364000,
-          "nodeType": 0,
-          "caseFeature": "鼻子太大",
-          "description": "",
-          "fileList": [
-            "http://101.132.161.222:8077/mc_files/10088/null/d6e37de9-1175-41cd-8d15-ffcf82e9ba0f"
-          ]
+    "trackDesc": [
+      {
+        "leftTrack": {
+          "subject": "姜士虎",
+          "code": "appShare",
+          "desc": "姜士虎分享了哈罗助手APP",
+          "date": 1510891403033
         },
-        {
-          "title": "术后120天",
-          "definitionDate": 1510984011000,
-          "nodeType": 1,
-          "caseFeature": "这个图片相当好看",
-          "description": "",
-          "fileList": [
-            "http://101.132.161.222:8077/mc_files/10088/null/cc119fdc-302c-4ae3-a4aa-63488ce8a13b"
+        "rightTrack": {
+          "trackDetailList": [
+            {
+              "subject": "罗兰",
+              "code": "appOpen",
+              "desc": "罗兰进入了哈罗助手APP",
+              "date": 1510891403033,
+              "imgNum": "",
+              "imgUrls": []
+            },
+            {
+              "subject": "罗兰",
+              "code": "caseLike",
+              "desc": "罗兰喜欢了案例“提拉注意事项",
+              "date": 1510891403033,
+              "imgNum": "",
+              "imgUrls": []
+            },
+            {
+              "subject": "罗兰",
+              "code": "photoUpload",
+              "desc": "罗兰上传了照片",
+              "date": 1510891403033,
+              "imgNum": 2,
+              "imgUrls": [
+                "../../../public/images/img-demo.png"
+              ]
+            },
+            {
+              "subject": "罗兰",
+              "code": "informationSubmit",
+              "desc": "罗兰提交了资料",
+              "date": 1510891403033,
+              "imgNum": "",
+              "imgUrls": []
+            },
+            {
+              "subject": "罗兰",
+              "code": "appQuit",
+              "desc": "罗兰退出了哈罗助手APP",
+              "date": 1510891403033,
+              "imgNum": "",
+              "imgUrls": []
+            }
           ]
         }
-      ]
+      },
+      {
+        "leftTrack": {
+          "subject": "姜士虎",
+          "code": "appShare",
+          "desc": "姜士虎分享了哈罗助手APP",
+          "date": 1510891403033
+        },
+        "rightTrack": {
+          "trackDetailList": [
+            {
+              "subject": "罗兰",
+              "code": "appOpen",
+              "desc": "罗兰进入了哈罗助手APP",
+              "date": 1510891403033,
+              "imgNum": "",
+              "imgUrls": []
+            },
+            {
+              "subject": "罗兰",
+              "code": "caseLike",
+              "desc": "罗兰喜欢了案例“提拉注意事项",
+              "date": 1510891403033,
+              "imgNum": "",
+              "imgUrls": []
+            },
+            {
+              "subject": "罗兰",
+              "code": "photoUpload",
+              "desc": "罗兰上传了照片",
+              "date": 1510891403033,
+              "imgNum": 2,
+              "imgUrls": [
+                "http://111.com",
+                "http://111.com"
+              ]
+            },
+            {
+              "subject": "罗兰",
+              "code": "informationSubmit",
+              "desc": "罗兰提交了资料",
+              "date": 1510891403033,
+              "imgNum": "",
+              "imgUrls": []
+            },
+            {
+              "subject": "罗兰",
+              "code": "appQuit",
+              "desc": "罗兰退出了哈罗助手APP",
+              "date": 1510891403033,
+              "imgNum": "",
+              "imgUrls": []
+            }
+          ]
+        }
+      }
+    ],
+    "project": {
+      "projectIds": [
+        "2001",
+        "3001"
+      ],
+      "projectName": "去眼袋 埋线双眼皮 拉皮 提拉 隆胸"
     },
+    "customer": {
+      "headPhotoUrl": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKuBQaDLQKxR3tMcn2iaF4IOH5L9tYNEOwUAB2IZGqjoEOCtk1sMeeibqI6Ddc87FCnFKesa5cibzMkA/0",
+      "name": "罗兰"
+    },
+    "consultant": {
+      "consultantName": "姜士虎",
+      "consultantLoginName": "18513855349"
+    },
+    "consultationStage": "术前",
 
-    oUserInfo: {},
+    oUInfo: {},
     oEvent: {
       code: "",
       eventAttrs: {
@@ -68,6 +162,18 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
+    let _This = this;
+    getApp().getUserData(function (uinfo) {
+      console.log("uinfo=====>", uinfo);
+      _This.setData({
+        consultingId: options.consultingId||0,
+        oUInfo: uinfo,
+        productCode: options.productCode
+
+      });
+      _This.fGetConsultationTrail();
+    });
+
   },
 
   /**
@@ -117,5 +223,48 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  fSendCase(){
+    var _This=this;
+    wx.navigateTo({
+      url: '../pcase/pcase?consultationId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + +_This.data.productcode
+    });
+  },
+  fGetConsultationTrail() {
+    wx.showLoading({
+      title: 'loading...',
+    });
+    let _This = this;
+    //console.log(_This.data.phonenum);
+    wx.request({
+      url: "https://27478500.qcloud.la/wxa/consult/trail",
+      method: "POST",
+      data: {
+        unionId: _This.data.oUInfo.unionId || "",
+        consultingId: _This.data.consultingId
+      },
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (result) {
+        console.log("trail====>", result.data.data);
+        if (result.data.code == 0) {
+          _This.setData({ 
+            trackDesc: result.data.data.trackDesc,
+            customer: result.data.data.customer,
+            consultant: result.data.data.consultant,
+            project: result.data.data.project,         
+            consultationStage: result.data.data.consultationStage 
+            });
+        } else {
+          console.log(result);
+        }
+        wx.hideLoading();
+      },
+      fail:function(){
+        wx.hideLoading();
+      }
+    });
+    wx.hideLoading();
   }
 })

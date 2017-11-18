@@ -11,6 +11,7 @@ var uinfo=function(unionid,callback){
     }
   });
 };
+
 module.exports = {
   uinfo: uinfo
 }

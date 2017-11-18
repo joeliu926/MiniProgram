@@ -96,9 +96,9 @@ Page({
         });
 
       }else{
-        _This.fCustomerMsg();//发送客服消息
-        _This.fUserEvent(event.eType.appOpen);//进入程序
         _This.fCustomerAdd();//客户添加
+        _This.fUserEvent(event.eType.appOpen);//进入程序
+        _This.fCustomerMsg();//发送客服消息    
       };
     });
   },
@@ -114,7 +114,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    this.fUserEvent(event.eType.appQuit);//退出页面
+    //this.fUserEvent(event.eType.appQuit);//退出页面
   },
 
 
@@ -148,7 +148,8 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (e) {
+    console.log(e);
     var _This=this;
    // _This.fUserEvent(event.eType.appShare); //咨询师分享事件
     var caseIds = _This.data.caseIds;
@@ -158,7 +159,12 @@ Page({
     }
     return {
       title: '案例分享',
-      path: '/pages/pcase/citem/citem?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId
+      path: '/pages/pcase/citem/citem?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" +     _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
+         success: function (res) {
+        wx.redirectTo({
+          url: '/pages/home/home'
+        }) 
+       }
     }
   },
   fCaseDetail: function (item) {
@@ -267,7 +273,12 @@ Page({
    * 获取会话ID，咨询师获取会话ID进行消息分享
    */
   fGetConsultationId(sItem, callback) {
+    
     let _This = this;
+    if (_This.data.consultationId){
+      callback(_This.data.consultationId);
+      return false;
+    }
     wx.request({
       url: "https://27478500.qcloud.la/wxa/consult/addconsultation",
       method: "POST",
@@ -340,7 +351,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
-        console.log("UserEvent------",result);
+        console.log("citem--Event---"+eType+"---",result);
         if (result.data.code == 0) {
           if (!oData.shareEventId){
            // oData.shareEventId = result.data.data;

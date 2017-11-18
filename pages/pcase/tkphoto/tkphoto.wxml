@@ -1,10 +1,10 @@
 <!--pages/pcase/tkphoto/tkphoto.wxml-->
 
 <view class='flex fx-d-col p-c b-s w-10'>
-    <view class='photo-content w-10'>
-        <view class='bk-c-w b-s  fx-d-col photo'>
-            <image class='b-s w-10 {{photoSide?"":"hide"}}'  src='{{frontface||"../../../public/images/bk-photo.png"}}' mode='widthFix'></image>
-            <image class='b-s w-10 {{!photoSide?"":"hide"}}' src='{{sideface||"../../../public/images/bk-photo.png"}}' mode='widthFix'></image>
+    <view class='photo-content b-s w-10'>
+        <view class='b-s  fx-d-col photo'>
+            <image style='' class='b-s p-img  w-10 {{photoSide?"":"hide"}}'  src='{{frontface||"../../../public/images/bk-photo.png"}}' mode='widthFix'></image>
+            <image class='b-s p-img w-10 {{!photoSide?"":"hide"}}' src='{{sideface||"../../../public/images/bk-photo.png"}}' mode='widthFix'></image>
             <image class='cam' bindtap='fTakePhoto' src='../../../public/images/icon-came.png' ></image>
         </view>
         <view class='flex-c'>
@@ -13,7 +13,7 @@
         </view>
     </view>
 
-   <view class='footer  b-s' style='display:{{!isUpload?"":"none"}}' >  
+   <view class='footer  b-s' style='display:{{!isUpload?"":"none"}}'>  
       <view class='flex-c btn-sub'> 
             <text class='f-32 btn-back'  bindtap='fSendMsg' style='' >把资料给医生</text>
       </view>           

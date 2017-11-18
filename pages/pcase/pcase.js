@@ -12,11 +12,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //console.log("options-->",options);
+    console.log("options pcase-->",options);
     console.log("---------------");
 
-   
-    console.log("++++++++++++++++++");
+
     let _This=this;
     wx.showLoading({
       title: 'loading...',
@@ -42,7 +41,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    wx.hideShareMenu({});
   },
 
   /**

@@ -16,14 +16,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (getApp().globalData.flag) {
-      wx.navigateBack({
-        delta: 1
-      })
-      wx.navigateBack({
-        delta: 1
-      })
-    } 
+    console.log("home---options--->",options.init);
+     if(options.init){
+      // getApp().globalData.flag=false;
+     }
+
+
     var _This = this;
     getApp().getUserData(function (result) {
       _This.fGetCUserInfo(result.unionId);
@@ -40,10 +38,15 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    //console.log("---------2222-----------------");
- 
-  
-    //console.log("+++++++++33333+++++++++++++++++");
+    /*if (getApp().globalData.flag) {
+      wx.navigateBack({
+        delta: 1
+      })
+      getApp().globalData.flag = false;
+      wx.navigateBack({
+        delta: 1
+      })
+    } */
    
   },
 
@@ -51,7 +54,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.hideShareMenu({});
+    wx.hideNavigationBarLoading();
   },
 
   /**
@@ -72,7 +76,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getProjectList();
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -85,7 +90,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (e) {
 
   },
   fSearchData(){
@@ -146,7 +151,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
-       //console.log("project====>", result.data.data.list);
+       console.log("project====>", result.data.data.list);
         if (result.data.code == 0) {
           _This.setData({ customerList: result.data.data.list });
          // console.log(result.data.data.list);

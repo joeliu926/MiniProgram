@@ -10,33 +10,33 @@ Page({
   data: {
     detailId:"",
     detailInfo: {
-      "doctorName": "刘德华",
+      "doctorName": "",
       "customerGender": 0,
-      "customerLogo": "http://101.132.161.222:8077/mc_files/10088/CASE_LIBRARY/7cb3da9e-f690-4b79-b32c-6a69bdcf629b",
-      "customerName": "吴彦祖",
-      "customerAge": 12,
+      "customerLogo": "",
+      "customerName": "",
+      "customerAge": 0,
       "operationDate": 1510724649000,
-      "hospitalName": "协和医院",
-      "productName": "你猜",
+      "hospitalName": "",
+      "productName": "",
       "contentList": [
         {
           "title": "",
           "definitionDate": 1510206364000,
           "nodeType": 0,
-          "caseFeature": "鼻子太大",
+          "caseFeature": "",
           "description": "",
           "fileList": [
-            "http://101.132.161.222:8077/mc_files/10088/null/d6e37de9-1175-41cd-8d15-ffcf82e9ba0f"
+            ""
           ]
         },
         {
-          "title": "术后120天",
+          "title": "",
           "definitionDate": 1510984011000,
           "nodeType": 1,
-          "caseFeature": "这个图片相当好看",
+          "caseFeature": "",
           "description": "",
           "fileList": [
-            "http://101.132.161.222:8077/mc_files/10088/null/cc119fdc-302c-4ae3-a4aa-63488ce8a13b"
+            ""
           ]
         }
       ]
@@ -128,6 +128,13 @@ Page({
    */
   onReachBottom: function () {
   
+  },
+  imgPreview(e){
+    var dataset = e.currentTarget.dataset;
+    wx.previewImage({
+      current: dataset.src, 
+      urls: [dataset.src] 
+    })
   },
 
   /**

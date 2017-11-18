@@ -41,6 +41,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("take photos options==>",options);
     var _This = this;
     var oEvent = _This.data.oEvent;
     getApp().getUserData(function (uinfo) {
@@ -110,12 +111,17 @@ Page({
   },
   fTakePhoto(){
     var _This=this;
+    console.log("upload------------------------");
     wx.chooseImage({
       success: function (res) {
         wx.showLoading({
           title: '上传中...',
         });
         var tempFilePaths = res.tempFilePaths
+        if (!tempFilePaths){
+          wx.hideLoading();
+        return false;
+        }
         wx.uploadFile({    
           url: "https://27478500.qcloud.la/uploadimg/attachment/upload",
           filePath: tempFilePaths[0],
@@ -124,7 +130,7 @@ Page({
             'user': 'test'
           },
           success: function (res) {
-           // console.log(res);
+            console.log("----upload-------success------",res);
                   var oData=JSON.parse(res.data);
                   //console.log(oData);
                   if (oData.code==0){
@@ -147,7 +153,7 @@ Page({
           },
           fail:function(res){
               wx.hideLoading();
-              console.log(res);
+              console.log("fail---------->",res);
           }
         })
       }
@@ -190,6 +196,7 @@ Page({
 
   },
   fClose(){
+    this.fUserEvent(event.eType.appQuit);//退出页面
     getApp().globalData.flag = true;  
     wx.reLaunch({
       url: '../../home/home',
@@ -241,7 +248,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (result) {
-        console.log(result);
+        console.log("photo--Event---" + eType + "---", result);
         if (result.data.code == 0) {
         } else {
           console.log("add  event error---", result);

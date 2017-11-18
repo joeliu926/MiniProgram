@@ -5,23 +5,27 @@ padding: 30px;
 align-items: center;
 }
 .photo-content{
-  height: 80%;
+  height: 90%;
   overflow: hidden;
   align-items: center;
 }
 .cam{
-  height: 60px;
-  width: 60px;
+  height: 120rpx;
+  width: 120rpx;
   position: absolute;
-  bottom: 30px;
-  left:90px;
+  bottom: 60rpx;
+  left:240rpx;
+
 }
 .photo{
-  height:80%;
-  width: 240px;
+  height:800rpx;
+  width: 600rpx;
   overflow: hidden;
   margin: 0 auto;
   position: relative;
+}
+.p-img{
+  width: 600rpx;
 }
 .footer{
   position: absolute;

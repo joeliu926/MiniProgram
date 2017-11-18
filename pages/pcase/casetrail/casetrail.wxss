@@ -2,8 +2,9 @@
     align-items:flex-start;
 }
 .b-pd{
-    padding: 30rpx;
+    padding: 20rpx 30rpx;
 }
+
 .u-ct{
     margin-bottom: 2rpx;
 }
@@ -17,9 +18,12 @@
 .u-info{
  margin-left: 30rpx;
 }
+.u-name{
+  padding-left: 20rpx;
+}
 .rail-ct{
-padding: 80rpx 20rpx 80rpx 20rpx;
-margin-bottom: 40rpx;
+padding: 0rpx 20rpx 80rpx 20rpx;
+/* margin-bottom: 40rpx;*/
 }
 .item-h{
   height: 100rpx;
@@ -33,6 +37,26 @@ margin-bottom: 40rpx;
 }
 .i-tp-bd{
    border-top: 2rpx solid #bcb4f7;
+  
+}
+.p-d-l{
+   padding-left: 0;
+}
+.i-tp-bd-l::before{
+  content: "●";
+  position: relative;
+  left: -10rpx;
+  top: -28rpx;
+  font-size: 20rpx;
+  color: #bcb4f7; 
+}
+.i-tp-bd-r::after{
+  content: "●";
+  position: relative;
+  right: -40rpx;
+  top: -28rpx;
+  font-size: 20rpx;
+  color: #bcb4f7; 
 }
 .i-lt-bd{
     border-left: 2rpx solid #e8e8e8;

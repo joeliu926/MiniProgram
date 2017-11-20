@@ -1,4 +1,4 @@
-<wxs src="./citem.wxs" module="util" />
+<wxs src="../../../utils/wxs/cutil.wxs" module="cutil"  />
 <view class='o-flex o-content'>
   <view class='o-title w-10'>
     <text class='{{isConsult?"show":"hide"}}'>{{projectName}}</text>
@@ -26,7 +26,7 @@
                 </view>
                 <view class='u-info'>
                   <text class='u-name'>{{oitem.customerName}}</text>
-                  <text class='f-14'>诊疗于 {{util.formatTime(oitem.operationDate,"yyyy-MM-dd")}}</text>
+                  <text class='f-14'>诊疗于 {{cutil.formatTime(oitem.operationDate,"yyyy-MM-dd")}}</text>
                 </view>
               </view>
             </view>

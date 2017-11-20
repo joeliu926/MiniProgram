@@ -1,4 +1,5 @@
-<wxs src="../casetrail/casetrail.wxs" module="util" />
+<wxs src="../casetrail/casetrail.wxs" module="trailUtil" />
+<wxs src="../../../utils/wxs/cutil.wxs" module="cutil"  />
 <view class='d-ct'>
 
 
@@ -51,8 +52,8 @@
         <view class='b-s pd-mg  w-10 mg-b share-c'>  
             <view class='flex'>
                <view class='i-left  b-s item-h item-pd' style='padding-right:25rpx;'>
-                   <view class='f-14 b-s item-pd' style='color:{{util.eventColor(oitem.leftTrack.code)}}'>{{oitem.leftTrack.desc}}</view> 
-                   <view class='f-12 b-s item-pd i-tp-bd i-tp-bd-r'>{{util.formatTime(oitem.leftTrack.date)}}</view> 
+                   <view class='f-14 b-s item-pd' style='color:{{trailUtil.eventColor(oitem.leftTrack.code)}}'>{{oitem.leftTrack.desc}}</view> 
+                   <view class='f-12 b-s item-pd i-tp-bd i-tp-bd-r'>{{cutil.formatTime(oitem.leftTrack.date)}}</view> 
                </view>
                <view class='i-right w-5 '>              
                    <view class='right-i i-lt-bd {{ditem.imgUrls.length>0?"item-h":"item-h"}} '>
@@ -61,12 +62,12 @@
 
  <block  wx:for="{{oitem.rightTrack.trackDetailList}}" wx:for-item="ditem" wx:key="id">
           <view class='right-i i-lt-bd item-h' style='height:{{(ditem.code=="photoUpload"&&ditem.imgUrls.length>0)?"300rpx":"100rpx"}}'>
-                      <view class='b-s f-14 item-pd' style='color:{{util.eventColor(ditem.code)}}' >{{ditem.desc}}</view> 
+                      <view class='b-s f-14 item-pd' style='color:{{trailUtil.eventColor(ditem.code)}}' >{{ditem.desc}}</view> 
                       <view class='b-s f-14 item-pd flex'  wx:if='{{ditem.code=="photoUpload"&&ditem.imgUrls.length>0}}'>
                           <image class='up-img' style='' src='{{ditem.imgUrls[0]||"../../../public/images/img-demo.png"}}'></image>  
                       </view>
              
-                      <view class='b-s f-12 item-pd i-tp-bd p-d-l i-tp-bd-l' style='color:{{util.eventColor(ditem.code)}}'>{{util.formatTime(ditem.date)}}</view> 
+                      <view class='b-s f-12 item-pd i-tp-bd p-d-l i-tp-bd-l' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{cutil.formatTime(ditem.date)}}</view> 
                     </view>
  </block>
 

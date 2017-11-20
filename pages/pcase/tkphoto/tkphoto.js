@@ -1,8 +1,9 @@
 
 const cmsg = require('../../../public/cmsg.js');
 const event = require('../../../public/event.js');
-const apiUser= require('../../../utils/APIUinfo.js');
-const tools = require('../../../utils/util.js');
+const tools = require('../../../utils/js/util.js');
+const wxaapi = require('../../../public/wxaapi.js');
+const wxRequest = require('../../../utils/js/wxRequest.js');
 Page({
 
   /**
@@ -41,7 +42,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("take photos options==>",options);
+   // console.log("take photos options==>",options);
     var _This = this;
     var oEvent = _This.data.oEvent;
     getApp().getUserData(function (uinfo) {
@@ -53,13 +54,7 @@ Page({
         shareEventId: options.shareEventId||""
       });
       //console.log("cstUid----", _This.data.cstUid);
-  
     });
-
-
-
- 
-
   },
 
   /**
@@ -123,7 +118,7 @@ Page({
         return false;
         }
         wx.uploadFile({    
-          url: "https://27478500.qcloud.la/uploadimg/attachment/upload",
+          url:wxaapi.img.upload.url,//upload image
           filePath: tempFilePaths[0],
           name: 'file',
           formData: {
@@ -233,26 +228,22 @@ Page({
       oEvent: oTempEvent
     });
   },
+  /**
+   * 用户事件
+   */
   fUserEvent(eType) {
-    console.log("---post---");
     let _This = this;
     _This.fGetTempEvent();
     var oData = _This.data.oEvent;
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
-    wx.request({
-      url: "https://27478500.qcloud.la/wxa/event/add",
-      method: "POST",
-      data: oData,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
-        console.log("photo--Event---" + eType + "---", result);
-        if (result.data.code == 0) {
-        } else {
-          console.log("add  event error---", result);
-        }
+
+    wxRequest(wxaapi.event.add.url, oData).then(function (result) {
+     // console.log("000000000000000000000000===>", result);
+      //console.log("photo--Event---" + eType + "---", result);
+      if (result.data.code == 0) {
+      } else {
+        console.log("add  event error---", result);
       }
     });
   },
@@ -263,31 +254,20 @@ Page({
     }
     var oCustom = cmsg.custom;
     oCustom = {
-      touser: "oh3NkxCV0gJ0-GtvC7LO5hKBsKio",
+      touser: "",
       msgtype: "text",
       text: {
         content: "This is a test data" + (new Date().valueOf())
       }
     };
-    apiUser.uinfo(_This.data.cstUid, function (result) {
-      //console.log("uinfo----", result.data.data.wxOpenId);
+
+    var pdata = { unionid: _This.data.cstUid };
+    wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
       oCustom.touser = result.data.data.wxOpenId;
       oCustom.text.content = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 提交了个人资料";
-      wx.request({
-        url: "https://27478500.qcloud.la/wx/msg/sendmessage",
-        method: "POST",
-        data: oCustom,
-        header: {
-          'Content-Type': 'application/json'
-        },
-        success: function (result) {
-          console.log("OK-----", result);
-        },
-        fail: function (result) {
-          console.log("false----", result);
-        }
-      });
-
+      return wxRequest(wxaapi.wx.msg.sendmessage.url, oCustom);
+    }).then(result => {
+      console.log("send msg result-----", result);
     });
   }
 })

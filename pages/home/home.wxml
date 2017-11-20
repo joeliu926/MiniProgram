@@ -1,4 +1,4 @@
-<wxs src="../pcase/citem/citem.wxs" module="util"  />
+<wxs src="../../utils/wxs/cutil.wxs" module="util"  />
 <view class='h-ct b-s' style='display:{{showData?"":"none"}}'>
   <view class='flex-c b-s w-10 bk-c-w s-ct'>
     <view class='flex input-o'>

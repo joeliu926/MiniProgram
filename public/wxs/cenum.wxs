@@ -1,0 +1,12 @@
+var genderFilter = function (param) {
+  var gender = "其他";
+  switch (param) {
+    case 1: gender = "男"; break;
+    case 2: gender = "女"; break;
+    default: break;
+  }
+  return gender;
+}
+module.exports = {
+  genderFilter: genderFilter
+}

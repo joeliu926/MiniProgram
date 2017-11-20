@@ -1,8 +1,9 @@
-// pages/pcase/pcase.js
+const wxaapi = require('../../public/wxaapi.js');
+const wxRequest = require('../../utils/js/wxRequest.js');
 Page({
   data: {
       projectItems:[],
-      uicondata:"adsffsdf",
+      uicondata:"",
       oUserInfo:{},
       consultationId:"",
       jSelect:""
@@ -12,10 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("options pcase-->",options);
-    console.log("---------------");
-
-
+   // console.log("options pcase-->", wxaapi);
     let _This=this;
     wx.showLoading({
       title: 'loading...',
@@ -72,12 +70,6 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
   selectItem:function(item){
     let sItem=item.target.dataset;
     this.setData({
@@ -92,28 +84,22 @@ Page({
   selectTitle:function(){
      console.log("this is select title");
   },
+  /**
+   * 获取项目列表信息
+   */
   getProjectList(param){
     let _This=this;
-    wx.request({
-      url: "https://27478500.qcloud.la/wxa/product/list",
-      method: "POST",
-      data: {
-        unionId: param
-      },
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
-        //console.log(result);
-        //console.log(result.data.code);
-        if(result.data.code==0){
-          _This.setData({projectItems: result.data.data});
-        }else{
-          console.log(result);
-        }
-        wx.hideLoading();
+
+    let pdata = {unionId: param};
+    wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
+      //console.log("000000000000000000000000===>", result);
+      if (result.data.code == 0) {
+        _This.setData({ projectItems: result.data.data });
+      } else {
+        console.log(result);
       }
-      });
+      wx.hideLoading();
+    });
   }
 
 })

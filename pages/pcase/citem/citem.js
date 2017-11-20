@@ -1,7 +1,8 @@
 const event= require('../../../public/event.js');
 const cmsg = require('../../../public/cmsg.js');
-const apiUser = require('../../../utils/APIUinfo.js');
-const tools = require('../../../utils/util.js');
+const tools = require('../../../utils/js/util.js');
+const wxaapi = require('../../../public/wxaapi.js');
+const wxRequest = require('../../../utils/js/wxRequest.js');
 Page({
 
   /**
@@ -68,7 +69,7 @@ Page({
 
     var _This=this;
     var caseIds = options.caseIds;
-    console.log("options===>", options);
+    //console.log("options===>", options);
 
     getApp().getUserData(function(uinfo){
       _This.setData({
@@ -84,11 +85,10 @@ Page({
         oEvent:event.oEvent
       });
       _This.fGetCaseList(uinfo);//获取案例
-
      // if ((!caseIds || caseIds.length <= 0) &&!options.consultationId){
       if ((!caseIds || caseIds.length <= 0)) {
         _This.fGetConsultationId(options.itemid, function (result) {
-           console.log("fGetConsultationId----->", result);
+           //console.log("fGetConsultationId----->", result);
           _This.setData({
             consultationId: result || ""
           });  
@@ -149,7 +149,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (e) {
-    console.log(e);
+    //console.log(e);
     var _This=this;
    // _This.fUserEvent(event.eType.appShare); //咨询师分享事件
     var caseIds = _This.data.caseIds;
@@ -279,27 +279,19 @@ Page({
       callback(_This.data.consultationId);
       return false;
     }
-    wx.request({
-      url: "https://27478500.qcloud.la/wxa/consult/addconsultation",
-      method: "POST",
-      data: {
-        wxaOpenId: _This.data.oUserInfo.openId,
-        unionId: _This.data.oUserInfo.unionId,
-        consultationId: _This.data.consultationId,
-        userLoginName: "",
-        productCode: sItem,
-        wxNickName: _This.data.oUserInfo.nickName,
-      },
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
-        //console.log(result);
-        if (result.data.code == 0) {
-          callback(result.data.data);
-        } else {
-          console.log("addconsultation error==",result);
-        }
+    let pdata = {
+      wxaOpenId: _This.data.oUserInfo.openId,
+      unionId: _This.data.oUserInfo.unionId,
+      consultationId: _This.data.consultationId,
+      userLoginName: "",
+      productCode: sItem,
+      wxNickName: _This.data.oUserInfo.nickName,
+    };
+    wxRequest(wxaapi.consult.add.url, pdata).then(function (result) {
+      if (result.data.code == 0) {
+        callback(result.data.data);
+      } else {
+        console.log("addconsultation error==", result);
       }
     });
   },
@@ -308,60 +300,50 @@ Page({
    */
     fCustomerAdd() {
     let _This = this;
-    wx.request({
-      url: "https://27478500.qcloud.la/wxa/customer/addcustomer",
-      method: "POST",
-      data: {
-        openid: _This.data.oUserInfo.openId,
-        wxNickname: _This.data.oUserInfo.nickName,
-        gender: _This.data.oUserInfo.gender,
-        province: _This.data.oUserInfo.province,
-        city: _This.data.oUserInfo.city,
-        country: _This.data.oUserInfo.country,
-        logo: _This.data.oUserInfo.avatarUrl,
-        unionid: _This.data.oUserInfo.unionId,
-        userUnionid: _This.data.cstUid,
-        consultationId: _This.data.consultationId,
-        shareEventId: _This.data.shareEventId
-      },
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
-        if (result.data.code == 0) {
-         // callback(result.data.data);
-        } else {
-          console.log("addcustomer error----",result);
-        }
+
+
+    let pdata = {
+      openid: _This.data.oUserInfo.openId,
+      wxNickname: _This.data.oUserInfo.nickName,
+      gender: _This.data.oUserInfo.gender,
+      province: _This.data.oUserInfo.province,
+      city: _This.data.oUserInfo.city,
+      country: _This.data.oUserInfo.country,
+      logo: _This.data.oUserInfo.avatarUrl,
+      unionid: _This.data.oUserInfo.unionId,
+      userUnionid: _This.data.cstUid,
+      consultationId: _This.data.consultationId,
+      shareEventId: _This.data.shareEventId
+    };
+    wxRequest(wxaapi.customer.add.url, pdata).then(function (result) {
+     // console.log("000000000000000000000000===>", result);
+      if (result.data.code == 0) {
+        // callback(result.data.data);
+      } else {
+        console.log("addcustomer error----", result);
       }
     });
   },
+  /**
+   * 用户事件
+   */
   fUserEvent(eType){
-    
     let _This = this;
     _This.fGetTempEvent();
     var oData = _This.data.oEvent;
     oData.eventAttrs.triggeredTime=new Date().valueOf();
     oData.code = eType;
-    wx.request({
-      url: "https://27478500.qcloud.la/wxa/event/add",
-      method: "POST",
-      data: oData,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
-        console.log("citem--Event---"+eType+"---",result);
-        if (result.data.code == 0) {
-          if (!oData.shareEventId){
-           // oData.shareEventId = result.data.data;
-            _This.setData({
-              shareEventId: result.data.data
-            });
-          };
-        } else {
-          console.log("add  event error---",result);
-        }
+    wxRequest(wxaapi.event.add.url, oData).then(function (result) {
+      //console.log("000000000000000000000000===>", result);
+      if (result.data.code == 0) {
+        if (!oData.shareEventId) {
+          // oData.shareEventId = result.data.data;
+          _This.setData({
+            shareEventId: result.data.data
+          });
+        };
+      } else {
+        console.log("add  event error---", result);
       }
     });
   },
@@ -381,26 +363,14 @@ Page({
         content: ""
       }
     };
-    
-    apiUser.uinfo(_This.data.cstUid, function (result) {
-      //console.log("uinfo----", result.data.data.wxOpenId);
+    var pdata = { unionid: _This.data.cstUid };
+    wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
+      //console.log("000000000000000000000000===>", result);
       oCustom.touser = result.data.data.wxOpenId;
       oCustom.text.content = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 查看了您的案例分享";
-      wx.request({
-        url: "https://27478500.qcloud.la/wx/msg/sendmessage",
-        method: "POST",
-        data: oCustom,
-        header: {
-          'Content-Type': 'application/json'
-        },
-        success: function (result) {
-          console.log("OK-----", result);
-        },
-        fail: function (result) {
-          console.log("false----", result);
-        }
-      });
-
+      return wxRequest(wxaapi.wx.msg.sendmessage.url, oCustom);
+    }).then(result=>{
+      console.log("send msg result-----", result);
     });
   },
   /**
@@ -408,27 +378,19 @@ Page({
    */
   fGetCaseList(uinfo) {
     let _This = this;
-    wx.request({
-      url: "https://27478500.qcloud.la/wxa/case/list",
-      method: "POST",
-      data: {
-        unionId: uinfo.unionId,
-        productCode: _This.data.productCode,
-        caseIds: _This.data.caseIds
-      },
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
-        if (result.data.code == 0) {
-          console.log("result.data.data----->", result.data.data);
-          _This.setData({
-            caseList: result.data.data,
-            totalCount: result.data.data.length
-          });
-        } else {
-          console.log("case list----", result);
-        }
+    var pdata = {
+      unionId: uinfo.unionId,
+      productCode: _This.data.productCode,
+      caseIds: _This.data.caseIds
+    };
+    wxRequest(wxaapi.pcase.list.url, pdata).then(function (result) {
+      if (result.data.code == 0) {
+        _This.setData({
+          caseList: result.data.data,
+          totalCount: result.data.data.length
+        });
+      } else {
+        console.log("case list----", result);
       }
     });
   }

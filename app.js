@@ -1,4 +1,4 @@
-//app.js
+const wxaapi = require('./public/wxaapi.js');
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -50,7 +50,7 @@ App({
      success: function (res) {
        if (res.code) {
          wx.request({
-           url: "https://27478500.qcloud.la/wxa/unionid/code",
+           url: wxaapi.unionid.code.url,
            method: "POST",
            data: {
              code: res.code
@@ -65,7 +65,7 @@ App({
                  var encryptedData = res.encryptedData;
                  var iv = res.iv;
                  wx.request({
-                   url: "https://27478500.qcloud.la/wxa/unionid/userinfo",
+                   url: wxaapi.unionid.userinfo.url,
                    method: "POST",
                    data: {
                      encryptedData: encryptedData,
@@ -76,7 +76,7 @@ App({
                      'Content-Type': 'application/json'
                    },
                    success: function (resAll) {
-                     //console.log(resAll);
+                     //console.log("resAll====>", resAll);
                      getApp().globalData.userInfo = resAll.data.userinfo;
                      if (callback){
                        callback(resAll.data.userinfo);

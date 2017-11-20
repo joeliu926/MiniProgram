@@ -1,7 +1,7 @@
 const cmsg = require('../../../public/cmsg.js');
 const event = require('../../../public/event.js');
-const apiUser = require('../../../utils/APIUinfo.js');
-const tools = require('../../../utils/util.js');
+const wxaapi = require('../../../public/wxaapi.js');
+const wxRequest = require('../../../utils/js/wxRequest.js');
 Page({
 
   /**
@@ -92,7 +92,7 @@ Page({
    */
   onReady: function () {
     var _This =this;
-   // _This.fUserEvent(event.eType.caseLike);
+    //_This.fUserEvent(event.eType.caseLike);
   },
 
   /**
@@ -145,23 +145,17 @@ Page({
   },
   getCaseDetaul:function(){
     let _This = this;
-    wx.request({
-      url: "https://27478500.qcloud.la/wxa/case/detail",
-      method: "POST",
-      data: {
-        did: _This.data.detailId
-      },
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
-        if (result.data.code == 0) {
-          _This.setData({
-            detailInfo: result.data.data
-          });
-        } else {
-          console.log(result);
-        }
+
+
+    var pdata = {did: _This.data.detailId};
+    wxRequest(wxaapi.pcase.detail.url, pdata).then(function (result) {
+      //console.log("000000000000000000000000===>", result);
+      if (result.data.code == 0) {
+        _This.setData({
+          detailInfo: result.data.data
+        });
+      } else {
+        console.log(result);
       }
     });
   },
@@ -190,25 +184,20 @@ Page({
       oEvent: oTempEvent
     });
   },
+  /**
+   * 用户事件
+   */
   fUserEvent(eType) {
     let _This = this;
     _This.fGetTempEvent();
     var oData = _This.data.oEvent;
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
-    wx.request({
-      url: "https://27478500.qcloud.la/wxa/event/add",
-      method: "POST",
-      data: oData,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
-       // console.log(result);
-        if (result.data.code == 0) {
-        } else {
-          console.log("add  event error---", result);
-        }
+    wxRequest(wxaapi.event.add.url, oData).then(function (result) {
+      //console.log("000000000000000000000000===>", result);
+      if (result.data.code == 0) {
+      } else {
+        console.log("add  event error---", result);
       }
     });
   }

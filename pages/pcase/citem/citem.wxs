@@ -1,26 +1,7 @@
-var formatTime = function(date,formater){
-  formater = formater||"yyyy-MM-dd hh:mm:ss";
-  date=getDate(date);
-  var year = date.getFullYear()
-  var month = date.getMonth() + 1
-  var day = date.getDate()
-  var hour = date.getHours()
-  var minute = date.getMinutes()
-  var second = date.getSeconds()
-  //return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
-  return formater.replace("yyyy", year).replace("MM", month).replace("dd", day).replace("hh", hour).replace("mm", minute).replace("ss", second);
-}
-
-var formatNumber = function(n){
-  n = n.toString()
-  return n[1] ? n : '0' + n
-}
-
 var arrayFilter=function(oItems,item){
   oItems = oItems||[];
   return oItems.indexOf(item)>=0;
 }
 module.exports = {
-  formatTime: formatTime,
   arrayFilter: arrayFilter
 }

@@ -1,4 +1,5 @@
-// pages/pcase/casetrail/casetrail.js
+const wxaapi = require('../../../public/wxaapi.js');
+const wxRequest = require('../../../utils/js/wxRequest.js');
 Page({
 
   /**
@@ -105,10 +106,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("options====>",options);
+   // console.log("options====>",options);
     let _This = this;
     getApp().getUserData(function (uinfo) {
-      console.log("uinfo=====>", uinfo);
+     // console.log("uinfo=====>", uinfo);
       _This.setData({
         consultingId: options.consultingId||0,
         oUInfo: uinfo,
@@ -162,52 +163,38 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
   fSendCase(){
     var _This=this;
     wx.navigateTo({
       url: '/pages/pcase/pcase?consultationId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + +_This.data.productCode
     });
   },
+  /**
+   * 获取咨询轨迹
+   */
   fGetConsultationTrail() {
     wx.showLoading({
       title: 'loading...',
     });
     let _This = this;
-    //console.log(_This.data.phonenum);
-    wx.request({
-      url: "https://27478500.qcloud.la/wxa/consult/trail",
-      method: "POST",
-      data: {
-        unionId: _This.data.oUInfo.unionId || "",
-        consultingId: _This.data.consultingId
-      },
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
-        console.log("trail====>", result);
-        if (result.data.code == 0) {
-          _This.setData({ 
-            trackDesc: result.data.data.trackDesc,
-            customer: result.data.data.customer,
-            consultant: result.data.data.consultant,
-            project: result.data.data.project,         
-            consultationStage: result.data.data.consultationStage 
-            });
-        } else {
-          console.log(result);
-        }
-        wx.hideLoading();
-      },
-      fail:function(){
-        wx.hideLoading();
+    let pdata = {
+      unionId: _This.data.oUInfo.unionId || "",
+      consultingId: _This.data.consultingId
+    };
+    wxRequest(wxaapi.consult.trail.url, pdata).then(function (result) {
+      console.log("000000000000000000000000===>", result);
+      if (result.data.code == 0) {
+        _This.setData({
+          trackDesc: result.data.data.trackDesc,
+          customer: result.data.data.customer,
+          consultant: result.data.data.consultant,
+          project: result.data.data.project,
+          consultationStage: result.data.data.consultationStage
+        });
+      } else {
+        console.log(result);
       }
+      wx.hideLoading();
     });
     wx.hideLoading();
   }

@@ -1,4 +1,5 @@
-const apiUser = require('../../utils/APIUinfo.js');
+const wxaapi = require('../../public/wxaapi.js');
+const wxRequest = require('../../utils/js/wxRequest.js');
 Page({
 
   /**
@@ -16,7 +17,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("home---options--->",options.init);
      if(options.init){
       // getApp().globalData.flag=false;
      }
@@ -47,7 +47,7 @@ Page({
         delta: 1
       })
     } */
-   
+ 
   },
 
   /**
@@ -133,47 +133,40 @@ Page({
       url: '../pcase/pcase',
     })
   },
+  /**
+   * 获取用户列表
+   */
   getProjectList(unionId,mobile) {
     wx.showLoading({
       title: 'loading...',
     });
     let _This = this;
-    //console.log(_This.data.phonenum);
-    wx.request({
-      url: "https://27478500.qcloud.la/wxa/consult/list",
-      method: "POST",
-      data: {
-        unionId: _This.data.oUInfo.unionId||"",
-        mobile: _This.data.phonenum||"",
-        pageSize:10000
-      },
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
-       console.log("project====>", result.data.data.list);
-        if (result.data.code == 0) {
-          _This.setData({ customerList: result.data.data.list });
-         // console.log(result.data.data.list);
-        } else {
-          console.log(result);
-        }
-        wx.hideLoading();
+    let pdata = {
+      unionId: _This.data.oUInfo.unionId || "",
+      mobile: _This.data.phonenum || "",
+      pageSize: 10000
+    };
+    wxRequest(wxaapi.consult.list.url, pdata).then(function (result) {
+      if (result.data.code == 0) {
+        _This.setData({ customerList: result.data.data.list });
+      } else {
+        console.log(result);
       }
+      wx.hideLoading();
     });
   },
+  /**
+   * 验证用户信息
+   */
   fGetCUserInfo(unionid){
     var _This=this;
-    apiUser.uinfo(unionid, function (result) {
-        //console.log(result);
-        if(result.data.code!=0||result.data.data.type!="1"){
-          _This.setData({
-            showData:false
-          });
-        }
-
+    let pdata = { unionid: unionid };
+    wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
+      if (result.data.code != 0 || result.data.data.type != "1") {
+        _This.setData({
+          showData: false
+        });
+      }
     });
   }
-
-
 })

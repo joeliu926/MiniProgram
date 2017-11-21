@@ -162,6 +162,7 @@ Page({
     var _This=this;
     let pdata = { unionid: unionid };
     wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
+      console.log("home page===>",result);
       if (result.data.code != 0 || result.data.data.type != "1") {
         _This.setData({
           showData: false

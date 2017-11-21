@@ -16,6 +16,7 @@ var fGetUserByUnionId = function (unionid, callback) {
 var fUserEvent=function(){
 
 };
+
 module.exports = {
   fGetUserByUnionId: fGetUserByUnionId,
   fUserEvent: fUserEvent

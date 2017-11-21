@@ -252,22 +252,8 @@ Page({
     if (_This.data.oUserInfo.unionId == _This.data.cstUid) {
       return false;
     }
-    var oCustom = cmsg.custom;
-    oCustom = {
-      touser: "",
-      msgtype: "text",
-      text: {
-        content: "This is a test data" + (new Date().valueOf())
-      }
-    };
+    var sendMsg = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 提交了个人资料";
+    cmsg.fSendWxMsg(_This.data.cstUid, sendMsg);
 
-    var pdata = { unionid: _This.data.cstUid };
-    wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
-      oCustom.touser = result.data.data.wxOpenId;
-      oCustom.text.content = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 提交了个人资料";
-      return wxRequest(wxaapi.wx.msg.sendmessage.url, oCustom);
-    }).then(result => {
-      console.log("send msg result-----", result);
-    });
   }
 })

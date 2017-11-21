@@ -355,23 +355,8 @@ Page({
     if (_This.data.oUserInfo.unionId == _This.data.cstUid){
       return false;
     }
-    var oCustom = cmsg.custom;
-    oCustom = {
-      touser: "",
-      msgtype: "text",
-      text: {
-        content: ""
-      }
-    };
-    var pdata = { unionid: _This.data.cstUid };
-    wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
-      //console.log("000000000000000000000000===>", result);
-      oCustom.touser = result.data.data.wxOpenId;
-      oCustom.text.content = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 查看了您的案例分享";
-      return wxRequest(wxaapi.wx.msg.sendmessage.url, oCustom);
-    }).then(result=>{
-      console.log("send msg result-----", result);
-    });
+    var sendMsg = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 查看了您的案例分享";
+    cmsg.fSendWxMsg(_This.data.cstUid, sendMsg);
   },
   /**
    *获取案例列表 

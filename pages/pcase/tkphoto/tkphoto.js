@@ -1,6 +1,5 @@
-
-const cmsg = require('../../../public/cmsg.js');
-const event = require('../../../public/event.js');
+const wxCustomerMsg = require('../../../public/js/wxCustomerMsg.js');
+const event = require('../../../public/js/wxEvent.js');
 const tools = require('../../../utils/js/util.js');
 const wxaapi = require('../../../public/wxaapi.js');
 const wxRequest = require('../../../utils/js/wxRequest.js');
@@ -247,13 +246,15 @@ Page({
       }
     });
   },
+  /**
+   * 发送客服消息
+   */
   fCustomerMsg(){
     var _This=this;
-    if (_This.data.oUserInfo.unionId == _This.data.cstUid) {
+    if (_This.data.oUserInfo.unionId == _This.data.cstUid) {//自己查看不返回事件通知
       return false;
     }
     var sendMsg = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 提交了个人资料";
-    cmsg.fSendWxMsg(_This.data.cstUid, sendMsg);
-
+    wxCustomerMsg.fSendWxMsg(_This.data.cstUid, sendMsg);
   }
 })

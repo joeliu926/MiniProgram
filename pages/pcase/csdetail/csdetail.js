@@ -1,5 +1,4 @@
-const cmsg = require('../../../public/cmsg.js');
-const event = require('../../../public/event.js');
+const event = require('../../../public/js/wxEvent.js');
 const wxaapi = require('../../../public/wxaapi.js');
 const wxRequest = require('../../../utils/js/wxRequest.js');
 Page({

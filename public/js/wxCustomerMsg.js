@@ -1,13 +1,9 @@
-const wxRequest = require('../utils/js/wxRequest.js');
-const wxaapi = require('./wxaapi.js');
-var oCustom= {
-   touser :"",
-   msgtype:"text",
-   text:
-     {
-      content:""
-     }
-}
+const wxRequest = require('../../utils/js/wxRequest.js');
+const wxaapi = require('../wxaapi.js');
+/**
+ * cstUid 咨询师的unionid
+ * msgContent要发送的内容
+ */
 var fSendWxMsg = function (cstUid,msgContent) {
   var pdata = { unionid:cstUid };
   wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
@@ -27,6 +23,5 @@ var fSendWxMsg = function (cstUid,msgContent) {
   });
 };
 module.exports={
-  custom: oCustom,
   fSendWxMsg: fSendWxMsg
 }

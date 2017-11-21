@@ -7,7 +7,7 @@ function wxPromise(fn) {
       obj.fail = function (res) {
         reject(res);
       }
-      fn(obj)
+      fn(obj);
     })
   }
 };
@@ -40,7 +40,7 @@ function wxRequest() {
    oParams.data = aArguments[2];
  };
   var wRequest = wxPromise(wx.request);
-  return wRequest(oParams)
+  return wRequest(oParams);
 }
 
 module.exports =wxRequest;

@@ -1,5 +1,5 @@
-const event= require('../../../public/event.js');
-const cmsg = require('../../../public/cmsg.js');
+const event = require('../../../public/js/wxEvent.js');
+const wxCustomerMsg = require('../../../public/js/wxCustomerMsg.js');
 const tools = require('../../../utils/js/util.js');
 const wxaapi = require('../../../public/wxaapi.js');
 const wxRequest = require('../../../utils/js/wxRequest.js');
@@ -356,7 +356,7 @@ Page({
       return false;
     }
     var sendMsg = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 查看了您的案例分享";
-    cmsg.fSendWxMsg(_This.data.cstUid, sendMsg);
+    wxCustomerMsg.fSendWxMsg(_This.data.cstUid, sendMsg);
   },
   /**
    *获取案例列表 

@@ -1,3 +1,5 @@
+const wxRequest = require('../../utils/js/wxRequest.js');
+const wxaapi = require('../wxaapi.js');
 var eType = {
   appShare: "appShare", //咨询师分享
   appOpen: "appOpen",//打开小程序

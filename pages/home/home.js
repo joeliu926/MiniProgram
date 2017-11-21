@@ -24,6 +24,7 @@ Page({
 
     var _This = this;
     getApp().getUserData(function (result) {
+      console.log("loading use info=====>",result);
       _This.fGetCUserInfo(result.unionId);
       _This.setData({
         oUInfo: result
@@ -47,7 +48,6 @@ Page({
         delta: 1
       })
     } */
- 
   },
 
   /**
@@ -84,7 +84,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+   console.log("this is bottom data");
+   wx.showLoading({
+     title: 'loading...',
+   });
+   setTimeout(function(){
+     wx.hideLoading();
+   },5000);
   },
 
   /**
@@ -147,10 +153,11 @@ Page({
       pageSize: 10000
     };
     wxRequest(wxaapi.consult.list.url, pdata).then(function (result) {
+      console.log("load project info==>", result);
       if (result.data.code == 0) {
         _This.setData({ customerList: result.data.data.list });
       } else {
-        console.log(result);
+        console.log("load project info error==>", result);
       }
       wx.hideLoading();
     });
@@ -162,7 +169,7 @@ Page({
     var _This=this;
     let pdata = { unionid: unionid };
     wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
-      console.log("home page===>",result);
+      console.log("home page get user type===>",result);
       if (result.data.code != 0 || result.data.data.type != "1") {
         _This.setData({
           showData: false

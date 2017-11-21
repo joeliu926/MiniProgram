@@ -1,0 +1,7 @@
+var featureFilter = function (param) {
+  param = param || "";
+  return param.split(",");
+}
+module.exports = {
+  featureFilter: featureFilter
+}

@@ -1,0 +1,53 @@
+<wxs src="../../../utils/wxs/cutil.wxs" module="cutil"  />
+<view class='o-flex o-content'>
+  <view class='o-title w-10'>
+    <text>{{currentPage}}/{{totalCount}}</text>
+  </view>
+  <view class='o-project w-10'>
+    <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
+      <block wx:for="{{caseList}}" wx:for-item="oitem" wx:key="id">
+        <swiper-item>       
+          <view class='o-item'>
+            <view class='w-10'>
+              <view>
+                <view class='flex b-s' style="position: relative;">
+                <text class='before f-12 bcommon'>before</text>
+                 <text class='after f-12 bcommon'>after</text>
+                  <image src='{{oitem.frondFile||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l'></image>
+                  <image  src='{{oitem.backFile||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r'></image>
+                </view>
+              </view>
+
+              <view class='user-info'  bindtap='fCaseDetail'>
+                <view class='bef-aft flex'>
+                  <image class='o-img-title' src='{{oitem.customerLogo}}' mode='scaleToFill'></image>
+
+                </view>
+                <view class='u-info'>
+                  <text class='u-name'>{{oitem.customerName}}</text>
+                  <text class='f-14'>诊疗于 {{cutil.formatTime(oitem.operationDate,"yyyy-MM-dd")}}</text>
+                </view>
+              </view>
+            </view>
+            <view style="padding:15px 15px 0 15px;">
+              <view>
+                <text class='f-14 txt-item'>{{oitem.caseName}}</text>
+              </view>
+              <view class='ho-info'>{{oitem.hospitalName}}</view>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+<view class='extr-v' style=''></view>
+<view class='extr-v extr-b' style=''></view>
+  <view class='like-content w-10 footer'>
+  <view class='b-r b-s {{isLikeItems[currentPage]!="n"?"":"ulk-b-d"}}'  bindtap='fUnlikeCase'>
+   <image src='../../../public/images/icon-unlike.png' class='like-icon' ></image>
+</view>
+<view class='b-r b-s {{isLikeItems[currentPage]!="y"?"":"lk-b-d"}}'  bindtap='fLikeCase'>
+ <image src='../../../public/images/icon-like.png' class='like-icon'></image>
+</view> 
+  </view>
+</view>

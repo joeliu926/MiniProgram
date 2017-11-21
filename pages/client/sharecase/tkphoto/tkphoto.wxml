@@ -1,0 +1,29 @@
+<!--pages/pcase/tkphoto/tkphoto.wxml-->
+
+<view class='flex fx-d-col p-c b-s w-10'>
+    <view class='photo-content b-s w-10'>
+        <view class='b-s  fx-d-col photo'>
+            <image style='' class='b-s p-img  w-10 {{photoSide?"":"hide"}}'  src='{{frontface||"../../../../public/images/bk-photo.png"}}' mode='widthFix'></image>
+            <image class='b-s p-img w-10 {{!photoSide?"":"hide"}}' src='{{sideface||"../../../../public/images/bk-photo.png"}}' mode='widthFix'></image>
+            <image class='cam' bindtap='fTakePhoto' src='../../../../public/images/icon-came.png' ></image>
+        </view>
+        <view class='flex-c'>
+          <text class='face f-14 {{photoSide?"s-side":""}}' data-choose='{{photoSide}}' bindtap='fChangeSide'>正面</text>
+          <text class='face f-14 {{!photoSide?"s-side":""}}'  data-choose='{{!photoSide}}' bindtap='fChangeSide'>侧面</text>
+        </view>
+    </view>
+
+   <view class='footer  b-s' style='display:{{!isUpload?"":"none"}}'>  
+      <view class='flex-c btn-sub'> 
+            <text class='f-32 btn-back'  bindtap='fSendMsg' style='' >把资料给医生</text>
+      </view>           
+    </view>
+
+    <view class='footer  b-s' style='display:{{isUpload?"":"none"}}' >  
+      <view class='flex-c btn-sub'> 
+          <image src='../../../../public/images/icon-we.png' class='icon-we' style=''></image>
+           <text class='f-32' bindtap='fClose'>返回咨询</text>
+      </view>           
+    </view>
+</view>
+

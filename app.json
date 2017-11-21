@@ -1,20 +1,20 @@
 {
   "pages": [
-
     "pages/home/home",
-    "pages/index/index",
     "pages/pcase/csdetail/csdetail",
     "pages/pcase/pcase",
     "pages/pcase/citem/citem",
-  "pages/pcase/tkphoto/tkphoto",
-   "pages/pcase/casetrail/casetrail",
-    "pages/logs/logs"
-  
+    "pages/pcase/tkphoto/tkphoto",
+    "pages/pcase/casetrail/casetrail",
+    "pages/client/sharecase/sharecase",
+    "pages/client/sharecase/detail/detail",
+    "pages/logs/logs",
+    "pages/client/sharecase/tkphoto/tkphoto"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#000000",
     "navigationBarTitleText": "咨询师助手",
-    "navigationBarTextStyle": "#ffffff" 
+    "navigationBarTextStyle": "#ffffff"
   }
 }

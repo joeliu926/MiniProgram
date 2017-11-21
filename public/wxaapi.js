@@ -1,7 +1,7 @@
 var gConfig={
-  //remote:"https://27478500.qcloud.la/wxa",
+  remote:"https://27478500.qcloud.la/wxa",
   remoteWx: "https://27478500.qcloud.la/wx",
-  remote: "https://27478500.qcloud.la/wxa_test",
+  //remote: "https://27478500.qcloud.la/wxa_test",
  // apiType:"test/" //"test/" or "",
 }
 var urlConfig = {

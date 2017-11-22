@@ -84,8 +84,8 @@ Page({
       });
       _This.fGetCaseList(uinfo);//获取案例
         _This.fCustomerAdd();//客户添加
-        _This.fUserEvent(event.eType.appOpen);//进入程序
-        _This.fCustomerMsg();//发送客服消息 
+        //_This.fUserEvent(event.eType.appOpen);//进入程序
+        //_This.fCustomerMsg();//发送客服消息 
     });
   },
 
@@ -107,6 +107,9 @@ Page({
     var currentPage = _This.data.currentPage;
     oTempEvent.shareEventId = _This.data.shareEventId;
     oTempEvent.productCode = _This.data.productCode;
+
+    console.log("_This.data.caseList[currentPage - 1].id===>", _This.data.caseList[currentPage - 1].id);
+
     oTempEvent.eventAttrs = {
       consultantId: _This.data.cstUid,
       caseId: _This.data.caseList[currentPage - 1].id,//
@@ -131,7 +134,6 @@ Page({
   onShareAppMessage: function (e) {
     //console.log(e);
     var _This = this;
-    // _This.fUserEvent(event.eType.appShare); //咨询师分享事件
     var caseIds = _This.data.caseIds;
     var currentPage = _This.data.currentPage;
     if (caseIds == "") {
@@ -302,10 +304,13 @@ Page({
     };
     wxRequest(wxaapi.pcase.list.url, pdata).then(function (result) {
       if (result.data.code == 0) {
+        //console.log("share result.data.data========>",result.data.data);
         _This.setData({
           caseList: result.data.data,
           totalCount: result.data.data.length
         });
+        _This.fUserEvent(event.eType.appOpen);//进入程序
+        _This.fCustomerMsg();//发送客服消息 
       } else {
         console.log("case list----", result);
       }

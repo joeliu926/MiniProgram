@@ -1,14 +1,15 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/pcase/csdetail/csdetail",
-    "pages/pcase/pcase",
-    "pages/pcase/citem/citem",
-    "pages/pcase/casetrail/casetrail",
+    "pages/projectcase/casedetail/casedetail",
+    "pages/projectcase/projectcase",
+    "pages/projectcase/caselist/caselist",
+    "pages/projectcase/casetrail/casetrail",
     "pages/client/sharecase/sharecase",
     "pages/client/sharecase/detail/detail",
-    "pages/logs/logs",
-    "pages/client/sharecase/tkphoto/tkphoto"
+    "pages/client/sharecase/tkphoto/tkphoto",
+    "pages/logs/logs"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

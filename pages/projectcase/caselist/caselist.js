@@ -147,7 +147,7 @@ Page({
     var _This = this;
     var did=item.target.dataset.uid;
     wx.navigateTo({
-      url: '../csdetail/csdetail?did=' + did + "&cstUid=" + _This.data.cstUid + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId
+      url: '../casedetail/casedetail?did=' + did + "&cstUid=" + _This.data.cstUid + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId
     })
   },
   /**

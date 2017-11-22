@@ -1,4 +1,4 @@
-<wxs src="./csdetail.wxs" module="util" />
+<wxs src="./casedetail.wxs" module="util" />
 <wxs src="../../../utils/wxs/cutil.wxs" module="cutil"  />
 <wxs src="../../../public/wxs/cenum.wxs" module="cenum"  />
 <view class='d-ct'>

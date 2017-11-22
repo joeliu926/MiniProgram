@@ -166,7 +166,7 @@ Page({
   fSendCase(){
     var _This=this;
     wx.navigateTo({
-      url: '/pages/pcase/pcase?consultationId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + +_This.data.productCode
+      url: '/pages/projectcase/projectcase?consultationId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + +_This.data.productCode
     });
   },
   /**

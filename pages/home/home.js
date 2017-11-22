@@ -127,7 +127,7 @@ Page({
     var _This=this;
     var dataset = e.currentTarget.dataset;
     wx.navigateTo({
-      url: '../pcase/casetrail/casetrail?consultingId=' + dataset.consultationid + '&iname=' + dataset.iname + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + dataset.productcode
+      url: '../projectcase/casetrail/casetrail?consultingId=' + dataset.consultationid + '&iname=' + dataset.iname + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + dataset.productcode
     });
 
   /*  wx.navigateTo({
@@ -136,7 +136,7 @@ Page({
   },
   fAddNew: function () {
     wx.navigateTo({
-      url: '../pcase/pcase',
+      url: '../projectcase/projectcase',
     })
   },
   /**

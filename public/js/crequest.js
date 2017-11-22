@@ -1,3 +1,4 @@
+const wxRequest = require('../../utils/js/wxRequest.js');
 const wxaapi = require('../wxaapi.js');
 var fGetUserByUnionId = function (unionid, callback) {
   wx.request({

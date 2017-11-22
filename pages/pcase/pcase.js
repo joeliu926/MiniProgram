@@ -77,10 +77,10 @@ Page({
     });
 
  
-  /*   wx.navigateTo({
+    /*wx.navigateTo({
       url: '/pages/client/sharecase/sharecase?iname=' + sItem.iname + '&itemid=' + sItem.itemid + '&paid=' + sItem.paid + '&paname=' + sItem.paname + '&consultationId=' + (this.data.consultationId || '')
     });*/
-     wx.navigateTo({
+      wx.navigateTo({
         url: 'citem/citem?iname=' + sItem.iname + '&itemid=' + sItem.itemid + '&paid=' + sItem.paid + '&paname=' + sItem.paname + '&consultationId=' + (this.data.consultationId||'')
       });
 

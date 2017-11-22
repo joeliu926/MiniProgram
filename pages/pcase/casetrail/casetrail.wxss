@@ -46,15 +46,15 @@ padding: 0rpx 20rpx 80rpx 20rpx;
   content: "●";
   position: relative;
   left: -10rpx;
-  top: -28rpx;
+  top: -29rpx;
   font-size: 20rpx;
   color: #bcb4f7; 
 }
 .i-tp-bd-r::after{
   content: "●";
   position: relative;
-  right: -40rpx;
-  top: -28rpx;
+  right: -45rpx;
+  top: -29rpx;
   font-size: 20rpx;
   color: #bcb4f7; 
 }

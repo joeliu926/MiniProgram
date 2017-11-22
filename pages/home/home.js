@@ -90,7 +90,7 @@ Page({
    });
    setTimeout(function(){
      wx.hideLoading();
-   },5000);
+   },1000);
   },
 
   /**

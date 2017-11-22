@@ -65,7 +65,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-console.log("take photo====>",options);
     var _This = this;
     var caseIds = options.caseIds;
     
@@ -84,8 +83,6 @@ console.log("take photo====>",options);
         oEvent: event.oEvent
       });
       _This.fGetCaseList(uinfo);//获取案例
-      // if ((!caseIds || caseIds.length <= 0) &&!options.consultationId){
-
         _This.fCustomerAdd();//客户添加
         _This.fUserEvent(event.eType.appOpen);//进入程序
         _This.fCustomerMsg();//发送客服消息 
@@ -252,7 +249,6 @@ console.log("take photo====>",options);
       shareEventId: _This.data.shareEventId
     };
     wxRequest(wxaapi.customer.add.url, pdata).then(function (result) {
-      // console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
         // callback(result.data.data);
       } else {

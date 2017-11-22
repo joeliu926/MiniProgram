@@ -2,7 +2,6 @@
 <view class='o-flex o-content'>
   <view class='o-title w-10'>
     <text class='{{isConsult?"show":"hide"}}'>{{projectName}}</text>
-    <text class='{{!isConsult?"show":"hide"}}'>{{currentPage}}/{{totalCount}}</text>
   </view>
   <view class='o-project w-10'>
     <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
@@ -65,16 +64,5 @@
   </button>
 
 
-  <view class='like-content w-10 footer' style='display:{{!isConsult?"show":"none"}};'>
-  <view class='b-r b-s {{isLikeItems[currentPage]!="n"?"":"ulk-b-d"}}'  bindtap='fUnlikeCase'>
-   <image src='../../../public/images/icon-unlike.png' class='like-icon' ></image>
-</view>
-<view class='b-r b-s {{isLikeItems[currentPage]!="y"?"":"lk-b-d"}}'  bindtap='fLikeCase'>
- <image src='../../../public/images/icon-like.png' class='like-icon'></image>
-</view>
 
-
- 
-   
-  </view>
 </view>

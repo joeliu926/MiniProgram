@@ -61,7 +61,7 @@
                     </view> 
 
  <block  wx:for="{{oitem.rightTrack.trackDetailList}}" wx:for-item="ditem" wx:key="id">
-          <view class='right-i i-lt-bd item-h' style='height:{{(ditem.code=="photoUpload"&&ditem.imgUrls.length>0)?"300rpx":"100rpx"}}'>
+          <view class='right-i i-lt-bd item-h' style='height:{{(ditem.code=="photoUpload"&&ditem.imgUrls.length>0)?"300rpx":"140rpx"}}'>
                       <view class='b-s f-14 item-pd' style='color:{{trailUtil.eventColor(ditem.code)}}' >{{ditem.desc}}</view> 
                       <view class='b-s f-14 item-pd flex'  wx:if='{{ditem.code=="photoUpload"&&ditem.imgUrls.length>0}}'>
                           <image class='up-img' style='' src='{{ditem.imgUrls[0]||"../../../public/images/img-demo.png"}}'></image>  

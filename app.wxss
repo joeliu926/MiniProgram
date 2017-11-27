@@ -50,9 +50,22 @@ page{
   font-size: 32rpx;
   color: #333333;
 }
+.f-c-3{
+  color: #333333;
+}
+.f-c-6{
+  color: #666666;
+}
+.f-c-9{
+  color: #999999;
+}
 .pd-mg{
   padding: 0;
   margin: 0;
+}
+.h-w-10{
+  width: 100%;
+  height: 100%;
 }
 .w-10{
   width: 100%;

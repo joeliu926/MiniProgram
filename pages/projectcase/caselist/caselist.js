@@ -64,7 +64,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     var _This=this;
     var caseIds = options.caseIds;
     getApp().getUserData(function(uinfo){
@@ -134,9 +133,13 @@ Page({
       title: '案例分享',
       path: '/pages/client/sharecase/sharecase?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
       success: function (res) {
-        wx.redirectTo({
-          url: '/pages/home/home'
+
+        wx.navigateBack({
+           delta: 2
         })
+       // wx.redirectTo({
+         // url: '/pages/home/home'
+       // })
       }
     }
   },

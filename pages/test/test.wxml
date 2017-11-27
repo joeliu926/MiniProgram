@@ -1,0 +1,23 @@
+
+
+<view class='h-w-10 b-s'>
+<scroll-view class='t-c b-s b-d' >
+  <view class='t-inner' style="bottom:{{ballBottom}}px;right:{{ballRight}}px;" bindtouchmove="ballMoveEvent"></view>  
+  <view class='t-inner' style="bottom:{{ballBottom}}px;right:{{ballRight}}px;color:#cccccc;" bindtouchmove="ballMoveEvent"></view>  
+</scroll-view>
+</view>
+
+
+<scroll-view scroll-x="true">  
+<view class="uploadWrap" scroll-x="true">  
+
+ <block  wx:for="{{imgData}}" wx:for-item="oItem" wx:if="{{index<4}}" wx:key="id">
+   <view  class="upload_Item b-s" style="right:{{index*50}}rpx;display:none;">  
+    <image class="upload_Item_img b-s"  src="../../public/images/img-demo.png"></image>  
+  </view> 
+ </block>
+ 
+
+  
+</view>  
+</scroll-view> 

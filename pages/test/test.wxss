@@ -1,0 +1,19 @@
+.t-c{
+  background: #eeddcc;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.t-inner{
+  height: 400rpx;
+  width: 400rpx;
+  background: #eeccaa;
+  position: absolute; 
+   z-index: 100;
+   bottom: 240px; 
+ right: 100px; 
+}
+.uploadWrap{height:160rpx; width:100%; display: flex;display: -webkit-box; flex-direction: column;position: relative;}  
+.upload_Item{ width: 160rpx; height: 160rpx; padding: 2rpx;flex: 1;border-radius: 50%;border: 2px solid red;position: absolute;}  
+.upload_Item_img{ width: 150rpx; height: 150rpx;border-radius: 50%;} 

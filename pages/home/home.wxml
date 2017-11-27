@@ -2,7 +2,7 @@
 <view class='h-ct b-s' style='display:{{showData?"":"none"}}'>
   <view class='flex-c b-s w-10 bk-c-w s-ct'>
     <view class='flex input-o'>
-      <icon type='search' size='16' bindtap='fSearchData'></icon> <input class='s-input f-16'  name="phonenum" value="{{phonenum}}" bindinput="fInputSearch"  placeholder='手机号搜索' placeholder-style='font-size:24rpx;color:#999999;'  maxlength='16' placeholder-class="place"></input> <icon bindtap='fClearData' type='clear' class='{{showicon?"show":"hide"}}' ></icon>
+      <icon type='search' size='16' bindtap='fSearchData'></icon> <input class='s-input f-16'  name="phonenum" value="{{phonenum}}" bindinput="fInputSearch"  placeholder='手机号搜索' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'  maxlength='16' placeholder-class="place"></input> <icon bindtap='fClearData' type='clear' class='{{showicon?"show":"hide"}}' ></icon>
     </view>
   </view>
 

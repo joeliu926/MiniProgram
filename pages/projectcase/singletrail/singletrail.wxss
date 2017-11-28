@@ -6,20 +6,17 @@
 }
 
 .a-u-ct{
- 
+
 }
 .a-item{
- 
-}
-.s-more{
-  padding: 20rpx;
+  padding: 40rpx;
 }
 .u-ct{
     margin-bottom: 2rpx;
 }
 .u-title{
-  height: 120rpx;
-  width: 120rpx;
+  height: 100rpx;
+  width: 100rpx;
 }
 .u-local{
   color: #333333;
@@ -31,12 +28,12 @@
   padding-left: 20rpx;
 }
 .rail-ct{
-padding: 0rpx 20rpx 80rpx 20rpx;
+padding: 0rpx 15rpx 80rpx 20rpx;
 /* margin-bottom: 40rpx;*/
 }
 .item-h{
-  height: 100rpx;
-  padding: 30rpx;
+  height: 200rpx;
+  /*padding: 30rpx;*/
 }
 .item-pd{
   padding: 10rpx;
@@ -46,53 +43,41 @@ padding: 0rpx 20rpx 80rpx 20rpx;
 }
 .i-tp-bd{
    border-top: 2rpx solid #bcb4f7;
+   position: relative;
   
+}
+.i-left-t{
+  padding: 10rpx;
 }
 .p-d-l{
    padding-left: 0;
 }
 .i-tp-bd-l::before{
   content: "●";
-  position: relative;
-  left: -10rpx;
-  top: -29rpx;
-  font-size: 20rpx;
+  position: absolute;
+  left: -12rpx;
+  top: -20rpx;
+  font-size: 24rpx;
   color: #bcb4f7; 
 }
 .i-tp-bd-r::after{
   content: "●";
-  position: relative;
-  right: -45rpx;
-  top: -29rpx;
-  font-size: 20rpx;
+  position: absolute;
+  right: -8rpx;
+  top: -20rpx;
+  font-size:  24rpx;
   color: #bcb4f7; 
 }
 .i-lt-bd{
     border-left: 2rpx solid #e8e8e8;
 }
-.p-mg{
-  padding: 24rpx 0;
-}
+
 .up-img{
-  height:180rpx;width:140rpx;
+  height:200rpx;width:160rpx;
 }
-.bd-b{
-  border-bottom: 1rpx solid #eeeeee;
+.cm-mg{
+  margin: 10rpx 5rpx 10rpx 0;
 }
-.sed-btn{
-  padding:10rpx 35rpx;
-  border-radius:30rpx;
-  background:#9083ed;
-  color:#ffffff;
+.cm-mg-r{
+  margin: 10rpx 0rpx 10rpx 8rpx;
 }
-.nk-name{
-  padding: 12rpx 0;
-}
-
-
-
-
-
-
-
-

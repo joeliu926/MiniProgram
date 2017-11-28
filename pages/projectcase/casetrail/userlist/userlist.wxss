@@ -1,0 +1,26 @@
+.u-ct{
+margin: 0;
+}
+.s-ct{
+  height: 130rpx;
+}
+.input-o{
+  width: 60%;
+  margin: 0 auto;
+  padding: 6rpx 10rpx;
+  border-radius: 18px;
+  border: 1px solid #9E9E9E;
+  align-items: center;
+}
+.s-input{
+  height: 32rpx;
+  text-align: center;
+  padding-left: 4rpx;
+}
+.u-title{
+  height: 120rpx;
+  width: 120rpx;
+}
+.mg-t{
+  margin-top: 20rpx;
+}

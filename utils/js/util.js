@@ -1,5 +1,5 @@
 var formatTime = function (date, formater) {
-  formater = formater || "yyyy-MM-dd hh:mm:ss";
+  formater =formater||"yyyy-MM-dd hh:mm:ss";
   date = date || new Date().valueOf();
   date = new Date(date);
   var year = date.getFullYear();

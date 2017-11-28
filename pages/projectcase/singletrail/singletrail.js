@@ -73,12 +73,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   // console.log("options====>",options);
+    console.log("single-- options====>",options);
     let _This = this;
     getApp().getUserData(function (uinfo) {
-     // console.log("uinfo=====>", uinfo);
+       console.log("single page uinfo=====>", uinfo);
       _This.setData({
-        consultingId: options.consultingId||0,
+        consultingId: options.consultingId || 0,
         oUInfo: uinfo,
         productCode: options.productCode
 
@@ -92,61 +92,45 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
-  fSingleTrail(){
-    var _This = this;
-    wx.navigateTo({
-     /* url: './cbooking/cbooking?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + +_This.data.productCode*/
-      url: '../singletrail/singletrail?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + +_This.data.productCode
-    });
-  },
-  fUserList(){
-    var _This = this;
-    wx.navigateTo({
-      url: './userlist/userlist?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + +_This.data.productCode
-    });
-  },
-  fSendCase(){
-    var _This=this;
-    wx.navigateTo({
-      url: '/pages/projectcase/projectcase?consultationId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + +_This.data.productCode
-    });
+
+  fSendCase() {
   },
   /**
    * 获取咨询轨迹
@@ -161,7 +145,7 @@ Page({
       consultingId: _This.data.consultingId
     };
     wxRequest(wxaapi.consult.trail.url, pdata).then(function (result) {
-      console.log("00000--trail===>", result);
+      console.log("single==00000--trail===>", result);
       if (result.data.code == 0) {
         _This.setData({
           trackDesc: result.data.data.trackDesc,
@@ -176,5 +160,10 @@ Page({
       wx.hideLoading();
     });
     wx.hideLoading();
+  },
+  fBooking(){
+    wx.navigateTo({
+      url: '../casetrail/cbooking/cbooking',
+    })
   }
 })

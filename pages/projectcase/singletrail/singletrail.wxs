@@ -1,0 +1,16 @@
+var eventColor = function (param) {
+  var color = "#999999;";
+  switch (param) {
+    case "appShare": color = ""; break;
+    case "appOpen": color = "#fd8062;"; break;
+    case "caseLike": color = "#ffca7f;"; break;
+    case "photoUpload": color = "#4cb0ff;"; break;
+    case "informationSubmit": color = "#9febc6;"; break;
+    case "appQuit": color = "#bcb4f7"; break;
+    default: break;
+  }
+  return color;
+}
+module.exports = {
+  eventColor: eventColor
+}

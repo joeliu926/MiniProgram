@@ -1,0 +1,72 @@
+  <view class='u-ct'>
+     <view class='flex-c b-s w-10 bk-c-w s-ct'>
+      <view class='flex input-o'>
+        <icon type='search' size='16' bindtap='fSearchData'></icon> <input class='s-input f-16'  name="phonenum" value="{{phonenum}}" bindinput="fInputSearch"  placeholder='手机号搜索' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'  maxlength='16' placeholder-class="place"></input> <icon bindtap='fClearData' type='clear' class='{{showicon?"show":"hide"}}' ></icon>
+      </view>
+     </view>
+
+
+    <view class='mg-b bk-c-w c-p-d'>
+       <view class='f-16'>最近互动</view>
+        <view class='flex b-s fx-wp fx-jc-sb bk-c-w a-u-ct'>
+   <view class='flex fx-d-col a-item'>
+      <image class='u-title b-r mg-t' src='../../../../public/images/default-title.png' bindtap='fSingleTrail' ></image>
+      <text class='f-16 t-a-c'>大伟宏</text>   
+   </view>
+   <view class='flex fx-d-col a-item'>
+      <image class='u-title b-r mg-t'  src='../../../../public/images/default-title.png' ></image>
+      <text class='f-16 t-a-c'>宏大伟</text>   
+   </view>
+    <view class='flex fx-d-col a-item'>
+      <image class='u-title b-r mg-t'  src='../../../../public/images/default-title.png' ></image>
+      <text class='f-16 t-a-c'>杨宏伟</text>   
+   </view>
+     <view class='flex fx-d-col a-item'>
+      <image class='u-title b-r mg-t'  src='../../../../public/images/default-title.png'></image>
+      <text class='f-16 t-a-c'>伟宏杨</text>   
+   </view>
+   <view class='flex fx-d-col a-item'>
+      <image class='u-title b-r mg-t'  src='../../../../public/images/default-title.png' ></image>
+      <text class='f-16 t-a-c'>伟杨宏</text>   
+   </view>
+    <view class='flex fx-d-col a-item'>
+      <image class='u-title b-r mg-t'  src='../../../../public/images/default-title.png' ></image>
+      <text class='f-16 t-a-c'>宏杨伟</text>   
+   </view>
+ </view>
+    </view>
+
+    <view class='mg-b bk-c-w c-p-d'>
+     <view class='f-16'> 最热互动</view>
+      <view class='flex b-s fx-wp fx-jc-sb bk-c-w a-u-ct'>
+   <view class='flex fx-d-col a-item'>
+      <image class='u-title b-r mg-t'  src='../../../../public/images/default-title.png' bindtap='fSingleTrail' ></image>
+      <text class='f-16 t-a-c'>大伟宏</text>   
+   </view>
+   <view class='flex fx-d-col a-item'>
+      <image class='u-title b-r mg-t'  src='../../../../public/images/default-title.png' ></image>
+      <text class='f-16 t-a-c'>宏大伟</text>   
+   </view>
+    <view class='flex fx-d-col a-item'>
+      <image class='u-title b-r mg-t'  src='../../../../public/images/default-title.png' ></image>
+      <text class='f-16 t-a-c'>杨宏伟</text>   
+   </view>
+     <view class='flex fx-d-col a-item'>
+      <image class='u-title b-r mg-t'  src='../../../../public/images/default-title.png' ></image>
+      <text class='f-16 t-a-c'>伟宏杨</text>   
+   </view>
+   <view class='flex fx-d-col a-item'>
+      <image class='u-title b-r mg-t' src='../../../../public/images/default-title.png'></image>
+      <text class='f-16 t-a-c'>伟杨宏</text>   
+   </view>
+    <view class='flex fx-d-col a-item'>
+      <image class='u-title b-r mg-t' src='../../../../public/images/default-title.png' ></image>
+      <text class='f-16 t-a-c'>宏杨伟</text>   
+   </view>
+ </view>
+    </view>
+
+
+
+   </view>
+   

@@ -2,34 +2,50 @@
 <wxs src="../../../utils/wxs/cutil.wxs" module="cutil"  />
 <view class='d-ct'>
 
-
-  <view class='u-ct flex b-pd bk-c-w'>
-    <view class='flex-c' style='width:950rpx; justify-content: flex-start;' >
-      <image class='u-title b-r' src='{{customer.headPhotoUrl||"../../../public/images/default-title.png"}}' mode='scaleToFill'></image> <text class='f-16 u-name'>{{customer.name||customer.wxNickname}}
-    </text>  <text class='f-16 {{customer.name?"":"hide"}}'>({{customer.wxNickname}})</text>
-    </view>
-    <view class='u-info flex fx-d-col fx-jc-sa w-10'>
-      <view class='flex fx-jc-sb'>
-        <text class='f-16 u-name'></text>
-        <text class='f-14' style=''>{{consultationStage}}</text>
-      </view>
-      <view class='flex fx-jc-sb' >
-       
-        <text class='f-14 w-10' style='text-align:right;'>咨询师 {{consultant.consultantName}}</text>
-      </view>
-    </view>
-  </view>
-
+ <view class='flex b-s fx-wp fx-jc-sb bk-c-w c-p-d a-u-ct'>
+   <view class='flex fx-d-col'>
+      <image class='u-title b-r' src='{{customer.headPhotoUrl}}' bindtap='fSingleTrail' ></image>
+      <text class='f-16 t-a-c nk-name'>大伟宏</text>   
+   </view>
+   <view class='flex fx-d-col '>
+      <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image>
+      <text class='f-16 t-a-c nk-name'>宏大伟</text>   
+   </view>
+    <view class='flex fx-d-col'>
+      <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image>
+      <text class='f-16 t-a-c nk-name'>杨宏伟</text>   
+   </view>
+     <view class='flex fx-d-col'>
+      <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image>
+      <text class='f-16 t-a-c nk-name'>伟宏杨</text>   
+   </view>
+   <view class='flex fx-d-col'>
+      <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image>
+      <text class='f-16 t-a-c nk-name'>伟杨宏</text>   
+   </view>
+    <view class='flex fx-d-col'>
+      <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image>
+      <text class='f-16 t-a-c nk-name'>宏杨伟</text>   
+   </view>
+ </view>
+ <view class='bk-c-w'>
+   <view class='t-a-c'><text class='sed-btn f-16' bindtap='fSendCase'>发送案例</text></view>
+ </view>
 
 
 
   <view class='flex fx-d-col b-pd bk-c-w mg-b'>
-    <view class='flex mg-b fx-jc-sb p-mg'>
-      <text class='f-14 u-local mg-l'>咨询项目</text>
-      <text class='f-12 b-s sed-btn' style='' bindtap='fSendCase'>发送案例</text>
+    <view class='flex  fx-jc-sb p-mg bd-b'>
+      <text class='f-16 u-local mg-l'>咨询项目</text>
+      <text class='f-14 b-s' style=''>{{project.projectName}}</text>
     </view>
-    <view class='flex'>
-      <text class='f-14 mg-l'>{{project.projectName}}</text>
+   <view class='flex  fx-jc-sb p-mg bd-b'>
+      <text class='f-16 u-local mg-l'>咨询师</text>
+      <text class='f-14 b-s' style=''>{{consultant.consultantName}}</text>
+    </view>
+    <view class='flex  fx-jc-sb p-mg'>
+      <text class='f-16 u-local mg-l'>医疗阶段</text>
+      <text class='f-14 b-s' style=''>{{consultationStage}}</text>
     </view>
   </view>
 

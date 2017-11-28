@@ -1,0 +1,54 @@
+.a-u-ct{
+  height: 280rpx;
+  align-items: center;
+  justify-content:center;
+}
+.u-title{
+  height: 160rpx;
+  width: 160rpx;
+}
+.w-icon{
+ height: 80rpx;
+  width: 80rpx;
+}
+
+.i-ct{
+  padding: 20rpx;
+}
+.sb-btn{
+  padding:8rpx 36rpx;
+  border-radius:10rpx;
+  background:#9083ed;
+  color:#ffffff;
+  width: 90%; 
+}
+.picker{
+  width: 180rpx;
+  height: 40rpx;
+  background: #F5F5F5;
+  margin-left: 30rpx;
+  text-align: center;
+}
+.c-p-d{
+  padding: 10rpx 0rpx;
+}
+.p-d-ct{
+  padding: 20rpx 30rpx;
+  background: #ffffff;
+}
+.w-9{
+  width: 90%;
+}
+.tarea{
+  height: 80rpx;
+}
+.b-d-b{
+  border-bottom: 1rpx solid #eaeaea;
+}
+.remark{
+  background:  #F5F5F5;
+  padding: 0 30rpx;
+}
+.dis-c{
+  background: #E5E5E5;
+}

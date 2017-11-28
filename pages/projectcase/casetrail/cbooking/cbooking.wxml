@@ -1,0 +1,93 @@
+<view class='bk-ct'>
+
+ <view class='flex b-s fx-wp  bk-c-w mg-b a-u-ct'>
+   <view class='flex-c fx-d-col a-item'>
+      <image class='u-title b-r' src='../../../../public/images/default-title.png' ></image>
+      <text class='f-16 t-a-c'>大伟宏</text>   
+   </view>
+ </view>
+
+<view class='p-d-ct mg-b'>
+<view class='flex bk-c-w fx-jc-sb c-p-d'>
+   <view class='f-16'> 
+    顾客姓名
+    </view>
+   <view class='f-16'> 
+     <text class='f-16' bindtap='fBooking'>大卫的羊</text>
+  </view>
+</view>
+</view>
+
+<view class='p-d-ct  mg-b'>
+ <view class='flex bk-c-w fx-jc-sb c-p-d b-d-b'>
+   <view class='f-16'>手机号码</view>
+   <view class='f-16'> <input name="phonenum" class='t-r' value="110" bindinput="fInputSearch"  placeholder='线索备注'></input></view>
+</view>
+<view class='flex bk-c-w fx-jc-sb c-p-d'>
+   <view class='f-16'>微信号码</view>
+   <view class='f-16'>
+    <input name="phonenum" class='t-r' value="119" bindinput="fInputSearch"  placeholder='微信号码'></input>
+   </view>
+</view>
+</view>
+
+<view class='p-d-ct mg-b'>
+<view class='flex bk-c-w fx-jc-sb c-p-d '>
+   <view class='f-16'>咨询项目</view>
+   <view class='f-16'>
+    暂时保密
+   </view>
+</view>
+</view>
+
+<view class='p-d-ct mg-b'>
+<view class='flex bk-c-w fx-jc-sb c-p-d'>
+   <view class='f-16'>预约</view>
+   <view class='flex'>
+     <picker mode="date" value="{{bdate}}"  bindchange="bindDateChange">
+       <view class="f-16 picker">
+         {{bdate}}
+       </view>
+    </picker>
+
+    <picker mode="time" value="{{btime}}"  bindchange="bindTimeChange">
+       <view class="f-16 picker">
+        {{btime}}
+       </view>
+    </picker>
+   </view>
+</view>
+<view class='flex bk-c-w fx-jc-sb c-p-d b-d-b'>
+   <view class='f-16'>已预约</view>
+</view>
+<view class='flex bk-c-w fx-jc-sb mg-b c-p-d'>
+   <view class='f-16'>线索备注</view>
+   <view class='f-16'>
+     <input name="phonenum" class='t-r' value="119" bindinput="fInputSearch"  placeholder='线索备注'></input>
+   </view>
+</view>
+</view>
+<view class='mg-b remark'>
+   <view class='f-16 '>当前用户没有一个有效的联系方式时，将不能够进行预约操作，你可先对用户进行联系方式的补充。</view>
+</view>
+<view class='p-d-ct mg-b'>
+<view class='flex bk-c-w fx-jc-sb c-p-d'>
+   <view class='f-16'>预约备注</view>
+</view>
+<view class='flex bk-c-w fx-jc-sb c-p-d'>
+   <view class='f-16'><textarea  placeholder="预约备注信息" class='tarea' name="textarea"/></view>
+</view>
+
+</view>
+
+
+
+<view class='flex-c c-p-d b-s w-10 mg-b'>
+   <view class='sb-btn t-a-c b-s'> 提交</view> 
+</view>
+
+<view class='flex-c c-p-d b-s w-10 mg-b'>
+   <view class='dis-c  sb-btn t-a-c b-s'> 提交</view> 
+</view>
+
+</view>

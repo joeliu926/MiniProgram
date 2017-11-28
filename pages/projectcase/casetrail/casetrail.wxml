@@ -63,36 +63,55 @@
 
 
 
-  <view class='b-s pd-mg  b-pd bk-c-w rail-ct'>
+ <view class='b-s pd-mg  b-pd bk-c-w rail-ct'>
      <block  wx:for="{{trackDesc}}" wx:for-item="oitem" wx:key="id">
         <view class='b-s pd-mg  w-10 mg-b share-c'>  
             <view class='flex'>
-               <view class='i-left  b-s item-h item-pd' style='padding-right:25rpx;'>
-                   <view class='f-14 b-s item-pd' style='color:{{trailUtil.eventColor(oitem.leftTrack.code)}}'>{{oitem.leftTrack.desc}}</view> 
-                   <view class='f-12 b-s item-pd i-tp-bd i-tp-bd-r'>{{cutil.formatTime(oitem.leftTrack.date)}}</view> 
+
+               <view class='i-left  b-s' style=''>
+                  <view class='flex fx-jc-ed' >
+                        <view class='flex fx-d-col fx-jc-sa b-s cm-mg'>
+                           <view  class='f-16 t-r'>大伟宏</view>
+                           <view  class='f-12 b-s'>2017/12/21 11:11:33</view>
+                        </view>
+                        <view class='cm-mg b-s'> <image class='t-title b-r' src='{{customer.headPhotoUrl}}' ></image></view> 
+                 </view>
+                   <view class='f-14  i-tp-bd i-tp-bd-r' style='padding-left:10rpx;color:{{trailUtil.eventColor(oitem.leftTrack.code)}}'>{{oitem.leftTrack.desc}}</view> 
                </view>
-               <view class='i-right w-5 '>              
+
+
+
+               <view class='i-right w-5'>              
                    <view class='right-i i-lt-bd {{ditem.imgUrls.length>0?"item-h":"item-h"}} '>
                      
                     </view> 
 
  <block  wx:for="{{oitem.rightTrack.trackDetailList}}" wx:for-item="ditem" wx:key="id">
-          <view class='right-i i-lt-bd item-h' style='height:{{(ditem.code=="photoUpload"&&ditem.imgUrls.length>0)?"300rpx":"140rpx"}}'>
-                      <view class='b-s f-14 item-pd' style='color:{{trailUtil.eventColor(ditem.code)}}' >{{ditem.desc}}</view> 
-                      <view class='b-s f-14 item-pd flex'  wx:if='{{ditem.code=="photoUpload"&&ditem.imgUrls.length>0}}'>
-                          <image class='up-img' style='' src='{{ditem.imgUrls[0]||"../../../public/images/img-demo.png"}}'></image>  
-                      </view>
+
+          <view class='right-i i-lt-bd item-h' style='height:{{(ditem.code=="photoUpload"&&ditem.imgUrls.length>0)?"440rpx":"260rpx"}}'>
+
+
+                <view class='flex' >
+                       <view class='cm-mg-r b-s'> <image class='t-title b-r' src='{{customer.headPhotoUrl}}' ></image></view> 
+                        <view class='flex fx-d-col fx-jc-sa cm-mg-r b-s'>
+                           <view  class='f-16 t-l b-s' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{ditem.subject}}</view>
+                           <view  class='f-12 b-s p-d-l' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{cutil.formatTime(ditem.date,"yyyy/MM/dd hh:mm:ss")}}</view> 
+                        </view>                     
+                 </view>
+<view class='f-14 b-s i-tp-bd  i-tp-bd-l' style='padding-left:10rpx;color:{{trailUtil.eventColor(ditem.code)}}'>{{ditem.desc}}</view> 
+
              
-                      <view class='b-s f-12 item-pd i-tp-bd p-d-l i-tp-bd-l' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{cutil.formatTime(ditem.date)}}</view> 
+                      <view class='b-s f-14 item-pd flex'  wx:if='{{ditem.code=="photoUpload"&&ditem.imgUrls.length>0}}'>
+                          <image class='up-img' style='' src='{{ditem.imgUrls[0]||"../../../public/images/img-demo.png"}}'></image> 
+                      </view> 
+
                     </view>
- </block>
+ </block>       
 
 
-              
                </view>
             </view>   
-   
-        </view>
+        </view>     
       </block>
   </view>
   

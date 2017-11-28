@@ -29,7 +29,7 @@
                            <view  class='f-16 t-r'>大伟宏</view>
                            <view  class='f-12 b-s'>2017/12/21 11:11:33</view>
                         </view>
-                        <view class='cm-mg b-s'> <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image></view> 
+                        <view class='cm-mg b-s'> <image class='t-title b-r' src='{{customer.headPhotoUrl}}' ></image></view> 
                  </view>
                    <view class='f-14  i-tp-bd i-tp-bd-r' style='padding-left:10rpx;color:{{trailUtil.eventColor(oitem.leftTrack.code)}}'>{{oitem.leftTrack.desc}}</view> 
                </view>
@@ -47,7 +47,7 @@
 
 
                 <view class='flex' >
-                       <view class='cm-mg-r b-s'> <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image></view> 
+                       <view class='cm-mg-r b-s'> <image class='t-title b-r' src='{{customer.headPhotoUrl}}' ></image></view> 
                         <view class='flex fx-d-col fx-jc-sa cm-mg-r b-s'>
                            <view  class='f-16 t-l b-s' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{ditem.subject}}</view>
                            <view  class='f-12 b-s p-d-l' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{cutil.formatTime(ditem.date,"yyyy/MM/dd hh:mm:ss")}}</view> 

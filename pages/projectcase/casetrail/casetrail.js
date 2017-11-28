@@ -65,8 +65,15 @@ Page({
         unionid: "",
         mobile: ""
       }
-    }
-
+    },
+//
+ imgUrls: [
+      '1','2','3'
+    ],
+    indicatorDots: false,
+    autoplay: false,
+    interval: 5000,
+    duration: 1000
   },
 
   /**

@@ -13,7 +13,8 @@
     顾客姓名
     </view>
    <view class='f-16'> 
-     <text class='f-16' bindtap='fBooking'>大卫的羊</text>
+   <input name="customerName" class='t-r' value="大伟的杨" bindinput="fInputSearch"  placeholder='客户姓名'></input>
+    
   </view>
 </view>
 </view>
@@ -35,7 +36,16 @@
 <view class='flex bk-c-w fx-jc-sb c-p-d '>
    <view class='f-16'>咨询项目</view>
    <view class='f-16'>
-    暂时保密
+   <scroll-view class='flex fx-jc-ed scrol-v'  scroll-x="true" style=''>
+
+  
+      <text class='f-16 pro-item' >大卫的羊</text>
+      <text class='f-16 pro-item'>大卫的羊</text>
+      <text class='f-16 pro-item' >大卫的羊</text>
+      <text class='f-16 pro-item'>大卫的羊</text>
+      <text class='f-16 pro-item'>大卫的羊</text>
+      <text class='f-16 pro-item'>大卫的羊</text>
+   </scroll-view>
    </view>
 </view>
 </view>

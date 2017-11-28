@@ -52,3 +52,11 @@
 .dis-c{
   background: #E5E5E5;
 }
+.scrol-v{
+  width:550rpx;
+  height: 40rpx; 
+  white-space: nowrap;
+}
+.pro-item{
+  margin: 0 10rpx;
+}

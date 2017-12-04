@@ -6,7 +6,10 @@
 }
 
 .a-u-ct{
- 
+ margin-left: 10rpx;
+}
+.csm-item{
+  margin-right: 15rpx;
 }
 .a-item{
   padding: 40rpx;

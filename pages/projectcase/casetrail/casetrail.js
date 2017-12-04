@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    oCustomerList:[],
     "trackDesc": [
       {
         "leftTrack": {
@@ -68,7 +69,7 @@ Page({
     },
 //
  imgUrls: [
-      '1','2','3'
+      '1'
     ],
     indicatorDots: false,
     autoplay: false,
@@ -83,7 +84,7 @@ Page({
    // console.log("options====>",options);
     let _This = this;
     getApp().getUserData(function (uinfo) {
-     // console.log("uinfo=====>", uinfo);
+      //console.log("uinfo=====>", uinfo);
       _This.setData({
         consultingId: options.consultingId||0,
         oUInfo: uinfo,
@@ -91,6 +92,7 @@ Page({
 
       });
       _This.fGetConsultationTrail();
+      _This.fGetCustomerList();
     });
 
   },
@@ -136,11 +138,13 @@ Page({
   onReachBottom: function () {
   
   },
-  fSingleTrail(){
+  fSingleTrail(e){
+    console.log("single----e",e);
+    let dataSet = e.currentTarget.dataset;
     var _This = this;
     wx.navigateTo({
      /* url: './cbooking/cbooking?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + +_This.data.productCode*/
-      url: '../singletrail/singletrail?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + +_This.data.productCode
+      url: '../singletrail/singletrail?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + _This.data.productCode + '&csunionid=' + dataSet.unionid
     });
   },
   fUserList(){
@@ -168,7 +172,7 @@ Page({
       consultingId: _This.data.consultingId
     };
     wxRequest(wxaapi.consult.trail.url, pdata).then(function (result) {
-      console.log("00000--trail===>", result);
+      //console.log("00000--trail===>", result);
       if (result.data.code == 0) {
         _This.setData({
           trackDesc: result.data.data.trackDesc,
@@ -183,5 +187,23 @@ Page({
       wx.hideLoading();
     });
     wx.hideLoading();
+  },
+  fGetCustomerList(){
+    let _This = this;
+    let pdata = {
+      wxNickname:"",
+      fieldValue:"",
+      id: _This.data.consultingId||""
+    };
+    //console.log("user list pdata",pdata);
+    wxRequest(wxaapi.consult.consultcustomers.url, pdata).then(function (result) {
+      console.log("customers--list===>", result.data.data.list); //oCustomerList
+      if (result.data.code==0){
+         _This.setData({ oCustomerList: result.data.data.list}); 
+       }
+    });
+  },
+  fSwiperChange(e){
+    console.log("swiper ee====>",e);
   }
 })

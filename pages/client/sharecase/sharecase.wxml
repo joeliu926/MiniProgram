@@ -13,8 +13,8 @@
                 <view class='flex b-s' style="position: relative;">
                 <text class='before f-12 bcommon'>before</text>
                  <text class='after f-12 bcommon'>after</text>
-                  <image src='{{oitem.frondFile||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l'></image>
-                  <image  src='{{oitem.backFile||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r'></image>
+                  <image src='{{oitem.frondFile.url||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l'></image>
+                  <image  src='{{oitem.backFile.url||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r'></image>
                 </view>
               </view>
 

@@ -3,35 +3,21 @@
 <view class='d-ct'>
 
 
-<swiper indicator-dots="true" style='height:430rpx;'
-  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-  <block wx:for="{{imgUrls}}">
-    <swiper-item >
-       <view class='flex b-s fx-wp fx-jc-sb bk-c-w c-p-d a-u-ct'>
-   <view class='flex fx-d-col'>
-      <image class='u-title b-r' src='{{customer.headPhotoUrl}}' bindtap='fSingleTrail' ></image>
-      <text class='f-16 t-a-c nk-name'>大伟宏</text>   
+<swiper indicator-dots="true" style='height:{{oCustomerList.length>4?"430rpx":"240rpx"}}'
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
+  <block wx:for="{{imgUrls}}" wx:key="id">
+    <swiper-item>
+       <view class='flex b-s fx-wp bk-c-w c-p-d a-u-ct'>
+   <view class='flex fx-d-col csm-item'>
+      <image class='u-title b-r' src='{{oUInfo.avatarUrl}}' ></image>
+      <text class='f-16 t-a-c nk-name'>{{oUInfo.nickName}}</text>   
    </view>
-   <view class='flex fx-d-col '>
-      <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image>
-      <text class='f-16 t-a-c nk-name'>宏大伟</text>   
-   </view>
-    <view class='flex fx-d-col'>
-      <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image>
-      <text class='f-16 t-a-c nk-name'>杨宏伟</text>   
-   </view>
-     <view class='flex fx-d-col'>
-      <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image>
-      <text class='f-16 t-a-c nk-name'>伟宏杨</text>   
-   </view>
-   <view class='flex fx-d-col'>
-      <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image>
-      <text class='f-16 t-a-c nk-name'>伟杨宏</text>   
-   </view>
-    <view class='flex fx-d-col'>
-      <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image>
-      <text class='f-16 t-a-c nk-name'>宏杨伟</text>   
-   </view>
+    <block wx:for="{{oCustomerList}}"  wx:for-item="oCItem" wx:key="id">
+       <view class='flex fx-d-col csm-item' data-unionid="oCItem.unionid" bindtap='fSingleTrail'>
+         <image class='u-title b-r' src='{{oCItem.logo}}' ></image>
+         <text class='f-16 t-a-c nk-name'>{{oCItem.name||oCItem.wxNickname}}</text>   
+       </view>  
+    </block>
  </view>
     </swiper-item>
   </block>
@@ -59,7 +45,7 @@
   </view>
 
 
-  <view class='flex fx-d-col b-pd bk-c-w'>
+  <view class='flex fx-d-col b-pd bk-c-w hide'>
     <view class='flex'>
       <text class='f-14 u-local mg-l'>互动轨迹</text>
     </view>
@@ -80,8 +66,8 @@
                <view class='i-left  b-s' style=''>
                   <view class='flex fx-jc-ed' >
                         <view class='flex fx-d-col fx-jc-sa b-s cm-mg'>
-                           <view  class='f-16 t-r'>大伟宏</view>
-                           <view  class='f-12 b-s'>2017/12/21 11:11:33</view>
+                           <view  class='f-16 t-r'>{{oitem.leftTrack.subject}}</view>
+                           <view  class='f-12 b-s'>{{cutil.formatTime(oitem.leftTrack.date,"yyyy/MM/dd hh:mm:ss")}}</view>
                         </view>
                         <view class='cm-mg b-s'> <image class='t-title b-r' src='{{customer.headPhotoUrl}}' ></image></view> 
                  </view>

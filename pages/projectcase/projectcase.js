@@ -95,7 +95,8 @@ Page({
   getProjectList(param){
     let _This=this;
 
-    let pdata = {unionId: param};
+    let pdata = {unionId: param,all:0};
+    //console.log("pdata------->",pdata);
     wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
       //console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {

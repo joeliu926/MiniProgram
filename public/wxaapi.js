@@ -3,11 +3,13 @@ var gConfig={
   remoteWx: "https://27478500.qcloud.la/wx",
   remote: "https://27478500.qcloud.la/wxa_test",
  // apiType:"test/" //"test/" or "",
+ // uploadUrl:"https://27478500.qcloud.la/uploadimg/attachment/upload",
+  uploadUrl: "https://27478500.qcloud.la/uploadimg_test/attachment/upload"
 }
 var urlConfig = {
   img:{
     upload:{
-      url:"https://27478500.qcloud.la/uploadimg/attachment/upload"
+      url: gConfig.uploadUrl
     }
   },
   wx:{
@@ -48,7 +50,13 @@ var urlConfig = {
   },
   customer: {
     add: {
-      url: gConfig.remote +"/customer/addcustomer" //添加客户
+      url: gConfig.remote + "/customer/addcustomer" //添加客户
+    },
+    getcustomer: {
+      url: gConfig.remote + "/customer/getcustomer" //获取客户资料getcustomer
+    },
+    update: {
+      url: gConfig.remote + "/customer/update" //更新客户update
     }
   },
   consult: {

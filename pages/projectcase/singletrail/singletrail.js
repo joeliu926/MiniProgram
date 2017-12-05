@@ -46,6 +46,7 @@ Page({
     "consultationStage": "",
 
     oUInfo: {},
+    bookDate:"",
     oEvent: {
       code: "",
       eventAttrs: {
@@ -73,17 +74,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("single-- options====>",options);
+    //console.log("single-- options====>",options);
     let _This = this;
     getApp().getUserData(function (uinfo) {
-       console.log("single page uinfo=====>", uinfo);
+      // console.log("single page uinfo=====>", uinfo);
       _This.setData({
         consultingId: options.consultingId || 0,
         oUInfo: uinfo,
-        productCode: options.productCode
+        productCode: options.productCode,
+        options: options
 
       });
       _This.fGetConsultationTrail();
+      _This.fGetAppointment();
     });
 
   },
@@ -133,7 +136,7 @@ Page({
   fSendCase() {
   },
   /**
-   * 获取咨询轨迹
+   * 获取单个用户咨询轨迹
    */
   fGetConsultationTrail() {
     wx.showLoading({
@@ -141,11 +144,11 @@ Page({
     });
     let _This = this;
     let pdata = {
-      unionId: _This.data.oUInfo.unionId || "",
+      unionId: _This.data.options.csunionid || "",
       consultingId: _This.data.consultingId
     };
-    wxRequest(wxaapi.consult.trail.url, pdata).then(function (result) {
-      console.log("single==00000--trail===>", result);
+    wxRequest(wxaapi.consult.singletrail.url, pdata).then(function (result) {
+     //console.log("single==00000--trail===>", result);
       if (result.data.code == 0) {
         _This.setData({
           trackDesc: result.data.data.trackDesc,
@@ -161,9 +164,40 @@ Page({
     });
     wx.hideLoading();
   },
+  /**
+   * 获取用户预约信息
+   */
+  fGetAppointment() {
+    let _This=this;
+    let pdata = {
+      sessionId: _This.data.consultingId,
+      customerId: _This.data.options.cid,
+      consultId:"",
+      appointmentTime:"",
+      remark: "",
+
+      id: "",
+      status: "",
+      tenantId: "",
+
+    };
+
+    wxRequest(wxaapi.appointment.detail.url, pdata).then(function (result) {
+     //console.log("single==00000--appointment===>", result);
+      if (result.data.code == 0) {
+        _This.setData({
+          bookDate: result.data.data.appointmentTime
+        });
+      } else {
+       // console.log(result);
+      }
+    });
+  },
   fBooking(){
+    let _This=this;
+   // console.log("_This.options-------->",_This.options);
     wx.navigateTo({
-      url: '../casetrail/cbooking/cbooking',
+      url: '../casetrail/cbooking/cbooking?csunionid=' + _This.options.csunionid + '&consultingId=' + _This.options.consultingId + '&productCode=' + _This.options.productCode + '&cid=' + _This.options.cid
     })
   }
 })

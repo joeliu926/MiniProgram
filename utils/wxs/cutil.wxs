@@ -1,4 +1,7 @@
 var formatTime = function (date, formater) {
+  if(!date){
+    return "";
+  }
   formater = formater || "yyyy-MM-dd hh:mm:ss";
   date = getDate(date);
   var year = date.getFullYear();

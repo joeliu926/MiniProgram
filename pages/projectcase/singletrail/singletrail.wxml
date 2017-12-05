@@ -6,14 +6,14 @@
  <view class='flex b-s fx-wp fx-jc-sa bk-c-w mg-b a-u-ct'>
    <view class='flex-c fx-d-col a-item'>
       <image class='u-title b-r' src='{{customer.headPhotoUrl}}' ></image>
-      <text class='f-16'>David.yang</text>   
+      <text class='f-16'>{{customer.name||customer.wxNickname}}</text>   
    </view>
  </view>
 
   <view class='flex fx-d-col b-pd bk-c-w mg-b'>
     <view class='flex-c fx-jc-sb' bindtap='fBooking'>
       <text class='f-16 u-local mg-l'>预约</text>
-      <text class='f-14 b-s f-c-9' style=''>2017-11-12 ></text>
+      <text class='f-14 b-s f-c-9' style=''>{{cutil.formatTime(bookDate,"yyyy/MM/dd hh:mm:ss")}} ></text>
     </view>
   </view>
 
@@ -26,10 +26,10 @@
                <view class='i-left  b-s' style=''>
                   <view class='flex fx-jc-ed' >
                         <view class='flex fx-d-col fx-jc-sa b-s cm-mg'>
-                           <view  class='f-16 t-r'>大伟宏</view>
-                           <view  class='f-12 b-s'>2017/12/21 11:11:33</view>
+                           <view  class='f-16 t-r'>{{oitem.leftTrack.subject}}</view>
+                           <view  class='f-12 b-s'>{{cutil.formatTime(oitem.leftTrack.date,"yyyy/MM/dd hh:mm:ss")}}</view>
                         </view>
-                        <view class='cm-mg b-s'> <image class='t-title b-r' src='{{customer.headPhotoUrl}}' ></image></view> 
+                        <view class='cm-mg b-s'> <image class='t-title b-r' src='{{oUInfo.avatarUrl}}' ></image></view> 
                  </view>
                    <view class='f-14  i-tp-bd i-tp-bd-r' style='padding-left:10rpx;color:{{trailUtil.eventColor(oitem.leftTrack.code)}}'>{{oitem.leftTrack.desc}}</view> 
                </view>
@@ -47,7 +47,7 @@
 
 
                 <view class='flex' >
-                       <view class='cm-mg-r b-s'> <image class='t-title b-r' src='{{customer.headPhotoUrl}}' ></image></view> 
+                       <view class='cm-mg-r b-s'> <image class='t-title b-r' src='{{ditem.headPhoto}}' ></image></view> 
                         <view class='flex fx-d-col fx-jc-sa cm-mg-r b-s'>
                            <view  class='f-16 t-l b-s' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{ditem.subject}}</view>
                            <view  class='f-12 b-s p-d-l' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{cutil.formatTime(ditem.date,"yyyy/MM/dd hh:mm:ss")}}</view> 

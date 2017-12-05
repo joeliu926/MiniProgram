@@ -139,12 +139,12 @@ Page({
   
   },
   fSingleTrail(e){
-    console.log("single----e",e);
+   // console.log("single----e",e);
     let dataSet = e.currentTarget.dataset;
     var _This = this;
     wx.navigateTo({
      /* url: './cbooking/cbooking?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + +_This.data.productCode*/
-      url: '../singletrail/singletrail?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + _This.data.productCode + '&csunionid=' + dataSet.unionid
+      url: '../singletrail/singletrail?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + _This.data.productCode + '&csunionid=' + dataSet.unionid + '&cid=' + dataSet.cid
     });
   },
   fUserList(){
@@ -197,7 +197,7 @@ Page({
     };
     //console.log("user list pdata",pdata);
     wxRequest(wxaapi.consult.consultcustomers.url, pdata).then(function (result) {
-      console.log("customers--list===>", result.data.data.list); //oCustomerList
+      //console.log("customers--list===>", result.data.data.list); //oCustomerList
       if (result.data.code==0){
          _This.setData({ oCustomerList: result.data.data.list}); 
        }

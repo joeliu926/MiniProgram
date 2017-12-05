@@ -3,7 +3,7 @@
 <view class='d-ct'>
 
 
-<swiper indicator-dots="true" style='height:{{oCustomerList.length>4?"430rpx":"240rpx"}}'
+<swiper indicator-dots="true" style='height:{{oCustomerList.length>4?"430rpx":"248rpx"}}'
   autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
   <block wx:for="{{imgUrls}}" wx:key="id">
     <swiper-item>
@@ -13,7 +13,7 @@
       <text class='f-16 t-a-c nk-name'>{{oUInfo.nickName}}</text>   
    </view>
     <block wx:for="{{oCustomerList}}"  wx:for-item="oCItem" wx:key="id">
-       <view class='flex fx-d-col csm-item' data-unionid="oCItem.unionid" bindtap='fSingleTrail'>
+       <view class='flex fx-d-col csm-item' data-unionid="{{oCItem.unionid}}" data-cid="{{oCItem.id}}" bindtap='fSingleTrail'>
          <image class='u-title b-r' src='{{oCItem.logo}}' ></image>
          <text class='f-16 t-a-c nk-name'>{{oCItem.name||oCItem.wxNickname}}</text>   
        </view>  
@@ -69,7 +69,7 @@
                            <view  class='f-16 t-r'>{{oitem.leftTrack.subject}}</view>
                            <view  class='f-12 b-s'>{{cutil.formatTime(oitem.leftTrack.date,"yyyy/MM/dd hh:mm:ss")}}</view>
                         </view>
-                        <view class='cm-mg b-s'> <image class='t-title b-r' src='{{customer.headPhotoUrl}}' ></image></view> 
+                        <view class='cm-mg b-s'> <image class='t-title b-r' src='{{oUInfo.avatarUrl}}' ></image></view> 
                  </view>
                    <view class='f-14  i-tp-bd i-tp-bd-r' style='padding-left:10rpx;color:{{trailUtil.eventColor(oitem.leftTrack.code)}}'>{{oitem.leftTrack.desc}}</view> 
                </view>
@@ -87,7 +87,7 @@
 
 
                 <view class='flex' >
-                       <view class='cm-mg-r b-s'> <image class='t-title b-r' src='{{customer.headPhotoUrl}}' ></image></view> 
+                       <view class='cm-mg-r b-s'> <image class='t-title b-r' src='{{ditem.headPhoto}}' ></image></view> 
                         <view class='flex fx-d-col fx-jc-sa cm-mg-r b-s'>
                            <view  class='f-16 t-l b-s' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{ditem.subject}}</view>
                            <view  class='f-12 b-s p-d-l' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{cutil.formatTime(ditem.date,"yyyy/MM/dd hh:mm:ss")}}</view> 

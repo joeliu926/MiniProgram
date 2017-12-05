@@ -61,11 +61,25 @@ var urlConfig = {
     trail: {
       url: gConfig.remote + "/consult/trail" //获取所有咨询轨迹
     },
+    singletrail:{
+      url: gConfig.remote + "/consult/singletrail" //获取单个用户咨询轨迹
+    },
     consultitems: {
       url: gConfig.remote + "/consult/consultitems" //获取咨询项目
     },
     consultcustomers: {
       url: gConfig.remote + "/consult/consultcustomers" //获取一个咨询下面的所有客户
+    }
+  },
+  appointment: {
+    list: {
+      url: gConfig.remote + "/appointment/list" //获取预约列表
+    },
+    detail: {
+      url: gConfig.remote + "/appointment/detail" //获取预约详情
+    },
+    send: {
+      url: gConfig.remote + "/appointment/send" //发起预约
     }
   },
   event: {

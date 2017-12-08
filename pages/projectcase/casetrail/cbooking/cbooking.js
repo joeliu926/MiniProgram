@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    oEvent:{},//预约事件参数
     oUserInfo:{},
     customerInfo:{},
     consultPorject:[],
@@ -28,7 +29,7 @@ Page({
     console.log("booking options=====>", options);
     let _This=this;
     getApp().getUserData(function (uinfo) {
-
+      console.log("booking uinfo=====>", uinfo);
           _This.setData({
             oUserInfo: uinfo,
             options: options
@@ -36,6 +37,8 @@ Page({
           _This.getUserInfo();
           _This.getConsultProject();
           _This.fGetAppointment();
+
+          _This.fBookingEvent();
     });
 
 
@@ -192,6 +195,9 @@ Page({
       }
     });
   },
+  /**
+   * 提交预约信息
+   */
   fSubmitData(){
     let _This = this;
     let bookDate = _This.data.bdate + " " + _This.data.btime;
@@ -242,7 +248,42 @@ Page({
         console.log(updateResult);
       }
     });
+  },
+  /*
+  *预约事件参数
+ */
+  fGetTempEvent() {
+    var _This = this;
+    var oTempEvent = _This.data.oEvent;
+    oTempEvent.code ="reserve";
+    oTempEvent.eventAttrs = {
+      triggeredTime:new Date().valueOf(),//触发时间
+      appletId: "hldn",//app小程序
+      consultingId: _This.data.options.consultingId,//会话id
+      reserveId:"",//预约id
+      appid: "yxy",//营销云
+      openid: "",
+      unionid: _This.data.options.csunionid,
+    };
+    oTempEvent.subjectAttrs = {
+      consultantId: _This.data.oUserInfo.unionId
+    };
+    _This.setData({
+      oEvent: oTempEvent
+    });
+  },
+  fBookingEvent(){
+    let _This=this;
+    _This.fGetTempEvent();
+    let pdata = _This.data.oEvent;
+    console.log("fffevent=====>", pdata);
+    wxRequest(wxaapi.event.v2.url, pdata).then(function (result) {
+      console.log("booking==00000--event===>", result);
+      if (result.data.code == 0) {
 
-
+      } else {
+        // console.log(result);
+      }
+    });
   }
 })

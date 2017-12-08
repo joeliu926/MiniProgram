@@ -13,7 +13,7 @@
   <view class='flex fx-d-col b-pd bk-c-w mg-b'>
     <view class='flex-c fx-jc-sb' bindtap='fBooking'>
       <text class='f-16 u-local mg-l'>预约</text>
-      <text class='f-14 b-s f-c-9' style=''>{{cutil.formatTime(bookDate,"yyyy/MM/dd hh:mm:ss")}} ></text>
+      <text class='f-14 b-s f-c-9' style='width:300rpx;'>{{cutil.formatTime(bookDate,"yyyy/MM/dd hh:mm")}} ></text>
     </view>
   </view>
 

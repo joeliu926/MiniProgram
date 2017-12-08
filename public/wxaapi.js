@@ -92,7 +92,10 @@ var urlConfig = {
   },
   event: {
     add: {
-      url: gConfig.remote +"/event/add"   //添加事件
+      url: gConfig.remote +"/event/add"   //分享访问相关接口添加事件
+    },
+    v2: {
+      url: gConfig.remote + "/event/v2"   //v2添加预约相关接口事件
     }
   }
  

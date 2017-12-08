@@ -23,8 +23,8 @@
   </block>
 </swiper>
 
- <view class='bk-c-w'>
-   <view class='t-a-c'><text class='sed-btn f-16' bindtap='fSendCase'>发送案例</text></view>
+ <view class='bk-c-w' >
+   <view class='t-a-c' style='margin-top:20rpx;'><text class='sed-btn f-16' bindtap='fSendCase'>发送案例</text></view>
  </view>
 
 

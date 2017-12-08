@@ -77,7 +77,7 @@ Page({
   /**
    * 客户登录名改变loginName
    */
-  fInputloginName(){
+  fInputloginName(e){
     let oCustomer = this.data.customerInfo;
     oCustomer.wechatNum = e.detail.value;
     this.setData({
@@ -87,7 +87,7 @@ Page({
   /**
    * 客户线索备注改变
    */
-  fInputClueRemark(){
+  fInputClueRemark(e){
     this.setData({
       clueRemark: e.detail.value
     });
@@ -194,7 +194,8 @@ Page({
   },
   fSubmitData(){
     let _This = this;
-    //console.log("_This.customerInfo---------------->",_This.data.customerInfo);
+    let bookDate = _This.data.bdate + " " + _This.data.btime;
+    console.log("_This.bookdate---------------->", bookDate);
     if (_This.data.bdate == "" || _This.data.btime == "" || _This.data.customerInfo.name==""){
        return false;
     }
@@ -204,16 +205,16 @@ Page({
       pCodes.push(item.productCode);
     });
     let pdata = {
-      appointmentTime: new Date(_This.data.bdate + " " + _This.data.btime).valueOf(),
+      appointmentTime: new Date(bookDate).valueOf(),
      // consultId: _This.data.oUserInfo.unionId,
       sessionId: _This.data.options.consultingId,
       customerId: _This.options.cid,
       projectCodes: pCodes,
       remark: _This.data.oAppointment.remark,
-      clueName: _This.data.clueRemark
+      clueName: _This.data.clueRemark || (cutil.formatTime(new Date(), "yyyy-MM-dd") + "-" + _This.data.customerInfo.name)
     };
 
-    //console.log("===================",pdata);
+    console.log("===================",pdata);
     let userupdate={
       id: _This.data.customerInfo.id,
       phoneNum: _This.data.customerInfo.phoneNum,
@@ -225,7 +226,7 @@ Page({
       return updateResult;
     }).then(function (updateResult){
       if (updateResult.data.code==0){
-        wxRequest(wxaapi.appointment.send.url, pdata).then(function (result) {
+       wxRequest(wxaapi.appointment.send.url, pdata).then(function (result) {
           console.log("booking==00000--send===>", result);
           if (result.data.code == 0) {
             let oAppointment = _This.data.oAppointment;

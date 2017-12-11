@@ -3,16 +3,16 @@
 <view class='d-ct'>
 
 
-<swiper indicator-dots="true" style='height:{{oCustomerList.length>4?"430rpx":"248rpx"}}'
+<swiper indicator-dots="{{indicatorDots}}" style='height:{{oSwiperCustomerList[0].oCustomerList.length>4?"430rpx":"248rpx"}}'
   autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
-  <block wx:for="{{imgUrls}}" wx:key="id">
+  <block wx:for="{{oSwiperCustomerList}}"  wx:for-item="oSwiperCItem"  wx:key="id">
     <swiper-item>
-       <view class='flex b-s fx-wp bk-c-w c-p-d a-u-ct'>
+       <view class='flex b-s fx-wp bk-c-w c-p-d a-u-ct' style='height:99%;'>
    <view class='flex fx-d-col csm-item'>
-      <image class='u-title b-r' src='{{oUInfo.avatarUrl}}' ></image>
-      <text class='f-16 t-a-c nk-name'>{{oUInfo.nickName}}</text>   
+      <image class='u-title b-r' src='{{oSwiperCItem.oUInfo.avatarUrl}}' ></image>
+      <text class='f-16 t-a-c nk-name'>{{oSwiperCItem.oUInfo.nickName}}</text>   
    </view>
-    <block wx:for="{{oCustomerList}}"  wx:for-item="oCItem" wx:key="id">
+    <block wx:for="{{oSwiperCItem.oCustomerList}}"  wx:for-item="oCItem" wx:key="id">
        <view class='flex fx-d-col csm-item' data-unionid="{{oCItem.unionid}}" data-cid="{{oCItem.id}}" bindtap='fSingleTrail'>
          <image class='u-title b-r' src='{{oCItem.logo}}' ></image>
          <text class='f-16 t-a-c nk-name'>{{oCItem.name||oCItem.wxNickname}}</text>   
@@ -23,8 +23,8 @@
   </block>
 </swiper>
 
- <view class='bk-c-w' >
-   <view class='t-a-c' style='margin-top:20rpx;'><text class='sed-btn f-16' bindtap='fSendCase'>发送案例</text></view>
+ <view class='bk-c-w flex-c'>
+     <text class='sed-btn f-16' bindtap='fSendCase'>发送案例</text>
  </view>
 
 

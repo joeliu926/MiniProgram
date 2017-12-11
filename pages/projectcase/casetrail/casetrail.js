@@ -67,14 +67,14 @@ Page({
         mobile: ""
       }
     },
-//
- imgUrls: [
-      '1'
-    ],
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
-    duration: 1000
+    duration: 1000,
+    pageNo:1,
+    pageSize:1000,
+    pageCount:["1"],
+    oSwiperCustomerList:[]
   },
 
   /**
@@ -97,39 +97,16 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
+ 
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    let _This=this;
+    _This.fGetConsultationTrail();
+    _This.fGetCustomerList();
+     wx.stopPullDownRefresh();
   },
 
   /**
@@ -139,11 +116,9 @@ Page({
   
   },
   fSingleTrail(e){
-   // console.log("single----e",e);
     let dataSet = e.currentTarget.dataset;
     var _This = this;
     wx.navigateTo({
-     /* url: './cbooking/cbooking?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + +_This.data.productCode*/
       url: '../singletrail/singletrail?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + _This.data.productCode + '&csunionid=' + dataSet.unionid + '&cid=' + dataSet.cid
     });
   },
@@ -188,22 +163,47 @@ Page({
     });
     wx.hideLoading();
   },
+  /**
+   * get customer list
+   */
   fGetCustomerList(){
     let _This = this;
     let pdata = {
       wxNickname:"",
       fieldValue:"",
-      id: _This.data.consultingId||""
+      id: _This.data.consultingId||"",
+      pageNo:_This.data.pageNo,
+      pageSize:_This.data.pageSize
     };
     //console.log("user list pdata",pdata);
     wxRequest(wxaapi.consult.consultcustomers.url, pdata).then(function (result) {
-      //console.log("customers--list===>", result.data.data.list); //oCustomerList
       if (result.data.code==0){
-         _This.setData({ oCustomerList: result.data.data.list}); 
+        let iSize=9;
+        let count=result.data.data.count;
+        let pCount = Math.ceil(count / iSize);
+        let lastCount = count % iSize == 0 ? iSize : count % iSize;
+         let oSwiperCustomerList = _This.data.oSwiperCustomerList; 
+         for (let i = 0; i < pCount; i++) {
+           let start = i * iSize;
+           let end = i * iSize + iSize;
+           if (i == pCount - 1){
+             end = i * iSize + lastCount;
+           }
+           let oSwiperItem={};
+           oSwiperItem.oUInfo = _This.data.oUInfo;
+           let ilist = result.data.data.list;
+           oSwiperItem.oCustomerList = ilist.slice(start,end);
+           oSwiperCustomerList.push(oSwiperItem);
+         }
+         _This.setData({
+           oSwiperCustomerList: oSwiperCustomerList,
+           indicatorDots: oSwiperCustomerList.length>1?true:false
+         }); 
        }
     });
   },
   fSwiperChange(e){
-    console.log("swiper ee====>",e);
+    let _This=this;
+    let currentPage=e.detail.current+1;
   }
 })

@@ -95,6 +95,7 @@ padding: 0rpx 15rpx 80rpx 20rpx;
   border-radius:30rpx;
   background:#9083ed;
   color:#ffffff;
+  margin: 18rpx 0;
 }
 .nk-name{
   padding: 12rpx 0;

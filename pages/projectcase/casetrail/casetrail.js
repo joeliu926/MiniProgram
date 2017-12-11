@@ -73,7 +73,6 @@ Page({
     duration: 1000,
     pageNo:1,
     pageSize:1000,
-    pageCount:["1"],
     oSwiperCustomerList:[]
   },
 
@@ -182,7 +181,8 @@ Page({
         let count=result.data.data.count;
         let pCount = Math.ceil(count / iSize);
         let lastCount = count % iSize == 0 ? iSize : count % iSize;
-         let oSwiperCustomerList = _This.data.oSwiperCustomerList; 
+         let oSwiperCustomerList =[];// _This.data.oSwiperCustomerList; 
+        // console.log("oSwiperCustomerList------>", oSwiperCustomerList);
          for (let i = 0; i < pCount; i++) {
            let start = i * iSize;
            let end = i * iSize + iSize;
@@ -204,6 +204,6 @@ Page({
   },
   fSwiperChange(e){
     let _This=this;
-    let currentPage=e.detail.current+1;
+  //  let currentPage=e.detail.current+1;
   }
 })

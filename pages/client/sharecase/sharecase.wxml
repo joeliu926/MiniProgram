@@ -4,7 +4,7 @@
     <text>{{currentPage}}/{{totalCount}}</text>
   </view>
   <view class='o-project w-10'>
-    <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
+    <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange" current="{{currentIndex}}">
       <block wx:for="{{caseList}}" wx:for-item="oitem" wx:key="id">
         <swiper-item>       
           <view class='o-item'>

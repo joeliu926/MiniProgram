@@ -53,8 +53,10 @@ Page({
     likeCount: 0,
     isLikeItems: {},
     /////////////////////////////////////////////////////
+    aisLikeIndex:[],
     indicatorDots: false,
     autoplay: false,
+    currentIndex: 0,
     interval: 5000,
     duration: 1000,
     isConsult: true
@@ -108,7 +110,7 @@ Page({
     oTempEvent.shareEventId = _This.data.shareEventId;
     oTempEvent.productCode = _This.data.productCode;
 
-    console.log("_This.data.caseList[currentPage - 1].id===>", _This.data.caseList[currentPage - 1].id);
+    //console.log("_This.data.caseList[currentPage - 1].id===>", _This.data.caseList[currentPage - 1].id);
 
     oTempEvent.eventAttrs = {
       consultantId: _This.data.cstUid,
@@ -164,6 +166,9 @@ Page({
     _This.setData({
       isLike: 1
     });
+
+    
+
     _This.fUserEvent(event.eType.caseLike);
     _This.fSelectIsLike("y", function (result) {
       if (result) {
@@ -209,17 +214,26 @@ Page({
    * C端用户选择喜欢 不喜欢，控制BUTTON样式
    */
   fSelectIsLike(param, callback) {
-    var _This = this;
-    var selectItems = _This.data.isLikeItems;
-    var lcount = _This.data.likeCount;
-    if (!selectItems["" + _This.data.currentPage + ""]) {
+    let _This = this;
+    let selectItems = _This.data.isLikeItems;
+    let lcount = _This.data.likeCount;
+    let currentPage = _This.data.currentPage;
+    if (!selectItems["" + currentPage + ""]) {
       lcount += 1;
     }
 
-    selectItems["" + _This.data.currentPage + ""] = param;
+    selectItems["" + currentPage + ""] = param;
+
+    let aisLikeIndex = _This.data.aisLikeIndex;//数组
+    let isExistIndex=aisLikeIndex.indexOf((currentPage-1));
+    if (isExistIndex>=0){
+      aisLikeIndex.splice(isExistIndex,1);
+    }
     _This.setData({
       isLikeItems: selectItems,
-      likeCount: lcount
+      likeCount: lcount,
+      currentIndex: aisLikeIndex.length > 0 ? aisLikeIndex[0] : 0,
+      aisLikeIndex: aisLikeIndex
     });
 
     if (_This.data.likeCount == _This.data.caseList.length) {
@@ -305,9 +319,15 @@ Page({
     wxRequest(wxaapi.pcase.list.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         //console.log("share result.data.data========>",result.data.data);
+        let aisLikeIndex=[];
+        for (let i = 0, iLength = result.data.data.length; i < iLength;i++){
+          aisLikeIndex.push(i);
+        }
+        console.log("share result.aisLikeIndex.data========>", aisLikeIndex);
         _This.setData({
           caseList: result.data.data,
-          totalCount: result.data.data.length
+          totalCount: result.data.data.length,
+          aisLikeIndex: aisLikeIndex
         });
         _This.fUserEvent(event.eType.appOpen);//进入程序
         _This.fCustomerMsg();//发送客服消息 

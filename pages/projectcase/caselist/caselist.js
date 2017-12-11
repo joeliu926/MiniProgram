@@ -137,9 +137,6 @@ Page({
         wx.navigateBack({
            delta: 2
         })
-       // wx.redirectTo({
-         // url: '/pages/home/home'
-       // })
       }
     }
   },

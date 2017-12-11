@@ -50,13 +50,13 @@
 <view class='flex bk-c-w fx-jc-sb c-p-d'>
    <view class='f-16' >预约</view>
    <view class='flex'>
-     <picker mode="date" value="bdate"  bindchange="bindDateChange">
+     <picker mode="date" value="{{bdate}}"  bindchange="bindDateChange">
        <view class="f-16 picker">
          {{cutil.formatTime(bdate,'yyyy-MM-dd')}}
        </view>
     </picker>
 
-    <picker mode="time" value="btime"  bindchange="bindTimeChange">
+    <picker mode="time" value="{{btime}}"  bindchange="bindTimeChange">
        <view class="f-16 picker">
         {{btime}}
        </view>
@@ -69,7 +69,7 @@
 <view class='flex bk-c-w fx-jc-sb mg-b c-p-d'>
    <view class='f-16'>线索备注</view>
    <view class='f-16'>
-     <input name='clueRemark' class='t-r' value='{{cutil.formatTime(clueDate,"yyyy/MM/dd")+"-"+(customerInfo.name||customerInfo.nickname)}}' bindinput='fInputClueRemark'  placeholder='线索备注'></input>
+     <input name='clueRemark' class='t-r' value='{{clueRemark}}' bindinput='fInputClueRemark'  placeholder='线索备注'></input>
    </view>
 </view>
 </view>

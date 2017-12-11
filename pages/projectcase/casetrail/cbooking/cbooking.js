@@ -8,6 +8,7 @@ Page({
    */
   data: {
     oEvent:{},//预约事件参数
+    reserveId:0,//预约id
     oUserInfo:{},
     customerInfo:{},
     consultPorject:[],
@@ -18,7 +19,6 @@ Page({
     clueRemark:"",
     clueDate:new Date(),
     value: [9999, 1, 1],
-    multiArray: [['11', '11'], ['22', '222', '2222', '22222', '222222'], ['33', '333'], ['44', '444'], ['55', '55555']],
     multiIndex: [0, 0, 0,0,0]
   },
 
@@ -26,10 +26,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("booking options=====>", options);
+    //console.log("booking options=====>", options);
     let _This=this;
     getApp().getUserData(function (uinfo) {
-      console.log("booking uinfo=====>", uinfo);
           _This.setData({
             oUserInfo: uinfo,
             options: options
@@ -133,7 +132,7 @@ Page({
     };
    // console.log("--------------------------", pdata)
     wxRequest(wxaapi.customer.getcustomer.url, pdata).then(function (result) {
-      console.log("single==00000--user info===>", result);
+      //console.log("single==00000--user info===>", result);
       if (result.data.code == 0) {
         _This.setData({
           customerInfo: result.data.data
@@ -172,17 +171,9 @@ Page({
     let pdata = {
       sessionId: _This.data.options.consultingId,
       customerId: _This.data.options.cid,
-     // consultId: "",
-     // appointmentTime: "",
-      //remark: "",
-
-      //id: "",
-      //status: "",
-     // tenantId: "",
     };
-    console.log("booking==appointment--pdata===>", pdata);
     wxRequest(wxaapi.appointment.detail.url, pdata).then(function (result) {
-     console.log("booking==00000--appointment===>", result);
+     //console.log("booking==00000--appointment===>", result);
       if (result.data.code == 0) {
         result.data.data=typeof(result.data.data) == "object" ? result.data.data:{};
         _This.setData({
@@ -201,7 +192,7 @@ Page({
   fSubmitData(){
     let _This = this;
     let bookDate = _This.data.bdate + " " + _This.data.btime;
-    console.log("_This.bookdate---------------->", bookDate);
+   // console.log("_This.bookdate---------------->", bookDate);
     if (_This.data.bdate == "" || _This.data.btime == "" || _This.data.customerInfo.name==""){
        return false;
     }
@@ -220,7 +211,7 @@ Page({
       clueName: _This.data.clueRemark || (cutil.formatTime(new Date(), "yyyy-MM-dd") + "-" + _This.data.customerInfo.name)
     };
 
-    console.log("===================",pdata);
+   // console.log("===================",pdata);
     let userupdate={
       id: _This.data.customerInfo.id,
       phoneNum: _This.data.customerInfo.phoneNum,
@@ -228,17 +219,19 @@ Page({
       wechatNum: _This.data.customerInfo.wechatNum
     };
     wxRequest(wxaapi.customer.update.url, userupdate).then(function (updateResult) {
-      console.log("update customer====>", updateResult);
+     // console.log("update customer====>", updateResult);
       return updateResult;
     }).then(function (updateResult){
       if (updateResult.data.code==0){
        wxRequest(wxaapi.appointment.send.url, pdata).then(function (result) {
-          console.log("booking==00000--send===>", result);
+          //console.log("booking==00000--send===>", result);
+
           if (result.data.code == 0) {
             let oAppointment = _This.data.oAppointment;
             oAppointment.status = 1;
             _This.setData({
-              oAppointment: oAppointment
+              oAppointment: oAppointment,
+              reserveId:result.data.data
             });
           } else {
             // console.log(result);
@@ -260,7 +253,7 @@ Page({
       triggeredTime:new Date().valueOf(),//触发时间
       appletId: "hldn",//app小程序
       consultingId: _This.data.options.consultingId,//会话id
-      reserveId:"",//预约id
+      reserveId: _This.data.reserveId,//预约id
       appid: "yxy",//营销云
       openid: "",
       unionid: _This.data.options.csunionid,
@@ -272,6 +265,9 @@ Page({
       oEvent: oTempEvent
     });
   },
+  /**
+   * 预约事件
+   */
   fBookingEvent(){
     let _This=this;
     _This.fGetTempEvent();

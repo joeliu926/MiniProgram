@@ -88,12 +88,12 @@
 
 
 
-<view class='flex-c c-p-d b-s w-10 mg-b {{oAppointment.status!=1?"":"hide"}}'>
-   <view class='sb-btn t-a-c b-s' bindtap='fSubmitData'> 提交</view> 
+<view class='flex-c c-p-d b-s w-10 mg-b {{oAppointment.status!=1?"":"hide"}}' >
+   <view class='sb-btn t-a-c b-s' style='' bindtap='fSubmitData'> 提交</view> 
 </view>
 
 <view class='flex-c c-p-d b-s w-10 mg-b {{oAppointment.status==1?"":"hide"}}'>
-   <view class='dis-c  sb-btn t-a-c b-s'> 提交</view> 
+   <view class='dis-c  sb-btn t-a-c b-s'  style=''> 提交</view> 
 </view>
 
 </view>

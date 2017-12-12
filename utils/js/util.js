@@ -16,7 +16,7 @@ let str2Date=function(dateStr){
   }
  // var arr = "2016-11-11 11:11:11".split(/[-:\s+\/]/);
   var arrDate = dateStr.split(/[-:\s+\/]/);
-  console.log(arr);
+
   let resultDate = new Date(arrDate[0], arrDate[1] - 1, arrDate[2], arrDate[3] || "00", arrDate[4] || "00", arrDate[5] || "00");
   return resultDate;
 };

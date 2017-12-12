@@ -173,14 +173,17 @@ Page({
       sessionId: _This.data.options.consultingId,
       customerId: _This.data.options.cid,
     };
+    console.log("pdata----1111--->", pdata);
     wxRequest(wxaapi.appointment.detail.url, pdata).then(function (result) {
-     //console.log("booking==00000--appointment===>", result);
+     console.log("booking==00000--appointment===>", result);
+
+     let appointmentTime = result.data.data.appointmentTime;
       if (result.data.code == 0) {
         result.data.data=typeof(result.data.data) == "object" ? result.data.data:{};
         _This.setData({
           oAppointment: result.data.data||{},
-          bdate: cutil.formatTime(_This.data.bdate,"yyyy-MM-dd"),
-          btime: cutil.formatTime(_This.data.btime, "hh:mm") 
+          bdate: cutil.formatTime(appointmentTime||_This.data.bdate,"yyyy-MM-dd"),
+          btime: cutil.formatTime(appointmentTime||_This.data.btime, "hh:mm") 
         });
       } else {
         // console.log(result);
@@ -198,7 +201,7 @@ Page({
     })
     console.log("提交----->", bookDate);
     if (_This.data.bdate == "" || _This.data.btime == "" || _This.data.customerInfo.name==""){
-      //console.log("_This.data.bdate----->", _This.data.bdate);
+      console.log("_This.data.bdate----->", _This.data.bdate);
       wx.hideLoading();
        return false;
     }
@@ -221,7 +224,7 @@ Page({
       clueName: _This.data.clueRemark || (cutil.formatTime(new Date(), "yyyy-MM-dd") + "-" + _This.data.customerInfo.name)
     };
 
-    //console.log("=======pdata============",pdata);
+    console.log("=======pdata============",pdata);
     let userupdate={
       id: _This.data.customerInfo.id,
       phoneNum: _This.data.customerInfo.phoneNum,
@@ -229,12 +232,12 @@ Page({
       wechatNum: _This.data.customerInfo.wechatNum
     };
     wxRequest(wxaapi.customer.update.url, userupdate).then(function (updateResult) {
-     // console.log("update customer====>", updateResult);
+      console.log("update customer====>", updateResult);
       return updateResult;
     }).then(function (updateResult){
       if (updateResult.data.code==0){
        wxRequest(wxaapi.appointment.send.url, pdata).then(function (result) {
-         // console.log("booking==00000--send===>", result);
+          console.log("booking==00000--send===>", result);
 
           if (result.data.code == 0) {
             let oAppointment = _This.data.oAppointment;

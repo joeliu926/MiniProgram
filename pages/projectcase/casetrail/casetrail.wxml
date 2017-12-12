@@ -86,7 +86,7 @@
           <view class='right-i i-lt-bd item-h' style='height:{{(ditem.code=="photoUpload"&&ditem.imgUrls.length>0)?"440rpx":"260rpx"}}'>
 
 
-                <view class='flex' >
+                <view class='flex' data-unionid="{{ditem.subjectId}}" data-cid="{{oCItem.id}}" bindtap='fSingleTrail' >
                        <view class='cm-mg-r b-s'> <image class='t-title b-r' src='{{ditem.headPhoto}}' ></image></view> 
                         <view class='flex fx-d-col fx-jc-sa cm-mg-r b-s'>
                            <view  class='f-16 t-l b-s' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{ditem.subject}}</view>

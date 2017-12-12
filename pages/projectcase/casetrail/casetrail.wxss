@@ -9,7 +9,8 @@
  margin-left: 10rpx;
 }
 .csm-item{
-  margin-right: 15rpx;
+  margin-right: 13rpx;
+  width: 18%;
 }
 .a-item{
   padding: 40rpx;
@@ -99,6 +100,10 @@ padding: 0rpx 15rpx 80rpx 20rpx;
 }
 .nk-name{
   padding: 12rpx 0;
+  word-break:keep-all;
+  width: 100%;
+  overflow: hidden;
+
 }
 
 

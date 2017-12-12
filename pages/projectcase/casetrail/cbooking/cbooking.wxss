@@ -16,10 +16,12 @@
   padding: 20rpx;
 }
 .sb-btn{
-  padding:8rpx 36rpx;
+height:80rpx;
+line-height:80rpx;
   border-radius:10rpx;
   background:#9083ed;
   color:#ffffff;
+  font-size: 40rpx;
   width: 90%; 
 }
 .picker{
@@ -41,6 +43,7 @@
 }
 .tarea{
   height: 80rpx;
+  z-index: 1;
 }
 .b-d-b{
   border-bottom: 1rpx solid #eaeaea;

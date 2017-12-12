@@ -116,9 +116,14 @@ Page({
   },
   fSingleTrail(e){
     let dataSet = e.currentTarget.dataset;
-    var _This = this;
+
+    
+  
+    let _This = this;
+    console.log("single trail---->", _This.fGetSingleCustomerIdByUnid(dataSet.unionid));
+    let cid = dataSet.cid||_This.fGetSingleCustomerIdByUnid(dataSet.unionid);
     wx.navigateTo({
-      url: '../singletrail/singletrail?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + _This.data.productCode + '&csunionid=' + dataSet.unionid + '&cid=' + dataSet.cid
+      url: '../singletrail/singletrail?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + _This.data.productCode + '&csunionid=' + dataSet.unionid + '&cid='+cid
     });
   },
   fUserList(){
@@ -146,7 +151,7 @@ Page({
       consultingId: _This.data.consultingId
     };
     wxRequest(wxaapi.consult.trail.url, pdata).then(function (result) {
-      //console.log("00000--trail===>", result);
+     // console.log("00000--trail===>", result);
       if (result.data.code == 0) {
         _This.setData({
           trackDesc: result.data.data.trackDesc,
@@ -182,7 +187,7 @@ Page({
         let pCount = Math.ceil(count / iSize);
         let lastCount = count % iSize == 0 ? iSize : count % iSize;
          let oSwiperCustomerList =[];// _This.data.oSwiperCustomerList; 
-        // console.log("oSwiperCustomerList------>", oSwiperCustomerList);
+         //console.log("oSwiperCustomerList- result----->", result);
          for (let i = 0; i < pCount; i++) {
            let start = i * iSize;
            let end = i * iSize + iSize;
@@ -197,6 +202,7 @@ Page({
          }
          _This.setData({
            oSwiperCustomerList: oSwiperCustomerList,
+           oCustomerList: result.data.data.list,
            indicatorDots: oSwiperCustomerList.length>1?true:false
          }); 
        }
@@ -205,5 +211,17 @@ Page({
   fSwiperChange(e){
     let _This=this;
   //  let currentPage=e.detail.current+1;
+  },
+  fGetSingleCustomerIdByUnid(cunionid){
+    let _This = this;
+    let ocList = _This.data.oCustomerList || [];
+    let result="";
+    ocList.forEach(item => {
+      console.log("ooitem--->", item);
+      if (item.unionid == cunionid){
+        result=item.id
+      }
+    });
+    return result;
   }
 })

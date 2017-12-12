@@ -182,29 +182,7 @@ Page({
     //console.log("user list pdata",pdata);
     wxRequest(wxaapi.consult.consultcustomers.url, pdata).then(function (result) {
       if (result.data.code==0){
-        let iSize=9;
-        let count=result.data.data.count;
-        let pCount = Math.ceil(count / iSize);
-        let lastCount = count % iSize == 0 ? iSize : count % iSize;
-         let oSwiperCustomerList =[];// _This.data.oSwiperCustomerList; 
-         //console.log("oSwiperCustomerList- result----->", result);
-         for (let i = 0; i < pCount; i++) {
-           let start = i * iSize;
-           let end = i * iSize + iSize;
-           if (i == pCount - 1){
-             end = i * iSize + lastCount;
-           }
-           let oSwiperItem={};
-           oSwiperItem.oUInfo = _This.data.oUInfo;
-           let ilist = result.data.data.list;
-           oSwiperItem.oCustomerList = ilist.slice(start,end);
-           oSwiperCustomerList.push(oSwiperItem);
-         }
-         _This.setData({
-           oSwiperCustomerList: oSwiperCustomerList,
-           oCustomerList: result.data.data.list,
-           indicatorDots: oSwiperCustomerList.length>1?true:false
-         }); 
+        _This.fGenerateUserList(result);
        }
     });
   },
@@ -212,16 +190,48 @@ Page({
     let _This=this;
   //  let currentPage=e.detail.current+1;
   },
+  /**
+   * 通过用户unionid获取用户id
+   */
   fGetSingleCustomerIdByUnid(cunionid){
     let _This = this;
     let ocList = _This.data.oCustomerList || [];
     let result="";
     ocList.forEach(item => {
-      console.log("ooitem--->", item);
+     // console.log("ooitem--->", item);
       if (item.unionid == cunionid){
         result=item.id
       }
     });
     return result;
+  },
+  /**
+   * 生成用户列表显示
+   */
+  fGenerateUserList(result){
+    let _This=this;
+    let iSize = 9;
+    let count = result.data.data.count;
+    let pCount = Math.ceil(count / iSize);
+    let lastCount = count % iSize == 0 ? iSize : count % iSize;
+    let oSwiperCustomerList = [];// _This.data.oSwiperCustomerList; 
+    //console.log("oSwiperCustomerList- result----->", result);
+    for (let i = 0; i < pCount; i++) {
+      let start = i * iSize;
+      let end = i * iSize + iSize;
+      if (i == pCount - 1) {
+        end = i * iSize + lastCount;
+      }
+      let oSwiperItem = {};
+      oSwiperItem.oUInfo = _This.data.oUInfo;
+      let ilist = result.data.data.list;
+      oSwiperItem.oCustomerList = ilist.slice(start, end);
+      oSwiperCustomerList.push(oSwiperItem);
+    }
+    _This.setData({
+      oSwiperCustomerList: oSwiperCustomerList,
+      oCustomerList: result.data.data.list,
+      indicatorDots: oSwiperCustomerList.length > 1 ? true : false
+    });
   }
 })

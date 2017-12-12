@@ -162,7 +162,7 @@ Page({
       }
       wx.hideLoading();
     });
-    wx.hideLoading();
+   // wx.hideLoading();
   },
   /**
    * 获取用户预约信息

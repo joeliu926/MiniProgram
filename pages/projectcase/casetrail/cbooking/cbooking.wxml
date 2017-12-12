@@ -14,7 +14,7 @@
     顾客姓名
     </view>
    <view class='f-16'> 
-   <input name="name" class='t-r' value="{{customerInfo.name}}" bindinput="fInputName"  placeholder='客户姓名'></input>
+   <input name="name" class='t-r' value="{{customerInfo.name}}" bindblur="fInputName"  placeholder='客户姓名'></input>
     
   </view>
 </view>
@@ -23,12 +23,12 @@
 <view class='p-d-ct  mg-b'>
  <view class='flex bk-c-w fx-jc-sb c-p-d b-d-b'>
    <view class='f-16'>手机号码</view>
-   <view class='f-16'> <input name="phoneNum" class='t-r' value="{{customerInfo.phoneNum}}" bindinput="fInputMobile"  placeholder='线索备注'></input></view>
+   <view class='f-16'> <input name="phoneNum" class='t-r' value="{{customerInfo.phoneNum}}" bindblur="fInputMobile"  placeholder='线索备注'></input></view>
 </view>
 <view class='flex bk-c-w fx-jc-sb c-p-d'>
    <view class='f-16'>微信号码</view>
    <view class='f-16'>
-    <input name="wechatNum" class='t-r' value="{{customerInfo.wechatNum}}" bindinput="fInputloginName"  placeholder='微信号码'></input>
+    <input name="wechatNum" class='t-r' value="{{customerInfo.wechatNum}}" bindblur="fInputloginName"  placeholder='微信号码'></input>
    </view>
 </view>
 </view>
@@ -50,9 +50,9 @@
 <view class='flex bk-c-w fx-jc-sb c-p-d'>
    <view class='f-16' >预约</view>
    <view class='flex'>
-     <picker mode="date" value="{{bdate}}"  bindchange="bindDateChange">
-       <view class="f-16 picker">
-         {{cutil.formatTime(bdate,'yyyy-MM-dd')}}
+     <picker mode="date" value="{{bdate}}" start="{{clueStartDate}}" end="{{clueEndDate}}"  bindchange="bindDateChange">
+       <view class="f-16 picker pkdate">
+         {{bdate}}
        </view>
     </picker>
 
@@ -69,7 +69,7 @@
 <view class='flex bk-c-w fx-jc-sb mg-b c-p-d'>
    <view class='f-16'>线索备注</view>
    <view class='f-16'>
-     <input name='clueRemark' class='t-r' value='{{clueRemark}}' bindinput='fInputClueRemark'  placeholder='线索备注'></input>
+     <input name='clueRemark' class='t-r' value='{{clueRemark}}'  bindblur='fInputClueRemark'  placeholder='线索备注'></input>
    </view>
 </view>
 </view>
@@ -81,7 +81,7 @@
    <view class='f-16'>预约备注</view>
 </view>
 <view class='flex bk-c-w fx-jc-sb c-p-d'>
-   <view class='f-16'><textarea  placeholder="预约备注信息" class='tarea' name="remark" bindinput='fInputRemark' value='{{oAppointment.remark}}'/></view>
+   <view class='f-16'><textarea  placeholder="预约备注信息" class='tarea' name="remark" bindblur='fInputRemark' value='{{oAppointment.remark}}'/></view>
 </view>
 
 </view>

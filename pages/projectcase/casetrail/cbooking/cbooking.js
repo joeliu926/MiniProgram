@@ -43,8 +43,6 @@ Page({
           _This.fGetAppointment();  
       
     });
-
-
   },
 
   /**
@@ -139,7 +137,7 @@ Page({
       customerId: _This.data.options.cid || "",
     };
     wxRequest(wxaapi.customer.getcustomer.url, pdata).then(function (result) {
-     // console.log("single==00000--user info===>", result);
+     console.log("single==00000--user info===>", result);
       if (result.data.code == 0) {
         _This.setData({
           customerInfo: result.data.data,

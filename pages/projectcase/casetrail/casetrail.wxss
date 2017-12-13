@@ -66,7 +66,7 @@ padding: 0rpx 15rpx 80rpx 20rpx;
   content: "●";
   position: absolute;
   left: -12rpx;
-  top: -20rpx;
+  top: -19rpx;
   font-size: 24rpx;
   color: #bcb4f7; 
 }
@@ -74,7 +74,7 @@ padding: 0rpx 15rpx 80rpx 20rpx;
   content: "●";
   position: absolute;
   right: -8rpx;
-  top: -20rpx;
+  top: -18rpx;
   font-size:  24rpx;
   color: #bcb4f7; 
 }

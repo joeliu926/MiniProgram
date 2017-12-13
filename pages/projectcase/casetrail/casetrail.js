@@ -151,7 +151,7 @@ Page({
       consultingId: _This.data.consultingId
     };
     wxRequest(wxaapi.consult.trail.url, pdata).then(function (result) {
-     // console.log("00000--trail===>", result);
+      //console.log("00000--trail--all===>", result);
       if (result.data.code == 0) {
         _This.setData({
           trackDesc: result.data.data.trackDesc,

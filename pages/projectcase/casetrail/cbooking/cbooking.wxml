@@ -81,7 +81,7 @@
    <view class='f-16'>预约备注</view>
 </view>
 <view class='flex bk-c-w fx-jc-sb c-p-d'>
-   <view class='f-16'><textarea  placeholder="预约备注信息" class='tarea' name="remark" bindblur='fInputRemark' value='{{oAppointment.remark}}'/></view>
+   <view class='f-16'><textarea  placeholder="预约备注信息" class='tarea' name="remark" bindinput='fInputRemark' value='{{oAppointment.remark}}'/></view>
 </view>
 
 </view>

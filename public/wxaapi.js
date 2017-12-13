@@ -97,6 +97,11 @@ var urlConfig = {
     v2: {
       url: gConfig.remote + "/event/v2"   //v2添加预约相关接口事件
     }
+  },
+  clue: {
+    detail: {
+      url: gConfig.remote + "/clue/detail"   //获取线索详情
+    }
   }
  
 }

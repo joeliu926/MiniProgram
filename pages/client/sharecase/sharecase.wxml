@@ -29,7 +29,7 @@
                 </view>
               </view>
             </view>
-            <view style="padding:15px 15px 0 15px;">
+            <view style="padding:15px 15px 0 10px;">
               <view>
                 <text class='f-14 txt-item'>{{oitem.caseName}}</text>
               </view>

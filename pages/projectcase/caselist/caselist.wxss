@@ -48,6 +48,7 @@ padding-right: 1px;
 .user-info{
     display: flex;
     padding:  5px 10px;
+    margin-top: 45rpx;
  }
  .u-info{
     display: flex;
@@ -129,18 +130,18 @@ width:90%;
 }
 .bcommon{
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
   background-color: rgba(0, 0, 0,0.5);
-  border-radius: 10px;
+  border-radius: 0px 10px 10px 0px;
   color: #ffffff;
   width: 55px;
   text-align: center;
 }
 .before{
-  left: 10px;
+ /* left: 10px;*/
 }
 .after{
-  left: 53%;
+  left: 50%;
 }
 .lk-b-d{
 border:1rpx solid  #00D8B4;

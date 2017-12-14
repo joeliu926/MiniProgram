@@ -1,5 +1,6 @@
 .d-ct{
     align-items:flex-start;
+    margin-left: 0;
 }
 .b-pd{
     padding: 20rpx 30rpx;
@@ -22,6 +23,7 @@
   border-radius: 50%;
   overflow: hidden;
 }
+
 .t-title{
   height: 100rpx;
   width: 100rpx;

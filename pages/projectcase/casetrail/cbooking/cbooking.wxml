@@ -3,7 +3,8 @@
 
  <view class='flex b-s fx-wp  bk-c-w mg-b a-u-ct'>
    <view class='flex-c fx-d-col a-item'>
-      <image class='u-title b-r' src='{{customerInfo.logo}}' ></image>
+       <view class='u-title b-r bk-r-img' style='background-image:url({{customerInfo.logo}});'></view>
+      <!--<image class='u-title b-r' src='{{customerInfo.logo}}' ></image>--> 
       <text class='f-16 t-a-c'>{{customerInfo.name||customerInfo.nickname}}</text>   
    </view>
  </view>

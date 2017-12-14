@@ -74,7 +74,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("single-- options====>",options);
+    //console.log("single-- options====>",options);
     let _This = this;
     getApp().getUserData(function (uinfo) {
       // console.log("single page uinfo=====>", uinfo);

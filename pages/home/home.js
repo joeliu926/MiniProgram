@@ -154,7 +154,7 @@ Page({
       pageSize: 10000
     };
     wxRequest(wxaapi.consult.list.url, pdata).then(function (result) {
-      console.log("load project info==>", result);
+     // console.log("load project info==>", result);
       if (result.data.code == 0) {
         _This.setData({ customerList: result.data.data.list });
       } else {

@@ -1,11 +1,11 @@
 .a-u-ct{
-  height: 280rpx;
+  height: 240rpx;
   align-items: center;
   justify-content:center;
 }
 .u-title{
-  height: 160rpx;
-  width: 160rpx;
+  height: 120rpx;
+  width: 120rpx;
 }
 .w-icon{
  height: 80rpx;

@@ -7,17 +7,17 @@
   autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
   <block wx:for="{{oSwiperCustomerList}}"  wx:for-item="oSwiperCItem"  wx:key="id">
     <swiper-item>
-       <view class='flex b-s fx-wp bk-c-w c-p-d a-u-ct' style='height:99%;'>
+       <view class='flex b-s fx-wp bk-c-w c-p-d' style='height:99%;'>
    <view class='flex fx-d-col csm-item'>
-   <view class='u-title'>
-     <image class='u-title b-r' src='{{oSwiperCItem.oUInfo.avatarUrl}}' ></image>
+   <view class='u-title bk-r-img' style='background-image:url({{oSwiperCItem.oUInfo.avatarUrl}});'>
+    <!-- <image class='u-title b-r' src='{{oSwiperCItem.oUInfo.avatarUrl}}' ></image>-->
    </view>
       <text class='f-16 t-a-c nk-name'>{{oSwiperCItem.oUInfo.nickName}}</text>   
    </view>
     <block wx:for="{{oSwiperCItem.oCustomerList}}"  wx:for-item="oCItem" wx:key="id">
        <view class='flex fx-d-col csm-item' data-unionid="{{oCItem.unionid}}" data-cid="{{oCItem.id}}" bindtap='fSingleTrail'>
-        <view  style='height: 120rpx;width: 120rpx;border-radius: 50%;overflow: hidden;'>
-         <image class='u-title b-r' src='{{oCItem.logo}}' ></image>
+        <view class='u-title bk-r-img'  style='background-image:url({{oCItem.logo}});'>
+         <!--  <image class='u-title' src='{{oCItem.logo}}' ></image>-->
         </view>
          <text class='f-16 t-a-c nk-name'>{{oCItem.name||oCItem.wxNickname}}</text>   
        </view>  
@@ -73,7 +73,10 @@
                            <view  class='f-16 t-r'>{{oitem.leftTrack.subject}}</view>
                            <view  class='f-12 b-s'>{{cutil.formatTime(oitem.leftTrack.date,"yyyy/MM/dd hh:mm:ss")}}</view>
                         </view>
-                        <view class='cm-mg b-s'> <image class='t-title b-r' src='{{oUInfo.avatarUrl}}' ></image></view> 
+                        <view class='cm-mg b-s'> 
+                          <view class='t-title b-r bk-r-img' style='background-image:url({{oUInfo.avatarUrl}});'></view>
+                           <!--<image class='t-title b-r' src='{{oUInfo.avatarUrl}}' ></image>--> 
+                        </view> 
                  </view>
                    <view class='f-14  i-tp-bd i-tp-bd-r' style='padding-left:10rpx;color:{{trailUtil.eventColor(oitem.leftTrack.code)}}'>{{oitem.leftTrack.desc}}</view> 
                </view>
@@ -91,7 +94,10 @@
 
 
                 <view class='flex' data-unionid="{{ditem.subjectId}}" data-cid="{{oCItem.id}}" bindtap='fSingleTrail' >
-                       <view class='cm-mg-r b-s'> <image class='t-title b-r' src='{{ditem.headPhoto}}' ></image></view> 
+                       <view class='cm-mg-r b-s'>
+                           <view class='t-title b-r bk-r-img' style='background-image:url({{ditem.headPhoto}});'></view>
+                          <!--<image class='t-title b-r' src='{{ditem.headPhoto}}' ></image>--> 
+                        </view> 
                         <view class='flex fx-d-col fx-jc-sa cm-mg-r b-s'>
                            <view  class='f-16 t-l b-s' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{ditem.subject}}</view>
                            <view  class='f-12 b-s p-d-l' style='color:{{trailUtil.eventColor(ditem.code)}}'>{{cutil.formatTime(ditem.date,"yyyy/MM/dd hh:mm:ss")}}</view> 

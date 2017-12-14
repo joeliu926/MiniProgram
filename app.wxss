@@ -109,6 +109,10 @@ background-color: #ffffff;
 .mg-b{
   margin-bottom: 24rpx;
 }
+.bk-r-img{
+  background-repeat: no-repeat;
+  background-size:100% 100%;
+}
 ::-webkit-scrollbar{
   height: 0;
   width: 0;

@@ -51,14 +51,15 @@ Page({
         consultingId: options.consultingId||0,
         oUInfo: uinfo,
         productCode: options.productCode
-
       });
       _This.fGetConsultationTrail();
       _This.fGetCustomerList();
+
     });
 
   },
-
+  onReady: function () {
+  },
  
 
   /**
@@ -79,11 +80,8 @@ Page({
   },
   fSingleTrail(e){
     let dataSet = e.currentTarget.dataset;
-
-    
-  
     let _This = this;
-    console.log("single trail---->", _This.fGetSingleCustomerIdByUnid(dataSet.unionid));
+   // console.log("single trail---->", _This.fGetSingleCustomerIdByUnid(dataSet.unionid));
     let cid = dataSet.cid||_This.fGetSingleCustomerIdByUnid(dataSet.unionid);
     wx.navigateTo({
       url: '../singletrail/singletrail?consultingId=' + _This.data.consultingId + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + _This.data.productCode + '&csunionid=' + dataSet.unionid + '&cid='+cid

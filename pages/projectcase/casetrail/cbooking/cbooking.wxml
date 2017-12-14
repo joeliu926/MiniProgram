@@ -89,7 +89,7 @@
 
 
 
-<view class='flex-c c-p-d b-s w-10 mg-b {{oAppointment.status==1?"":"hide"}}' >
+<view class='flex-c c-p-d b-s w-10 mg-b {{oAppointment.status!=1?"":"hide"}}' >
    <view class='sb-btn t-a-c b-s' style='' bindtap='fSubmitData'> 提交</view> 
 </view>
 

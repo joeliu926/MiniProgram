@@ -22,6 +22,8 @@ Page({
      }
 
 
+
+
     var _This = this;
     getApp().getUserData(function (result) {
       //console.log("loading use info=====>",result);

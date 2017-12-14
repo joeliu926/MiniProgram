@@ -9,12 +9,16 @@
     <swiper-item>
        <view class='flex b-s fx-wp bk-c-w c-p-d a-u-ct' style='height:99%;'>
    <view class='flex fx-d-col csm-item'>
-      <image class='u-title b-r' src='{{oSwiperCItem.oUInfo.avatarUrl}}' ></image>
+   <view class='u-title'>
+     <image class='u-title b-r' src='{{oSwiperCItem.oUInfo.avatarUrl}}' ></image>
+   </view>
       <text class='f-16 t-a-c nk-name'>{{oSwiperCItem.oUInfo.nickName}}</text>   
    </view>
     <block wx:for="{{oSwiperCItem.oCustomerList}}"  wx:for-item="oCItem" wx:key="id">
        <view class='flex fx-d-col csm-item' data-unionid="{{oCItem.unionid}}" data-cid="{{oCItem.id}}" bindtap='fSingleTrail'>
+        <view  style='height: 120rpx;width: 120rpx;border-radius: 50%;overflow: hidden;'>
          <image class='u-title b-r' src='{{oCItem.logo}}' ></image>
+        </view>
          <text class='f-16 t-a-c nk-name'>{{oCItem.name||oCItem.wxNickname}}</text>   
        </view>  
     </block>

@@ -240,7 +240,8 @@ Page({
       pCodes.push(item.productCode);
     });
 
-    let aTime = cutil.str2Date(bookDate).valueOf();;
+    let aTime = cutil.str2Date(bookDate).valueOf();
+    console.log("aTime---------->",aTime);
     let pdata = {
       appointmentTime: aTime,
      // consultId: _This.data.oUserInfo.unionId,

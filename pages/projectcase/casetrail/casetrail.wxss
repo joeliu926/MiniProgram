@@ -11,6 +11,7 @@
 .csm-item{
   margin-right: 13rpx;
   width: 18%;
+  overflow: hidden;
 }
 .a-item{
   padding: 40rpx;
@@ -18,6 +19,8 @@
 .u-title{
   height: 120rpx;
   width: 120rpx;
+  border-radius: 50%;
+  overflow: hidden;
 }
 .t-title{
   height: 100rpx;

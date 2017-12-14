@@ -7,44 +7,7 @@ Page({
    */
   data: {
     oCustomerList:[],
-    "trackDesc": [
-      {
-        "leftTrack": {
-          "subject": "",
-          "code": "",
-          "desc": "",
-          "date": 1510891403033
-        },
-        "rightTrack": {
-          "trackDetailList": [
-            {
-              "subject": "",
-              "code": "",
-              "desc": "",
-              "date": 1510891403033,
-              "imgNum": "",
-              "imgUrls": []
-            }
-          ]
-        }
-      }
-    ],
-    "project": {
-      "projectIds": [
-        "2001",
-        "3001"
-      ],
-      "projectName": ""
-    },
-    "customer": {
-      "headPhotoUrl": "",
-      "name": ""
-    },
-    "consultant": {
-      "consultantName": "",
-      "consultantLoginName": ""
-    },
-    "consultationStage": "",
+
 
     oUInfo: {},
     oEvent: {

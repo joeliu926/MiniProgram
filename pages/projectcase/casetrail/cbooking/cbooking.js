@@ -137,11 +137,11 @@ Page({
       customerId: _This.data.options.cid || "",
     };
     wxRequest(wxaapi.customer.getcustomer.url, pdata).then(function (result) {
-     console.log("single==00000--user info===>", result);
+    // console.log("single==00000--user info===>", result);
       if (result.data.code == 0) {
         _This.setData({
           customerInfo: result.data.data,
-          clueRemarkBk: cutil.formatTime(new Date(), "yyyy-MM-dd") + "-" + (result.data.data.name || result.data.data.nickname)
+          clueRemarkBk: cutil.formatTime(new Date(), "yyyy-MM-dd") + "-" + (result.data.data.name || result.data.data.nickname||"")
 
         });
         _This.fClueDetail();
@@ -214,7 +214,7 @@ Page({
      // console.log("_This.data.clueRemarkBk----->", _This.data.clueRemarkBk);
       if (result.data.code == 0) {
         _This.setData({
-          clueRemark: result.data.data.name || _This.data.clueRemarkBk
+          clueRemark: result.data.data.name || _This.data.clueRemarkBk||""
         });
       } else {
         // console.log(result);
@@ -230,7 +230,7 @@ Page({
     wx.showLoading({
       title: '提交中...'
     })
-    if (_This.data.bdate == "" || _This.data.btime == "" || _This.data.customerInfo.name==""){
+    if (_This.data.bdate == "" || _This.data.btime == "" || !_This.data.customerInfo.name|| _This.data.customerInfo.name==""){
       //console.log("_This.data.bdate----->", _This.data.bdate);
       wx.hideLoading();
        return false;

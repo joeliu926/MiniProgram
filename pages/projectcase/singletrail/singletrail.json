@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "哈罗美云"
+  "navigationBarTitleText": "哈罗美云",
+  "enablePullDownRefresh": true
 }

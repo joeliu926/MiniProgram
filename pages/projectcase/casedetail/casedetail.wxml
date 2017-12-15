@@ -21,7 +21,9 @@
       <block wx:for="{{detailInfo.contentList}}" wx:for-item="oitem" wx:if="{{oitem.nodeType==0}}" wx:key="id">
       <view class='flex fx-wp w-10'>
         <block wx:for="{{oitem.files}}" wx:for-item="imgItem" wx:key="id">
-         <view class='img-c b-s'><image class='c-image' src='{{imgItem.url}}' data-src='{{imgItem.url}}' bindtap='imgPreview' mode='aspectFit'></image></view>
+         <view class='img-c b-s' style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreview'>
+        <!-- <image class='c-image' src='{{imgItem.url}}' data-src='{{imgItem.url}}' bindtap='imgPreview' mode='aspectFit'></image>-->
+         </view>
          </block>
       </view>
       <view class=''>
@@ -43,7 +45,9 @@
       <view class='b-pd w-10  b-s'>
           <view class='flex fx-wp w-10 b-s'>
              <block wx:for="{{oitem.files}}" wx:for-item="imgItem" wx:key="ids" >
-              <view class='img-c b-s'><image mode='aspectFit' class='c-image' src='{{imgItem.url}}' data-src='{{imgItem.url}}' bindtap='imgPreview' ></image></view>
+              <view class='img-c b-s' style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreview'>
+             <!--<image mode='aspectFit' class='c-image' src='{{imgItem.url}}' data-src='{{imgItem.url}}' bindtap='imgPreview' ></image>--> 
+              </view>
             </block>
          </view>
          <view>

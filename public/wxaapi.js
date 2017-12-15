@@ -1,10 +1,14 @@
 var gConfig={
-  //remote:"https://27478500.qcloud.la/wxa",
+  /****production start*****/
+  remote:"https://27478500.qcloud.la/wxa",
+  uploadUrl: "https://27478500.qcloud.la/uploadimg/attachment/upload",
+  /****production end*****/
+
   remoteWx: "https://27478500.qcloud.la/wx",
-  remote: "https://27478500.qcloud.la/wxa_test",
- // apiType:"test/" //"test/" or "",
- // uploadUrl:"https://27478500.qcloud.la/uploadimg/attachment/upload",
-  uploadUrl: "https://27478500.qcloud.la/uploadimg_test/attachment/upload"
+  /****test start*****/
+   //remote: "https://27478500.qcloud.la/wxa_test",
+   //uploadUrl: "https://27478500.qcloud.la/uploadimg_test/attachment/upload"
+    /****test start*****/
 }
 var urlConfig = {
   img:{

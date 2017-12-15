@@ -24,7 +24,7 @@
 <view class='p-d-ct  mg-b'>
  <view class='flex bk-c-w fx-jc-sb c-p-d b-d-b'>
    <view class='f-16'>手机号码</view>
-   <view class='f-16'> <input name="phoneNum" class='t-r' value="{{customerInfo.phoneNum}}" bindblur="fInputMobile"  placeholder='线索备注'></input></view>
+   <view class='f-16'> <input name="phoneNum" class='t-r' value="{{customerInfo.phoneNum}}" bindblur="fInputMobile"  placeholder='手机号码'></input></view>
 </view>
 <view class='flex bk-c-w fx-jc-sb c-p-d'>
    <view class='f-16'>微信号码</view>

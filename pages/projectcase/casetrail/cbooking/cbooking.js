@@ -210,7 +210,8 @@ Page({
     };
     // console.log("fffevent=====>", pdata);
     wxRequest(wxaapi.clue.detail.url, pdata).then(function (result) {
-      //console.log("fClueDetail==00000--event===>", result);
+     // console.log("fClueDetail==00000--event===>", result);
+     // console.log("_This.data.clueRemarkBk----->", _This.data.clueRemarkBk);
       if (result.data.code == 0) {
         _This.setData({
           clueRemark: result.data.data.name || _This.data.clueRemarkBk
@@ -241,7 +242,7 @@ Page({
     });
 
     let aTime = cutil.str2Date(bookDate).valueOf();
-    console.log("aTime---------->",aTime);
+   // console.log("aTime---------->",aTime);
     let pdata = {
       appointmentTime: aTime,
      // consultId: _This.data.oUserInfo.unionId,
@@ -249,7 +250,7 @@ Page({
       customerId: _This.options.cid,
       projectCodes: pCodes,
       remark: _This.data.oAppointment.remark,
-      clueName: _This.data.clueRemark || (cutil.formatTime(new Date(), "yyyy-MM-dd") + "-" + _This.data.customerInfo.name)
+      clueName: _This.data.clueRemark || _This.data.clueRemarkBk
     };
 
     //console.log("=======pdata============",pdata);

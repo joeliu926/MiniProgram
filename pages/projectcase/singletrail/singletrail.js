@@ -186,8 +186,7 @@ Page({
     };
 
     wxRequest(wxaapi.appointment.detail.url, pdata).then(function (result) {
-     //console.log("single==00000--appointment===>", result);
-      if (result.data.code == 0) {
+      if (result.data.code == 0 && typeof(result.data.data)=="object") {
         _This.setData({
           bookDate: result.data.data.appointmentTime
         });
@@ -198,7 +197,6 @@ Page({
   },
   fBooking(){
     let _This=this;
-   // console.log("_This.options-------->",_This.options);
     wx.navigateTo({
       url: '../casetrail/cbooking/cbooking?csunionid=' + _This.options.csunionid + '&consultingId=' + _This.options.consultingId + '&productCode=' + _This.options.productCode + '&cid=' + _This.options.cid
     })

@@ -28,7 +28,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //console.log("booking options=====>", options);
+    console.log("booking options=====>", options);
     let enddate = new Date();
       enddate.setFullYear((new Date().getFullYear()+2));
     let _This=this;
@@ -38,6 +38,7 @@ Page({
             options: options,
             clueEndDate: enddate
           });
+          console.log("_This.data=====>", _This.data);
           _This.getUserInfo();
           _This.getConsultProject();
           _This.fGetAppointment();  
@@ -137,11 +138,11 @@ Page({
       customerId: _This.data.options.cid || "",
     };
     wxRequest(wxaapi.customer.getcustomer.url, pdata).then(function (result) {
-    // console.log("single==00000--user info===>", result);
+      console.log("single==00000--user info===>", result);
       if (result.data.code == 0) {
         _This.setData({
           customerInfo: result.data.data,
-          clueRemarkBk: cutil.formatTime(new Date(), "yyyy-MM-dd") + "-" + (result.data.data.name || result.data.data.nickname||"")
+          clueRemarkBk: cutil.formatTime(new Date(), "yyyy-MM-dd") + "-" + (result.data.data.name || result.data.data.nickname||"-")
 
         });
         _This.fClueDetail();
@@ -182,14 +183,12 @@ Page({
     };
     //console.log("pdata----1111--->", pdata);
     wxRequest(wxaapi.appointment.detail.url, pdata).then(function (result) {
-     //console.log("booking==00000--appointment===>", result);
+      console.log("booking==00000--appointment===>", result, typeof (result.data.data));
      let appointmentTime = result.data.data.appointmentTime;
       if (result.data.code == 0) {
         result.data.data=typeof(result.data.data) == "object" ? result.data.data:{};
         _This.setData({
           oAppointment: result.data.data||{},
-         /* bdate: cutil.formatTime(appointmentTime||_This.data.bdate,"yyyy-MM-dd"),
-          btime: cutil.formatTime(appointmentTime||_This.data.btime, "hh:mm")*/
           bdate: appointmentTime?cutil.formatTime(appointmentTime, "yyyy-MM-dd"):"请选择",
           btime: appointmentTime?cutil.formatTime(appointmentTime, "hh:mm"):""  
         });
@@ -210,11 +209,10 @@ Page({
     };
     // console.log("fffevent=====>", pdata);
     wxRequest(wxaapi.clue.detail.url, pdata).then(function (result) {
-     // console.log("fClueDetail==00000--event===>", result);
-     // console.log("_This.data.clueRemarkBk----->", _This.data.clueRemarkBk);
+      console.log("_This.data.clueRemarkBk----->", result.data, typeof(result.data.data));
       if (result.data.code == 0) {
         _This.setData({
-          clueRemark: result.data.data.name || _This.data.clueRemarkBk||""
+          clueRemark: result.data.data.name || _This.data.clueRemarkBk||"-"
         });
       } else {
         // console.log(result);
@@ -245,7 +243,6 @@ Page({
    // console.log("aTime---------->",aTime);
     let pdata = {
       appointmentTime: aTime,
-     // consultId: _This.data.oUserInfo.unionId,
       sessionId: _This.data.options.consultingId,
       customerId: _This.options.cid,
       projectCodes: pCodes,

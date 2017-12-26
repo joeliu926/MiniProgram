@@ -69,7 +69,8 @@ Page({
   onLoad: function (options) {
     var _This = this;
     var caseIds = options.caseIds;
-    
+    console.log("share case --option--",options);
+
     getApp().getUserData(function (uinfo) {
       console.log("-------user info=====>", uinfo);
       _This.setData({
@@ -316,14 +317,15 @@ Page({
       productCode: _This.data.productCode,
       caseIds: _This.data.caseIds
     };
+    console.log("get post data----->", pdata);
     wxRequest(wxaapi.pcase.list.url, pdata).then(function (result) {
       if (result.data.code == 0) {
-        //console.log("share result.data.data========>",result.data.data);
+        console.log("share result.data.data========>",result.data.data);
         let aisLikeIndex=[];
         for (let i = 0, iLength = result.data.data.length; i < iLength;i++){
           aisLikeIndex.push(i);
         }
-        console.log("share result.aisLikeIndex.data========>", aisLikeIndex);
+        //console.log("share result.aisLikeIndex.data========>", aisLikeIndex);
         _This.setData({
           caseList: result.data.data,
           totalCount: result.data.data.length,
@@ -332,7 +334,7 @@ Page({
         _This.fUserEvent(event.eType.appOpen);//进入程序
         _This.fCustomerMsg();//发送客服消息 
       } else {
-        console.log("case list----", result);
+        console.log("share case list----", result);
       }
     });
   }

@@ -145,7 +145,7 @@ Page({
   getCaseDetaul: function () {
     let _This = this;
 
-
+   // _This.data.detailId=1;
     var pdata = { did: _This.data.detailId };
     wxRequest(wxaapi.pcase.detail.url, pdata).then(function (result) {
       //console.log("000000000000000000000000===>", result);

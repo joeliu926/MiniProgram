@@ -1,13 +1,13 @@
 var gConfig={
   /****production start*****/
-  remote:"https://27478500.qcloud.la/wxa",
-  uploadUrl: "https://27478500.qcloud.la/uploadimg/attachment/upload",
+  //remote:"https://27478500.qcloud.la/wxa",
+  //uploadUrl: "https://27478500.qcloud.la/uploadimg/attachment/upload",
   /****production end*****/
 
   remoteWx: "https://27478500.qcloud.la/wx",
   /****test start*****/
-   //remote: "https://27478500.qcloud.la/wxa_test",
-   //uploadUrl: "https://27478500.qcloud.la/uploadimg_test/attachment/upload"
+   remote: "https://27478500.qcloud.la/wxa_test",
+   uploadUrl: "https://27478500.qcloud.la/uploadimg_test/attachment/upload"
     /****test start*****/
 }
 var urlConfig = {

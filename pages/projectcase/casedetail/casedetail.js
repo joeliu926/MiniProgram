@@ -145,10 +145,10 @@ Page({
   getCaseDetaul:function(){
     let _This = this;
 
-
+   // _This.data.detailId=1;
     var pdata = {did: _This.data.detailId};
     wxRequest(wxaapi.pcase.detail.url, pdata).then(function (result) {
-      //console.log("detail0000000000===>", result);
+      console.log("detail0000000000===>", result);
       if (result.data.code == 0) {
         _This.setData({
           detailInfo: result.data.data

@@ -25,15 +25,16 @@
                 </view>
                 <view class='u-info'>
                   <text class='u-name'>{{oitem.customerName}}</text>
+                   <text class='f-14 txt-item' style='margin-left:-20rpx'>{{oitem.caseName}}</text>
                   <text class='f-14'>诊疗于 {{cutil.formatTime(oitem.operationDate,"yyyy-MM-dd")}}</text>
                 </view>
               </view>
             </view>
             <view style="padding:15px 15px 0 10px;">
               <view>
-                <text class='f-14 txt-item'>{{oitem.caseName}}</text>
+                <text class='f-14 txt-item hide'>{{oitem.caseName}}</text>
               </view>
-              <view class='ho-info'>{{oitem.clinic.name}}</view>
+                    <view class='flex mg-b ho-info'><image class='u-icon' src='../../../public/images/icon-hos.png' mode='scaleToFill'></image><text class='f-14 u-local mg-l'> {{oitem.clinic.name}}</text></view>
             </view>
           </view>
         </swiper-item>

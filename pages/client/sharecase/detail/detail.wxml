@@ -2,7 +2,23 @@
 <wxs src="../../../../utils/wxs/cutil.wxs" module="cutil"  />
 <wxs src="../../../../public/wxs/cenum.wxs" module="cenum"  />
 <view class='d-ct'>
+
    <view class='u-ct flex b-pd bk-c-w'>
+      <view>
+        <image class='u-title' src='{{detailInfo.customerLogo.url}}'  mode='scaleToFill'></image>
+      </view>
+      <view class='u-info flex fx-d-col fx-jc-sa w-10'>
+          <view class='flex fx-jc-sb'><text class='f-16 u-name'>{{cenum.genderFilter(detailInfo.customerGender)}} {{detailInfo.customerAge}}岁</text>   
+          </view> 
+      </view>
+  </view>
+   <view class='u-ct flex b-pd bk-c-w'>
+        <text class='f-14 u-item' wx:for="{{detailInfo.products}}" wx:for-item="oProduct" wx:key="oProduct.id" style=''>{{oProduct.productName}}</text>
+  </view>
+
+
+
+   <view class='u-ct flex b-pd bk-c-w hide'>
       <view>
         <image class='u-title' src='{{detailInfo.customerLogo.url}}'  mode='scaleToFill'></image>
       </view>

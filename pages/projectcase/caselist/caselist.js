@@ -241,7 +241,7 @@ Page({
       caseIds: _This.data.caseIds
     };
     wxRequest(wxaapi.pcase.list.url, pdata).then(function (result) {
-      console.log("case list===>",result);
+     // console.log("case list===>",result);
       if (result.data.code == 0) {
         _This.setData({
           caseList: result.data.data,

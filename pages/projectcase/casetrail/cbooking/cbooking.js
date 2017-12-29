@@ -68,6 +68,9 @@ Page({
     this.setData({
       customerInfo: oCustomer
     });
+    console.log("this data---customerInfo--", this.data.customerInfo);
+
+
   },
   /**
    * 电话改变
@@ -138,7 +141,7 @@ Page({
       customerId: _This.data.options.cid || "",
     };
     wxRequest(wxaapi.customer.getcustomer.url, pdata).then(function (result) {
-      console.log("single==00000--user info===>", result);
+      //console.log("single==00000--user info===>", result);
       if (result.data.code == 0) {
         _This.setData({
           customerInfo: result.data.data,
@@ -183,7 +186,7 @@ Page({
     };
     //console.log("pdata----1111--->", pdata);
     wxRequest(wxaapi.appointment.detail.url, pdata).then(function (result) {
-      console.log("booking==00000--appointment===>", result, typeof (result.data.data));
+     // console.log("booking==00000--appointment===>", result, typeof (result.data.data));
      let appointmentTime = result.data.data.appointmentTime;
       if (result.data.code == 0) {
         result.data.data=typeof(result.data.data) == "object" ? result.data.data:{};
@@ -207,7 +210,7 @@ Page({
       sessionId: _This.data.options.consultingId,
       customerId: _This.data.options.cid
     };
-    // console.log("fffevent=====>", pdata);
+     console.log("fffevent=====>", pdata);
     wxRequest(wxaapi.clue.detail.url, pdata).then(function (result) {
       console.log("_This.data.clueRemarkBk----->", result.data, typeof(result.data.data));
       if (result.data.code == 0) {
@@ -228,8 +231,9 @@ Page({
     wx.showLoading({
       title: '提交中...'
     })
+    console.log("user data---customerInfo---", _This.data.customerInfo);
     if (_This.data.bdate == "" || _This.data.btime == "" || !_This.data.customerInfo.name|| _This.data.customerInfo.name==""){
-      //console.log("_This.data.bdate----->", _This.data.bdate);
+      console.log("_This.data.bdate----->", _This.data.bdate);
       wx.hideLoading();
        return false;
     }
@@ -240,7 +244,7 @@ Page({
     });
 
     let aTime = cutil.str2Date(bookDate).valueOf();
-   // console.log("aTime---------->",aTime);
+    console.log("aTime---------->",aTime);
     let pdata = {
       appointmentTime: aTime,
       sessionId: _This.data.options.consultingId,
@@ -250,7 +254,7 @@ Page({
       clueName: _This.data.clueRemark || _This.data.clueRemarkBk
     };
 
-    //console.log("=======pdata============",pdata);
+    console.log("=======pdata============",pdata);
     let userupdate={
       id: _This.data.customerInfo.id,
       phoneNum: _This.data.customerInfo.phoneNum,
@@ -258,11 +262,12 @@ Page({
       wechatNum: _This.data.customerInfo.wechatNum
     };
     wxRequest(wxaapi.customer.update.url, userupdate).then(function (updateResult) {
-     // console.log("update customer====>", updateResult);
+      console.log("update customer====>", updateResult);
       return updateResult;
     }).then(function (updateResult){
       if (updateResult.data.code==0){
        wxRequest(wxaapi.appointment.send.url, pdata).then(function (result) {
+         console.log("result.data---appointment-->", result.data);
           if (result.data.code == 0) {
             let oAppointment = _This.data.oAppointment;
             oAppointment.status = 1;

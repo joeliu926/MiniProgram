@@ -48,6 +48,7 @@ App({
    }
    wx.login({
      success: function (res) {
+       //console.log("res------>", res, wxaapi.unionid.code.url);
        if (res.code) {
          wx.request({
            url: wxaapi.unionid.code.url,
@@ -59,6 +60,7 @@ App({
              'Content-Type': 'application/json'
            },
            success: function (resSession) {
+             //console.log("-----resSession----", resSession);
              var sessionKey = resSession.data.session_key;
              wx.getUserInfo({
                success: function (res) {

@@ -13,7 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("options pcase-->", options);
+    //console.log("options pcase-->", options);
     let _This=this;
     wx.showLoading({
       title: 'loading...',
@@ -96,7 +96,7 @@ Page({
     let pdata = {unionId: param,all:0};
     //console.log("pdata------->",pdata);
     wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
-      console.log("000000000000000000000000===>", result);
+     // console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
         _This.setData({ projectItems: result.data.data });
       } else {

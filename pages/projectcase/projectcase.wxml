@@ -11,10 +11,11 @@
     </view>
   </view>
 </block>
-<view class='b-pos' style=''> </view>
+<view class='b-pos' style=''>
+</view>
 </view>
 
-<view class='case-btn-content' style='display:none;'>
+<view class='case-btn-content hide'>
   <view class='o-flex'>
       <image class='case-img-btn' src='../../public/images/case.png' mode='aspectFill'></image>
       <text class='case-btn-name'>案例</text>

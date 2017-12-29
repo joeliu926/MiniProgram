@@ -104,6 +104,10 @@ Page({
       }
       wx.hideLoading();
     });
+  },
+  fGetUserPhoneNumber(e){
+    console.log("get user phone num----->", e);
+
   }
 
 })

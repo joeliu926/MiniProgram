@@ -72,6 +72,7 @@ Page({
 
   selectItem:function(item){
     let sItem=item.target.dataset;
+    
     this.setData({
       jSelect: sItem.itemid
     });

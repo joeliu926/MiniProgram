@@ -1,0 +1,133 @@
+page{
+  background-color: #ffffff;
+}
+.c-case-ct{
+
+}
+.o-title{
+  text-align: center;
+  padding: 0 0 5px 0;
+  font-size: 16px;
+}
+.case-ct{
+position:relitive !important;
+margin-top:60rpx;
+
+}
+.case-item-ct{
+  position:absolute;
+padding:20rpx;
+box-sizing:border-box;
+top:36rpx;
+left:0;
+}
+/*****before after common******/
+.bcommon{ 
+  padding: 4rpx;
+  position: absolute;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0,0.5);
+  border-radius: 0px 10px 10px 0px;
+  color: #ffffff;
+  width: 46px;
+  text-align: center;
+}
+.after{
+  left: 50%;
+}
+/*****************history start******************/
+.his-title{
+  font-weight: bold;
+  padding: 24rpx;
+
+}
+.diary{
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0 15px 0 12px;
+  margin: 20rpx;
+
+}
+.img-c{
+  width: 224rpx;
+  height: 224rpx;
+  margin: 2rpx;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+/*****************history end******************/
+
+/*****************project description start******************/
+.host-des-ct{
+  padding: 24rpx;
+}
+.pro-item{
+  padding: 4rpx 10rpx;
+  border-radius: 20rpx;
+  margin:8rpx; 
+  border: 1rpx solid #6F61D4;
+  color: #6F61D4;
+}
+
+/*****************project description start******************/
+
+
+
+
+/****************float icon start*******************/
+.com-right-icon{
+  position: fixed;
+  right: 40rpx;
+  height: 100rpx;
+  width: 100rpx;
+}
+.like-icon{
+  bottom: 500rpx;
+}
+.tk-photo-icon{
+  bottom: 350rpx;
+}
+.phone-icon{
+  bottom: 200rpx;
+}
+/****************float icon end*******************/
+/*************end page start*************/
+.end-cmy-ct{
+  border-bottom: 1px dashed red;
+  margin-bottom: 24rpx;
+}
+.end-cmy-icon{
+  height: 160rpx;
+  width: 160rpx;
+}
+.e-cmy-major{
+  box-sizing: border-box; padding: 0 48rpx;
+}
+.e-cmy-name{
+  padding: 10rpx;
+}
+.end-items-ct{
+
+}
+.item-ct{
+  margin: 24rpx;
+}
+.small-icon{
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: middle;
+}
+.clinic-ct{
+  padding: 0 24rpx;
+  box-sizing: border-box;
+}
+.clinic-pic{
+  width: 200rpx;
+  height: 200rpx;
+  margin-right: 8rpx;
+}
+/*************end page end*************/
+
+
+

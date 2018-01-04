@@ -35,7 +35,7 @@
         <view class='f-16 t-a-c bk-c-w his-title'>术后日记</view>
         <block wx:for="{{detailInfo.contentList}}" wx:for-item="oitem" wx:key="id">
         <view class='bk-c-w'>
-          <view class='f-14 t-a-c'><text class='diary'>{{oitem.title}}</text></view>
+          <view class='f-14 t-a-c'><text class='diary f-14'>{{oitem.title}}</text></view>
           <view class='b-pd w-10  b-s' style='margin:20rpx 0;'>
             <view class='flex fx-wp w-10 b-s'>
                <block wx:for="{{oitem.pictures}}" wx:for-item="imgItem" wx:key="ids" >
@@ -54,16 +54,22 @@
    </view>
 </view>
 
+
+
+
   <!------------------right icon start-------------------->
-  <view class='like-ct'>
-     <image  class='com-right-icon like-icon'  src='../../../public/images/icon-came.png' bindtap='fTakePhoto'></image>
-  </view>
-    <view class='tk-photo'>
-   <image  class='com-right-icon tk-photo-icon'  src='../../../public/images/icon-came.png' bindtap='fTakePhoto'></image>
-  </view>
-  <view class='auth-phone'>
-   <image  class='com-right-icon phone-icon'  src='../../../public/images/icon-came.png' bindtap='fTakePhoto'></image>
-  </view>
+
+<view class='bk-c-w b-r flex-c com-right-icon like-icon' style=''>
+   <image  class='cm-img '  src='../../../public/images/like-icon.png' ></image>
+</view>
+
+<view class='bk-c-w b-r flex-c com-right-icon phone-icon' style=''>
+   <image  class='cm-img '  src='../../../public/images/wx-icon.png' ></image>
+</view>
+<view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon' style=''>
+   <image  class='cm-img' style='width:65rpx;'  src='../../../public/images/tk-photo-icon.png' ></image>
+</view>
+
   <!------------------right icon start-------------------->
 
 

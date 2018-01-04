@@ -10,8 +10,6 @@ page{
   font-size: 16px;
 }
 .case-ct{
-position:relitive !important;
-margin-top:60rpx;
 
 }
 .case-item-ct{
@@ -42,10 +40,11 @@ left:0;
 
 }
 .diary{
-  background-color: #000000;
+  background-color: #6F61D4;
   color: #ffffff;
-  padding: 0 15px 0 12px;
+  padding:4rpx 20rpx;
   margin: 20rpx;
+  border-radius: 30rpx;
 
 }
 .img-c{
@@ -81,15 +80,23 @@ left:0;
   right: 40rpx;
   height: 100rpx;
   width: 100rpx;
+  background: #ffffff;
+  box-shadow: 0 0 10px #ddd; 
+
+}
+.cm-img{
+  height: 60rpx;
+  width: 60rpx;
 }
 .like-icon{
-  bottom: 500rpx;
+  bottom: 450rpx;
+}
+
+.phone-icon{
+   bottom: 300rpx;
 }
 .tk-photo-icon{
-  bottom: 350rpx;
-}
-.phone-icon{
-  bottom: 200rpx;
+   bottom: 150rpx;
 }
 /****************float icon end*******************/
 /*************end page start*************/
@@ -128,6 +135,21 @@ left:0;
   margin-right: 8rpx;
 }
 /*************end page end*************/
+
+
+
+.test{
+  right: 20rpx;
+  height: 100rpx;
+  width: 100rpx;
+  position: absolute;
+  background: #ffffff;
+  box-shadow: 0 0 10px #ddd; 
+}
+.test-img{
+  height: 60rpx;
+  width: 60rpx;
+}
 
 
 

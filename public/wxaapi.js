@@ -54,7 +54,11 @@ var urlConfig = {
     },
     detail: {
       url: gConfig.remote +"/case/detail" //项目案例详情
-    }
+    },
+    share: {
+      url: gConfig.remote +"/case/share" //项目案例详情
+    },
+
   },
   customer: {
     add: {

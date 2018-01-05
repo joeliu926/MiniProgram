@@ -1,24 +1,29 @@
+<wxs src="./projectcase.wxs" module="projectcase" />
 <view class='case-content'>
-<block wx:for="{{projectItems}}" wx:for-item="oitem" wx:key="id">
-  <view class='o-flex case-item-content'>
-    <text class='case-title'  bindtap='selectTitle'>{{oitem.productName}}</text>
-    <view class='case-item-detail'>
-       <block wx:for="{{oitem.productList}}" wx:for-item="secitem" wx:key="id">
-           <block wx:for="{{secitem.productList}}" wx:for-item="item" wx:key="id">
-             <text class='case-item {{jSelect==item.productCode?"case-sele":""}}' data-paid='{{item.parentCode}}' data-paname='{{oitem.productName}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}' bindtap='selectItem'>{{item.productName}}</text>
+  <block wx:for="{{projectItems}}" wx:for-item="oitem" wx:key="id">
+    <view class='o-flex case-item-content'>
+      <text class='case-title' bindtap='selectTitle'>{{oitem.productName}}</text>
+      <view class='case-item-detail'>
+        <block wx:for="{{oitem.productList}}" wx:for-item="secitem" wx:key="id">
+          <block wx:for="{{secitem.productList}}" wx:for-item="item" wx:key="id">
+            <!-- {{jSelect==item.productCode?"case-sele":""}} {{projectcase.inArray(jSelect,item.productCode)?"case-sele":""}}-->
+            <!-- {{item.productCode}}  -->
+            <text class='case-item  {{projectcase.inArray(sSelect,item.productCode)?"case-sele":""}}' data-paid='{{item.parentCode}}' data-paname='{{oitem.productName}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}' bindtap='selectItem'>{{item.productName}}</text>
           </block>
-       </block>
+        </block>
+      </view>
     </view>
+  </block>
+  <view class='b-pos' style=''>
   </view>
-</block>
-<view class='b-pos' style=''>
-</view>
+  <view style="text-align:center; margin-top:20px;">
+    <span class="selend {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</span>
+  </view>
 </view>
 
 <view class='case-btn-content hide'>
   <view class='o-flex'>
-      <image class='case-img-btn' src='../../public/images/case.png' mode='aspectFill'></image>
-      <text class='case-btn-name'>案例</text>
+    <image class='case-img-btn' src='../../public/images/case.png' mode='aspectFill'></image>
+    <text class='case-btn-name'>案例</text>
   </view>
 </view>
-

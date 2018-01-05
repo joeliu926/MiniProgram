@@ -13,6 +13,8 @@
   </view>
 
 
+
+
 <block  wx:for="{{customerList}}" wx:for-item="oitem" wx:key="id">
   <view class='flex w-10 b-s bk-c-w ex-ct' bindtap='fNavCase' data-consultationId='{{oitem.id}}' data-iname='{{oitem.productName}}' data-productCode='{{oitem.productCode}}'>
     <view>

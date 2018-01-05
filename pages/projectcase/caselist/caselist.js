@@ -56,17 +56,125 @@ Page({
     autoplay: false,
     interval: 5000,
     duration: 1000,
-    isConsult: true
+    isConsult: true,
+    // 弹层
+    uicondata: "",
+    oUserInfo: {},
+    consultationId: "",
+    jSelect: "",
+    isactive:false,
+    isShow:false,
+    projectItems: [
+      {
+        "productName": " 眼部整形",
+        "parentCode": "0",
+        "productCode": "1001",
+        "productList": [
+          {
+            "productName": "开眼角",
+            "parentCode": "1001",
+            "productCode": "2001",
+            "productList": [
+              {
+                "productName": "开眼角",
+                "parentCode": "1001",
+                "productCode": "2001",
+                "productList": [
 
+                ]
+              },
+              {
+                "productName": "双眼皮",
+                "parentCode": "1001",
+                "productCode": "2002",
+                "productList": [
+
+                ]
+              },
+              {
+                "productName": "祛眼袋",
+                "parentCode": "1001",
+                "productCode": "2003",
+                "productList": [
+
+                ]
+              },
+              {
+                "productName": "去黑眼圈",
+                "parentCode": "1001",
+                "productCode": "2004",
+                "productList": [
+
+                ]
+              },
+              {
+                "productName": "丰卧蚕",
+                "parentCode": "1001",
+                "productCode": "2005",
+                "productList": [
+
+                ]
+              },
+              {
+                "productName": "上睑整形",
+                "parentCode": "1001",
+                "productCode": "2006",
+                "productList": [
+
+                ]
+              },
+              {
+                "productName": "下睑整形",
+                "parentCode": "1001",
+                "productCode": "2007",
+                "productList": [
+
+                ]
+              },
+              {
+                "productName": "丰眉弓",
+                "parentCode": "1001",
+                "productCode": "2008",
+                "productList": [
+
+                ]
+              },
+              {
+                "productName": "眼部综合",
+                "parentCode": "1001",
+                "productCode": "2009",
+                "productList": [
+
+                ]
+              },
+              {
+                "productName": "眼部修复",
+                "parentCode": "1001",
+                "productCode": "2010",
+                "productList": [
+
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    sSelect: [],
+    arrData: [],
+    cases:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    // console.log("+++++++++==================------------",JSON.parse(options.pdata));
     var _This=this;
     var caseIds = options.caseIds;
     getApp().getUserData(function(uinfo){
+      // console.log("4444444444444444444444",uinfo);
       _This.setData({
         isConsult: caseIds ? false : true,
         caseIds: caseIds || "",
@@ -77,15 +185,22 @@ Page({
         consultationId: options.consultationId||"",
         likeItem:"",
         shareEventId: options.shareEventId||"",
-        oEvent:event.oEvent
+        oEvent:event.oEvent,
+        arrData: JSON.parse(options.pdata)//从上一个页面跳转的数据 初始化数据
       });
+      // console.log("1111111111111111", _This.data.arrData);
+      //设置第一个项目是选中的；
+      
       _This.fGetCaseList(uinfo);//获取案例
       if ((!caseIds || caseIds.length <= 0)) {
+        // console.log("gggggggfGetConsultationId----->", options.itemid);
         _This.fGetConsultationId(options.itemid, function (result) {
-           //console.log("fGetConsultationId----->", result);
+           console.log("fGetConsultationId----->", result);
           _This.setData({
-            consultationId: result || ""
+            consultationId: result || "",
+          
           });  
+         
           _This.fUserEvent(event.eType.appShare);    
         });
       }
@@ -122,23 +237,46 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (e) {
-    var _This=this;
-   // _This.fUserEvent(event.eType.appShare); //咨询师分享事件
-    var caseIds = _This.data.caseIds;
-    var currentPage = _This.data.currentPage;
-    if (caseIds==""){
-      caseIds = _This.data.caseList[currentPage - 1].id;
-    }
-    return {
-      title: '案例分享',
-      path: '/pages/client/sharecase/sharecase?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
-      success: function (res) {
-
-        wx.navigateBack({
-           delta: 2
-        })
+      let _This = this;
+      if (_This.data.consultationId) {
+        callback(_This.data.consultationId);
+        return false;
       }
-    }
+      let shareData = {
+        cases: [1,2,3],//案例列表Id
+        consultingId: _This.data.oEvent.eventAttrs.consultingId ,//会话id
+        consultantUnionid: _This.data.oUserInfo.unionId,//咨询师unionid
+        products: [3002,3025,3028],//项目列表id
+      };
+      wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
+        console.log("=====0", wxaapi.consult.consultantupdate.url,shareData);
+      console.log("000000000000000000000000===>", result);
+          if (result.data.code == 0) {
+            _This.setData({ projectItems: result.data.data });
+            // console.log("￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥",分享成功);
+          } else {
+            console.log(result);
+          }
+          wx.hideLoading();
+      });
+
+
+    // _This.fUserEvent(event.eType.appShare); //咨询师分享事件
+      var caseIds = _This.data.caseIds;
+      var currentPage = _This.data.currentPage;
+      if (caseIds==""){
+        caseIds = _This.data.caseList[currentPage - 1].id;
+      }
+      return {
+        title: '案例分享',
+        path: '/pages/client/sharecase/sharecase?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
+        success: function (res) {
+
+          wx.navigateBack({
+             delta: 2
+          })
+        }
+      }
   },
   /**
    * 案例详情
@@ -237,12 +375,15 @@ Page({
     let _This = this;
     var pdata = {
       unionId: uinfo.unionId,
-      productCode: _This.data.productCode,
+      productCode: _This.data.productCode||[],
       caseIds: _This.data.caseIds
     };
+    console.log(pdata);
     wxRequest(wxaapi.pcase.list.url, pdata).then(function (result) {
-     // console.log("case list===>",result);
+     console.log("case list===>",result);
       if (result.data.code == 0) {
+        // var caseids = [];
+        // for(var i=0;)
         _This.setData({
           caseList: result.data.data,
           totalCount: result.data.data.length
@@ -251,7 +392,74 @@ Page({
         //console.log("case list----", result);
       }
     });
+
+
+   
+  },
+  /**
+   * 下拉选择 获取项目列表
+   */
+  getproductitem() {
+    console.log("=============****************==============", this.data.oUserInfo);
+    let _This= this;
+    let pdata = { unionId: _This.data.oUserInfo.unionId, all: 0 };
+    //console.log("pdata------->",pdata);
+    wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
+      // console.log("000000000000000000000000===>", result);
+      if (result.data.code == 0) {
+        _This.setData({
+           projectItems: result.data.data,
+           isactive: _This.data.isactive,
+           isShow: !_This.data.isShow,
+
+        });
+      } else {
+        console.log(result);
+      }
+      wx.hideLoading();
+    });
+  },
+
+  selectItem(item){
+    let sItem = item.target.dataset;
+    console.log(sItem);
+    var arr = this.data.sSelect;
+    var arrData = this.data.arrData;
+    // console.log(arr.indexOf(sItem.itemid));
+    if (arr.indexOf(sItem.itemid) == -1) {
+      // console.log("=========================ffffff");
+      arr.push(sItem.itemid);
+      arrData.push(sItem);
+      // console.log(arrData);
+    } else {
+      var index = arr.indexOf(sItem.itemid);
+      if (index > -1) {
+        arr.splice(index, 1);
+        arrData.splice(index, 1);
+        // console.log(arrData);
+      }
+    }
+    this.setData({
+      sSelect: arr,
+      arrData: this.data.arrData
+    });
+    // console.log(this.data.sSelect)
+    // 传递相关的参数到借口
   }
+  ,
+  // 选好案例
+  selectItems(){
+    
+      this.setData({
+        isactive: true,
+        isShow: !this.data.isShow,
+        arrData: this.data.arrData
+      })
+      console.log(this.data.arrData);
+
+  },
+ 
+
   
 
 })

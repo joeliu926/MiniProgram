@@ -117,3 +117,20 @@ background-color: #ffffff;
   height: 0;
   width: 0;
 }
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    height: 0;
+    display: block;
+    line-height: 0;
+    visibility: hidden;
+    clear: both;
+    overflow: hidden;
+}

@@ -1,0 +1,11 @@
+var inArray =function (arr, item) {
+  // console.log(arr.indexOf);
+  if (arr.indexOf(item) == -1) {
+    return false;
+  } else {
+    return true;
+  }
+}
+module.exports = {
+  inArray: inArray
+}

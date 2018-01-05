@@ -99,6 +99,14 @@ left:0;
 .tk-photo-icon{
    bottom: 150rpx;
 }
+.tip-font{
+  background:#ffffff;
+  position:fixed;
+  z-index:1000;
+  bottom:330rpx;
+  right: 150rpx;
+  color: #000;
+}
 /****************float icon end*******************/
 /*************end page start*************/
 .end-cmy-ct{

@@ -85,6 +85,12 @@ var urlConfig = {
     },
     consultcustomers: {
       url: gConfig.remote + "/consult/consultcustomers" //获取一个咨询下面的所有客户
+    },
+    sharecase: {
+      url: gConfig.remote + "/consult/sharecase" //通过会话id获取单次分享的案例ID
+    },
+    consultantupdate: {
+      url: gConfig.remote + "/consult/consultantupdate" // 咨询会话更新接口，可更新会话与案例的关系，会话与项目的关系
     }
   },
   appointment: {

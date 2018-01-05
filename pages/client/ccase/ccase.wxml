@@ -75,7 +75,7 @@
 <view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon' style=''>
    <image  class='cm-img' style='width:65rpx;'  src='../../../public/images/tk-photo-icon.png' ></image>
 </view>
-
+<view class='tip-font f-14 {{isShowTip?"":"hide"}}' style=''><text>授权手机号 获得1对1专属服务</text></view>
   <!------------------right icon start-------------------->
 
 

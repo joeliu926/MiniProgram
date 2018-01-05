@@ -5,11 +5,8 @@ Page({
   data: {
     aCaseList: [{ id: 0, item: "red" }, { id: 1, item: "green" }, { id: 2, item: "blue"}, { id: 3,item:"purple"}],
     aCurrentList:[],
-    aCurrentIndex:0,
-    caseCount:2,
     itemLeft:0,
     itemTop:0,
-    itemindex:1
   },
   onLoad: function () {
     let _This = this;
@@ -90,8 +87,7 @@ Page({
       }
     }
     _This.setData({
-      aCurrentList: aCurrentList,
-      aCurrentIndex: iIndex
+      aCurrentList: aCurrentList
     });
   },
   fFilterData(id){

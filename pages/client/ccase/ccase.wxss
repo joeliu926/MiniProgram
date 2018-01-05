@@ -82,6 +82,7 @@ left:0;
   width: 100rpx;
   background: #ffffff;
   box-shadow: 0 0 10px #ddd; 
+  z-index: 1000
 
 }
 .cm-img{

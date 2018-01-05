@@ -16,7 +16,8 @@ Page({
     caseCount:4,//案例总数
     itemTop: 20,//顶部位置
     isShowTip:false,//是否显示授权手机号码的tip
-    oUserInfo:{},
+    oUserInfo:{}, //当前用户信息
+    clueId:"",
     currentPage:1,
     totalCount:1,
     caseList:["案例一","案例二","案例三"],
@@ -104,7 +105,7 @@ Page({
     console.log("get case list");
   },
   /**
-   * 客户添加或者更新
+   * 客户添加或者更新,返回用户
    */
   fCustomerAdd(){
     let _This = this;
@@ -118,18 +119,74 @@ Page({
       logo: _This.data.oUserInfo.avatarUrl,
       unionid: _This.data.oUserInfo.unionId,
       userUnionid: _This.data.cstUid,
-      consultationId: _This.data.consultationId,
-      shareEventId: _This.data.shareEventId
+      consultationId: _This.data.consultationId
     };
     console.log("---fCustomerAdd---pdata---------->", pdata);
-    wxRequest(wxaapi.customer.add.url, pdata).then(function (result) {
+    wxRequest(wxaapi.consult.entry.url, pdata).then(function (result) {
+      console.log("------result---------->", result);
       if (result.data.code == 0) {
-        // callback(result.data.data);
+        _This.setData({
+          clueId: result.data.data.clueId
+        });
       } else {
         console.log("addcustomer error----", result);
       }
     });
   },
+  /*
+ *事件参数 
+ */
+  fGetTempEvent() {
+    var _This = this;
+    var oTempEvent = _This.data.oEvent;
+    var currentPage = _This.data.currentPage;
+    oTempEvent.shareEventId = _This.data.shareEventId;
+    oTempEvent.productCode = _This.data.productCode;
+    oTempEvent.clueId=_This.data.clueId; //线索id
+    oTempEvent.consultationId=_This.data.consultationId;//咨询会话ID
+    oTempEvent.eventAttrs = {
+      consultantId: _This.data.cstUid,
+      caseId: _This.data.caseList[currentPage - 1].id,//
+      appletId: "hldn",
+      consultingId: _This.data.consultationId,
+      isLike: _This.data.isLike
+    }
+    oTempEvent.subjectAttrs = {
+      appid: "yxy",
+      consultantId: _This.data.cstUid,
+      openid: _This.data.oUserInfo.openId,
+      unionid: _This.data.oUserInfo.unionId,
+      mobile: ""
+    };
+    _This.setData({
+      oEvent: oTempEvent
+    });
+  },
+  /**
+  * 用户事件
+  */
+  fUserEvent(eType) {
+    let _This = this;
+    _This.fGetTempEvent();
+    var oData = _This.data.oEvent;
+    oData.eventAttrs.triggeredTime = new Date().valueOf();
+    oData.code = eType;
+    wxRequest(wxaapi.event.add.url, oData).then(function (result) {
+      //console.log("000000000000000000000000===>", result);
+      if (result.data.code == 0) {
+        if (!oData.shareEventId) {
+          // oData.shareEventId = result.data.data;
+          _This.setData({
+            shareEventId: result.data.data
+          });
+        };
+      } else {
+        console.log("add  event error---", result);
+      }
+    });
+  },
+
+
 
 
 

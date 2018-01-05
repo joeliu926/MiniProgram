@@ -8,7 +8,7 @@ var gConfig={
   //uploadUrl: "https://27478500.qcloud.la/uploadimg/attachment/upload",
   /****production end*****/
 
-  remoteWx: "https://27478500.qcloud.la/wx",
+  remoteWx: "https://nihaomc.com/wx",
   /****test start*****/
   remote: "https://nihaomc.com/wxa_test",
   uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload"
@@ -91,7 +91,10 @@ var urlConfig = {
     },
     consultantupdate: {
       url: gConfig.remote + "/consult/consultantupdate" // 咨询会话更新接口，可更新会话与案例的关系，会话与项目的关系
-    }
+    },
+    entry: {
+      url: gConfig.remote + "/consult/entry" //  客户进入咨询师分享的小程序，对客户信息，线索信息进行维护
+   }
   },
   appointment: {
     list: {

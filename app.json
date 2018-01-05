@@ -1,6 +1,6 @@
 {
   "pages": [
-
+ 
     "pages/home/home",
     "pages/projectcase/casedetail/casedetail",
     "pages/projectcase/projectcase",

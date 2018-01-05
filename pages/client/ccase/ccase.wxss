@@ -154,3 +154,10 @@ left:0;
 
 
 
+button[plain]{
+border: 0;
+ width: 60rpx;
+ height: 60rpx;
+} 
+
+

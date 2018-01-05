@@ -1,6 +1,7 @@
 const wxaapi = require('./../../../public/wxaapi.js');
 const wxRequest = require('./../../../utils/js/wxRequest.js');
 const wxPromise = require('./../../../utils/js/wxPromise.js');
+
 var touchDotX = 0;//触摸时的原点
 var touchDotY = 0;//触摸时的原点
 Page({
@@ -129,6 +130,40 @@ Page({
     let caseCount = _This.data.detailInfo.contentList.length || 1;
     let countRate = parseInt(100 / caseCount);
   },
+  fTestPhone(){
+    console.log("--------点击触发事件--------");
+  },
+  /**
+   * 获取手机号码
+   */
+  getPhoneNumber(e) {
+    console.log("------", e);
+    let encryptedData = e.detail.encryptedData;
+    let iv = e.detail.iv;
+    if (!encryptedData) {
+      return false;
+    }
+    let sessionKey = "";
+    wxPromise(wx.login)().then(result => {
+      let ucode = result.code;
+      return wxRequest(wxaapi.unionid.code.url, { code: ucode });
+    }).then(resSession => {
+      sessionKey = resSession.data.session_key;
+      return sessionKey;
+    }).then(sessionKey => {
+      console.log("sessionKey----->", sessionKey);
+      var postData = {
+        encryptedData: encryptedData,
+        sessionKey: sessionKey, iv: iv
+      };
+      return wxRequest(wxaapi.unionid.userinfo.url, postData);
+    }).then(resAll => {
+      console.log("resAll----->", resAll);
+    });
+  },
+
+
+
 /*************** 滚动事件 开始************************/
   // 触摸开始事件
   fTouchStart: function (e) {

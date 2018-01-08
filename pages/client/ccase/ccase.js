@@ -172,9 +172,9 @@ Page({
     let pdata = {
       sessionId:_This.data.consultationId
     };
-    console.log("---cases---pdata---------->", pdata);
+   // console.log("---cases---pdata---------->", pdata);
     wxRequest(wxaapi.consult.sharecase.url, pdata).then(function (result) {
-      console.log("---cases---result---------->", result);
+      //console.log("---cases---result---------->", result);
       if (result.data.code == 0) {
          _This.setData({
            aCaseIds:result.data.data,
@@ -191,22 +191,16 @@ Page({
    */
   fGetCaseDetailById(){
     let _This = this;
-
-    console.log(_This.data.iCurrentSearchCase,"---=-=-=-=-=-=-=-----", _This.data.aCaseIds.length);
     let aCaseIds=_This.data.aCaseIds;
     let iCurrentSearchCase = _This.data.iCurrentSearchCase
     if (iCurrentSearchCase >=aCaseIds.length) {
       return false;
     }
     let currentId = aCaseIds.slice(iCurrentSearchCase, iCurrentSearchCase+1);
-
-    console.log("currentId----------->", aCaseIds[iCurrentSearchCase]);
-
     let pdata = {
       did: aCaseIds[iCurrentSearchCase]
     };
     wxRequest(wxaapi.pcase.detail.url, pdata).then(function (result) {
-      console.log("---aCurrentList---result-------iCurrentSearchCase--->", iCurrentSearchCase, result.data.data);
       if (result.data.code == 0) {
         let oCase = result.data.data;
         let aCaseList=_This.data.aCaseList;
@@ -217,7 +211,6 @@ Page({
           iCurrentSearchCase: iCurrentSearchCase+1
         });
         if (iCurrentSearchCase==0){
-          console.log("aCaseList---current--->", aCaseList);
           _This.setData({
             aCurrentList: aCaseList
           });
@@ -339,11 +332,11 @@ Page({
 /*************** 滚动事件 开始************************/
   // 触摸开始事件
   fTouchStart: function (e) {
-   console.log("e.touches[0]------->", e, e.currentTarget.dataset.caseitem);
+   //console.log("e.touches[0]------->", e, e.currentTarget);
     let caseItem = e.currentTarget.dataset.caseitem;
     this.setData({
       currentItem: caseItem,
-      isShowTip:true
+     // isShowTip:true
     });
     touchDotX = e.touches[0].pageX; // 获取触摸时的原点touchDotX
     touchDotY = e.touches[0].pageY; // 获取触摸时的原点touchDotY
@@ -353,13 +346,17 @@ Page({
     let _This = this;
     let tX = (e.touches[0].pageX - touchDotX);
     let tY = (e.touches[0].pageY - touchDotY);
-    let currentItem = _This.data.currentItem;
+    let currentItemId = _This.data.currentItem;//当前的案例id
 
     if (Math.abs(tY) < Math.abs(tX)) {
-      _This.fGenerateShow(currentItem, tX);
+      _This.fGenerateShow(currentItemId, tX);
       _This.setData({
-        itemLeft: (tX + "px"),
-        itemTop: (tY + "px")
+       // itemLeft: (tX + "px"),
+       // itemTop: (tY + "px")
+      });
+    }else{
+      this.setData({
+        isShowTip: true
       });
     }
   },
@@ -367,16 +364,25 @@ Page({
   fTouchEnd: function (e) {
     let _This = this;
     var touchMove = e.changedTouches[0].pageX;
-    if (Math.abs(touchMove - touchDotX) > 40) {
+    if (Math.abs(touchMove - touchDotX) > 50) {
+
+
+      let currentItemId = _This.data.currentItem;//当前的案例id
+      let iIndex = _This.fFilterData(currentItemId);
+      console.log("iIndex--------->", iIndex);
+      if ((iIndex + 1) == _This.data.totalCount && touchMove < touchDotX){
+          _This.setData({
+            isEndPage:true
+          });
+      }
+
       let clist = _This.data.aCurrentList;
       if (clist.length > 1) {
         let rmItem = clist.splice(0, 1);
         _This.setData({
           aCurrentList: clist
         });
-
-        console.log("rmItem[0].id-----", clist[0]);
-
+        //console.log("rmItem[0].id-----", clist[0]);
         _This.fFilterData(clist[0].id);
       }
     }
@@ -396,8 +402,10 @@ Page({
     let iIndex = _This.fFilterData(itemid);
     let aCurrentList = _This.data.aCurrentList;
     if (direction < 0) {
+      console.log("right----->", iIndex);
       aCurrentList = aCaseList.slice(iIndex, iIndex + 2);
     } else {
+      console.log("left----->",iIndex);
       if (iIndex > 0) {
         aCurrentList[1] = aCaseList[iIndex - 1];
       }
@@ -417,7 +425,7 @@ Page({
     aCaseList.some((item, index) => {
     
       if (item.id == id) {
-        console.log("index------->", index, _This.data.currentPage, "-----item.id----", item.id,"id-------",id);
+        //console.log("index------->", index, _This.data.currentPage, "-----item.id----", item.id,"id-------",id);
          oId = index;
         _This.setData({
           currentPage:index
@@ -425,6 +433,20 @@ Page({
       }
     });
     return oId;
-  }
+  },
 /****************滚动事件结束*****************/
+  fEndPageStart(e) {
+    touchDotX = e.touches[0].pageX; // 获取触摸时的原点touchDotX
+    touchDotY = e.touches[0].pageY; // 获取触摸时的原点touchDotY
+   }, 
+  fEndPageEnd(e){
+    let _This=this;
+    let touchMove = e.changedTouches[0].pageX;
+    if (touchMove - touchDotX> 50) {
+      _This.setData({
+        isEndPage: false
+      });
+    }
+  }
+
 })

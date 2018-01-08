@@ -80,7 +80,7 @@
 
 
 <!------------------end page start-------------------->
-<view class='c-p-d end-ct {{!isEndPage?"hide":""}}'>
+<view class='c-p-d end-ct {{!isEndPage?"hide":""}}'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
    <view class='end-cmy-ct flex fx-jc-sb'>
      <view class='flex-c fx-d-col e-cmy-major'>
         <text class='f-16 w-10 e-cmy-name'>这是一个医院名字</text>

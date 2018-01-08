@@ -110,7 +110,7 @@ left:0;
 /****************float icon end*******************/
 /*************end page start*************/
 .end-cmy-ct{
-  border-bottom: 1px dashed red;
+  border-bottom: 1px dashed #999999;
   margin-bottom: 24rpx;
 }
 .end-cmy-icon{

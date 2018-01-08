@@ -10,15 +10,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    aCaseList: [{ id: 0, item: "red" }, { id: 1, item: "green" }, { id: 2, item: "blue" }, { id: 3, item: "purple" }],
+    aCaseList: [],
     aCurrentList: [],//选中项
     itemLeft: 0,//左侧位置
     caseCount:4,//案例总数
     itemTop: 20,//顶部位置
     isShowTip:false,//是否显示授权手机号码的tip
     oUserInfo:{}, //当前用户信息
+    isEndPage:false,//是否是最后一页
+    aCaseIds:[],//项目案例IDs
+    iCurrentSearchCase:0,//遍历查询案例信息，当前查询的条数
     clueId:"",
-    currentPage:1,
+    currentPage:0,
     totalCount:1,
     caseList:["案例一","案例二","案例三"],
     detailInfo: {
@@ -49,14 +52,57 @@ Page({
           "pictures": ["", "11", "222", "11", "222"]
         }
       ]
+    },
+    oCaseDetail:{
+      "id": 3,
+      "caseName": "测试案例1",
+      "doctor": {
+        "tenantId": "",
+        "id": 1,
+        "name": "李医生"
+      },
+      "products": [
+        {
+          "id": 1,
+          "productName": " 眼部整形"
+        }
+      ],
+      "operationDate": 1513008000000,
+      "customerGender": 1,
+      "customerAge": 23,
+      "customerLogo": {
+        "name": "10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7",
+        "url": "http://140.143.185.73:8077/mc_files/10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7"
+      },
+      "beforePicture": {
+        "name": "10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7",
+        "url": "http://140.143.185.73:8077/mc_files/10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7"
+      },
+      "afterPicture": {
+        "name": "10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7",
+        "url": "http://140.143.185.73:8077/mc_files/10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7"
+      },
+      "contentList": [
+        {
+          "id": 3,
+          "title": "术后10天",
+          "pictures": [
+            {
+              "name": "10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7",
+              "url": "http://140.143.185.73:8077/mc_files/10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7"
+            }
+          ],
+          "definitionDate": 1513008000000,
+          "description": "手术日记描述"
+        }
+      ]
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    console.log("event------>event",event);
+   // console.log("event------>event",event);
 
   let _This=this;
   var caseIds = options.caseIds;
@@ -67,7 +113,7 @@ Page({
   });
 /***********qiehuan******/
   getApp().getUserData(function (uinfo) {
-    console.log("-------user info=====>", uinfo);
+    //console.log("-------user info=====>", uinfo);
     _This.setData({
       caseIds: caseIds || "",
       projectName: options.iname,
@@ -79,10 +125,10 @@ Page({
       shareEventId: options.shareEventId || "",
       oEvent: event.oEvent
     });
-    _This.fGetCaseList(uinfo);//获取案例
+ 
     _This.fCustomerAdd();//客户添加
-    //_This.fUserEvent(event.eType.appOpen);//进入程序
-    //_This.fCustomerMsg();//发送客服消息 
+    _This.fGetCaseIDs();//会话ID获取案例ids
+   
   });
 
 
@@ -90,22 +136,8 @@ Page({
 
 
 
- 
-
   /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-  /**
-   * 获取案例列表
-   */
-  fGetCaseList(){
-    console.log("get case list");
-  },
-  /**
-   * 客户添加或者更新,返回用户
+   * 客户添加或者更新,返回线索id
    */
   fCustomerAdd(){
     let _This = this;
@@ -121,9 +153,8 @@ Page({
       userUnionid: _This.data.cstUid,
       consultationId: _This.data.consultationId
     };
-    console.log("---fCustomerAdd---pdata---------->", pdata);
+    //console.log("---fCustomerAdd---pdata---------->", pdata);
     wxRequest(wxaapi.consult.entry.url, pdata).then(function (result) {
-      console.log("------result---------->", result);
       if (result.data.code == 0) {
         _This.setData({
           clueId: result.data.data.clueId
@@ -133,6 +164,74 @@ Page({
       }
     });
   },
+  /**
+   * 通过会话ID获取所有的案例ID
+   */
+  fGetCaseIDs(){
+    let _This = this;
+    let pdata = {
+      sessionId:_This.data.consultationId
+    };
+    console.log("---cases---pdata---------->", pdata);
+    wxRequest(wxaapi.consult.sharecase.url, pdata).then(function (result) {
+      console.log("---cases---result---------->", result);
+      if (result.data.code == 0) {
+         _This.setData({
+           aCaseIds:result.data.data,
+           totalCount: result.data.data.length
+         });
+         _This.fGetCaseDetailById();//获取案例详情
+      } else {
+        console.log("case ids error----", result);
+      }
+    });
+  },
+  /**
+   * 通过案例ID获取案例详情
+   */
+  fGetCaseDetailById(){
+    let _This = this;
+
+    console.log(_This.data.iCurrentSearchCase,"---=-=-=-=-=-=-=-----", _This.data.aCaseIds.length);
+    let aCaseIds=_This.data.aCaseIds;
+    let iCurrentSearchCase = _This.data.iCurrentSearchCase
+    if (iCurrentSearchCase >=aCaseIds.length) {
+      return false;
+    }
+    let currentId = aCaseIds.slice(iCurrentSearchCase, iCurrentSearchCase+1);
+
+    console.log("currentId----------->", aCaseIds[iCurrentSearchCase]);
+
+    let pdata = {
+      did: aCaseIds[iCurrentSearchCase]
+    };
+    wxRequest(wxaapi.pcase.detail.url, pdata).then(function (result) {
+      console.log("---aCurrentList---result-------iCurrentSearchCase--->", iCurrentSearchCase, result.data.data);
+      if (result.data.code == 0) {
+        let oCase = result.data.data;
+        let aCaseList=_This.data.aCaseList;
+        aCaseList.push(oCase);
+        _This.setData({
+          oCaseDetail: oCase,
+          aCaseList: aCaseList,
+          iCurrentSearchCase: iCurrentSearchCase+1
+        });
+        if (iCurrentSearchCase==0){
+          console.log("aCaseList---current--->", aCaseList);
+          _This.setData({
+            aCurrentList: aCaseList
+          });
+        }
+        _This.fGetCaseDetailById();
+      
+      } else {
+        console.log("case detail error----", result);
+      }
+    });
+  },
+
+
+
   /*
  *事件参数 
  */
@@ -240,7 +339,7 @@ Page({
 /*************** 滚动事件 开始************************/
   // 触摸开始事件
   fTouchStart: function (e) {
-    // console.log("e.touches[0]------->", e, e.currentTarget.dataset.caseitem);
+   console.log("e.touches[0]------->", e, e.currentTarget.dataset.caseitem);
     let caseItem = e.currentTarget.dataset.caseitem;
     this.setData({
       currentItem: caseItem,
@@ -255,8 +354,9 @@ Page({
     let tX = (e.touches[0].pageX - touchDotX);
     let tY = (e.touches[0].pageY - touchDotY);
     let currentItem = _This.data.currentItem;
-    _This.fGenerateShow(currentItem, tX);
+
     if (Math.abs(tY) < Math.abs(tX)) {
+      _This.fGenerateShow(currentItem, tX);
       _This.setData({
         itemLeft: (tX + "px"),
         itemTop: (tY + "px")
@@ -274,6 +374,10 @@ Page({
         _This.setData({
           aCurrentList: clist
         });
+
+        console.log("rmItem[0].id-----", clist[0]);
+
+        _This.fFilterData(clist[0].id);
       }
     }
     _This.setData({
@@ -285,11 +389,11 @@ Page({
   /**
    * 生成显示的items，direction是切换的方向，大于0是向右，小于0是向左
    */
-  fGenerateShow(item, direction) {
+  fGenerateShow(itemid, direction) {
     let _This = this;
     let aCaseList = _This.data.aCaseList;
     let aCount = aCaseList.length;
-    let iIndex = _This.fFilterData(item);
+    let iIndex = _This.fFilterData(itemid);
     let aCurrentList = _This.data.aCurrentList;
     if (direction < 0) {
       aCurrentList = aCaseList.slice(iIndex, iIndex + 2);
@@ -307,13 +411,16 @@ Page({
    */
   fFilterData(id) {
     let _This = this;
+   // return false;
     let aCaseList = _This.data.aCaseList;
     let oId = 0;
     aCaseList.some((item, index) => {
+    
       if (item.id == id) {
-        oId = index;
+        console.log("index------->", index, _This.data.currentPage, "-----item.id----", item.id,"id-------",id);
+         oId = index;
         _This.setData({
-          currentPage:index+2
+          currentPage:index
         });
       }
     });

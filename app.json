@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/index/home",
     "pages/index/detail/cluedetail",
-    "pages/home/home",
+
     "pages/test/book",
     "pages/projectcase/casedetail/casedetail",
     "pages/projectcase/projectcase",

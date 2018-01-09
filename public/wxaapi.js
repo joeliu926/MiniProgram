@@ -52,6 +52,9 @@ var urlConfig = {
     list: {
       url: gConfig.remote +"/case/list" //获取案例列表
     },
+    morelist: {
+      url: gConfig.remote + "/case/morelist" //获取多案例列表
+    },
     detail: {
       url: gConfig.remote +"/case/detail" //项目案例详情
     },

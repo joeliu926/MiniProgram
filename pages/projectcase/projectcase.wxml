@@ -8,15 +8,14 @@
           <block wx:for="{{secitem.productList}}" wx:for-item="item" wx:key="id">
             <!-- {{jSelect==item.productCode?"case-sele":""}} {{projectcase.inArray(jSelect,item.productCode)?"case-sele":""}}-->
             <!-- {{item.productCode}}  -->
-            <text class='case-item  {{projectcase.inArray(sSelect,item.productCode)?"case-sele":""}}' data-paid='{{item.parentCode}}' data-paname='{{oitem.productName}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}' bindtap='selectItem'>{{item.productName}}</text>
+            <text class='case-item  {{projectcase.inArray(sSelect,item.productCode)?"case-sele":""}} {{projectcase.inArray(selable,item.productCode)?"":"unable"}}' data-paid='{{item.parentCode}}' data-paname='{{oitem.productName}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}' bindtap='selectItem'>{{item.productName}}</text>
           </block>
         </block>
       </view>
     </view>
   </block>
-  <view class='b-pos' style=''>
-  </view>
-  <view style="text-align:center; margin-top:20px;">
+  <text class=" tipunable" style="display:{{isShow=='true'?'block':'none'}}"> 当前项目下暂时无案例可选</text> 
+  <view style="text-align:center; margin-top:20px;" class="selBtn">
     <span class="selend {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</span>
   </view>
 </view>

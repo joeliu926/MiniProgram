@@ -1,10 +1,9 @@
 {
   "pages": [
-"pages/projectcase/book/book",
     "pages/index/home",
     "pages/index/detail/cluedetail",
     "pages/home/home",
-    
+    "pages/projectcase/book/book",
     "pages/projectcase/casedetail/casedetail",
     "pages/projectcase/projectcase",
     "pages/projectcase/caselist/caselist",
@@ -14,6 +13,7 @@
     "pages/client/sharecase/tkphoto/tkphoto",
     "pages/test/test",
     "pages/logs/logs",
+    "pages/client/ccase/ccase",
     "pages/projectcase/singletrail/singletrail",
     "pages/projectcase/casetrail/userlist/userlist",
     "pages/projectcase/casetrail/cbooking/cbooking",

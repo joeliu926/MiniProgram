@@ -20,6 +20,9 @@ Page({
     isEndPage:false,//是否是最后一页
     aCaseIds:[],//项目案例IDs
     iCurrentSearchCase:0,//遍历查询案例信息，当前查询的条数
+    currentLikeState:false,//当前的是否like
+    olikeResult:{},//用户喜欢案例结果
+    sCurrentId:0,//当前案例的id
     oClinic:{},
     clueId:"",
     currentPage:0,
@@ -114,14 +117,14 @@ Page({
   });
 /***********qiehuan******/
   getApp().getUserData(function (uinfo) {
-    //console.log("-------user info=====>", uinfo);
+    console.log("-------user info=====>", uinfo);
     _This.setData({
       caseIds: caseIds || "",
       projectName: options.iname,
       productCode: options.itemid,
       cstUid: caseIds ? options.cstUid : uinfo.unionId,
       oUserInfo: uinfo,
-      consultationId: options.consultationId || "1420",
+      consultationId: options.consultationId || "1616",
       likeItem: "",
       shareEventId: options.shareEventId || "",
       oEvent: event.oEvent
@@ -130,15 +133,11 @@ Page({
     _This.fCustomerAdd();//客户添加
     _This.fGetCaseIDs();//会话ID获取案例ids
     _This.fGetClinicDetail();//获取诊所信息
+   
     
    
   });
-
-
   },
-
-
-
   /**
    * 客户添加或者更新,返回线索id
    */
@@ -162,13 +161,99 @@ Page({
         _This.setData({
           clueId: result.data.data.clueId
         });
-
         _This.fUserEvent(event.eType.appOpen);//进入小程序事件
-
+        _This.fGetCustomerByUnionid();
       } else {
         console.log("addcustomer error----", result);
       }
     });
+  },
+  /**
+   * 通过会话id和用户unionid获取客户信息
+   */
+  fGetCustomerByUnionid(){
+    let _This = this;
+    let oUserInfo = _This.data.oUserInfo;
+    let pdata = {
+      consultantUnionid: _This.data.cstUid,
+      unionid: _This.data.oUserInfo.unionId
+    };
+    wxRequest(wxaapi.customer.getcustomerbyunid.url, pdata).then(function (result) {
+      console.log("get customer info result---->", result);
+
+      if (result.data.code == 0) {
+        oUserInfo.wechatMobile = result.data.data.wechatMobile;
+        oUserInfo.id = result.data.data.id;
+        _This.setData({
+          oUserInfo: oUserInfo
+        });
+      } else {
+        console.log("get customer info error----", result);
+      }
+    });
+  },
+  /**
+ * 授权获取手机号码
+ */
+  getPhoneNumber(e) {
+    let _This=this;
+    let encryptedData = e.detail.encryptedData;
+    let iv = e.detail.iv;
+    if (!encryptedData) {
+      return false;
+    }
+    let sessionKey = "";
+    wxPromise(wx.login)().then(result => {
+      let ucode = result.code;
+      return wxRequest(wxaapi.unionid.code.url, { code: ucode });
+    }).then(resSession => {
+      sessionKey = resSession.data.session_key;
+      return sessionKey;
+    }).then(sessionKey => {
+      //console.log("sessionKey----->", sessionKey);
+      var postData = {
+        encryptedData: encryptedData,
+        sessionKey: sessionKey, iv: iv
+      };
+      return wxRequest(wxaapi.unionid.userinfo.url, postData);
+    }).then(resAll => {
+      let oUserInfo = _This.data.oUserInfo;
+      let wxPhone = resAll.data.userinfo.phoneNumber;
+      oUserInfo.wechatMobile = wxPhone;
+      _This.setData({
+        oUserInfo: oUserInfo
+      });
+      _This.fUpdateCustomerInfo();
+    });
+  },
+  /**
+   * 授权后更新客户手机号码
+   */
+  fUpdateCustomerInfo(){
+    let _This = this;
+    let oUserInfo = _This.data.oUserInfo;
+    let pdata = {
+      id: _This.data.oUserInfo.id,
+      wechatMobile: _This.data.oUserInfo.wechatMobile
+    };
+    wxRequest(wxaapi.customer.update.url, pdata).then(function (result) {
+      console.log("update customer result---->", result);
+      if (result.data.code == 0) {
+        _This.fGetConsultDetail();
+      } else {
+        console.log("update customer info error----", result);
+      }
+    });
+  },
+  /**
+   * 跳转获取咨询师详情页面
+   */
+  fGetConsultDetail(){
+    let _This=this;
+    let cstunionid = _This.data.cstUid;
+    wx.navigateTo({
+      url: './counselor/counselor?cstUid=' + cstunionid
+    })
   },
   /**
    * 通过会话ID获取所有的案例ID
@@ -178,15 +263,14 @@ Page({
     let pdata = {
       sessionId:_This.data.consultationId
     };
-   // console.log("---cases---pdata---------->", pdata);
     wxRequest(wxaapi.consult.sharecase.url, pdata).then(function (result) {
-      //console.log("---cases---result---------->", result);
       if (result.data.code == 0) {
          _This.setData({
            aCaseIds:result.data.data,
            totalCount: result.data.data.length
          });
          _This.fGetCaseDetailById();//获取案例详情
+         //_This.fGetLikeState();//获取点赞状态
       } else {
         console.log("case ids error----", result);
       }
@@ -207,7 +291,8 @@ Page({
       did: aCaseIds[iCurrentSearchCase]
     };
     wxRequest(wxaapi.pcase.detail.url, pdata).then(function (result) {
-      if (result.data.code == 0) {
+     // console.log("case detail------->",result);
+      if (result.data.code == 0 && typeof(result.data.data)=="object"){
         let oCase = result.data.data;
         let aCaseList=_This.data.aCaseList;
         aCaseList.push(oCase);
@@ -220,6 +305,7 @@ Page({
           _This.setData({
             aCurrentList: aCaseList
           });
+          _This.fGetLikeState();//获取点赞状态
         }
         _This.fGetCaseDetailById();
       
@@ -229,15 +315,83 @@ Page({
     });
   },
   /**
+   * 获取点赞状态
+   */
+  fGetLikeState(){
+    let _This = this;
+    let pdata = {
+      sessionId: _This.data.consultationId,
+      customerUnionid: _This.data.oUserInfo.unionId,
+      caseIds: _This.data.aCaseIds
+    };
+    wxRequest(wxaapi.consult.getsharelike.url, pdata).then(function (result) {
+      if (result.data.code == 0) {
+        _This.setData({
+          olikeResult: result.data.data
+        });
+        _This.fGetCurrentLikeState();
+      } else {
+        console.log("like state  error----", result);
+      }
+    });
+  },
+  /**
+   * 当前的点赞状态
+   */
+  fGetCurrentLikeState(){
+    let _This=this;
+    let olikeResult = _This.data.olikeResult; 
+    let aCurrent = _This.data.aCurrentList[0]||{};
+    //console.log("aCurrentList------>", _This.data.aCurrentList);
+    let currentId=aCurrent.id;
+    _This.setData({
+      currentLikeState: olikeResult[currentId],
+      sCurrentId: currentId
+    });
+  },
+  /**
+   * 点击喜欢不喜欢案例
+   */
+  fLikeCase(){
+    let _This = this;  //olikeResult
+    let olikeResult = _This.data.olikeResult; 
+   // console.log("like case---", _This.data.sCurrentId,_This.data.currentLikeState); //_This.data.currentLikeState
+    _This.fCustomerOperate(1);
+  },
+  /**
+   * 获取用户操作状态 1喜欢案例 2提交资料
+   */
+  fCustomerOperate(operateType){
+    let _This=this;
+    let pdata = {
+      customerUnionid: _This.data.oUserInfo.unionId,
+      consultantUnionid: _This.data.cstUid,//咨询师unionid
+      sessionId: _This.data.consultationId,//当前会话id
+      caseId: _This.data.sCurrentId, //案例id
+      operationType: operateType, //1喜欢案例 2提交资料
+      positiveFace: "",
+      sideFace: ""
+    };
+    wxRequest(wxaapi.consult.handelsharecase.url, pdata).then(function (result) {
+      if (result.data.code == 0) {
+        let currentLikeState = _This.data.currentLikeState; 
+        let olikeResult = _This.data.olikeResult; 
+        olikeResult[_This.data.sCurrentId] = !currentLikeState;
+        _This.setData({
+          currentLikeState: !currentLikeState
+        });
+      }
+    });
+  },
+  /**
    * 获取诊所详情信息
    */
   fGetClinicDetail(){
     let _This=this;
     let pdata = {
-      unionId:"oDOgS0kCV5its31fROZtbdqcpMAE"
+      unionId: _This.data.cstUid //咨询师unionid
     };
     wxRequest(wxaapi.clinic.detail.url, pdata).then(function (result) {
-      console.log("result----clinic-->", result);
       if(result.data.code==0){
         _This.setData({
           oClinic:result.data.data
@@ -308,8 +462,10 @@ Page({
 
 
   fTakePhoto(){
+    let _This = this;
+    let cstunionid = _This.data.cstUid;
     wx.navigateTo({
-      url: './counselor/counselor'
+      url: './counselor/counselor?cstUid=' + cstunionid
     })
   },
   fGetCaseData(){
@@ -320,34 +476,7 @@ Page({
   fTestPhone(){
     console.log("--------点击触发事件--------");
   },
-  /**
-   * 获取手机号码
-   */
-  getPhoneNumber(e) {
-    console.log("------", e);
-    let encryptedData = e.detail.encryptedData;
-    let iv = e.detail.iv;
-    if (!encryptedData) {
-      return false;
-    }
-    let sessionKey = "";
-    wxPromise(wx.login)().then(result => {
-      let ucode = result.code;
-      return wxRequest(wxaapi.unionid.code.url, { code: ucode });
-    }).then(resSession => {
-      sessionKey = resSession.data.session_key;
-      return sessionKey;
-    }).then(sessionKey => {
-      console.log("sessionKey----->", sessionKey);
-      var postData = {
-        encryptedData: encryptedData,
-        sessionKey: sessionKey, iv: iv
-      };
-      return wxRequest(wxaapi.unionid.userinfo.url, postData);
-    }).then(resAll => {
-      console.log("resAll----->", resAll);
-    });
-  },
+
 
 
 
@@ -391,7 +520,7 @@ Page({
 
       let currentItemId = _This.data.currentItem;//当前的案例id
       let iIndex = _This.fFilterData(currentItemId);
-      console.log("iIndex--------->", iIndex);
+     // console.log("iIndex--------->", iIndex);
       if ((iIndex + 1) == _This.data.totalCount && touchMove < touchDotX){
           _This.setData({
             isEndPage:true
@@ -413,6 +542,7 @@ Page({
       itemTop: "20px",
       isShowTip:false
     });
+    _This.fGetCurrentLikeState();
   },
   /**
    * 生成显示的items，direction是切换的方向，大于0是向右，小于0是向左
@@ -424,10 +554,10 @@ Page({
     let iIndex = _This.fFilterData(itemid);
     let aCurrentList = _This.data.aCurrentList;
     if (direction < 0) {
-      console.log("right----->", iIndex);
+      //console.log("right----->", iIndex);
       aCurrentList = aCaseList.slice(iIndex, iIndex + 2);
     } else {
-      console.log("left----->",iIndex);
+      //console.log("left----->",iIndex);
       if (iIndex > 0) {
         aCurrentList[1] = aCaseList[iIndex - 1];
       }

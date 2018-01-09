@@ -52,6 +52,9 @@ var urlConfig = {
     list: {
       url: gConfig.remote +"/case/list" //获取案例列表
     },
+    morelist: {
+      url: gConfig.remote + "/case/morelist" //获取多案例列表
+    },
     detail: {
       url: gConfig.remote +"/case/detail" //项目案例详情
     },
@@ -68,7 +71,10 @@ var urlConfig = {
       url: gConfig.remote + "/customer/getcustomer" //获取客户资料getcustomer
     },
     update: {
-      url: gConfig.remote + "/customer/update" //更新客户update
+      url: gConfig.remote + "/customer/update" //更新客户
+    },
+    getcustomerbyunid: {
+      url: gConfig.remote + "/customer/getcustomerbyunid" //通过咨询师unionid和客户unionid获取客户信息
     }
   },
   consult: {

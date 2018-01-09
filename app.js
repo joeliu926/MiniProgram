@@ -37,6 +37,5 @@ App({
        callback(resAll.data.userinfo);
      }
    });
-
  }
 })

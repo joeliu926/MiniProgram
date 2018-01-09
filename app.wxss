@@ -3,13 +3,14 @@ page{
   height: 100%;
   background-color: #F7F7F7;
   box-sizing: border-box;
+  font-family:'Helvetica Neue','Hiragino Sans GB',stheiti,'Microsoft Yahei','微软雅黑',tahoma,sans-serif;
 }
 .container{
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-   justify-content: space-between;
+  justify-content: space-between;
   box-sizing: border-box;
 }
 .flex{

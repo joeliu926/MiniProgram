@@ -1,0 +1,171 @@
+page{
+  background-color: #ffffff;
+}
+.c-case-ct{
+
+}
+.o-title{
+  text-align: center;
+  padding: 0 0 5px 0;
+  font-size: 16px;
+}
+.case-ct{
+
+}
+.case-item-ct{
+  position:absolute;
+padding:20rpx;
+box-sizing:border-box;
+top:36rpx;
+left:0;
+}
+/*****before after common******/
+.bcommon{ 
+  padding: 4rpx;
+  position: absolute;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0,0.5);
+  border-radius: 0px 10px 10px 0px;
+  color: #ffffff;
+  width: 46px;
+  text-align: center;
+}
+.after{
+  left: 50%;
+}
+/*****************history start******************/
+.his-title{
+  font-weight: bold;
+  padding: 24rpx;
+
+}
+.diary{
+  background-color: #6F61D4;
+  color: #ffffff;
+  padding:4rpx 20rpx;
+  margin: 20rpx;
+  border-radius: 30rpx;
+
+}
+.img-c{
+  width: 224rpx;
+  height: 224rpx;
+  margin: 2rpx;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+/*****************history end******************/
+
+/*****************project description start******************/
+.host-des-ct{
+  padding: 24rpx;
+}
+.pro-item{
+  padding: 4rpx 10rpx;
+  border-radius: 20rpx;
+  margin:8rpx; 
+  border: 1rpx solid #6F61D4;
+  color: #6F61D4;
+}
+
+/*****************project description start******************/
+
+
+
+
+/****************float icon start*******************/
+.com-right-icon{
+  position: fixed;
+  right: 40rpx;
+  height: 100rpx;
+  width: 100rpx;
+  background: #ffffff;
+  box-shadow: 0 0 10px #ddd; 
+  z-index: 1000
+
+}
+.cm-img{
+  height: 60rpx;
+  width: 60rpx;
+}
+.like-icon{
+  bottom: 450rpx;
+}
+
+.phone-icon{
+   bottom: 300rpx;
+}
+.tk-photo-icon{
+   bottom: 150rpx;
+}
+.tip-font{
+  background:#ffffff;
+  position:fixed;
+  z-index:1000;
+  bottom:330rpx;
+  right: 150rpx;
+  color: #000;
+}
+/****************float icon end*******************/
+/*************end page start*************/
+.end-cmy-ct{
+  border-bottom: 1px dashed #999999;
+  margin-bottom: 24rpx;
+}
+.end-cmy-icon{
+  height: 160rpx;
+  width: 160rpx;
+}
+.e-cmy-major{
+  box-sizing: border-box; padding: 0 48rpx;
+}
+.e-cmy-name{
+  padding: 10rpx;
+}
+.end-items-ct{
+
+}
+.item-ct{
+  margin: 24rpx;
+}
+.small-icon{
+  width: 26rpx;
+  height: 30rpx;
+  vertical-align: middle;
+}
+.clinic-ct{
+  padding: 0 24rpx;
+  box-sizing: border-box;
+}
+.clinic-pic{
+  width: 200rpx;
+  height: 200rpx;
+  margin-right: 8rpx;
+}
+/*************end page end*************/
+
+
+
+.test{
+  right: 20rpx;
+  height: 100rpx;
+  width: 100rpx;
+  position: absolute;
+  background: #ffffff;
+  box-shadow: 0 0 10px #ddd; 
+}
+.test-img{
+  height: 60rpx;
+  width: 60rpx;
+}
+
+
+
+button[plain]{
+border: 0;
+ width: 60rpx;
+ height: 60rpx;
+} 
+
+

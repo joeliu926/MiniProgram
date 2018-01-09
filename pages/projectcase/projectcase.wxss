@@ -73,5 +73,18 @@ page{
   font-size: 12px;
 
 }
+.selend{
+  box-sizing:border-box;
+  background-color:#F7F7F7;
+  border-radius:40rpx;
+  padding:10rpx 34rpx;
+  margin:0 20rpx 30rpx 0;
+  color:#666666;
+  font-size:28rpx;
 
+}
 
+.active{
+    background-color:#9083ed;
+    color:#ffffff;
+}

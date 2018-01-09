@@ -1,0 +1,86 @@
+<!--pages/index/detail/cluedetail.wxml-->
+<view class='page'>
+  <div class='top'>
+    <div class='top-content'>
+      <div class="top-right">
+        <div>杨美丽（Davidlili）
+          <span class="top-span">网资跟进</span>
+        </div>
+        <div class='top-state'>未预约</div>
+        <div class='top-book'>去预约</div>
+      </div>
+      <div class='top-imgdiv'>
+        <image class='top-img' src='{{oitem.wxHeadPhoto||"../../../public/images/default-title.png"}}'></image>
+      </div>
+    </div>
+    <div>
+      <div class='top-cnt'>
+        <div>
+          <image src="../../../public/images/clue-man.png"></image> 拥有者：杨宏伟</div>
+        <div>
+          <image src="../../../public/images/clue-yumyue.png"></image> 当前跟进：杨宏伟</div>
+        <div>
+          <image src="../../../public/images/clue-connect.png"></image> 意向需求：
+          <span>脂肪去皱</span>
+          <span>脂肪去皱</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cnt">
+    <div class='cnt-tab'>
+      <div bindtap='selectType' data-id='{{item.id}}' wx:for="{{selectItem}}" wx:for-item="item" wx:key="id" class="search-type-item" style="{{item.val?'color:#8F82EC;':''}}">
+        <span class="search-type-top">{{item.text}}</span>
+        <span class="{{item.val?'search-type-bottom':'search-type-none'}}"></span>
+      </div>
+    </div>
+    <div class="cnt-content">
+      <div class="cnt-imgdiv">
+        <image src='{{oitem.wxHeadPhoto||"../../../public/images/default-title.png"}}'></image>
+      </div>
+      <div class='cnt-text'>
+        <div class='cnt-text-name'>
+          姜咨询
+        </div>
+        <div class='cnt-text-time'>
+          2017年12月12日 下午 12：00
+        </div>
+        <div class='cnt-text-txt'>
+          要地工载顶替东奔西走 基本原则载顶替苛塔顶 地茜基本原则栽大声基本原则栽奔顶替棋塔顶 栽地基本原则载茜m 要地工载顶替东奔西走 基本原则载顶替苛塔顶 地茜基本原则栽大声基本原则栽奔顶替棋塔顶 栽地基本原则载茜
+        </div>
+      </div>
+    </div>
+    <div class="cnt-content">
+      <div class="cnt-imgdiv">
+        <image src='{{oitem.wxHeadPhoto||"../../../public/images/default-title.png"}}'></image>
+      </div>
+      <div class='cnt-text'>
+        <div class='cnt-text-name'>
+          姜咨询
+        </div>
+        <div class='cnt-text-time'>
+          2017年12月12日 下午 12：00
+        </div>
+        <div class='cnt-text-txt'>
+          要地工载顶替东奔西走 基本原则载顶替苛塔顶 地茜基本原则栽大声基本原则栽奔顶替棋塔顶 栽地基本原则载茜m 要地工载顶替东奔西走 基本原则载顶替苛塔顶 地茜基本原则栽大声基本原则栽奔顶替棋塔顶 栽地基本原则载茜
+        </div>
+      </div>
+    </div>
+    <div class="cnt-content">
+      <div class="cnt-imgdiv">
+        <image src='{{oitem.wxHeadPhoto||"../../../public/images/default-title.png"}}'></image>
+      </div>
+      <div class='cnt-text'>
+        <div class='cnt-text-name'>
+          姜咨询
+        </div>
+        <div class='cnt-text-time'>
+          2017年12月12日 下午 12：00
+        </div>
+        <div class='cnt-text-txt'>
+          要地工载顶替东奔西走 基本原则载顶替苛塔顶 地茜基本原则栽大声基本原则栽奔顶替棋塔顶 栽地基本原则载茜m 要地工载顶替东奔西走 基本原则载顶替苛塔顶 地茜基本原则栽大声基本原则栽奔顶替棋塔顶 栽地基本原则载茜
+        </div>
+      </div>
+    </div>
+  </div>
+</view>

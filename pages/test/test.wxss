@@ -1,19 +1,19 @@
-.t-c{
-  background: #eeddcc;
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
+
+.page-common{
+  width:100%;
+
+  position: absolute;
+
 }
-.t-inner{
-  height: 400rpx;
-  width: 400rpx;
-  background: #eeccaa;
-  position: absolute; 
-   z-index: 100;
-   bottom: 240px; 
- right: 100px; 
+.page-red{
+  background:red;
+  z-index: 1;
 }
-.uploadWrap{height:160rpx; width:100%; display: flex;display: -webkit-box; flex-direction: column;position: relative;}  
-.upload_Item{ width: 160rpx; height: 160rpx; padding: 2rpx;flex: 1;border-radius: 50%;border: 2px solid red;position: absolute;}  
-.upload_Item_img{ width: 150rpx; height: 150rpx;border-radius: 50%;} 
+.page-green{
+  background:green;
+  z-index: 2;
+}
+.page-blue{
+  background:blue;
+  z-index: 3;
+}

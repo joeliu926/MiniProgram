@@ -8,7 +8,7 @@ var gConfig={
   //uploadUrl: "https://27478500.qcloud.la/uploadimg/attachment/upload",
   /****production end*****/
 
-  remoteWx: "https://27478500.qcloud.la/wx",
+  remoteWx: "https://nihaomc.com/wx",
   /****test start*****/
   remote: "https://nihaomc.com/wxa_test",
   uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload"
@@ -54,7 +54,11 @@ var urlConfig = {
     },
     detail: {
       url: gConfig.remote +"/case/detail" //项目案例详情
-    }
+    },
+    share: {
+      url: gConfig.remote +"/case/share" //
+    },
+
   },
   customer: {
     add: {
@@ -85,6 +89,21 @@ var urlConfig = {
     },
     consultcustomers: {
       url: gConfig.remote + "/consult/consultcustomers" //获取一个咨询下面的所有客户
+    },
+    sharecase: {
+      url: gConfig.remote + "/consult/sharecase" //通过会话id获取单次分享的案例ID
+    },
+    consultantupdate: {
+      url: gConfig.remote + "/consult/consultantupdate" // 咨询会话更新接口，可更新会话与案例的关系，会话与项目的关系
+    },
+    entry: {
+      url: gConfig.remote + "/consult/entry" //  客户进入咨询师分享的小程序，对客户信息，线索信息进行维护
+    },
+    getsharelike: {
+      url: gConfig.remote + "/consult/getsharelike" //   查询一次分享中，单个客户对某个案例的点赞状态
+    },
+    handelsharecase: {
+      url: gConfig.remote + "/consult/handelsharecase" // 客户进入咨询师分享的小程序，对某个案例进行点赞操作 或者进行 提交资料给医生操作
     }
   },
   appointment: {
@@ -109,6 +128,11 @@ var urlConfig = {
   clue: {
     detail: {
       url: gConfig.remote + "/clue/detail"   //获取线索详情
+    }
+  },
+  clinic: {
+    detail: {
+      url: gConfig.remote + "/clinic/detail"   //获取诊所详情
     }
   }
  

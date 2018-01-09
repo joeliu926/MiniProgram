@@ -20,10 +20,6 @@ Page({
      if(options.init){
       // getApp().globalData.flag=false; 
      }
-
-
-
-
     var _This = this;
     getApp().getUserData(function (result) {
       console.log("loading use info=====>",result);
@@ -154,7 +150,7 @@ Page({
       pageSize: 10000
     };
     wxRequest(wxaapi.consult.list.url, pdata).then(function (result) {
-     // console.log("load project info==>", result);
+      //console.log("load project info==>", result);
       if (result.data.code == 0) {
         _This.setData({ customerList: result.data.data.list });
       } else {
@@ -170,7 +166,6 @@ Page({
     var _This=this;
     let pdata = { unionid: unionid };
     wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
-      //console.log("home page get user type===>",result);
       if (result.data.code != 0 || result.data.data.type != "1") {
         _This.setData({
           showData: false

@@ -1,7 +1,7 @@
 <!--pages/test/book.wxml-->
 <wxs src="./book.wxs" module="bookUtil" />
 <view class='out-content head-padding'>
-  <view class='flex-c fx-d-row '>
+  <view class='flex-c fx-d-col '>
     <image class='info-img head-p' src='../../../public/images/img-demo.png' ></image>
     <view class="text-head f-16">Roland luo    ( Roland )</view>
   </view>
@@ -15,8 +15,8 @@
     <view class='flex-c fx-d-row w-10 mg-b product '>
       <!-- <view wx-for="{{arrData}}" wx:for-item="sitem" wx:key="id" class=' pro-b'>{{sitem.iname}}aaa<image class='pro-icon' src='../../../public/images/bookdeletepro.png' ></image>
       </view> -->
-      <view wx:for="{{arrData}}" wx:for-item="oitem" wx:key="id">
-        <view data-id='{{oitem.id}}' data-name='{{oitem.name}}' data-show='{{oitem.show}}'  class='pro-b'  >{{oitem.iname}}<image class='pro-icon'  bindtap='selectpro'  src='../../../public/images/bookdeletepro.png' ></image></view></view>
+      <view wx:for="{{arrData}}" wx:for-item="oitem1" wx:key="id">
+        <view  class='pro-b'  >{{oitem1.iname}}<image data-id='{{oitem1.itemid}}' data-name='{{oitem1.iname}}'  class='pro-icon'    src='../../../public/images/bookdeletepro.png' bindtap='deletepro' ></image></view></view>
       </view> 
     <view bindtap='showproduct' class='f-16 add-pro' ><image class='proadd-icon' src='../../../public/images/bookaddicon.png' ></image></view>
   </view>
@@ -57,11 +57,11 @@
       </view>
   </view>
 <!-- 手机号联想 -->
-  <view class='phoneNumadd f-14' hidden="{{showphone}}" >
+  <!-- <view class='phoneNumadd f-14' hidden="{{showphone}}" >
     <view bindtap='selectphone'>18811795986</view>
     <view >18811795984</view>
     <view>18811795983</view>
-  </view>
+  </view> -->
 
   <view class='flex custmerinfo-name fx-jc-sb c-p-d mg-b '>
     
@@ -112,31 +112,9 @@
     <span class="selend {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</span>
   </view>
 </view>
-<!-- 
-        <view class='case-content'>
-            <block wx:for="{{projectItems}}" wx:for-item="oitem" wx:key="id">
-              <view class='o-flex case-item-content'>
-                  <text class='case-title'  bindtap='selectTitle'>{{oitem.productName}}</text>
-                      <view class='case-item-detail'>
-                          <block wx:for="{{oitem.productList}}" wx:for-item="secitem" wx:key="id">
-                            <block wx:for="{{secitem.productList}}" wx:for-item="item" wx:key="id">
-                               <text class='case-item {{jSelect==item.productCode?"case-sele":""}}' data-paid='{{item.parentCode}}' data-paname='{                            {oitem.productName}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}' bindtap='selectItem'>{{item.productName}}</text>
-                            </block>
-                          </block>
-                      </view>
-              </view>
-            </block>
-           <view style="text-align:center; margin-top:20px;">
-    <span class="selend {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</span>
-            </view>
-        </view> -->
 
-         <view class='case-btn-content hide'>
-             <view class='o-flex'>
-                 <image class='case-img-btn' src='../../public/images/case.png' mode='aspectFill'></image>
-                 <text class='case-btn-name'>案例</text>
-              </view>
-          </view>
+
+         
       </view>
    </view>
 </view>  
@@ -146,8 +124,8 @@
         <text class=' {{jSelect.includes(oitem.id)?"case-sele":""}}'  bindtap='selectTitle'>{{oitem.name}}</text></view>
   </view>  -->
   <!-- 列表{{getClass(oitem)}} -->
-   <view>
+   <!-- <view>
    <view wx:for="{{testlist}}" wx:for-item="oitem" wx:key="id">
         <text data-id='{{oitem.id}}' data-name='{{oitem.name}}' data-show='{{oitem.show}}'  class='{{bookUtil.eventColor(oitem,testlisted)}}'  bindtap='selectpro'  >{{oitem.name}}</text></view>
-  </view> 
+  </view>  -->
   

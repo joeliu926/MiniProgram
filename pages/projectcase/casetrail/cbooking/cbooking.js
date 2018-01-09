@@ -136,10 +136,11 @@ Page({
     wx.showLoading({
       title: 'loading...',
     });
-    let _This = this;
+    let _This = this; 
     let pdata = {
       customerId: _This.data.options.cid || "",
     };
+    console.log("pdta",pdata)
     wxRequest(wxaapi.customer.getcustomer.url, pdata).then(function (result) {
       //console.log("single==00000--user info===>", result);
       if (result.data.code == 0) {

@@ -43,7 +43,7 @@
           <text class='f-16 pro-item'  data-productCode="{{oProject.productCode}}" data-productName="{{oProject.productName}}" >{{oProject.productName}}</text>
       </block>
    </scroll-view>
-   </view>
+   </view> 
 </view>
 </view>
 

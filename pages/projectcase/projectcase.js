@@ -112,6 +112,7 @@ Page({
    */
   onLoad: function (options) {
     //console.log("options pcase-->", options);
+   
     let _This=this;
     wx.showLoading({
       title: 'loading...',
@@ -120,7 +121,7 @@ Page({
       consultationId: options.consultationId,
       jSelect: options.productCode
       });
-   // console.log("_This.data====>",_This.data);
+    //console.log("_This.data====>",_This.data);
     getApp().getUserData(function (uinfo) {
       uinfo && _This.getProjectList(uinfo.unionId);
     });
@@ -144,7 +145,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+   
   },
 
   /**
@@ -172,10 +173,11 @@ Page({
    *选择项目 
    */ 
   selectItem:function(item){
+    console.log("item",item);
     let sItem=item.target.dataset;
-    this.setData({
-      jSelect: sItem.itemid
-    });
+    // this.setData({
+    //   jSelect: sItem.itemid
+    // });
     /*   wx.navigateTo({
         url: '/pages/client/sharecase/sharecase?iname=' + sItem.iname + '&itemid=' + sItem.itemid + '&paid=' + sItem.paid + '&paname=' + sItem.paname + '&consultationId=' + (this.data.consultationId||'')
       });*/
@@ -248,7 +250,6 @@ Page({
    */
   getProjectList(param){
     let _This=this;
-
     let pdata = {unionId: param,all:0};
     //console.log("pdata------->",pdata);
     wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
@@ -259,6 +260,7 @@ Page({
         console.log(result);
       }
       wx.hideLoading();
+      console.log("pdata------->", _This.data.projectItems);
     });
   },
   fGetUserPhoneNumber(e){

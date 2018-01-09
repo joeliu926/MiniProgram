@@ -254,7 +254,7 @@ Page({
 
     let pdata = {
       openid: _This.data.oUserInfo.openId,
-      wxNickname: _This.data.oUserInfo.nickName,
+      wxNickname: _This.data.oUserInfo.nickName, 
       gender: _This.data.oUserInfo.gender,
       province: _This.data.oUserInfo.province,
       city: _This.data.oUserInfo.city,

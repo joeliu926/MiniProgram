@@ -129,6 +129,11 @@ var urlConfig = {
     detail: {
       url: gConfig.remote + "/clue/detail"   //获取线索详情
     }
+  },
+  clinic: {
+    detail: {
+      url: gConfig.remote + "/clinic/detail"   //获取诊所详情
+    }
   }
  
 }

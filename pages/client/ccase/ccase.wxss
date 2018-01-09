@@ -130,8 +130,8 @@ left:0;
   margin: 24rpx;
 }
 .small-icon{
-  width: 40rpx;
-  height: 40rpx;
+  width: 26rpx;
+  height: 30rpx;
   vertical-align: middle;
 }
 .clinic-ct{

@@ -72,7 +72,7 @@
    <image  class='cm-img '  src='../../../public/images/wx-icon.png' ></image>
       <button class='' style='position:absolute;' plain="true" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
 </view>
-<view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon {{isEndPage?"hide":""}}' style=''>
+<view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon {{isEndPage?"hide":""}}' bindtap='fTakePhoto' style=''>
    <image  class='cm-img' style='width:65rpx;'  src='../../../public/images/tk-photo-icon.png' ></image>
 </view>
 <view class='tip-font f-14 {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text>授权手机号 获得1对1专属服务</text></view>
@@ -83,32 +83,32 @@
 <view class='c-p-d end-ct {{!isEndPage?"hide":""}}'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
    <view class='end-cmy-ct flex fx-jc-sb'>
      <view class='flex-c fx-d-col e-cmy-major'>
-        <text class='f-16 w-10 e-cmy-name'>这是一个医院名字</text>
-        <text class='f-14 w-10'>开内眼角、整形鼻子</text>
+        <text class='f-16 w-10 e-cmy-name'>{{oClinic.name}}</text>
+        <text class='f-14 w-10'>{{oClinic.majorBusiness}}</text>
      </view>
      <view class='e-cmy-logo'>
-       <image  class='end-cmy-icon' src='../../../public/images/icon-like.png'></image>
+       <image  class='end-cmy-icon' src='{{oClinic.logo}}'></image>
      </view>
    </view>
    <view class='end-items-ct f-14'>
     <view class='flex fx-jc-sb item-ct'>
-        <view class='e-item' style='' ><image class='small-icon' src='../../../public/images/icon-like.png'></image> 北京市兆维工业园</view>
-        <image class='small-icon' src='../../../public/images/icon-like.png'></image>
+        <view class='e-item' style='' ><image class='small-icon' src='../../../public/images/location-icon.png' mode="aspectFit"></image> {{oClinic.address}}</view>
+        <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
     </view>
   
  <view class='flex fx-jc-sb item-ct'>
-      <view class='e-item'><image class='small-icon' src='../../../public/images/icon-like.png'></image> 9：00-23：00</view>
-        <image class='small-icon' src='../../../public/images/icon-like.png'></image>
+      <view class='e-item'><image class='small-icon' src='../../../public/images/time-icon.png' mode="aspectFit"></image> {{oClinic.businessTime}}</view>
+        <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
  </view>
 
   <view class='flex fx-jc-sb item-ct'>
   
-      <view class='e-item'><image class='small-icon' src='../../../public/images/icon-like.png'></image> 010-62545878</view>
-        <image class='small-icon' src='../../../public/images/icon-like.png'></image>
+      <view class='e-item'><image class='small-icon' src='../../../public/images/tel-icon.png' mode="aspectFit" ></image> {{oClinic.phone}}</view>
+        <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
  </view>
 
     <view class='flex fx-jc-sb item-ct'> 
-      <view class='e-item f-16'><image class='small-icon' src='../../../public/images/icon-like.png'></image> 门店照片</view>
+      <view class='e-item f-16'><image class='small-icon' src='../../../public/images/pic-icon.png' mode="aspectFit"></image> 门店照片</view>
  </view>
  <view class='clinic-ct w-10'>
   <image class='clinic-pic' src='../../../public/images/icon-like.png'></image>

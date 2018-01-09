@@ -20,6 +20,7 @@ Page({
     isEndPage:false,//是否是最后一页
     aCaseIds:[],//项目案例IDs
     iCurrentSearchCase:0,//遍历查询案例信息，当前查询的条数
+    oClinic:{},
     clueId:"",
     currentPage:0,
     totalCount:1,
@@ -128,6 +129,8 @@ Page({
  
     _This.fCustomerAdd();//客户添加
     _This.fGetCaseIDs();//会话ID获取案例ids
+    _This.fGetClinicDetail();//获取诊所信息
+    
    
   });
 
@@ -159,6 +162,9 @@ Page({
         _This.setData({
           clueId: result.data.data.clueId
         });
+
+        _This.fUserEvent(event.eType.appOpen);//进入小程序事件
+
       } else {
         console.log("addcustomer error----", result);
       }
@@ -222,7 +228,23 @@ Page({
       }
     });
   },
-
+  /**
+   * 获取诊所详情信息
+   */
+  fGetClinicDetail(){
+    let _This=this;
+    let pdata = {
+      unionId:"oDOgS0kCV5its31fROZtbdqcpMAE"
+    };
+    wxRequest(wxaapi.clinic.detail.url, pdata).then(function (result) {
+      console.log("result----clinic-->", result);
+      if(result.data.code==0){
+        _This.setData({
+          oClinic:result.data.data
+        });
+      }
+    });
+  },
 
 
   /*
@@ -238,7 +260,8 @@ Page({
     oTempEvent.consultationId=_This.data.consultationId;//咨询会话ID
     oTempEvent.eventAttrs = {
       consultantId: _This.data.cstUid,
-      caseId: _This.data.caseList[currentPage - 1].id,//
+      //caseId: _This.data.caseList[currentPage - 1].id,//
+      caseId: 3,//
       appletId: "hldn",
       consultingId: _This.data.consultationId,
       isLike: _This.data.isLike
@@ -263,15 +286,12 @@ Page({
     var oData = _This.data.oEvent;
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
+
+   // console.log("app get into-----", oData);
     wxRequest(wxaapi.event.add.url, oData).then(function (result) {
-      //console.log("000000000000000000000000===>", result);
+     //console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
-        if (!oData.shareEventId) {
-          // oData.shareEventId = result.data.data;
-          _This.setData({
-            shareEventId: result.data.data
-          });
-        };
+
       } else {
         console.log("add  event error---", result);
       }
@@ -288,7 +308,9 @@ Page({
 
 
   fTakePhoto(){
-    console.log("the doctor take photo--->");
+    wx.navigateTo({
+      url: './counselor/counselor'
+    })
   },
   fGetCaseData(){
     let _This = this;
@@ -435,10 +457,16 @@ Page({
     return oId;
   },
 /****************滚动事件结束*****************/
+/**
+ * 诊所详情页面触摸start
+ */
   fEndPageStart(e) {
     touchDotX = e.touches[0].pageX; // 获取触摸时的原点touchDotX
     touchDotY = e.touches[0].pageY; // 获取触摸时的原点touchDotY
    }, 
+   /**
+    * 诊所详情页面触摸end
+    */
   fEndPageEnd(e){
     let _This=this;
     let touchMove = e.changedTouches[0].pageX;

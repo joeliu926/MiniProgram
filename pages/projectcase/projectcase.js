@@ -177,7 +177,7 @@ Page({
    */ 
   selectItem:function(item){
 
-    // console.log("=====================================", item);
+    console.log("=====================================", item);
     let _This=this;
     let sItem = item.target.dataset;
     // 不可选
@@ -258,7 +258,6 @@ Page({
     //全部的项目
     let pdata = { unionId: param };//,all:0
     console.log("pdata------->",pdata);
-
     wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
      console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
@@ -286,7 +285,7 @@ Page({
     //可选的项目
     let abledata = { unionId: param, all:0};//,all:0
     wxRequest(wxaapi.product.list.url, abledata).then(function (result) {
-      // console.log("3333333333333333333===>", result.data.data);
+      console.log("3333333333333333333===>", result.data.data);
       var codearr=[];
       if (result.data.code == 0) {
         result.data.data.forEach(function (item) {
@@ -309,7 +308,7 @@ Page({
     });
 
 
-    console.log('|||||||||||||||||', this.data.allarr, '^^^^^^^^^^^^^^^', this.data.selable)
+    console.log('|||||||||||||||||', _This.data.allarr, '^^^^^^^^^^^^^^^', _This.data.selable)
   },
 
 

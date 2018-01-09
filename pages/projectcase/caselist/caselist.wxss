@@ -18,7 +18,10 @@
 
 }
 .pdactive{
-    color:#000;
+    color:red;
+}
+.pdactive2{
+    color:#999999;
 }
 
 
@@ -239,6 +242,7 @@ border: 1rpx solid #FF334B;
     background: #ffffff;
 }
 .case-title{
+   justify-content: center;
   text-align: center;
   color: #333333 ;
    font-size: 16px;  
@@ -260,7 +264,7 @@ border: 1rpx solid #FF334B;
   background-color: #F7F7F7;
   border-radius: 40rpx; 
   padding: 10rpx 34rpx;
-  margin:0 20rpx 30rpx 30px; 
+  margin:0 20rpx 30rpx 15px; 
   color: #666666;
   font-size: 28rpx;
 
@@ -309,16 +313,44 @@ span{
   bottom:0;
   right:0;
   margin:auto auto;
-  line-height:32px;
+  line-height:48rpx;
 
 }
 
+.selend{
+  /* height:80px; */
+  box-sizing:border-box;
+  background-color:#F7F7F7;
+  border-radius:40rpx;
+  padding:10rpx 34rpx;
+  margin:0 20rpx 30rpx 0;
+  color:#666666;
+  font-size:28rpx;
+
+}
+.tipunable{
+  position:fixed;
+  bottom: 120rpx;
+  width:100%; 
+  font-size:28rpx;
+  text-align:center;
+  z-index: 100;
+}
+
+.selBtn{
+  position:fixed;
+  bottom: 40rpx;
+   left:50%; 
+  margin-left:-80rpx;
+  z-index: 100;
+}
+/*选中的状态*/
 .active{
     background-color:#9083ed;
     color:#ffffff;
-
 }
-
-
-
-
+/*不可用状态*/
+.unable{
+    background-color:#F7F7F7;
+    color:#999999;
+}

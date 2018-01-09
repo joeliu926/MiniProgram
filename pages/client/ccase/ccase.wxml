@@ -64,13 +64,17 @@
 
   <!------------------right icon start-------------------->
 
-<view class='bk-c-w b-r flex-c com-right-icon like-icon {{isEndPage?"hide":""}}' style=''>
-   <image  class='cm-img '  src='../../../public/images/like-icon.png' ></image>
+<view class='bk-c-w b-r flex-c com-right-icon like-icon {{isEndPage?"hide":""}}' bindtap='fLikeCase' style=''>
+    <image  class='cm-img {{currentLikeState?"hide":""}}'  src='../../../public/images/unlike-icon.png' ></image>
+    <image  class='cm-img {{!currentLikeState?"hide":""}}'  src='../../../public/images/like-icon.png' ></image>
 </view>
 
-<view class='bk-c-w b-r flex-c com-right-icon phone-icon {{isEndPage?"hide":""}}' style=''>
+<view class='bk-c-w b-r flex-c com-right-icon phone-icon {{isEndPage?"hide":""}} {{oUserInfo.wechatMobile?"hide":""}}' style=''>
    <image  class='cm-img '  src='../../../public/images/wx-icon.png' ></image>
       <button class='' style='position:absolute;' plain="true" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
+</view>
+<view bindtap='fGetConsultDetail' class='bk-c-w b-r flex-c com-right-icon phone-icon {{isEndPage?"hide":""}} {{!oUserInfo.wechatMobile?"hide":""}}' style=''>
+   <image  class='cm-img '  src='../../../public/images/wx-icon.png' ></image>
 </view>
 <view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon {{isEndPage?"hide":""}}' bindtap='fTakePhoto' style=''>
    <image  class='cm-img' style='width:65rpx;'  src='../../../public/images/tk-photo-icon.png' ></image>
@@ -80,8 +84,8 @@
 
 
 <!------------------end page start-------------------->
-<view class='c-p-d end-ct {{!isEndPage?"hide":""}}'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
-   <view class='end-cmy-ct flex fx-jc-sb'>
+<view class='b-s end-ct {{!isEndPage?"hide":""}}'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
+   <view class='end-cmy-ct b-s flex fx-jc-sb'>
      <view class='flex-c fx-d-col e-cmy-major'>
         <text class='f-16 w-10 e-cmy-name'>{{oClinic.name}}</text>
         <text class='f-14 w-10'>{{oClinic.majorBusiness}}</text>
@@ -97,7 +101,7 @@
     </view>
   
  <view class='flex fx-jc-sb item-ct'>
-      <view class='e-item'><image class='small-icon' src='../../../public/images/time-icon.png' mode="aspectFit"></image> {{oClinic.businessTime}}</view>
+      <view class='e-item f-14'><image class='small-icon' src='../../../public/images/time-icon.png' mode="aspectFit"></image> {{oClinic.businessTime}}</view>
         <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
  </view>
 

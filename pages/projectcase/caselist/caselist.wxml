@@ -5,7 +5,7 @@
   <!--项目滚动区  -->
   <view class="scroll-box fl">
     <scroll-view scroll-x="true" style=" white-space: nowrap;">
-      <view class="item-view f-14 pdactive" wx:for="{{arrData}}" wx:key="index" bindtap="">{{item.iname}}</view>
+      <view class="item-view f-14" style="color:{{item.changeColor}} " wx:for-item="item"  wx:for="{{arrData}}"  wx:key="item.itemid" data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}" bindtap="chooseitem">{{item.iname}}</view>
       <!-- <view class="item-view f-14" bindtap="">热门项目</view>-->
     </scroll-view>
   </view>

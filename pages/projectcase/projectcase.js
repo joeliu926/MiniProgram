@@ -105,7 +105,10 @@ Page({
       consultationId:"",
       jSelect:"",
       sSelect:[],
-      arrData:[]
+      arrData:[],
+      selable: [],
+      allarr:[],
+      isShow:'false'
   },
   /**
    * 生命周期函数--监听页面加载
@@ -173,16 +176,33 @@ Page({
    *选择项目 
    */ 
   selectItem:function(item){
-    console.log("item",item);
-    let sItem=item.target.dataset;
-    // this.setData({
-    //   jSelect: sItem.itemid
-    // });
+
+    console.log("=====================================", item);
+    let _This=this;
+    let sItem = item.target.dataset;
+    // 不可选
+    if (this.data.selable.indexOf(sItem.itemid)==-1){
+       
+        this.setData({
+          isShow:'true',
+          
+        });
+        setTimeout(function(){
+          _This.setData({
+            isShow: 'false'
+          });
+
+        },2000);
+    }
+    this.setData({
+      jSelect: sItem.itemid,
+     
+    });
     /*   wx.navigateTo({
         url: '/pages/client/sharecase/sharecase?iname=' + sItem.iname + '&itemid=' + sItem.itemid + '&paid=' + sItem.paid + '&paname=' + sItem.paname + '&consultationId=' + (this.data.consultationId||'')
       });*/
 
-      // console.log("=========",sItem);
+  
       var arr = this.data.sSelect;
       var arrData = this.data.arrData;
       // console.log(arr.indexOf(sItem.itemid));
@@ -190,14 +210,9 @@ Page({
       // console.log("=========================ffffff");
         arr.push(sItem.itemid);
         arrData.push(sItem);    
-        console.log(arrData);
-        
-     
-  
+        // console.log("888888888888888888",arrData);
       }else{
         var index = arr.indexOf(sItem.itemid);
-        // var dindex = arrData.indexOf(sItem);
-        // console.log(dindex);
         if (index > -1) {
           arr.splice(index, 1);   
           arrData.splice(index, 1);
@@ -207,27 +222,16 @@ Page({
       this.setData({
         sSelect: arr,
         arrData:this.data.arrData
-
       });
-      console.log(this.data.sSelect)
-
-    // let sItem=item.target.dataset;
-    // this.setData({
-    //   jSelect: sItem.itemid
-    // });
-    /* wx.navigateTo({
-        url: 'caselist/caselist?iname=' + sItem.iname + '&itemid=' + sItem.itemid + '&paid=' + sItem.paid + '&paname=' + sItem.paname + '&consultationId=' + (this.data.consultationId || '')
-      });*/
-   
-
+      // console.log(this.data.sSelect)
   },
   /**
    * 选好了
    */ 
   selectItems:function(item) {
-      // console.log("=====================================");
+   
     let sItem=item.target.dataset;
-    console.log(item);
+    // console.log("=====================================", item);
     this.setData({
       isactive: !this.data.isactive,
       isshow: this.data.isshow,
@@ -238,7 +242,7 @@ Page({
     }
     // console.log(sItem.paid);
     wx.navigateTo({
-      url: 'caselist/caselist?pdata=' + (JSON.stringify(this.data.arrData)||{} )
+      url: 'caselist/caselist?pdata=' + (JSON.stringify(this.data.arrData) || {}) + '&itemids='+this.data.sSelect
     });  
   },
 
@@ -250,19 +254,65 @@ Page({
    */
   getProjectList(param){
     let _This=this;
-    let pdata = {unionId: param,all:0};
-    //console.log("pdata------->",pdata);
+
+    //全部的项目
+    let pdata = { unionId: param };//,all:0
+    console.log("pdata------->",pdata);
     wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
      console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
-        _This.setData({ projectItems: result.data.data });
+          // 没有案例的项目不可用
+         var  everyarr=[];
+        result.data.data.forEach(function(item){
+              item.productList.forEach(function(oitem){
+                oitem.productList.forEach(function(titem){
+                    console.log(titem.productCode);
+                    everyarr.push(titem.productCode);
+                })
+              })
+          })
+        _This.setData({ 
+          projectItems: result.data.data,
+          allarr:everyarr
+        });
       } else {
         console.log(result);
       }
       wx.hideLoading();
       console.log("pdata------->", _This.data.projectItems);
     });
+
+    //可选的项目
+    let abledata = { unionId: param, all:0};//,all:0
+    wxRequest(wxaapi.product.list.url, abledata).then(function (result) {
+      console.log("3333333333333333333===>", result.data.data);
+      var codearr=[];
+      if (result.data.code == 0) {
+        result.data.data.forEach(function (item) {
+          item.productList.forEach(function (oitem) {
+            oitem.productList.forEach(function (titem) {
+              // console.log(titem.productCode);
+              codearr.push(titem.productCode);
+               
+            })
+          })
+        })
+        _This.setData({
+            projectItems: result.data.data,
+            selable:codearr
+         });
+      } else {
+        console.log(result);
+      }
+      wx.hideLoading();
+    });
+
+
+    console.log('|||||||||||||||||', _This.data.allarr, '^^^^^^^^^^^^^^^', _This.data.selable)
   },
+
+
+
   fGetUserPhoneNumber(e){
     console.log("get user phone num----->", e);
 

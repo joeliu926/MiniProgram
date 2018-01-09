@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/home",
     "pages/index/home",
+    
     "pages/index/detail/cluedetail",
     "pages/projectcase/book/book",
     "pages/projectcase/casedetail/casedetail",

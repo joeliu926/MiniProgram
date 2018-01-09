@@ -97,6 +97,7 @@ page{
   background: #FFBE00;
   font-size:28rpx;
   text-align:center;
+  color:#FFF;
   z-index: 100;
 }
 

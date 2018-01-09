@@ -339,7 +339,7 @@ span{
 
 .selBtn{
   position:fixed;
-  bottom: 40rpx;
+  bottom: 20rpx;
    left:50%; 
   margin-left:-80rpx;
   z-index: 100;

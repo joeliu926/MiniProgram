@@ -97,11 +97,11 @@
 .sb-btn{
 height:80rpx;
 line-height:80rpx;
-  border-radius:10rpx;
+  border-radius:40rpx;
   background:#9083ed;
   color:#ffffff;
-  font-size: 28rpx;
-  width: 90%; 
+  font-size: 36rpx;
+  width: 450rpx; 
 }
 .dis-c{
   background: #E5E5E5;
@@ -209,26 +209,31 @@ color: #9083ed
 
 }
 .phoneNumadd{
+  line-height: 50rpx;
   width: 300rpx;
   background: #ffffff;
   position: absolute;
-  top: 75%;
+  top: 30%;
   display:flex;
   flex-direction: column-reverse;
   margin-left:39%; 
   z-index:1001;
 }
 .selend{
+  width: 300rpx;
   box-sizing:border-box;
   background-color:#F7F7F7;
   border-radius:40rpx;
-  padding:10rpx 34rpx;
-  margin:0 20rpx 30rpx 0;
+  line-height: 80rpx;
   color:#666666;
   font-size:28rpx;
+  position: absolute;
+  bottom: 40rpx;
+  left:250rpx;
 
 }
 .active{
+
     background-color:#9083ed;
     color:#ffffff;
 }

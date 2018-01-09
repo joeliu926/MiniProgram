@@ -177,7 +177,7 @@ Page({
    */ 
   selectItem:function(item){
 
-    console.log("=====================================", item);
+    // console.log("=====================================", item);
     let _This=this;
     let sItem = item.target.dataset;
     // 不可选
@@ -279,13 +279,13 @@ Page({
         console.log(result);
       }
       wx.hideLoading();
-      console.log("pdata------->", _This.data.projectItems);
+      // console.log("pdata------->", _This.data.projectItems);
     });
 
     //可选的项目
     let abledata = { unionId: param, all:0};//,all:0
     wxRequest(wxaapi.product.list.url, abledata).then(function (result) {
-      console.log("3333333333333333333===>", result.data.data);
+      // console.log("3333333333333333333===>", result.data.data);
       var codearr=[];
       if (result.data.code == 0) {
         result.data.data.forEach(function (item) {
@@ -308,7 +308,7 @@ Page({
     });
 
 
-    console.log('|||||||||||||||||', _This.data.allarr, '^^^^^^^^^^^^^^^', _This.data.selable)
+    // console.log('|||||||||||||||||', _This.data.allarr, '^^^^^^^^^^^^^^^', _This.data.selable)
   },
 
 

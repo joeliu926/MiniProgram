@@ -64,7 +64,7 @@ Page({
     itemids:[],
     jSelect: "",
     isactive:false,
-    isShow:false,
+    ishow:false,
     projectItems: [
       {
         "productName": " 眼部整形",
@@ -165,7 +165,10 @@ Page({
     arrData: [],
     cases:[],
     changeColor:"#999999",
-    productlistArr:[]
+    productlistArr:[],
+    selable: [],
+    allarr: [],
+    isShow: 'true'
   },
 
   /**
@@ -285,7 +288,7 @@ Page({
        + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,"11111111111111111111111111111" );
       return {
         title: '案例分享',
-        path: '/pages/client/sharecase/sharecase?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
+        path: '/pages/client/ccase/ccase?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
        
         success: function (res) {
          
@@ -414,38 +417,94 @@ Page({
    * 下拉选择 获取项目列表
    */
   getproductitem() {
-    // console.log("=============****************==============", this.data.oUserInfo);
-    let _This= this;
-    let pdata = { unionId: _This.data.oUserInfo.unionId, all: 0 };
-    //console.log("pdata------->",pdata);
+
+    let _This = this;
+
+    //全部的项目
+    let pdata = { unionId: _This.data.oUserInfo.unionId };//,all:0
+    console.log("pdata------->", pdata);
     wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
       console.log("000000000000000000000000===>", result);
-      var  listArr=[]
-     
-      var  dataArr=result.data.data;
-      // console.log("",dataArr,result.data.data);
-    
-      dataArr.forEach(function(item,index){
-        item.productList.forEach(function(itme,index){
-          listArr.concat(item.productList);
-        })
-          
-      })
-
-      
       if (result.data.code == 0) {
+        // 没有案例的项目不可用
+        var everyarr = [];
+        result.data.data.forEach(function (item) {
+          item.productList.forEach(function (oitem) {
+            oitem.productList.forEach(function (titem) {
+              console.log(titem.productCode);
+              everyarr.push(titem.productCode);
+            })
+          })
+        })
         _This.setData({
-           projectItems: result.data.data,
-           isactive: _This.data.isactive,
-           isShow: !_This.data.isShow,
-           productlistArr: listArr,
+          projectItems: result.data.data,
+          allarr: everyarr,
+          ishow: !_This.data.ishow,
+          isactive: _This.data.isactive,
         });
       } else {
         console.log(result);
       }
-      console.log("+++++++++++++++++++++++++", _This.data.productlistArr);
+      wx.hideLoading();
+      console.log("pdata------->", _This.data.projectItems);
+    });
+
+    //可选的项目
+    let abledata = { unionId: _This.data.oUserInfo.unionId, all: 0 };//,all:0
+    wxRequest(wxaapi.product.list.url, abledata).then(function (result) {
+      console.log("3333333333333333333===>", result.data.data);
+      var codearr = [];
+      if (result.data.code == 0) {
+        result.data.data.forEach(function (item) {
+          item.productList.forEach(function (oitem) {
+            oitem.productList.forEach(function (titem) {
+              // console.log(titem.productCode);
+              codearr.push(titem.productCode);
+
+            })
+          })
+        })
+        _This.setData({
+          projectItems: result.data.data,
+          selable: codearr
+        });
+      } else {
+        console.log(result);
+      }
       wx.hideLoading();
     });
+
+
+    console.log('|||||||||||||||||', _This.data.allarr, '^^^^^^^^^^^^^^^', _This.data.selable)
+
+
+    // console.log("=============****************==============", this.data.oUserInfo);
+    // let _This= this;
+    // let pdata = { unionId: _This.data.oUserInfo.unionId, all: 0 };
+    // //console.log("pdata------->",pdata);
+    // wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
+    //   console.log("000000000000000000000000===>", result);
+    //   var  listArr=[]
+    //   var  dataArr=result.data.data;
+    //   // console.log("",dataArr,result.data.data);  
+    //   dataArr.forEach(function(item,index){
+    //     item.productList.forEach(function(itme,index){
+    //       listArr.concat(item.productList);
+    //     })
+    //   })
+    //   if (result.data.code == 0) {
+    //     _This.setData({
+    //        projectItems: result.data.data,
+    //        isactive: _This.data.isactive,
+    //        isShow: !_This.data.isShow,
+    //        productlistArr: listArr,
+    //     });
+    //   } else {
+    //     console.log(result);
+    //   }
+    //   console.log("+++++++++++++++++++++++++", _This.data.productlistArr);
+    //   wx.hideLoading();
+    // });
   },
 
   /**
@@ -471,7 +530,28 @@ Page({
   },
   // 下拉的项目列表中选中
   selectItem(item){
+    let _This = this;
     let sItem = item.target.dataset;
+    // 不可选
+    if (this.data.selable.indexOf(sItem.itemid) == -1) {
+
+      this.setData({
+        isShow: 'true',
+
+      });
+      setTimeout(function () {
+        _This.setData({
+          isShow: 'false'
+        });
+
+      }, 2000);
+    }
+    this.setData({
+      jSelect: sItem.itemid,
+    });
+
+
+    // let sItem = item.target.dataset;
     console.log(sItem);
     var arr = this.data.sSelect;
     var arrData = this.data.arrData;
@@ -502,7 +582,7 @@ Page({
     
       this.setData({
         isactive: true,
-        isShow: !this.data.isShow,
+        ishow: !this.data.ishow,
         arrData: this.data.arrData
       })
       console.log(this.data.arrData);

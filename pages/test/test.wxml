@@ -1,23 +1,56 @@
 
 
-<view class='h-w-10 b-s'>
-<scroll-view class='t-c b-s b-d' >
-  <view class='t-inner' style="bottom:{{ballBottom}}px;right:{{ballRight}}px;" bindtouchmove="ballMoveEvent"></view>  
-  <view class='t-inner' style="bottom:{{ballBottom}}px;right:{{ballRight}}px;color:#cccccc;" bindtouchmove="ballMoveEvent"></view>  
-</scroll-view>
-</view>
-
-
-<scroll-view scroll-x="true">  
-<view class="uploadWrap" scroll-x="true">  
-
- <block  wx:for="{{imgData}}" wx:for-item="oItem" wx:if="{{index<4}}" wx:key="id">
-   <view  class="upload_Item b-s" style="right:{{index*50}}rpx;display:none;">  
-    <image class="upload_Item_img b-s"  src="../../public/images/img-demo.png"></image>  
-  </view> 
- </block>
+<block wx:for="{{aCurrentList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
+   <view class='page-common' bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='background:{{oItem.item}};z-index:{{caseCount-index}};left:{{index==0?itemLeft:"0px"}};top:{{index==0?itemTop:"0px"}}'>{{index}}------{{oItem.item}}
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+       <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+       <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+       <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+       <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+       <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+       <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+       <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+       <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+       <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+       <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+      <view>这是一个测试------{{oItem.item}}</view>
+        
  
+         
 
-  
-</view>  
-</scroll-view> 
+   </view>
+</block>
+
+

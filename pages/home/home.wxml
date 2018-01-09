@@ -9,10 +9,20 @@
     <image class='cst-img' src='../../public/images/icon-consult.png'></image>
     <text class='f-16 txt-cst'>新的咨询</text>
   </view>
-  <block  wx:for="{{customerList}}" wx:for-item="oitem" wx:key="id">  
-    <view class='flex w-10 b-s bk-c-w ex-ct' bindtap='fNavCase' data-consultationId='{{oitem.id}}' data-iname='{{oitem.productName}}' data-productCode='{{oitem.productCode}}'>
-      <view>
-        <image class='cst-img' src='{{oitem.wxHeadPhoto||"../../public/images/default-title.png"}}'></image>
+
+
+
+
+<block  wx:for="{{customerList}}" wx:for-item="oitem" wx:key="id">
+  <view class='flex w-10 b-s bk-c-w ex-ct' bindtap='fNavCase' data-consultationId='{{oitem.id}}' data-iname='{{oitem.productName}}' data-productCode='{{oitem.productCode}}'>
+    <view>
+      <image class='cst-img' src='{{oitem.wxHeadPhoto||"../../public/images/default-title.png"}}'></image>
+    </view>
+    <view class='flex fx-d-col w-10 fx-jc-sa ex-item '>
+      <view class='flex fx-jc-sb'>
+        <text class='f-16'>{{oitem.wxNickName}}</text>
+        <text class='f-14'>{{util.formatTime(oitem.createTime,"yyyy-MM-dd")}}</text>
+
       </view>
       <view class='flex fx-d-col w-10 fx-jc-sa ex-item '>
         <view class='flex fx-jc-sb'>
@@ -24,6 +34,7 @@
           <text class='f-12 istatus'>术前</text>
         </view>
       </view>
+    </view>
     </view>
   </block>
 </view>

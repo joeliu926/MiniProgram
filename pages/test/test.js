@@ -1,98 +1,111 @@
-// pages/test/test.js
+var touchDotX = 0;//触摸时的原点
+var touchDotY = 0;//触摸时的原点
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    ballBottom: 240,
-    ballRight: 120,
-    screenHeight: 0,
-    screenWidth: 0,
-    imgData:[0,0,0,0,0,0]
+    aCaseList: [{ id: 0, item: "red" }, { id: 1, item: "green" }, { id: 2, item: "blue"}, { id: 3,item:"purple"}],
+    aCurrentList:[],
+    itemLeft:0,
+    itemTop:0,
   },
+  onLoad: function () {
+    let _This = this;
+    let aCaseList = _This.data.aCaseList;
+    _This.setData({
+      aCurrentList: aCaseList.slice(0,10)
+    });
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var _this = this;
     wx.getSystemInfo({
       success: function (res) {
-        _this.setData({
-          screenHeight: res.windowHeight,
-          screenWidth: res.windowWidth,
+      //  console.log(res)
+
+      }
+    }) 
+
+
+  },
+  onShow: function () {
+  },
+  // 触摸开始事件
+  fTouchStart: function (e) {
+   // console.log("e.touches[0]------->", e, e.currentTarget.dataset.caseitem);
+    let caseItem = e.currentTarget.dataset.caseitem;
+    this.setData({
+      currentItem: caseItem
+    });
+    touchDotX = e.touches[0].pageX; // 获取触摸时的原点touchDotX
+    touchDotY = e.touches[0].pageY; // 获取触摸时的原点touchDotY
+  },
+  fTouchMove:function(e){
+    //console.log("e.touches[0]------->", e.touches[0]);
+    let _This=this;
+    let tX = (e.touches[0].pageX - touchDotX);
+    let tY = (e.touches[0].pageY - touchDotY);
+    let currentItem = _This.data.currentItem;
+    _This.fGenerateShow(currentItem,tX);
+    if(Math.abs(tY)<Math.abs(tX)){
+      _This.setData({
+        itemLeft: (tX + "px"),
+        itemTop: (tY + "px")
+      }); 
+    }
+  },
+  // 触摸结束事件
+  fTouchEnd: function (e) {
+    let _This=this;
+    var touchMove = e.changedTouches[0].pageX;
+    if (Math.abs(touchMove-touchDotX)>40){
+      let clist = _This.data.aCurrentList;
+      if (clist.length > 1) {
+        let rmItem = clist.splice(0, 1);
+        _This.setData({
+          aCurrentList: clist
         });
       }
+    }
+    _This.setData({
+      itemLeft: "0px",
+      itemTop: "0px"
     });
   },
-
-  ballMoveEvent: function (e) {
-    console.log('我被拖动了....')
-    var touchs = e.touches[0];
-    var pageX = touchs.pageX;
-    var pageY = touchs.pageY;
-    console.log('pageX: ' + pageX)
-    console.log('pageY: ' + pageY)
-    if (pageX < 30) return;
-    if (pageX > this.data.screenWidth - 30) return;
-    if (this.data.screenHeight - pageY <= 30) return;
-    if (pageY <= 30) return;
-    var x = this.data.screenWidth - pageX - 30;
-    var y = this.data.screenHeight - pageY - 30;
-    console.log('x: ' + x)
-    console.log('y: ' + y)
-    this.setData({
-      ballBottom: y,
-      ballRight: x
+  /**
+   * 生成显示的items，direction是切换的方向，大于0是向右，小于0是向左
+   */
+  fGenerateShow(item,direction){
+    let _This=this;
+    let aCaseList = _This.data.aCaseList;
+    let aCount = aCaseList.length;
+    let iIndex = _This.fFilterData(item);
+   // let iIndex = _This.data.aCaseList.indexOf(item);
+    //let iIndex = _This.data.aCurrentIndex;
+    let aCurrentList = _This.data.aCurrentList;
+    if (direction<0){
+      aCurrentList = aCaseList.slice(iIndex,iIndex+2);
+    }else{
+      if (iIndex>0){
+        aCurrentList[1]=aCaseList[iIndex - 1];
+      }
+    }
+    _This.setData({
+      aCurrentList: aCurrentList
     });
-  }, 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
   },
+  fFilterData(id){
+    let _This = this;
+    let aCaseList = _This.data.aCaseList;
+    let oId=0;
+  /*  aCaseList.forEach((item,index)=>{
+      if (item.id == id) {
+        console.log(item,"--------------------",id);
+        oId = index;
+      }
+    });*/
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    aCaseList.some((item, index) => {
+      if (item.id == id) {
+        oId = index;
+      }
+    });
+     return oId;
   }
 })

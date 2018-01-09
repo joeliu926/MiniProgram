@@ -1,0 +1,7 @@
+var productsFilter = function (param) {
+  param = param || "";
+  return param.split(",");
+}
+module.exports = {
+  productsFilter: productsFilter
+}

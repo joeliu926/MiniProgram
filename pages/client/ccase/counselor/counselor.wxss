@@ -1,0 +1,38 @@
+.counselor-ct{
+  background: linear-gradient(#9382F5, #5A9BFC);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding-top: 20%;
+}
+.color-w{
+   color: #ffffff;
+   font-size: 32rpx;
+   align-items: center;
+
+}
+.name-pd{
+  padding:40rpx;
+}
+.cst-pd{
+  padding:10rpx;
+  width:100%;padding-left:32%;
+}
+.title-ct{
+  width: 300rpx;
+  height: 300rpx;
+  border-radius: 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.cs-des{
+  position: fixed;
+  bottom: 15%;
+  height: 160rpx;
+  background: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  color: #ffffff;
+}

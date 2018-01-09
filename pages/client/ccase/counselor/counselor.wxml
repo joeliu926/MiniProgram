@@ -1,0 +1,14 @@
+<view class='counselor-ct flex'>
+  <view class='w-10 flex fx-d-col color-w'>
+    <view class='title-ct' style='background-image:url({{oCstData.headImgUrl||"../../../../public/images/front-face.png"}})'></view>
+    <view class='name-pd' style=''>{{oCstData.name}}</view>
+    <view class='cst-pd b-s' style=''>
+       微信：{{oCstData.wxAccount}}
+       </view>
+    <view class='cst-pd b-s' style=''>电话：{{oCstData.mobile}}</view>
+  </view>
+  <view class='cs-des flex-c fx-d-col f-16'>
+    <text class=''>我是您的专属咨询师，</text>
+    <text>有问题请随时与我联系！</text>
+  </view>
+</view>

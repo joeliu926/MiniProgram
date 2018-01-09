@@ -110,12 +110,12 @@ Page({
       allarr:[],
       isShow:'false'
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     //console.log("options pcase-->", options);
+   
     let _This=this;
     wx.showLoading({
       title: 'loading...',
@@ -124,7 +124,7 @@ Page({
       consultationId: options.consultationId,
       jSelect: options.productCode
       });
-   // console.log("_This.data====>",_This.data);
+    //console.log("_This.data====>",_This.data);
     getApp().getUserData(function (uinfo) {
       uinfo && _This.getProjectList(uinfo.unionId);
     });
@@ -148,7 +148,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+   
   },
 
   /**
@@ -176,6 +176,7 @@ Page({
    *选择项目 
    */ 
   selectItem:function(item){
+
     // console.log("=====================================", item);
     let _This=this;
     let sItem = item.target.dataset;
@@ -253,9 +254,11 @@ Page({
    */
   getProjectList(param){
     let _This=this;
+
     //全部的项目
     let pdata = { unionId: param };//,all:0
     console.log("pdata------->",pdata);
+
     wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
      console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
@@ -277,6 +280,7 @@ Page({
         console.log(result);
       }
       wx.hideLoading();
+      console.log("pdata------->", _This.data.projectItems);
     });
 
     //可选的项目

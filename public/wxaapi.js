@@ -59,7 +59,7 @@ var urlConfig = {
       url: gConfig.remote +"/case/detail" //项目案例详情
     },
     share: {
-      url: gConfig.remote +"/case/share" //项目案例详情
+      url: gConfig.remote +"/case/share" //
     },
 
   },
@@ -71,7 +71,10 @@ var urlConfig = {
       url: gConfig.remote + "/customer/getcustomer" //获取客户资料getcustomer
     },
     update: {
-      url: gConfig.remote + "/customer/update" //更新客户update
+      url: gConfig.remote + "/customer/update" //更新客户
+    },
+    getcustomerbyunid: {
+      url: gConfig.remote + "/customer/getcustomerbyunid" //通过咨询师unionid和客户unionid获取客户信息
     }
   },
   consult: {
@@ -101,7 +104,13 @@ var urlConfig = {
     },
     entry: {
       url: gConfig.remote + "/consult/entry" //  客户进入咨询师分享的小程序，对客户信息，线索信息进行维护
-   }
+    },
+    getsharelike: {
+      url: gConfig.remote + "/consult/getsharelike" //   查询一次分享中，单个客户对某个案例的点赞状态
+    },
+    handelsharecase: {
+      url: gConfig.remote + "/consult/handelsharecase" // 客户进入咨询师分享的小程序，对某个案例进行点赞操作 或者进行 提交资料给医生操作
+    }
   },
   appointment: {
     list: {
@@ -125,6 +134,11 @@ var urlConfig = {
   clue: {
     detail: {
       url: gConfig.remote + "/clue/detail"   //获取线索详情
+    }
+  },
+  clinic: {
+    detail: {
+      url: gConfig.remote + "/clinic/detail"   //获取诊所详情
     }
   }
  

@@ -1,7 +1,8 @@
+<wxs src="../../../utils/wxs/cutil.wxs" module="cutil"  />
 
-<view class='c-case-ct b-s bk-c-w' style=''>
+<view class='c-case-ct b-s bk-c-w {{isEndPage?"hide":""}}' style=''>
    <view class='o-title w-10'>
-      <text><text class='f-14 f-c-3'>{{currentPage}}</text><text class='f-14'>/{{totalCount}}</text></text>
+      <text><text class='f-14 f-c-3'>{{currentPage+1}}</text><text class='f-14'>/{{totalCount}}</text></text>
    </view>
   <view class='case-ct w-h-10  bk-c-w'  style=''>
 <block wx:for="{{aCurrentList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
@@ -13,8 +14,8 @@
             <view class='flex b-s' style="position: relative;">
                  <text class='before f-12 bcommon'>术前</text>
                  <text class='after f-12 bcommon'>术后</text>
-                  <image src='{{oitem.beforePicture.url||"../../../public/images/front-face.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' ></image>
-                  <image  src='{{oitem.afterPicture.url||"../../../public/images/side-face.png"}}' mode='aspectFill' data-uid='{{oitem.id}}'></image>
+                  <image src='{{oItem.beforePicture.url||"../../../public/images/front-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}' ></image>
+                  <image  src='{{oItem.afterPicture.url||"../../../public/images/side-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}'></image>
             </view>
       </view>
 <!------------------before after end-------------------->
@@ -22,12 +23,11 @@
 
 <!------------------case hospital start-------------------->
       <view class='t-a-c bk-c-w host-des-ct'>
-          <view class='f-16'>模仿金娜啦脸部效果</view>
-          <text class='f-12'>华佗医生</text>
-          <view class='f-12'>诊疗于公元12年</view>
+          <view class='f-16'>{{oItem.caseName}}</view>
+          <text class='f-12'>{{oItem.doctor.name}} · {{oItem.clinic.name}}</text>
+          <view class='f-12'>{{cutil.formatTime(oItem.operationDate,"yyyy-MM-dd")}}</view>
           <view class='f-14 flex-c fx-wp des-project-ct'>
-              <text class='f-12 pro-item'>项目一啥项目</text><text class='f-12 pro-item'>项目二那个项目</text><text class='f-12 pro-item'>项目三大项目</text>
-              <text class='f-12 pro-item'>项目四就是</text><text class='f-12 pro-item'>项目五</text>
+            <text class='f-12 pro-item' wx:for="{{oItem.products}}" wx:for-item='oProduct' wx:key="oProduct.id">{{oProduct.productName}}</text>
           </view>
       </view>
 <!------------------case hospital end-------------------->
@@ -35,17 +35,17 @@
 <!------------------case history start-------------------->
       <view class='case-his-ct'>
         <view class='f-16 t-a-c bk-c-w his-title'>术后日记</view>
-        <block wx:for="{{detailInfo.contentList}}" wx:for-item="oitem" wx:key="id">
+        <block wx:for="{{oItem.contentList}}" wx:for-item="oContent" wx:key="oContent.id">
         <view class='bk-c-w'>
-          <view class='f-14 t-a-c'><text class='diary f-14'>{{oitem.title}}</text></view>
+          <view class='f-14 t-a-c'><text class='diary f-14'>{{oContent.title}}</text></view>
           <view class='b-pd w-10  b-s' style='margin:20rpx 0;'>
             <view class='flex fx-wp w-10 b-s'>
-               <block wx:for="{{oitem.pictures}}" wx:for-item="imgItem" wx:key="ids" >
-               <view class='img-c b-s' style='background-image:url(http://140.143.185.73:8077/mc_files/10088/CASE_LIBRARY/e642ab1b-4086-4b2c-998c-bd20bba10898)' data-src='{{imgItem.url}}' bindtap='imgPreview'></view>
+               <block wx:for="{{oContent.pictures}}" wx:for-item="imgItem" wx:key="ids" >
+               <view class='img-c b-s' style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreview'></view>
                </block>
             </view>
-            <view><text class='f-14'>{{oitem.description}}</text></view>
-             <text class='f-12'>{{oitem.definitionDate}}</text>
+            <view><text class='f-14'>{{oContent.description}}</text></view>
+             <text class='f-12'>{{cutil.formatTime(oContent.definitionDate,"yyyy-MM-dd")}}</text>
           </view>
         </view>
         </block>
@@ -64,51 +64,55 @@
 
   <!------------------right icon start-------------------->
 
-<view class='bk-c-w b-r flex-c com-right-icon like-icon' style=''>
-   <image  class='cm-img '  src='../../../public/images/like-icon.png' ></image>
+<view class='bk-c-w b-r flex-c com-right-icon like-icon {{isEndPage?"hide":""}}' bindtap='fLikeCase' style=''>
+    <image  class='cm-img {{currentLikeState?"hide":""}}'  src='../../../public/images/unlike-icon.png' ></image>
+    <image  class='cm-img {{!currentLikeState?"hide":""}}'  src='../../../public/images/like-icon.png' ></image>
 </view>
 
-<view class='bk-c-w b-r flex-c com-right-icon phone-icon' style=''>
+<view class='bk-c-w b-r flex-c com-right-icon phone-icon {{isEndPage?"hide":""}} {{oUserInfo.wechatMobile?"hide":""}}' style=''>
    <image  class='cm-img '  src='../../../public/images/wx-icon.png' ></image>
       <button class='' style='position:absolute;' plain="true" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
 </view>
-<view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon' style=''>
+<view bindtap='fGetConsultDetail' class='bk-c-w b-r flex-c com-right-icon phone-icon {{isEndPage?"hide":""}} {{!oUserInfo.wechatMobile?"hide":""}}' style=''>
+   <image  class='cm-img '  src='../../../public/images/wx-icon.png' ></image>
+</view>
+<view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon {{isEndPage?"hide":""}}' bindtap='fTakePhoto' style=''>
    <image  class='cm-img' style='width:65rpx;'  src='../../../public/images/tk-photo-icon.png' ></image>
 </view>
-<view class='tip-font f-14 {{isShowTip?"":"hide"}}' style=''><text>授权手机号 获得1对1专属服务</text></view>
+<view class='tip-font f-14 {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text>授权手机号 获得1对1专属服务</text></view>
   <!------------------right icon start-------------------->
 
 
 <!------------------end page start-------------------->
-<view class='c-p-d end-ct hide'>
-   <view class='end-cmy-ct flex'>
-     <view class='e-cmy-logo'>
-       <image  class='end-cmy-icon' src='../../../public/images/icon-like.png'></image>
-     </view>
+<view class='b-s end-ct {{!isEndPage?"hide":""}}'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
+   <view class='end-cmy-ct b-s flex fx-jc-sb'>
      <view class='flex-c fx-d-col e-cmy-major'>
-        <text class='f-16 w-10 e-cmy-name'>这是一个医院名字</text>
-        <text class='f-14 w-10'>开内眼角、整形鼻子</text>
+        <text class='f-16 w-10 e-cmy-name'>{{oClinic.name}}</text>
+        <text class='f-14 w-10'>{{oClinic.majorBusiness}}</text>
+     </view>
+     <view class='e-cmy-logo'>
+       <image  class='end-cmy-icon' src='{{oClinic.logo}}'></image>
      </view>
    </view>
    <view class='end-items-ct f-14'>
     <view class='flex fx-jc-sb item-ct'>
-        <view class='e-item' style='' ><image class='small-icon' src='../../../public/images/icon-like.png'></image> 北京市兆维工业园</view>
-        <image class='small-icon' src='../../../public/images/icon-like.png'></image>
+        <view class='e-item' style='' ><image class='small-icon' src='../../../public/images/location-icon.png' mode="aspectFit"></image> {{oClinic.address}}</view>
+        <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
     </view>
   
  <view class='flex fx-jc-sb item-ct'>
-      <view class='e-item'><image class='small-icon' src='../../../public/images/icon-like.png'></image> 9：00-23：00</view>
-        <image class='small-icon' src='../../../public/images/icon-like.png'></image>
+      <view class='e-item f-14'><image class='small-icon' src='../../../public/images/time-icon.png' mode="aspectFit"></image> {{oClinic.businessTime}}</view>
+        <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
  </view>
 
   <view class='flex fx-jc-sb item-ct'>
   
-      <view class='e-item'><image class='small-icon' src='../../../public/images/icon-like.png'></image> 010-62545878</view>
-        <image class='small-icon' src='../../../public/images/icon-like.png'></image>
+      <view class='e-item'><image class='small-icon' src='../../../public/images/tel-icon.png' mode="aspectFit" ></image> {{oClinic.phone}}</view>
+        <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
  </view>
 
     <view class='flex fx-jc-sb item-ct'> 
-      <view class='e-item f-16'><image class='small-icon' src='../../../public/images/icon-like.png'></image> 门店照片</view>
+      <view class='e-item f-16'><image class='small-icon' src='../../../public/images/pic-icon.png' mode="aspectFit"></image> 门店照片</view>
  </view>
  <view class='clinic-ct w-10'>
   <image class='clinic-pic' src='../../../public/images/icon-like.png'></image>

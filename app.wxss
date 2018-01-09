@@ -86,7 +86,7 @@ page{
     box-sizing: border-box;
 }
 .b-d{
-  border: 2rpx solid green;
+  border: 2rpx solid green; 
 }
 .b-r{
   border-radius: 50%;

@@ -18,7 +18,7 @@ Page({
    */
   onLoad: function (options) {
      if(options.init){
-      // getApp().globalData.flag=false;
+      // getApp().globalData.flag=false; 
      }
 
 
@@ -26,7 +26,7 @@ Page({
 
     var _This = this;
     getApp().getUserData(function (result) {
-      //console.log("loading use info=====>",result);
+      console.log("loading use info=====>",result);
       _This.fGetCUserInfo(result.unionId);
       _This.setData({
         oUInfo: result

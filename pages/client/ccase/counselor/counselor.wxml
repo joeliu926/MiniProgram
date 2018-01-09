@@ -1,11 +1,11 @@
 <view class='counselor-ct flex'>
   <view class='w-10 flex fx-d-col color-w'>
-    <view class='title-ct' style='background-image:url(../../../../public/images/front-face.png)'></view>
-    <view class='name-pd' style=''>李时珍</view>
+    <view class='title-ct' style='background-image:url({{oCstData.headImgUrl||"../../../../public/images/front-face.png"}})'></view>
+    <view class='name-pd' style=''>{{oCstData.name}}</view>
     <view class='cst-pd b-s' style=''>
-       微信：3333333
+       微信：{{oCstData.wxAccount}}
        </view>
-    <view class='cst-pd b-s' style=''>电话：15855555555</view>
+    <view class='cst-pd b-s' style=''>电话：{{oCstData.mobile}}</view>
   </view>
   <view class='cs-des flex-c fx-d-col f-16'>
     <text class=''>我是您的专属咨询师，</text>

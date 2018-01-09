@@ -12,6 +12,10 @@ page{
 .case-ct{
 
 }
+.e-item{
+
+  font-size: 32rpx;
+}
 .case-item-ct{
   position:absolute;
 padding:20rpx;
@@ -109,16 +113,20 @@ left:0;
 }
 /****************float icon end*******************/
 /*************end page start*************/
+.end-ct{
+
+}
 .end-cmy-ct{
   border-bottom: 1px dashed #999999;
   margin-bottom: 24rpx;
+   padding: 30rpx;
 }
 .end-cmy-icon{
-  height: 160rpx;
-  width: 160rpx;
+  height: 100rpx;
+  width: 100rpx;
 }
 .e-cmy-major{
-  box-sizing: border-box; padding: 0 48rpx;
+  box-sizing: border-box; 
 }
 .e-cmy-name{
   padding: 10rpx;
@@ -127,11 +135,11 @@ left:0;
 
 }
 .item-ct{
-  margin: 24rpx;
+  margin: 32rpx 24rpx;
 }
 .small-icon{
-  width: 26rpx;
-  height: 30rpx;
+  width: 32rpx;
+  height: 32rpx;
   vertical-align: middle;
 }
 .clinic-ct{

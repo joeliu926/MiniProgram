@@ -68,7 +68,10 @@ var urlConfig = {
       url: gConfig.remote + "/customer/getcustomer" //获取客户资料getcustomer
     },
     update: {
-      url: gConfig.remote + "/customer/update" //更新客户update
+      url: gConfig.remote + "/customer/update" //更新客户
+    },
+    getcustomerbyunid: {
+      url: gConfig.remote + "/customer/getcustomerbyunid" //通过咨询师unionid和客户unionid获取客户信息
     }
   },
   consult: {

@@ -17,6 +17,7 @@
     "pages/projectcase/casetrail/userlist/userlist",
     "pages/projectcase/casetrail/cbooking/cbooking",
     "pages/client/ccase/counselor/counselor"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -52,7 +52,7 @@
     </block>
 
     <view style='display:block;height:100rpx;background-color:white;margin-top:10rpx; font-size:26rpx;text-align:center;'>
-      下拉加载更多..
+ 
     </view>
   </view>
 
@@ -85,12 +85,21 @@
     </view>
 
   </view>
-  <view style='display:{{culeList.length==0?"":"none"}}'>
+  <view style='display:{{culeList.length==0&&menuType?"":"none"}}'>
     <div class="list-none">
       <div class="list-none-div">
         <icon type='search' size='16'></icon>
       </div>
-      <div>还没有客户哦，您可以点击右下角+号，先创建一个活动分享。</div>
+      <div>您还没有客户哦，您可以点击菜单中间按钮，先创建一个场景分享。</div>
+    </div>
+  </view>
+
+    <view style='display:{{shareList.length==0&&!menuType?"":"none"}}'>
+    <div class="list-none">
+      <div class="list-none-div">
+        <icon type='search' size='16'></icon>
+      </div>
+      <div>您还没有过场景哦，您可以点击菜单中间按钮，先创建一个场景分享。</div>
     </div>
   </view>
 

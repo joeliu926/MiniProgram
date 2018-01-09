@@ -12,71 +12,8 @@ Page({
     selectItem: [{ id: 1, text: '智能推荐', val: true }, { id: 2, text: '其它', val: false }],
     moreItem: ['编辑联人', '关闭'],
     menuType: true,
-    culeList1: [],
-    culeList: [{
-      id: 0,
-      name: '客户护理',
-      desc: '理线双眼皮，开内角拉，定点双眼波',
-      type: '现场咨询',
-      disp: ''
-    },
-    {
-      id: 1,
-      name: '客户护理',
-      desc: '理线双眼皮，开内角拉，定点双眼波',
-      type: '现场咨询',
-      disp: ''
-    },
-    {
-      id: 2,
-      name: '客户护理',
-      desc: '理线双眼皮，开内角拉，定点双眼波',
-      type: '现场咨询',
-      disp: ''
-    },
-    {
-      id: 3,
-      name: '客户护理',
-      desc: '理线双眼皮，开内角拉，定点双眼波',
-      type: '现场咨询',
-      disp: ''
-    },
-    {
-      id: 4,
-      name: '客户护理',
-      desc: '理线双眼皮，开内角拉，定点双眼波',
-      type: '现场咨询',
-      disp: ''
-    },
-    {
-      id: 5,
-      name: '客户护理',
-      desc: '理线双眼皮，开内角拉，定点双眼波',
-      type: '现场咨询',
-      disp: ''
-    },
-    {
-      id: 6,
-      name: '客户护理',
-      desc: '理线双眼皮，开内角拉，定点双眼波',
-      type: '现场咨询',
-      disp: ''
-    },
-    {
-      id: 7,
-      name: '客户护理',
-      desc: '理线双眼皮，开内角拉，定点双眼波',
-      type: '现场咨询',
-      disp: ''
-    },
-    {
-      id: 8,
-      name: '客户护理',
-      desc: '理线双眼皮，开内角拉，定点双眼波',
-      type: '现场咨询',
-      disp: ''
-    }
-    ],
+    shareList: [],
+    culeList: [],
     oUInfo: {},
     showData: 0,
     sexitems: [
@@ -329,10 +266,9 @@ Page({
     let pdata = { unionid: unionid };
     wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
       if (result.data.code != 0 || result.data.data.type != "1") {
-        /*  _This.setData({
+         _This.setData({
             showData: false
           });
-          */
       }
     });
   }

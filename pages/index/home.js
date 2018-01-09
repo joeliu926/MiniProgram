@@ -6,10 +6,13 @@ Page({
    */
   data: {
     showicon: false,
-    phonenum: "",
+    searchName: "",
+    cluereMark:"",
+    clueClose:"",
     customerList: [],
     autoFocus: false,
-    selectItem: [{ id: 1, text: '智能推荐', val: true }, { id: 2, text: '其它', val: false }],
+    selectItem: [{ id: 0, text: '智能推荐', val: true }, { id: 1, text: '其它', val: false }],
+    currentSelect:0,
     moreItem: ['编辑联人', '关闭'],
     menuType: true,
     shareList: [],
@@ -36,7 +39,8 @@ Page({
       _This.setData({
         oUInfo: result
       });
-      _This.getProjectList();
+      _This.getClueList(result.unionId,_This.data.searchName);
+      _This.getShareList(result.unionId,_This.data.searchName);
     });
   },
 
@@ -75,7 +79,7 @@ Page({
    */
   onUnload: function () {
 
-  },
+  }, 
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -125,8 +129,6 @@ Page({
   moreOption(params) {
     console.log('params', params);
   },
-
-
   bookOption(params) {
     this.setData({
       showData: 3
@@ -137,10 +139,24 @@ Page({
       showData: 3
     });
   },
+  searchClueinput(params){
+    if (params.detail.value.length > 0) {
+      this.setData({
+        showicon: true,
+        searchName: params.detail.value
+      });
+    } else {
+      this.setData({
+        showicon: false,
+        searchName: ""
+      });
+    }
+  },
   selectType(params) {
     var dataset = params.currentTarget.dataset;
     this.data.selectItem.forEach(item => {
       if (item.id == dataset.id) {
+        this.currentSelect = dataset.id;
         item.val = true;
       }
       else {
@@ -168,19 +184,18 @@ Page({
         });
         break;
       case "2":
-
+        wx.navigateTo({
+          url: '../projectcase/projectcase',
+        });
         break;
       case "3":
         this.setData({
           menuType: false
         });
         break;
-
     }
   },
   bindPickerChange(params) {
-    console.log('params', params);
-
     switch (params.detail.value) {
       case "0":
         this.setData({
@@ -198,42 +213,12 @@ Page({
         break;
     }
   },
-  fInputSearch: function (e) {
-    if (e.detail.value.length > 0) {
-      this.setData({
-        showicon: true,
-        phonenum: e.detail.value
-      });
-    } else {
-      this.setData({
-        showicon: false,
-        phonenum: ""
-      });
-    }
-    this.getProjectList();
-  },
   fClearData: function () {
     this.setData({
       showicon: false,
-      phonenum: ""
+      searchName: ""
     });
     this.getProjectList();
-  },
-  fNavCase(e) {
-    var _This = this;
-    var dataset = e.currentTarget.dataset;
-    wx.navigateTo({
-      url: '../projectcase/casetrail/casetrail?consultingId=' + dataset.consultationid + '&iname=' + dataset.iname + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + dataset.productcode
-    });
-
-    /*  wx.navigateTo({
-        url: '../pcase/pcase?consultationId=' + dataset.consultationid + '&iname=' + dataset.iname + '&cstUid=' + _This.data.oUInfo.unionId + '&productCode=' + dataset.productcode
-      });*/
-  },
-  fAddNew: function () {
-    wx.navigateTo({
-      url: '../projectcase/projectcase',
-    })
   },
   /**
    * 获取用户列表
@@ -245,10 +230,60 @@ Page({
     let _This = this;
     let pdata = {
       unionId: _This.data.oUInfo.unionId || "",
-      mobile: _This.data.phonenum || "",
+      mobile: _This.data.searchName || "",
       pageSize: 10000
     };
     wxRequest(wxaapi.consult.list.url, pdata).then(function (result) {
+      // console.log("load project info==>", result);
+      if (result.data.code == 0) {
+        _This.setData({ customerList: result.data.data.list });
+      } else {
+        console.log("load project info error==>", result);
+      }
+      wx.hideLoading();
+    });
+  },
+  /**
+   * 获取线索列表
+   */
+  getClueList(unionId, name) {
+    wx.showLoading({
+      title: 'loading...',
+    });
+    let _This = this;
+
+    console.log('_This.currentSelect', _This.currentSelect);
+    let pdata = {
+      userUnionId: unionId || "",
+      group: _This.data.currentSelect,
+      searchName: '',
+      pageNo:1,
+      pageSize:10
+    };
+    wxRequest(wxaapi.index.cluelist.url, pdata).then(function (result) {
+      if (result.data.code == 0) {
+        _This.setData({ clueList: result.data.data.list });
+      } else {
+        console.log("load project info error==>", result);
+      }
+      wx.hideLoading();
+    });
+  },
+
+  /**
+   * 获取分享列表
+   */
+  getShareList(unionId, name) {
+    wx.showLoading({
+      title: 'loading...',
+    });
+    let _This = this;
+    let pdata = {
+      consultantUnionid: unionId || "",
+      pageNo: 1,
+      pageSize: 10
+    };
+    wxRequest(wxaapi.index.sharelist.url, pdata).then(function (result) {
       // console.log("load project info==>", result);
       if (result.data.code == 0) {
         _This.setData({ customerList: result.data.data.list });

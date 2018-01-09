@@ -52,11 +52,8 @@
     </block>
 
     <view style='display:block;height:100rpx;background-color:white;margin-top:10rpx; font-size:26rpx;text-align:center;'>
- 
     </view>
   </view>
-
-
   <!--场景列表-->
 
   <view style='display:{{menuType?"none":"block"}};background-color:white;'>
@@ -142,7 +139,7 @@
     <div class="opensh-input">
       <div class='flex input-o'>
         <icon type='search' size='16' bindtap='inputOver'></icon>
-        <input class='s-input f-16' style='text-align:left;' bindconfirm="inputOver" name="phonenum" value="{{phonenum}}" bindinput="fInputSearch" focus='{{autoFocus}}' placeholder='请输入客户名称' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'
+        <input class='s-input f-16' style='text-align:left;' bindconfirm="inputOver" name="searchName" value="{{searchName}}" bindinput="searchClueinput" focus='{{autoFocus}}' placeholder='请输入客户名称' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'
           maxlength='36' placeholder-class="place"></input>
         <icon bindtap='fClearData' size='16' type='clear' class='{{showicon?"show":"hide"}}'></icon>
       </div>
@@ -156,7 +153,7 @@
 <view class='h-ct w-10' style='display:{{showData==3?"":"none"}};background-color:white;'>
   <div>
     <div class="remark">
-      <textarea class='s-input f-16 remark-area' bindconfirm="inputOver" name="phonenum" value="{{phonenum}}" placeholder='补充一些线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'></textarea>
+      <textarea class='s-input f-16 remark-area' bindconfirm="inputOver" name="cluereMark" value="{{cluereMark}}" placeholder='补充一些线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'></textarea>
     </div>
     <div class='submit-btn'>
       <div bindtap='closeSearch'>提交</div>
@@ -168,7 +165,7 @@
 <view class='h-ct w-10' style='display:{{showData==5?"":"none"}};background-color:white;'>
   <div>
     <div class="close-content">
-      <textarea class='s-input f-16 close-area' bindconfirm="inputOver" name="phonenum" value="{{phonenum}}" placeholder='补充关闭线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'></textarea>
+      <textarea class='s-input f-16 close-area' bindconfirm="inputOver" name="clueClose" value="{{clueClose}}" placeholder='补充关闭线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'></textarea>
     </div>
     <div class='submit-btn'>
       <div bindtap='closeSearch'>提交</div>

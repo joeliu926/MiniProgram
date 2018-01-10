@@ -41,7 +41,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log("take photos options==>",options);
+     console.log("take photos options==>",options);
     var _This = this;
     var oEvent = _This.data.oEvent;
     getApp().getUserData(function (uinfo) {
@@ -50,53 +50,14 @@ Page({
         oUserInfo: uinfo,
         cstUid: options.consultantId,
         consultationId: options.consultationId,
+        clueId: options.clueId,
         shareEventId: options.shareEventId || ""
       });
       //console.log("cstUid----", _This.data.cstUid);
     });
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
 
   /**
    * 用户点击右上角分享
@@ -203,6 +164,9 @@ Page({
     var _This = this;
     var oTempEvent = _This.data.oEvent;
     oTempEvent.shareEventId = _This.data.shareEventId;
+   // oTempEvent.productCode = _This.data.productCode;
+    oTempEvent.clueId = _This.data.clueId; //线索id
+    oTempEvent.consultationId = _This.data.consultationId;//咨询会话ID
     oTempEvent.eventAttrs = {
 
       appletId: "hldn",
@@ -256,5 +220,11 @@ Page({
     }
     var sendMsg = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 提交了个人资料";
     wxCustomerMsg.fSendWxMsg(_This.data.cstUid, sendMsg);
+  },
+  /**
+   * huoqu
+   */
+  fGetPhoto(){
+
   }
 })

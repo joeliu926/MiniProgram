@@ -5,7 +5,7 @@
     <!--项目滚动区  -->
     <view class="scroll-box fl">
       <scroll-view scroll-x="true" style=" white-space: nowrap;margin-left:24rpx;">
-        <view class="item-view" style="color:{{item.changeColor}} " wx:for-item="item" wx:for="{{arrData}}" wx:key="item.itemid" data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}" bindtap="chooseitem">{{item.iname}}</view>
+        <view class="item-view " style="color:{{item.changeColor}} " wx:for-item="item" wx:for="{{arrData}}" wx:key="item.itemid" data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}" bindtap="chooseitem">{{item.iname}}</view>
         <!-- <view class="item-view f-14" bindtap="">热门项目</view>-->
       </scroll-view>
     </view>
@@ -33,13 +33,14 @@
                 <view class='user-info' bindtap='fCaseDetail'>
                   <view class='bef-aft flex'>
                     <image class='o-img-title' src='{{oitem.customerLogo.url}}' mode='scaleToFill'></image>
-
                   </view>
                   <view class='u-info'>
                     <text class='u-name'>{{oitem.customerName}}</text>
-                    <text class='f-14 txt-item' style='margin-left:-20rpx'>{{oitem.caseName}}</text>
+                    <view style="margin-bottom: 10rpx; ">
+                      <text class='f-14 txt-item' >{{oitem.caseName}}</text><br/>
+                    </view>
+                    
                     <text class='f-14'>诊疗于 {{cutil.formatTime(oitem.operationDate,"yyyy-MM-dd")}}</text>
-
                   </view>
                 </view>
               </view>

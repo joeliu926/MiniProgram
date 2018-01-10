@@ -104,7 +104,10 @@ Page({
       // console.log("++++++++++++++++++++++++++++++", _This.data.itemids);
       // console.log("1111111111111111", _This.data.arrData);
       //设置第一个项目是选中的；
-
+      
+      // for (var i = 0; i < _This.data.arrData.length;i++){
+      //   _This.data.arrData[0].changeColor = '#9083ed';
+      // }
       _This.fGetCaseList(uinfo);//获取案例
       if ((!caseIds || caseIds.length <= 0)) {
         // console.log("gggggggfGetConsultationId----->", options.pdata.itemid, options.itemids.split(","));
@@ -298,7 +301,7 @@ Page({
     };
     // console.log("|||||||||||||||||",pdata);
     wxRequest(wxaapi.pcase.morelist.url, pdata).then(function (result) {
-      //  console.log("case list=666666666666666666666666666666==>",result);
+       console.log("case list=666666666666666666666666666666==>",result);
       if (result.data.code == 0) {
         _This.setData({
           caseList: result.data.data,
@@ -382,7 +385,7 @@ Page({
     var targetproductcode = e.target.dataset.itemid;
     // 对应的案例选中
     this.data.caseList.forEach(function (oitem, index) {
-      oitem.products.forEach(function (item, jkjk) {
+      oitem.products.forEach(function (item, k) {
         // console.log(item);
         if (item.productCode == targetproductcode) {
           // console.log("==========成功把案例的index赋值给current =============")    
@@ -395,6 +398,7 @@ Page({
     // 选择对应的项目  添加选中的样式
     for (let i = 0; i < this.data.arrData.length; i++) {
       if (e.target.dataset.itemid == this.data.arrData[i].itemid) {
+        
         this.data.arrData[i].changeColor = '#9083ed';
         this.setData({
           arrData: this.data.arrData

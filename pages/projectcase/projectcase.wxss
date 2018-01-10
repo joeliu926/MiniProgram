@@ -45,7 +45,7 @@ page {
   background-color: #f7f7f7;
   border-radius: 40rpx;
   padding: 10rpx 24rpx;
-  margin: 0 20rpx 30rpx 0rpx;
+  margin: 0 20rpx 30rpx 10rpx;
   color: #333;
   font-size: 28rpx;
 }

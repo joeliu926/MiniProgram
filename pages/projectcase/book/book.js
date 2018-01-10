@@ -16,7 +16,7 @@ Page({
     oEvent: {},//预约事件参数
     reserveId: 0,//预约id
     oUserInfo: {},
-    customerInfo: { name: "nihao", phoneNum:"18811795986"},
+    customerInfo: { name: "david", phoneNum:"18811795986"},
     consultPorject: [],
     oAppointment: {},
     nextdate:"",
@@ -50,7 +50,7 @@ Page({
    */
 
   onLoad: function (options) {
-    
+    console.log("booking options=====>", options);
     let _This = this;
     let nowtime=new Date();
     nowtime.setTime(nowtime.getTime() + 24 * 60 * 60 * 1000);
@@ -410,6 +410,7 @@ Page({
       arrData: this.data.arrData,
       sSelect: this.data.sSelect
     });
+    this.checkbook()
     //console.log("sSelect", this.data.sSelect)
   },
   /**
@@ -483,7 +484,7 @@ Page({
         // console.log(result);
       }
     });
-    console.log("appointment----", this.data.oAppointment)
+    console.log("appointment----", _This.data.oAppointment)
   },
   /**
     * 提交预约信息

@@ -3,7 +3,6 @@
    
   
     "pages/index/home",
-    "pages/home/home",
     "pages/index/detail/cluedetail",
     "pages/projectcase/book/book",
     "pages/projectcase/casedetail/casedetail",

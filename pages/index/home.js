@@ -7,18 +7,26 @@ Page({
   data: {
     showicon: false,
     searchName: "",
-    cluereMark:"",
-    clueClose:"",
+    cluereMark: "",
+    clueClose: "",
     customerList: [],
     autoFocus: false,
     selectItem: [{ id: 0, text: '智能推荐', val: true }, { id: 1, text: '其它', val: false }],
-    currentSelect:0,
+    currentSelect: 0,
     moreItem: ['编辑联人', '关闭'],
     menuType: true,
     shareList: [],
-    culeList: [],
+    clueList: [],
+    clueListOther: [],
     oUInfo: {},
     showData: 0,
+    clueNo: 1,
+    clueCount: 0,
+    clueNoOther: 1,
+    clueCountOther: 0,
+    shareNo: 1,
+    shareCount: 0,
+    pageSize: 10,
     sexitems: [
       { name: '男', value: 1 },
       { name: '女', value: 2, checked: 'true' }
@@ -39,8 +47,8 @@ Page({
       _This.setData({
         oUInfo: result
       });
-      _This.getClueList(result.unionId,_This.data.searchName);
-      _This.getShareList(result.unionId,_This.data.searchName);
+      _This.getClueList();
+      _This.getShareList();
     });
   },
 
@@ -79,28 +87,62 @@ Page({
    */
   onUnload: function () {
 
-  }, 
+  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    //wx.reLaunch();
-    this.getProjectList();
-    wx.stopPullDownRefresh();
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    //console.log("this is bottom data");
-    wx.showLoading({
-      title: 'loading...',
-    });
-    setTimeout(function () {
-      wx.hideLoading();
-    }, 1000);
+    if (this.data.menuType) {
+      if (this.data.currentSelect) {
+        if (this.data.clueNoOther * this.data.pageSize < this.data.clueCountOther) {
+          wx.showLoading({
+            title: 'loading...',
+          });
+          setTimeout(function () {
+            wx.hideLoading();
+          }, 1000);
+          this.setData({
+            clueNoOther: this.data.clueNoOther + 1
+          });
+          this.getClueList();
+        }
+      } else {
+        if (this.data.clueNo * this.data.pageSize < this.data.clueCount) {
+          wx.showLoading({
+            title: 'loading...',
+          });
+          setTimeout(function () {
+            wx.hideLoading();
+          }, 1000);
+          this.setData({
+            clueNo: this.data.clueNo + 1
+          });
+          this.getClueList();
+        }
+      }
+    }
+    else {
+      if (this.data.shareNo * this.data.pageSize < this.data.shareCount) {
+        wx.showLoading({
+          title: 'loading...',
+        });
+        setTimeout(function () {
+          wx.hideLoading();
+        }, 1000);
+        this.setData({
+          shareNo: this.data.shareNo + 1
+        });
+        this.getShareList();
+      }
+    }
   },
 
   /**
@@ -130,16 +172,19 @@ Page({
     console.log('params', params);
   },
   bookOption(params) {
-    this.setData({
-      showData: 3
-    });
+    let pobj = params.target.dataset.obj;
+  wx.navigateTo({
+    url: `../projectcase/book/book?userId=${pobj.userId}&userUnionId=${pobj.userUnionId}&appointmentId=${pobj.appointmentId}&tenantId=${pobj.tenantId}&customerId${pobj.customerId}&clueId=${pobj.clueId}`, });
+    console.log('params', params.target.dataset.obj);
+  
   },
   remarkOption(params) {
     this.setData({
       showData: 3
     });
   },
-  searchClueinput(params){
+  //搜索确定
+  searchClueinput(params) {
     if (params.detail.value.length > 0) {
       this.setData({
         showicon: true,
@@ -151,19 +196,38 @@ Page({
         searchName: ""
       });
     }
+
+    if (this.data.currentSelect) {
+      this.setData({
+        clueListOther: []
+      });
+
+    } else {
+      this.setData({
+        clueList: []
+      });
+    }
+    this.getClueList();
+    this.closeSearch();
   },
+
+  //tab 选项卡
   selectType(params) {
     var dataset = params.currentTarget.dataset;
     this.data.selectItem.forEach(item => {
       if (item.id == dataset.id) {
-        this.currentSelect = dataset.id;
+        this.setData({
+          currentSelect: dataset.id
+        });
         item.val = true;
+        // this.getClueList();
       }
       else {
         item.val = false;
       }
     });
     this.setData({
+      searchName: "",
       selectItem: this.data.selectItem
     });
   },
@@ -176,6 +240,7 @@ Page({
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
   },
+  //菜单点击
   menuClick(params) {
     switch (params.currentTarget.dataset.type) {
       case "1":
@@ -195,6 +260,7 @@ Page({
         break;
     }
   },
+  //线索更多点击
   bindPickerChange(params) {
     switch (params.detail.value) {
       case "0":
@@ -246,23 +312,37 @@ Page({
   /**
    * 获取线索列表
    */
-  getClueList(unionId, name) {
+  getClueList() {
     wx.showLoading({
       title: 'loading...',
     });
     let _This = this;
-
-    console.log('_This.currentSelect', _This.currentSelect);
     let pdata = {
-      userUnionId: unionId || "",
-      group: _This.data.currentSelect,
-      searchName: '',
-      pageNo:1,
-      pageSize:10
+      userUnionId: _This.data.oUInfo.unionId || "",
+      group: this.data.currentSelect,
+      searchName: this.data.searchName,
+      pageNo: this.data.currentSelect ? this.data.clueNo : this.data.clueNoOther,
+      pageSize: this.data.pageSize
     };
     wxRequest(wxaapi.index.cluelist.url, pdata).then(function (result) {
       if (result.data.code == 0) {
-        _This.setData({ clueList: result.data.data.list });
+        let getArray = result.data.data.list;
+        getArray.forEach(m => {
+          let slist = [];
+          m.productList.forEach((sm, index) => {
+            if (sm.productName && slist.length < 4) {
+              slist.push(sm);
+            }
+          });
+          m.productList = slist;
+        });
+        if (_This.data.currentSelect) {
+          _This.setData({ clueListOther: _This.data.clueListOther.concat(getArray) });
+          _This.setData({ clueCountOther: result.data.data.count });
+        } else {
+          _This.setData({ clueList: _This.data.clueList.concat(getArray) });
+          _This.setData({ clueCount: result.data.data.count });
+        }
       } else {
         console.log("load project info error==>", result);
       }
@@ -273,20 +353,40 @@ Page({
   /**
    * 获取分享列表
    */
-  getShareList(unionId, name) {
+  getShareList() {
     wx.showLoading({
       title: 'loading...',
     });
     let _This = this;
     let pdata = {
-      consultantUnionid: unionId || "",
-      pageNo: 1,
-      pageSize: 10
+      consultantUnionid: _This.data.oUInfo.unionId || "",
+      pageNo: this.data.shareNo,
+      pageSize: this.data.pageSize
     };
     wxRequest(wxaapi.index.sharelist.url, pdata).then(function (result) {
-      // console.log("load project info==>", result);
       if (result.data.code == 0) {
-        _This.setData({ customerList: result.data.data.list });
+        _This.setData({ shareCount: result.data.data.count });
+        let getArray = result.data.data.list;
+        getArray.forEach(m => {
+          let slist = [];
+          m.casesName.forEach((sm, index) => {
+            if (sm && slist.length < 2) {
+              if (m.casesName.length > 1) {
+                sm += '等';
+              }
+              slist.push(sm);
+            }
+          });
+          m.casesName = slist;
+          let plist = [];
+          m.productsName.forEach((sm, index) => {
+            if (sm && plist.length < 4) {
+              plist.push(sm);
+            }
+          });
+          m.productsName = plist;
+        });
+        _This.setData({ shareList: _This.data.shareList.concat(getArray) });
       } else {
         console.log("load project info error==>", result);
       }
@@ -301,9 +401,9 @@ Page({
     let pdata = { unionid: unionid };
     wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
       if (result.data.code != 0 || result.data.data.type != "1") {
-         _This.setData({
-            showData: false
-          });
+        _This.setData({
+          showData: false
+        });
       }
     });
   }

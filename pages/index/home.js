@@ -153,11 +153,9 @@ Page({
   },
   openItem(params) {
     var dataset = params.currentTarget.dataset;
-
-    console.log('params', params);
     wx.navigateTo({
-      url: './detail/cluedetail'
-    })
+      url: './detail/cluedetail?id=' + dataset.obj.id
+    });
   },
   closeSearch(params) {
     this.setData({
@@ -174,9 +172,7 @@ Page({
   bookOption(params) {
     let pobj = params.target.dataset.obj;
   wx.navigateTo({
-    url: `../projectcase/book/book?userId=${pobj.userId}&userUnionId=${pobj.userUnionId}&appointmentId=${pobj.appointmentId}&tenantId=${pobj.tenantId}&customerId${pobj.customerId}&clueId=${pobj.clueId}`, });
-    console.log('params', params.target.dataset.obj);
-  
+    url: `../projectcase/book/book?userId=${pobj.userId}&userUnionId=${pobj.userUnionId}&appointmentId=${pobj.appointmentId}&tenantId=${pobj.tenantId}&customerId=${pobj.customerId}&clueId=${pobj.id}`, });
   },
   remarkOption(params) {
     this.setData({
@@ -249,7 +245,7 @@ Page({
         });
         break;
       case "2":
-        wx.navigateTo({
+        wx.navigateTo({ 
           url: '../projectcase/projectcase',
         });
         break;

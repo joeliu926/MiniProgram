@@ -63,7 +63,7 @@ Page({
       "doctor": {
         "tenantId": "",
         "id": 1,
-        "name": "李医生"
+        "name": "李医生 http://140.143.185.73:8083/api/clue/pageList?userUnionId=oDOgS0oVZtsOeNBbQ1fDXi-Rm4L4&group=0&searchName=&pageNo=1&pageSize=10"
       },
       "products": [
         {
@@ -464,8 +464,10 @@ Page({
   fTakePhoto(){
     let _This = this;
     let cstunionid = _This.data.cstUid;
+    let consultationId=_This.data.consultationId;//咨询会话ID
+    let clueId = _This.data.clueId; //线索id
     wx.navigateTo({
-      url: './counselor/counselor?cstUid=' + cstunionid
+      url: '/pages/client/sharecase/tkphoto/tkphoto?consultantId=' + cstunionid + "&consultationId=" + consultationId + "&clueId=" + clueId
     })
   },
   fGetCaseData(){

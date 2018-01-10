@@ -168,7 +168,7 @@ Page({
     productlistArr:[],
     selable: [],
     allarr: [],
-    isShow: 'true'
+    isShow: 'false'
   },
 
   /**

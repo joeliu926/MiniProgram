@@ -1,22 +1,20 @@
 <wxs src="../../../utils/wxs/cutil.wxs" module="cutil" />
 <wxs src="./caselist.wxs" module="caselist" />
-<view class="topshow clearfix">
-  <!--项目滚动区  -->
-  <view class="scroll-box fl">
-    <scroll-view scroll-x="true" style=" white-space: nowrap;">
-      <view class="item-view f-14" style="color:{{item.changeColor}} " wx:for-item="item"  wx:for="{{arrData}}"  wx:key="item.itemid" data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}" bindtap="chooseitem">{{item.iname}}</view>
-      <!-- <view class="item-view f-14" bindtap="">热门项目</view>-->
-    </scroll-view>
-  </view>
-  <!--下拉箭头  -->
-  <view class="selectarrow fr ">
-    <image src='../../../public/images/arrow-down.png' class='btn-down' bindtap="getproductitem"></image>
-  </view>
-</view>
+
 <view class='o-flex o-content'>
-  <!-- <view class='o-title w-10'>
-    <text class='{{isConsult?"show":"hide"}}'>{{projectName}}</text>
-  </view> -->
+  <view class="topshow clearfix">
+    <!--项目滚动区  -->
+    <view class="scroll-box fl">
+      <scroll-view scroll-x="true" style=" white-space: nowrap;margin-left:24rpx;">
+        <view class="item-view f-14" style="color:{{item.changeColor}} " wx:for-item="item" wx:for="{{arrData}}" wx:key="item.itemid" data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}" bindtap="chooseitem">{{item.iname}}</view>
+        <!-- <view class="item-view f-14" bindtap="">热门项目</view>-->
+      </scroll-view>
+    </view>
+    <!--下拉箭头  -->
+    <view class="selectarrow fr ">
+      <image src='../../../public/images/arrow-down.png' class='btn-down' bindtap="getproductitem"></image>
+    </view>
+  </view>
   <view class='o-project w-10'>
     <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
       <block wx:for="{{caseList}}" wx:for-item="oitem" wx:key="id">
@@ -77,11 +75,11 @@
     <text class='tip' wx:if='{{aCaseIds.length>0}}'>{{aCaseIds.length}}</text>
   </button>
 
-   <button class='share-btn flex-c' wx:if='{{aCaseIds.length<=0}}' style='background-color:#999999;display:{{isConsult?"flex":"none"}};'>
+  <button class='share-btn flex-c' wx:if='{{aCaseIds.length<=0}}' style='background-color:#999999;display:{{isConsult?"flex":"none"}};'>
     <image src='../../../public/images/icon-share.png' class='share-icon'></image>
     <text class='share-txt'>分享给好友</text>
     <text class='tip' wx:if='{{aCaseIds.length>0}}'>{{aCaseIds.length}}</text>
-  </button> 
+  </button>
 
   <!-- 案例选项弹层 -->
   <!-- {{isshow?'block':'none'}} -->
@@ -104,24 +102,25 @@
 
   </view> -->
   <view class='case-content' style="display: {{ishow?'block':'none'}}">
-  <block wx:for="{{projectItems}}" wx:for-item="oitem" wx:key="id">
-    <view class='o-flex case-item-content'>
-      <text class='case-title' bindtap='selectTitle'>{{oitem.productName}}</text>
-      <view class='case-item-detail'>
-        <block wx:for="{{oitem.productList}}" wx:for-item="secitem" wx:key="id">
-          <block wx:for="{{secitem.productList}}" wx:for-item="item" wx:key="id">
-            <!-- {{jSelect==item.productCode?"case-sele":""}} {{projectcase.inArray(jSelect,item.productCode)?"case-sele":""}}-->
-            <!-- {{item.productCode}}  -->
-            <text class='case-item  {{caselist.inArray(sSelect,item.productCode)?"case-sele":""}} {{caselist.inArray(selable,item.productCode)?"":"unable"}}' data-paid='{{item.parentCode}}' data-paname='{{oitem.productName}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}' bindtap='selectItem'>{{item.productName}}</text>
+    <block wx:for="{{projectItems}}" wx:for-item="oitem" wx:key="id">
+      <view class='o-flex case-item-content'>
+        <text class='case-title' bindtap='selectTitle'>{{oitem.productName}}</text>
+        <view class='case-item-detail'>
+          <block wx:for="{{oitem.productList}}" wx:for-item="secitem" wx:key="id">
+            <block wx:for="{{secitem.productList}}" wx:for-item="item" wx:key="id">
+              <!-- {{jSelect==item.productCode?"case-sele":""}} {{projectcase.inArray(jSelect,item.productCode)?"case-sele":""}}-->
+              <!-- {{item.productCode}}  -->
+              <text class='case-item  {{caselist.inArray(sSelect,item.productCode)?"case-sele":""}} {{caselist.inArray(selable,item.productCode)?"":"unable"}}' data-paid='{{item.parentCode}}' data-paname='{{oitem.productName}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}'
+                bindtap='selectItem'>{{item.productName}}</text>
+            </block>
           </block>
-        </block>
+        </view>
       </view>
+    </block>
+    <text class=" tipunable" style="display:{{isShow=='true'?'block':'none'}}"> 当前项目下暂时无案例可选</text>
+    <view style="text-align:center; margin-top:20px;" class="selBtn">
+      <span class="selend {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</span>
     </view>
-  </block>
-  <text class=" tipunable" style="display:{{isShow=='true'?'block':'none'}}"> 当前项目下暂时无案例可选</text> 
-  <view style="text-align:center; margin-top:20px;" class="selBtn">
-    <span class="selend {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</span>
   </view>
-</view>
 
 </view>

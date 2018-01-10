@@ -45,15 +45,15 @@
   <view class='flex custmerinfo-name fx-jc-sb c-p-d mg-b b-g'>
     <view class='f-16 ' maxlength="6" size="6">顾客姓名</view>
     <view class='f-16 custmerinfo-input '>
-     <input name='clueRemark ' class='t-l' value='{{clueRemark}}'   bindblur='fInputName'  placeholder='{{customerInfo.name}}'></input>
+     <input name='clueRemark ' class='t-l' value='{{customerInfo.name}}'   bindblur='fInputName'  placeholder='{{}}'></input>
     </view>
    </view>
 
   <view class='flex custmerinfo-name fx-jc-sb c-p-d mg-b b-g'>
       <view class='f-16 ' >手机号码</view>
       <view class='f-16 custmerinfo-input '>
-          <input name='clueRemark' class='t-l ' value='{{clueRemark}}' bindtap='showphone' bindblur='fInputMobile'  
-          placeholder='{{customerInfo.phoneNum}}'></input>
+          <input name='clueRemark' class='t-l ' value='{{customerInfo.phoneNum}}' bindtap='showphone' bindblur='fInputMobile'  
+          placeholder='{{}}'></input>
       </view>
   </view>
 <!-- 手机号联想 -->
@@ -67,7 +67,8 @@
     
        <view class='f-16  ' >线索备注</view>
           <view class='f-16 custmerinfo-input '>
-        <input name='clueRemark' class='t-l' value='{{clueRemark}}' maxlength="140" bindtap='' bindblur=''  placeholder='线索备注'></input>
+        <input name='clueRemark' class='t-l' value='{{clueRemark}}' maxlength="140" bindtap='' bindblur='fInputClueRemark'  
+        placeholder='{{}}'></input>
          </view>
       </view>
    

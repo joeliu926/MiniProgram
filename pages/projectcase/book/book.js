@@ -16,7 +16,7 @@ Page({
     oEvent: {},//预约事件参数
     reserveId: 0,//预约id
     oUserInfo: {},
-    customerInfo: { name: "nihao", phoneNum:"18811795986"},
+    customerInfo: { name: "david", phoneNum:"18811795986"},
     consultPorject: [],
     oAppointment: {},
     nextdate:"",
@@ -50,7 +50,7 @@ Page({
    */
 
   onLoad: function (options) {
-    
+    console.log("booking options=====>", options);
     let _This = this;
     let nowtime=new Date();
     nowtime.setTime(nowtime.getTime() + 24 * 60 * 60 * 1000);
@@ -86,6 +86,7 @@ Page({
       _This.fGetAppointment();
 
     });
+    
   },
   
   
@@ -230,6 +231,31 @@ Page({
       });
     };
   },
+  /**
+  * 客户线索备注改变
+  */
+  fInputClueRemark(e) {
+    this.setData({
+      clueRemark: e.detail.value
+    });
+    console.log("beizhu------", this.data.clueRemark);
+    console.log("cucustomerInfo", this.data.customerInfo)
+  },
+  // /**
+  //  * 备注改变
+  //  */
+  // fInputRemark(e) {
+  //   let oAppoint = this.data.oAppointment;
+  //   // console.log("oAppoint============>", oAppoint);
+  //   oAppoint.remark = e.detail.value;
+
+
+  //   this.setData({
+  //     oAppointment: oAppoint
+  //   });
+  //   console.log("beizhu------", this.data.oAppointment)
+  // },
+
 
   // 预约时间改变
   bindDateChange: function (e) {
@@ -306,7 +332,7 @@ Page({
     //   }
     // })
       wx.showToast({
-        title: '预约成功预约成功预约成功预约成功预约成功',
+        title: '预约成功',
         icon: 'success',
         duration: 2000
       })
@@ -384,6 +410,7 @@ Page({
       arrData: this.data.arrData,
       sSelect: this.data.sSelect
     });
+    this.checkbook()
     //console.log("sSelect", this.data.sSelect)
   },
   /**
@@ -442,11 +469,12 @@ Page({
     };
     //console.log("pdata----1111--->", pdata);
     wxRequest(wxaapi.appointment.detail.url, pdata).then(function (result) {
-      // console.log("booking==00000--appointment===>", result, typeof (result.data.data));
+      console.log("booking==00000--appointment===>", result, "typeof",result.data.data);
       let appointmentTime = result.data.data.appointmentTime;
       if (result.data.code == 0) {
         console.log(result);
         result.data.data = typeof (result.data.data) == "object" ? result.data.data : {};
+        console.log("result.data.data ", result.data.data )
         _This.setData({
           oAppointment: result.data.data || {},
           bdate: appointmentTime ? cutil.formatTime(appointmentTime, "yyyy-MM-dd") : _This.data.nextdate,
@@ -456,7 +484,7 @@ Page({
         // console.log(result);
       }
     });
-    console.log("appointment----", this.data.oAppointment)
+    console.log("appointment----", _This.data.oAppointment)
   },
   /**
     * 提交预约信息
@@ -506,7 +534,7 @@ Page({
     }).then(function (updateResult) {
       if (updateResult.data.code == 0) {
         wxRequest(wxaapi.appointment.send.url, pdata).then(function (result) {
-          console.log("result.data---appointment-->", result.data);
+          console.log("result.data---appointment-->----------", result.data);
           if (result.data.code == 0) {
             let oAppointment = _This.data.oAppointment;
             oAppointment.status = 1;

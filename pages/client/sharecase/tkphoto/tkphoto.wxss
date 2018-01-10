@@ -29,9 +29,28 @@ align-items: center;
 }
 .footer{
   position: absolute;
-  bottom: 40px;
+  bottom: 60rpx;
   text-align: center;
 }
+.foot-tips{
+    position: absolute;
+    bottom: 150rpx;
+    background: #ffffff;
+    box-shadow: 0 0 10rpx #ddd;
+    padding: 16rpx 24rpx;
+}
+.dp-arr{
+  border: 24rpx solid #ffffff;
+  position: absolute;
+  border-left: 16rpx solid transparent;
+  border-right: 16rpx solid transparent;
+  border-bottom: 15rpx solid transparent;
+  bottom: -32rpx;
+  left: 50%;
+  margin-left: -18rpx;
+ 
+}
+
 .btn-sub{
   padding: 10rpx 40rpx;
   border-radius: 20px;

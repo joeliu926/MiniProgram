@@ -13,9 +13,13 @@
         </view>
     </view>
 
+<view class='t-a-c flex b-s foot-tips'>
+  <view class='f-14'>留下联系方式，上传照片获取个性化诊断</view>
+  <view class='dp-arr'></view>
+</view>
    <view class='footer  b-s' style='display:{{!isUpload?"":"none"}}'>  
       <view class='flex-c btn-sub'> 
-            <text class='f-32 btn-back'  bindtap='fSendMsg' style='' >把资料给医生</text>
+            <text class='f-32 btn-back'  bindtap='fSendMsg' style='' >立即提交</text>
       </view>           
     </view>
 

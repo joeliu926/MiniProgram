@@ -115,6 +115,8 @@
 .list-content-top-r {
   display: inline-block;
   vertical-align: top;
+  height: 50rpx;
+  overflow: hidden;
   width: 70%;
 }
 
@@ -126,6 +128,9 @@
 }
 
 .list-content-btm {
+  height: 50rpx;
+  vertical-align: top;
+  text-overflow: ellipsis;
   display: inline-block;
   width: 90%;
 }
@@ -312,6 +317,7 @@
 .cst-img {
   height: 96rpx;
   width: 96rpx;
+  border-radius: 12rpx;
 }
 
 .txt-cst {

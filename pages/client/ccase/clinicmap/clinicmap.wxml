@@ -1,0 +1,8 @@
+<view class='h-w-10 b-s' style='height:{{mapHeight}}px;'>
+<map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" controls="{{controls}}"  markers="{{markers}}"  polyline="{{polyline}}"  show-location class='w-10' style='height:{{mapHeight}}px;'></map>
+
+</view>
+<view class='w-10 c-p-d b-s flex fx-d-col bottom'>
+   <view class='txt-pd' style=''>{{clinicName}}</view>
+   <view class='txt-pd'>{{address}}</view>
+</view>

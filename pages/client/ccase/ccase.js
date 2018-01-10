@@ -63,7 +63,7 @@ Page({
       "doctor": {
         "tenantId": "",
         "id": 1,
-        "name": "李医生 http://140.143.185.73:8083/api/clue/pageList?userUnionId=oDOgS0oVZtsOeNBbQ1fDXi-Rm4L4&group=0&searchName=&pageNo=1&pageSize=10"
+        "name": "李医生"
       },
       "products": [
         {
@@ -107,6 +107,19 @@ Page({
    */
   onLoad: function (options) {
    // console.log("event------>event",event);
+
+
+ /* wx.showModal({
+      title: '提示',
+      content: '这是一个模态弹窗',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })*/
 
   let _This=this;
   var caseIds = options.caseIds;
@@ -408,7 +421,7 @@ Page({
     var _This = this;
     var oTempEvent = _This.data.oEvent;
     var currentPage = _This.data.currentPage;
-    oTempEvent.shareEventId = _This.data.shareEventId;
+    oTempEvent.shareEventId = _This.data.shareEventId||1;
     oTempEvent.productCode = _This.data.productCode;
     oTempEvent.clueId=_This.data.clueId; //线索id
     oTempEvent.consultationId=_This.data.consultationId;//咨询会话ID
@@ -466,8 +479,9 @@ Page({
     let cstunionid = _This.data.cstUid;
     let consultationId=_This.data.consultationId;//咨询会话ID
     let clueId = _This.data.clueId; //线索id
+    let shareEventId = _This.data.shareEventId; //分享id
     wx.navigateTo({
-      url: '/pages/client/sharecase/tkphoto/tkphoto?consultantId=' + cstunionid + "&consultationId=" + consultationId + "&clueId=" + clueId
+      url: '/pages/client/sharecase/tkphoto/tkphoto?consultantId=' + cstunionid + "&consultationId=" + consultationId + "&clueId=" + clueId + "&shareEventId=" + shareEventId
     })
   },
   fGetCaseData(){
@@ -475,8 +489,28 @@ Page({
     let caseCount = _This.data.detailInfo.contentList.length || 1;
     let countRate = parseInt(100 / caseCount);
   },
-  fTestPhone(){
-    console.log("--------点击触发事件--------");
+  /**
+   * 拨打电话
+   */
+  fMakePhone(){
+    let _This=this;
+    wx.makePhoneCall({
+      phoneNumber: _This.data.oClinic.phone
+    })
+  },
+  /**
+   * 查看诊所map
+   */
+  fAddressMap(){
+    let _This = this;
+    console.log("oClinic-------",_This.data.oClinic);
+    let oClinic = _This.data.oClinic;
+    let address = oClinic.address;
+    let coordinate = oClinic.coordinate;
+    let clinicName = oClinic.name;
+    wx.navigateTo({
+      url: './clinicmap/clinicmap?clinicName=' + clinicName+'&address=' + address + "&coordinate=" + coordinate,
+    })
   },
 
 

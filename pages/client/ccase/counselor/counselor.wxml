@@ -8,7 +8,6 @@
     <view class='cst-pd b-s' style=''>电话：{{oCstData.mobile}}</view>
   </view>
   <view class='cs-des flex-c fx-d-col f-16'>
-    <text class=''>我是您的专属咨询师，</text>
-    <text>有问题请随时与我联系！</text>
+    <text class=''>专属咨询师，为您提供一对一服务！</text>
   </view>
 </view>

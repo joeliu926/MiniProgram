@@ -1,6 +1,7 @@
 {
   "pages": [
-
+   
+  
     "pages/index/home",
     "pages/home/home",
     "pages/index/detail/cluedetail",
@@ -18,7 +19,8 @@
     "pages/projectcase/singletrail/singletrail",
     "pages/projectcase/casetrail/userlist/userlist",
     "pages/projectcase/casetrail/cbooking/cbooking",
-    "pages/client/ccase/counselor/counselor"
+    "pages/client/ccase/counselor/counselor",
+    "pages/client/ccase/clinicmap/clinicmap"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -41,7 +41,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     console.log("take photos options==>",options);
     var _This = this;
     var oEvent = _This.data.oEvent;
     getApp().getUserData(function (uinfo) {
@@ -51,7 +50,7 @@ Page({
         cstUid: options.consultantId,
         consultationId: options.consultationId,
         clueId: options.clueId,
-        shareEventId: options.shareEventId || ""
+        shareEventId: options.shareEventId || "1"
       });
       //console.log("cstUid----", _This.data.cstUid);
     });
@@ -137,7 +136,7 @@ Page({
       title: '上传中...',
     })
     _This.fUserEvent(event.eType.informationSubmit);
-    _This.fCustomerMsg();
+   // _This.fCustomerMsg();
     setTimeout(function () {
       wx.hideLoading();
       wx.showToast({

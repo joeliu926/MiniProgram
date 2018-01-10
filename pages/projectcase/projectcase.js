@@ -182,14 +182,13 @@ Page({
     let sItem = item.target.dataset;
     // 不可选
     if (this.data.selable.indexOf(sItem.itemid)==-1){
-       
         this.setData({
           isShow:'true',
           
         });
         setTimeout(function(){
           _This.setData({
-            isShow: 'false'
+            isShow:!_This.data.isShow
           });
 
         },2000);

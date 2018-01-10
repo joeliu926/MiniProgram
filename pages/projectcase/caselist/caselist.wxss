@@ -76,7 +76,7 @@ scroll-view {
     box-sizing: border-box;
     display: flex;
     flex-direction:column;
-    height: 100%;
+    /* height: 100%; */
     border:1px solid #eeeeee;
     border-radius: 15rpx;
 }
@@ -231,7 +231,7 @@ border: 1rpx solid #FF334B;
 .case-content{
     margin:0;
     width: 100%;
-    height: 100%;
+    height: 100%; 
     /* padding: 15px; */
     position: absolute;
     z-index: 100;
@@ -250,7 +250,7 @@ border: 1rpx solid #FF334B;
 .case-item-content{
   width: 100%;
   box-sizing: border-box;
-  margin: 0 0 20px 0;
+  margin: 20px 0 20px 0;
   padding-top:30rpx;
 }
 .case-item-detail{
@@ -264,7 +264,7 @@ border: 1rpx solid #FF334B;
   background-color: #F7F7F7;
   border-radius: 40rpx; 
   padding: 10rpx 34rpx;
-  margin:0 20rpx 30rpx 15px; 
+  margin:0 0rpx 30rpx 26rpx;
   color: #666666;
   font-size: 28rpx;
 
@@ -330,10 +330,16 @@ span{
 }
 .tipunable{
   position:fixed;
-  bottom: 120rpx;
+  top:0;
+  left:0;
+  /* bottom: 120rpx; */
   width:100%; 
+  height:30px;
+  line-height:30px;
+  background: #FFBE00;
   font-size:28rpx;
   text-align:center;
+  color:#FFF;
   z-index: 100;
 }
 

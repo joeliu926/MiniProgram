@@ -140,7 +140,29 @@ var urlConfig = {
     detail: {
       url: gConfig.remote + "/clinic/detail"   //获取诊所详情
     }
+  },
+  index:{
+    cluelist: {
+      url: gConfig.remote + "/index/cluelist"   //获取线索列表
+    },
+    cluedetail: {
+      url: gConfig.remote + "/index/cluedetail"   //获取线索详情
+    },
+    sharelist: {
+      url: gConfig.remote + "/index/sharelist"   //场景列表
+    },
+    clueremark: {
+      url: gConfig.remote + "/index/clueremark"   //线索备注
+    },
+    clueclose: {
+      url: gConfig.remote + "/index/clueclose"   //线索关闭
+    },
+    linkmanupdate: {
+      url: gConfig.remote + "/index/linkmanupdate"   //联系人更新
+    },
+    linkman: {
+      url: gConfig.remote + "/index/linkman"   //联系人信息
+    }
   }
- 
 }
 module.exports = urlConfig;

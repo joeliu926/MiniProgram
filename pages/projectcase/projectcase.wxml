@@ -1,5 +1,6 @@
 <wxs src="./projectcase.wxs" module="projectcase" />
-<view class='case-content'>
+<view class='case-content b-s'>
+  <!-- <view class=" tipunable" style="display:block;"> 当前项目下暂时无案例可选</view>  -->
   <block wx:for="{{projectItems}}" wx:for-item="oitem" wx:key="id">
     <view class='o-flex case-item-content'>
       <text class='case-title' bindtap='selectTitle'>{{oitem.productName}}</text>
@@ -14,15 +15,9 @@
       </view>
     </view>
   </block>
-  <text class=" tipunable" style="display:{{isShow=='true'?'block':'none'}}"> 当前项目下暂时无案例可选</text> 
+  <!-- -->
+   <view class=" tipunable" style="display: {{isShow=='true'?'block':'none'}}"> 当前项目下暂时无案例可选</view>  
   <view style="text-align:center; margin-top:20px;" class="selBtn">
     <span class="selend {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</span>
-  </view>
-</view>
-
-<view class='case-btn-content hide'>
-  <view class='o-flex'>
-    <image class='case-img-btn' src='../../public/images/case.png' mode='aspectFill'></image>
-    <text class='case-btn-name'>案例</text>
   </view>
 </view>

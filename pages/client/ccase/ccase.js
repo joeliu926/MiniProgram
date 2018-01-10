@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+  
     aCaseList: [],
     aCurrentList: [],//选中项
     itemLeft: 0,//左侧位置

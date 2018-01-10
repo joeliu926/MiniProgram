@@ -79,7 +79,7 @@
 <view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon {{isEndPage?"hide":""}}' bindtap='fTakePhoto' style=''>
    <image  class='cm-img' style='width:65rpx;'  src='../../../public/images/tk-photo-icon.png' ></image>
 </view>
-<view class='tip-font f-14 {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text>留下联系方式，开启专属咨询师一对一沟通.</text></view>
+<view class='tip-font f-14 {{oUserInfo.wechatMobile?"hide":""}} {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text style='padding:8rpx 16rpx;'>留下联系方式，开启专属咨询师一对一沟通.</text></view>
   <!------------------right icon start-------------------->
 
 

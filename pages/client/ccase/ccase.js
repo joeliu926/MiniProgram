@@ -107,20 +107,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   // console.log("event------>event",event);
-
-
- /* wx.showModal({
-      title: '提示',
-      content: '这是一个模态弹窗',
-      success: function (res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    })*/
+   // console.log("event------>event",event)
 
   let _This=this;
   var caseIds = options.caseIds;
@@ -474,15 +461,23 @@ Page({
 
 
 
-
+/**
+ * 跳转至上传图片页面
+ */
   fTakePhoto(){
     let _This = this;
+
+    let aCurrent = _This.data.aCurrentList[0] || {};
+    //console.log("aCurrentList------>", _This.data.aCurrentList);
+    let caseId = aCurrent.id;
     let cstunionid = _This.data.cstUid;
     let consultationId=_This.data.consultationId;//咨询会话ID
     let clueId = _This.data.clueId; //线索id
     let shareEventId = _This.data.shareEventId; //分享id
+    let tel = _This.data.oUserInfo.wechatMobile||"";//客户idoUserInfo.wechatMobile
+    let cid = _This.data.oUserInfo.id;//客户idoUserInfo.wechatMobile
     wx.navigateTo({
-      url: '/pages/client/sharecase/tkphoto/tkphoto?consultantId=' + cstunionid + "&consultationId=" + consultationId + "&clueId=" + clueId + "&shareEventId=" + shareEventId
+      url: '/pages/client/sharecase/tkphoto/tkphoto?consultantId=' + cstunionid + "&consultationId=" + consultationId + "&clueId=" + clueId + "&shareEventId=" + shareEventId + "&caseId=" + caseId + "&tel=" + tel + "&cid" + cid
     })
   },
   fGetCaseData(){

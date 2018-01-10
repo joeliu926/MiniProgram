@@ -50,7 +50,7 @@ Page({
    */
 
   onLoad: function (options) {
-    
+    console.log("booking options=====>", options);
     let _This = this;
     let nowtime=new Date();
     nowtime.setTime(nowtime.getTime() + 24 * 60 * 60 * 1000);

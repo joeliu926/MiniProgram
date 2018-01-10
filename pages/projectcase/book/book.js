@@ -8,15 +8,21 @@ Page({
    * 页面的初始数据
    */
   data: {
+    oUInfo:{},
     projectItems: [],
     uicondata: "",
     oUserInfo: {},
+    appointmentId:"",
+    clueId:"",
+    customerId:"",
+    consultUnId:"",
     consultationId: "",
     jSelect: "",
     oEvent: {},//预约事件参数
     reserveId: 0,//预约id
-    oUserInfo: {},
-    customerInfo: { name: "david", phoneNum:"18811795986"},
+    //oUserInfo: {},
+    bcustomerInfo: [],
+    customerInfo: [],
     consultPorject: [],
     oAppointment: {},
     nextdate:"",
@@ -41,7 +47,7 @@ Page({
     custmerinfo:[],
     arrData: [],
     active:"",
-    isshow:""
+    
    // totalerror:""
   },
 
@@ -51,6 +57,7 @@ Page({
 
   onLoad: function (options) {
     console.log("booking options=====>", options);
+   
     let _This = this;
     let nowtime=new Date();
     nowtime.setTime(nowtime.getTime() + 24 * 60 * 60 * 1000);
@@ -63,6 +70,9 @@ Page({
       title: 'loading...',
     });
     _This.setData({
+      customerId: options.customerId,
+      clueId: options.clueId,
+      appointmentId:options.appointmentId,
       nextdate: "" + new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-"+DATE,
       consultationId: options.consultationId,
       jSelect: options.productCode
@@ -73,11 +83,18 @@ Page({
     });
   
     this.checkbook();
-
+    // getApp().getUserData(function (result) {
+    //   console.log("loading use info=====>", result);
+     
+    //   _This.setData({
+    //     oUInfo: result
+    //   });
+     
+    // });
     getApp().getUserData(function (uinfo) {
       _This.setData({
         oUserInfo: uinfo,
-        options: options,
+        // options: options,
     
       });
       console.log("_This.data=====>", _This.data);
@@ -163,7 +180,7 @@ Page({
     let oCustomer = this.data.customerInfo;
     oCustomer.name = e.detail.value;
     this.setData({
-      customerInfo: oCustomer
+      bcustomerInfo: oCustomer
     });
     
     this.checkbook();
@@ -196,6 +213,15 @@ Page({
     this.setData({
       oAppointment: oAppointment
     });
+    if (this.data.proerror) {
+      this.setData({
+        isactive: true
+      })
+    } else {
+      this.setData({
+        isactive: false
+      })
+    }
   },
   /**
    * 电话改变
@@ -205,7 +231,7 @@ Page({
     let oCustomer = this.data.customerInfo;
     oCustomer.phoneNum = 18811795986;
     this.setData({
-      customerInfo: oCustomer
+      bcustomerInfo: oCustomer
     });
     this.checkbook();
   },
@@ -215,7 +241,7 @@ Page({
     let oCustomer = this.data.customerInfo;
     oCustomer.phoneNum = e.detail.value;
     this.setData({
-      customerInfo: oCustomer
+      bcustomerInfo: oCustomer
     });
     this.checkbook();
    // console.log("this data---customerInfo--", this.data.customerInfo);
@@ -293,7 +319,8 @@ Page({
   },
       // 项目选择弹出层
   showproduct:function(){
-    this.setData({showpro:false})
+    this.setData({showpro:false});
+    this.checkbook();
   },
   hideproduct:function(){
     this.setData({ showpro: true })
@@ -310,27 +337,11 @@ Page({
 
   //提交预约
   submit:function(){
-    
-    // wx.showModal({
-    //   title: '示',
-    //   content: '这是一个模态弹窗',
-    //   success: function (res) {
-    //     if (res.confirm) {
-    //       console.log('用户点击确定')
-    //     } else if (res.cancel) {
-    //       console.log('用户点击取消')
-    //     }
-    //   }
-    // })
-    // wx.showActionSheet({
-    //   itemList: ['A', 'B', 'C'],
-    //   success: function (res) {
-    //     console.log(res.tapIndex)
-    //   },
-    //   fail: function (res) {
-    //     console.log(res.errMsg)
-    //   }
-    // })
+    // let _This = this;
+    // let bookDate = _This.data.bdate + " " + _This.data.btime;
+   
+    // let Bookdate = Date.parse(new Date(bookDate));
+    // console.log("bookdae-----", Bookdate);
       wx.showToast({
         title: '预约成功',
         icon: 'success',
@@ -417,6 +428,8 @@ Page({
    * 选好了
    */
   selectItems: function (item) {
+    console.log("",this.data.arrData);
+    console.log("", this.data.sSelect);
     // console.log("=====================================");
     let sItem = item.target.dataset;
     //console.log(sItem);
@@ -440,7 +453,7 @@ Page({
     });
     let _This = this;
     let pdata = {
-      customerId: _This.data.options.cid || "",
+      customerId: _This.data.customerId||"",
     };
     console.log("pdta", pdata)
     wxRequest(wxaapi.customer.getcustomer.url, pdata).then(function (result) {
@@ -448,10 +461,10 @@ Page({
       if (result.data.code == 0) {
         _This.setData({
           customerInfo: result.data.data,
-          clueRemarkBk: cutil.formatTime(new Date(), "yyyy-MM-dd") + "-" + (result.data.data.name || result.data.data.nickname || "-")
+         // clueRemarkBk: cutil.formatTime(new Date(), "yyyy-MM-dd") + "-" + (result.data.data.name || result.data.data.nickname || "-")
 
         });
-        _This.fClueDetail();
+     //   _This.fClueDetail();
       } else {
         // console.log(result);
       }
@@ -462,23 +475,41 @@ Page({
    * 获取用户预约信息
    */
   fGetAppointment() {
+   
     let _This = this;
     let pdata = {
-      sessionId: _This.data.options.consultingId,
-      customerId: _This.data.options.cid,
+      id:178,
     };
-    //console.log("pdata----1111--->", pdata);
-    wxRequest(wxaapi.appointment.detail.url, pdata).then(function (result) {
+    //_This.data.appointmentId
+    console.log("pdata----1111--->", pdata);
+    wxRequest(wxaapi.appointment.detail.url,pdata).then(function (result) {
       console.log("booking==00000--appointment===>", result, "typeof",result.data.data);
       let appointmentTime = result.data.data.appointmentTime;
+      let remark = result.data.data.remark; 
+      let projectNames = result.data.data.projectNames; 
+      let products = [];
+      let sSelects=[];
+      projectNames.forEach(function(item){
+        console.log("item",item);
+        let product = {};
+        product.iname = item.projectName;
+        product.itemid = item.projectCode;
+        products.push(product);
+        sSelects.push(item.projectCode)
+      });
+      console.log("product", products)
       if (result.data.code == 0) {
         console.log(result);
         result.data.data = typeof (result.data.data) == "object" ? result.data.data : {};
         console.log("result.data.data ", result.data.data )
         _This.setData({
+          sSelect: sSelects,
+          clueRemark: remark,
+          arrData: products,          
           oAppointment: result.data.data || {},
           bdate: appointmentTime ? cutil.formatTime(appointmentTime, "yyyy-MM-dd") : _This.data.nextdate,
-          btime: appointmentTime ? cutil.formatTime(appointmentTime, "hh:mm") : "10:00"
+          btime: appointmentTime ? cutil.formatTime(appointmentTime, "hh:mm") : "10:00",
+
         });
       } else {
         // console.log(result);
@@ -490,33 +521,29 @@ Page({
     * 提交预约信息
     */
   fSubmitData() {
-  
     let _This = this;
     let bookDate = _This.data.bdate + " " + _This.data.btime;
+   // let Bookdate = Date.parse(new Date(bookDate));
     wx.showLoading({
       title: '提交中...'
     })
     console.log("user data---customerInfo---", _This.data.customerInfo);
-    if (_This.data.bdate == "" || _This.data.btime == "" || !_This.data.customerInfo.name || _This.data.customerInfo.name == "") {
-      console.log("_This.data.bdate----->", _This.data.bdate);
-      wx.hideLoading();
-      return false;
-    }
-    let cPorject = _This.data.consultPorject;
-    let pCodes = [];
-    cPorject.forEach(item => {
-      pCodes.push(item.productCode);
-    });
-
+    // if (_This.data.bdate == "" || _This.data.btime == "" || !_This.data.customerInfo.name || _This.data.customerInfo.name == "") {
+    //   console.log("_This.data.bdate----->", _This.data.bdate);
+    //   wx.hideLoading();
+    //   return false;
+    // }
+    let pCodes = _This.data.sSelect;
+    //console.log("pCodes", _This.data.sSelect);
     let aTime = cutil.str2Date(bookDate).valueOf();
     console.log("aTime---------->", aTime);
     let pdata = {
+      consultUnId: _This.data.oUserInfo.unionId,
+      customerId: _This.data.customerId,
+      clueId: _This.data.clueId,
       appointmentTime: aTime,
-      sessionId: _This.data.options.consultingId,
-      customerId: _This.options.cid,
       projectCodes: pCodes,
-      remark: _This.data.oAppointment.remark,
-      clueName: _This.data.clueRemark || _This.data.clueRemarkBk
+      remark: _This.data.clueRemark,
     };
 
     console.log("=======pdata============", pdata);
@@ -524,10 +551,11 @@ Page({
     // 客户更新
     let userupdate = {
       id: _This.data.customerInfo.id,
-      phoneNum: _This.data.customerInfo.phoneNum,
-      name: _This.data.customerInfo.name,
+      phoneNum: _This.data.bcustomerInfo.phoneNum,
+      name: _This.data.bcustomerInfo.name,
       wechatNum: _This.data.customerInfo.wechatNum
     };
+    console.log("userupdatep----", userupdate);
     wxRequest(wxaapi.customer.update.url, userupdate).then(function (updateResult) {
       console.log("update customer====>", updateResult);
       return updateResult;
@@ -543,7 +571,6 @@ Page({
               reserveId: result.data.data
             });
             wx.hideLoading();
-            _This.fBookingEvent();
           } else {
             wx.hideLoading();
           }

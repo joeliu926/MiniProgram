@@ -1,7 +1,7 @@
 /* pages/test/book.wxss */
 .out-content{
   background: #ffffff;
-  width:100%;
+  width:750rpx;
   margin-bottom: 24rpx;
   padding:40rpx 0;
 }
@@ -19,8 +19,8 @@
 }
 .head-p{
  position:absolute;
- top:0.1rpx
-  
+ top:0rpx;
+  left:290rpx
 }
 .text-w{
   width:50%

@@ -19,6 +19,6 @@
   <!-- -->
   <view class=" tipunable" style="display: {{isShow=='true'?'block':'none'}}"> 当前项目下暂时无案例可选</view>
   <view style="text-align:center; margin-top:20px;" class="selBtn">
-    <span class="selend {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</span>
+    <button class="selend f-16 {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</button>
   </view>
 </view>

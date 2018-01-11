@@ -546,8 +546,10 @@ Page({
   // 触摸结束事件
   fTouchEnd: function (e) {
     let _This = this;
-    var touchMove = e.changedTouches[0].pageX;
-    if (Math.abs(touchMove - touchDotX) > 50) {
+    let touchMove = e.changedTouches[0].pageX;
+    let tX = (e.changedTouches[0].pageX - touchDotX);
+    let tY = (e.changedTouches[0].pageY - touchDotY);
+    if (Math.abs(touchMove - touchDotX) > 100 && (Math.abs(tX) > Math.abs(tY)+40)) {
 
 
       let currentItemId = _This.data.currentItem;//当前的案例id

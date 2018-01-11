@@ -18,8 +18,8 @@
   <view class='dp-arr'></view>
 </view>
    <view class='footer  b-s'>  
-      <view class='flex-c btn-sub'> 
-            <text class='f-32 btn-back'  bindtap='fSendMsg' style='' >立即上传</text>
+      <view class='flex-c b-s btn-sub'> 
+            <text class='f-16 btn-back'  bindtap='fSendMsg' style='' >立即上传</text>
       </view>           
     </view>
 

@@ -20,6 +20,7 @@ Page({
     oUserInfo:{}, //当前用户信息
     isEndPage:false,//是否是最后一页
     aCaseIds:[],//项目案例IDs
+    aItemLeft:[],
     iCurrentSearchCase:0,//遍历查询案例信息，当前查询的条数
     currentLikeState:false,//当前的是否like
     olikeResult:{},//用户喜欢案例结果
@@ -223,9 +224,16 @@ Page({
     };
     wxRequest(wxaapi.consult.sharecase.url, pdata).then(function (result) {
       if (result.data.code == 0) {
+        let aCaseIds=result.data.data;
+        console.log("aCaseIds----------->", aCaseIds);
+        let aItemLeft = _This.data.aItemLeft||[];
+        aCaseIds.forEach((item,index)=>{
+          aItemLeft[item]=0;
+        });
          _This.setData({
-           aCaseIds:result.data.data,
-           totalCount: result.data.data.length
+           aCaseIds: aCaseIds,
+           totalCount: aCaseIds.length,
+           aItemLeft: aItemLeft
          });
          _This.fGetCaseDetailById();//获取案例详情
          //_This.fGetLikeState();//获取点赞状态
@@ -485,11 +493,12 @@ Page({
     let tY = (e.touches[0].pageY - touchDotY);
     let currentItemId = _This.data.currentItem;//当前的案例id
 
-    if (Math.abs(tY) < Math.abs(tX)) {
+    //if (Math.abs(tY) < Math.abs(tX)) {
+    if (Math.abs(tX) > Math.abs(tY) + 60) {
       _This.fGenerateShow(currentItemId, tX);
       _This.setData({
-       // itemLeft: (tX + "px"),
-       // itemTop: (tY + "px")
+        itemLeft: (tX + "px"),
+        itemTop: (tY + "px")
       });
     }else{
       this.setData({
@@ -503,7 +512,7 @@ Page({
     let touchMove = e.changedTouches[0].pageX;
     let tX = (e.changedTouches[0].pageX - touchDotX);
     let tY = (e.changedTouches[0].pageY - touchDotY);
-    if (Math.abs(touchMove - touchDotX) > 100 && (Math.abs(tX) > Math.abs(tY)+40)) {
+    if (Math.abs(touchMove - touchDotX) > 100 && (Math.abs(tX) > Math.abs(tY)+60)) {
 
 
       let currentItemId = _This.data.currentItem;//当前的案例id

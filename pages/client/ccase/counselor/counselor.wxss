@@ -1,10 +1,13 @@
+page{
+  background: #ffffff;
+}
 .counselor-ct{
-  background: linear-gradient(#9382F5, #5A9BFC);
+  background: linear-gradient(#9083ed, #5A9BFC);
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  top: 40rpx;
+  bottom: 40rpx;
+  right: 40rpx;
+  left: 40rpx;
   padding-top: 20%;
 }
 .color-w{
@@ -24,6 +27,7 @@
   width: 300rpx;
   height: 300rpx;
   border-radius: 50%;
+  border: 4rpx solid #ffffff;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 100%;

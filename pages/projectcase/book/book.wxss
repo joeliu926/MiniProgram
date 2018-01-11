@@ -78,6 +78,7 @@
 .custmerinfo-input{
   margin-right: 100rpx
 }
+
 .pickert{
   width: 240rpx;
   height: 60rpx;

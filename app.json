@@ -21,8 +21,8 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#000000",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "咨询师助手",
-    "navigationBarTextStyle": "#ffffff"
+    "navigationBarTextStyle": "black"
   }
 }

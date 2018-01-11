@@ -64,12 +64,12 @@ Page({
           }
         });
         resultobj.productList = slist;
-
         let _bookname="去预约";
-        if (resultobj.clueStatus != 1 && resultobj.clueStatus != 5) {
+      
+        if (resultobj.appointmentId) {
           _bookname = resultobj.appointmentTime;
-        }
-
+        } 
+  
         _This.setData({
           clueDetail: resultobj,
           clueName: cname,

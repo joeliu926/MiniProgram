@@ -8,8 +8,8 @@
           <span style="margin-right:10rpx;vertical-align:middle;">{{clueName}}</span>
           <span class="top-span">{{clueDetail.statusName}}</span>
         </div>
-        <div class='top-state'>{{clueDetail.clueStatus==1?"未预约":"已预约"}}</div>
-        <div class='top-book' bindtap='bookOption'>{{bookName}}</div>
+        <div class='top-state'>{{!clueDetail.appointmentId?"未预约":"已预约"}}</div>
+        <div class='top-book' bindtap='bookOption'>{{bookName=='去预约'?bookName:util.formatTime(bookName,"yyyy年MM月dd日 hh:mm")}}</div>
       </div>
       <div class='top-imgdiv'>
         <image class='top-img' src='{{clueDetail.customerLogo||"../../../public/images/default-title.png"}}'></image>

@@ -86,17 +86,29 @@ page {
   font-size: 12px;
 }
 
+.selBtn {
+  position: fixed;
+  bottom: 40rpx;
+  left: 50%;
+  margin-left:-215rpx;
+  z-index: 100;
+}
 .selend {
-  /* height:80px; */
+  width:450rpx;
+  height:80rpx; 
   box-sizing: border-box;
   background-color: #f7f7f7;
   border-radius: 40rpx;
-  padding: 10rpx 34rpx;
+  /* padding: 10rpx 50rpx 0rpx; */
   margin: 0 20rpx 30rpx 0;
   color: #666;
-  font-size: 28rpx;
+  font-size:30rpx!important;
+  line-height:80rpx!important;
+  border:none!important;
 }
-
+button::after{
+  border:none;
+}
 .tipunable {
   position: fixed;
   top: 0;
@@ -112,13 +124,6 @@ page {
   z-index: 100;
 }
 
-.selBtn {
-  position: fixed;
-  bottom: 40rpx;
-  left: 50%;
-  margin-left: -80rpx;
-  z-index: 100;
-}
 
 /*选中的状态*/
 

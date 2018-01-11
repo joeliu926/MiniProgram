@@ -125,6 +125,7 @@ Page({
   
   },
   imgPreview(e){
+    // console.log("++++++++++++++====================",e)
     var dataset = e.currentTarget.dataset;
     wx.previewImage({
       current: dataset.src, 

@@ -13,7 +13,7 @@
 }
 
 .top-content {
-  margin: 0 40rpx 40rpx 40rpx;
+  margin: 0 30rpx 30rpx 30rpx;
   padding: 30rpx;
   display: block;
   height: 200rpx;
@@ -32,8 +32,14 @@
 .top-span {
   background-color: #ffa92f;
   border-radius: 5rpx;
+  height:30rpx;
+  overflow: hidden;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 30rpx;
   font-size: 22rpx;
-  padding: 0 5rpx 5rpx 5rpx;
+  padding: 5rpx 8rpx 5rpx 5rpx;
+  box-sizing:border-box;
 }
 
 .top-state {
@@ -73,7 +79,7 @@
 }
 
 .top-cnt {
-  padding: 0 40rpx 40rpx 40rpx;
+  padding: 0 30rpx 30rpx 30rpx;
   display: block;
   font-size: 30rpx;
 }

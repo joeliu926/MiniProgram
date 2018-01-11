@@ -3,10 +3,13 @@
 <view class='out-content head-padding'>
   <view class='flex-c fx-d-col '>
     <image class='info-img head-p' src='{{customerInfo.logo}}' ></image>
-    <view class="text-head f-16">{{customerInfo.wxNickname}}    ( {{customerInfo.name}} )</view>
+ <!-- class='flex-c c-p-d p-b b-s w-10 mg-b {{oAppointment.status!=1?"":"hide"}}'  -->
+    <view  class='text-head f-16 {{customerInfo.name?"":"hide"}}'>{{customerInfo.name}}     （{{customerInfo.wxNickname}}） </view>
+    <view  class='text-head f-16 {{customerInfo.name?"hide":""}}'>{{customerInfo.wxNickname}} </view>
   </view>
 </view>
-
+<!-- 已关闭提示 -->
+ <view class=" tipunable" style="display: {{isshow?'block':'none'}}"> 已关闭用户不可以预约！</view>
 
 <!-- 预约项目和时间 -->
 <view class='out-content'>
@@ -18,13 +21,15 @@
       <view wx:for="{{arrData}}" wx:for-item="oitem1" wx:key="id">
         <view  class='pro-b'  >{{oitem1.iname}}<image data-id='{{oitem1.itemid}}' data-name='{{oitem1.iname}}'  class='pro-icon'    src='../../../public/images/bookdeletepro.png' bindtap='deletepro' ></image></view></view>
       </view> 
-    <view bindtap='showproduct' class='f-16 add-pro' ><image class='proadd-icon' src='../../../public/images/bookaddicon.png' ></image></view>
+      <!-- 打开项目列表 -->
+    <view bindtap='showproduct' class='f-16 add-pro {{status!=1?"":"hide"}} ' ><image class='proadd-icon' src='../../../public/images/bookaddicon.png' ></image></view>
+     <view bindtap='' class='f-16 add-pro {{status==1?"":"hide"}} ' ><image class='proadd-icon' src='../../../public/images/bookaddicon.png' ></image></view>
   </view>
 
 
   <view class='flex-c fx-d-col fx-jc-sb c-p-d '>
    <view class='f-16 mg-b' >预约时间</view>
-   <view class='flex'>
+   <view class='flex  {{status!=1?"":"hide"}}'>
      <picker  mode="date" value="{{bdate}}" start="{{clueStartDate}}"   bindchange="bindDateChange">
        <view class="f-16 b-t  pickerd pkdate">
          {{bdate}}
@@ -36,6 +41,19 @@
         {{btime}}
        </view>
     </picker>
+   </view>
+   <view class='flex  {{status==1?"":"hide"}}'>
+     
+       <view class="f-16 b-t  pickerd pkdate">
+         {{bdate}}
+       </view>
+    
+
+    
+       <view class="f-16  b-t pickert">
+        {{btime}}
+       </view>
+    
    </view>
   </view>
 </view>

@@ -4,7 +4,8 @@
   <div class='top'>
     <div class='top-content'>
       <div class="top-right">
-        <div>{{clueName}}
+        <div>
+          <span style="margin-right:10rpx;vertical-align:middle;">{{clueName}}</span>
           <span class="top-span">{{clueDetail.statusName}}</span>
         </div>
         <div class='top-state'>{{clueDetail.appointmentId?"未预约":"已预约"}}</div>

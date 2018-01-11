@@ -172,12 +172,14 @@ Page({
     if (this.data.currentSelect) {
       this.setData({
         searchName: '',
-        clueListOther: []
+        clueListOther: [],
+        showicon: false
       });
     } else {
       this.setData({
         searchName: '',
-        clueList: []
+        clueList: [],
+        showicon: false
       });
     }
     this.getClueList();
@@ -411,6 +413,19 @@ Page({
       autoFocus: true
     });
   },
+  searchInput: function (e) {
+    if (e.detail.value.length > 0) {
+      this.setData({
+        showicon: true,
+        phonenum: e.detail.value
+      });
+    } else {
+      this.setData({
+        showicon: false,
+        phonenum: ""
+      });
+    }
+  },
   radioChange: function (e) {
     let _linkman = this.data.linkMan;
     _linkman.gender = e.detail.value;
@@ -516,7 +531,7 @@ Page({
               linkMan: linkman,
               sexitems: sexitems
             });
-            _This.regixlinkman();
+            _This.regixlinkman('init');
           }
         });
         break;
@@ -541,7 +556,10 @@ Page({
     }
   },
   //验证联系人
-  regixlinkman() {
+  regixlinkman(params) {
+
+    
+    
     let cansubmit = true;
     let linkman = this.data.linkMan;
     if (linkman.name.length < 1 || linkman.phoneNum.length < 1) {
@@ -556,13 +574,17 @@ Page({
     this.setData({
       linkMansubmit: cansubmit
     });
-    if (linkman.name.length >6 ) {
-      this.alertMessage("姓名长度不能超过六个汉字！", 'red')
-      cansubmit = false;
+
+    if(params!='init'){
+      if (linkman.name.length > 6) {
+        this.alertMessage("姓名长度不能超过六个汉字！", 'red')
+        cansubmit = false;
+      }
+      if (message) {
+        this.alertMessage("电话号码填写不正确！", 'red')
+      }
     }
-    if(message){
-      this.alertMessage("电话号码填写不正确！", 'red')
-    }
+    
   },
   fClearData: function () {
     this.setData({
@@ -595,6 +617,17 @@ Page({
               slist.push(sm);
             }
           });
+
+
+          let cname = m.customerName;
+          if (!cname) {
+            cname = m.customerWxNickname;
+          } else {
+            if (m.customerWxNickname) {
+              cname += '(' + m.customerWxNickname + ')';
+            }
+          }
+          m.customerName = cname;
           m.productList = slist;
         });
         if (initOther || _This.data.currentSelect) {

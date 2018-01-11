@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "哈罗案例"
+  "navigationBarTitleText": "哈罗案例",
+   "backgroundTextStyle": "light",
+   "navigationBarBackgroundColor": "#000000",
+    "navigationBarTextStyle": "#ffffff"
 }

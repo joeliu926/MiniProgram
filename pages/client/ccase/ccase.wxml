@@ -104,7 +104,7 @@
   
  <view class='flex-c fx-jc-sb item-ct'>
       <view class='flex-c f-16'><image class='small-icon' src='../../../public/images/time-icon.png' mode="aspectFit"></image> {{oClinic.businessTime}}</view>
-        <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
+       
  </view>
 
   <view class='flex-c fx-jc-sb item-ct' bindtap='fMakePhone'>

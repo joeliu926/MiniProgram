@@ -134,6 +134,7 @@ padding: 24rpx;
 .end-cmy-icon{
   height: 100rpx;
   width: 100rpx;
+  border-radius: 50%;
 }
 .e-cmy-major{
   box-sizing: border-box; 

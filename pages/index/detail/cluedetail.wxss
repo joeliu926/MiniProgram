@@ -58,7 +58,6 @@
   height: 50rpx;
   display: block;
   text-align: center;
-  vartical-align: middle;
 }
 
 .top-imgdiv {
@@ -86,7 +85,7 @@
 
 .top-cnt>div {
   display: block;
-  height: 70rpx;
+  padding-top:10rpx;
 }
 
 .top-cnt>div image {
@@ -103,6 +102,8 @@
   border: 2rpx solid #8088f6;
   color: #8088f6;
   margin-right: 10rpx;
+   margin-bottom: 10rpx;
+  display: inline-block;
 }
 
 .cnt {

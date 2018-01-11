@@ -10,7 +10,8 @@ Page({
     clueDetail:{},
     clueName:'',
     clueStage:'',
-    remarklist:[]
+    remarklist:[],
+    bookName:''
   },
 
   /**
@@ -46,27 +47,36 @@ Page({
       id: params
     };
     wxRequest(wxaapi.index.cluedetail.url, pdata).then(function (result) {
+      let resultobj = result.data.data;
       if (result.data.code == 0) {
-        console.log('result', result);
-        let cname = result.data.data.customerName;
+        let cname = resultobj.customerName;
         if (!cname){
-          cname = result.data.data.customerWxNickname;
+          cname = resultobj.customerWxNickname;
         }else{
-          if (result.data.data.customerWxNickname) {
-            cname += '(' + result.data.data.customerWxNickname + ')';
+          if (resultobj.customerWxNickname) {
+            cname += '(' + resultobj.customerWxNickname + ')';
           }
         }
-          let slist = [];
-          result.data.data.productList.forEach((sm, index) => {
-            if (sm.productName && slist.length < 4) {
-              slist.push(sm);
-            }
-          });
-          result.data.data.productList = slist;
-        _This.setData({
-          clueDetail: result.data.data,
-          clueName: cname,
+        let slist = [];
+        resultobj.productList.forEach((sm, index) => {
+          if (sm.productName) {
+            slist.push(sm);
+          }
         });
+        resultobj.productList = slist;
+        let _bookname="去预约";
+      
+        if (resultobj.appointmentId) {
+          _bookname = resultobj.appointmentTime;
+        } 
+  
+        _This.setData({
+          clueDetail: resultobj,
+          clueName: cname,
+          bookName: _bookname
+        });
+     
+        
 
         _This.initRemark();
       } else {

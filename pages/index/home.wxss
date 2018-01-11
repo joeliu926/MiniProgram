@@ -25,28 +25,29 @@
 
 .search {
   height: 100rpx;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1rpx solid #eee;
 }
 
 .search-type {
   width: 70%;
   display: inline-block;
-  font-size: 30rpx;
   overflow: hidden;
+  height: 100rpx;
 }
 
 .search-type-item {
-  width: 120rpx;
-  height: 50rpx;
+  vertical-align: top;
+  width: 130rpx;
+    height: 100rpx;
   display: inline-block;
   text-align: center;
-  padding: 10rpx 10rpx 0 10rpx;
+  position: relative;
 }
 
 .search-type-top {
   display: block;
   height: 35rpx;
-  font-size: 30rpx;
+  font-size: 32rpx;
   padding: 20rpx 0 0 0;
   font-weight: bold;
 }
@@ -56,6 +57,9 @@
   height: 10rpx;
   width: 30rpx;
   display: inline-block;
+  position: absolute;
+  bottom: 0rpx;
+  left:42%;
 }
 
 .search-type-none {
@@ -73,14 +77,14 @@
 }
 
 .search-btn-span {
-  padding: 22rpx 20rpx 0 0;
+  padding: 17rpx 30rpx 0 0;
   display: inline-block;
 }
 
 .list {
   overflow-x: auto;
   overflow-y: hidden;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1rpx solid #eee;
 }
 
 .list-body {
@@ -111,7 +115,7 @@
 .list-content-top {
   display: inline-block;
   vertical-align: top;
-  width: 95%;
+  width: 96%;
 }
 
 .list-content-top-r {
@@ -121,13 +125,13 @@
   overflow: hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
-  width: 70%;
+  width: 65%;
 }
 
 .list-content-top-l {
   vertical-align: top;
   display: inline-block;
-  width: 30%;
+  width: 35%;
     text-overflow:ellipsis;
   white-space:nowrap;
   text-align: right;
@@ -167,7 +171,7 @@
 }
 
 .opensh {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1rpx solid #eee;
   height: 70rpx;
   display: block;
   padding: 20rpx;
@@ -226,8 +230,8 @@
 }
 
 .contect-line {
-  border-bottom: 1px solid #eee;
-  margin: 0 30rpx;
+  border-bottom: 1rpx solid #eee;
+  margin: 0 40rpx;
   padding: 30rpx 0;
 }
 
@@ -268,7 +272,7 @@
   padding-bottom: 10rpx;
   background-color: white;
   height: 98rpx;
-  border-top: 1px solid #eee;
+  border-top: 1rpx solid #eee;
 }
 
 .menu span {
@@ -358,5 +362,9 @@
   left: 40%;
 }
 .close-wind{
-  position:absolute;right:20rpx;top:0rpx;width:20rpx;height:20rpx;font-size:50rpx;
+  position:absolute;right:20rpx;top:50rpx;width:40rpx;height:40rpx;font-size:50rpx;display: block;
+}
+.nodata-img{
+   width: 364rpx;
+   height: 252rpx;
 }

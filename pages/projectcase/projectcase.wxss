@@ -97,11 +97,11 @@ page {
   width:450rpx;
   height:80rpx; 
   box-sizing: border-box;
-  background-color: #f7f7f7;
+  background-color: #cccccc;
   border-radius: 40rpx;
   /* padding: 10rpx 50rpx 0rpx; */
   margin: 0 20rpx 30rpx 0;
-  color: #666;
+  color: #FFFFFF;
   font-size:30rpx!important;
   line-height:80rpx!important;
   border:none!important;

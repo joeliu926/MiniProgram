@@ -6,14 +6,17 @@
 <view class='h-ct b-s' style='display:{{showData==0?"":"none"}};background-color:white;'>
   <view class='search' style='display:{{menuType?"":"none"}}'>
     <div class="search-type">
+      <div style="  padding-left:20rpx;  height: 100rpx;display:block; ">
+
       <div bindtap='selectType' data-id='{{item.id}}' wx:for="{{selectItem}}" wx:for-item="item" wx:key="id" class="search-type-item" style="{{item.val?'color:#8F82EC;':''}}">
         <span class="search-type-top">{{item.text}}</span>
         <span class="{{item.val?'search-type-bottom':'search-type-none'}}"></span>
       </div>
+      </div>
     </div>
     <div class="search-btn">
       <span class="search-btn-span">
-        <icon type='search' size='22' bindtap='searchBtn'></icon>
+        <icon type='search' style='vertical-align:bottom' size='20' bindtap='searchBtn'></icon>
       </span>
     </div>
   </view>
@@ -114,9 +117,9 @@
             <div style="padding-left:10rpx;margin: 20rpx  10rpx  10rpx 0;">
               <div class="list-content-top">
                 <span class='f-16 list-content-top-r'>{{'发起了'+oitem.casesName+'的案例分享'}}</span>
-                <span class='f-14 list-content-top-l' style="text-align:right;">{{util.formatTime(oitem.createTime,"MM-dd hh:mm")}}</span>
+                <span class='f-14 list-content-top-l' style="text-align:right;">{{util.formatTime(oitem.createTime,"yyyy-MM-dd hh:mm")}}</span>
               </div>
-              <div class='list-content-btm' style="margin: 0  0  10rpx  10rpx;">
+              <div class='list-content-btm' style="margin: 0  0  0 10rpx;">
                 <span class='f-14' wx:for="{{oitem.productsName}}" wx:for-item="pitem" wx:key="pitem">{{index==0?pitem:'、'+pitem}}</span>
 
               </div>
@@ -136,27 +139,28 @@
   <view style='display:{{clueList.length==0&&menuType&&!currentSelect?"":"none"}}'>
     <div class="list-none">
       <div class="list-none-div">
-        <icon type='search' size='16'></icon>
+    
+          <image style="vertical-align:middle;" class='nodata-img' src='../../public/images/no_data.png'></image>
       </div>
-      <div>没有相关线索哦，您可以点击菜单中间按钮，先创建一个场景分享。</div>
+     
     </div>
   </view>
 
   <view style='display:{{clueListOther.length==0&&menuType&&currentSelect?"":"none"}}'>
     <div class="list-none">
       <div class="list-none-div">
-        <icon type='search' size='16'></icon>
+        
+          <image style="vertical-align:middle;" class='nodata-img' src='../../public/images/no_data.png'></image>
       </div>
-      <div>没有相关线索哦，您可以点击菜单中间按钮，先创建一个场景分享。</div>
+       
     </div>
   </view>
 
   <view style='display:{{shareList.length==0&&!menuType?"":"none"}}'>
     <div class="list-none">
       <div class="list-none-div">
-        <icon type='search' size='16'></icon>
+       <image style="vertical-align:middle;" class='nodata-img' src='../../public/images/no_data.png'></image>
       </div>
-      <div>您还没有过场景哦，您可以点击菜单中间按钮，先创建一个场景分享。</div>
     </div>
   </view>
 
@@ -166,14 +170,14 @@
   <view class='menu'>
     <div class='menu-l' data-Type='1' bindtap='menuClick'>
       <image src='{{menuType?"../../public/images/menu-l-t.png":"../../public/images/menu-l-f.png"}}'></image>
-      <span style="{{menuType?'color:#8F82E8;':''}}">线索</span>
+      <span style="{{menuType?'color:#8F82E8;':'color:#999999;'}}">线索</span>
     </div>
     <div class="menu-m" data-Type='2' bindtap='menuClick'>
       <image src='../../public/images/clue-addmore.png'></image>
     </div>
     <div class='menu-r' data-Type='3' bindtap='menuClick'>
       <image src='{{menuType?"../../public/images/menu-r-f.png":"../../public/images/menu-r-t.png"}}'></image>
-      <span style="{{menuType?'':'color:#8F82E8;'}}">场景</span>
+      <span style="{{menuType?'color:#999999;':'color:#8F82E8;'}}">场景</span>
     </div>
   </view>
   <!--
@@ -204,7 +208,7 @@
     <div class="opensh-input">
       <div class='flex input-o'>
         <icon type='search' size='16' style='margin-right:10rpx;'></icon>
-        <input class='s-input f-16' style='text-align:left;' bindinput="searchInput" bindconfirm="searchClueinput" name="searchName" value="{{searchName}}" focus='{{autoFocus}}' placeholder='请输入客户名称' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;' maxlength='36'
+        <input class='s-input f-16' style='text-align:left;' bindinput="searchInput" bindconfirm="searchClueinput" name="searchName" value="{{searchName}}" focus='{{autoFocus}}' placeholder='请输入客户名称' placeholder-class='f-12 c-9' placeholder-style='font-size:30rpx;color:#999999;' maxlength='36'
           placeholder-class="place"></input>
         <icon bindtap='fClearData' size='16' type='clear' class='{{showicon?"show":"hide"}}'></icon>
       </div>
@@ -217,9 +221,11 @@
 <!--线索备注-->
 <view class='h-ct w-10' style='display:{{showData==3?"":"none"}};background-color:white;position:relative;'>
   <div class="close-wind" bindtap ="closewindow">×</div>
+    <div style="display:block;height:100rpx;">
+  </div>
   <div>
     <div class="remark">
-      <textarea class='s-input f-16 remark-area'  bindinput="remarkinput" name="cluereMark" value="{{cluereMark}}" placeholder='补充一些线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'></textarea>
+      <textarea class='s-input f-16 remark-area'  bindinput="remarkinput" name="cluereMark" value="{{cluereMark}}" placeholder='补充一些线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:30rpx;color:#999999;'></textarea>
     </div>
     <div class='submit-btn'>
       <div style='{{cluereMark.length<1?"background:#E5E5E5;":""}}' bindtap='submitRemark'>提交</div>
@@ -230,9 +236,11 @@
 <!--关闭备注-->
 <view class='h-ct w-10' style='display:{{showData==5?"":"none"}};background-color:white;position:relative;'>
   <div class="close-wind" bindtap ="closewindow">×</div>
+  <div style="display:block;height:100rpx;">
+  </div>
   <div>
     <div class="close-content">
-      <textarea class='s-input f-16 close-area' bindinput="closeinput"  name="clueClose" value="{{clueClose}}" placeholder='补充关闭线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'></textarea>
+      <textarea class='s-input f-16 close-area' bindinput="closeinput"  name="clueClose" value="{{clueClose}}" placeholder='补充关闭线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:30rpx;color:#999999;'></textarea>
     </div>
     <div class='submit-btn'>
       <div style='{{clueClose.length<1?"background:#E5E5E5;":""}}' bindtap='submitClose'>提交</div>
@@ -242,7 +250,9 @@
 
 <!--联系人-->
 <view class='h-ct w-10' style='display:{{showData==4?"":"none"}};position:relative;'>
-  <div class="close-wind" style="top:-5rpx;" bindtap ="closewindow">×</div>
+  <div class="close-wind" bindtap ="closewindow">×</div>
+    <div style="display:block;height:100rpx;background-color:white;">
+  </div>
   <div>
     <view class='p-d-ct mg-b' style='background-color:white;'>
       <view class='flex bk-c-w fx-jc-sb contect-line'>
@@ -250,7 +260,7 @@
           姓名
         </view>
         <view class='f-16'>
-          <input name="name" class='t-r' value="{{linkMan.name}}" placeholder-style='font-size:24rpx;color:#999999;' bindinput="linkchangeName" placeholder='填写姓名'></input>
+          <input name="name" class='t-r' value="{{linkMan.name}}" placeholder-style='font-size:26rpx;color:#999999;' bindinput="linkchangeName" placeholder='填写姓名'></input>
         </view>
       </view>
       <view class='flex bk-c-w fx-jc-sb contect-line'>
@@ -265,7 +275,7 @@
           </radio-group>
         </view>
       </view>
-      <view class='flex bk-c-w fx-jc-sb' style=' margin:0 30rpx;padding:30rpx 0;'>
+      <view class='flex bk-c-w fx-jc-sb' style=' margin:0 40rpx;padding:30rpx 0;'>
         <view class='f-16'>
           出生日期
         </view>
@@ -288,12 +298,12 @@
           <input name="name" placeholder-style='font-size:24rpx;color:#999999;' class='t-r' value="{{linkMan.phoneNum}}" bindinput="linkchangephone" placeholder='输入电话'></input>
         </view>
       </view>
-      <view class='flex bk-c-w fx-jc-sb c-p-d'>
+      <view class='flex bk-c-w fx-jc-sb c-p-d' style='margin:0 40rpx;padding:30rpx 0;'>
         <view class='f-16'>
           微信
         </view>
         <view class='f-16'>
-          <input name="name" placeholder-style='font-size:24rpx;color:#999999;' class='t-r' value="{{linkMan.wechatNum}}" bindinput="linkchangewechat" placeholder='输入微信'></input>
+          <input name="name" placeholder-style='font-size:26rpx;color:#999999;' class='t-r' value="{{linkMan.wechatNum}}" bindinput="linkchangewechat" placeholder='输入微信'></input>
         </view>
       </view>
     </view>

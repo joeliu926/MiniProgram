@@ -8,8 +8,8 @@
           <span style="margin-right:10rpx;vertical-align:middle;">{{clueName}}</span>
           <span class="top-span">{{clueDetail.statusName}}</span>
         </div>
-        <div class='top-state'>{{clueDetail.appointmentId?"未预约":"已预约"}}</div>
-        <div class='top-book' bindtap='bookOption'>去预约</div>
+        <div class='top-state'>{{!clueDetail.appointmentId?"未预约":"已预约"}}</div>
+        <div class='top-book' bindtap='bookOption'>{{bookName=='去预约'?bookName:util.formatTime(bookName,"yyyy年MM月dd日 hh:mm")}}</div>
       </div>
       <div class='top-imgdiv'>
         <image class='top-img' src='{{clueDetail.customerLogo||"../../../public/images/default-title.png"}}'></image>
@@ -22,8 +22,12 @@
         <div>
           <image src="../../../public/images/clue-yumyue.png"></image> 当前跟进：{{clueDetail.followUseName}}</div>
         <div>
-          <image src="../../../public/images/clue-connect.png"></image> 意向需求：
+          <div style="display:inline-block;width:30%;vertical-align: top;">
+           <image src="../../../public/images/clue-connect.png"></image> 意向需求：
+          </div>
+          <div style="display:inline-block;width:70%;vertical-align: top;">
             <span wx:for="{{clueDetail.productList}}" wx:for-item="pitem" wx:key="productCode">{{pitem.productName}}</span>
+          </div>
         </div>
       </div>
     </div>

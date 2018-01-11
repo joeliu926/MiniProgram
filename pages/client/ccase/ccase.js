@@ -500,13 +500,9 @@ Page({
    */
   fAddressMap(){
     let _This = this;
-    console.log("oClinic-------",_This.data.oClinic);
-    let oClinic = _This.data.oClinic;
-    let address = oClinic.address;
-    let coordinate = oClinic.coordinate;
-    let clinicName = oClinic.name;
+    let unionId=_This.data.cstUid;
     wx.navigateTo({
-      url: './clinicmap/clinicmap?clinicName=' + clinicName+'&address=' + address + "&coordinate=" + coordinate,
+      url: './clinicmap/clinicmap?unionId=' + unionId
     })
   },
 

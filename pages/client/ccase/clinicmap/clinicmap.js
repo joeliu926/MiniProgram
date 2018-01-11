@@ -1,3 +1,5 @@
+const wxaapi = require('./../../../../public/wxaapi.js');//api地址参数
+const wxRequest = require('./../../../../utils/js/wxRequest.js'); //请求参数
 Page({
   data: {
     logs: [],
@@ -15,65 +17,53 @@ Page({
   },
   onLoad: function (options) {
     let _This = this;
-    let coordinate = options.coordinate;
-    let address = options.address;
-    let clinicName = options.clinicName;
-
-    let  longitude = parseFloat(coordinate.split(",")[0]);
-    let latitude= parseFloat(coordinate.split(",")[1]);
-
-    console.log("options----->", options, latitude, longitude);
-    let markers = _This.data.markers;
-    markers[0].latitude = latitude;
-    markers[0].longitude = longitude;
-      
     _This.setData({
-      latitude: latitude,
-      longitude: longitude,
-      markers: markers,
-      clinicName: clinicName,
-      address:address
+      unionId: options.unionId
     });
+
+    _This.fGetClinicDetail();
     wx.getSystemInfo({
       success:function(result){
-        console.log("system info------->", result);
         _This.setData({
           mapHeight: (result.windowHeight-100)
         });
       }
     });
-
-
   },
-  getPhoneNumber(e) {
-    console.log("------", e);
-    let encryptedData = e.detail.encryptedData;
-    let iv = e.detail.iv;
-    if (!encryptedData) {
-      return false;
-    }
-    ////////////////////////////////////////////
-    let sessionKey = "";
-    wxPromise(wx.login)().then(result => {
-      let ucode = result.code;
-      return wxRequest(wxaapi.unionid.code.url, { code: ucode });
-    }).then(resSession => {
-      sessionKey = resSession.data.session_key;
-      return sessionKey;
-    }).then(sessionKey => {
-      console.log("sessionKey----->", sessionKey);
-      var postData = {
-        encryptedData: encryptedData,
-        sessionKey: sessionKey, iv: iv
-      };
-      return wxRequest(wxaapi.unionid.userinfo.url, postData);
-    }).then(resAll => {
-      console.log("resAll----->", resAll);
+  /**
+ * 获取诊所详情信息
+ */
+  fGetClinicDetail() {
+    let _This = this;
+    let pdata = {
+      unionId: _This.data.unionId //咨询师unionid
+    };
+    wxRequest(wxaapi.clinic.detail.url, pdata).then(function (result) {
+      if (result.data.code == 0) {
+        _This.setData({
+          oClinic: result.data.data
+        });
+        _This.fGetMapData();
+      }
     });
-
-    ///////////////////////////////////////////
   },
-
+  /**
+   * 生成地图数据
+   */
+  fGetMapData(){
+    let _This = this;
+    let oClinic = _This.data.oClinic;
+    let longitude = parseFloat(oClinic.coordinate.split(",")[0]);
+    let latitude = parseFloat(oClinic.coordinate.split(",")[1]);
+    let markers = _This.data.markers;
+    markers[0].latitude = latitude;
+    markers[0].longitude = longitude;
+    _This.setData({
+      latitude: latitude,
+      longitude: longitude,
+      markers: markers
+    });
+  },
   regionchange(e) {
     console.log(e.type)
   },

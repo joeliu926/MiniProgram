@@ -109,7 +109,10 @@ var urlConfig = {
       url: gConfig.remote + "/consult/getsharelike" //   查询一次分享中，单个客户对某个案例的点赞状态
     },
     handelsharecase: {
-      url: gConfig.remote + "/consult/handelsharecase" // 客户进入咨询师分享的小程序，对某个案例进行点赞操作 或者进行 提交资料给医生操作
+      url: gConfig.remote + "/consult/handelsharecase" // 客户进入咨询师分享的小程序，对某个案例进行点赞操作 或者进行 提交资料给医生操作  
+    },
+    getpostphoto: {
+      url: gConfig.remote + "/consult/getpostphoto" // 获取用户上传的头像图片
     }
   },
   appointment: {
@@ -153,6 +156,9 @@ var urlConfig = {
     },
     clueremark: {
       url: gConfig.remote + "/index/clueremark"   //线索备注
+    },
+    remarklist: {
+      url: gConfig.remote + "/index/remarklist"   //备注列表
     },
     clueclose: {
       url: gConfig.remote + "/index/clueclose"   //线索关闭

@@ -14,20 +14,33 @@
     </view>
 
 <view class='t-a-c flex b-s foot-tips'>
-  <view class='f-14'>留下联系方式，上传照片获取个性化诊断</view>
+  <view class='f-14'>上传获取个性化诊疗</view>
   <view class='dp-arr'></view>
 </view>
-   <view class='footer  b-s' style='display:{{!isUpload?"":"none"}}'>  
+   <view class='footer  b-s'>  
       <view class='flex-c btn-sub'> 
-            <text class='f-32 btn-back'  bindtap='fSendMsg' style='' >立即提交</text>
+            <text class='f-32 btn-back'  bindtap='fSendMsg' style='' >立即上传</text>
       </view>           
     </view>
 
-    <view class='footer  b-s' style='display:{{isUpload?"":"none"}}' >  
+    <view class='footer  b-s hide' style='display:{{isUpload?"":"none"}}' >  
       <view class='flex-c btn-sub'> 
           <image src='../../../../public/images/icon-we.png' class='icon-we' style=''></image>
            <text class='f-32' bindtap='fClose'>返回咨询</text>
       </view>           
     </view>
 </view>
+
+<view class='mask {{isShowMask?"":"hide"}}'>
+     <view class='pop-box flex-c fx-d-col'>
+       <text class='f-16 tex-pd'>上传成功！</text>
+       <text class='f-14 tex-pd'>授权手机号，开启专属咨询师沟通</text>
+       <button class='f-14 auth-tel'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">去授权</button>
+     </view>
+</view>
+<view class='w-10 f-16 show-toast {{isUpload?"":"hide"}}'>
+   <text class=''>提交成功！</text>
+</view>
+
+
 

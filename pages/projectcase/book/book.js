@@ -8,6 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isactive:"",
+    isshow:"",
     oUInfo:{},
     projectItems: [],
     uicondata: "",
@@ -25,6 +27,7 @@ Page({
     customerInfo: [],
     consultPorject: [],
     oAppointment: {},
+    status:"",
     nextdate:"",
     bdate:"",
     //bDate: new Date().getDay() < 10 ? "0" + new Date().getDay() : new Date().getDay(),
@@ -47,6 +50,8 @@ Page({
     custmerinfo:[],
     arrData: [],
     active:"",
+    clueStatus:"",
+    
     
    // totalerror:""
   },
@@ -70,6 +75,7 @@ Page({
       title: 'loading...',
     });
     _This.setData({
+      clueStatus: options.clueStatus,
       customerId: options.customerId,
       clueId: options.clueId,
       appointmentId:options.appointmentId,
@@ -77,12 +83,10 @@ Page({
       consultationId: options.consultationId,
       jSelect: options.productCode
     });
-    console.log("_This.data====>",_This.data);
+    //console.log("_This.data====>",_This.data);
     getApp().getUserData(function (uinfo) {
       uinfo && _This.getProjectList(uinfo.unionId);
     });
-  
-    this.checkbook();
     // getApp().getUserData(function (result) {
     //   console.log("loading use info=====>", result);
      
@@ -97,12 +101,15 @@ Page({
         // options: options,
     
       });
-      console.log("_This.data=====>", _This.data);
+     // console.log("_This.data=====>", _This.data);
      
       _This.getUserInfo();
       _This.fGetAppointment();
+     
 
     });
+    this.checkbook();
+    this.clearTimeout();
     
   },
   
@@ -172,6 +179,21 @@ Page({
   onShareAppMessage: function () {
   
   },
+  //提示已关闭
+  clearTimeout(){
+    let _This=this;
+    console.log("cluestatus", this.data.clueStatus)
+    if (this.data.clueStatus == 5) {
+    this.setData({
+      isShow: 'true',
+    });
+    // var timer = setTimeout(function () {
+    //   _This.setData({
+    //     isShow: !_This.data.isShow
+    //   });
+    // }, 1000);
+    // clearTimeout(timer);
+  } },
   /**
  * 客户姓名改变
  */
@@ -204,7 +226,12 @@ Page({
     this.checkname();
     this.checkpro();
     let oAppointment = this.data.oAppointment;
-    if (this.data.nameerror && this.data.phoneerror && this.data.proerror) {
+    
+    // console.log("this.data.nameerror", this.data.nameerror);
+    // console.log("this.data.phoneerror", this.data.phoneerror);
+    // console.log("this.data.proerror", this.data.proerror);
+
+    if (this.data.status!=1&&this.data.nameerror && this.data.phoneerror && this.data.proerror) {
       oAppointment.status = 0;
     } else {
       oAppointment.status = 1;
@@ -213,6 +240,7 @@ Page({
     this.setData({
       oAppointment: oAppointment
     });
+   // console.log("this.data.oAppointment--------------++++>", this.data.oAppointment)
     if (this.data.proerror) {
       this.setData({
         isactive: true
@@ -222,6 +250,7 @@ Page({
         isactive: false
       })
     }
+
   },
   /**
    * 电话改变
@@ -264,8 +293,8 @@ Page({
     this.setData({
       clueRemark: e.detail.value
     });
-    console.log("beizhu------", this.data.clueRemark);
-    console.log("cucustomerInfo", this.data.customerInfo)
+    //console.log("beizhu------", this.data.clueRemark);
+   // console.log("cucustomerInfo", this.data.customerInfo)
   },
   // /**
   //  * 备注改变
@@ -380,6 +409,7 @@ Page({
    // console.log("this.data.sSelect-----",this.data.sSelect);
    // console.log("this.data.sSelect", this.data.arrData);
    this.checkpro();
+   //if this.data.status != 1
    if (this.data.proerror){
      this.setData({
        isactive: true
@@ -428,8 +458,8 @@ Page({
    * 选好了
    */
   selectItems: function (item) {
-    console.log("",this.data.arrData);
-    console.log("", this.data.sSelect);
+    //console.log("this.data.arrData",this.data.arrData);
+    //console.log("this.data.sSelect", this.data.sSelect);
     // console.log("=====================================");
     let sItem = item.target.dataset;
     //console.log(sItem);
@@ -455,7 +485,7 @@ Page({
     let pdata = {
       customerId: _This.data.customerId||"",
     };
-    console.log("pdta", pdata)
+    //console.log("pdta", pdata)
     wxRequest(wxaapi.customer.getcustomer.url, pdata).then(function (result) {
       console.log("single==00000--user info===>", result);
       if (result.data.code == 0) {
@@ -478,31 +508,39 @@ Page({
    
     let _This = this;
     let pdata = {
-      id:178,
+      //id:189,
+      id: _This.data.appointmentId
     };
     //_This.data.appointmentId
-    console.log("pdata----1111--->", pdata);
+    //console.log("pdata----1111--->", pdata);
     wxRequest(wxaapi.appointment.detail.url,pdata).then(function (result) {
-      console.log("booking==00000--appointment===>", result, "typeof",result.data.data);
+      //console.log("booking==00000--appointment===>", result, typeof(result.data.data));
       let appointmentTime = result.data.data.appointmentTime;
+      //console.log("appointmentTime----->", appointmentTime);
       let remark = result.data.data.remark; 
       let projectNames = result.data.data.projectNames; 
       let products = [];
       let sSelects=[];
+      let ostatus = result.data.data.status;
+      if (projectNames){
       projectNames.forEach(function(item){
-        console.log("item",item);
+       // console.log("item",item);
         let product = {};
         product.iname = item.projectName;
         product.itemid = item.projectCode;
         products.push(product);
         sSelects.push(item.projectCode)
-      });
-      console.log("product", products)
+      });}else{
+       // console.log("proNameesle")
+      }
+     // console.log("product", products)
       if (result.data.code == 0) {
-        console.log(result);
+       
+        //console.log("appointment=====result====",result);
         result.data.data = typeof (result.data.data) == "object" ? result.data.data : {};
-        console.log("result.data.data ", result.data.data )
+       console.log("result.data.data ", result.data.data )
         _This.setData({
+          status: ostatus,
           sSelect: sSelects,
           clueRemark: remark,
           arrData: products,          
@@ -511,11 +549,12 @@ Page({
           btime: appointmentTime ? cutil.formatTime(appointmentTime, "hh:mm") : "10:00",
 
         });
+        _This.checkbook();
       } else {
         // console.log(result);
       }
     });
-    console.log("appointment----", _This.data.oAppointment)
+    //console.log("appointment----", _This.data.oAppointment)
   },
   /**
     * 提交预约信息
@@ -527,7 +566,7 @@ Page({
     wx.showLoading({
       title: '提交中...'
     })
-    console.log("user data---customerInfo---", _This.data.customerInfo);
+    //console.log("user data---customerInfo---", _This.data.customerInfo);
     // if (_This.data.bdate == "" || _This.data.btime == "" || !_This.data.customerInfo.name || _This.data.customerInfo.name == "") {
     //   console.log("_This.data.bdate----->", _This.data.bdate);
     //   wx.hideLoading();
@@ -536,7 +575,7 @@ Page({
     let pCodes = _This.data.sSelect;
     //console.log("pCodes", _This.data.sSelect);
     let aTime = cutil.str2Date(bookDate).valueOf();
-    console.log("aTime---------->", aTime);
+   // console.log("aTime---------->", aTime);
     let pdata = {
       consultUnId: _This.data.oUserInfo.unionId,
       customerId: _This.data.customerId,
@@ -546,7 +585,7 @@ Page({
       remark: _This.data.clueRemark,
     };
 
-    console.log("=======pdata============", pdata);
+    //console.log("=======pdata============", pdata);
 
     // 客户更新
     let userupdate = {
@@ -555,9 +594,9 @@ Page({
       name: _This.data.bcustomerInfo.name,
       wechatNum: _This.data.customerInfo.wechatNum
     };
-    console.log("userupdatep----", userupdate);
+    //console.log("userupdatep----", userupdate);
     wxRequest(wxaapi.customer.update.url, userupdate).then(function (updateResult) {
-      console.log("update customer====>", updateResult);
+      //console.log("update customer====>", updateResult);
       return updateResult;
     }).then(function (updateResult) {
       if (updateResult.data.code == 0) {
@@ -565,11 +604,16 @@ Page({
           console.log("result.data---appointment-->----------", result.data);
           if (result.data.code == 0) {
             let oAppointment = _This.data.oAppointment;
-            oAppointment.status = 1;
+            //oAppointment.status = 1;
             _This.setData({
               oAppointment: oAppointment,
               reserveId: result.data.data
             });
+            wx.showToast({
+              title: '预约成功',
+              icon: 'success',
+              duration: 2000
+            })
             wx.hideLoading();
           } else {
             wx.hideLoading();
@@ -577,11 +621,9 @@ Page({
         });
       } else {
         wx.hideLoading();
-        console.log(updateResult);
+       //console.log(updateResult);
       }
     });
   },
-  selectTitle: function () {
-    console.log("this is select title");
-  },
+  
 })

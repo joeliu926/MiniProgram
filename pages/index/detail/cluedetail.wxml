@@ -1,28 +1,29 @@
 <!--pages/index/detail/cluedetail.wxml-->
+<wxs src="../../../utils/wxs/cutil.wxs" module="util" />
 <view class='page'>
   <div class='top'>
     <div class='top-content'>
       <div class="top-right">
-        <div>杨美丽（Davidlili）
-          <span class="top-span">网资跟进</span>
+        <div>
+          <span style="margin-right:10rpx;vertical-align:middle;">{{clueName}}</span>
+          <span class="top-span">{{clueDetail.statusName}}</span>
         </div>
-        <div class='top-state'>未预约</div>
-        <div class='top-book'>去预约</div>
+        <div class='top-state'>{{clueDetail.appointmentId?"未预约":"已预约"}}</div>
+        <div class='top-book' bindtap='bookOption'>去预约</div>
       </div>
       <div class='top-imgdiv'>
-        <image class='top-img' src='{{oitem.wxHeadPhoto||"../../../public/images/default-title.png"}}'></image>
+        <image class='top-img' src='{{clueDetail.customerLogo||"../../../public/images/default-title.png"}}'></image>
       </div>
     </div>
     <div>
       <div class='top-cnt'>
         <div>
-          <image src="../../../public/images/clue-man.png"></image> 拥有者：杨宏伟</div>
+          <image src="../../../public/images/clue-man.png"></image> 拥有者：{{clueDetail.creatorName}}</div>
         <div>
-          <image src="../../../public/images/clue-yumyue.png"></image> 当前跟进：杨宏伟</div>
+          <image src="../../../public/images/clue-yumyue.png"></image> 当前跟进：{{clueDetail.followUseName}}</div>
         <div>
           <image src="../../../public/images/clue-connect.png"></image> 意向需求：
-          <span>脂肪去皱</span>
-          <span>脂肪去皱</span>
+            <span wx:for="{{clueDetail.productList}}" wx:for-item="pitem" wx:key="productCode">{{pitem.productName}}</span>
         </div>
       </div>
     </div>
@@ -34,53 +35,27 @@
         <span class="{{item.val?'search-type-bottom':'search-type-none'}}"></span>
       </div>
     </div>
-    <div class="cnt-content">
+    <div  wx:for="{{remarklist}}" wx:for-item="remark" wx:key="id" class="cnt-content">
       <div class="cnt-imgdiv">
-        <image src='{{oitem.wxHeadPhoto||"../../../public/images/default-title.png"}}'></image>
+        <image src='{{remark.headImgUrl||"../../../public/images/default-title.png"}}'></image>
       </div>
       <div class='cnt-text'>
         <div class='cnt-text-name'>
-          姜咨询
+          {{remark.createrName}}
         </div>
         <div class='cnt-text-time'>
-          2017年12月12日 下午 12：00
+          {{util.formatTime(remark.createTime,"yyyy年MM月dd日 hh:mm")}}
         </div>
         <div class='cnt-text-txt'>
-          要地工载顶替东奔西走 基本原则载顶替苛塔顶 地茜基本原则栽大声基本原则栽奔顶替棋塔顶 栽地基本原则载茜m 要地工载顶替东奔西走 基本原则载顶替苛塔顶 地茜基本原则栽大声基本原则栽奔顶替棋塔顶 栽地基本原则载茜
+           {{remark.remark}}
         </div>
       </div>
     </div>
-    <div class="cnt-content">
-      <div class="cnt-imgdiv">
-        <image src='{{oitem.wxHeadPhoto||"../../../public/images/default-title.png"}}'></image>
-      </div>
-      <div class='cnt-text'>
-        <div class='cnt-text-name'>
-          姜咨询
-        </div>
-        <div class='cnt-text-time'>
-          2017年12月12日 下午 12：00
-        </div>
-        <div class='cnt-text-txt'>
-          要地工载顶替东奔西走 基本原则载顶替苛塔顶 地茜基本原则栽大声基本原则栽奔顶替棋塔顶 栽地基本原则载茜m 要地工载顶替东奔西走 基本原则载顶替苛塔顶 地茜基本原则栽大声基本原则栽奔顶替棋塔顶 栽地基本原则载茜
-        </div>
-      </div>
+
+
+    <div  class="cnt-content" style='text-align:center;font-size:30rpx;display:{{remarklist.length==0?"block":"none"}}'>
+      当前线索还没有备注！
     </div>
-    <div class="cnt-content">
-      <div class="cnt-imgdiv">
-        <image src='{{oitem.wxHeadPhoto||"../../../public/images/default-title.png"}}'></image>
-      </div>
-      <div class='cnt-text'>
-        <div class='cnt-text-name'>
-          姜咨询
-        </div>
-        <div class='cnt-text-time'>
-          2017年12月12日 下午 12：00
-        </div>
-        <div class='cnt-text-txt'>
-          要地工载顶替东奔西走 基本原则载顶替苛塔顶 地茜基本原则栽大声基本原则栽奔顶替棋塔顶 栽地基本原则载茜m 要地工载顶替东奔西走 基本原则载顶替苛塔顶 地茜基本原则栽大声基本原则栽奔顶替棋塔顶 栽地基本原则载茜
-        </div>
-      </div>
-    </div>
+
   </div>
 </view>

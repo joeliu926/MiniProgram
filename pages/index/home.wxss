@@ -208,11 +208,11 @@
   display: block;
   height: 80rpx;
   line-height: 80rpx;
-  border-radius: 10rpx;
+  border-radius: 40rpx;
   background: #9083ed;
   color: #fff;
   font-size: 40rpx;
-  width: 90%;
+  width: 450rpx;
   text-align: center;
   box-sizing: border-box;
 }
@@ -277,7 +277,7 @@
 
 .menu-l>image {
   width: 50rpx;
-  height: 40rpx;
+  height: 50rpx;
 }
 
 .menu-m {
@@ -348,4 +348,7 @@
   z-index: 100;
   bottom: 20px;
   left: 40%;
+}
+.close-wind{
+  position:absolute;right:20rpx;top:0rpx;width:20rpx;height:20rpx;font-size:46rpx;
 }

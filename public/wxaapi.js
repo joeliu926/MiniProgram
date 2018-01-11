@@ -157,6 +157,9 @@ var urlConfig = {
     clueremark: {
       url: gConfig.remote + "/index/clueremark"   //线索备注
     },
+    remarklist: {
+      url: gConfig.remote + "/index/remarklist"   //备注列表
+    },
     clueclose: {
       url: gConfig.remote + "/index/clueclose"   //线索关闭
     },

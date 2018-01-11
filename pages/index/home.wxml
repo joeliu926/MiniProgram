@@ -1,4 +1,7 @@
 <wxs src="../../utils/wxs/cutil.wxs" module="util" />
+<div style="height:70rpx;line-height:70rpx;display:{{errorType?'block':'none'}};background-color:{{errorColor}};text-align:center;font-size:30rpx;color:white;vertical-align:middle;">
+    {{errorMessage}}
+</div>
 <!--线索例表-->
 <view class='h-ct b-s' style='display:{{showData==0?"":"none"}};background-color:white;'>
   <view class='search' style='display:{{menuType?"":"none"}}'>
@@ -29,7 +32,7 @@
             <div style='margin-left:10rpx;display:block;'>
               <div class="list-content-top">
                 <span class='f-16 list-content-top-r'>{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
-                <span class='f-14 list-content-top-l'>{{oitem.stageName}}</span>
+                <span class='f-14 list-content-top-l'>{{oitem.statusName}}</span>
               </div>
               <div class='list-content-btm'>
                 <span class='f-14'>
@@ -71,7 +74,7 @@
             <div style='margin-left:10rpx;display:block;'>
               <div class="list-content-top">
                 <span class='f-16 list-content-top-r'>{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
-                <span class='f-14 list-content-top-l'>{{oitem.stageName}}</span>
+                <span class='f-14 list-content-top-l'>{{oitem.statusName}}</span>
               </div>
               <div class='list-content-btm'>
                 <span class='f-14'>
@@ -103,7 +106,6 @@
 
 
   <!--场景列表-->
-  <wxs src="../../utils/wxs/cutil.wxs" module="util" />
   <view style='display:{{menuType?"none":"block"}};background-color:white;'>
     <block wx:for="{{shareList}}" wx:for-item="oitem" wx:key="id">
       <view class="list" style="background-color:white;">
@@ -214,30 +216,33 @@
 </view>
 <!--线索备注-->
 <view class='h-ct w-10' style='display:{{showData==3?"":"none"}};background-color:white;'>
+  <div class="close-wind" bindtap ="closewindow">×</div>
   <div>
     <div class="remark">
-      <textarea class='s-input f-16 remark-area' bindconfirm="inputOver" name="cluereMark" value="{{cluereMark}}" placeholder='补充一些线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'></textarea>
+      <textarea class='s-input f-16 remark-area'  bindinput="remarkinput" name="cluereMark" value="{{cluereMark}}" placeholder='补充一些线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'></textarea>
     </div>
     <div class='submit-btn'>
-      <div bindtap='closeSearch'>提交</div>
+      <div style='{{cluereMark.length<1?"background:#E5E5E5;":""}}' bindtap='submitRemark'>提交</div>
     </div>
   </div>
 </view>
 
 <!--关闭备注-->
 <view class='h-ct w-10' style='display:{{showData==5?"":"none"}};background-color:white;'>
+  <div class="close-wind" bindtap ="closewindow">×</div>
   <div>
     <div class="close-content">
-      <textarea class='s-input f-16 close-area' bindconfirm="inputOver" name="clueClose" value="{{clueClose}}" placeholder='补充关闭线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'></textarea>
+      <textarea class='s-input f-16 close-area' bindinput="closeinput"  name="clueClose" value="{{clueClose}}" placeholder='补充关闭线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;'></textarea>
     </div>
     <div class='submit-btn'>
-      <div bindtap='closeSearch'>提交</div>
+      <div style='{{clueClose.length<1?"background:#E5E5E5;":""}}' bindtap='submitClose'>提交</div>
     </div>
   </div>
 </view>
 
 <!--联系人-->
 <view class='h-ct w-10' style='display:{{showData==4?"":"none"}}'>
+  <div class="close-wind" style="top:-5rpx;" bindtap ="closewindow">×</div>
   <div>
     <view class='p-d-ct mg-b' style='background-color:white;'>
       <view class='flex bk-c-w fx-jc-sb contect-line'>
@@ -245,8 +250,7 @@
           姓名
         </view>
         <view class='f-16'>
-          <input name="name" class='t-r' value="{{customerInfo.name}}" placeholder-style='font-size:24rpx;color:#999999;' bindinput="fInputName" placeholder='填写姓名'></input>
-
+          <input name="name" class='t-r' value="{{linkMan.name}}" placeholder-style='font-size:24rpx;color:#999999;' bindinput="linkchangeName" placeholder='填写姓名'></input>
         </view>
       </view>
       <view class='flex bk-c-w fx-jc-sb contect-line'>
@@ -263,11 +267,15 @@
       </view>
       <view class='flex bk-c-w fx-jc-sb' style=' margin:0 30rpx;padding:30rpx 0;'>
         <view class='f-16'>
-          年龄
+          出生日期
         </view>
         <view class='f-16'>
-          <input name="name" placeholder-style='font-size:24rpx;color:#999999;' class='t-r' value="{{customerInfo.name}}" bindinput="fInputName" placeholder='输入年龄'></input>
 
+        <picker  mode="date" value="{{linkMan.birthday}}" start="{{clueStartDate}}"   bindchange="linkchangeage">
+          <view style="width:240rpx;height:60rpx;line-height:60rpx;text-align:center;">
+            {{linkMan.birthday}}
+          </view>
+        </picker>
         </view>
       </view>
     </view>
@@ -277,8 +285,7 @@
           电话
         </view>
         <view class='f-16'>
-          <input name="name" placeholder-style='font-size:24rpx;color:#999999;' class='t-r' value="{{customerInfo.name}}" bindinput="fInputName" placeholder='输入电话'></input>
-
+          <input name="name" placeholder-style='font-size:24rpx;color:#999999;' class='t-r' value="{{linkMan.phoneNum}}" bindinput="linkchangephone" placeholder='输入电话'></input>
         </view>
       </view>
       <view class='flex bk-c-w fx-jc-sb c-p-d'>
@@ -286,12 +293,12 @@
           微信
         </view>
         <view class='f-16'>
-          <input name="name" placeholder-style='font-size:24rpx;color:#999999;' class='t-r' value="{{customerInfo.name}}" bindinput="fInputName" placeholder='输入微信'></input>
+          <input name="name" placeholder-style='font-size:24rpx;color:#999999;' class='t-r' value="{{linkMan.wechatNum}}" bindinput="linkchangewechat" placeholder='输入微信'></input>
         </view>
       </view>
     </view>
     <div class='submit-btn'>
-      <div bindtap='closeSearch'>提交</div>
+      <div style='{{linkMansubmit?"":"background:#E5E5E5;"}}'   bindtap='submitLinkman'>提交</div>
     </div>
   </div>
 </view>

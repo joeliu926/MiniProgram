@@ -393,6 +393,7 @@ Page({
       unionId: _This.data.cstUid //咨询师unionid
     };
     wxRequest(wxaapi.clinic.detail.url, pdata).then(function (result) {
+      console.log("result------>", result);
       if(result.data.code==0){
         _This.setData({
           oClinic:result.data.data

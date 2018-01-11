@@ -115,11 +115,9 @@
       <view class='e-item f-16'><image class='small-icon' src='../../../public/images/pic-icon.png' mode="aspectFit"></image> 门店照片</view>
  </view>
  <view class='clinic-ct w-10'>
-  <image class='clinic-pic' src='../../../public/images/icon-like.png'></image>
-  <image class='clinic-pic' src='../../../public/images/icon-like.png'></image>
-  <image class='clinic-pic' src='../../../public/images/icon-like.png'></image>
-  <image class='clinic-pic' src='../../../public/images/icon-like.png'></image>
-  <image class='clinic-pic' src='../../../public/images/icon-like.png'></image>
+  <block wx:for="{{oClinic.fileVo}}" wx:for-item="cItem" wx:key="cItem.id"  wx:for-index="index">
+   <image class='clinic-pic'  src='{{cItem.url}}'></image>
+  </block>
  </view>
    </view>
 </view>

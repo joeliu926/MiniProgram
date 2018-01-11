@@ -5,7 +5,7 @@
 <view class='w-10 c-p-d b-s flex-c fx-jc-sb bottom'>
   <view>
     <view class='txt-pd f-16' style=''>{{oClinic.name}}</view>
-    <view class='txt-pd f-16'>{{oClinic.address}}</view>
+    <view class='txt-pd f-14'>{{oClinic.address}}</view>
   </view>
   <image class='clinic-logo' src='{{oClinic.logo}}'></image>
  

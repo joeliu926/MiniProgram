@@ -377,9 +377,9 @@ Page({
       if (result.data.code == 0) {
         let currentLikeState = _This.data.currentLikeState; 
         let olikeResult = _This.data.olikeResult; 
-        olikeResult[_This.data.sCurrentId] = !currentLikeState;
+        olikeResult[_This.data.sCurrentId] =!currentLikeState;
         _This.setData({
-          currentLikeState: !currentLikeState
+          currentLikeState:true// !currentLikeState
         });
       }
     });
@@ -568,6 +568,9 @@ Page({
         //console.log("rmItem[0].id-----", clist[0]);
         _This.fFilterData(clist[0].id);
       }
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
     }
     _This.setData({
       itemLeft: "0px",
@@ -586,10 +589,8 @@ Page({
     let iIndex = _This.fFilterData(itemid);
     let aCurrentList = _This.data.aCurrentList;
     if (direction < 0) {
-      //console.log("right----->", iIndex);
       aCurrentList = aCaseList.slice(iIndex, iIndex + 2);
     } else {
-      //console.log("left----->",iIndex);
       if (iIndex > 0) {
         aCurrentList[1] = aCaseList[iIndex - 1];
       }

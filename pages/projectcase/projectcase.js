@@ -91,11 +91,11 @@ Page({
       this.setData({
         isShow: 'true',
       });
-      var timer = setTimeout(function () {
+      var timer= setTimeout(function () {
         _This.setData({
           isShow: !_This.data.isShow
         });
-      }, 1000);
+      }, 2000);
       // clearTimeout(timer);
     } else {
       var arr = this.data.sSelect;
@@ -105,6 +105,13 @@ Page({
         // console.log("=========================ffffff");
         arr.push(sItem.itemid);
         arrData.push(sItem);
+        if (arr.length>0){
+          this.setData({
+            sSelect: arr,
+            arrData: this.data.arrData,
+            isactive:true
+          });
+        }
         // console.log("888888888888888888",arrData);
       } else {
         var index = arr.indexOf(sItem.itemid);
@@ -116,9 +123,10 @@ Page({
       }
       this.setData({
         sSelect: arr,
-        arrData: this.data.arrData
+        arrData: this.data.arrData,
+        isactive: _This.data.sSelect.length > 0 ? true : false
       });
-      // console.log(this.data.sSelect)
+      // console.log(this.data.sSelect);
     }
     this.setData({
       jSelect: sItem.itemid,
@@ -133,10 +141,9 @@ Page({
     let sItem = item.target.dataset;
     // console.log("=====================================", item);
     this.setData({
-      isactive: !this.data.isactive,
       isshow: this.data.isshow,
     })
-    console.log(this.data.sSelect);
+    // console.log(this.data.sSelect);
     if (this.data.sSelect.length <= 0) {
       return false;
     }

@@ -83,6 +83,7 @@ Page({
   onLoad: function (options) {
     var _This = this;
     var itemids = options.itemids.split(",");
+   
     // console.log("===========%%%%%%%%%%%%%%%",itemids);
     var caseIds = options.caseIds;
     getApp().getUserData(function (uinfo) {
@@ -104,10 +105,13 @@ Page({
       // console.log("++++++++++++++++++++++++++++++", _This.data.itemids);
       // console.log("1111111111111111", _This.data.arrData);
       //设置第一个项目是选中的；
-      
-      // for (var i = 0; i < _This.data.arrData.length;i++){
-      //   _This.data.arrData[0].changeColor = '#9083ed';
-      // }
+      // if (this.data.arrData > 0) {
+      //   this.data.arrData[0].changeColor = '#9083ed';
+      //   this.setData({
+      //     arrData: this.data.arrData
+      //   })
+      // }  
+   
       _This.fGetCaseList(uinfo);//获取案例
       if ((!caseIds || caseIds.length <= 0)) {
         // console.log("gggggggfGetConsultationId----->", options.pdata.itemid, options.itemids.split(","));
@@ -321,7 +325,13 @@ Page({
    */
   getproductitem() {
     let _This = this;
-    //全部的项目
+
+    if (this.data.itemids.length > 0) {
+      _This.setData({
+        isactive: true
+      })
+    }
+    //全部的项目================
     let pdata = { unionId: _This.data.oUserInfo.unionId };//,all:0
     // console.log("pdata------->", pdata);
     wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
@@ -448,6 +458,7 @@ Page({
         sSelect: arr,
         arrData: this.data.arrData,
         itemids: this.data.sSelect,
+        isactive: _This.data.sSelect.length > 0 ? true : false
       });
       // console.log("555555555555555555555555",this.data.sSelect,this.data.itemids);
       // 传递相关的参数到借口
@@ -464,6 +475,9 @@ Page({
   selectItems() {
     // 选好项目从新请求案例列表
     let _This = this;
+    if (this.data.itemids.length<=0){
+       return  false;
+    }
     var pdata = {
       unionid: _This.data.oUserInfo.unionId,
       productCodes: _This.data.itemids || [],
@@ -476,7 +490,6 @@ Page({
         _This.setData({
           caseList: result.data.data,
           totalCount: result.data.data.length,
-          isactive: true,
           ishow: !_This.data.ishow,
           arrData: _This.data.arrData,
           itemids: _This.data.sSelect,

@@ -268,7 +268,7 @@ Page({
       caseId: _This.data.caseId, //案例id
       operationType: 2, //1喜欢案例 2提交资料
       positiveFace: _This.data.frontface||"",
-      sideFace: _This.data.sideFace||""
+      sideFace: _This.data.sideface||""
     };
     console.log("ffffff post data------>", pdata);
     wxRequest(wxaapi.consult.handelsharecase.url, pdata).then(function (result) {

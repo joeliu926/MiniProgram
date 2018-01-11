@@ -32,7 +32,6 @@
 .top-span {
   background-color: #ffa92f;
   border-radius: 5rpx;
-  vertical-align: top;
   font-size: 22rpx;
   padding: 0 5rpx 5rpx 5rpx;
 }

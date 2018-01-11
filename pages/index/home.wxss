@@ -128,7 +128,7 @@
 }
 
 .list-content-btm {
-  height: 50rpx;
+  height: 40rpx;
   vertical-align: top;
   text-overflow: ellipsis;
   display: inline-block;

@@ -202,26 +202,23 @@ Page({
       clueClose: params.detail.value
     });
   },
+  //预约
   bookOption(params) {
     let pobj = params.target.dataset.obj;
     wx.navigateTo({
-      url: `../projectcase/book/book?userId=${pobj.userId}&userUnionId=${pobj.userUnionId}&appointmentId=${pobj.appointmentId}&tenantId=${pobj.tenantId}&customerId=${pobj.customerId}&clueId=${pobj.id}`,
+      url: `../projectcase/book/book?userId=${pobj.userId}&userUnionId=${pobj.userUnionId}&appointmentId=${pobj.appointmentId}&tenantId=${pobj.tenantId}&customerId=${pobj.customerId}&clueId=${pobj.id}&clueStatus=${pobj.clueStatus}`,
     });
   },
   remarkOption(params) {
     let remark = params.currentTarget.dataset.obj;
     if (remark.clueStatus == 5) {
-      this.alertMessage("关闭状态不能备注！", 'yellow');
+      this.alertMessage("关闭客户不可以备注！", 'yellow');
       return;
     }
-
     this.setData({
       showData: 3,
       currentClue: remark
     });
-
-  
-
   },
   //提交备注
   submitRemark(params) {
@@ -328,10 +325,13 @@ Page({
     }
     let remark = this.data.currentClue;
     if (remark.clueStatus != 1) {
-      this.alertMessage("当前状态不允许编辑联系人！", 'yellow');
+      this.alertMessage("已预约客户不可以编辑！", 'yellow');
       return;
     }
-
+    if (remark.clueStatus == 5) {
+      this.alertMessage("已关闭客户不可以编辑！", 'yellow');
+      return;
+    }
     let _This = this;
     let linkmandata = this.data.linkMan;
     if (this.data.sexitems[0].checked) {
@@ -522,8 +522,13 @@ Page({
         break;
       case "1":
         let reobj = params.currentTarget.dataset.obj;
+        if (reobj.clueStatus == 5) {
+          this.alertMessage("已关闭！", 'yellow');
+          return;
+        }
+
         if (reobj.clueStatus != 1) {
-          this.alertMessage("当前状态不允许关闭！", 'yellow');
+          this.alertMessage("已预约客户不可以关闭！", 'yellow');
           return;
         }
         this.setData({
@@ -543,7 +548,7 @@ Page({
       cansubmit = false;
     }
     let message = false;
-    if (/^1\d{10,15}$/.test(linkman.phoneNum)) {
+    if (/^1\d{10}$/.test(linkman.phoneNum)) {
     } else {
       cansubmit = false;
       message = true;
@@ -551,7 +556,10 @@ Page({
     this.setData({
       linkMansubmit: cansubmit
     });
-
+    if (linkman.name.length >6 ) {
+      this.alertMessage("姓名长度不能超过六个汉字！", 'red')
+      cansubmit = false;
+    }
     if(message){
       this.alertMessage("电话号码填写不正确！", 'red')
     }

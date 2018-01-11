@@ -202,10 +202,11 @@ Page({
       clueClose: params.detail.value
     });
   },
+  //预约
   bookOption(params) {
     let pobj = params.target.dataset.obj;
     wx.navigateTo({
-      url: `../projectcase/book/book?userId=${pobj.userId}&userUnionId=${pobj.userUnionId}&appointmentId=${pobj.appointmentId}&tenantId=${pobj.tenantId}&customerId=${pobj.customerId}&clueId=${pobj.id}`,
+      url: `../projectcase/book/book?userId=${pobj.userId}&userUnionId=${pobj.userUnionId}&appointmentId=${pobj.appointmentId}&tenantId=${pobj.tenantId}&customerId=${pobj.customerId}&clueId=${pobj.id}&clueStatus=${pobj.clueStatus}`,
     });
   },
   remarkOption(params) {

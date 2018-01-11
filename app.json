@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/index/home",
     "pages/index/detail/cluedetail",
     "pages/projectcase/book/book",
@@ -21,8 +22,9 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#000000",
     "navigationBarTitleText": "咨询师助手",
-    "navigationBarTextStyle": "#ffffff"
+     "navigationBarBackgroundColor": "#ffffff",
+     "navigationBarTextStyle": "black",
+    "backgroundColor": "#eeeeee"
   }
 }

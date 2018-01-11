@@ -9,7 +9,7 @@
   </view>
 </view>
 <!-- 已关闭提示 -->
- <view class=" tipunable" style="display: {{isshow?'block':'none'}}"> 已关闭用户不可以预约！</view>
+ <view class=" tipunable" style="display: {{isShow?'block':'none'}}"> 已关闭用户不可以预约！</view>
 
 <!-- 预约项目和时间 -->
 <view class='out-content'>
@@ -19,7 +19,9 @@
       <!-- <view wx-for="{{arrData}}" wx:for-item="sitem" wx:key="id" class=' pro-b'>{{sitem.iname}}aaa<image class='pro-icon' src='../../../public/images/bookdeletepro.png' ></image>
       </view> -->
       <view wx:for="{{arrData}}" wx:for-item="oitem1" wx:key="id">
-        <view  class='pro-b'  >{{oitem1.iname}}<image data-id='{{oitem1.itemid}}' data-name='{{oitem1.iname}}'  class='pro-icon'    src='../../../public/images/bookdeletepro.png' bindtap='deletepro' ></image></view></view>
+        <view  class='pro-b'  >{{oitem1.iname}}<image data-id='{{oitem1.itemid}}' data-name='{{oitem1.iname}}'  class='pro-icon {{status!=1?"":"hide"}}'    src='../../../public/images/bookdeletepro.png' bindtap='deletepro' ></image>
+        <image data-id='{{oitem1.itemid}}' data-name='{{oitem1.iname}}'  class='pro-icon {{status==1?"":"hide"}}'    src='../../../public/images/bookdeletepro.png' bindtap='' ></image>
+        </view></view>
       </view> 
       <!-- 打开项目列表 -->
     <view bindtap='showproduct' class='f-16 add-pro {{status!=1?"":"hide"}} ' ><image class='proadd-icon' src='../../../public/images/bookaddicon.png' ></image></view>
@@ -62,16 +64,22 @@
 <view class='out-content'>
   <view class='flex custmerinfo-name fx-jc-sb c-p-d mg-b b-g'>
     <view class='f-16 ' maxlength="6" size="6">顾客姓名</view>
-    <view class='f-16 custmerinfo-input '>
+    <view class='f-16 custmerinfo-input {{status!=1?"":"hide"}}'>
      <input name='clueRemark ' class='t-l' value='{{customerInfo.name}}'   bindblur='fInputName'  placeholder='{{}}'></input>
+    </view>
+     <view class='f-16  custmerinfo-input {{status==1?"":"hide"}}' style="width:360rpx">
+     <view name='clueRemark ' class='t-l' value='{{customerInfo.name}}'   bindblur='fInputName' >{{customerInfo.name}}</view>
     </view>
    </view>
 
   <view class='flex custmerinfo-name fx-jc-sb c-p-d mg-b b-g'>
       <view class='f-16 ' >手机号码</view>
-      <view class='f-16 custmerinfo-input '>
+      <view class='f-16 custmerinfo-input  {{status!=1?"":"hide"}}'>
           <input name='clueRemark' class='t-l ' value='{{customerInfo.phoneNum}}' bindtap='showphone' bindblur='fInputMobile'  
           placeholder='{{}}'></input>
+      </view>
+       <view class='f-16  custmerinfo-input {{status==1?"":"hide"}}' style="width:360rpx">
+          <view  class='t-l ' style="t" >{{customerInfo.phoneNum}}</view>
       </view>
   </view>
 <!-- 手机号联想 -->

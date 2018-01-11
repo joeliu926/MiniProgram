@@ -37,7 +37,7 @@ align-items: center;
     bottom: 150rpx;
     background: #ffffff;
     box-shadow: 0 0 10rpx #ddd;
-    padding: 16rpx 46rpx;
+    padding: 12rpx 46rpx;
 }
 .dp-arr{
   border: 24rpx solid #ffffff;
@@ -56,7 +56,8 @@ align-items: center;
   border-radius: 20px;
   background-color: #9083ed;
   color: #ffffff;
- height: 50rpx;
+  height: 80rpx;
+  width: 450rpx;
 }
 .f-32{
   font-size: 28rpx;
@@ -68,6 +69,7 @@ align-items: center;
 }
 .btn-back{
  padding:15rpx 9rpx;
+ color: #ffffff;
 }
 .face{
   padding: 3px 25px;

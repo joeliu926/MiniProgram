@@ -24,10 +24,10 @@
 <!------------------case hospital start-------------------->
       <view class='t-a-c bk-c-w host-des-ct'>
           <view class='f-16'>{{oItem.caseName}}</view>
-          <text class='f-12'>{{oItem.doctor.name}} · {{oItem.clinic.name}}</text>
-          <view class='f-12'>{{cutil.formatTime(oItem.operationDate,"yyyy-MM-dd")}}</view>
+          <text class='f-14'>{{oItem.doctor.name}} · {{oItem.clinic.name}}</text>
+          <view class='f-14'>{{cutil.formatTime(oItem.operationDate,"yyyy-MM-dd")}}</view>
           <view class='f-14 flex-c fx-wp des-project-ct'>
-            <text class='f-12 pro-item' wx:for="{{oItem.products}}" wx:for-item='oProduct' wx:key="oProduct.id">{{oProduct.productName}}</text>
+            <text class='f-14 pro-item' wx:for="{{oItem.products}}" wx:for-item='oProduct' wx:key="oProduct.id">{{oProduct.productName}}</text>
           </view>
       </view>
 <!------------------case hospital end-------------------->
@@ -37,7 +37,7 @@
         <view class='f-16 t-a-c bk-c-w his-title'>术后日记</view>
         <block wx:for="{{oItem.contentList}}" wx:for-item="oContent" wx:key="oContent.id">
         <view class='bk-c-w'>
-          <view class='f-14 t-a-c'><text class='diary f-14'>{{oContent.title}}</text></view>
+          <view class='t-a-c'><view class='diary f-14' style=''>{{oContent.title}}</view></view>
           <view class='b-pd w-10  b-s' style='margin:20rpx 0;'>
             <view class='flex fx-wp w-10 b-s'>
                <block wx:for="{{oContent.pictures}}" wx:for-item="imgItem" wx:key="ids" >
@@ -45,7 +45,7 @@
                </block>
             </view>
             <view><text class='f-14'>{{oContent.description}}</text></view>
-             <text class='f-12'>{{cutil.formatTime(oContent.definitionDate,"yyyy-MM-dd")}}</text>
+             <text class='f-14'>{{cutil.formatTime(oContent.definitionDate,"yyyy-MM-dd")}}</text>
           </view>
         </view>
         </block>
@@ -79,7 +79,9 @@
 <view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon {{isEndPage?"hide":""}}' bindtap='fTakePhoto' style=''>
    <image  class='cm-img' style='width:65rpx;'  src='../../../public/images/tk-photo-icon.png' ></image>
 </view>
-<view class='tip-font f-14 {{oUserInfo.wechatMobile?"hide":""}} {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text style='padding:8rpx 16rpx;'>留下联系方式，开启专属咨询师一对一沟通.</text></view>
+<view class='tip-font f-14 {{oUserInfo.wechatMobile?"hide":""}} {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text>留下联系方式，开启专属咨询师一对一沟通.</text>
+ <view class='dp-arr'></view>
+</view>
   <!------------------right icon start-------------------->
 
 
@@ -96,23 +98,23 @@
    </view>
    <view class='end-items-ct f-14'>
     <view class='flex-c fx-jc-sb item-ct' bindtap='fAddressMap'>
-        <view class='e-item' style='' ><image class='small-icon' src='../../../public/images/location-icon.png' mode="aspectFit"></image> {{oClinic.address}}</view>
+        <view class='flex-c f-16'><image class='small-icon' src='../../../public/images/location-icon.png' mode="aspectFit"></image> <text>{{oClinic.address}}</text> </view>
         <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
     </view>
   
  <view class='flex-c fx-jc-sb item-ct'>
-      <view class='e-item f-14'><image class='small-icon' src='../../../public/images/time-icon.png' mode="aspectFit"></image> {{oClinic.businessTime}}</view>
-        <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
+      <view class='flex-c f-16'><image class='small-icon' src='../../../public/images/time-icon.png' mode="aspectFit"></image> {{oClinic.businessTime}}</view>
+       
  </view>
 
   <view class='flex-c fx-jc-sb item-ct' bindtap='fMakePhone'>
   
-      <view class='e-item' ><image class='small-icon' src='../../../public/images/tel-icon.png' mode="aspectFit" ></image> {{oClinic.phone}}</view>
+      <view class='flex-c f-16' ><image class='small-icon' src='../../../public/images/tel-icon.png' mode="aspectFit" ></image> {{oClinic.phone}}</view>
         <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
  </view>
 
     <view class='flex fx-jc-sb item-ct'> 
-      <view class='e-item f-16'><image class='small-icon' src='../../../public/images/pic-icon.png' mode="aspectFit"></image> 门店照片</view>
+      <view class='flex-c f-16'><image class='small-icon' src='../../../public/images/pic-icon.png' mode="aspectFit"></image> 门店照片</view>
  </view>
  <view class='clinic-ct w-10'>
   <block wx:for="{{oClinic.fileVo}}" wx:for-item="cItem" wx:key="cItem.id"  wx:for-index="index">

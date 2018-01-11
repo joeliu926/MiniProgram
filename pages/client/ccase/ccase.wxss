@@ -17,10 +17,13 @@ page{
 }
 .case-item-ct{
   position:absolute;
-padding:20rpx;
+ padding:40rpx;
 box-sizing:border-box;
 top:36rpx;
 left:0;
+}
+.content-bd{
+  
 }
 /*****before after common******/
 .bcommon{ 
@@ -37,6 +40,9 @@ left:0;
   left: 50%;
 }
 /*****************history start******************/
+.case-his-ct{
+  border-top: 2rpx solid #eeeeee;
+}
 .his-title{
   font-weight: bold;
   padding: 24rpx;
@@ -45,13 +51,13 @@ left:0;
 .diary{
   background-color: #9083ed;
   color: #ffffff;
-  padding:10rpx 24rpx;
+  padding:8rpx 18rpx;
   border-radius: 30rpx;
   display: inline-block;
 }
 .img-c{
-  width: 224rpx;
-  height: 224rpx;
+  width: 218rpx;
+  height: 218rpx;
   margin: 2rpx;
   background-position: center center;
   background-repeat: no-repeat;
@@ -63,8 +69,11 @@ left:0;
 .host-des-ct{
   padding: 24rpx;
 }
+.txt-pd{
+  margin-bottom: 4rpx;
+}
 .pro-item{
-  padding: 10rpx 24rpx;
+  padding: 8rpx 18rpx;
   border-radius: 32rpx;
   margin:8rpx; 
   border: 1rpx solid #9083ed;
@@ -93,6 +102,7 @@ left:0;
 }
 .like-icon{
   bottom: 450rpx;
+  padding-top:5rpx;
 }
 
 .phone-icon{
@@ -102,6 +112,7 @@ left:0;
    bottom: 150rpx;
 }
 .tip-font{
+  color: #000000;
   background:#ffffff;
   position:fixed;
   z-index:1000;

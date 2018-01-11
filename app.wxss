@@ -43,7 +43,7 @@ page{
   font-size: 28rpx;
   color: #999999;
 }
-.f-12{
+.f-12{ /***del*/
   font-size: 24rpx;
   color: #999999;
 }
@@ -87,7 +87,7 @@ page{
     box-sizing: border-box;
 }
 .b-d{
-  border: 2rpx solid green; 
+  border: 2rpx solid #eeeeee; 
 }
 .b-r{
   border-radius: 50%;
@@ -135,3 +135,38 @@ background-color: #ffffff;
     clear: both;
     overflow: hidden;
 }
+
+/********项目标签 带边框*********/
+.product-tip{  
+  padding: 8rpx 18rpx;
+}
+.com-pd{
+  padding: 40rpx;
+}
+.t-b{
+  margin: 20rpx;
+}
+.p-d-bottom{
+  margin-bottom: 20rpx;
+}
+.pd-txt{
+  margin: 20rpx 0;
+}
+.com-line{
+  border-color: #eeeeee;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

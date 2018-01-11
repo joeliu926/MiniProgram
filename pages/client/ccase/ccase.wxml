@@ -7,13 +7,13 @@
   <view class='case-ct w-h-10  bk-c-w'  style=''>
 <block wx:for="{{aCurrentList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
 
-    <view class='w-10 case-item-ct' bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{caseCount-index}};left:{{index==0?itemLeft:"0px"}};'>
-    
-  <!------------------before after start------------left:{{index==0?itemLeft:"0px"-------->
+    <view class='w-10 b-s case-item-ct' bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{caseCount-index}};left:{{index==0?itemLeft:"0px"}};'>
+    <view class='b-d'>
+  <!------------------before after start------------left:{{index==0?itemLeft:"0px"}};-------->
       <view class='w-10 b-after-ct'> 
             <view class='flex b-s' style="position: relative;">
-                 <text class='before f-12 bcommon'>术前</text>
-                 <text class='after f-12 bcommon'>术后</text>
+                 <text class='before f-10 bcommon'>术前</text>
+                 <text class='after f-10 bcommon'>术后</text>
                   <image src='{{oItem.beforePicture.url||"../../../public/images/front-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}' ></image>
                   <image  src='{{oItem.afterPicture.url||"../../../public/images/side-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}'></image>
             </view>
@@ -23,9 +23,9 @@
 
 <!------------------case hospital start-------------------->
       <view class='t-a-c bk-c-w host-des-ct'>
-          <view class='f-16'>{{oItem.caseName}}</view>
-          <text class='f-14'>{{oItem.doctor.name}} · {{oItem.clinic.name}}</text>
-          <view class='f-14'>{{cutil.formatTime(oItem.operationDate,"yyyy-MM-dd")}}</view>
+          <view class='f-16 p-d-bottom'>{{oItem.caseName}}</view>
+          <view class='f-14 txt-pd'>{{oItem.doctor.name}} · {{oItem.clinic.name}}</view>
+          <view class='f-14 p-d-bottom'>{{cutil.formatTime(oItem.operationDate,"yyyy-MM-dd")}}</view>
           <view class='f-14 flex-c fx-wp des-project-ct'>
             <text class='f-14 pro-item' wx:for="{{oItem.products}}" wx:for-item='oProduct' wx:key="oProduct.id">{{oProduct.productName}}</text>
           </view>
@@ -52,8 +52,9 @@
       </view>
 <!------------------case history end-------------------->
 
-   </view>
+</view>
 
+   </view>
    </block>
 
    </view>
@@ -64,7 +65,7 @@
 
   <!------------------right icon start-------------------->
 
-<view class='bk-c-w b-r flex-c com-right-icon like-icon {{isEndPage?"hide":""}}' bindtap='fLikeCase' style=''>
+<view class='bk-c-w b-r flex-c com-right-icon b-s like-icon {{isEndPage?"hide":""}}' bindtap='fLikeCase' style=''>
     <image  class='cm-img {{currentLikeState?"hide":""}}'  src='../../../public/images/unlike-icon.png' ></image>
     <image  class='cm-img {{!currentLikeState?"hide":""}}'  src='../../../public/images/like-icon.png' ></image>
 </view>
@@ -79,7 +80,7 @@
 <view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon {{isEndPage?"hide":""}}' bindtap='fTakePhoto' style=''>
    <image  class='cm-img' style='width:65rpx;'  src='../../../public/images/tk-photo-icon.png' ></image>
 </view>
-<view class='tip-font f-14 {{oUserInfo.wechatMobile?"hide":""}} {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text>留下联系方式，开启专属咨询师一对一沟通.</text>
+<view class='tip-font f-14 {{oUserInfo.wechatMobile?"hide":""}} {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text>开启专属咨询师一对一沟通.</text>
  <view class='dp-arr'></view>
 </view>
   <!------------------right icon start-------------------->

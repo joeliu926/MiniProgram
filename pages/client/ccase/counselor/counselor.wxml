@@ -1,3 +1,4 @@
+
 <view class='counselor-ct flex'>
   <view class='w-10 flex fx-d-col color-w'>
     <view class='title-ct' style='background-image:url({{oCstData.headImgUrl||"../../../../public/images/front-face.png"}})'></view>

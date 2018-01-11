@@ -2,8 +2,8 @@
 <wxs src="./book.wxs" module="bookUtil" />
 <view class='out-content head-padding'>
   <view class='flex-c fx-d-col '>
-    <image class='info-img head-p' src='../../../public/images/img-demo.png' ></image>
-    <view class="text-head f-16">Roland luo    ( Roland )</view>
+    <image class='info-img head-p' src='{{customerInfo.logo}}' ></image>
+    <view class="text-head f-16">{{customerInfo.wxNickname}}    ( {{customerInfo.name}} )</view>
   </view>
 </view>
 

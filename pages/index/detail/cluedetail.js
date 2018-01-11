@@ -53,7 +53,7 @@ Page({
           cname = result.data.data.customerWxNickname;
         }else{
           if (result.data.data.customerWxNickname) {
-            cname + '(' + result.data.data.customerWxNickname + ')';
+            cname += '(' + result.data.data.customerWxNickname + ')';
           }
         }
           let slist = [];

@@ -31,7 +31,7 @@
           <div class="list-content" bindtap='openItem' data-Obj='{{oitem}}'>
             <div style='margin-left:10rpx;display:block;'>
               <div class="list-content-top">
-                <span class='f-16 list-content-top-r'>{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
+                <span class='f-16 list-content-top-r' style="text-overflow:ellipsis;">{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
                 <span class='f-14 list-content-top-l'>{{oitem.statusName}}</span>
               </div>
               <div class='list-content-btm'>
@@ -203,8 +203,8 @@
   <div class="opensh">
     <div class="opensh-input">
       <div class='flex input-o'>
-        <icon type='search' size='16'></icon>
-        <input class='s-input f-16' style='text-align:left;' bindconfirm="searchClueinput" name="searchName" value="{{searchName}}" focus='{{autoFocus}}' placeholder='请输入客户名称' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;' maxlength='36'
+        <icon type='search' size='16' style='margin-right:10rpx;'></icon>
+        <input class='s-input f-16' style='text-align:left;' bindinput="searchInput" bindconfirm="searchClueinput" name="searchName" value="{{searchName}}" focus='{{autoFocus}}' placeholder='请输入客户名称' placeholder-class='f-12 c-9' placeholder-style='font-size:24rpx;color:#999999;' maxlength='36'
           placeholder-class="place"></input>
         <icon bindtap='fClearData' size='16' type='clear' class='{{showicon?"show":"hide"}}'></icon>
       </div>
@@ -215,7 +215,7 @@
   </div>
 </view>
 <!--线索备注-->
-<view class='h-ct w-10' style='display:{{showData==3?"":"none"}};background-color:white;'>
+<view class='h-ct w-10' style='display:{{showData==3?"":"none"}};background-color:white;position:relative;'>
   <div class="close-wind" bindtap ="closewindow">×</div>
   <div>
     <div class="remark">
@@ -228,7 +228,7 @@
 </view>
 
 <!--关闭备注-->
-<view class='h-ct w-10' style='display:{{showData==5?"":"none"}};background-color:white;'>
+<view class='h-ct w-10' style='display:{{showData==5?"":"none"}};background-color:white;position:relative;'>
   <div class="close-wind" bindtap ="closewindow">×</div>
   <div>
     <div class="close-content">
@@ -241,7 +241,7 @@
 </view>
 
 <!--联系人-->
-<view class='h-ct w-10' style='display:{{showData==4?"":"none"}}'>
+<view class='h-ct w-10' style='display:{{showData==4?"":"none"}};position:relative;'>
   <div class="close-wind" style="top:-5rpx;" bindtap ="closewindow">×</div>
   <div>
     <view class='p-d-ct mg-b' style='background-color:white;'>

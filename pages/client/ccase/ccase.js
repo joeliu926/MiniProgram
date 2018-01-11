@@ -28,78 +28,35 @@ Page({
     clueId:"",
     currentPage:0,
     totalCount:1,
-    caseList:["案例一","案例二","案例三"],
+    caseList:[],
     detailInfo: {
       "doctorName": "",
       "contentList": [
         {
-          "title": "术后20天",
-          "description":"这是第一个的描述信息，一定要仔细去看",
-          "definitionDate":"2017-11-12",
-          "pictures": ["",""]
-        },
-        {
-          "title": "术后25天",
-          "description": "这是第二个的描述信息，一定要仔细去看，哎呀这个不错啊",
-          "definitionDate": "2017-11-22",
-          "pictures": ["", "", "", "11", "222"]
-        },
-        {
-          "title": "术后30天",
-          "description": "这是第三个的描述信息，一定要仔细去看，这个更好了，继续发展，你会看到变化",
-          "definitionDate": "2017-11-30",
-          "pictures": ["","",""]
-        },
-        {
-          "title": "术后35天",
-          "description": "这是第四个的描述信息，一定要仔细去看，这个是最后的，你看到了可以袭击决定怎么处理",
-          "definitionDate": "2017-12-12",
-          "pictures": ["", "11", "222", "11", "222"]
+          "title": "",
+          "description":"",
+          "definitionDate":"",
+          "pictures": []
         }
       ]
     },
     oCaseDetail:{
-      "id": 3,
-      "caseName": "测试案例1",
+      "id": "",
+      "caseName": "",
       "doctor": {
-        "tenantId": "",
-        "id": 1,
-        "name": "李医生"
       },
       "products": [
-        {
-          "id": 1,
-          "productName": " 眼部整形"
-        }
       ],
-      "operationDate": 1513008000000,
-      "customerGender": 1,
-      "customerAge": 23,
+      "operationDate": "",
+      "customerGender": "",
+      "customerAge":"",
       "customerLogo": {
-        "name": "10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7",
-        "url": "http://140.143.185.73:8077/mc_files/10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7"
       },
       "beforePicture": {
-        "name": "10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7",
-        "url": "http://140.143.185.73:8077/mc_files/10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7"
       },
       "afterPicture": {
-        "name": "10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7",
-        "url": "http://140.143.185.73:8077/mc_files/10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7"
       },
       "contentList": [
-        {
-          "id": 3,
-          "title": "术后10天",
-          "pictures": [
-            {
-              "name": "10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7",
-              "url": "http://140.143.185.73:8077/mc_files/10088/CASE_LIBRARY/3919c607-53e9-46a4-afea-57aa734e99e7"
-            }
-          ],
-          "definitionDate": 1513008000000,
-          "description": "手术日记描述"
-        }
       ]
     }
   },

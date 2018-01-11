@@ -9,7 +9,7 @@
 
     <view class='w-10 case-item-ct' bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{caseCount-index}};left:{{index==0?itemLeft:"0px"}};'>
     
-  <!------------------before after start-------------------->
+  <!------------------before after start------------left:{{index==0?itemLeft:"0px"-------->
       <view class='w-10 b-after-ct'> 
             <view class='flex b-s' style="position: relative;">
                  <text class='before f-12 bcommon'>术前</text>
@@ -79,7 +79,7 @@
 <view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon {{isEndPage?"hide":""}}' bindtap='fTakePhoto' style=''>
    <image  class='cm-img' style='width:65rpx;'  src='../../../public/images/tk-photo-icon.png' ></image>
 </view>
-<view class='tip-font f-14 {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text>授权手机号 获得1对1专属服务</text></view>
+<view class='tip-font f-14 {{oUserInfo.wechatMobile?"hide":""}} {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text style='padding:8rpx 16rpx;'>留下联系方式，开启专属咨询师一对一沟通.</text></view>
   <!------------------right icon start-------------------->
 
 
@@ -95,19 +95,19 @@
      </view>
    </view>
    <view class='end-items-ct f-14'>
-    <view class='flex fx-jc-sb item-ct'>
+    <view class='flex-c fx-jc-sb item-ct' bindtap='fAddressMap'>
         <view class='e-item' style='' ><image class='small-icon' src='../../../public/images/location-icon.png' mode="aspectFit"></image> {{oClinic.address}}</view>
         <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
     </view>
   
- <view class='flex fx-jc-sb item-ct'>
+ <view class='flex-c fx-jc-sb item-ct'>
       <view class='e-item f-14'><image class='small-icon' src='../../../public/images/time-icon.png' mode="aspectFit"></image> {{oClinic.businessTime}}</view>
         <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
  </view>
 
-  <view class='flex fx-jc-sb item-ct'>
+  <view class='flex-c fx-jc-sb item-ct' bindtap='fMakePhone'>
   
-      <view class='e-item'><image class='small-icon' src='../../../public/images/tel-icon.png' mode="aspectFit" ></image> {{oClinic.phone}}</view>
+      <view class='e-item' ><image class='small-icon' src='../../../public/images/tel-icon.png' mode="aspectFit" ></image> {{oClinic.phone}}</view>
         <image class='small-icon' src='../../../public/images/nav-right-icon.png' mode="aspectFit"></image>
  </view>
 

@@ -76,7 +76,7 @@
 
 <!-- 预约按钮 -->
 <view class='flex-c c-p-d p-b b-s w-10 mg-b {{oAppointment.status!=1?"":"hide"}}' >
-   <view class='sb-btn  t-a-c b-s' style='' bindtap='submit'> 预约</view> 
+   <view class='sb-btn  t-a-c b-s' style='' bindtap='fSubmitData'> 预约</view> 
 </view>
 
 <view class='flex-c p-b c-p-d b-s w-10 mg-b {{oAppointment.status==1?"":"hide"}}'>
@@ -101,7 +101,7 @@
           <block wx:for="{{secitem.productList}}" wx:for-item="item" wx:key="id">
             <!-- {{jSelect==item.productCode?"case-sele":""}} {{projectcase.inArray(jSelect,item.productCode)?"case-sele":""}}-->
             <!-- {{item.productCode}}  -->
-            <text class='case-item  {{bookUtil.inArray(sSelect,item.productCode)?"case-sele":""}}' data-paid='{{item.parentCode}}' data-paname='{{oitem.productName}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}' bindtap='selectItem'>{{item.productName}}</text>
+            <text class='case-item  {{bookUtil.inArray(sSelect,item.productCode)?"case-sele":""}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}' bindtap='selectItem'>{{item.productName}}</text>
           </block>
         </block>
       </view>

@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+  
     aCaseList: [],
     aCurrentList: [],//选中项
     itemLeft: 0,//左侧位置
@@ -63,7 +64,7 @@ Page({
       "doctor": {
         "tenantId": "",
         "id": 1,
-        "name": "李医生 http://140.143.185.73:8083/api/clue/pageList?userUnionId=oDOgS0oVZtsOeNBbQ1fDXi-Rm4L4&group=0&searchName=&pageNo=1&pageSize=10"
+        "name": "李医生"
       },
       "products": [
         {
@@ -106,7 +107,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   // console.log("event------>event",event);
+   // console.log("event------>event",event)
 
   let _This=this;
   var caseIds = options.caseIds;
@@ -376,9 +377,9 @@ Page({
       if (result.data.code == 0) {
         let currentLikeState = _This.data.currentLikeState; 
         let olikeResult = _This.data.olikeResult; 
-        olikeResult[_This.data.sCurrentId] = !currentLikeState;
+        olikeResult[_This.data.sCurrentId] =!currentLikeState;
         _This.setData({
-          currentLikeState: !currentLikeState
+          currentLikeState:true// !currentLikeState
         });
       }
     });
@@ -408,7 +409,7 @@ Page({
     var _This = this;
     var oTempEvent = _This.data.oEvent;
     var currentPage = _This.data.currentPage;
-    oTempEvent.shareEventId = _This.data.shareEventId;
+    oTempEvent.shareEventId = _This.data.shareEventId||1;
     oTempEvent.productCode = _This.data.productCode;
     oTempEvent.clueId=_This.data.clueId; //线索id
     oTempEvent.consultationId=_This.data.consultationId;//咨询会话ID
@@ -460,14 +461,23 @@ Page({
 
 
 
-
+/**
+ * 跳转至上传图片页面
+ */
   fTakePhoto(){
     let _This = this;
+
+    let aCurrent = _This.data.aCurrentList[0] || {};
+    //console.log("aCurrentList------>", _This.data.aCurrentList);
+    let caseId = aCurrent.id;
     let cstunionid = _This.data.cstUid;
     let consultationId=_This.data.consultationId;//咨询会话ID
     let clueId = _This.data.clueId; //线索id
+    let shareEventId = _This.data.shareEventId; //分享id
+    let tel = _This.data.oUserInfo.wechatMobile||"";//客户idoUserInfo.wechatMobile
+    let cid = _This.data.oUserInfo.id;//客户idoUserInfo.wechatMobile
     wx.navigateTo({
-      url: '/pages/client/sharecase/tkphoto/tkphoto?consultantId=' + cstunionid + "&consultationId=" + consultationId + "&clueId=" + clueId
+      url: '/pages/client/sharecase/tkphoto/tkphoto?consultantId=' + cstunionid + "&consultationId=" + consultationId + "&clueId=" + clueId + "&shareEventId=" + shareEventId + "&caseId=" + caseId + "&tel=" + tel + "&cid" + cid
     })
   },
   fGetCaseData(){
@@ -475,8 +485,28 @@ Page({
     let caseCount = _This.data.detailInfo.contentList.length || 1;
     let countRate = parseInt(100 / caseCount);
   },
-  fTestPhone(){
-    console.log("--------点击触发事件--------");
+  /**
+   * 拨打电话
+   */
+  fMakePhone(){
+    let _This=this;
+    wx.makePhoneCall({
+      phoneNumber: _This.data.oClinic.phone
+    })
+  },
+  /**
+   * 查看诊所map
+   */
+  fAddressMap(){
+    let _This = this;
+    console.log("oClinic-------",_This.data.oClinic);
+    let oClinic = _This.data.oClinic;
+    let address = oClinic.address;
+    let coordinate = oClinic.coordinate;
+    let clinicName = oClinic.name;
+    wx.navigateTo({
+      url: './clinicmap/clinicmap?clinicName=' + clinicName+'&address=' + address + "&coordinate=" + coordinate,
+    })
   },
 
 
@@ -516,8 +546,10 @@ Page({
   // 触摸结束事件
   fTouchEnd: function (e) {
     let _This = this;
-    var touchMove = e.changedTouches[0].pageX;
-    if (Math.abs(touchMove - touchDotX) > 50) {
+    let touchMove = e.changedTouches[0].pageX;
+    let tX = (e.changedTouches[0].pageX - touchDotX);
+    let tY = (e.changedTouches[0].pageY - touchDotY);
+    if (Math.abs(touchMove - touchDotX) > 100 && (Math.abs(tX) > Math.abs(tY)+40)) {
 
 
       let currentItemId = _This.data.currentItem;//当前的案例id
@@ -538,6 +570,9 @@ Page({
         //console.log("rmItem[0].id-----", clist[0]);
         _This.fFilterData(clist[0].id);
       }
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
     }
     _This.setData({
       itemLeft: "0px",
@@ -556,10 +591,8 @@ Page({
     let iIndex = _This.fFilterData(itemid);
     let aCurrentList = _This.data.aCurrentList;
     if (direction < 0) {
-      //console.log("right----->", iIndex);
       aCurrentList = aCaseList.slice(iIndex, iIndex + 2);
     } else {
-      //console.log("left----->",iIndex);
       if (iIndex > 0) {
         aCurrentList[1] = aCaseList[iIndex - 1];
       }

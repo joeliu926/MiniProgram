@@ -5,6 +5,10 @@
   
   padding:40rpx 0;
 }
+.custmer{
+  background: #ffffff;
+  width:750rpx;
+}
 .info-img{width:120rpx;
           height: 120rpx;
           margin: 24rpx;
@@ -72,13 +76,15 @@
   z-index:1000;
 
 }
+
 .custmerinfo-name{
   margin-left: 40rpx;
   margin-right:40rpx;
+  padding: 30rpx 0;
  
 }
 .custmerinfo-input{
-  margin-right: 100rpx
+  margin-left: 40rpx
 }
 .textarea{
   width:450rpx;

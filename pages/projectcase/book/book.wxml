@@ -61,9 +61,9 @@
 </view>
 
 <!-- 顾客信息 -->
-<view class='out-content'>
-  <view class='flex custmerinfo-name fx-jc-sb c-p-d  b-g'>
-    <view class='f-16 ' maxlength="6" size="6">顾客姓名</view>
+<view class='custmer'>
+  <view class='flex custmerinfo-name  c-p-d  b-g'>
+    <view class='f-16 'style='width:160rpx' maxlength="6" size="6">顾客姓名</view>
     <view class='f-16 custmerinfo-input {{status!=1?"":"hide"}}'>
      <input name='name ' class='t-l' value='{{customerInfo.name}}'   bindblur='fInputName'  placeholder='{{}}'></input>
     </view>
@@ -72,8 +72,8 @@
     </view>
    </view>
 
-  <view class='flex custmerinfo-name fx-jc-sb c-p-d mg-b b-g'>
-      <view class='f-16 ' >手机号码</view>
+  <view class='flex custmerinfo-name  c-p-d mg-b b-g'>
+      <view class='f-16 'style='width:160rpx' >手机号码</view>
       <view class='f-16 custmerinfo-input  {{status!=1?"":"hide"}}'>
           <input name='phoneNum' class='t-l ' value='{{customerInfo.phoneNum}}' bindtap='showphone' bindblur='fInputMobile'  
           placeholder='{{}}'></input>
@@ -89,21 +89,21 @@
     <view>18811795983</view>
   </view> -->
 
-  <view class='flex custmerinfo-name fx-jc-sb c-p-d  mg-b' >
+  <view class='flex custmerinfo-name  c-p-d  mg-b' >
     
-       <view class='f-16  ' >线索备注</view>
-          <view class='f-16   {{status!=1?"":"hide"}}' style='positin:absolute;z-index:1'>
+       <view class='f-16  'style='width:160rpx' >线索备注</view>
+          <view class='f-16  custmerinfo-input {{status!=1?"":"hide"}}' style='positin:absolute;z-index:1'>
             <view class='{{showtextarea?"":"hide"}}'>
-             <textarea style="width:450rpx;height:160rpx;" name='clueRemark' class='t-l ' value='{{clueRemark}}' maxlength="140" bindtap='' bindblur='fInputClueRemark'  
+             <textarea style="width:450rpx;height:120rpx;" name='clueRemark' class='t-l ' value='{{clueRemark}}' maxlength="140" bindtap='' bindblur='fInputClueRemark'  
         placeholder='{{}}'></textarea>
             </view>
        
          </view>
-          <view style="width:460rpx;height:160rpx" class='f-16   {{status==1?"":"hide"}} ' >
+          <view style="width:460rpx;height:160rpx" class='f-16 custmerinfo-input  {{status==1?"":"hide"}} ' >
        <view  class='t-l ' style="t" >{{clueRemark}}</view>
          </view>
       </view>
-   
+    <view style='height:160rpx'></view> 
 </view>
 
 <!-- 预约按钮 -->
@@ -144,7 +144,7 @@
      <view style="text-align:center; margin-top:20px;">
            <span class="selend {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</span>
       </view>
-       <view style='height:160rpx'></view> 
+      
       </view>
 
          

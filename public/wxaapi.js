@@ -7,8 +7,7 @@ var gConfig={
   //remote:"https://27478500.qcloud.la/wxa",
   //uploadUrl: "https://27478500.qcloud.la/uploadimg/attachment/upload",
   /****production end*****/
-
-  remoteWx: "https://nihaomc.com/wx",
+  remoteWx: "https://nihaomc.com/wx_test",
   /****test start*****/
   remote: "https://nihaomc.com/wxa_test",
   uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload"

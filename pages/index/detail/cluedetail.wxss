@@ -115,6 +115,9 @@
 .cnt-content {
   padding: 20rpx;
   display: block;
+  height: 200rpx;
+  line-height: 200rpx;
+  vertical-align: middle;
   border-bottom: 1px solid #eee;
 }
 

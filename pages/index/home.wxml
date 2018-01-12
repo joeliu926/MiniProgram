@@ -1,9 +1,9 @@
 <wxs src="../../utils/wxs/cutil.wxs" module="util" />
-<div style="height:70rpx;line-height:70rpx;display:{{errorType?'block':'none'}};background-color:{{errorColor}};text-align:center;font-size:30rpx;color:white;vertical-align:middle;">
+<div style="height:70rpx;line-height:70rpx;display:{{errorType?'block':'none'}};background-color:{{errorColor}};text-align:center;font-size:30rpx;color:white;vertical-align:middle;margin-top:0rpx;">
     {{errorMessage}}
 </div>
 <!--线索例表-->
-<view class='h-ct b-s' style='display:{{showData==0?"":"none"}};background-color:white;'>
+<view class='h-ct b-s' style='display:{{showData==0?"":"none"}};background-color:white;margin-top:0rpx;'>
   <view class='search' style='display:{{menuType?"":"none"}}'>
     <div class="search-type">
       <div style="  padding-left:20rpx;  height: 100rpx;display:block; ">

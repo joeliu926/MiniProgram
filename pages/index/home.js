@@ -141,13 +141,24 @@ Page({
     * 页面相关事件处理函数--监听用户下拉动作
     */
   onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
+
+    let _this=this;
+    setTimeout(function(){
+      _this.pullRefresh();
+
+    },1000);
+
+  },
+
+  pullRefresh(){
     if (this.data.menuType) {
       if (this.data.currentSelect) {
         this.setData({
-          clueNoOther:1,
-          clueListOther:[]
+          clueNoOther: 1,
+          clueListOther: []
         });
-      }else{
+      } else {
         this.setData({
           clueNo: 1,
           clueList: []
@@ -162,9 +173,8 @@ Page({
       });
       this.getShareList();
     }
-    wx.stopPullDownRefresh();
-  },
 
+  },
 
   openItem(params) {
     var dataset = params.currentTarget.dataset;

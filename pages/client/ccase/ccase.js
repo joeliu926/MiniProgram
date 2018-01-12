@@ -27,6 +27,7 @@ Page({
     oClinic: {},
     oHeight:"",//案例内容的高度
     isFirst:true,//首次进来
+    picCount:0,//获取用户上传图片
     clueId: "",
     currentPage: 0,
     totalCount: 1,
@@ -175,6 +176,7 @@ Page({
         _This.setData({
           oUserInfo: oUserInfo
         });
+        _This.fGetPhoto();//获取用户上传图片
       } else {
         console.log("get customer info error----", result);
       }
@@ -234,6 +236,34 @@ Page({
         _This.fGetConsultDetail();
       } else {
         console.log("update customer info error----", result);
+      }
+    });
+  },
+  /**
+ * 获取用户上传的图片
+ */
+  fGetPhoto() {
+    let _This = this;
+    let postData = {
+      customerUnionid: _This.data.oUserInfo.unionId,// 客户unionId
+      sessionId: _This.data.consultationId//会话id
+    };
+    //console.log("postData---fGetPhoto--->", postData);
+    wxRequest(wxaapi.consult.getpostphoto.url, postData).then(function (result) {
+      //console.log("result--use pic---->", result);
+      if (result.data.code == 0) {
+        let picCount = _This.data.picCount;
+        if (result.data.data.positiveFace){
+          picCount++;
+        }
+        if (result.data.data.sideFace){
+          picCount++;
+        }
+        _This.setData({
+          picCount: picCount
+        });
+      } else {
+        console.log("add  event error---", result);
       }
     });
   },

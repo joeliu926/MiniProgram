@@ -115,6 +115,18 @@ left:0;
 .tk-photo-icon{
    bottom: 150rpx;
 }
+.tip-pic-count{
+  position:absolute;
+  right:-10rpx;
+  top:-10rpx;
+  color:#ffffff;
+  background: #ff0000;
+  padding: 8rpx;
+  border-radius: 50%;
+  width: 20rpx;
+  height: 20rpx;
+  text-align: center;
+}
 .tip-font{
   color: #000000;
   background:#ffffff;

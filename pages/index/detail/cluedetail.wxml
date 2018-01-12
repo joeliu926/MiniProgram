@@ -57,7 +57,7 @@
     </div>
 
 
-    <div  class="cnt-content" style='text-align:center;font-size:30rpx;display:{{remarklist.length==0?"block":"none"}}'>
+    <div  class="cnt-content" style='text-align:center;font-size:30rpx;display:{{remarklist.length==0?"block":"none"}};  height: 200rpx;line-height: 200rpx;vertical-align: middle;'>
       当前线索还没有备注！
     </div>
 

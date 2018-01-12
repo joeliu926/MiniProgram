@@ -89,12 +89,15 @@
     <view>18811795983</view>
   </view> -->
 
-  <view class='flex custmerinfo-name fx-jc-sb c-p-d  mg-b'>
+  <view class='flex custmerinfo-name fx-jc-sb c-p-d  mg-b' >
     
        <view class='f-16  ' >线索备注</view>
-          <view class='f-16   {{status!=1?"":"hide"}}'>
-        <textarea style="width:450rpx;height:160rpx" name='clueRemark' class='t-l ' value='{{clueRemark}}' maxlength="140" bindtap='' bindblur='fInputClueRemark'  
+          <view class='f-16   {{status!=1?"":"hide"}}' style='positin:absolute;z-index:1'>
+            <view class='{{showtextarea?"":"hide"}}'>
+             <textarea style="width:450rpx;height:160rpx;" name='clueRemark' class='t-l ' value='{{clueRemark}}' maxlength="140" bindtap='' bindblur='fInputClueRemark'  
         placeholder='{{}}'></textarea>
+            </view>
+       
          </view>
           <view style="width:460rpx;height:160rpx" class='f-16   {{status==1?"":"hide"}} ' >
        <view  class='t-l ' style="t" >{{clueRemark}}</view>
@@ -141,6 +144,7 @@
      <view style="text-align:center; margin-top:20px;">
            <span class="selend {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</span>
       </view>
+       <view style='height:160rpx'></view> 
       </view>
 
          
@@ -153,9 +157,9 @@
 <view>
     <div class="list-none">
       <div class="list-none-div">
-        <icon type='search' size='16'></icon>
+       <image style="vertical-align:middle;" class='nodata-img' src='../../../public/images/no_data.png'></image>
       </div>
-      <div>没有相关线索哦，您可以点击菜单中间按钮，先创建一个场景分享。</div>
+      
     </div>
 </view>
 </view>

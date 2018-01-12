@@ -104,6 +104,10 @@ left:0;
   height: 60rpx;
   width: 60rpx;
 }
+.t-photo{
+  width:60rpx;
+  height:51rpx;
+}
 .like-icon{
   bottom: 450rpx;
   padding-top:5rpx;

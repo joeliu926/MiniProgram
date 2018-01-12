@@ -72,7 +72,6 @@ Page({
   },
   fTakePhoto() {
     var _This = this;
-    console.log("upload------------------------");
     wx.chooseImage({
       success: function (res) {
         wx.showLoading({
@@ -91,7 +90,6 @@ Page({
             'user': 'test'
           },
           success: function (res) {
-            console.log("----upload-------success------", res);
             var oData = JSON.parse(res.data);
             //console.log(oData);
             if (oData.code == 0) {
@@ -270,9 +268,7 @@ Page({
       positiveFace: _This.data.frontface||"",
       sideFace: _This.data.sideface||""
     };
-    console.log("ffffff post data------>", pdata);
     wxRequest(wxaapi.consult.handelsharecase.url, pdata).then(function (result) {
-      console.log("ffffff post data result------>",result);
       if (result.data.code == 0) {
         if (!_This.data.tel){
           _This.setData({
@@ -304,10 +300,14 @@ Page({
 * 授权获取手机号码
 */
   getPhoneNumber(e) {
+    wx.showLoading({
+      title: '授权中...',
+    });
     let _This = this;
     let encryptedData = e.detail.encryptedData;
     let iv = e.detail.iv;
     if (!encryptedData) {
+      wx.hideLoading();
       return false;
     }
     let sessionKey = "";
@@ -331,7 +331,7 @@ Page({
       _This.setData({
         oUserInfo: oUserInfo
       });
-      console.log("sessionKey----->", resAll);
+       wx.hideLoading();
       _This.fUpdateCustomerInfo();
     });
   },
@@ -341,13 +341,11 @@ Page({
   fUpdateCustomerInfo() {
     let _This = this;
     let oUserInfo = _This.data.oUserInfo;
-    console.log("oUserInfo----->", oUserInfo, oUserInfo.id);
     let pdata = {
       id: _This.data.cid,
       wechatMobile: _This.data.oUserInfo.wechatMobile
     };
     wxRequest(wxaapi.customer.update.url, pdata).then(function (result) {
-      console.log("update customer result---->", result);
       if (result.data.code == 0) {
         _This.fRedirectBack();
       } else {

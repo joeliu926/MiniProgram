@@ -167,9 +167,13 @@ Page({
  */
   getPhoneNumber(e) {
     let _This = this;
+    wx.showLoading({
+      title: '授权中...',
+    });
     let encryptedData = e.detail.encryptedData;
     let iv = e.detail.iv;
     if (!encryptedData) {
+      wx.hideLoading();
       return false;
     }
     let sessionKey = "";
@@ -193,6 +197,7 @@ Page({
       _This.setData({
         oUserInfo: oUserInfo
       });
+      wx.hideLoading();
       _This.fUpdateCustomerInfo();
     });
   },
@@ -207,7 +212,6 @@ Page({
       wechatMobile: _This.data.oUserInfo.wechatMobile
     };
     wxRequest(wxaapi.customer.update.url, pdata).then(function (result) {
-      console.log("update customer result---->", result);
       if (result.data.code == 0) {
         _This.fGetConsultDetail();
       } else {

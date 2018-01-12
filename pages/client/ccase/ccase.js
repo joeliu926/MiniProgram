@@ -2,7 +2,6 @@ const event = require('../../../public/js/wxEvent.js'); //事件上报相关参�
 const wxaapi = require('./../../../public/wxaapi.js');//api地址参数
 const wxRequest = require('./../../../utils/js/wxRequest.js'); //请求参数
 const wxPromise = require('./../../../utils/js/wxPromise.js');//promise信息
-
 var touchDotX = 0;//触摸时的原点
 var touchDotY = 0;//触摸时的原点
 Page({

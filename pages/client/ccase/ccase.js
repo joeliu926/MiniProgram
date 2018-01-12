@@ -76,6 +76,7 @@ Page({
   });
 /***********qiehuan******/
   getApp().getUserData(function (uinfo) {
+    console.log("-------user info=====>", uinfo);
     _This.setData({
       caseIds: caseIds || "",
       projectName: options.iname,
@@ -137,6 +138,8 @@ Page({
       unionid: _This.data.oUserInfo.unionId
     };
     wxRequest(wxaapi.customer.getcustomerbyunid.url, pdata).then(function (result) {
+      console.log("get customer info result---->", result);
+
       if (result.data.code == 0) {
         oUserInfo.wechatMobile = result.data.data.wechatMobile;
         oUserInfo.id = result.data.data.id;
@@ -222,6 +225,7 @@ Page({
     wxRequest(wxaapi.consult.sharecase.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         let aCaseIds=result.data.data;
+        console.log("aCaseIds----------->", aCaseIds);
         let aItemLeft = _This.data.aItemLeft||[];
         aCaseIds.forEach((item,index)=>{
           aItemLeft[item]=0;
@@ -354,6 +358,7 @@ Page({
       unionId: _This.data.cstUid //咨询师unionid
     };
     wxRequest(wxaapi.clinic.detail.url, pdata).then(function (result) {
+      console.log("result------>", result);
       if(result.data.code==0){
         _This.setData({
           oClinic:result.data.data

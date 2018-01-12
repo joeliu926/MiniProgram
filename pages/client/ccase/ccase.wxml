@@ -44,8 +44,8 @@
                <view class='img-c b-s' style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreview'></view>
                </block>
             </view>
-            <view><text class='f-14'>{{oContent.description}}</text></view>
-             <text class='f-14'>{{cutil.formatTime(oContent.definitionDate,"yyyy-MM-dd")}}</text>
+            <view><view class='f-14 com-left'>{{oContent.description}}</view></view>
+             <view class='f-14 com-left'>{{cutil.formatTime(oContent.definitionDate,"yyyy-MM-dd")}}</view>
           </view>
         </view>
         </block>

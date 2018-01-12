@@ -2,7 +2,7 @@
 .out-content{
   background: #ffffff;
   width:750rpx;
-  margin-bottom: 24rpx;
+  
   padding:40rpx 0;
 }
 .info-img{width:120rpx;
@@ -28,7 +28,7 @@
 .pro-b{
   border: solid 1rpx #9083ed;
   border-radius:24rpx ;
-  padding: 5rpx 20rpx;
+  padding: 8rpx 18rpx;
   text-align: center;
   font-size: 24rpx;
   color: #9083ed;
@@ -55,24 +55,26 @@
   line-height:50rpx
 }
 .b-t{
-  border:2rpx solid gray; 
+  border:1rpx solid #eee; 
 }
 .b-g{
-  border-bottom: 2rpx solid gray; 
+  border-bottom: 1rpx solid #eee; 
 }
 
 .c-p-d{
   padding: 10rpx 0rpx;
-  z-index:1001;
+ 
   
 }
 .p-b{
   position:fixed;
   top:90%;
-  margin-bottom: 20rpx
+  z-index:1000;
+
 }
 .custmerinfo-name{
-  margin-left: 100rpx;
+  margin-left: 40rpx;
+  margin-right:40rpx;
  
 }
 .custmerinfo-input{
@@ -141,7 +143,7 @@ color: #9083ed
   box-sizing: border-box;
   background-color: #F7F7F7;
   border-radius: 40rpx; 
-  padding: 10rpx 34rpx;
+  padding: 10rpx 24rpx;
   margin:0 20rpx 30rpx 0px; 
   color: #666666;
   font-size: 28rpx;
@@ -221,7 +223,7 @@ color: #9083ed
   z-index:1001;
 }
 .selend{
-  width: 300rpx;
+  width: 450rpx;
   box-sizing:border-box;
   background-color:#F7F7F7;
   border-radius:40rpx;
@@ -230,7 +232,7 @@ color: #9083ed
   font-size:28rpx;
   position: absolute;
   bottom: 40rpx;
-  left:250rpx;
+  left:150rpx;
 
 }
 .active{
@@ -251,4 +253,16 @@ color: #9083ed
   text-align: center;
   color: #fff;
   z-index: 100;
+}
+.list-none {
+  padding: 100rpx;
+  font-size: 26rpx;
+  height: 200rpx;
+  display: block;
+}
+
+.list-none-div {
+  display: block;
+  text-align: center;
+  height: 80rpx;
 }

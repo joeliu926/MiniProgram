@@ -6,6 +6,7 @@ page{
 }
 .v-hidden{
   visibility:hidden;
+ 
 }
 .o-title{
   text-align: center;

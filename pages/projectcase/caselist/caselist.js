@@ -104,14 +104,6 @@ Page({
       });
       // console.log("++++++++++++++++++++++++++++++", _This.data.itemids);
       // console.log("1111111111111111", _This.data.arrData);
-      //设置第一个项目是选中的；
-      // if (this.data.arrData > 0) {
-      //   this.data.arrData[0].changeColor = '#9083ed';
-      //   this.setData({
-      //     arrData: this.data.arrData
-      //   })
-      // }  
-   
       _This.fGetCaseList(uinfo);//获取案例
       if ((!caseIds || caseIds.length <= 0)) {
         // console.log("gggggggfGetConsultationId----->", options.pdata.itemid, options.itemids.split(","));
@@ -125,6 +117,11 @@ Page({
         });
       }
     });
+    //设置第一个项目是选中的；
+    this.data.arrData[0].changeColor = '#9083ed';
+    this.setData({
+      arrData: this.data.arrData
+    })
   },
   /*
    *事件参数 
@@ -498,6 +495,11 @@ Page({
         //console.log("case list----", result);
       }
     });
+    //设置第一个项目是选中的；
+    this.data.arrData[0].changeColor = '#9083ed';
+    this.setData({
+      arrData: this.data.arrData
+    })
 
   },
 

@@ -63,13 +63,14 @@
 
 .c-p-d{
   padding: 10rpx 0rpx;
-  z-index:1001;
+ 
   
 }
 .p-b{
   position:fixed;
   top:90%;
-  margin-bottom: 20rpx
+  z-index:1000;
+
 }
 .custmerinfo-name{
   margin-left: 40rpx;

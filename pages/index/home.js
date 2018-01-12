@@ -137,6 +137,34 @@ Page({
       }
     }
   },
+  /**
+    * 页面相关事件处理函数--监听用户下拉动作
+    */
+  onPullDownRefresh: function () {
+    if (this.data.menuType) {
+      if (this.data.currentSelect) {
+        this.setData({
+          clueNoOther:1,
+          clueListOther:[]
+        });
+      }else{
+        this.setData({
+          clueNo: 1,
+          clueList: []
+        });
+      }
+      this.getClueList();
+    }
+    else {
+      this.setData({
+        shareNo: 1,
+        shareList: []
+      });
+      this.getShareList();
+    }
+  },
+
+
   openItem(params) {
     var dataset = params.currentTarget.dataset;
     wx.navigateTo({

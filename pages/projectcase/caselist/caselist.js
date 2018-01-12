@@ -75,7 +75,7 @@ Page({
     allarr: [],
     isShow: 'false',
     current: 0,
-    productcodes:[]
+    productcodes: []
   },
 
   /**
@@ -84,7 +84,7 @@ Page({
   onLoad: function (options) {
     var _This = this;
     var itemids = options.itemids.split(",");
-   
+
     // console.log("===========%%%%%%%%%%%%%%%",itemids);
     var caseIds = options.caseIds;
     getApp().getUserData(function (uinfo) {
@@ -162,16 +162,16 @@ Page({
       return false;
     }
 
-    let prodcutcodearr=_This.data.productcodes;
+    let prodcutcodearr = _This.data.productcodes;
     console.log("_This.prodcutcodearr.======>", _This.data.productcodes);
 
 
     this.data.caseList.forEach(function (item) {
-      if (_This.data.aCaseIds.indexOf(item.id)!=-1 ) {
+      if (_This.data.aCaseIds.indexOf(item.id) != -1) {
         item.products.forEach(item => {
           if (prodcutcodearr.indexOf(item.productCode) == -1) {
             prodcutcodearr.push(item.productCode);
-          } 
+          }
 
         });
       }
@@ -239,31 +239,31 @@ Page({
    * 咨询师改变分享的条目  加入分享
    */
   fChangeShare(e) {
-    console.log("==============",e);
-    console.log("=======caselist=======",this.data.caseList);
+    console.log("==============", e);
+    console.log("=======caselist=======", this.data.caseList);
     var prodcutcodearr = this.data.productcodes;
     var citem = e.currentTarget.dataset.itemid;
     var cindex = e.currentTarget.dataset.indexi;
     var tmpList = this.data.caseList;
     var oItems = this.data.aCaseIds;
     var dindex = oItems.indexOf(citem);
-    this.data.caseList.forEach(function(item){
-      if (item.id==citem){ 
-        item.products.forEach(item=>{
-          if (prodcutcodearr.indexOf(item.productCode)==-1){
+    this.data.caseList.forEach(function (item) {
+      if (item.id == citem) {
+        item.products.forEach(item => {
+          if (prodcutcodearr.indexOf(item.productCode) == -1) {
             prodcutcodearr.push(item.productCode);
-          }else{
-            prodcutcodearr.splice(prodcutcodearr.indexOf(item.productCode), 1);  
+          } else {
+            prodcutcodearr.splice(prodcutcodearr.indexOf(item.productCode), 1);
           }
 
         });
       }
     })
-    prodcutcodearr=  prodcutcodearr.filter(function(pitem,pindex,oProduct){
+    prodcutcodearr = prodcutcodearr.filter(function (pitem, pindex, oProduct) {
       //console.log("========0000000000000===============",Array.prototype.slice.call(arguments));  
-      return oProduct.indexOf(pitem)==pindex;
+      return oProduct.indexOf(pitem) == pindex;
     })
-   
+
 
     // console.log("prodcutcodearr------------------>", prodcutcodearr);
 
@@ -275,7 +275,7 @@ Page({
       oItems.splice(dindex, 1);
     }
     this.setData({
-      productcodes:prodcutcodearr,
+      productcodes: prodcutcodearr,
       aCaseIds: oItems,
       caseList: tmpList,
       caseIds: oItems.toString(),
@@ -350,7 +350,7 @@ Page({
     };
     // console.log("|||||||||||||||||",pdata);
     wxRequest(wxaapi.pcase.morelist.url, pdata).then(function (result) {
-       console.log("case list=666666666666666666666666666666==>",result);
+      console.log("case list=666666666666666666666666666666==>", result);
       if (result.data.code == 0) {
         _This.setData({
           caseList: result.data.data,
@@ -373,7 +373,7 @@ Page({
 
     if (this.data.itemids.length > 0) {
       _This.setData({
-        isConsult:false,
+        isConsult: false,
         isactive: true
       })
     }
@@ -454,7 +454,7 @@ Page({
     // 选择对应的项目  添加选中的样式
     for (let i = 0; i < this.data.arrData.length; i++) {
       if (e.target.dataset.itemid == this.data.arrData[i].itemid) {
-        
+
         this.data.arrData[i].changeColor = '#9083ed';
         this.setData({
           arrData: this.data.arrData
@@ -477,7 +477,7 @@ Page({
     if (this.data.selable.indexOf(sItem.itemid) == -1) {
       this.setData({
         isShow: 'true',
-       
+
       });
       var timer = setTimeout(function () {
         _This.setData({
@@ -523,8 +523,8 @@ Page({
     // 选好项目从新请求案例列表
     let _This = this;
     // console.log("aCaseIds-------->", _This.data.aCaseIds);
-    if (this.data.itemids.length<=0){
-       return  false;
+    if (this.data.itemids.length <= 0) {
+      return false;
     }
     var pdata = {
       unionid: _This.data.oUserInfo.unionId,
@@ -546,7 +546,7 @@ Page({
         //console.log("case list----", result);
       }
     });
-    
+
     //设置第一个项目是选中的；
     this.data.arrData[0].changeColor = '#9083ed';
     this.setData({

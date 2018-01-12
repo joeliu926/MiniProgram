@@ -14,7 +14,7 @@ Page({
     selable: [],
     allarr: [],
     isShow: 'false',
-    Show:'false',
+    Show: 'false',
   },
   /**
    * 生命周期函数--监听页面加载
@@ -35,7 +35,7 @@ Page({
     getApp().getUserData(function (uinfo) {
       uinfo && _This.getProjectList(uinfo.unionId);
     });
-    
+
   },
 
   /**
@@ -94,7 +94,7 @@ Page({
       this.setData({
         isShow: 'true',
       });
-      var timer= setTimeout(function () {
+      var timer = setTimeout(function () {
         _This.setData({
           isShow: !_This.data.isShow
         });
@@ -108,11 +108,11 @@ Page({
         // console.log("=========================ffffff");
         arr.push(sItem.itemid);
         arrData.push(sItem);
-        if (arr.length>0){
+        if (arr.length > 0) {
           this.setData({
             sSelect: arr,
             arrData: this.data.arrData,
-            isactive:true
+            isactive: true
           });
         }
         // console.log("888888888888888888",arrData);
@@ -186,6 +186,17 @@ Page({
           allarr: everyarr
         });
       } else {
+        clearTimeout(timer);
+        if (_This.data.selable.length == 0) {
+          _This.setData({
+            Show: 'true',
+          });
+          var timer = setTimeout(function () {
+            _This.setData({
+              Show: !_This.data.Show
+            });
+          }, 2000);
+        }
         console.log(result);
       }
       wx.hideLoading();
@@ -209,7 +220,7 @@ Page({
         })
         _This.setData({
           // projectItems: result.data.data,
-          selable:codearr
+          selable: codearr
         });
         clearTimeout(timer);
         if (_This.data.selable.length == 0) {
@@ -223,6 +234,17 @@ Page({
           }, 2000);
         }
       } else {
+        clearTimeout(timer);
+        if (_This.data.selable.length == 0) {
+          _This.setData({
+            Show: 'true',
+          });
+          var timer = setTimeout(function () {
+            _This.setData({
+              Show: !_This.data.Show
+            });
+          }, 2000);
+        }
         console.log(result);
       }
       wx.hideLoading();

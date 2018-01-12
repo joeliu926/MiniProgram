@@ -5,13 +5,14 @@
     <!--项目滚动区  -->
     <view class="scroll-box fl">
       <scroll-view scroll-x="true" style=" white-space: nowrap;margin-left:24rpx;">
-        <view class="item-view" style="color:{{item.changeColor}} " wx:for-item="item" wx:for="{{arrData}}" wx:for-index="{{index}}" wx:key="item.itemid" data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}" bindtap="chooseitem">{{item.iname}}</view>
+        <view class="item-view" style="color:{{item.changeColor}} " wx:for-item="item" wx:for="{{arrData}}" wx:for-index="{{index}}" wx:key="item.itemid" data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}"
+          bindtap="chooseitem">{{item.iname}}</view>
         <!-- <view class="item-view f-14" bindtap="">热门项目</view>-->
       </scroll-view>
     </view>
     <!--下拉箭头  -->
     <view class="selectarrow fr " bindtap="getproductitem">
-      <image src='../../../public/images/arrow-down.png' class='btn-down' ></image>
+      <image src='../../../public/images/arrow-down.png' class='btn-down'></image>
     </view>
   </view>
   <view class='o-flex o-content' style="width:100%; background:#f7f7f7;">
@@ -25,21 +26,22 @@
                   <view class='flex b-s clearfix' style="position: relative;">
                     <text class='before f-12 bcommon'>术前</text>
                     <text class='after f-12 bcommon'>术后</text>
-                    <image  src='{{oitem.beforePicture.url||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l fl'></image>
-                    <image   src='{{oitem.afterPicture.url||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r fl'></image>
+                    <image src='{{oitem.beforePicture.url||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l fl'></image>
+                    <image src='{{oitem.afterPicture.url||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r fl'></image>
                   </view>
                 </view>
 
-                <view class='user-info' ><!--bindtap='fCaseDetail'  -->
+                <view class='user-info'>
+                  <!--bindtap='fCaseDetail'  -->
                   <view class='bef-aft flex'>
                     <image class='o-img-title' src='{{oitem.customerLogo.url}}' mode='scaleToFill'></image>
                   </view>
                   <view class='u-info'>
                     <text class='u-name'>{{oitem.customerName}}</text>
                     <view style="margin-bottom: 10rpx; ">
-                      <text class='f-14 txt-item' >{{oitem.caseName}}</text>
+                      <text class='f-14 txt-item'>{{oitem.caseName}}</text>
                     </view>
-                    
+
                     <text class='f-14'>诊疗于 {{cutil.formatTime(oitem.operationDate,"yyyy-MM-dd")}}</text>
                   </view>
                 </view>

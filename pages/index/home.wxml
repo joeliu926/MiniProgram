@@ -104,11 +104,8 @@
     <view style='display:block;height:100rpx;background-color:white;margin-top:10rpx; font-size:26rpx;text-align:center;'>
     </view>
   </view>
-
-
-
   <!--场景列表-->
-  <view style='display:{{menuType?"none":"block"}};background-color:white;'>
+  <view style='display:{{menuType?"none":"block"}};background-color:white;overflow:hidden;'>
     <block wx:for="{{shareList}}" wx:for-item="oitem" wx:key="id">
       <view class="list" style="background-color:white;">
         <div class="list-body" style="width:100%;">

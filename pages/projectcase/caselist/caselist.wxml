@@ -10,8 +10,8 @@
       </scroll-view>
     </view>
     <!--下拉箭头  -->
-    <view class="selectarrow fr ">
-      <image src='../../../public/images/arrow-down.png' class='btn-down' bindtap="getproductitem"></image>
+    <view class="selectarrow fr " bindtap="getproductitem">
+      <image src='../../../public/images/arrow-down.png' class='btn-down' ></image>
     </view>
   </view>
   <view class='o-flex o-content' style="width:100%; background:#f7f7f7;">
@@ -57,8 +57,8 @@
               <view style='padding-right:10px;'>
                 <view class="flex fx-jc-ed">
                   <view class='flex-c txt-item-share b-s' bindtap='fChangeShare' data-indexi='{{index}}' data-itemid='{{oitem.id}}' style='display:{{isConsult?"show":"none"}};'>
-                    <image wx:if='{{oitem.current==oitem.id}}' src='../../../public/images/icon-ashare.png' class='share-icon'></image>
-                    <image wx:if='{{oitem.current!=oitem.id}}' src='../../../public/images/icon-rshare.png' class='share-icon'></image>
+                    <image wx:if='{{caselist.inArray(aCaseIds,oitem.id)}}' src='../../../public/images/icon-ashare.png' class='share-icon'></image>
+                    <image wx:if='{{!caselist.inArray(aCaseIds,oitem.id)}}' src='../../../public/images/icon-rshare.png' class='share-icon'></image>
                     <text class='f-14'>加入分享</text>
                   </view>
                 </view>
@@ -72,7 +72,7 @@
     <view class='extr-v extr-b' style=''></view>
     <button class='share-btn flex-c' wx:if='{{aCaseIds.length>0}}' style='display:{{isConsult?"flex":"none"}};' open-type="share">
       <image src='../../../public/images/icon-share.png' class='share-icon'></image>
-      <text class='share-txt '>分享给好友 </text>
+      <text class='share-txt'>分享给好友 </text>
       <text class='tip' wx:if='{{aCaseIds.length>0}}'>{{aCaseIds.length}}</text>
     </button>
 
@@ -83,7 +83,7 @@
     </button>
 
     <!-- 案例选项弹层 -->
-    <view class='case-content' style="display: {{ishow?'block':'none'}}">
+    <view class='product-content' style="display: {{ishow?'block':'none'}}">
       <block wx:for="{{projectItems}}" wx:for-item="oitem" wx:key="id">
         <view class='o-flex case-item-content'>
           <text class='case-title' bindtap='selectTitle'>{{oitem.productName}}</text>

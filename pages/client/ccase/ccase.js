@@ -25,6 +25,8 @@ Page({
     olikeResult: {},//用户喜欢案例结果
     sCurrentId: 0,//当前案例的id
     oClinic: {},
+    oHeight:"",//案例内容的高度
+    isFirst:true,//首次进来
     clueId: "",
     currentPage: 0,
     totalCount: 1,
@@ -102,12 +104,28 @@ Page({
     })
   },
   onReady: function () {
-    this.fGetView();
   },
+  /**
+   * 获取案例列表的内容高度
+   */
   fGetView() {
-
-
-
+    let _This=this;
+    if (!_This.data.isFirst){
+       return false;
+    }
+    var query = wx.createSelectorQuery().selectAll('.QQQ').boundingClientRect(function (rect) {
+      let oHeight=[];
+      rect.forEach(item=>{
+      oHeight.push(item.height);
+    });
+    oHeight=oHeight.sort((one,two)=>{
+      return one<two;
+    });
+      _This.setData({
+        oHeight: oHeight[0],
+        isFirst:false
+      });
+    }).exec();
   },
   /**
    * 客户添加或者更新,返回线索id
@@ -296,8 +314,7 @@ Page({
           });
           _This.fGetLikeState();//获取点赞状态
         }
-        _This.fGetCaseDetailById();
-
+        _This.fGetCaseDetailById();    
       } else {
         console.log("case detail error----", result);
       }
@@ -500,6 +517,7 @@ Page({
   // 触摸开始事件
   fTouchStart: function (e) {
     //console.log("e.touches[0]------->", e, e.currentTarget);
+    this.fGetView();
     let caseItem = e.currentTarget.dataset.caseitem;
     this.setData({
       currentItem: caseItem,

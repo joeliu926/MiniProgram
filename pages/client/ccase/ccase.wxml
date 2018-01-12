@@ -79,7 +79,7 @@
 </view>
 <view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon {{isEndPage?"hide":""}}' bindtap='fTakePhoto' style=''>
    <image  class='cm-img' style='width:65rpx;'  src='../../../public/images/tk-photo-icon.png' ></image>
-   <view class='f-14 flex-c tip-pic-count' style=''>{{picCount}}</view>
+   <view wx:if="{{picCount>0}}" class='f-14 flex-c tip-pic-count' style=''>{{picCount}}</view>
 </view>
 <view class='tip-font f-14 {{oUserInfo.wechatMobile?"hide":""}} {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text>开启专属咨询师一对一沟通.</text>
  <view class='dp-arr'></view>

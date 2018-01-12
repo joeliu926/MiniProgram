@@ -137,6 +137,45 @@ Page({
       }
     }
   },
+  /**
+    * 页面相关事件处理函数--监听用户下拉动作
+    */
+  onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
+
+    let _this=this;
+    setTimeout(function(){
+      _this.pullRefresh();
+
+    },1000);
+
+  },
+
+  pullRefresh(){
+    if (this.data.menuType) {
+      if (this.data.currentSelect) {
+        this.setData({
+          clueNoOther: 1,
+          clueListOther: []
+        });
+      } else {
+        this.setData({
+          clueNo: 1,
+          clueList: []
+        });
+      }
+      this.getClueList();
+    }
+    else {
+      this.setData({
+        shareNo: 1,
+        shareList: []
+      });
+      this.getShareList();
+    }
+
+  },
+
   openItem(params) {
     var dataset = params.currentTarget.dataset;
     wx.navigateTo({
@@ -217,6 +256,11 @@ Page({
       this.alertMessage("关闭客户不可以备注！", 'yellow');
       return;
     }
+
+    if (remark.clueStatus == 7) {
+      this.alertMessage("已成交客户不可以备注！", 'yellow');
+      return;
+    }
     this.setData({
       showData: 3,
       currentClue: remark
@@ -232,7 +276,7 @@ Page({
     let pdata = {
       "clueId": remark.id,
       "clueStage": remark.clueStage,
-      "creater": remark.creater,
+      "creater": remark.creator,
       "customerId": remark.customerId,
       "id": remark.id,
       "remark": this.data.cluereMark,
@@ -322,7 +366,7 @@ Page({
   },
   //提交联系人
   submitLinkman(params) {
-    if (!this.data.linkMansubmit) {
+    if (!this.data.linkMansubmit || this.data.currentClue.clueStatus!=1) {
       return
     }
     let remark = this.data.currentClue;
@@ -336,12 +380,7 @@ Page({
     }
     let _This = this;
     let linkmandata = this.data.linkMan;
-    if (this.data.sexitems[0].checked) {
-      linkmandata.gender = 1;
-    }
-    else {
-      linkmandata.gender = 2;
-    }
+  
     delete linkmandata.wechatMobile;
     let pdata = linkmandata;
 

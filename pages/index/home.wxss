@@ -141,8 +141,9 @@
   height: 50rpx;
   vertical-align: top;
   text-overflow: ellipsis;
+      white-space:nowrap;
   display: inline-block;
-    white-space:nowrap;
+
     overflow: hidden;
   width: 90%;
 }

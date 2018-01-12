@@ -10,7 +10,7 @@ Page({
     clueDetail:{},
     clueName:'',
     clueStage:'',
-    remarklist:[],
+    remarklist:[{}],
     bookName:''
   },
 

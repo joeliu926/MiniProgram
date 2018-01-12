@@ -4,6 +4,10 @@ page{
 .c-case-ct{
 
 }
+.v-hidden{
+  visibility:hidden;
+ 
+}
 .o-title{
   text-align: center;
   padding: 0 0 5px 0;

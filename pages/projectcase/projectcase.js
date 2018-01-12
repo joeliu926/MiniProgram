@@ -13,7 +13,8 @@ Page({
     arrData: [],
     selable: [],
     allarr: [],
-    isShow: 'false'
+    isShow: 'false',
+    Show:'false',
   },
   /**
    * 生命周期函数--监听页面加载
@@ -22,6 +23,7 @@ Page({
     //console.log("options pcase-->", options);
 
     let _This = this;
+
     wx.showLoading({
       title: 'loading...',
     });
@@ -33,6 +35,7 @@ Page({
     getApp().getUserData(function (uinfo) {
       uinfo && _This.getProjectList(uinfo.unionId);
     });
+    
   },
 
   /**
@@ -206,8 +209,19 @@ Page({
         })
         _This.setData({
           // projectItems: result.data.data,
-          selable: codearr
+          selable:codearr
         });
+        clearTimeout(timer);
+        if (_This.data.selable.length == 0) {
+          _This.setData({
+            Show: 'true',
+          });
+          var timer = setTimeout(function () {
+            _This.setData({
+              Show: !_This.data.Show
+            });
+          }, 2000);
+        }
       } else {
         console.log(result);
       }

@@ -659,12 +659,12 @@ Page({
             }, 4500);
             wx.hideLoading();
           } else {
-            wx.showToast({
-              title: '预约失败',
-              image: '../../public/images/no_data.png',
-              icon: 'success',
-              duration: 4000
-            });
+            // wx.showToast({
+            //   title: '预约失败',
+            //   image: '../../public/images/no_data.png',
+            //   icon: 'success',
+            //   duration: 4000
+            // });
            // wx.hideLoading();
           }
         });

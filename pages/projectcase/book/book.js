@@ -657,8 +657,8 @@ Page({
               wx.navigateTo({
                 url: '../../index/home'
               });
-            }, 2500);
-            wx.hideLoading();
+            }, 3000);
+            // wx.hideLoading();
           } else {
             // wx.showToast({
             //   title: '预约失败',

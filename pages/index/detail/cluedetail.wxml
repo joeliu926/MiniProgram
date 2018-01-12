@@ -5,8 +5,8 @@
     <div class='top-content'>
       <div class="top-right">
         <div>
-          <span style="margin-right:10rpx;vertical-align:middle;">{{clueName}}</span>
-          <span class="top-span">{{clueDetail.statusName}}</span>
+          <span style="margin-right:10rpx;vertical-align:middle;max-width:150px;text-overflow:ellipsis;white-space:nowrap;display:inline-block;">{{clueName}}</span>
+          <span class="top-span" style="display:inline-block;">{{clueDetail.statusName}}</span>
         </div>
         <div class='top-state'>{{!clueDetail.appointmentId?"未预约":util.formatTime(bookName,"yyyy年MM月dd日 hh:mm")}}</div>
         <div class='top-book' bindtap='bookOption'>{{bookName=='去预约'?bookName:"已预约"}}</div>

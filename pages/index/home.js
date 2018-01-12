@@ -162,6 +162,7 @@ Page({
       });
       this.getShareList();
     }
+    wx.stopPullDownRefresh();
   },
 
 
@@ -265,7 +266,7 @@ Page({
     let pdata = {
       "clueId": remark.id,
       "clueStage": remark.clueStage,
-      "creater": remark.creater,
+      "creater": remark.creator,
       "customerId": remark.customerId,
       "id": remark.id,
       "remark": this.data.cluereMark,

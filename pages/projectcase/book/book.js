@@ -599,9 +599,9 @@ Page({
     let _This = this;
     let bookDate = _This.data.bdate + " " + _This.data.btime;
    // let Bookdate = Date.parse(new Date(bookDate));
-    wx.showLoading({
-      title: '提交中...'
-    })
+    // wx.showLoading({
+    //   title: '提交中...'
+    // })
     //console.log("user data---customerInfo---", _This.data.customerInfo);
     // if (_This.data.bdate == "" || _This.data.btime == "" || !_This.data.customerInfo.name || _This.data.customerInfo.name == "") {
     //   console.log("_This.data.bdate----->", _This.data.bdate);
@@ -646,17 +646,18 @@ Page({
               oAppointment: oAppointment,
               reserveId: result.data.data
             });
-            clearTimeout(timere);
+            
             wx.showToast({
               title: '预约成功',
               icon: 'success',
-              duration: 4000
+              duration: 2000
             });
+            clearTimeout(timere);
             var timere = setTimeout(function () {
               wx.navigateTo({
                 url: '../../index/home'
               });
-            }, 4500);
+            }, 2500);
             wx.hideLoading();
           } else {
             // wx.showToast({

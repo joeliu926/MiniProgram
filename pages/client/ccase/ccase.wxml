@@ -8,7 +8,7 @@
 <block wx:for="{{aCurrentList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
 
     <view class='w-10 b-s case-item-ct' bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{caseCount-index}};left:{{index==0?itemLeft:"0px"}};'>
-    <view class='b-d'>
+    <view class='b-d bk-c-w'>
   <!------------------before after start------------left:{{index==0?itemLeft:"0px"}};-------->
       <view class='w-10 b-after-ct'> 
             <view class='flex b-s' style="position: relative;">

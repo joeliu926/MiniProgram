@@ -259,7 +259,7 @@
           姓名
         </view>
         <view class='f-16'>
-          <input name="name" class='t-r' value="{{linkMan.name}}" placeholder-style='font-size:26rpx;color:#999999;' bindinput="linkchangeName" placeholder='填写姓名'></input>
+          <input name="name"  disabled="{{currentClue.clueStatus==1?false:true}}"  class='t-r' value="{{linkMan.name}}" placeholder-style='font-size:26rpx;color:#999999;' bindinput="linkchangeName" placeholder='填写姓名'></input>
         </view>
       </view>
       <view class='flex bk-c-w fx-jc-sb contect-line'>
@@ -280,7 +280,7 @@
         </view>
         <view class='f-16'>
 
-        <picker  mode="date" value="{{linkMan.birthday}}" start="{{clueStartDate}}"   bindchange="linkchangeage">
+        <picker   disabled="{{currentClue.clueStatus==1?false:true}}"  mode="date" value="{{linkMan.birthday}}" start="{{clueStartDate}}"   bindchange="linkchangeage">
           <view style="width:240rpx;height:60rpx;line-height:60rpx;text-align:center;">
             {{linkMan.birthday}}
           </view>
@@ -294,7 +294,7 @@
           电话
         </view>
         <view class='f-16'>
-          <input name="name" placeholder-style='font-size:24rpx;color:#999999;' class='t-r' value="{{linkMan.phoneNum}}" bindinput="linkchangephone" placeholder='输入电话'></input>
+          <input name="name" placeholder-style='font-size:24rpx;color:#999999;'  disabled="{{currentClue.clueStatus==1?false:true}}"  class='t-r' value="{{linkMan.phoneNum}}" bindinput="linkchangephone" placeholder='输入电话'></input>
         </view>
       </view>
       <view class='flex bk-c-w fx-jc-sb c-p-d' style='margin:0 40rpx;padding:30rpx 0;'>
@@ -302,12 +302,12 @@
           微信
         </view>
         <view class='f-16'>
-          <input name="name" placeholder-style='font-size:26rpx;color:#999999;' class='t-r' value="{{linkMan.wechatNum}}" bindinput="linkchangewechat" placeholder='输入微信'></input>
+          <input name="name" placeholder-style='font-size:26rpx;color:#999999;' disabled="{{currentClue.clueStatus==1?false:true}}" class='t-r' value="{{linkMan.wechatNum}}" bindinput="linkchangewechat" placeholder='输入微信'></input>
         </view>
       </view>
     </view>
     <div class='submit-btn'>
-      <div style='{{linkMansubmit?"":"background:#E5E5E5;"}}'   bindtap='submitLinkman'>提交</div>
+      <div style='{{linkMansubmit&&currentClue.clueStatus==1?"":"background:#E5E5E5;"}}'   bindtap='submitLinkman'>提交</div>
     </div>
   </div>
 </view>

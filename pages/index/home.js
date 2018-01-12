@@ -366,7 +366,7 @@ Page({
   },
   //提交联系人
   submitLinkman(params) {
-    if (!this.data.linkMansubmit) {
+    if (!this.data.linkMansubmit || this.data.currentClue.clueStatus!=1) {
       return
     }
     let remark = this.data.currentClue;

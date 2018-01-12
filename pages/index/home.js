@@ -217,6 +217,11 @@ Page({
       this.alertMessage("关闭客户不可以备注！", 'yellow');
       return;
     }
+
+    if (remark.clueStatus == 7) {
+      this.alertMessage("已成交客户不可以备注！", 'yellow');
+      return;
+    }
     this.setData({
       showData: 3,
       currentClue: remark
@@ -336,12 +341,7 @@ Page({
     }
     let _This = this;
     let linkmandata = this.data.linkMan;
-    if (this.data.sexitems[0].checked) {
-      linkmandata.gender = 1;
-    }
-    else {
-      linkmandata.gender = 2;
-    }
+  
     delete linkmandata.wechatMobile;
     let pdata = linkmandata;
 

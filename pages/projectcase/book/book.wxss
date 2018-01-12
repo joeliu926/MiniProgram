@@ -80,7 +80,11 @@
 .custmerinfo-input{
   margin-right: 100rpx
 }
-
+.textarea{
+  width:450rpx;
+  height:160rpx ;
+  position:absolute;
+}
 .pickert{
   width: 240rpx;
   height: 60rpx;
@@ -116,6 +120,7 @@ line-height:80rpx;
   height:100%;
   top:0px;
   background:#ffffff;
+  overflow: scroll
 
   }
 
@@ -230,7 +235,7 @@ color: #9083ed
   line-height: 80rpx;
   color:#666666;
   font-size:28rpx;
-  position: absolute;
+  position: fixed;
   bottom: 40rpx;
   left:150rpx;
 

@@ -7,7 +7,6 @@
   <view class='search' style='display:{{menuType?"":"none"}}'>
     <div class="search-type">
       <div style="  padding-left:20rpx;  height: 100rpx;display:block; ">
-
       <div bindtap='selectType' data-id='{{item.id}}' wx:for="{{selectItem}}" wx:for-item="item" wx:key="id" class="search-type-item" style="{{item.val?'color:#8F82EC;':''}}">
         <span class="search-type-top">{{item.text}}</span>
         <span class="{{item.val?'search-type-bottom':'search-type-none'}}"></span>
@@ -28,7 +27,7 @@
         <div class="list-body">
           <div class='list-img' bindtap='openItem' data-Obj='{{oitem}}'>
             <div style='margin:10rpx 15rpx 0rpx 15rpx;display:block;'>
-              <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/default-title.png"}}'></image>
+              <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/def-userimg.png"}}'></image>
             </div>
           </div>
           <div class="list-content" bindtap='openItem' data-Obj='{{oitem}}'>
@@ -70,7 +69,7 @@
         <div class="list-body">
           <div class='list-img' bindtap='openItem'  data-Obj='{{oitem}}' >
             <div style='margin:10rpx 15rpx 0rpx 15rpx;display:block;'>
-              <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/default-title.png"}}'></image>
+              <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/def-userimg.png"}}'></image>
             </div>
           </div>
           <div class="list-content" bindtap='openItem'  data-Obj='{{oitem}}' >

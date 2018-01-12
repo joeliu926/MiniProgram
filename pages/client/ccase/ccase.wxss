@@ -121,14 +121,14 @@ left:0;
 }
 .tip-pic-count{
   position:absolute;
-  right:-10rpx;
-  top:-10rpx;
+  right:-4rpx;
+  top:-4rpx;
   color:#ffffff;
   background: #ff0000;
-  padding: 8rpx;
+ 
   border-radius: 50%;
-  width: 20rpx;
-  height: 20rpx;
+  width: 34rpx;
+  height: 34rpx;
   text-align: center;
 }
 .tip-font{

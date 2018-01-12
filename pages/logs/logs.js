@@ -41,6 +41,13 @@ let _This=this;
 
 
   },
+  click(){
+    wx.previewImage({
+      current: dataset.src,
+      urls: [dataset.src]
+    })
+  }
+  ,
   getPhoneNumber(e){
     console.log("------",e);
     let encryptedData = e.detail.encryptedData;

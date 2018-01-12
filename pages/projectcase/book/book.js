@@ -77,9 +77,9 @@ Page({
     wx.showLoading({
       title: 'loading...',
     });
-    console.log("options.clueStatus", options.clueStatus)
+   // console.log("options.clueStatus", options.clueStatus)
     
-    console.log("status", this.data.status)
+    //console.log("status", this.data.status)
     _This.setData({
       clueStatus: options.clueStatus,
       customerId: options.customerId,
@@ -190,7 +190,7 @@ Page({
   //提示已关闭
   clearTimeout(){
     let _This=this;
-    console.log("cluestatus", this.data.clueStatus)
+    //console.log("cluestatus", this.data.clueStatus)
     clearTimeout(timer);
     if (this.data.clueStatus == 5) {
     this.setData({
@@ -583,14 +583,14 @@ Page({
             status: 1
           });
         }
-        console.log("status", _This.data.status)
+       // console.log("status", _This.data.status)
         _This.checkbook();
       } else {
         // console.log(result);
       }
     });
     //console.log("appointment----", _This.data.oAppointment)
-    console.log("status",this.data.status)
+    //console.log("status",this.data.status)
   },
   /**
     * 提交预约信息

@@ -4,7 +4,7 @@ var arrayFilter=function(oItems,item){
 }
 
 var inArray = function (arr, item) {
-  // console.log(arr.indexOf);
+ // console.log(typeof (arr), arr, "-------------------", item, arr.indexOf(item));
   if (arr.indexOf(item) == -1) {
     return false;
   } else {

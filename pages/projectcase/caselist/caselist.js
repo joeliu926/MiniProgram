@@ -75,6 +75,7 @@ Page({
     allarr: [],
     isShow: 'false',
     current: 0,
+    productcodes:[]
   },
 
   /**
@@ -151,7 +152,7 @@ Page({
     });
   },
   /**
-   * 用户点击右上角分享
+   * 用户点击右上角分享   分享给好友
    */
   onShareAppMessage: function (e) {
     let _This = this;
@@ -160,11 +161,34 @@ Page({
       /// callback(_This.data.consultationId);
       return false;
     }
+
+    let prodcutcodearr=_This.data.productcodes;
+    console.log("_This.prodcutcodearr.======>", _This.data.productcodes);
+
+
+    this.data.caseList.forEach(function (item) {
+      if (_This.data.aCaseIds.indexOf(item.id)!=-1 ) {
+        item.products.forEach(item => {
+          if (prodcutcodearr.indexOf(item.productCode) == -1) {
+            prodcutcodearr.push(item.productCode);
+          } 
+
+        });
+      }
+    })
+    prodcutcodearr = prodcutcodearr.filter(function (pitem, pindex, oProduct) {
+      //console.log("========0000000000000===============",Array.prototype.slice.call(arguments));  
+      return oProduct.indexOf(pitem) == pindex;
+    })
+    _This.setData({
+      productcodes: prodcutcodearr
+    })
+
     let shareData = {
       cases: _This.data.aCaseIds,//案例列表Id
       consultingId: _This.data.oEvent.eventAttrs.consultingId,//会话id
       consultantUnionid: _This.data.oUserInfo.unionId,//咨询师unionid
-      products: _This.data.sSelect,//项目列表id  [3002,3025,3028]
+      products: _This.data.productcodes,//项目列表id  [3002,3025,3028]
     };
     wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
       // console.log("=====0", wxaapi.consult.consultantupdate.url,shareData);
@@ -212,14 +236,37 @@ Page({
     })
   },
   /**
-   * 咨询师改变分享的条目
+   * 咨询师改变分享的条目  加入分享
    */
   fChangeShare(e) {
+    console.log("==============",e);
+    console.log("=======caselist=======",this.data.caseList);
+    var prodcutcodearr = this.data.productcodes;
     var citem = e.currentTarget.dataset.itemid;
     var cindex = e.currentTarget.dataset.indexi;
     var tmpList = this.data.caseList;
     var oItems = this.data.aCaseIds;
     var dindex = oItems.indexOf(citem);
+    this.data.caseList.forEach(function(item){
+      if (item.id==citem){ 
+        item.products.forEach(item=>{
+          if (prodcutcodearr.indexOf(item.productCode)==-1){
+            prodcutcodearr.push(item.productCode);
+          }else{
+            prodcutcodearr.splice(prodcutcodearr.indexOf(item.productCode), 1);  
+          }
+
+        });
+      }
+    })
+    prodcutcodearr=  prodcutcodearr.filter(function(pitem,pindex,oProduct){
+      //console.log("========0000000000000===============",Array.prototype.slice.call(arguments));  
+      return oProduct.indexOf(pitem)==pindex;
+    })
+   
+
+    // console.log("prodcutcodearr------------------>", prodcutcodearr);
+
     if (dindex < 0) {
       oItems.push(citem);
       tmpList[cindex]["current"] = citem;
@@ -228,6 +275,7 @@ Page({
       oItems.splice(dindex, 1);
     }
     this.setData({
+      productcodes:prodcutcodearr,
       aCaseIds: oItems,
       caseList: tmpList,
       caseIds: oItems.toString(),
@@ -472,6 +520,10 @@ Page({
   selectItems() {
     // 选好项目从新请求案例列表
     let _This = this;
+
+
+    console.log("aCaseIds-------->", _This.data.aCaseIds);
+
     if (this.data.itemids.length<=0){
        return  false;
     }
@@ -495,6 +547,7 @@ Page({
         //console.log("case list----", result);
       }
     });
+    
     //设置第一个项目是选中的；
     this.data.arrData[0].changeColor = '#9083ed';
     this.setData({

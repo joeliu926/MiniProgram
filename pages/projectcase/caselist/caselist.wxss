@@ -5,6 +5,7 @@ page {
 }
 .case-content {
   width: 100%;
+  height:100%;
 }
 
 .o-flex {
@@ -177,11 +178,11 @@ scroll-view {
   border-radius: 20px;
   overflow: visible;
   border: none;
-  font-size: 32rpx;
+  font-size: 30rpx;
   position:fixed;
-  bottom:30px;
+  bottom:20rpx;
   left:50%;
-  margin-left:-225rpx;
+  margin-left:-215rpx;
   justify-content: center;
 }
 
@@ -275,17 +276,17 @@ button::after {
   flex-direction: column;
 }
 
-.case-content {
+.o-content .product-content {
   margin: 0;
   width: 100%;
-  height: 100%;
+   /* height: 100%;  */
   /* padding: 15px; */
   position: absolute;
   z-index: 100;
   top: 0;
   left: 0;
   box-sizing: border-box;
-  /* margin-bottom: 100px; */
+  padding-bottom: 300rpx; 
   background: #fff;
 }
 
@@ -305,7 +306,7 @@ button::after {
 
 .case-item-detail {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 40rpx;
   display: flex;
   flex-wrap: wrap;
 }
@@ -331,7 +332,7 @@ button::after {
 }
 
 .b-pos {
-  height: 40px;
+  height: 80rpx;
 }
 
 .case-btn-content {
@@ -347,8 +348,8 @@ button::after {
 }
 
 .case-img-btn {
-  height: 40px;
-  width: 40px;
+  height: 80rpx;
+  width: 80rpx;
 }
 
 .case-btn-name {
@@ -397,8 +398,8 @@ button::after{
   left: 0;
   /* bottom: 120rpx; */
   width: 100%;
-  height: 30px;
-  line-height: 30px;
+  height: 60rpx;
+  line-height: 60rpx;
   background: #ffbe00;
   font-size: 28rpx;
   text-align: center;
@@ -408,7 +409,7 @@ button::after{
 
 .selBtn {
   position: fixed;
-  bottom: 10rpx;
+  bottom:20rpx;
   left: 50%;
   margin-left:-215rpx;
   /* margin-left: -80rpx; */

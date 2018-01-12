@@ -16,7 +16,7 @@ page {
   /* height: 100%; */
   padding: 30rpx;
   box-sizing: border-box;
-  padding-bottom:300rpx;
+  padding-bottom: 300rpx;
   background: #fff;
 }
 
@@ -90,25 +90,28 @@ page {
   position: fixed;
   bottom: 40rpx;
   left: 50%;
-  margin-left:-215rpx;
+  margin-left: -215rpx;
   z-index: 100;
 }
+
 .selend {
-  width:450rpx;
-  height:80rpx; 
+  width: 450rpx;
+  height: 80rpx;
   box-sizing: border-box;
-  background-color: #cccccc;
+  background-color: #ccc;
   border-radius: 40rpx;
   /* padding: 10rpx 50rpx 0rpx; */
   margin: 0 20rpx 30rpx 0;
-  color: #FFFFFF;
-  font-size:30rpx!important;
-  line-height:80rpx!important;
-  border:none!important;
+  color: #fff;
+  font-size: 30rpx !important;
+  line-height: 80rpx !important;
+  border: none !important;
 }
-button::after{
-  border:none;
+
+button::after {
+  border: none;
 }
+
 .tipunable {
   position: fixed;
   top: 0;
@@ -123,8 +126,9 @@ button::after{
   color: #fff;
   z-index: 100;
 }
-.tip{
-    position: fixed;
+
+.tip {
+  position: fixed;
   top: 0;
   left: 0;
   /* bottom: 120rpx; */
@@ -135,7 +139,7 @@ button::after{
   font-size: 28rpx;
   text-align: center;
   color: #fff;
-  z-index: 100; 
+  z-index: 100;
 }
 
 /*选中的状态*/

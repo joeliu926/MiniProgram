@@ -104,11 +104,11 @@
 </view>
 
 <!-- 预约按钮 -->
-<view class='flex-c c-p-d p-b b-s w-10 mg-b {{oAppointment.status!=1?"":"hide"}}' >
+<view class='flex-c c-p-d p-b b-s w-10 {{oAppointment.status!=1?"":"hide"}}' >
    <view class='sb-btn  t-a-c b-s' style='' bindtap='fSubmitData'> 预约</view> 
 </view>
 
-<view class='flex-c p-b c-p-d b-s w-10 mg-b {{oAppointment.status==1?"":"hide"}}'>
+<view class='flex-c p-b c-p-d b-s w-10  {{oAppointment.status==1?"":"hide"}}'>
    <view class='dis-c  sb-btn t-a-c b-s'  style=''> 预约</view> 
 </view>
 

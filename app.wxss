@@ -143,6 +143,9 @@ background-color: #ffffff;
 .com-pd{
   padding: 40rpx;
 }
+.com-left{
+  padding:0 20rpx;
+}
 .t-b{
   margin: 20rpx;
 }

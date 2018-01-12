@@ -162,6 +162,7 @@
     display: block;
 }
 .search-type-item {
+  vertical-align: top;
   overflow: hidden;
   width: 50%;
   height: 90rpx;

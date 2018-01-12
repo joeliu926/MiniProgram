@@ -80,7 +80,7 @@ Page({
       caseIds: caseIds || "",
       projectName: options.iname,
       productCode: options.itemid,
-      cstUid: caseIds ? options.cstUid : uinfo.unionId,
+      cstUid:options.cstUid||uinfo.unionId,
       oUserInfo: uinfo,
       consultationId: options.consultationId || "1616",
       likeItem: "",

@@ -10,17 +10,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    olock:false,
     aCaseList: [],
     aCurrentList: [],//选中项
     itemLeft: 0,//左侧位置
+    aItemLeft:{},//左侧位置对象
     caseCount:4,//案例总数
     itemTop: 20,//顶部位置
     isShowTip:false,//是否显示授权手机号码的tip
     oUserInfo:{}, //当前用户信息
     isEndPage:false,//是否是最后一页
     aCaseIds:[],//项目案例IDs
-    aItemLeft:[],
     iCurrentSearchCase:0,//遍历查询案例信息，当前查询的条数
     currentLikeState:false,//当前的是否like
     olikeResult:{},//用户喜欢案例结果
@@ -76,7 +76,7 @@ Page({
   });
 /***********qiehuan******/
   getApp().getUserData(function (uinfo) {
-    console.log("-------user info=====>", uinfo);
+    //console.log("-------user info=====>", uinfo);
     _This.setData({
       caseIds: caseIds || "",
       projectName: options.iname,
@@ -92,11 +92,18 @@ Page({
     _This.fCustomerAdd();//客户添加
     _This.fGetCaseIDs();//会话ID获取案例ids
     _This.fGetClinicDetail();//获取诊所信息
-   
-    
-   
+  
   });
   },
+
+  onReady: function () {
+    this.fGetView();
+  },
+fGetView(){
+
+
+
+},
   /**
    * 客户添加或者更新,返回线索id
    */
@@ -138,8 +145,7 @@ Page({
       unionid: _This.data.oUserInfo.unionId
     };
     wxRequest(wxaapi.customer.getcustomerbyunid.url, pdata).then(function (result) {
-      console.log("get customer info result---->", result);
-
+      //console.log("get customer info result---->", result);
       if (result.data.code == 0) {
         oUserInfo.wechatMobile = result.data.data.wechatMobile;
         oUserInfo.id = result.data.data.id;
@@ -225,10 +231,18 @@ Page({
     wxRequest(wxaapi.consult.sharecase.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         let aCaseIds=result.data.data;
-        console.log("aCaseIds----------->", aCaseIds);
-        let aItemLeft = _This.data.aItemLeft||[];
+        let aItemLeft = _This.data.aItemLeft||{};
         aCaseIds.forEach((item,index)=>{
-          aItemLeft[item]=0;
+          let oitem={
+            zindex:0,
+            zleft:0
+          };
+          if(index==0){
+            oitem.zindex=5;
+          }else if(index==1){
+            oitem.zindex = 4;
+          }
+          aItemLeft["case" + item] = oitem;
         });
          _This.setData({
            aCaseIds: aCaseIds,
@@ -358,7 +372,6 @@ Page({
       unionId: _This.data.cstUid //咨询师unionid
     };
     wxRequest(wxaapi.clinic.detail.url, pdata).then(function (result) {
-      console.log("result------>", result);
       if(result.data.code==0){
         _This.setData({
           oClinic:result.data.data
@@ -492,13 +505,38 @@ Page({
     let tX = (e.touches[0].pageX - touchDotX);
     let tY = (e.touches[0].pageY - touchDotY);
     let currentItemId = _This.data.currentItem;//当前的案例id
+    let iIndex = _This.fFilterData(currentItemId);
+    if (iIndex <= 0 && tX>0){
+      return false;
+    }
+
+    let olock=_This.data.olock;
+    if (Math.abs(tX) > Math.abs(tY) + 40){
+      if(!olock){
+        _This.setData({
+          olock: true
+        });
+        _This.fGenerateShow(currentItemId, tX);
+      }  
+      if ((iIndex + 1) == _This.data.totalCount && tX<0) {
+        _This.setData({
+          isEndPage: true
+        });
+      }
+    }else{
+      _This.setData({
+        olock: false
+      });
+    }
+
+
 
     //if (Math.abs(tY) < Math.abs(tX)) {
     if (Math.abs(tX) > Math.abs(tY) + 60) {
-      _This.fGenerateShow(currentItemId, tX);
+      let aItemLeft = _This.data.aItemLeft;
+      aItemLeft["case" + currentItemId].zleft = tX + "px";
       _This.setData({
-        itemLeft: (tX + "px"),
-        itemTop: (tY + "px")
+        aItemLeft: aItemLeft
       });
     }else{
       this.setData({
@@ -512,40 +550,39 @@ Page({
     let touchMove = e.changedTouches[0].pageX;
     let tX = (e.changedTouches[0].pageX - touchDotX);
     let tY = (e.changedTouches[0].pageY - touchDotY);
+    let currentItemId = _This.data.currentItem;//当前的案例id
     if (Math.abs(touchMove - touchDotX) > 100 && (Math.abs(tX) > Math.abs(tY)+60)) {
-
-
-      let currentItemId = _This.data.currentItem;//当前的案例id
-      let iIndex = _This.fFilterData(currentItemId);
-     // console.log("iIndex--------->", iIndex);
-      if ((iIndex + 1) == _This.data.totalCount && touchMove < touchDotX){
-          _This.setData({
-            isEndPage:true
-          });
-      }
-
       let clist = _This.data.aCurrentList;
       if (clist.length > 1) {
         let rmItem = clist.splice(0, 1);
         _This.setData({
           aCurrentList: clist
         });
-        //console.log("rmItem[0].id-----", clist[0]);
         _This.fFilterData(clist[0].id);
       }
       wx.pageScrollTo({
         scrollTop: 0
       })
     }
+
+    ///////////////////////////////////////////
+    let aCurrentList = _This.data.aCurrentList;
+    let aCurrentOne = aCurrentList[0];
+    let aItemLeft = _This.data.aItemLeft;
+    aItemLeft["case" + currentItemId] = { zleft:0,zindex:1};
+    ///////////////////////////////////////////
+    aItemLeft["case" + aCurrentOne.id] = { zindex: 5 };
     _This.setData({
+      aItemLeft: aItemLeft,
       itemLeft: "0px",
       itemTop: "20px",
-      isShowTip:false
+      isShowTip: false
     });
+/////////////////////////////////////////////
     _This.fGetCurrentLikeState();
   },
   /**
-   * 生成显示的items，direction是切换的方向，大于0是向右，小于0是向左
+   * 生成显示的items，direction是切换的方向，大于0是向右滑动查看左侧，小于0是向左滑动查看右侧
    */
   fGenerateShow(itemid, direction) {
     let _This = this;
@@ -560,12 +597,16 @@ Page({
         aCurrentList[1] = aCaseList[iIndex - 1];
       }
     }
+    let aCurrentTwo = aCurrentList[1]||{id:0};
+    let aItemLeft = _This.data.aItemLeft;
+    aItemLeft["case" + aCurrentTwo.id] = {zindex:4};
     _This.setData({
+      aItemLeft: aItemLeft,
       aCurrentList: aCurrentList
     });
   },
   /**
-   * 过滤数据
+   * 过滤数据，返回当前的案例的id
    */
   fFilterData(id) {
     let _This = this;

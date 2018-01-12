@@ -3,16 +3,16 @@ var gConfig={
   //remote:"https://nihaomc.com/wxa",
   //uploadUrl: "https://nihaomc.com/uploadimg/attachment/upload",
   //remoteWx: "https://nihaomc.com/wx",
-  /****production start*****/
-  //remote:"https://27478500.qcloud.la/wxa",
-  //uploadUrl: "https://27478500.qcloud.la/uploadimg/attachment/upload",
-  /****production end*****/
+  /****uat start*****/
+  //remote:"https://nihaomc.com/wxa_test",
+  //uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload"
+  /****uat end*****/
 
   remoteWx: "https://nihaomc.com/wx",
-  /****test start*****/
-  remote: "https://nihaomc.com/wxa_test",
-  uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload"
-    /****test start*****/
+  /****dev start*****/
+  remote: "https://nihaomc.com/wxa_dev",
+  uploadUrl: "https://nihaomc.com/uploadimg_dev/attachment/upload"
+    /****dev start*****/
 }
 var urlConfig = {
   img:{

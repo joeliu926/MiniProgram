@@ -94,7 +94,13 @@ Page({
 
     });
   },
-
+  imgPreview(e) {
+    var dataset = e.currentTarget.dataset;
+    wx.previewImage({
+      current: dataset.src,
+      urls: [dataset.src]
+    })
+  },
   onReady: function () {
     this.fGetView();
   },

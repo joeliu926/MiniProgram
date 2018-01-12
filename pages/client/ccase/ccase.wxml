@@ -41,7 +41,7 @@
           <view class='b-pd w-10  b-s' style='margin:20rpx 0;'>
             <view class='flex fx-wp w-10 b-s'>
                <block wx:for="{{oContent.pictures}}" wx:for-item="imgItem" wx:key="ids" >
-               <view class='img-c b-s' style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreview'></view>
+               <view class='img-c b-s'   style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreview'></view>
                </block>
             </view>
             <view><view class='f-14 com-left'>{{oContent.description}}</view></view>

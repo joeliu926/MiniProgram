@@ -141,13 +141,24 @@ Page({
     * 页面相关事件处理函数--监听用户下拉动作
     */
   onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
+
+    let _this=this;
+    setTimeout(function(){
+      _this.pullRefresh();
+
+    },1000);
+
+  },
+
+  pullRefresh(){
     if (this.data.menuType) {
       if (this.data.currentSelect) {
         this.setData({
-          clueNoOther:1,
-          clueListOther:[]
+          clueNoOther: 1,
+          clueListOther: []
         });
-      }else{
+      } else {
         this.setData({
           clueNo: 1,
           clueList: []
@@ -162,8 +173,8 @@ Page({
       });
       this.getShareList();
     }
-  },
 
+  },
 
   openItem(params) {
     var dataset = params.currentTarget.dataset;
@@ -265,7 +276,7 @@ Page({
     let pdata = {
       "clueId": remark.id,
       "clueStage": remark.clueStage,
-      "creater": remark.creater,
+      "creater": remark.creator,
       "customerId": remark.customerId,
       "id": remark.id,
       "remark": this.data.cluereMark,
@@ -355,7 +366,7 @@ Page({
   },
   //提交联系人
   submitLinkman(params) {
-    if (!this.data.linkMansubmit) {
+    if (!this.data.linkMansubmit || this.data.currentClue.clueStatus!=1) {
       return
     }
     let remark = this.data.currentClue;

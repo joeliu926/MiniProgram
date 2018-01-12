@@ -65,21 +65,21 @@
   <view class='flex custmerinfo-name  c-p-d  b-g'>
     <view class='f-16 'style='width:160rpx' maxlength="6" size="6">顾客姓名</view>
     <view class='f-16 custmerinfo-input {{status!=1?"":"hide"}}'>
-     <input name='name ' class='t-l' value='{{customerInfo.name}}'   bindblur='fInputName'  placeholder='{{}}'></input>
+     <input style='color:#666666;font-size:28rpx' name='name ' class='t-l' value='{{customerInfo.name}}'   bindblur='fInputName'  placeholder='{{}}'></input>
     </view>
-     <view class='f-16  custmerinfo-input {{status==1?"":"hide"}}' style="width:360rpx">
-     <view name='clueRemark ' class='t-l' value='{{customerInfo.name}}'   bindblur='fInputName' >{{customerInfo.name}}</view>
+     <view class='f-14  custmerinfo-input {{status==1?"":"hide"}}' style="width:360rpx">
+     <view name='clueRemark ' class='t-l' value='{{customerInfo.name}}'  style="color:#666666" >{{customerInfo.name}}</view>
     </view>
    </view>
 
   <view class='flex custmerinfo-name  c-p-d mg-b b-g'>
       <view class='f-16 'style='width:160rpx' >手机号码</view>
       <view class='f-16 custmerinfo-input  {{status!=1?"":"hide"}}'>
-          <input name='phoneNum' class='t-l ' value='{{customerInfo.phoneNum}}' bindtap='showphone' bindblur='fInputMobile'  
+          <input style='color:#666666;font-size:28rpx' name='phoneNum' class='t-l ' value='{{customerInfo.phoneNum}}' bindtap='showphone' bindblur='fInputMobile'  
           placeholder='{{}}'></input>
       </view>
-       <view class='f-16  custmerinfo-input {{status==1?"":"hide"}}' style="width:360rpx">
-          <view  class='t-l ' style="t" >{{customerInfo.phoneNum}}</view>
+       <view class='f-14  custmerinfo-input {{status==1?"":"hide"}}' style="width:360rpx">
+          <view  class='t-l ' style="color:#666666" >{{customerInfo.phoneNum}}</view>
       </view>
   </view>
 <!-- 手机号联想 -->
@@ -89,21 +89,22 @@
     <view>18811795983</view>
   </view> -->
 
-  <view class='flex custmerinfo-name  c-p-d  mg-b' >
+  <view class='flex custmerinfo-name  c-p-d  ' >
     
-       <view class='f-16  'style='width:160rpx' >线索备注</view>
-          <view class='f-16  custmerinfo-input {{status!=1?"":"hide"}}' style='positin:absolute;z-index:1'>
+       <view class='f-16  'style='width:160rpx;vertical-align:top;' >线索备注</view>
+        
+      </view>
+        <view class='f-16  custmerinfo-input {{status!=1?"":"hide"}}' style='vertical-align:top;'>
             <view class='{{showtextarea?"":"hide"}}'>
-             <textarea style="width:450rpx;height:120rpx;" name='clueRemark' class='t-l ' value='{{clueRemark}}' maxlength="140" bindtap='' bindblur='fInputClueRemark'  
+             <textarea style="width:670rpx;color:#666666;font-size:28rpx" name='clueRemark' class='t-l ' value='{{clueRemark}}' maxlength="140" bindtap='' bindblur='fInputClueRemark'  
         placeholder='{{}}'></textarea>
             </view>
        
          </view>
-          <view style="width:460rpx;height:160rpx" class='f-16 custmerinfo-input  {{status==1?"":"hide"}} ' >
-       <view  class='t-l ' style="t" >{{clueRemark}}</view>
+          <view style="width:670rpx;height:300rpx" class='f-14 custmerinfo-input  {{status==1?"":"hide"}} ' >
+       <view  class='t-l ' style="color:#666666" >{{clueRemark}}</view>
          </view>
-      </view>
-    <view style='height:160rpx'></view> 
+    <view style='height:160rpx;display:block'></view> 
 </view>
 
 <!-- 预约按钮 -->

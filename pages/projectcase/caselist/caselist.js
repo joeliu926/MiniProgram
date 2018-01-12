@@ -373,6 +373,7 @@ Page({
 
     if (this.data.itemids.length > 0) {
       _This.setData({
+        isConsult:false,
         isactive: true
       })
     }
@@ -476,6 +477,7 @@ Page({
     if (this.data.selable.indexOf(sItem.itemid) == -1) {
       this.setData({
         isShow: 'true',
+       
       });
       var timer = setTimeout(function () {
         _This.setData({
@@ -520,10 +522,7 @@ Page({
   selectItems() {
     // 选好项目从新请求案例列表
     let _This = this;
-
-
-    console.log("aCaseIds-------->", _This.data.aCaseIds);
-
+    // console.log("aCaseIds-------->", _This.data.aCaseIds);
     if (this.data.itemids.length<=0){
        return  false;
     }
@@ -551,7 +550,8 @@ Page({
     //设置第一个项目是选中的；
     this.data.arrData[0].changeColor = '#9083ed';
     this.setData({
-      arrData: this.data.arrData
+      arrData: this.data.arrData,
+      isConsult: !_This.data.isConsult,
     })
 
   },

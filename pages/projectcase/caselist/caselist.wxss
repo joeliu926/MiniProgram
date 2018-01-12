@@ -180,7 +180,7 @@ scroll-view {
   border: none;
   font-size: 30rpx;
   position:fixed;
-  bottom:20rpx;
+  bottom:70rpx;
   left:50%;
   margin-left:-215rpx;
   justify-content: center;

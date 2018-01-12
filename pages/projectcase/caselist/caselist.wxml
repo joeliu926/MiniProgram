@@ -72,7 +72,7 @@
     <view class='extr-v extr-b' style=''></view>
     <button class='share-btn flex-c' wx:if='{{aCaseIds.length>0}}' style='display:{{isConsult?"flex":"none"}};' open-type="share">
       <image src='../../../public/images/icon-share.png' class='share-icon'></image>
-      <text class='share-txt '>分享给好友 </text>
+      <text class='share-txt'>分享给好友 </text>
       <text class='tip' wx:if='{{aCaseIds.length>0}}'>{{aCaseIds.length}}</text>
     </button>
 

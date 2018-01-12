@@ -198,19 +198,22 @@ Page({
     }
     let sessionKey = "";
     wxPromise(wx.login)().then(result => {
+      console.log("get login-------->",result);
       let ucode = result.code;
       return wxRequest(wxaapi.unionid.code.url, { code: ucode });
     }).then(resSession => {
+      console.log("get resSession-------->", resSession);
       sessionKey = resSession.data.session_key;
       return sessionKey;
     }).then(sessionKey => {
-      //console.log("sessionKey----->", sessionKey);
+       console.log("get sessionKey----->", sessionKey);
       var postData = {
         encryptedData: encryptedData,
         sessionKey: sessionKey, iv: iv
       };
       return wxRequest(wxaapi.unionid.userinfo.url, postData);
     }).then(resAll => {
+      console.log("get resAll----->", resAll);
       let oUserInfo = _This.data.oUserInfo;
       let wxPhone = resAll.data.userinfo.phoneNumber;
       oUserInfo.wechatMobile = wxPhone;

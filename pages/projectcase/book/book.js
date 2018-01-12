@@ -173,10 +173,12 @@ Page({
     wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         _This.setData({ projectItems: result.data.data });
+        console.log("result.data.data", result.data.data)
       } else {
       }
       wx.hideLoading();
     });
+   
   },
   /**
    * 用户点击右上角分享
@@ -300,7 +302,7 @@ Page({
     this.setData({
       clueRemark: e.detail.value
     });
-    //console.log("beizhu------", this.data.clueRemark);
+    console.log("beizhu------", this.data.clueRemark);
    // console.log("cucustomerInfo", this.data.customerInfo)
   },
   // /**
@@ -377,12 +379,20 @@ Page({
     // let bookDate = _This.data.bdate + " " + _This.data.btime;
    
     // let Bookdate = Date.parse(new Date(bookDate));
-    // console.log("bookdae-----", Bookdate);
+    // console.log("bookdae-----", Bookdate);\
+    clearTimeout(timere);
       wx.showToast({
         title: '预约成功',
         icon: 'success',
         duration: 2000
-      })
+      });
+      var timere = setTimeout(function () {
+        wx.navigateTo({
+          url: '../../index/home'
+        });
+      }, 2500);
+     
+      
   },
 
     //项目选择
@@ -624,12 +634,17 @@ Page({
               oAppointment: oAppointment,
               reserveId: result.data.data
             });
+            clearTimeout(timere);
             wx.showToast({
               title: '预约成功',
               icon: 'success',
               duration: 2000
             });
-            
+            var timere = setTimeout(function () {
+              wx.navigateTo({
+                url: '../../index/home'
+              });
+            }, 2500);
             wx.hideLoading();
           } else {
             wx.hideLoading();

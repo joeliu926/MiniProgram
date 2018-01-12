@@ -1,6 +1,6 @@
 <!--pages/test/book.wxml-->
 <wxs src="./book.wxs" module="bookUtil" />
-<view class='out-content head-padding'>
+<view class='out-content mg-b head-padding'>
   <view class='flex-c fx-d-col '>
     <image class='info-img head-p' src='{{customerInfo.logo}}' ></image>
  <!-- class='flex-c c-p-d p-b b-s w-10 mg-b {{oAppointment.status!=1?"":"hide"}}'  -->
@@ -12,7 +12,7 @@
  <view class=" tipunable" style="display: {{isShow?'block':'none'}}"> 已关闭用户不可以预约！</view>
 
 <!-- 预约项目和时间 -->
-<view class='out-content'>
+<view class='out-content mg-b'>
   <view class='flex-c fx-d-col'>
     <view class='f-16 mg-b' >预约项目</view>
     <view class='flex-c fx-d-row w-10 mg-b product '>
@@ -20,13 +20,13 @@
       </view> -->
       <view wx:for="{{arrData}}" wx:for-item="oitem1" wx:key="id">
         <view  class='pro-b'  >{{oitem1.iname}}<image data-id='{{oitem1.itemid}}' data-name='{{oitem1.iname}}'  class='pro-icon {{status!=1?"":"hide"}}'    src='../../../public/images/bookdeletepro.png' bindtap='deletepro' ></image>
-        <image data-id='{{oitem1.itemid}}' data-name='{{oitem1.iname}}'  class='pro-icon {{status==1?"":"hide"}}'    src='../../../public/images/bookdeletepro.png' bindtap='' ></image>
+        <!-- <image data-id='{{oitem1.itemid}}' data-name='{{oitem1.iname}}'  class='pro-icon {{status==1?"":"hide"}}'    src='../../../public/images/bookdeletepro.png' bindtap='' ></image> -->
         </view></view>
       </view> 
       <!-- 打开项目列表 -->
     <view bindtap='showproduct' class='f-16 add-pro {{status!=1?"":"hide"}} ' ><image class='proadd-icon' src='../../../public/images/bookaddicon.png' ></image></view>
-     <view bindtap='' class='f-16 add-pro {{status==1?"":"hide"}} ' ><image class='proadd-icon' src='../../../public/images/bookaddicon.png' ></image></view>
-  </view>
+     <!-- <view bindtap='' class='f-16 add-pro {{status==1?"":"hide"}} ' ><image class='proadd-icon' src='../../../public/images/bookaddicon.png' ></image></view> -->
+  </view> 
 
 
   <view class='flex-c fx-d-col fx-jc-sb c-p-d '>
@@ -62,10 +62,10 @@
 
 <!-- 顾客信息 -->
 <view class='out-content'>
-  <view class='flex custmerinfo-name fx-jc-sb c-p-d mg-b b-g'>
+  <view class='flex custmerinfo-name fx-jc-sb c-p-d  b-g'>
     <view class='f-16 ' maxlength="6" size="6">顾客姓名</view>
     <view class='f-16 custmerinfo-input {{status!=1?"":"hide"}}'>
-     <input name='clueRemark ' class='t-l' value='{{customerInfo.name}}'   bindblur='fInputName'  placeholder='{{}}'></input>
+     <input name='name ' class='t-l' value='{{customerInfo.name}}'   bindblur='fInputName'  placeholder='{{}}'></input>
     </view>
      <view class='f-16  custmerinfo-input {{status==1?"":"hide"}}' style="width:360rpx">
      <view name='clueRemark ' class='t-l' value='{{customerInfo.name}}'   bindblur='fInputName' >{{customerInfo.name}}</view>
@@ -75,7 +75,7 @@
   <view class='flex custmerinfo-name fx-jc-sb c-p-d mg-b b-g'>
       <view class='f-16 ' >手机号码</view>
       <view class='f-16 custmerinfo-input  {{status!=1?"":"hide"}}'>
-          <input name='clueRemark' class='t-l ' value='{{customerInfo.phoneNum}}' bindtap='showphone' bindblur='fInputMobile'  
+          <input name='phoneNum' class='t-l ' value='{{customerInfo.phoneNum}}' bindtap='showphone' bindblur='fInputMobile'  
           placeholder='{{}}'></input>
       </view>
        <view class='f-16  custmerinfo-input {{status==1?"":"hide"}}' style="width:360rpx">
@@ -89,12 +89,15 @@
     <view>18811795983</view>
   </view> -->
 
-  <view class='flex custmerinfo-name fx-jc-sb c-p-d mg-b '>
+  <view class='flex custmerinfo-name fx-jc-sb c-p-d  mg-b'>
     
        <view class='f-16  ' >线索备注</view>
-          <view class='f-16 custmerinfo-input '>
-        <input name='clueRemark' class='t-l' value='{{clueRemark}}' maxlength="140" bindtap='' bindblur='fInputClueRemark'  
-        placeholder='{{}}'></input>
+          <view class='f-16   {{status!=1?"":"hide"}}'>
+        <textarea style="width:450rpx;height:160rpx" name='clueRemark' class='t-l ' value='{{clueRemark}}' maxlength="140" bindtap='' bindblur='fInputClueRemark'  
+        placeholder='{{}}'></textarea>
+         </view>
+          <view style="width:460rpx;height:160rpx" class='f-16   {{status==1?"":"hide"}} ' >
+       <view  class='t-l ' style="t" >{{clueRemark}}</view>
          </view>
       </view>
    
@@ -111,7 +114,7 @@
 
 <!-- 弹出项目 -->
 
-<view class="modal-box" hidden="{{showpro}}" bindtap="">
+<view class='modal-box {{projectItems.length>0?"":"hide"}}' hidden="{{showpro}}" bindtap="">
   <view class="modal-body">
     <view class="modal-content">
         <!-- <view class=' case-item-detail'>
@@ -133,19 +136,29 @@
       </view>
     </view>
   </block>
-  <view class='b-pos' style=''>
-  </view>
-  <view style="text-align:center; margin-top:20px;">
-    <span class="selend {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</span>
-  </view>
-</view>
-
+    <view class='b-pos' style=''>
+     </view>
+     <view style="text-align:center; margin-top:20px;">
+           <span class="selend {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</span>
+      </view>
+      </view>
 
          
       </view>
    </view>
 </view>  
 
+
+<view class='modal-box {{projectItems.length<=0?"":"hide"}}' hidden="{{showpro}}" bindtap="">
+<view>
+    <div class="list-none">
+      <div class="list-none-div">
+        <icon type='search' size='16'></icon>
+      </div>
+      <div>没有相关线索哦，您可以点击菜单中间按钮，先创建一个场景分享。</div>
+    </div>
+</view>
+</view>
  <!-- <view>
    <view wx:for="{{testlist}}" wx:for-item="oitem" wx:key="id">
         <text class=' {{jSelect.includes(oitem.id)?"case-sele":""}}'  bindtap='selectTitle'>{{oitem.name}}</text></view>

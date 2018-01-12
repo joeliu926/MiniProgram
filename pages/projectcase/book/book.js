@@ -41,6 +41,7 @@ Page({
     multiIndex: [0, 0, 0, 0, 0],
     flag: true,
     showpro:true,
+    showtextarea:true,
     showphone:true,
     jSelect:[1,3],
     proerror:true,
@@ -200,7 +201,7 @@ Page({
       _This.setData({
         isShow: !_This.data.isShow
       });
-    }, 1000);
+    }, 2000);
     
   } },
   /**
@@ -357,7 +358,10 @@ Page({
   },
       // 项目选择弹出层
   showproduct:function(){
-    this.setData({showpro:false});
+    this.setData({showpro:false,
+                  showtextarea:false
+    });
+    console.log("showtextarea", this.data.showtextarea)
     this.checkbook();
   },
   hideproduct:function(){
@@ -375,22 +379,28 @@ Page({
 
   //提交预约
   submit:function(){
+    wx.showToast({
+      title: '预约失败',
+      image: '../../public/images/no_data.png',
+      icon: 'success',
+      duration: 4000
+    });
     // let _This = this;
     // let bookDate = _This.data.bdate + " " + _This.data.btime;
    
     // let Bookdate = Date.parse(new Date(bookDate));
     // console.log("bookdae-----", Bookdate);\
-    clearTimeout(timere);
-      wx.showToast({
-        title: '预约成功',
-        icon: 'success',
-        duration: 2000
-      });
-      var timere = setTimeout(function () {
-        wx.navigateTo({
-          url: '../../index/home'
-        });
-      }, 2500);
+    // clearTimeout(timere);
+    //   wx.showToast({
+    //     title: '预约成功',
+    //     icon: 'success',
+    //     duration: 2000
+    //   });
+    //   var timere = setTimeout(function () {
+    //     wx.navigateTo({
+    //       url: '../../index/home'
+    //     });
+    //   }, 2500);
      
       
   },
@@ -485,7 +495,9 @@ Page({
       return false;
 
     }
-    this.setData({ showpro: true })
+    this.setData({ showpro: true ,
+                   showtextarea: true
+    })
     this.checkbook();
     // console.log(sItem.paid);
   
@@ -638,16 +650,22 @@ Page({
             wx.showToast({
               title: '预约成功',
               icon: 'success',
-              duration: 2000
+              duration: 4000
             });
             var timere = setTimeout(function () {
               wx.navigateTo({
                 url: '../../index/home'
               });
-            }, 2500);
+            }, 4500);
             wx.hideLoading();
           } else {
-            wx.hideLoading();
+            wx.showToast({
+              title: '预约失败',
+              image: '../../public/images/no_data.png',
+              icon: 'success',
+              duration: 4000
+            });
+           // wx.hideLoading();
           }
         });
       } else {

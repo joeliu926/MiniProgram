@@ -12,7 +12,7 @@
   <!------------------before after start------------left:{{index==0?itemLeft:"0px"}};-------->
       <view class='w-10 b-after-ct'> 
             <view class='flex b-s' style="position: relative;">
-                 <text class='before f-10 bcommon'>术前{{oDetailHeight[index].height+"px"}}</text>
+                 <text class='before f-10 bcommon'>术前</text>
                  <text class='after f-10 bcommon'>术后</text>
                   <image src='{{oItem.beforePicture.url||"../../../public/images/front-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}' ></image>
                   <image  src='{{oItem.afterPicture.url||"../../../public/images/side-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}'></image>

@@ -67,7 +67,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log("event------>event",event)
+    console.log("ccase------>event", options)
 
     let _This = this;
     var caseIds = options.caseIds;
@@ -78,7 +78,7 @@ Page({
     });
     /***********qiehuan******/
     getApp().getUserData(function (uinfo) {
-      //console.log("-------user info=====>", uinfo);
+      console.log("---ccase----user info=====>", uinfo);
       _This.setData({
         caseIds: caseIds || "",
         projectName: options.iname,
@@ -187,6 +187,7 @@ Page({
  */
   getPhoneNumber(e) {
     let _This = this;
+    console.log("e-------->", e);
     wx.showLoading({
       title: '授权中...',
     });
@@ -198,29 +199,31 @@ Page({
     }
     let sessionKey = "";
     wxPromise(wx.login)().then(result => {
-      console.log("get login-------->",result);
+      console.log("result-------->", result);
       let ucode = result.code;
       return wxRequest(wxaapi.unionid.code.url, { code: ucode });
     }).then(resSession => {
-      console.log("get resSession-------->", resSession);
+      console.log("resSession-------->", resSession);
       sessionKey = resSession.data.session_key;
       return sessionKey;
     }).then(sessionKey => {
-       console.log("get sessionKey----->", sessionKey);
+      
       var postData = {
         encryptedData: encryptedData,
         sessionKey: sessionKey, iv: iv
       };
+      console.log("sessionKey----->", sessionKey, postData);
       return wxRequest(wxaapi.unionid.userinfo.url, postData);
     }).then(resAll => {
-      console.log("get resAll----->", resAll);
+      console.log("resAll----->", resAll);
+      wx.hideLoading();
       let oUserInfo = _This.data.oUserInfo;
       let wxPhone = resAll.data.userinfo.phoneNumber;
       oUserInfo.wechatMobile = wxPhone;
       _This.setData({
         oUserInfo: oUserInfo
       });
-      wx.hideLoading();
+     
       _This.fUpdateCustomerInfo();
     });
   },
@@ -511,7 +514,7 @@ Page({
     let cstunionid = _This.data.cstUid;
     let consultationId = _This.data.consultationId;//咨询会话ID
     let clueId = _This.data.clueId; //线索id
-    let shareEventId = _This.data.shareEventId; //分享id
+    let shareEventId = _This.data.shareEventId||""; //分享id
     let tel = _This.data.oUserInfo.wechatMobile || "";//客户idoUserInfo.wechatMobile
     let cid = _This.data.oUserInfo.id;//客户idoUserInfo.wechatMobile
     wx.navigateTo({
@@ -635,9 +638,13 @@ Page({
     _This.setData({
       aItemLeft: aItemLeft,
       itemLeft: "0px",
-      itemTop: "20px",
-      isShowTip: false
+      itemTop: "20px"
     });
+    setTimeout(function(){
+      _This.setData({
+        isShowTip: false
+      });
+    },3000);
     /////////////////////////////////////////////
     _This.fGetCurrentLikeState();
   },
@@ -698,6 +705,8 @@ Page({
    */
   fEndPageEnd(e) {
     let _This = this;
+    let currentPage = _This.data.currentPage;//当前页
+    let totalCount = _This.data.totalCount;//总页数
     let touchMove = e.changedTouches[0].pageX;
     if (touchMove - touchDotX > 50) {
       _This.setData({

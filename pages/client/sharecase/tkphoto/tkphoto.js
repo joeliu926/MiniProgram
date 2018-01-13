@@ -43,10 +43,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("tkphoto options----->", options);
     var _This = this;
     var oEvent = _This.data.oEvent;
     getApp().getUserData(function (uinfo) {
-      //console.log(uinfo);
+       console.log("tkphoto user info------->",uinfo);
       _This.setData({
         oUserInfo: uinfo,
         cstUid: options.consultantId,
@@ -300,6 +301,7 @@ Page({
 * 授权获取手机号码
 */
   getPhoneNumber(e) {
+    console.log("e---------->", e);
     wx.showLoading({
       title: '授权中...',
     });
@@ -325,13 +327,17 @@ Page({
       };
       return wxRequest(wxaapi.unionid.userinfo.url, postData);
     }).then(resAll => {
+      wx.hideLoading();
+      _This.setData({
+        isShowMask:false
+      })
       let oUserInfo = _This.data.oUserInfo;
       let wxPhone = resAll.data.userinfo.phoneNumber;
       oUserInfo.wechatMobile = wxPhone;
       _This.setData({
         oUserInfo: oUserInfo
       });
-       wx.hideLoading();
+      
       _This.fUpdateCustomerInfo();
     });
   },

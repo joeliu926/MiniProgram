@@ -119,16 +119,29 @@ line-height:80rpx;
 .dis-c{
   background: #E5E5E5;
 }
-.modal-box{
+ .modal-box{
   z-index: 1001;
-  position:fixed;
+  position:absolute;
   width:100%;
-  height:100%;
+   box-sizing: border-box;
   top:0rpx;
   background:#ffffff;
-  overflow: scroll
+  
 
-  }
+  } 
+  /* .modal-box{
+    margin: 0;
+  width: 100%;
+  
+  position: absolute;
+  z-index: 1001;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding-bottom: 300rpx;
+  background: #fff;
+
+  } */
 
 .modal-body{
  width:100%;
@@ -266,7 +279,8 @@ color: #9083ed
   z-index: 100;
 }
 .list-none {
-  padding: 100rpx;
+  position:absolute;
+  top:20%;
   font-size: 26rpx;
   height: 200rpx;
   display: block;
@@ -276,4 +290,8 @@ color: #9083ed
   display: block;
   text-align: center;
   height: 80rpx;
+}
+.nodata-img{
+   width: 364rpx;
+   height: 252rpx;
 }

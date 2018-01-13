@@ -1,14 +1,14 @@
 <wxs src="../../../utils/wxs/cutil.wxs" module="cutil"  />
 
-<view class='c-case-ct b-s bk-c-w {{isEndPage?"hide":""}}' style=''>
+<view class='c-case-ct b-s bk-c-w ' style=''>
    <view class='o-title w-10'>
-      <text><text class='f-14 f-c-3'>{{currentPage+1}}</text><text class='f-14'>/{{totalCount}}</text></text>
+      <text><text wx:if="{{!isEndPage}}" class='f-14 f-c-3'>{{currentPage+1}}</text><text wx:if="{{isEndPage}}" class='f-14 f-c-3'>{{totalCount+1}}</text><text class='f-14'>/{{totalCount+1}}</text></text>
    </view>
   <view class='case-ct w-h-10  bk-c-w'  style=''>
 <block wx:for="{{aCaseList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
 
-    <view class='w-10 b-s case-item-ct'  bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{aItemLeft["case"+oItem.id].zindex}};left:{{aItemLeft["case"+oItem.id].zleft}};'>
-    <view class='b-d bk-c-w QQQ' style='height:{{oHeight+"px"}};overflow: hidden;'>
+    <view class='w-10 b-s case-item-ct {{isEndPage?"hide":""}}'  bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{aItemLeft["case"+oItem.id].zindex}};left:{{aItemLeft["case"+oItem.id].zleft}};'>
+    <view class='b-d-tb bk-c-w QQQ' style='height:{{oHeight+"px"}};overflow: hidden;'>
   <!------------------before after start------------left:{{index==0?itemLeft:"0px"}};-------->
       <view class='w-10 b-after-ct'> 
             <view class='flex b-s' style="position: relative;">
@@ -79,7 +79,7 @@
 </view>
 <view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon {{isEndPage?"hide":""}}' bindtap='fTakePhoto' style=''>
    <image  class='t-photo' style=''  src='../../../public/images/tk-photo-icon.png' ></image>
-   <view wx:if="{{picCount>0}}" class='f-14 flex-c tip-pic-count' style=''>{{picCount}}</view>
+   <view wx:if="{{picCount>0}}" class='f-14 b-s flex-c tip-pic-count' style=''><text>{{picCount}}</text></view>
 </view>
 <view class='tip-font f-14 {{oUserInfo.wechatMobile?"hide":""}} {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text>开启专属咨询师一对一沟通.</text>
  <view class='dp-arr'></view>
@@ -120,7 +120,8 @@
  </view>
  <view class='clinic-ct w-10'>
   <block wx:for="{{oClinic.fileVo}}" wx:for-item="cItem" wx:key="cItem.id"  wx:for-index="index">
-   <image class='clinic-pic'  src='{{cItem.url}}'></image>
+  
+    <view class='img-c b-s'   style='width: 214rpx;display: inline-block;background-image:url({{cItem.url}})' data-src='{{cItem.url}}' bindtap='imgPreview'></view>
   </block>
  </view>
    </view>

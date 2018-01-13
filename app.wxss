@@ -89,6 +89,10 @@ page{
 .b-d{
   border: 2rpx solid #eeeeee; 
 }
+.b-d-tb{
+  border-top: 2rpx solid #eeeeee; 
+  border-bottom: 2rpx solid #eeeeee; 
+}
 .b-r{
   border-radius: 50%;
 }

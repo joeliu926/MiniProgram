@@ -6,11 +6,11 @@
 <view class='h-ct b-s' style='display:{{showData==0?"":"none"}};background-color:white;margin-top:0rpx;'>
   <view class='search' style='display:{{menuType?"":"none"}}'>
     <div class="search-type">
-      <div style="  padding-left:20rpx;  height: 100rpx;display:block; ">
-      <div bindtap='selectType' data-id='{{item.id}}' wx:for="{{selectItem}}" wx:for-item="item" wx:key="id" class="search-type-item" style="{{item.val?'color:#8F82EC;':''}}">
-        <span class="search-type-top">{{item.text}}</span>
-        <span class="{{item.val?'search-type-bottom':'search-type-none'}}"></span>
-      </div>
+      <div style="padding-left:20rpx;height:100rpx;display:block;">
+        <div bindtap='selectType' data-id='{{item.id}}' wx:for="{{selectItem}}" wx:for-item="item" wx:key="id" class="search-type-item" style="{{item.val?'color:#8F82EC;':''}}">
+          <span class="search-type-top">{{item.text}}</span>
+          <span class="{{item.val?'search-type-bottom':'search-type-none'}}"></span>
+        </div>
       </div>
     </div>
     <div class="search-btn">
@@ -22,51 +22,49 @@
 
   <!--线索列表-->
   <view style='display:{{menuType&&!currentSelect?"block":"none"}};background-color:white;'>
-    <block wx:for="{{clueList}}" wx:for-item="oitem" wx:key="id">
-      <view class="list">
-        <div class="list-body">
-          <div class='list-img' bindtap='openItem' data-Obj='{{oitem}}'>
-            <div style='margin:10rpx 15rpx 0rpx 15rpx;display:block;'>
-              <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/def-userimg.png"}}'></image>
-            </div>
-          </div>
-          <div class="list-content" bindtap='openItem' data-Obj='{{oitem}}'>
-            <div style='margin-left:10rpx;display:block;'>
-              <div class="list-content-top">
-                <span class='f-16 list-content-top-r' style="text-overflow:ellipsis;">{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
-                <span class='f-14 list-content-top-l'>{{oitem.statusName}}</span>
-              </div>
-              <div class='list-content-btm'>
-                <span class='f-14'>
-                  项目：
-                  <span wx:for="{{oitem.productList}}" wx:for-item="pitem" wx:key="productCode">{{index==0?pitem.productName:'、'+pitem.productName}}</span>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class='more-btn' style='background-color:#CCCCCC;'>
-            <picker class='f-14' style='height:100%;' data-Obj='{{oitem}}' bindchange="bindPickerChange" mode="selector" range="{{moreItem}}">
-              <text class='f-14' style='color:white'>更多</text>
-            </picker>
-          </div>
-          <div class='more-btn' style='background-color:#2FAEFF;'>
-            <text bindtap='bookOption'  data-Obj='{{oitem}}'  class='f-14' style='color:white'>预约</text>
-          </div>
-          <div class='more-btn' style='background-color:#FFA92F;'>
-            <text bindtap='remarkOption' data-Obj='{{oitem}}'  class='f-14' style='color:white'>备注</text>
+ 
+    <view   wx:for="{{clueList}}" wx:for-item="oitem" wx:key="id" class="list">
+      <div class="list-body">
+        <div class='list-img' bindtap='openItem' data-Obj='{{oitem}}'>
+          <div style='margin:10rpx 15rpx 0rpx 15rpx;display:block;'>
+            <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/def-userimg.png"}}'></image>
           </div>
         </div>
-      </view>
-    </block>
+        <div class="list-content" bindtap='openItem' data-Obj='{{oitem}}'>
+          <div style='margin-left:10rpx;display:block;'>
+            <div class="list-content-top">
+              <span class='f-16 list-content-top-r' style="text-overflow:ellipsis;">{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
+              <span class='f-14 list-content-top-l'>{{oitem.statusName}}</span>
+            </div>
+            <div class='list-content-btm'>
+              <span class='f-14'>
+                项目：
+                <span wx:for="{{oitem.productList}}" wx:for-item="pitem" wx:key="productCode">{{index==0?pitem.productName:'、'+pitem.productName}}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class='more-btn' style='background-color:#CCCCCC;'>
+          <picker class='f-14' style='height:100%;' data-Obj='{{oitem}}' bindchange="bindPickerChange" mode="selector" range="{{moreItem}}">
+            <text class='f-14' style='color:white'>更多</text>
+          </picker>
+        </div>
+        <div class='more-btn' style='background-color:#2FAEFF;'>
+          <text bindtap='bookOption'  data-Obj='{{oitem}}'  class='f-14' style='color:white'>预约</text>
+        </div>
+        <div class='more-btn' style='background-color:#FFA92F;'>
+          <text bindtap='remarkOption' data-Obj='{{oitem}}'  class='f-14' style='color:white'>备注</text>
+        </div>
+      </div>
+    </view>
 
     <view style='display:block;height:100rpx;background-color:white;margin-top:10rpx; font-size:26rpx;text-align:center;'>
     </view>
   </view>
 
   <view style='display:{{menuType&&currentSelect?"block":"none"}};background-color:white;'>
-    <block wx:for="{{clueListOther}}" wx:for-item="oitem" wx:key="id">
-      <view class="list">
-        <div class="list-body">
+      <view class="list" wx:for="{{clueListOther}}" wx:for-item="oitem" wx:key="id">
+        <div class="list-body"   bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"  data-index="{{index}}">
           <div class='list-img' bindtap='openItem'  data-Obj='{{oitem}}' >
             <div style='margin:10rpx 15rpx 0rpx 15rpx;display:block;'>
               <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/def-userimg.png"}}'></image>
@@ -99,15 +97,12 @@
           </div>
         </div>
       </view>
-    </block>
-
-    <view style='display:block;height:100rpx;background-color:white;margin-top:10rpx; font-size:26rpx;text-align:center;'>
-    </view>
+      <view style='display:block;height:100rpx;background-color:white;margin-top:10rpx; font-size:26rpx;text-align:center;'>
+      </view>
   </view>
   <!--场景列表-->
   <view style='display:{{menuType?"none":"block"}};background-color:white;overflow:hidden;'>
-    <block wx:for="{{shareList}}" wx:for-item="oitem" wx:key="id">
-      <view class="list" style="background-color:white;">
+      <view class="list" style="background-color:white;"  wx:for="{{shareList}}" wx:for-item="oitem" wx:key="id">
         <div class="list-body" style="width:100%;">
           <div class="list-content" style="width:94%;margin:20rpx 20rpx 15rpx 20rpx;" bindtap='openItem' data-Id='{{oitem.id}}'>
             <div style="padding-left:10rpx;margin: 20rpx  10rpx  10rpx 0;">
@@ -117,7 +112,6 @@
               </div>
               <div class='list-content-btm' style="margin: 0  0  0 10rpx;">
                 <span class='f-14' wx:for="{{oitem.productsName}}" wx:for-item="pitem" wx:key="pitem">{{index==0?pitem:'、'+pitem}}</span>
-
               </div>
             </div>
           </div>
@@ -125,12 +119,8 @@
       </view>
       <view>
       </view>
-    </block>
-
     <view style='display:block;height:100rpx;background-color:white;margin-top:10rpx; font-size:26rpx;text-align:center;'>
-
     </view>
-
   </view>
   <view style='display:{{clueList.length==0&&menuType&&!currentSelect?"":"none"}}'>
     <div class="list-none">

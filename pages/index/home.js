@@ -45,7 +45,8 @@ Page({
     errorMessage: '',
     errorType: false,
     errorColor: "#F76260",//#09BB07  #FFBE00   #F76260
-    linkMansubmit: true
+    linkMansubmit: true,
+    delBtnWidth: 150 //删除按钮宽度单位（rpx）
   },
 
   /**
@@ -729,9 +730,10 @@ Page({
     var _This = this;
     let pdata = { unionid: unionid };
     wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
+      console.log(' result.data.data.type', result.data.data);
       if (result.data.code != 0 || result.data.data.type != "1") {
         _This.setData({
-          showData: false
+          showData: 1
         });
       }
     });

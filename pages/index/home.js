@@ -13,7 +13,7 @@ Page({
     autoFocus: false,
     selectItem: [{ id: 0, text: '智能推荐', val: true }, { id: 1, text: '其它', val: false }],
     currentSelect: 0,
-    moreItem: ['编辑联人', '关闭'],
+    moreItem: ['编辑客户', '不再跟进'],
     menuType: true,
     shareList: [],
     clueList: [],
@@ -46,11 +46,9 @@ Page({
     errorType: false,
     errorColor: "#F76260",//#09BB07  #FFBE00   #F76260
     linkMansubmit: true,
-    moreWidth: 320,
+    moreWidth: 365,
     startX:0,
   },
-
-  //手指刚放到屏幕触发
   touchS: function (e) {
     if (e.touches.length == 1) {
       this.setData({
@@ -58,61 +56,105 @@ Page({
       });
     }
   },
-  //触摸时触发，手指在屏幕上每移动一次，触发一次
   touchM: function (e) {
     var that = this
     if (e.touches.length == 1) {
-      //记录触摸点位置的X坐标
       var moveX = e.touches[0].clientX;
-      //计算手指起始点的X坐标与当前触摸点的X坐标的差值
       var disX = that.data.startX - moveX;
       var moreWidth = that.data.moreWidth;
+      let _disx = disX;
+      if (disX>0){
+      }else{
+        disX = 365-Math.abs(disX);  
+      }
+
       var txtStyle = "";
-      if (disX == 0 || disX < 0) {//如果移动距离小于等于0，文本层位置不变
-        txtStyle = "margin-left:0rpx";
-      } else if (disX > 0) {//移动距离大于0，文本层left值等于手指移动距离
-        txtStyle = "margin-left:-" + disX + "rpx";
+      if (disX == 0 || disX < 0) {
+        txtStyle = "left:0rpx";
+      } else if (disX > 0) {
+        txtStyle = "left:-" + disX + "rpx";
         if (disX >= moreWidth) {
-          //控制手指移动距离最大值为删除按钮的宽度
-          txtStyle = "margin-left:-" + moreWidth + "rpx";
+          txtStyle = "left:-" + moreWidth + "rpx";
         }
       }
-      //获取手指触摸的是哪一个item
       var index = e.currentTarget.dataset.index;
-      var list = this.data.clueListOther;
-      //将拼接好的样式设置到当前item中
+      var list =[];
+      
+      if (this.data.currentSelect){
+        list = this.data.clueListOther;
+      }else{
+        list = this.data.clueList;
+      }
+      if (list[index].txtStyle == 'left:0rpx;' || !list[index].txtStyle){
+        return;
+      }
+
       list[index].txtStyle = txtStyle;
-      //更新列表的状态
-      this.setData({
-        clueListOther: list
-      });
+
+      if (this.data.currentSelect) {
+        this.setData({
+          clueListOther: list
+        });
+      } else {
+        this.setData({
+          clueList: list
+        });
+      }
     }
   },
   touchE: function (e) {
     var that = this
     if (e.changedTouches.length == 1) {
-      //手指移动结束后触摸点位置的X坐标
       var endX = e.changedTouches[0].clientX;
-      //触摸开始与结束，手指移动的距离
       var disX = that.data.startX - endX;
       var moreWidth = that.data.moreWidth;
-      //如果距离小于删除按钮的1/2，不显示删除按钮
-      var txtStyle = disX > moreWidth / 2 ? "margin-left:-" + moreWidth + "rpx" : "margin-left:0rpx";
-      //获取手指触摸的是哪一项
       var index = e.currentTarget.dataset.index;
-      var list = that.data.clueListOther;
-      list[index].txtStyle = txtStyle;
-
-      console.log('index', index);
-      //更新列表的状态
-      that.setData({
-        clueListOther: list
-      });
+      if (disX>0) {
+        this.itemMove(index, 'left', endX);
+      }
+      else{
+        this.itemMove(index, 'right', endX);
+      }
     }
   },
 
-    
+  itemMove(index,diraction,init){
 
+    let list=[];
+    if (this.data.currentSelect) {
+      list = this.data.clueListOther;
+    } else {
+      list = this.data.clueList;
+    }
+
+    if (diraction == 'left'){
+        list[index].txtStyle = "left:-365rpx;";
+    }
+    else{
+        list[index].txtStyle = "left:0rpx;";
+    }
+
+    list.forEach((m,_index)=>{
+      if(_index!=index){
+        m.txtStyle = "left:0rpx;";
+      }
+    });
+
+    if (this.data.currentSelect) {
+      this.setData({
+        clueListOther: list,
+        startX:0
+      });
+    }else{
+      this.setData({
+        clueList: list,
+        startX: 0
+      });
+    }
+
+    return;
+     
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -576,6 +618,7 @@ Page({
         this.setData({
           menuType: true
         });
+        wx.setNavigationBarTitle({ title: '我的潜客' })
         break;
       case "2":
         wx.navigateTo({
@@ -586,6 +629,7 @@ Page({
         this.setData({
           menuType: false
         });
+        wx.setNavigationBarTitle({ title: '我的分享' })
         break;
     }
   },
@@ -629,7 +673,7 @@ Page({
                 { name: '女', value: 2, checked: false }
               ];
             }
-            linkman.phoneNum = linkman.phoneNum ? linkman.phoneNum : linkman.wechatMobile;
+            linkman.phoneNum = linkman.wechatMobile ? linkman.wechatMobile : linkman.phoneNum;
 
             _This.setData({
               linkMan: linkman,

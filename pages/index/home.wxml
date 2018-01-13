@@ -1,5 +1,5 @@
 <wxs src="../../utils/wxs/cutil.wxs" module="util" />
-<div style="height:70rpx;line-height:70rpx;display:{{errorType?'block':'none'}};background-color:{{errorColor}};text-align:center;font-size:30rpx;color:white;vertical-align:middle;margin-top:0rpx;">
+<div style="height:70rpx;line-height:70rpx;display:{{errorType?'block':'none'}};position:fixed;top:0rpx;z-index:1000;left:0rpx;width:100%; background-color:{{errorColor}};text-align:center;font-size:30rpx;color:white;vertical-align:middle;margin-top:0rpx;">
     {{errorMessage}}
 </div>
 <!--线索例表-->
@@ -24,7 +24,7 @@
   <view style='display:{{menuType&&!currentSelect?"block":"none"}};background-color:white;'>
  
     <view   wx:for="{{clueList}}" wx:for-item="oitem" wx:key="id" class="list">
-      <div class="list-body">
+      <div class="list-body"   style="{{oitem.txtStyle}}"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"  data-index="{{index}}">
         <div class='list-img' bindtap='openItem' data-Obj='{{oitem}}'>
           <div style='margin:10rpx 15rpx 0rpx 15rpx;display:block;'>
             <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/def-userimg.png"}}'></image>
@@ -104,7 +104,7 @@
   <view style='display:{{menuType?"none":"block"}};background-color:white;overflow:hidden;'>
       <view class="list" style="background-color:white;"  wx:for="{{shareList}}" wx:for-item="oitem" wx:key="id">
         <div class="list-body" style="width:100%;">
-          <div class="list-content" style="width:94%;margin:20rpx 20rpx 15rpx 20rpx;" bindtap='openItem' data-Id='{{oitem.id}}'>
+          <div class="list-content" style="width:94%;margin:20rpx 20rpx 15rpx 20rpx;"   data-Id='{{oitem.id}}'>
             <div style="padding-left:10rpx;margin: 20rpx  10rpx  10rpx 0;">
               <div class="list-content-top">
                 <span class='f-16 list-content-top-r'>{{'发起了'+oitem.casesName+'的案例分享'}}</span>
@@ -156,14 +156,14 @@
   <view class='menu'>
     <div class='menu-l' data-Type='1' bindtap='menuClick'>
       <image src='{{menuType?"../../public/images/menu-l-t.png":"../../public/images/menu-l-f.png"}}'></image>
-      <span style="{{menuType?'color:#8F82E8;':'color:#999999;'}}">线索</span>
+      <span style="{{menuType?'color:#8F82E8;':'color:#999999;'}}">潜客</span>
     </div>
     <div class="menu-m" data-Type='2' bindtap='menuClick'>
       <image src='../../public/images/clue-addmore.png'></image>
     </div>
     <div class='menu-r' data-Type='3' bindtap='menuClick'>
       <image src='{{menuType?"../../public/images/menu-r-f.png":"../../public/images/menu-r-t.png"}}'></image>
-      <span style="{{menuType?'color:#999999;':'color:#8F82E8;'}}">场景</span>
+      <span style="{{menuType?'color:#999999;':'color:#8F82E8;'}}">分享</span>
     </div>
   </view>
   <!--

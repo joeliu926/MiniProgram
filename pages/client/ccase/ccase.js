@@ -187,6 +187,7 @@ Page({
  */
   getPhoneNumber(e) {
     let _This = this;
+    console.log("e-------->", e);
     wx.showLoading({
       title: '授权中...',
     });
@@ -198,19 +199,23 @@ Page({
     }
     let sessionKey = "";
     wxPromise(wx.login)().then(result => {
+      console.log("result-------->", result);
       let ucode = result.code;
       return wxRequest(wxaapi.unionid.code.url, { code: ucode });
     }).then(resSession => {
+      console.log("resSession-------->", resSession);
       sessionKey = resSession.data.session_key;
       return sessionKey;
     }).then(sessionKey => {
-      //console.log("sessionKey----->", sessionKey);
+      
       var postData = {
         encryptedData: encryptedData,
         sessionKey: sessionKey, iv: iv
       };
+      console.log("sessionKey----->", sessionKey, postData);
       return wxRequest(wxaapi.unionid.userinfo.url, postData);
     }).then(resAll => {
+      console.log("resAll----->", resAll);
       let oUserInfo = _This.data.oUserInfo;
       let wxPhone = resAll.data.userinfo.phoneNumber;
       oUserInfo.wechatMobile = wxPhone;
@@ -695,6 +700,8 @@ Page({
    */
   fEndPageEnd(e) {
     let _This = this;
+    let currentPage = _This.data.currentPage;//当前页
+    let totalCount = _This.data.totalCount;//总页数
     let touchMove = e.changedTouches[0].pageX;
     if (touchMove - touchDotX > 50) {
       _This.setData({

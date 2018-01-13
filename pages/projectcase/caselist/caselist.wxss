@@ -42,25 +42,24 @@ page {
 .selectarrow {
   width: 60rpx;
   height: 55rpx;
-  margin-top: 5rpx;
   margin-right: 20rpx;
   position: relative;
 }
 
 .btn-down {
   position: absolute;
-  top: 8rpx;
-  right: 24.5rpx;
-  margin-top: 5rpx;
-  width: 40rpx;
-  height: 25rpx;
+  /* top: 8rpx;
+  right: 24.5rpx; */
+  margin-top: 0rpx;
+  width:44rpx;
+  height:44rpx;
   display: inline-block;
   overflow: hidden;
 }
 
 .topshow .scroll-box {
   width: 85%;
-  height: 30px;
+  height: 60rpx;
   overflow: hidden;
 }
 
@@ -77,13 +76,6 @@ scroll-view {
   font-size: 30rpx;
   color: #000;
 }
-
-.selectarrow {
-  width: 70rpx;
-  height: 45rpx;
-  overflow: hidden;
-}
-
 .o-swiper {
   height: 900rpx;
 }
@@ -315,7 +307,7 @@ button::after {
   background-color: #f7f7f7 !important;
   border-radius: 40rpx;
   padding: 10rpx 34rpx;
-  margin: 0 15rpx 30rpx 15rpx;
+  margin:0 10rpx 30rpx 20rpx;
   color: #333;
   font-size: 28rpx;
 }
@@ -407,14 +399,24 @@ button::after {
 }
 
 .selBtn {
-  position: fixed;
-  bottom: 20rpx;
-  left: 50%;
-  margin-left: -215rpx;
+  width:44rpx;
+  height:44rpx;
+  background: red;
+  position: fixed; 
+  top:30rpx;
+  right:0rpx;
+  /* bottom: 20rpx; */
+  /* left: 50%; */
+  /* margin-left: -215rpx; */
   /* margin-left: -80rpx; */
   z-index: 100;
 }
-
+.btn-up{
+  width:44rpx;
+  height:44rpx;
+  display: inline-block;
+  overflow: hidden;
+}
 /*选中的状态*/
 
 .active {

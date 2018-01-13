@@ -23,7 +23,7 @@
           <image src="../../../public/images/clue-yumyue.png"></image> 当前跟进：{{clueDetail.followUseName}}</div>
         <div>
           <div style="display:inline-block;width:30%;vertical-align: top;">
-           <image src="../../../public/images/clue-connect.png"></image> 意向需求：
+           <image src="../../../public/images/clue-connect.png"></image> 当前项目：
           </div>
           <div style="display:inline-block;width:70%;vertical-align: top;">
             <span wx:for="{{clueDetail.productList}}" wx:for-item="pitem" wx:key="productCode">{{pitem.productName}}</span>

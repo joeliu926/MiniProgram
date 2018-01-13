@@ -13,7 +13,7 @@ Page({
     autoFocus: false,
     selectItem: [{ id: 0, text: '智能推荐', val: true }, { id: 1, text: '其它', val: false }],
     currentSelect: 0,
-    moreItem: ['编辑联人', '关闭'],
+    moreItem: ['编辑客户', '不再跟进'],
     menuType: true,
     shareList: [],
     clueList: [],
@@ -46,11 +46,9 @@ Page({
     errorType: false,
     errorColor: "#F76260",//#09BB07  #FFBE00   #F76260
     linkMansubmit: true,
-    moreWidth: 320,
-    startX:0,
+    moreWidth: 365,
+    startX: 0,
   },
-
-  //手指刚放到屏幕触发
   touchS: function (e) {
     if (e.touches.length == 1) {
       this.setData({
@@ -58,61 +56,123 @@ Page({
       });
     }
   },
-  //触摸时触发，手指在屏幕上每移动一次，触发一次
   touchM: function (e) {
     var that = this
     if (e.touches.length == 1) {
-      //记录触摸点位置的X坐标
       var moveX = e.touches[0].clientX;
-      //计算手指起始点的X坐标与当前触摸点的X坐标的差值
       var disX = that.data.startX - moveX;
       var moreWidth = that.data.moreWidth;
+      let _disx = disX;
+      if (disX > 0) {
+      } else {
+        disX = 365 - Math.abs(disX);
+      }
+
       var txtStyle = "";
-      if (disX == 0 || disX < 0) {//如果移动距离小于等于0，文本层位置不变
-        txtStyle = "margin-left:0rpx";
-      } else if (disX > 0) {//移动距离大于0，文本层left值等于手指移动距离
-        txtStyle = "margin-left:-" + disX + "rpx";
+      if (disX == 0 || disX < 0) {
+        txtStyle = "left:0rpx";
+      } else if (disX > 0) {
+        txtStyle = "left:-" + disX + "rpx";
         if (disX >= moreWidth) {
-          //控制手指移动距离最大值为删除按钮的宽度
-          txtStyle = "margin-left:-" + moreWidth + "rpx";
+          txtStyle = "left:-" + moreWidth + "rpx";
         }
       }
-      //获取手指触摸的是哪一个item
       var index = e.currentTarget.dataset.index;
-      var list = this.data.clueListOther;
-      //将拼接好的样式设置到当前item中
+      var list = [];
+
+      if (this.data.currentSelect) {
+        list = this.data.clueListOther;
+      } else {
+        list = this.data.clueList;
+      }
+      if (list[index].txtStyle == 'left:0rpx;' || !list[index].txtStyle) {
+        if (_disx < 0) {
+          return;
+        }
+
+      }
+
       list[index].txtStyle = txtStyle;
-      //更新列表的状态
-      this.setData({
-        clueListOther: list
-      });
+
+      if (this.data.currentSelect) {
+        this.setData({
+          clueListOther: list
+        });
+      } else {
+        this.setData({
+          clueList: list
+        });
+      }
     }
   },
   touchE: function (e) {
     var that = this
     if (e.changedTouches.length == 1) {
-      //手指移动结束后触摸点位置的X坐标
       var endX = e.changedTouches[0].clientX;
-      //触摸开始与结束，手指移动的距离
       var disX = that.data.startX - endX;
       var moreWidth = that.data.moreWidth;
-      //如果距离小于删除按钮的1/2，不显示删除按钮
-      var txtStyle = disX > moreWidth / 2 ? "margin-left:-" + moreWidth + "rpx" : "margin-left:0rpx";
-      //获取手指触摸的是哪一项
       var index = e.currentTarget.dataset.index;
-      var list = that.data.clueListOther;
-      list[index].txtStyle = txtStyle;
 
-      console.log('index', index);
-      //更新列表的状态
-      that.setData({
-        clueListOther: list
-      });
+      var list = [];
+
+      if (this.data.currentSelect) {
+        list = this.data.clueListOther;
+      } else {
+        list = this.data.clueList;
+      }
+      if (list[index].txtStyle == 'left:0rpx;' || !list[index].txtStyle) {
+        if (disX < 0) {
+          return;
+        }
+      }
+
+
+      if (disX > 0) {
+        this.itemMove(index, 'left', endX);
+      }
+      else {
+        this.itemMove(index, 'right', endX);
+      }
     }
   },
 
-    
+  itemMove(index, diraction, init) {
 
+    let list = [];
+    if (this.data.currentSelect) {
+      list = this.data.clueListOther;
+    } else {
+      list = this.data.clueList;
+    }
+
+    if (diraction == 'left') {
+      list[index].txtStyle = "left:-365rpx;";
+    }
+    else {
+      list[index].txtStyle = "left:0rpx;";
+    }
+
+    list.forEach((m, _index) => {
+      if (_index != index) {
+        m.txtStyle = "left:0rpx;";
+      }
+    });
+
+    if (this.data.currentSelect) {
+      this.setData({
+        clueListOther: list,
+        startX: 0
+      });
+    } else {
+      this.setData({
+        clueList: list,
+        startX: 0
+      });
+    }
+
+    return;
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -208,15 +268,15 @@ Page({
   onPullDownRefresh: function () {
     wx.stopPullDownRefresh();
 
-    let _this=this;
-    setTimeout(function(){
+    let _this = this;
+    setTimeout(function () {
       _this.pullRefresh();
 
-    },1000);
+    }, 1000);
 
   },
 
-  pullRefresh(){
+  pullRefresh() {
     if (this.data.menuType) {
       if (this.data.currentSelect) {
         this.setData({
@@ -247,9 +307,9 @@ Page({
       url: './detail/cluedetail?id=' + dataset.obj.id
     });
   },
-  alertMessage(content,types,times=3000){
-    let color ="#F76260";
-    if (types == 1 || types == 'green'){
+  alertMessage(content, types, times = 3000) {
+    let color = "#F76260";
+    if (types == 1 || types == 'green') {
       color = '#09BB07';
     }
     if (types == 2 || types == 'yellow') {
@@ -261,15 +321,15 @@ Page({
 
     this.setData({
       errorMessage: content,
-      errorType:true,
+      errorType: true,
       errorColor: color
     });
-    let _this =this;
-    setTimeout(function(){
+    let _this = this;
+    setTimeout(function () {
       _this.setData({
         errorType: false
       });
-    },times);
+    }, times);
   },
   //取消搜索
   closeSearch(params) {
@@ -357,7 +417,7 @@ Page({
         })
       }
     });
- 
+
   },
   //关闭备注
   submitClose(params) {
@@ -397,13 +457,13 @@ Page({
     });
   },
   removeArray(params) {
-    let inOther=false;
-    this.data.clueListOther.forEach(om=>{
-      if (om.id==params.id){
-        inOther=true;
+    let inOther = false;
+    this.data.clueListOther.forEach(om => {
+      if (om.id == params.id) {
+        inOther = true;
       }
     });
-    if (inOther){
+    if (inOther) {
       this.data.clueListOther.forEach(om => {
         if (om.id == params.id) {
           om.statusName = "关闭";
@@ -413,7 +473,7 @@ Page({
       this.setData({
         clueListOther: this.data.clueListOther
       });
-    }else{
+    } else {
       let repArray = [];
       this.data.clueList.forEach(m => {
         if (m.id != params.id) {
@@ -431,7 +491,7 @@ Page({
   },
   //提交联系人
   submitLinkman(params) {
-    if (!this.data.linkMansubmit || this.data.currentClue.clueStatus!=1) {
+    if (!this.data.linkMansubmit || this.data.currentClue.clueStatus != 1) {
       return
     }
     let remark = this.data.currentClue;
@@ -445,7 +505,7 @@ Page({
     }
     let _This = this;
     let linkmandata = this.data.linkMan;
-  
+
     delete linkmandata.wechatMobile;
     let pdata = linkmandata;
 
@@ -576,6 +636,7 @@ Page({
         this.setData({
           menuType: true
         });
+        wx.setNavigationBarTitle({ title: '我的潜客' })
         break;
       case "2":
         wx.navigateTo({
@@ -586,6 +647,7 @@ Page({
         this.setData({
           menuType: false
         });
+        wx.setNavigationBarTitle({ title: '我的分享' })
         break;
     }
   },
@@ -629,7 +691,7 @@ Page({
                 { name: '女', value: 2, checked: false }
               ];
             }
-            linkman.phoneNum = linkman.phoneNum ? linkman.phoneNum : linkman.wechatMobile;
+            linkman.phoneNum = linkman.wechatMobile ? linkman.wechatMobile : linkman.phoneNum;
 
             _This.setData({
               linkMan: linkman,
@@ -662,8 +724,8 @@ Page({
   //验证联系人
   regixlinkman(params) {
 
-    
-    
+
+
     let cansubmit = true;
     let linkman = this.data.linkMan;
     if (linkman.name.length < 1 || linkman.phoneNum.length < 1) {
@@ -679,7 +741,7 @@ Page({
       linkMansubmit: cansubmit
     });
 
-    if(params!='init'){
+    if (params != 'init') {
       if (linkman.name.length > 6) {
         this.alertMessage("姓名长度不能超过六个汉字！", 'red')
         cansubmit = false;
@@ -688,7 +750,7 @@ Page({
         this.alertMessage("电话号码填写不正确！", 'red')
       }
     }
-    
+
   },
   fClearData: function () {
     this.setData({
@@ -741,8 +803,8 @@ Page({
           _This.setData({ clueList: _This.data.clueList.concat(getArray) });
           _This.setData({ clueCount: result.data.data.count });
         }
-      } 
-      
+      }
+
       wx.hideLoading();
     });
   },

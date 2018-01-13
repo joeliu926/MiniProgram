@@ -82,14 +82,17 @@
 }
 
 .list {
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: hidden;
   border-bottom: 1rpx solid #eee;
+  position: relative;
+  height: 140rpx;
 }
 
 .list-body {
   width: 150%;
   display: inline-block;
+  position: absolute;
 }
 
 .list-img {

@@ -64,7 +64,7 @@
 
   <view style='display:{{menuType&&currentSelect?"block":"none"}};background-color:white;'>
       <view class="list" wx:for="{{clueListOther}}" wx:for-item="oitem" wx:key="id">
-        <div class="list-body"   bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"  data-index="{{index}}">
+        <div class="list-body"  style="{{oitem.txtStyle}}"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"  data-index="{{index}}">
           <div class='list-img' bindtap='openItem'  data-Obj='{{oitem}}' >
             <div style='margin:10rpx 15rpx 0rpx 15rpx;display:block;'>
               <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/def-userimg.png"}}'></image>

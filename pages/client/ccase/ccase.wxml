@@ -120,7 +120,8 @@
  </view>
  <view class='clinic-ct w-10'>
   <block wx:for="{{oClinic.fileVo}}" wx:for-item="cItem" wx:key="cItem.id"  wx:for-index="index">
-   <image class='clinic-pic'  src='{{cItem.url}}'></image>
+  
+    <view class='img-c b-s'   style='width: 214rpx;display: inline-block;background-image:url({{cItem.url}})' data-src='{{cItem.url}}' bindtap='imgPreview'></view>
   </block>
  </view>
    </view>

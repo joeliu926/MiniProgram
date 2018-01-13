@@ -7,6 +7,9 @@
     <view class='txt-pd f-16' style=''>{{oClinic.name}}</view>
     <view class='txt-pd f-14'>{{oClinic.address}}</view>
   </view>
+  <view>
   <image class='clinic-logo' src='{{oClinic.logo}}'></image>
+  </view>
+  
  
 </view>

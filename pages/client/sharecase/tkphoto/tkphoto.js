@@ -327,13 +327,17 @@ Page({
       };
       return wxRequest(wxaapi.unionid.userinfo.url, postData);
     }).then(resAll => {
+      wx.hideLoading();
+      _This.setData({
+        isShowMask:false
+      })
       let oUserInfo = _This.data.oUserInfo;
       let wxPhone = resAll.data.userinfo.phoneNumber;
       oUserInfo.wechatMobile = wxPhone;
       _This.setData({
         oUserInfo: oUserInfo
       });
-       wx.hideLoading();
+      
       _This.fUpdateCustomerInfo();
     });
   },

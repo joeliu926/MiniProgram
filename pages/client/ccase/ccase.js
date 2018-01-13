@@ -216,13 +216,14 @@ Page({
       return wxRequest(wxaapi.unionid.userinfo.url, postData);
     }).then(resAll => {
       console.log("resAll----->", resAll);
+      wx.hideLoading();
       let oUserInfo = _This.data.oUserInfo;
       let wxPhone = resAll.data.userinfo.phoneNumber;
       oUserInfo.wechatMobile = wxPhone;
       _This.setData({
         oUserInfo: oUserInfo
       });
-      wx.hideLoading();
+     
       _This.fUpdateCustomerInfo();
     });
   },
@@ -637,9 +638,13 @@ Page({
     _This.setData({
       aItemLeft: aItemLeft,
       itemLeft: "0px",
-      itemTop: "20px",
-      isShowTip: false
+      itemTop: "20px"
     });
+    setTimeout(function(){
+      _This.setData({
+        isShowTip: false
+      });
+    },3000);
     /////////////////////////////////////////////
     _This.fGetCurrentLikeState();
   },

@@ -182,21 +182,17 @@ Page({
           })
         })
         _This.setData({
-          projectItems: result.data.data,
-          allarr: everyarr
+          projectItems: result.data.data,//, []
+          allarr: everyarr//
         });
+        
       } else {
-        clearTimeout(timer);
-        if (_This.data.selable.length == 0) {
+       
+        if (_This.data.projectItems.length == 0) {
           _This.setData({
             Show: 'true',
           });
-          var timer = setTimeout(function () {
-            _This.setData({
-              Show: !_This.data.Show
-            });
-          }, 2000);
-        }
+        }  
         console.log(result);
       }
       wx.hideLoading();
@@ -222,29 +218,13 @@ Page({
           // projectItems: result.data.data,
           selable: codearr
         });
-        clearTimeout(timer);
+      //提示判断
         if (_This.data.selable.length == 0) {
           _This.setData({
             Show: 'true',
           });
-          var timer = setTimeout(function () {
-            _This.setData({
-              Show: !_This.data.Show
-            });
-          }, 2000);
         }
       } else {
-        clearTimeout(timer);
-        if (_This.data.selable.length == 0) {
-          _This.setData({
-            Show: 'true',
-          });
-          var timer = setTimeout(function () {
-            _This.setData({
-              Show: !_This.data.Show
-            });
-          }, 2000);
-        }
         console.log(result);
       }
       wx.hideLoading();

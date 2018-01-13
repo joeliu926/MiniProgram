@@ -150,6 +150,7 @@ Page({
         _This.setData({
           detailInfo: result.data.data
         });
+        
       } else {
         console.log(result);
       }

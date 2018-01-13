@@ -55,7 +55,7 @@ Page({
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
-    duration: 2000,
+    duration: 500,
     isConsult: true,
     // 弹层
     uicondata: "",
@@ -180,17 +180,6 @@ Page({
       consultantUnionid: _This.data.oUserInfo.unionId,//咨询师unionid
       products: _This.data.productcodes,//项目列表id  [3002,3025,3028]
     };
-    wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
-      if (result.data.code == 0) {
-        _This.setData({ projectItems: result.data.data });
-        // console.log("￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥","分享成功");
-      } else {
-        console.log(result);
-      }
-      wx.hideLoading();
-    });
-
-
     // _This.fUserEvent(event.eType.appShare); //咨询师分享事件
     var caseIds = _This.data.caseIds;
     var currentPage = _This.data.currentPage;
@@ -200,12 +189,18 @@ Page({
     return {
       title: '案例分享',
       path: '/pages/client/ccase/ccase?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
-
       success: function (res) {
 
-        wx.navigateBack({
-          delta: 2
-        })
+        console.log("5555555555555555555");
+        wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
+          // console.log("000000000000000000000000===>", result);
+          if (result.data.code == 0) {
+            _This.setData({ projectItems: result.data.data });
+          } else {
+            console.log(result);
+          }
+          wx.hideLoading();
+        });
       }
     }
   },

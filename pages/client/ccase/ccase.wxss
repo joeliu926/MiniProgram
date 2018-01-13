@@ -138,8 +138,9 @@ left:0;
   z-index:1000;
   bottom:320rpx;
   right: 150rpx;
-  box-shadow: 0 0 10rpx #ddd; 
+  box-shadow: 0 0 20rpx #666; 
   padding:12rpx 16rpx;
+  border-radius: 6rpx;
 }
 .dp-arr{
   border: 24rpx solid #ffffff;
@@ -165,7 +166,7 @@ padding: 24rpx;
 .end-cmy-icon{
   height: 100rpx;
   width: 100rpx;
-  border-radius: 50%;
+ 
 }
 .e-cmy-major{
   box-sizing: border-box; 
@@ -184,6 +185,7 @@ padding: 24rpx;
 .clinic-ct{
   padding: 0 24rpx;
   box-sizing: border-box;
+  
 }
 .clinic-pic{
   width: 200rpx;
@@ -215,4 +217,11 @@ border: 0;
  height: 60rpx;
 } 
 
-
+.show-error-toast{
+  position:absolute;
+  top: 0;
+  color: #ffffff;
+ text-align: center;
+  background: #ee4444;
+  padding: 10rpx;
+}

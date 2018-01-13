@@ -117,3 +117,11 @@ align-items: center;
   background: #09bb07;
   padding: 10rpx;
 }
+.show-error-toast{
+ position:absolute;
+  top: 0;
+  color: #ffffff;
+ text-align: center;
+  background: #ee4444;
+  padding: 10rpx;
+}

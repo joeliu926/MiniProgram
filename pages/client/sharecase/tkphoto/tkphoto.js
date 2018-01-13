@@ -17,6 +17,7 @@ Page({
     imgKey: 1,
     oUserInfo: {},
     isUpload: false,
+    isErrorUpload:false,//授权手机号码失败
     shareEventId: "",
     oEvent: {
       code: "",
@@ -46,7 +47,6 @@ Page({
     var _This = this;
     var oEvent = _This.data.oEvent;
     getApp().getUserData(function (uinfo) {
-      //console.log(uinfo);
       _This.setData({
         oUserInfo: uinfo,
         cstUid: options.consultantId,
@@ -300,6 +300,7 @@ Page({
 * 授权获取手机号码
 */
   getPhoneNumber(e) {
+    console.log("e---------->", e);
     wx.showLoading({
       title: '授权中...',
     });
@@ -325,13 +326,29 @@ Page({
       };
       return wxRequest(wxaapi.unionid.userinfo.url, postData);
     }).then(resAll => {
+      wx.hideLoading();
+      if (!resAll.data.userinfo){
+        _This.setData({
+          isErrorUpload: true
+        });
+
+        setTimeout(function(){
+          _This.setData({
+            isErrorUpload: false
+          });
+        },2000);
+        return false;
+      }
+
       let oUserInfo = _This.data.oUserInfo;
       let wxPhone = resAll.data.userinfo.phoneNumber;
       oUserInfo.wechatMobile = wxPhone;
       _This.setData({
         oUserInfo: oUserInfo
       });
-       wx.hideLoading();
+      _This.setData({
+        isShowMask: false
+      })
       _This.fUpdateCustomerInfo();
     });
   },

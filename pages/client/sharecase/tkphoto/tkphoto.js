@@ -43,10 +43,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("tkphoto options----->", options);
     var _This = this;
     var oEvent = _This.data.oEvent;
     getApp().getUserData(function (uinfo) {
-      //console.log(uinfo);
+       console.log("tkphoto user info------->",uinfo);
       _This.setData({
         oUserInfo: uinfo,
         cstUid: options.consultantId,
@@ -300,6 +301,7 @@ Page({
 * 授权获取手机号码
 */
   getPhoneNumber(e) {
+    console.log("e---------->", e);
     wx.showLoading({
       title: '授权中...',
     });

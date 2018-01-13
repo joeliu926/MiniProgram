@@ -310,7 +310,7 @@ Page({
         let fpdata = {
           "clueId": remark.id,
           "clueStage": remark.clueStage,
-          "creater": remark.creater,
+          "creater": remark.creator,
           "customerId": remark.customerId,
           "id": remark.id,
           "remark": _This.data.clueClose,

@@ -47,7 +47,7 @@ Page({
     errorColor: "#F76260",//#09BB07  #FFBE00   #F76260
     linkMansubmit: true,
     moreWidth: 365,
-    startX:0,
+    startX: 0,
   },
   touchS: function (e) {
     if (e.touches.length == 1) {
@@ -63,9 +63,9 @@ Page({
       var disX = that.data.startX - moveX;
       var moreWidth = that.data.moreWidth;
       let _disx = disX;
-      if (disX>0){
-      }else{
-        disX = 365-Math.abs(disX);  
+      if (disX > 0) {
+      } else {
+        disX = 365 - Math.abs(disX);
       }
 
       var txtStyle = "";
@@ -78,15 +78,18 @@ Page({
         }
       }
       var index = e.currentTarget.dataset.index;
-      var list =[];
-      
-      if (this.data.currentSelect){
+      var list = [];
+
+      if (this.data.currentSelect) {
         list = this.data.clueListOther;
-      }else{
+      } else {
         list = this.data.clueList;
       }
-      if (list[index].txtStyle == 'left:0rpx;' || !list[index].txtStyle){
-        return;
+      if (list[index].txtStyle == 'left:0rpx;' || !list[index].txtStyle) {
+        if (_disx < 0) {
+          return;
+        }
+
       }
 
       list[index].txtStyle = txtStyle;
@@ -109,33 +112,48 @@ Page({
       var disX = that.data.startX - endX;
       var moreWidth = that.data.moreWidth;
       var index = e.currentTarget.dataset.index;
-      if (disX>0) {
+
+      var list = [];
+
+      if (this.data.currentSelect) {
+        list = this.data.clueListOther;
+      } else {
+        list = this.data.clueList;
+      }
+      if (list[index].txtStyle == 'left:0rpx;' || !list[index].txtStyle) {
+        if (disX < 0) {
+          return;
+        }
+      }
+
+
+      if (disX > 0) {
         this.itemMove(index, 'left', endX);
       }
-      else{
+      else {
         this.itemMove(index, 'right', endX);
       }
     }
   },
 
-  itemMove(index,diraction,init){
+  itemMove(index, diraction, init) {
 
-    let list=[];
+    let list = [];
     if (this.data.currentSelect) {
       list = this.data.clueListOther;
     } else {
       list = this.data.clueList;
     }
 
-    if (diraction == 'left'){
-        list[index].txtStyle = "left:-365rpx;";
+    if (diraction == 'left') {
+      list[index].txtStyle = "left:-365rpx;";
     }
-    else{
-        list[index].txtStyle = "left:0rpx;";
+    else {
+      list[index].txtStyle = "left:0rpx;";
     }
 
-    list.forEach((m,_index)=>{
-      if(_index!=index){
+    list.forEach((m, _index) => {
+      if (_index != index) {
         m.txtStyle = "left:0rpx;";
       }
     });
@@ -143,9 +161,9 @@ Page({
     if (this.data.currentSelect) {
       this.setData({
         clueListOther: list,
-        startX:0
+        startX: 0
       });
-    }else{
+    } else {
       this.setData({
         clueList: list,
         startX: 0
@@ -153,7 +171,7 @@ Page({
     }
 
     return;
-     
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -250,15 +268,15 @@ Page({
   onPullDownRefresh: function () {
     wx.stopPullDownRefresh();
 
-    let _this=this;
-    setTimeout(function(){
+    let _this = this;
+    setTimeout(function () {
       _this.pullRefresh();
 
-    },1000);
+    }, 1000);
 
   },
 
-  pullRefresh(){
+  pullRefresh() {
     if (this.data.menuType) {
       if (this.data.currentSelect) {
         this.setData({
@@ -289,9 +307,9 @@ Page({
       url: './detail/cluedetail?id=' + dataset.obj.id
     });
   },
-  alertMessage(content,types,times=3000){
-    let color ="#F76260";
-    if (types == 1 || types == 'green'){
+  alertMessage(content, types, times = 3000) {
+    let color = "#F76260";
+    if (types == 1 || types == 'green') {
       color = '#09BB07';
     }
     if (types == 2 || types == 'yellow') {
@@ -303,15 +321,15 @@ Page({
 
     this.setData({
       errorMessage: content,
-      errorType:true,
+      errorType: true,
       errorColor: color
     });
-    let _this =this;
-    setTimeout(function(){
+    let _this = this;
+    setTimeout(function () {
       _this.setData({
         errorType: false
       });
-    },times);
+    }, times);
   },
   //取消搜索
   closeSearch(params) {
@@ -399,7 +417,7 @@ Page({
         })
       }
     });
- 
+
   },
   //关闭备注
   submitClose(params) {
@@ -439,13 +457,13 @@ Page({
     });
   },
   removeArray(params) {
-    let inOther=false;
-    this.data.clueListOther.forEach(om=>{
-      if (om.id==params.id){
-        inOther=true;
+    let inOther = false;
+    this.data.clueListOther.forEach(om => {
+      if (om.id == params.id) {
+        inOther = true;
       }
     });
-    if (inOther){
+    if (inOther) {
       this.data.clueListOther.forEach(om => {
         if (om.id == params.id) {
           om.statusName = "关闭";
@@ -455,7 +473,7 @@ Page({
       this.setData({
         clueListOther: this.data.clueListOther
       });
-    }else{
+    } else {
       let repArray = [];
       this.data.clueList.forEach(m => {
         if (m.id != params.id) {
@@ -473,7 +491,7 @@ Page({
   },
   //提交联系人
   submitLinkman(params) {
-    if (!this.data.linkMansubmit || this.data.currentClue.clueStatus!=1) {
+    if (!this.data.linkMansubmit || this.data.currentClue.clueStatus != 1) {
       return
     }
     let remark = this.data.currentClue;
@@ -487,7 +505,7 @@ Page({
     }
     let _This = this;
     let linkmandata = this.data.linkMan;
-  
+
     delete linkmandata.wechatMobile;
     let pdata = linkmandata;
 
@@ -706,8 +724,8 @@ Page({
   //验证联系人
   regixlinkman(params) {
 
-    
-    
+
+
     let cansubmit = true;
     let linkman = this.data.linkMan;
     if (linkman.name.length < 1 || linkman.phoneNum.length < 1) {
@@ -723,7 +741,7 @@ Page({
       linkMansubmit: cansubmit
     });
 
-    if(params!='init'){
+    if (params != 'init') {
       if (linkman.name.length > 6) {
         this.alertMessage("姓名长度不能超过六个汉字！", 'red')
         cansubmit = false;
@@ -732,7 +750,7 @@ Page({
         this.alertMessage("电话号码填写不正确！", 'red')
       }
     }
-    
+
   },
   fClearData: function () {
     this.setData({
@@ -785,8 +803,8 @@ Page({
           _This.setData({ clueList: _This.data.clueList.concat(getArray) });
           _This.setData({ clueCount: result.data.data.count });
         }
-      } 
-      
+      }
+
       wx.hideLoading();
     });
   },

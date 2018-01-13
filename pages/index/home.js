@@ -46,8 +46,72 @@ Page({
     errorType: false,
     errorColor: "#F76260",//#09BB07  #FFBE00   #F76260
     linkMansubmit: true,
-    delBtnWidth: 150 //删除按钮宽度单位（rpx）
+    moreWidth: 320,
+    startX:0,
   },
+
+  //手指刚放到屏幕触发
+  touchS: function (e) {
+    if (e.touches.length == 1) {
+      this.setData({
+        startX: e.touches[0].clientX
+      });
+    }
+  },
+  //触摸时触发，手指在屏幕上每移动一次，触发一次
+  touchM: function (e) {
+    var that = this
+    if (e.touches.length == 1) {
+      //记录触摸点位置的X坐标
+      var moveX = e.touches[0].clientX;
+      //计算手指起始点的X坐标与当前触摸点的X坐标的差值
+      var disX = that.data.startX - moveX;
+      var moreWidth = that.data.moreWidth;
+      var txtStyle = "";
+      if (disX == 0 || disX < 0) {//如果移动距离小于等于0，文本层位置不变
+        txtStyle = "margin-left:0rpx";
+      } else if (disX > 0) {//移动距离大于0，文本层left值等于手指移动距离
+        txtStyle = "margin-left:-" + disX + "rpx";
+        if (disX >= moreWidth) {
+          //控制手指移动距离最大值为删除按钮的宽度
+          txtStyle = "margin-left:-" + moreWidth + "rpx";
+        }
+      }
+      //获取手指触摸的是哪一个item
+      var index = e.currentTarget.dataset.index;
+      var list = this.data.clueListOther;
+      //将拼接好的样式设置到当前item中
+      list[index].txtStyle = txtStyle;
+      //更新列表的状态
+      this.setData({
+        clueListOther: list
+      });
+    }
+  },
+  touchE: function (e) {
+    var that = this
+    if (e.changedTouches.length == 1) {
+      //手指移动结束后触摸点位置的X坐标
+      var endX = e.changedTouches[0].clientX;
+      //触摸开始与结束，手指移动的距离
+      var disX = that.data.startX - endX;
+      var moreWidth = that.data.moreWidth;
+      //如果距离小于删除按钮的1/2，不显示删除按钮
+      var txtStyle = disX > moreWidth / 2 ? "margin-left:-" + moreWidth + "rpx" : "margin-left:0rpx";
+      //获取手指触摸的是哪一项
+      var index = e.currentTarget.dataset.index;
+      var list = that.data.clueListOther;
+      list[index].txtStyle = txtStyle;
+
+      console.log('index', index);
+      //更新列表的状态
+      that.setData({
+        clueListOther: list
+      });
+    }
+  },
+
+    
 
   /**
    * 生命周期函数--监听页面加载
@@ -735,6 +799,7 @@ Page({
         _This.setData({
           showData: 1
         });
+        wx.setNavigationBarTitle({ title: '欢颜小助手' })
       }
     });
   }

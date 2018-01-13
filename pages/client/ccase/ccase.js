@@ -67,7 +67,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log("event------>event",event)
+    console.log("ccase------>event", options)
 
     let _This = this;
     var caseIds = options.caseIds;
@@ -78,7 +78,7 @@ Page({
     });
     /***********qiehuan******/
     getApp().getUserData(function (uinfo) {
-      //console.log("-------user info=====>", uinfo);
+      console.log("---ccase----user info=====>", uinfo);
       _This.setData({
         caseIds: caseIds || "",
         projectName: options.iname,
@@ -508,7 +508,7 @@ Page({
     let cstunionid = _This.data.cstUid;
     let consultationId = _This.data.consultationId;//咨询会话ID
     let clueId = _This.data.clueId; //线索id
-    let shareEventId = _This.data.shareEventId; //分享id
+    let shareEventId = _This.data.shareEventId||""; //分享id
     let tel = _This.data.oUserInfo.wechatMobile || "";//客户idoUserInfo.wechatMobile
     let cid = _This.data.oUserInfo.id;//客户idoUserInfo.wechatMobile
     wx.navigateTo({

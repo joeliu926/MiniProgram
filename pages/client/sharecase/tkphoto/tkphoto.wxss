@@ -34,7 +34,7 @@ align-items: center;
 }
 .foot-tips{
     position: absolute;
-    bottom: 150rpx;
+    bottom: 160rpx;
     background: #ffffff;
     box-shadow: 0 0 10rpx #ddd;
     padding: 12rpx 46rpx;

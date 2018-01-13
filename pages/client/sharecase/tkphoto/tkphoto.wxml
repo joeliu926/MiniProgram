@@ -42,5 +42,9 @@
    <text class=''>提交成功！</text>
 </view>
 
+<view class='w-10 f-16 show-error-toast {{isErrorUpload?"":"hide"}}'>
+   <text class=''>授权失败 请重试！</text>
+</view>
+
 
 

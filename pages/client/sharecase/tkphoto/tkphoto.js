@@ -17,6 +17,7 @@ Page({
     imgKey: 1,
     oUserInfo: {},
     isUpload: false,
+    isErrorUpload:false,//授权手机号码失败
     shareEventId: "",
     oEvent: {
       code: "",
@@ -43,11 +44,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("tkphoto options----->", options);
     var _This = this;
     var oEvent = _This.data.oEvent;
     getApp().getUserData(function (uinfo) {
-       console.log("tkphoto user info------->",uinfo);
       _This.setData({
         oUserInfo: uinfo,
         cstUid: options.consultantId,
@@ -328,16 +327,28 @@ Page({
       return wxRequest(wxaapi.unionid.userinfo.url, postData);
     }).then(resAll => {
       wx.hideLoading();
-      _This.setData({
-        isShowMask:false
-      })
+      if (!resAll.data.userinfo){
+        _This.setData({
+          isErrorUpload: true
+        });
+
+        setTimeout(function(){
+          _This.setData({
+            isErrorUpload: false
+          });
+        },2000);
+        return false;
+      }
+
       let oUserInfo = _This.data.oUserInfo;
       let wxPhone = resAll.data.userinfo.phoneNumber;
       oUserInfo.wechatMobile = wxPhone;
       _This.setData({
         oUserInfo: oUserInfo
       });
-      
+      _This.setData({
+        isShowMask: false
+      })
       _This.fUpdateCustomerInfo();
     });
   },

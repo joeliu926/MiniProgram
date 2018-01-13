@@ -11,6 +11,7 @@ Page({
   data: {
     olock: false,
     aCaseList: [],
+    isErrorUpload: false,//授权手机号码失败
     aCurrentList: [],//选中项
     itemLeft: 0,//左侧位置
     aItemLeft: {},//左侧位置对象
@@ -67,7 +68,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("ccase------>event", options)
+    //console.log("ccase------>event", options)
 
     let _This = this;
     var caseIds = options.caseIds;
@@ -78,7 +79,7 @@ Page({
     });
     /***********qiehuan******/
     getApp().getUserData(function (uinfo) {
-      console.log("---ccase----user info=====>", uinfo);
+      //console.log("---ccase----user info=====>", uinfo);
       _This.setData({
         caseIds: caseIds || "",
         projectName: options.iname,
@@ -187,7 +188,6 @@ Page({
  */
   getPhoneNumber(e) {
     let _This = this;
-    console.log("e-------->", e);
     wx.showLoading({
       title: '授权中...',
     });
@@ -199,11 +199,9 @@ Page({
     }
     let sessionKey = "";
     wxPromise(wx.login)().then(result => {
-      console.log("result-------->", result);
       let ucode = result.code;
       return wxRequest(wxaapi.unionid.code.url, { code: ucode });
     }).then(resSession => {
-      console.log("resSession-------->", resSession);
       sessionKey = resSession.data.session_key;
       return sessionKey;
     }).then(sessionKey => {
@@ -212,11 +210,24 @@ Page({
         encryptedData: encryptedData,
         sessionKey: sessionKey, iv: iv
       };
-      console.log("sessionKey----->", sessionKey, postData);
       return wxRequest(wxaapi.unionid.userinfo.url, postData);
     }).then(resAll => {
       console.log("resAll----->", resAll);
       wx.hideLoading();
+      
+      if (!resAll.data.userinfo) {
+        _This.setData({
+          isErrorUpload: true
+        });
+
+        setTimeout(function () {
+          _This.setData({
+            isErrorUpload: false
+          });
+        }, 2000);
+        return false;
+      }
+
       let oUserInfo = _This.data.oUserInfo;
       let wxPhone = resAll.data.userinfo.phoneNumber;
       oUserInfo.wechatMobile = wxPhone;
@@ -644,7 +655,7 @@ Page({
       _This.setData({
         isShowTip: false
       });
-    },3000);
+    },2000);
     /////////////////////////////////////////////
     _This.fGetCurrentLikeState();
   },

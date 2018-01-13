@@ -138,8 +138,9 @@ left:0;
   z-index:1000;
   bottom:320rpx;
   right: 150rpx;
-  box-shadow: 0 0 20rpx #000; 
+  box-shadow: 0 0 20rpx #666; 
   padding:12rpx 16rpx;
+  border-radius: 6rpx;
 }
 .dp-arr{
   border: 24rpx solid #ffffff;
@@ -216,4 +217,11 @@ border: 0;
  height: 60rpx;
 } 
 
-
+.show-error-toast{
+  position:absolute;
+  top: 0;
+  color: #ffffff;
+ text-align: center;
+  background: #ee4444;
+  padding: 10rpx;
+}

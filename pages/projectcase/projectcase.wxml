@@ -20,6 +20,14 @@
   <view class="tip" style="display: {{Show=='true'?'block':'none'}}">还没有案例哦，通知管理员录入一下案例吧</view>
   <view class=" tipunable" style="display: {{isShow=='true'?'block':'none'}}"> 当前项目下暂时无案例可选</view>
   <view style="text-align:center; margin-top:20px;" class="selBtn">
-    <button class="selend f-16 {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</button>
+    <button class="selend f-16 {{isactive?'active':''}} " style="display: {{projectItems.length!=0?'block':'none'}}" size="mini" bindtap="selectItems">选好了      </button>
+  </view>
+  <!--没有数据的术后 -->
+  <view class="noData" style='display:{{allarr.length==0?"block":"none"}};  position:absolute; top:0rpx; left:0rpx;'>
+    <div class="list-none">
+      <div class="list-none-div">
+          <image style="vertical-align:middle;" class='nodata-img' src='../../../public/images/no_data.png'></image>
+      </div>
+    </div>
   </view>
 </view>

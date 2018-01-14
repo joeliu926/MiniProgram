@@ -300,55 +300,38 @@ Page({
 * 授权获取手机号码
 */
   getPhoneNumber(e) {
-    console.log("e---------->", e);
+    let _This = this;
     wx.showLoading({
       title: '授权中...',
     });
-    let _This = this;
-    let encryptedData = e.detail.encryptedData;
-    let iv = e.detail.iv;
-    if (!encryptedData) {
+    console.log("encryptedData----->", e);
+    let eDetail = e.detail;
+    if (!eDetail.encryptedData) {
       wx.hideLoading();
       return false;
     }
-    let sessionKey = "";
-    wxPromise(wx.login)().then(result => {
-      let ucode = result.code;
-      return wxRequest(wxaapi.unionid.code.url, { code: ucode });
-    }).then(resSession => {
-      sessionKey = resSession.data.session_key;
-      return sessionKey;
-    }).then(sessionKey => {
-      //console.log("sessionKey----->", sessionKey);
-      var postData = {
-        encryptedData: encryptedData,
-        sessionKey: sessionKey, iv: iv
-      };
-      return wxRequest(wxaapi.unionid.userinfo.url, postData);
-    }).then(resAll => {
-      wx.hideLoading();
-      if (!resAll.data.userinfo){
+    eDetail.times = 0;
+    _This.fAuthorization(eDetail, function (resPhone) {
+      if (!resPhone) {
+        wx.hideLoading();
         _This.setData({
           isErrorUpload: true
         });
-
-        setTimeout(function(){
+        setTimeout(function () {
           _This.setData({
             isErrorUpload: false
           });
-        },2000);
+        }, 2000);
         return false;
       }
 
       let oUserInfo = _This.data.oUserInfo;
-      let wxPhone = resAll.data.userinfo.phoneNumber;
-      oUserInfo.wechatMobile = wxPhone;
+      oUserInfo.wechatMobile = resPhone;
       _This.setData({
-        oUserInfo: oUserInfo
+        oUserInfo: oUserInfo,
+        isShowMask:true
       });
-      _This.setData({
-        isShowMask: false
-      })
+      wx.hideLoading();
       _This.fUpdateCustomerInfo();
     });
   },
@@ -367,6 +350,38 @@ Page({
         _This.fRedirectBack();
       } else {
         console.log("update customer info error----", result);
+      }
+    });
+  },
+  /**
+ * 用户授权 eDetail用户授权返回对象
+ */
+  fAuthorization(eDetail, callback) {
+    let _This = this;
+    let sessionKey = "";
+    wxPromise(wx.login)().then(result => {
+      let ucode = result.code;
+      return wxRequest(wxaapi.unionid.code.url, { code: ucode });
+    }).then(resSession => {
+      let sessionKey = resSession.data.session_key;
+      var postData = {
+        encryptedData: eDetail.encryptedData,
+        sessionKey: sessionKey,
+        iv: eDetail.iv
+      };
+      console.log("postData----->", postData);
+      return wxRequest(wxaapi.unionid.userinfo.url, postData);
+    }).then(resPhone => {
+      console.log("time count-------", eDetail.times);
+      if (resPhone.data.userinfo) {
+        callback && callback(resPhone.data.userinfo.phoneNumber);
+      } else {
+        eDetail.times++;
+        if (eDetail.times > 4) {
+          callback && callback(false);
+          return false;
+        }
+        _This.fAuthorization(eDetail, callback);
       }
     });
   }

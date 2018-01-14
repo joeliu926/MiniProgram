@@ -77,6 +77,7 @@ Page({
     _This.setData({
       aCurrentList: aCaseList.slice(0, 10)
     });
+    console.log("get user info-------------");
     /***********qiehuan******/
     getApp().getUserData(function (uinfo) {
       //console.log("---ccase----user info=====>", uinfo);
@@ -191,52 +192,36 @@ Page({
     wx.showLoading({
       title: '授权中...',
     });
-    let encryptedData = e.detail.encryptedData;
-    let iv = e.detail.iv;
-    if (!encryptedData) {
+    console.log("encryptedData----->", e);
+    let eDetail = e.detail;
+    if (!eDetail.encryptedData) {
       wx.hideLoading();
       return false;
     }
-    let sessionKey = "";
-    wxPromise(wx.login)().then(result => {
-      let ucode = result.code;
-      return wxRequest(wxaapi.unionid.code.url, { code: ucode });
-    }).then(resSession => {
-      sessionKey = resSession.data.session_key;
-      return sessionKey;
-    }).then(sessionKey => {
-      
-      var postData = {
-        encryptedData: encryptedData,
-        sessionKey: sessionKey, iv: iv
-      };
-      return wxRequest(wxaapi.unionid.userinfo.url, postData);
-    }).then(resAll => {
-      console.log("resAll----->", resAll);
-      wx.hideLoading();
-      
-      if (!resAll.data.userinfo) {
-        _This.setData({
-          isErrorUpload: true
-        });
-
-        setTimeout(function () {
+    eDetail.times=0;
+    _This.fAuthorization(eDetail,function(resPhone){
+      if (!resPhone){
+         wx.hideLoading();
           _This.setData({
-            isErrorUpload: false
+            isErrorUpload: true
           });
-        }, 2000);
-        return false;
+          setTimeout(function () {
+            _This.setData({
+              isErrorUpload: false
+            });
+          }, 2000);
+          return false;  
       }
-
       let oUserInfo = _This.data.oUserInfo;
-      let wxPhone = resAll.data.userinfo.phoneNumber;
-      oUserInfo.wechatMobile = wxPhone;
+      oUserInfo.wechatMobile = resPhone;
       _This.setData({
         oUserInfo: oUserInfo
       });
-     
+       wx.hideLoading();
       _This.fUpdateCustomerInfo();
     });
+      
+    /*  */
   },
   /**
    * 授权后更新客户手机号码
@@ -253,6 +238,39 @@ Page({
         _This.fGetConsultDetail();
       } else {
         console.log("update customer info error----", result);
+      }
+    });
+  },
+  /**
+   * 用户授权 eDetail用户授权返回对象
+   */
+  fAuthorization(eDetail,callback){
+    let _This=this;
+    let sessionKey = "";
+    wxPromise(wx.login)().then(result => {
+      let ucode = result.code;
+      return wxRequest(wxaapi.unionid.code.url, { code: ucode });
+    }).then(resSession => {
+      let sessionKey = resSession.data.session_key;
+      var postData = {
+        encryptedData: eDetail.encryptedData,
+        sessionKey: sessionKey, 
+        iv: eDetail.iv
+      };
+      console.log("postData----->", postData);
+      return wxRequest(wxaapi.unionid.userinfo.url, postData);
+    }).then(resPhone => {
+      console.log("resPhone----->", resPhone);
+      console.log("time count-------",eDetail.times);
+      if (resPhone.data.userinfo){
+        callback && callback(resPhone.data.userinfo.phoneNumber); 
+      }else{
+        eDetail.times++;
+        if (eDetail.times>4){
+          callback && callback(false);
+          return false;
+        }
+        _This.fAuthorization(eDetail, callback);
       }
     });
   },
@@ -291,7 +309,7 @@ Page({
     let _This = this;
     let cstunionid = _This.data.cstUid;
     wx.navigateTo({
-      url: './counselor/counselor?cstUid=' + cstunionid
+      url: '/pages/client/ccase/counselor/counselor?cstUid=' + cstunionid
     })
   },
   /**
@@ -401,6 +419,7 @@ Page({
       currentLikeState: olikeResult[currentId],
       sCurrentId: currentId
     });
+ 
   },
   /**
    * 点击喜欢不喜欢案例
@@ -410,6 +429,7 @@ Page({
     let olikeResult = _This.data.olikeResult;
     // console.log("like case---", _This.data.sCurrentId,_This.data.currentLikeState); //_This.data.currentLikeState
     _This.fCustomerOperate(1);
+    _This.fUserEvent(event.eType.caseLike);
   },
   /**
    * 获取用户操作状态 1喜欢案例 2提交资料

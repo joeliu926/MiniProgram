@@ -11,9 +11,9 @@ var gConfig={
 
   /****uat start*****/
 
-  remote:"https://nihaomc.com/wxa_test",
-  uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload",
-  remoteWx: "https://nihaomc.com/wx_test",
+  // remote:"https://nihaomc.com/wxa_test",
+  // uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload",
+  // remoteWx: "https://nihaomc.com/wx_test",
 
   /****uat end*****/
  
@@ -21,9 +21,9 @@ var gConfig={
   /****dev start*****/
 
 
-  // remoteWx: "https://nihaomc.com/wx",
-  // remote: "https://nihaomc.com/wxa_dev",
-  // uploadUrl: "https://nihaomc.com/uploadimg_dev/attachment/upload"
+  remoteWx: "https://nihaomc.com/wx",
+  remote: "https://nihaomc.com/wxa_dev",
+  uploadUrl: "https://nihaomc.com/uploadimg_dev/attachment/upload"
 
   /****dev end*****/
 

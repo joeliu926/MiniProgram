@@ -198,7 +198,7 @@ Page({
         });
         // console.log("===5555555555555555555============")
         wx.navigateTo({
-          url: '../../index/home'
+          url: '../../index/home?type=share'
         })
       }
     }

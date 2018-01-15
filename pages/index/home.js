@@ -106,15 +106,18 @@ Page({
     }
   },
   touchE: function (e) {
-    var that = this
+    var that = this;
+
+
     if (e.changedTouches.length == 1) {
       var endX = e.changedTouches[0].clientX;
       var disX = that.data.startX - endX;
       var moreWidth = that.data.moreWidth;
       var index = e.currentTarget.dataset.index;
-
       var list = [];
-
+      if (disX==0){
+        return;
+      }
       if (this.data.currentSelect) {
         list = this.data.clueListOther;
       } else {
@@ -126,7 +129,7 @@ Page({
         }
       }
 
-
+     
       if (disX > 0) {
         this.itemMove(index, 'left', endX);
       }
@@ -187,7 +190,7 @@ Page({
         oUInfo: result
       });
       _This.getClueList();
-      _This.getClueList('initOther');
+     // _This.getClueList('initOther');
       _This.getShareList();
     });
   },
@@ -230,7 +233,10 @@ Page({
           this.setData({
             clueNoOther: this.data.clueNoOther + 1
           });
-          this.getClueList();
+          let _this = this;
+          setTimeout(function () {
+            _this.getClueList();
+          }, 200);
         }
       } else {
         if (this.data.clueNo * this.data.pageSize < this.data.clueCount) {
@@ -243,7 +249,12 @@ Page({
           this.setData({
             clueNo: this.data.clueNo + 1
           });
-          this.getClueList();
+
+          let _this = this;
+          setTimeout(function () {
+            _this.getClueList();
+          }, 200);
+ 
         }
       }
     }
@@ -258,7 +269,11 @@ Page({
         this.setData({
           shareNo: this.data.shareNo + 1
         });
-        this.getShareList();
+
+        let _this = this;
+        setTimeout(function () {
+          _this.getShareList();
+        }, 200);
       }
     }
   },
@@ -275,7 +290,6 @@ Page({
     }, 1000);
 
   },
-
   pullRefresh() {
     if (this.data.menuType) {
       if (this.data.currentSelect) {
@@ -300,7 +314,6 @@ Page({
     }
 
   },
-
   openItem(params) {
     var dataset = params.currentTarget.dataset;
     wx.navigateTo({
@@ -318,7 +331,6 @@ Page({
     if (types == 3 || types == 'red') {
       color = ' #F76260';
     }
-
     this.setData({
       errorMessage: content,
       errorType: true,
@@ -337,12 +349,14 @@ Page({
       this.setData({
         searchName: '',
         clueListOther: [],
+        clueNoOther:1,
         showicon: false
       });
     } else {
       this.setData({
         searchName: '',
         clueList: [],
+        clueNo:1,
         showicon: false
       });
     }
@@ -381,7 +395,6 @@ Page({
       this.alertMessage("关闭客户不可以备注！", 'yellow');
       return;
     }
-
     if (remark.clueStatus == 7) {
       this.alertMessage("已成交客户不可以备注！", 'yellow');
       return;
@@ -540,12 +553,14 @@ Page({
 
     if (this.data.currentSelect) {
       this.setData({
-        clueListOther: []
+        clueListOther: [],
+        clueNoOther:1
       });
 
     } else {
       this.setData({
-        clueList: []
+        clueList: [],
+        clueNo:1
       });
     }
     this.getClueList();
@@ -553,6 +568,8 @@ Page({
   },
   //tab 选项卡
   selectType(params) {
+
+
     var dataset = params.currentTarget.dataset;
     this.data.selectItem.forEach(item => {
       if (item.id == dataset.id) {
@@ -560,7 +577,25 @@ Page({
           currentSelect: dataset.id
         });
         item.val = true;
-        // this.getClueList();
+
+        if (dataset.id) {
+          this.setData({
+            searchName: '',
+            clueListOther: [],
+            clueNoOther: 1,
+            showicon: false
+          });
+        } else {
+          this.setData({
+            searchName: '',
+            clueList: [],
+            clueNo: 1,
+            showicon: false
+          });
+        }
+
+
+         this.getClueList();
       }
       else {
         item.val = false;
@@ -570,6 +605,7 @@ Page({
       searchName: "",
       selectItem: this.data.selectItem
     });
+  
   },
   searchBtn() {
     this.setData({
@@ -761,14 +797,14 @@ Page({
   /**
    * 获取线索列表
    */
-  getClueList(initOther) {
+  getClueList() {
     wx.showLoading({
       title: 'loading...',
     });
     let _This = this;
     let pdata = {
       userUnionId: _This.data.oUInfo.unionId || "",
-      group: initOther ? 1 : this.data.currentSelect,
+      group: this.data.currentSelect,
       searchName: this.data.searchName,
       pageNo: this.data.currentSelect ? this.data.clueNo : this.data.clueNoOther,
       pageSize: this.data.pageSize
@@ -796,7 +832,7 @@ Page({
           m.customerName = cname;
           m.productList = slist;
         });
-        if (initOther || _This.data.currentSelect) {
+        if (_This.data.currentSelect) {
           _This.setData({ clueListOther: _This.data.clueListOther.concat(getArray) });
           _This.setData({ clueCountOther: result.data.data.count });
         } else {

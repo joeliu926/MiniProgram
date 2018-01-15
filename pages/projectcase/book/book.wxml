@@ -14,7 +14,7 @@
 <!-- 预约项目和时间 -->
 <view class='out-content mg-b'>
   <view class='flex-c fx-d-col'>
-    <view class='f-16 mg-b' ><span style='color:red'>*</span>预约项目</view>
+    <view class='f-16 mg-b' >预约项目</view>
     <view class='flex-c fx-d-row w-10 mg-b product '>
       <!-- <view wx-for="{{arrData}}" wx:for-item="sitem" wx:key="id" class=' pro-b'>{{sitem.iname}}aaa<image class='pro-icon' src='../../../public/images/bookdeletepro.png' ></image>
       </view> -->
@@ -63,7 +63,7 @@
 <!-- 顾客信息 -->
 <view class='custmer'>
   <view class='flex custmerinfo-name  c-p-d  b-g'>
-    <view class='f-16 'style='width:30%;' maxlength="6" size="6"><span style='color:red'>*</span>顾客姓名</view>
+    <view class='f-16 'style='width:30%;' maxlength="6" size="6">顾客姓名</view>
     <view class='f-16 custmerinfo-input {{status!=1?"":"hide"}}'    style='text-align:right;width:70%;' >
      <input style='color:#666666;font-size:28rpx' name='name ' class='t-l' value='{{customerInfo.name}}' bindblur='fInputName'  placeholder='请输入姓名'></input>
     </view>
@@ -73,9 +73,9 @@
    </view>
 
   <view class='flex custmerinfo-name  c-p-d mg-b b-g'>
-      <view class='f-16 'style='width:30%;' ><span style='color:red'>*</span>手机号码</view>
+      <view class='f-16 'style='width:30%;' >手机号码</view>
       <view class='f-16 custmerinfo-input  {{status!=1?"":"hide"}}' style='text-align:right;width:70%;'>
-          <input style='color:#666666;font-size:28rpx' name='phoneNum' class='t-l ' value='{{customerInfo.phoneNum}}' bindtap='showphone' bindblur='fInputMobile'  
+          <input style='color:#666666;font-size:28rpx' name='phoneNum' class='t-l ' value='{{customerInfo.wechatMobile?customerInfo.wechatMobile:customerInfo.phoneNum}}' bindtap='showphone' bindblur='fInputMobile'  
           placeholder='请输入手机号'></input>
       </view>
        <view class='f-14  custmerinfo-input {{status==1?"":"hide"}}' style="width:360rpx">

@@ -4,7 +4,7 @@ function wxRequest() {
  var aArguments=Array.prototype.slice.call(arguments);
  var oParams = {
    header: {
-     'Content-Type': 'application/json'
+     'Content-Type': 'application/json;charset=UTF-8'
    },
  };
  if (aArguments.length==1){

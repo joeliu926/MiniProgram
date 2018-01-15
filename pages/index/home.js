@@ -6,15 +6,14 @@ Page({
    */
   data: {
     showicon: false,
-    searchName: "",
-    cluereMark: "",
-    clueClose: "",
-    customerList: [],
+    searchName: "",//搜索条输入框
+    cluereMark: "",//线索备注
+    clueClose: "",//关闭备注
     autoFocus: false,
     selectItem: [{ id: 0, text: '智能推荐', val: true }, { id: 1, text: '其它', val: false }],
-    currentSelect: 0,
-    moreItem: ['编辑客户', '不再跟进'],
-    menuType: true,
+    currentSelect: 0,//当前tab 已选择内容
+    moreItem: ['编辑客户', '不再跟进'], //更多弹出选项
+    menuType: true,//菜单类型 //true左 fase 右
     shareList: [],
     clueList: [],
     clueListOther: [],
@@ -45,7 +44,7 @@ Page({
     errorMessage: '',
     errorType: false,
     errorColor: "#F76260",//#09BB07  #FFBE00   #F76260
-    linkMansubmit: true,
+    linkMansubmit: true,//联系人是否能提交
     moreWidth: 365,
     startX: 0,
   },
@@ -68,6 +67,11 @@ Page({
       if (disX > 0) {
       } else {
         disX = 365 - Math.abs(disX);
+      }
+
+      //偏移太小不做处理
+      if (disX < 20) {
+        return;
       }
 
       var txtStyle = "";
@@ -115,7 +119,7 @@ Page({
       var moreWidth = that.data.moreWidth;
       var index = e.currentTarget.dataset.index;
       var list = [];
-      if (disX==0){
+      if (disX == 0) {
         return;
       }
       if (this.data.currentSelect) {
@@ -128,9 +132,7 @@ Page({
           return;
         }
       }
-
-     
-      if (disX > 0) {
+      if (disX > 50) {
         this.itemMove(index, 'left', endX);
       }
       else {
@@ -172,14 +174,19 @@ Page({
         startX: 0
       });
     }
-
     return;
-
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.type && options.type == 'share') {
+      this.menuClick({
+        currentTarget: {
+          dataset: { type: '3' }
+        }
+      });
+    }
     if (options.init) {
       // getApp().globalData.flag=false;
     }
@@ -190,7 +197,7 @@ Page({
         oUInfo: result
       });
       _This.getClueList();
-     // _This.getClueList('initOther');
+      // _This.getClueList('initOther');
       _This.getShareList();
     });
   },
@@ -231,7 +238,7 @@ Page({
             wx.hideLoading();
           }, 1000);
 
-          
+
           this.setData({
             clueNoOther: this.data.clueNoOther + 1
           });
@@ -256,7 +263,7 @@ Page({
           setTimeout(function () {
             _this.getClueList();
           }, 200);
- 
+
         }
       }
     }
@@ -352,14 +359,14 @@ Page({
       this.setData({
         searchName: '',
         clueListOther: [],
-        clueNoOther:1,
+        clueNoOther: 1,
         showicon: false
       });
     } else {
       this.setData({
         searchName: '',
         clueList: [],
-        clueNo:1,
+        clueNo: 1,
         showicon: false
       });
     }
@@ -557,13 +564,13 @@ Page({
     if (this.data.currentSelect) {
       this.setData({
         clueListOther: [],
-        clueNoOther:1
+        clueNoOther: 1
       });
 
     } else {
       this.setData({
         clueList: [],
-        clueNo:1
+        clueNo: 1
       });
     }
     this.getClueList();
@@ -576,11 +583,6 @@ Page({
     var dataset = params.currentTarget.dataset;
     this.data.selectItem.forEach(item => {
       if (item.id == dataset.id) {
-        this.setData({
-          currentSelect: dataset.id
-        });
-        item.val = true;
-
         if (dataset.id) {
           this.setData({
             searchName: '',
@@ -596,9 +598,11 @@ Page({
             showicon: false
           });
         }
-
-
-         this.getClueList();
+        this.setData({
+          currentSelect: dataset.id
+        });
+        item.val = true;
+        this.getClueList();
       }
       else {
         item.val = false;
@@ -608,7 +612,7 @@ Page({
       searchName: "",
       selectItem: this.data.selectItem
     });
-  
+
   },
   searchBtn() {
     this.setData({
@@ -639,7 +643,6 @@ Page({
   linkchangeName(e) {
     let _linkman = this.data.linkMan;
     _linkman.name = e.detail.value;
-
     this.regixlinkman();
     this.setData({
       linkMan: _linkman
@@ -655,7 +658,6 @@ Page({
   linkchangephone(e) {
     let _linkman = this.data.linkMan;
     _linkman.phoneNum = e.detail.value;
-
     this.regixlinkman();
     this.setData({
       linkMan: _linkman
@@ -670,6 +672,7 @@ Page({
   },
   //菜单点击
   menuClick(params) {
+    console.log('params', params);
     switch (params.currentTarget.dataset.type) {
       case "1":
         this.setData({
@@ -893,7 +896,7 @@ Page({
     var _This = this;
     let pdata = { unionid: unionid };
     wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
-  
+
       if (result.data.code != 0 || result.data.data.type != "1") {
         _This.setData({
           showData: 1

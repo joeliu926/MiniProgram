@@ -106,15 +106,18 @@ Page({
     }
   },
   touchE: function (e) {
-    var that = this
+    var that = this;
+
+
     if (e.changedTouches.length == 1) {
       var endX = e.changedTouches[0].clientX;
       var disX = that.data.startX - endX;
       var moreWidth = that.data.moreWidth;
       var index = e.currentTarget.dataset.index;
-
       var list = [];
-
+      if (disX==0){
+        return;
+      }
       if (this.data.currentSelect) {
         list = this.data.clueListOther;
       } else {
@@ -126,7 +129,7 @@ Page({
         }
       }
 
-
+     
       if (disX > 0) {
         this.itemMove(index, 'left', endX);
       }

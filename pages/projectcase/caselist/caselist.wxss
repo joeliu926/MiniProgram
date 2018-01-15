@@ -401,9 +401,8 @@ button::after {
 .selBtn {
   width:44rpx;
   height:44rpx;
-  background: red;
   position: fixed; 
-  top:30rpx;
+  top:20rpx;
   right:0rpx;
   /* bottom: 20rpx; */
   /* left: 50%; */

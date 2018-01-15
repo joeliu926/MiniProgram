@@ -49,6 +49,7 @@ Page({
     moreWidth: 365,
     startX: 0,
   },
+  //移动开始
   touchS: function (e) {
     if (e.touches.length == 1) {
       this.setData({
@@ -56,6 +57,7 @@ Page({
       });
     }
   },
+  //移动
   touchM: function (e) {
     var that = this
     if (e.touches.length == 1) {
@@ -89,11 +91,8 @@ Page({
         if (_disx < 0) {
           return;
         }
-
       }
-
       list[index].txtStyle = txtStyle;
-
       if (this.data.currentSelect) {
         this.setData({
           clueListOther: list
@@ -105,6 +104,7 @@ Page({
       }
     }
   },
+  //移动结束
   touchE: function (e) {
     var that = this;
 
@@ -230,6 +230,8 @@ Page({
           setTimeout(function () {
             wx.hideLoading();
           }, 1000);
+
+          
           this.setData({
             clueNoOther: this.data.clueNoOther + 1
           });
@@ -314,6 +316,7 @@ Page({
     }
 
   },
+  //打开线索详情
   openItem(params) {
     var dataset = params.currentTarget.dataset;
     wx.navigateTo({
@@ -806,12 +809,13 @@ Page({
       userUnionId: _This.data.oUInfo.unionId || "",
       group: this.data.currentSelect,
       searchName: this.data.searchName,
-      pageNo: this.data.currentSelect ? this.data.clueNo : this.data.clueNoOther,
+      pageNo: this.data.currentSelect ? this.data.clueNoOther : this.data.clueNo,
       pageSize: this.data.pageSize
     };
     wxRequest(wxaapi.index.cluelist.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         let getArray = result.data.data.list;
+
         getArray.forEach(m => {
           let slist = [];
           m.productList.forEach((sm, index) => {
@@ -819,8 +823,6 @@ Page({
               slist.push(sm);
             }
           });
-
-
           let cname = m.customerName;
           if (!cname) {
             cname = m.customerWxNickname;
@@ -840,7 +842,6 @@ Page({
           _This.setData({ clueCount: result.data.data.count });
         }
       }
-
       wx.hideLoading();
     });
   },
@@ -892,7 +893,7 @@ Page({
     var _This = this;
     let pdata = { unionid: unionid };
     wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
-      console.log(' result.data.data.type', result.data.data);
+  
       if (result.data.code != 0 || result.data.data.type != "1") {
         _This.setData({
           showData: 1

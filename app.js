@@ -3,19 +3,22 @@ const wxRequest = require('./utils/js/wxRequest.js');
 const wxPromise = require('./utils/js/wxPromise.js');
 App({
   onLaunch: function () {
-    this.getUserData();
+    //this.getUserData();
   },
   globalData: {
    userInfo: null,
    flag: false  
   },
  getUserData:function(callback){
+
    if (this.globalData.userInfo&&this.globalData.userInfo.unionId){
      if (callback) {
+       console.log("exist-------->");
        callback(this.globalData.userInfo);
      }
      return false;
    };
+   console.log("data not exist------>");
    let sessionKey="";
    wxPromise(wx.login)().then(result => {
      let ucode = result.code;

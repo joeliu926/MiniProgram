@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isAddShare:false,//是否加入分享
     oUserInfo: {},
     consultationId: "",
     caseList: [
@@ -91,7 +92,7 @@ Page({
         caseIds: caseIds || "",
         projectName: options.iname,
         productCode: options.itemid,
-        cstUid: caseIds ? options.cstUid : uinfo.unionId,
+        cstUid: uinfo.unionId,
         oUserInfo: uinfo,
         consultationId: options.consultationId || "",
         likeItem: "",
@@ -102,15 +103,6 @@ Page({
         sSelect: itemids,
       });
       _This.fGetCaseList(uinfo);//获取案例
-      if ((!caseIds || caseIds.length <= 0)) {
-        //  options.itemid=2;
-        _This.fGetConsultationId(options.itemids, function (result) {
-          _This.setData({
-            consultationId: result || "",
-          });
-          _This.fUserEvent(event.eType.appShare);
-        });
-      }
     });
     //设置第一个项目是选中的；
     this.data.arrData[0].changeColor = '#9083ed';
@@ -190,8 +182,6 @@ Page({
       title: '案例分享',
       path: '/pages/client/ccase/ccase?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
       success: function (res) {
-
-        console.log("5555555555555555555");
         wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
           // console.log("000000000000000000000000===>", result);
           if (result.data.code == 0) {
@@ -218,6 +208,17 @@ Page({
    * 咨询师改变分享的条目  加入分享
    */
   fChangeShare(e) {
+
+    let _This=this;
+    if (!_This.data.isAddShare){
+      _This.fGetConsultationId(_This.data.itemids.join(","), function (result) {
+        _This.setData({
+          consultationId: result || "",
+          isAddShare:true
+        });
+        _This.fUserEvent(event.eType.appShare);
+      });
+    }
     var prodcutcodearr = this.data.productcodes;
     var citem = e.currentTarget.dataset.itemid;
     var cindex = e.currentTarget.dataset.indexi;

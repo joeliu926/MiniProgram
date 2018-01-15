@@ -12,7 +12,7 @@
         <div class='top-book' bindtap='bookOption'>{{bookName=='去预约'?bookName:"已预约"}}</div>
       </div>
       <div class='top-imgdiv'>
-        <image class='top-img' src='{{clueDetail.customerLogo||"../../../public/images/defimag.png"}}'></image>
+        <image class='top-img' src='{{clueDetail.customerLogo.length<5?"../../../public/images/defimag.png":clueDetail.customerLogo}}'></image>
       </div>
     </div>
     <div>

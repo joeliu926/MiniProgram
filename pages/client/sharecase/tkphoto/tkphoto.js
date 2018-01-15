@@ -167,7 +167,7 @@ Page({
     this.fUserEvent(event.eType.appQuit);//退出页面
     getApp().globalData.flag = true;
     wx.reLaunch({
-      url: '../../../home/home',
+      url: '/pages/index/home',
     })
   },
   /*
@@ -244,6 +244,7 @@ Page({
       sessionId: _This.data.consultationId//会话id
     };
     wxRequest(wxaapi.consult.getpostphoto.url, postData).then(function (result) {
+      console.log("get photo result---------->", result);
       if (result.data.code == 0) {
         _This.setData({
           frontface: result.data.data.positiveFace,

@@ -49,6 +49,7 @@ App({
    let _This =this;
    let sessionKey=getApp().globalData.sessionKey;
    wxPromise(wx.checkSession)().then(result => {
+     console.log("checkout sessioon--------->",result);
      if (!firstType&&result.errMsg.indexOf("ok") > 0) {
        callback(sessionKey);
      } else {

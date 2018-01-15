@@ -192,7 +192,6 @@ Page({
     wx.showLoading({
       title: '授权中...',
     });
-    console.log("encryptedData----->", e);
     let eDetail = e.detail;
     if (!eDetail.encryptedData) {
       wx.hideLoading();
@@ -246,33 +245,30 @@ Page({
    */
   fAuthorization(eDetail,callback){
     let _This=this;
-    let sessionKey = "";
-    wxPromise(wx.login)().then(result => {
-      let ucode = result.code;
-      return wxRequest(wxaapi.unionid.code.url, { code: ucode });
-    }).then(resSession => {
-      let sessionKey = resSession.data.session_key;
-      var postData = {
-        encryptedData: eDetail.encryptedData,
-        sessionKey: sessionKey, 
-        iv: eDetail.iv
-      };
-      console.log("postData----->", postData);
-      return wxRequest(wxaapi.unionid.userinfo.url, postData);
-    }).then(resPhone => {
-      console.log("resPhone----->", resPhone);
-      console.log("time count-------",eDetail.times);
-      if (resPhone.data.userinfo){
-        callback && callback(resPhone.data.userinfo.phoneNumber); 
-      }else{
-        eDetail.times++;
-        if (eDetail.times>4){
-          callback && callback(false);
-          return false;
+    getApp().fGetSessionKey(false, function (sessionKey) {
+        var postData = {
+          encryptedData: eDetail.encryptedData,
+          sessionKey: sessionKey,
+          iv: eDetail.iv
+        };
+        wxRequest(wxaapi.unionid.userinfo.url, postData).then(resPhone => {
+        if (resPhone.data.userinfo) {
+          callback && callback(resPhone.data.userinfo.phoneNumber);
+        } else {
+          eDetail.times++;
+          if (eDetail.times > 4) {
+            callback && callback(false);
+            return false;
+          }
+          setTimeout(function () {
+            _This.fAuthorization(eDetail, callback);
+          }, 2000);
+
         }
-        _This.fAuthorization(eDetail, callback);
-      }
+      });
     });
+
+
   },
   /**
  * 获取用户上传的图片

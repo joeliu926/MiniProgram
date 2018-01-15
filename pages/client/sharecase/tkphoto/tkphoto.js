@@ -244,12 +244,19 @@ Page({
       sessionId: _This.data.consultationId//会话id
     };
     wxRequest(wxaapi.consult.getpostphoto.url, postData).then(function (result) {
-      console.log("get photo result---------->", result);
+      console.log("get photo result---------->", postData,result);
       if (result.data.code == 0) {
         _This.setData({
           frontface: result.data.data.positiveFace,
           sideface: result.data.data.sideFace
         });
+        setTimeout(function(){ 
+          _This.setData({
+            frontface: result.data.data.positiveFace,
+            sideface: result.data.data.sideFace
+          });
+        },2000);
+
       } else {
         console.log("add  event error---", result);
       }

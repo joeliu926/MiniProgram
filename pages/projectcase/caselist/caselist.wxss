@@ -408,7 +408,7 @@ button::after {
   /* left: 50%; */
   /* margin-left: -215rpx; */
   /* margin-left: -80rpx; */
-  z-index: 100;
+  z-index: 50;
 }
 .btn-up{
   width:44rpx;

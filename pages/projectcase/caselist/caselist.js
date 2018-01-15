@@ -86,6 +86,9 @@ Page({
     var _This = this;
     var itemids = options.itemids.split(",");
     var caseIds = options.caseIds;
+
+
+
     getApp().getUserData(function (uinfo) {
       _This.setData({
         isConsult: caseIds ? false : true,
@@ -168,7 +171,7 @@ Page({
 
     let shareData = {
       cases: _This.data.aCaseIds,//案例列表Id
-      consultingId: _This.data.oEvent.eventAttrs.consultingId,//会话id
+      consultingId: _This.data.consultationId,//会话id
       consultantUnionid: _This.data.oUserInfo.unionId,//咨询师unionid
       products: _This.data.productcodes,//项目列表id  [3002,3025,3028]
     };
@@ -182,6 +185,8 @@ Page({
       title: '案例分享',
       path: '/pages/client/ccase/ccase?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
       success: function (res) {
+        //console.log("shareData------->", shareData);
+        _This.fUserEvent(event.eType.appShare);
         wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
           // console.log("000000000000000000000000===>", result);
           if (result.data.code == 0) {
@@ -216,7 +221,7 @@ Page({
           consultationId: result || "",
           isAddShare:true
         });
-        _This.fUserEvent(event.eType.appShare);
+    
       });
     }
     var prodcutcodearr = this.data.productcodes;
@@ -282,6 +287,7 @@ Page({
       productCode: sItem,
       wxNickName: _This.data.oUserInfo.nickName,
     };
+    console.log("pdata--------------------",pdata);
     wxRequest(wxaapi.consult.add.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         callback(result.data.data);

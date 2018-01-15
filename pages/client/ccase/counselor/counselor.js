@@ -14,7 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("options---->", options);
+    //console.log("options---->", options);
      this.setData({
        cstUid: options.cstUid
      });
@@ -30,7 +30,7 @@ Page({
       unionid: _This.data.cstUid,
     };
     wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
-      console.log("get consult detail result---->", result);
+      //console.log("get consult detail result---->", result);
       if (result.data.code == 0) {
          _This.setData({
            oCstData:result.data.data

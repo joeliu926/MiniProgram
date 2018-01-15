@@ -6,7 +6,8 @@ function wxPromise(fn) {
       }
       obj.fail = function (res) {
         console.log("get data error--------");
-        reject(res);
+        //reject(res);
+        resolve(res);
       }
       fn(obj);
     })

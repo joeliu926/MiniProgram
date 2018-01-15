@@ -1,35 +1,23 @@
 var gConfig={
  /****production start*****/
-
   //remote:"https://nihaomc.com/wxa",
-
   //uploadUrl: "https://nihaomc.com/uploadimg/attachment/upload",
-
   //remoteWx: "https://nihaomc.com/wx",
- /****production end*****/
+  /****production end*****/
 
 
   /****uat start*****/
-
    remote:"https://nihaomc.com/wxa_test",
    uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload",
    remoteWx: "https://nihaomc.com/wx_test",
-
   /****uat end*****/
  
  
   /****dev start*****/
-
-
   //remoteWx: "https://nihaomc.com/wx",
   //remote: "https://nihaomc.com/wxa_dev",
   //uploadUrl: "https://nihaomc.com/uploadimg_dev/attachment/upload"
-
   /****dev end*****/
-
-
-
-
 }
 var urlConfig = {
   img:{

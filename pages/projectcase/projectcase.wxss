@@ -91,7 +91,7 @@ page {
   bottom: 40rpx;
   left: 50%;
   margin-left: -215rpx;
-  z-index: 100;
+  z-index: 50;
 }
 
 .selend {
@@ -124,7 +124,7 @@ button::after {
   font-size: 28rpx;
   text-align: center;
   color: #fff;
-  z-index: 100;
+  z-index: 1000!important;
 }
 
 .tip {

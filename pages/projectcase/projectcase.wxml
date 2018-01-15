@@ -23,7 +23,7 @@
     <button class="selend f-16 {{isactive?'active':''}} " style="display: {{projectItems.length!=0?'block':'none'}}" size="mini" bindtap="selectItems">选好了      </button>
   </view>
   <!--没有数据的术后 -->
-  <view class="noData" style='display:{{allarr.length==0?"block":"none"}};  position:absolute; top:0rpx; left:0rpx;'>
+  <view class="noData" style='display:{{projectItems.length==0?"block":"none"}};  position:absolute; top:0rpx; left:0rpx;'>
     <div class="list-none">
       <div class="list-none-div">
           <image style="vertical-align:middle;" class='nodata-img' src='../../../public/images/no_data.png'></image>

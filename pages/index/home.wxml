@@ -2,7 +2,7 @@
 <div style="height:70rpx;line-height:70rpx;display:{{errorType?'block':'none'}};position:fixed;top:0rpx;z-index:1000;left:0rpx;width:100%; background-color:{{errorColor}};text-align:center;font-size:30rpx;color:white;vertical-align:middle;margin-top:0rpx;">
     {{errorMessage}}
 </div>
-<!--线索例表-->
+<!--线索例表-搜索-->
 <view class='h-ct b-s' style='display:{{showData==0?"":"none"}};background-color:white;margin-top:0rpx;'>
   <view class='search' style='display:{{menuType?"":"none"}}'>
     <div class="search-type">
@@ -20,7 +20,7 @@
     </div>
   </view>
 
-  <!--线索列表-->
+  <!--线索列表-推荐-->
   <view style='display:{{menuType&&!currentSelect?"block":"none"}};background-color:white;'>
  
     <view   wx:for="{{clueList}}" wx:for-item="oitem" wx:key="id" class="list">
@@ -61,7 +61,7 @@
     <view style='display:block;height:100rpx;background-color:white;margin-top:10rpx; font-size:26rpx;text-align:center;'>
     </view>
   </view>
-
+  <!--线索列表-其它-->
   <view style='display:{{menuType&&currentSelect?"block":"none"}};background-color:white;'>
       <view class="list" wx:for="{{clueListOther}}" wx:for-item="oitem" wx:key="id">
         <div class="list-body"  style="{{oitem.txtStyle}}"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"  data-index="{{index}}">

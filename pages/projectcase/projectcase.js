@@ -182,17 +182,22 @@ Page({
           })
         })
         _This.setData({
-          projectItems: result.data.data,//, []
+          projectItems: result.data.data,// result.data.data,//, []
           allarr: everyarr//
         });
-        
-      } else {
-       
         if (_This.data.projectItems.length == 0) {
           _This.setData({
             Show: 'true',
           });
         }  
+        
+      } else {
+       
+        // if (_This.data.projectItems.length == 0) {
+        //   _This.setData({
+        //     Show: 'true',
+        //   });
+        // }  
         console.log(result);
       }
       wx.hideLoading();

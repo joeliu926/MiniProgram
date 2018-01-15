@@ -196,8 +196,13 @@ Page({
           }
           wx.hideLoading();
         });
+        // console.log("===5555555555555555555============")
+        wx.navigateTo({
+          url: '../../index/home?type=share'
+        })
       }
     }
+   
   },
   /**
    * 案例详情

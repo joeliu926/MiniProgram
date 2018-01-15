@@ -10,6 +10,9 @@ App({
    flag: false, 
    sessionKey:"" 
   },
+  /**
+   * 获取用户登录信息
+   */
  getUserData:function(callback){
 
    if (this.globalData.userInfo&&this.globalData.userInfo.unionId){
@@ -39,6 +42,9 @@ App({
    });
 
  },
+ /**
+  * 获取sessionKey
+  */
  fGetSessionKey: function (firstType,callback){
    let _This =this;
    let sessionKey=getApp().globalData.sessionKey;

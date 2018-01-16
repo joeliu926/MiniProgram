@@ -583,11 +583,6 @@ Page({
     var dataset = params.currentTarget.dataset;
     this.data.selectItem.forEach(item => {
       if (item.id == dataset.id) {
-        this.setData({
-          currentSelect: dataset.id
-        });
-        item.val = true;
-
         if (dataset.id) {
           this.setData({
             searchName: '',
@@ -603,8 +598,10 @@ Page({
             showicon: false
           });
         }
-
-
+        this.setData({
+          currentSelect: dataset.id
+        });
+        item.val = true;
         this.getClueList();
       }
       else {
@@ -646,7 +643,6 @@ Page({
   linkchangeName(e) {
     let _linkman = this.data.linkMan;
     _linkman.name = e.detail.value;
-
     this.regixlinkman();
     this.setData({
       linkMan: _linkman
@@ -662,7 +658,6 @@ Page({
   linkchangephone(e) {
     let _linkman = this.data.linkMan;
     _linkman.phoneNum = e.detail.value;
-
     this.regixlinkman();
     this.setData({
       linkMan: _linkman

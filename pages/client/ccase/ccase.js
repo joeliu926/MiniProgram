@@ -87,7 +87,7 @@ Page({
         productCode: options.itemid,
         cstUid: options.cstUid || uinfo.unionId,
         oUserInfo: uinfo,
-        consultationId: options.consultationId || "1616",
+        consultationId: options.consultationId || "2457",
         likeItem: "",
         shareEventId: options.shareEventId || "",
         oEvent: event.oEvent
@@ -441,6 +441,9 @@ Page({
       positiveFace: "",
       sideFace: ""
     };
+    if (_This.data.currentLikeState){
+       return false;
+    }
     wxRequest(wxaapi.consult.handelsharecase.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         let currentLikeState = _This.data.currentLikeState;

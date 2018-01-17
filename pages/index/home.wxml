@@ -226,7 +226,7 @@
   </div>
   <div>
     <div class="close-content">
-      <textarea class='s-input f-16 close-area' bindinput="closeinput"  name="clueClose" value="{{clueClose}}" placeholder='补充关闭线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:30rpx;color:#999999;'></textarea>
+      <textarea class='s-input f-16 close-area' bindinput="closeinput"  name="clueClose" value="{{clueClose}}" placeholder='补充备注' placeholder-class='f-12 c-9' placeholder-style='font-size:30rpx;color:#999999;'></textarea>
     </div>
     <div class='submit-btn'>
       <div style='{{clueClose.length<1?"background:#E5E5E5;":""}}' bindtap='submitClose'>提交</div>

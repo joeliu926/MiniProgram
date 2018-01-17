@@ -44,7 +44,7 @@
                <view class='img-c b-s'   style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreview'></view>
                </block>
             </view>
-            <view><view class='f-14 com-left'>{{oContent.description}}</view></view>
+            <view style="padding-top:20rpx;"><view class='f-14 com-left'>{{oContent.description}}</view></view>
              <view class='f-14 com-left'>{{cutil.formatTime(oContent.definitionDate,"yyyy-MM-dd")}}</view>
           </view>
         </view>
@@ -81,10 +81,10 @@
    <image  class='t-photo' style=''  src='../../../public/images/tk-photo-icon.png' ></image>
    <view wx:if="{{picCount>0}}" class='f-14 b-s flex-c tip-pic-count' style=''><text>{{picCount}}</text></view>
 </view>
-<view class='tip-font f-14 {{oUserInfo.wechatMobile?"hide":""}} {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text>开启专属咨询师一对一沟通.</text>
+<view class='tip-font f-14 {{oUserInfo.wechatMobile?"hide":""}} {{(!isEndPage&&isShowTip)?"":"hide"}}' style=''><text>开启专属顾问一对一沟通.</text>
  <view class='dp-arr'></view>
 </view>
-  <!------------------right icon start-------------------->
+<!------------------right icon start-------------------->
 
 
 <!------------------end page start-------------------->

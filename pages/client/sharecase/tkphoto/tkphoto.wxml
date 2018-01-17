@@ -34,7 +34,7 @@
 <view class='mask {{isShowMask?"":"hide"}}'>
      <view class='pop-box flex-c fx-d-col'>
        <text class='f-16 tex-pd'>上传成功！</text>
-       <text class='f-14 tex-pd'>授权手机号，开启专属咨询师沟通</text>
+       <text class='f-14 tex-pd'>授权手机号，开启专属医生顾问沟通</text>
        <button class='f-14 auth-tel'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">去授权</button>
      </view>
 </view>

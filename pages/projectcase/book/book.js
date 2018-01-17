@@ -102,6 +102,7 @@ Page({
      
     // });
     getApp().getUserData(function (uinfo) {
+ 
       _This.setData({
         oUserInfo: uinfo,
         // options: options,
@@ -516,12 +517,10 @@ Page({
     };
     //console.log("pdta", pdata)
     wxRequest(wxaapi.customer.getcustomer.url, pdata).then(function (result) {
-      console.log("single==00000--user info===>", result);
       if (result.data.code == 0) {
+        result.data.data.phoneNum = result.data.data.phoneNum ? result.data.data.phoneNum:result.data.data.wechatMobile;
         _This.setData({
           customerInfo: result.data.data,
-         // clueRemarkBk: cutil.formatTime(new Date(), "yyyy-MM-dd") + "-" + (result.data.data.name || result.data.data.nickname || "-")
-
         });
      //   _This.fClueDetail();
       } else {

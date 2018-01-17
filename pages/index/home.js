@@ -818,7 +818,6 @@ Page({
     wxRequest(wxaapi.index.cluelist.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         let getArray = result.data.data.list;
-
         getArray.forEach(m => {
           let slist = [];
           m.productList.forEach((sm, index) => {

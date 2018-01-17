@@ -75,7 +75,7 @@
   <view class='flex custmerinfo-name  c-p-d mg-b b-g'>
       <view class='f-16 'style='width:30%;' >手机号码</view>
       <view class='f-16 custmerinfo-input  {{status!=1?"":"hide"}}' style='text-align:right;width:70%;'>
-          <input style='color:#666666;font-size:28rpx' name='phoneNum' class='t-l ' value='{{customerInfo.wechatMobile?customerInfo.wechatMobile:customerInfo.phoneNum}}' bindtap='showphone' bindblur='fInputMobile'  
+          <input style='color:#666666;font-size:28rpx' name='phoneNum' class='t-l ' value='{{customerInfo.phoneNum}}' bindtap='showphone' bindblur='fInputMobile'  
           placeholder='请输入手机号'></input>
       </view>
        <view class='f-14  custmerinfo-input {{status==1?"":"hide"}}' style="width:360rpx">
@@ -147,8 +147,6 @@
       </view>
       
       </view>
-
-         
       </view>
    </view>
 </view>  
@@ -164,13 +162,3 @@
     </div>
 </view>
 </view>
- <!-- <view>
-   <view wx:for="{{testlist}}" wx:for-item="oitem" wx:key="id">
-        <text class=' {{jSelect.includes(oitem.id)?"case-sele":""}}'  bindtap='selectTitle'>{{oitem.name}}</text></view>
-  </view>  -->
-  <!-- 列表{{getClass(oitem)}} -->
-   <!-- <view>
-   <view wx:for="{{testlist}}" wx:for-item="oitem" wx:key="id">
-        <text data-id='{{oitem.id}}' data-name='{{oitem.name}}' data-show='{{oitem.show}}'  class='{{bookUtil.eventColor(oitem,testlisted)}}'  bindtap='selectpro'  >{{oitem.name}}</text></view>
-  </view>  -->
-  

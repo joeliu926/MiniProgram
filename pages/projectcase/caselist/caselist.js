@@ -111,6 +111,9 @@ Page({
     this.data.arrData[0].changeColor = '#9083ed';
     this.setData({
       arrData: this.data.arrData
+    });
+    wx.showShareMenu({
+      withShareTicket: true //要求小程序返回分享目标信息
     })
   },
   /*
@@ -174,6 +177,7 @@ Page({
       consultingId: _This.data.consultationId,//会话id
       consultantUnionid: _This.data.oUserInfo.unionId,//咨询师unionid
       products: _This.data.productcodes,//项目列表id  [3002,3025,3028]
+      type: 3//  1朋友圈 2分享到群 3分享到好友
     };
     // _This.fUserEvent(event.eType.appShare); //咨询师分享事件
     var caseIds = _This.data.caseIds;
@@ -185,8 +189,12 @@ Page({
       title: '案例分享',
       path: '/pages/client/ccase/ccase?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
       success: function (res) {
-        //console.log("shareData------->", shareData);
+        console.log("shareData---result---->", res);
         _This.fUserEvent(event.eType.appShare);
+        
+        if (res.shareTickets){
+          shareData.type = 2;//2分享到微信群   
+        }
         wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
           // console.log("000000000000000000000000===>", result);
           if (result.data.code == 0) {
@@ -201,8 +209,7 @@ Page({
           url: '../../index/home?type=share'
         })
       }
-    }
-   
+    } 
   },
   /**
    * 案例详情

@@ -8,6 +8,7 @@ Page({
    */
   data: {
     isAddShare:false,//是否加入分享
+    isShare:false,//是否分享
     oUserInfo: {},
     consultationId: "",
     caseList: [
@@ -299,7 +300,6 @@ Page({
       productCode: sItem,
       wxNickName: _This.data.oUserInfo.nickName,
     };
-    console.log("pdata--------------------",pdata);
     wxRequest(wxaapi.consult.add.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         callback(result.data.data);
@@ -536,8 +536,42 @@ Page({
       arrData: this.data.arrData,
       isConsult: !_This.data.isConsult,
     })
-
   },
+  /**
+   * 生成海报
+   */
+  fGeneratePost(){
+    let _This=this;
+    let caseIds = _This.data.caseIds||"";
+    let cstUid = _This.data.cstUid;
+    let itemid = _This.data.productCode||"";
+    let consultationId = _This.data.consultationId;
+    let shareEventId = _This.data.shareEventId;
+    _This.setData({
+      isShare: false
+    });
+    wx.navigateTo({
+      url: `/pages/projectcase/post/post?caseIds=${caseIds}&cstUid=${cstUid}&itemid=${itemid}&consultationId=${consultationId}&shareEventId=${shareEventId}`,
+    })
+  },
+  /**
+   * 加入分享
+   */
+  fAddToShare(){
+    let _This = this;
+    _This.setData({
+      isShare: true
+    });
+  },
+  /**
+   * 取消分享
+   */
+  fCancelShare(){
+    let _This=this;
+    _This.setData({
+      isShare:false
+    });
+  }
 
 
 

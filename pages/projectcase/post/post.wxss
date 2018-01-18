@@ -1,0 +1,63 @@
+.post-ct{
+  box-sizing: border-box;
+  background:#ffffff;
+  overflow-y: scroll;
+}
+.c-b-d{
+border: 1rpx solid rebeccapurple;
+}
+.post-img{
+  height: 700px;
+}
+
+.qr-logo{
+  width: 120rpx;
+  height: 120rpx;
+}
+.logo-ct{
+  height: 200rpx;
+  justify-content: flex-start;
+}
+.f-26{
+  font-size: 26rpx;
+  color: #333333;
+}
+.logo-pd{
+  padding: 40rpx;
+}
+.select-ct{
+  background: rgba(0,0,0,0.6);
+  position: absolute;
+  bottom: 0;
+}
+.h-ct{
+  overflow-x: scroll;
+white-space:nowrap;
+}
+.h-scrol{
+  display: inline-block;
+  color: #ffffff;
+  padding: 8rpx 40rpx;
+
+}
+.save-btn{
+  background: #9083ed;
+  color: #ffffff;
+  width: 200rpx;
+  text-align: center;
+}
+.v-ct{
+  padding:10px 20px;
+  height: 100px;
+  overflow: scroll;
+  background: rgba(0,0,0,0.8);
+  position: relative;
+}
+.post-logo{
+  width: 79px;
+  height:79px;
+}
+.v-scrol{
+   display: inline-block;
+   margin: 4rpx 4rpx 10rpx 0;
+}

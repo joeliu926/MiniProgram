@@ -514,7 +514,7 @@ Page({
     oData.code = eType;
 
     // console.log("app get into-----", oData);
-    wxRequest(wxaapi.event.add.url, oData).then(function (result) {
+    wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
       //console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
 

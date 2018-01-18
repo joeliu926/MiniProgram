@@ -418,15 +418,44 @@ button::after {
   overflow: hidden;
 }
 /*选中的状态*/
-
 .active {
   background-color: #9083ed;
   color: #fff;
 }
-
 /*不可用状态*/
-
 .unable {
   background-color: #f7f7f7;
   color: #999;
+}
+
+/*****分享弹出层*****/
+.share-layer{
+  position: absolute;
+
+  bottom: 0;
+  background: #ffffff;
+  box-shadow: 0 0 10rpx #eee;
+}
+.end-share-img{
+  height: 100rpx;
+  width: 100rpx;
+}
+.share-content{
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.share-b-btn{
+  background:none;
+  position: relative;
+}
+.btn-ct{
+  padding: 30rpx 0 20rpx 0;
+}
+.cancel-btn{
+  padding: 30rpx 0;
+  border-top: 2rpx solid #dddddd;
 }

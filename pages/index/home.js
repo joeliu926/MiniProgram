@@ -10,19 +10,22 @@ Page({
     cluereMark: "",//线索备注
     clueClose: "",//关闭备注
     autoFocus: false,
-    selectItem: [{ id: 0, text: '智能推荐', val: true }, { id: 1, text: '其它', val: false }],
+    selectItem: [{ id: 0, text: '智能推荐', val: true }, { id: 2, text: '已预约', val: false }, { id: 1, text: '其它', val: false }],
     currentSelect: 0,//当前tab 已选择内容
     moreItem: ['编辑客户', '不再跟进'], //更多弹出选项
     menuType: true,//菜单类型 //true左 fase 右
     shareList: [],
     clueList: [],
     clueListOther: [],
+    clueListOrder: [],
     oUInfo: {},
     showData: 0,
     clueNo: 1,
     clueCount: 0,
     clueNoOther: 1,
     clueCountOther: 0,
+    clueNoOrder: 1,
+    clueCountOrder: 0,
     shareNo: 1,
     shareCount: 0,
     pageSize: 10,
@@ -86,26 +89,44 @@ Page({
       var index = e.currentTarget.dataset.index;
       var list = [];
 
-      if (this.data.currentSelect) {
-        list = this.data.clueListOther;
-      } else {
-        list = this.data.clueList;
-      }
+      switch (this.data.currentSelect) {
+        case 0:
+          list = this.data.clueList;
+          break;
+        case 1:
+          list = this.data.clueListOther;
+          break;
+        case 2:
+          list = this.data.clueListOrder;
+          break;
+      } 
+   
       if (list[index].txtStyle == 'left:0rpx;' || !list[index].txtStyle) {
         if (_disx < 0) {
           return;
         }
       }
       list[index].txtStyle = txtStyle;
-      if (this.data.currentSelect) {
-        this.setData({
-          clueListOther: list
-        });
-      } else {
-        this.setData({
-          clueList: list
-        });
-      }
+
+      switch (this.data.currentSelect) {
+        case 0:
+          this.setData({
+            clueList: list
+          });
+          break;
+        case 1:
+          this.setData({
+            clueListOther: list
+          });
+          break;
+        case 2:
+          this.setData({
+            clueListOrder: list
+          });
+          break;
+      } 
+
+   
     }
   },
   //移动结束
@@ -122,11 +143,20 @@ Page({
       if (disX == 0) {
         return;
       }
-      if (this.data.currentSelect) {
-        list = this.data.clueListOther;
-      } else {
-        list = this.data.clueList;
-      }
+
+      switch (this.data.currentSelect) {
+        case 0:
+          list = this.data.clueList;
+          break;
+        case 1:
+          list = this.data.clueListOther;
+          break;
+        case 2:
+          list = this.data.clueListOrder;
+          break;
+      } 
+
+ 
       if (list[index].txtStyle == 'left:0rpx;' || !list[index].txtStyle) {
         if (disX < 0) {
           return;
@@ -144,11 +174,19 @@ Page({
   itemMove(index, diraction, init) {
 
     let list = [];
-    if (this.data.currentSelect) {
-      list = this.data.clueListOther;
-    } else {
-      list = this.data.clueList;
-    }
+
+    switch (this.data.currentSelect){
+      case 0:
+        list = this.data.clueList;
+      break;
+      case 1:
+        list = this.data.clueListOther;
+      break;
+      case 2:
+        list = this.data.clueListOrder;
+      break;
+    } 
+
 
     if (diraction == 'left') {
       list[index].txtStyle = "left:-365rpx;";
@@ -163,17 +201,27 @@ Page({
       }
     });
 
-    if (this.data.currentSelect) {
-      this.setData({
-        clueListOther: list,
-        startX: 0
-      });
-    } else {
-      this.setData({
-        clueList: list,
-        startX: 0
-      });
-    }
+
+    switch (this.data.currentSelect) {
+      case 0:
+        this.setData({
+          clueList: list,
+          startX: 0
+        });
+        break;
+      case 1:
+        this.setData({
+          clueListOther: list,
+          startX: 0
+        });
+        break;
+      case 2:
+        this.setData({
+          clueListOrder: list,
+          startX: 0
+        });
+        break;
+    } 
     return;
   },
   /**
@@ -197,7 +245,6 @@ Page({
         oUInfo: result
       });
       _This.getClueList();
-      // _This.getClueList('initOther');
       _This.getShareList();
     });
   },
@@ -229,42 +276,65 @@ Page({
    */
   onReachBottom: function () {
     if (this.data.menuType) {
-      if (this.data.currentSelect) {
-        if (this.data.clueNoOther * this.data.pageSize < this.data.clueCountOther) {
-          wx.showLoading({
-            title: 'loading...',
-          });
-          setTimeout(function () {
-            wx.hideLoading();
-          }, 1000);
 
+      switch (this.data.currentSelect)
+      {
+        case 0:
+          if (this.data.clueNo * this.data.pageSize < this.data.clueCount) {
+            wx.showLoading({
+              title: 'loading...',
+            });
+            setTimeout(function () {
+              wx.hideLoading();
+            }, 1000);
+            this.setData({
+              clueNo: this.data.clueNo + 1
+            });
 
-          this.setData({
-            clueNoOther: this.data.clueNoOther + 1
-          });
-          let _this = this;
-          setTimeout(function () {
-            _this.getClueList();
-          }, 200);
-        }
-      } else {
-        if (this.data.clueNo * this.data.pageSize < this.data.clueCount) {
-          wx.showLoading({
-            title: 'loading...',
-          });
-          setTimeout(function () {
-            wx.hideLoading();
-          }, 1000);
-          this.setData({
-            clueNo: this.data.clueNo + 1
-          });
+            let _this = this;
+            setTimeout(function () {
+              _this.getClueList();
+            }, 200);
 
-          let _this = this;
-          setTimeout(function () {
-            _this.getClueList();
-          }, 200);
+          }
+        break;
+        case 1:
+          if (this.data.clueNoOther * this.data.pageSize < this.data.clueCountOther) {
+            wx.showLoading({
+              title: 'loading...',
+            });
+            setTimeout(function () {
+              wx.hideLoading();
+            }, 1000);
 
-        }
+            this.setData({
+              clueNoOther: this.data.clueNoOther + 1
+            });
+            let _this = this;
+            setTimeout(function () {
+              _this.getClueList();
+            }, 200);
+          }
+        break;
+        case 2:
+          if (this.data.clueNoOrder * this.data.pageSize < this.data.clueCountOrder) {
+            wx.showLoading({
+              title: 'loading...',
+            });
+            setTimeout(function () {
+              wx.hideLoading();
+            }, 1000);
+
+            this.setData({
+              clueNoOrder: this.data.clueNoOrder + 1
+            });
+            let _this = this;
+            setTimeout(function () {
+              _this.getClueList();
+            }, 200);
+          }
+
+        break;
       }
     }
     else {
@@ -301,17 +371,7 @@ Page({
   },
   pullRefresh() {
     if (this.data.menuType) {
-      if (this.data.currentSelect) {
-        this.setData({
-          clueNoOther: 1,
-          clueListOther: []
-        });
-      } else {
-        this.setData({
-          clueNo: 1,
-          clueList: []
-        });
-      }
+      this.clearClueList();
       this.getClueList();
     }
     else {
@@ -355,21 +415,13 @@ Page({
   },
   //取消搜索
   closeSearch(params) {
-    if (this.data.currentSelect) {
-      this.setData({
-        searchName: '',
-        clueListOther: [],
-        clueNoOther: 1,
-        showicon: false
-      });
-    } else {
-      this.setData({
-        searchName: '',
-        clueList: [],
-        clueNo: 1,
-        showicon: false
-      });
-    }
+   
+    this.clearClueList();
+    this.setData({
+      searchName: '',
+      showicon: false
+    });
+
     this.getClueList();
     this.closewindow();
   },
@@ -561,20 +613,33 @@ Page({
       });
     }
 
-    if (this.data.currentSelect) {
-      this.setData({
-        clueListOther: [],
-        clueNoOther: 1
-      });
 
-    } else {
-      this.setData({
-        clueList: [],
-        clueNo: 1
-      });
-    }
+    this.clearClueList();
+  
     this.getClueList();
     this.closewindow();
+  },
+  clearClueList(){
+    switch (this.data.currentSelect) {
+      case 0:
+        this.setData({
+          clueList: [],
+          clueNo: 1
+        });
+        break;
+      case 1:
+        this.setData({
+          clueListOther: [],
+          clueNoOther: 1
+        });
+        break;
+      case 2:
+        this.setData({
+          clueListOrder: [],
+          clueNoOrder: 1
+        });
+        break;
+    }
   },
   //tab 选项卡
   selectType(params) {
@@ -808,11 +873,26 @@ Page({
       title: 'loading...',
     });
     let _This = this;
+
+    let _pageNo=0;
+
+    switch (this.data.currentSelect){
+      case 0:
+        _pageNo = this.data.clueNo;
+      break;
+      case 1:
+        _pageNo = this.data.clueNoOther;
+      break;
+      case 2:
+        _pageNo = this.data.clueNoOrder;
+      break;
+    }
+
     let pdata = {
       userUnionId: _This.data.oUInfo.unionId || "",
       group: this.data.currentSelect,
       searchName: this.data.searchName,
-      pageNo: this.data.currentSelect ? this.data.clueNoOther : this.data.clueNo,
+      pageNo: _pageNo,
       pageSize: this.data.pageSize
     };
     wxRequest(wxaapi.index.cluelist.url, pdata).then(function (result) {
@@ -836,13 +916,24 @@ Page({
           m.customerName = cname;
           m.productList = slist;
         });
-        if (_This.data.currentSelect) {
-          _This.setData({ clueListOther: _This.data.clueListOther.concat(getArray) });
-          _This.setData({ clueCountOther: result.data.data.count });
-        } else {
-          _This.setData({ clueList: _This.data.clueList.concat(getArray) });
-          _This.setData({ clueCount: result.data.data.count });
+
+
+        switch (_This.data.currentSelect) {
+          case 0:
+            _This.setData({ clueList: _This.data.clueList.concat(getArray) });
+            _This.setData({ clueCount: result.data.data.count });
+            break;
+          case 1:
+            _This.setData({ clueListOther: _This.data.clueListOther.concat(getArray) });
+            _This.setData({ clueCountOther: result.data.data.count });
+            break;
+          case 2:
+            _This.setData({ clueListOrder: _This.data.clueList.concat(getArray) });
+            _This.setData({ clueCountOrder: result.data.data.count });
+            break;
         }
+
+     
       }
       wx.hideLoading();
     });
@@ -898,7 +989,7 @@ Page({
 
       if (result.data.code != 0 || result.data.data.type != "1") {
         _This.setData({
-          showData: 0
+          showData: 1
         });
         wx.setNavigationBarTitle({ title: '欢颜小助手' })
       }

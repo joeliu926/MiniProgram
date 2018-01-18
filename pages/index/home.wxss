@@ -37,8 +37,8 @@
 
 .search-type-item {
   vertical-align: top;
-  width: 130rpx;
-    height: 100rpx;
+  height: 100rpx;
+  padding: 0 20rpx 0 0;
   display: inline-block;
   text-align: center;
   position: relative;
@@ -59,7 +59,7 @@
   display: inline-block;
   position: absolute;
   bottom: 0rpx;
-  left:42%;
+  left:28%;
 }
 
 .search-type-none {
@@ -128,7 +128,11 @@
   overflow: hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
-  width: 65%;
+  width: 55%;
+}
+
+.list-content-status{
+  font-size:22rpx;border:1rpx solid #4BB9FF;border-radius:10rpx;color:#4BB9FF;vertical-align:top;margin-right:10rpx;padding:0 5rpx;
 }
 
 .list-content-top-l {

@@ -898,7 +898,7 @@ Page({
 
       if (result.data.code != 0 || result.data.data.type != "1") {
         _This.setData({
-          showData: 1
+          showData: 0
         });
         wx.setNavigationBarTitle({ title: '欢颜小助手' })
       }

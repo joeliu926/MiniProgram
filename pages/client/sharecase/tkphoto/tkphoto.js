@@ -320,6 +320,7 @@ Page({
     }
     eDetail.times = 0;
     _This.fAuthorization(eDetail, function (resPhone) {
+      console.log("resPhone--------->",resPhone);
       if (!resPhone) {
         wx.hideLoading();
         _This.setData({

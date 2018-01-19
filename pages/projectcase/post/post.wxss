@@ -2,6 +2,7 @@
   box-sizing: border-box;
   background:#ffffff;
   overflow-y: scroll;
+  padding-bottom: 320rpx;
 }
 .c-b-d{
 border: 1rpx solid rebeccapurple;
@@ -25,19 +26,24 @@ border: 1rpx solid rebeccapurple;
 .logo-pd{
   padding: 40rpx;
 }
+
+
+/***************底部选择********************/
 .select-ct{
-  background: rgba(0,0,0,0.6);
-  position: absolute;
-  bottom: 0;
+   background: rgba(0,0,0,0.8);
+   position: fixed;
+   bottom: 0;
+   height:320rpx;
 }
 .h-ct{
   overflow-x: scroll;
-white-space:nowrap;
+  white-space:nowrap;
 }
 .h-scrol{
   display: inline-block;
   color: #ffffff;
-  padding: 8rpx 40rpx;
+  padding:20rpx;
+  font-size: 28rpx;
 
 }
 .save-btn{
@@ -45,19 +51,28 @@ white-space:nowrap;
   color: #ffffff;
   width: 200rpx;
   text-align: center;
+  padding: 20rpx;
+  font-size: 30rpx;
+  float: right;
 }
 .v-ct{
-  padding:10px 20px;
-  height: 100px;
+  padding:10rpx 20rpx;
+  height: 240rpx;
   overflow: scroll;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.4);
   position: relative;
 }
-.post-logo{
-  width: 79px;
-  height:79px;
-}
+
 .v-scrol{
    display: inline-block;
    margin: 4rpx 4rpx 10rpx 0;
+}
+.img-c{
+  box-sizing: border-box;
+  width: 161rpx;
+  height: 161rpx;
+  margin: 8rpx;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }

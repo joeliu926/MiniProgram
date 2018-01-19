@@ -173,6 +173,29 @@ var urlConfig = {
     linkman: {
       url: gConfig.remote + "/index/linkman"   //联系人信息
     }
+  },
+  posterinfo:{
+    addposter:{
+      url: gConfig.remote + "/posterinfo/addposter"   //新建海报
+    }, 
+    pagelist: {
+      url: gConfig.remote + "/posterinfo/pagelist"   //海报列表查询
+    },
+    posterdel: {
+      url: gConfig.remote + "/posterinfo/posterdel"   //海报删除
+    }
+  },
+  postercategory: {
+    addorupdate: {
+      url: gConfig.remote + "/postercategory/addorupdate"   //添加、修改海报分类
+    }, list: {
+      url: gConfig.remote + "/postercategory/list"   //分类列表查询
+    }
+  },
+  wxaqr:{
+    genwxaqrcode:{
+      url: gConfig.remote + "/wxaqr/genwxaqrcode"
+    }
   }
 }
 module.exports = urlConfig;

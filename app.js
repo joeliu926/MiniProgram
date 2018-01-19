@@ -17,12 +17,12 @@ App({
 
    if (this.globalData.userInfo&&this.globalData.userInfo.unionId){
      if (callback) {
-       console.log("exist-------->");
+      // console.log("exist-------->");
        callback(this.globalData.userInfo);
      }
      return false;
    };
-   console.log("data not exist------>");
+  // console.log("data not exist------>");
    this.fGetSessionKey(true,function (sessionKey){
      //console.log("sessionKey------>", sessionKey);
      wxPromise(wx.getUserInfo)().then(resUserInfo => {
@@ -49,7 +49,7 @@ App({
    let _This =this;
    let sessionKey=getApp().globalData.sessionKey;
    wxPromise(wx.checkSession)().then(result => {
-     console.log("checkout sessioon--------->",result);
+     //console.log("checkout sessioon--------->",result);
      if (!firstType&&result.errMsg.indexOf("ok") > 0) {
        callback(sessionKey);
      } else {

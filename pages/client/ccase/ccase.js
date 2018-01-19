@@ -87,7 +87,7 @@ Page({
         productCode: options.itemid,
         cstUid: options.cstUid || uinfo.unionId,
         oUserInfo: uinfo,
-        consultationId: options.consultationId || "2457",
+        consultationId: options.consultationId || "2491",
         likeItem: "",
         shareEventId: options.shareEventId || "",
         oEvent: event.oEvent
@@ -512,9 +512,7 @@ Page({
     var oData = _This.data.oEvent;
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
-
-    // console.log("app get into-----", oData);
-    wxRequest(wxaapi.event.add.url, oData).then(function (result) {
+    wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
       //console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
 
@@ -548,7 +546,7 @@ Page({
     let tel = _This.data.oUserInfo.wechatMobile || "";//客户idoUserInfo.wechatMobile
     let cid = _This.data.oUserInfo.id;//客户idoUserInfo.wechatMobile
     wx.navigateTo({
-      url: '/pages/client/sharecase/tkphoto/tkphoto?consultantId=' + cstunionid + "&consultationId=" + consultationId + "&clueId=" + clueId + "&shareEventId=" + shareEventId + "&caseId=" + caseId + "&tel=" + tel + "&cid" + cid
+      url: '/pages/client/sharecase/tkphoto/tkphoto?consultantId=' + cstunionid + "&consultationId=" + consultationId + "&clueId=" + clueId + "&shareEventId=" + shareEventId + "&caseId=" + caseId + "&tel=" + tel + "&cid=" + cid
     })
   },
   fGetCaseData() {

@@ -50,12 +50,14 @@ Page({
     linkMansubmit: true,//联系人是否能提交
     moreWidth: 365,
     startX: 0,
+    startY: 0,
   },
   //移动开始
   touchS: function (e) {
     if (e.touches.length == 1) {
       this.setData({
-        startX: e.touches[0].clientX
+        startX: e.touches[0].clientX,
+        startY: e.touches[0].clientY
       });
     }
   },
@@ -65,17 +67,28 @@ Page({
     if (e.touches.length == 1) {
       var moveX = e.touches[0].clientX;
       var disX = that.data.startX - moveX;
+      var moveY = e.touches[0].clientY;
+      var disY = that.data.startY - moveY;
       var moreWidth = that.data.moreWidth;
       let _disx = disX;
-      if (disX > 0) {
+
+      disY = Math.abs(disY);
+      disX = Math.abs(disX);
+
+      //上下滑动不做处理
+      if (disX < disY) {
+        return;
+      }
+    
+      if (_disx > 0) {
       } else {
-        disX = 365 - Math.abs(disX);
+        disX = 365 - disX;
       }
 
       //偏移太小不做处理
-      if (disX < 20) {
-        return;
-      }
+       if (disX < 20) {
+       return;
+       }
 
       var txtStyle = "";
       if (disX == 0 || disX < 0) {
@@ -124,16 +137,12 @@ Page({
             clueListOrder: list
           });
           break;
-      } 
-
-   
+      }
     }
   },
   //移动结束
   touchE: function (e) {
     var that = this;
-
-
     if (e.changedTouches.length == 1) {
       var endX = e.changedTouches[0].clientX;
       var disX = that.data.startX - endX;
@@ -155,7 +164,6 @@ Page({
           list = this.data.clueListOrder;
           break;
       } 
-
  
       if (list[index].txtStyle == 'left:0rpx;' || !list[index].txtStyle) {
         if (disX < 0) {
@@ -170,11 +178,8 @@ Page({
       }
     }
   },
-
   itemMove(index, diraction, init) {
-
     let list = [];
-
     switch (this.data.currentSelect){
       case 0:
         list = this.data.clueList;
@@ -186,7 +191,6 @@ Page({
         list = this.data.clueListOrder;
       break;
     } 
-
 
     if (diraction == 'left') {
       list[index].txtStyle = "left:-365rpx;";
@@ -584,10 +588,6 @@ Page({
     delete linkmandata.wechatMobile;
     let pdata = linkmandata;
 
-    if (linkmandata.name.lenght < 1) {
-      errorMessage
-    }
-
     wxRequest(wxaapi.index.linkmanupdate.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         _This.closewindow();
@@ -644,27 +644,15 @@ Page({
   //tab 选项卡
   selectType(params) {
 
-
     var dataset = params.currentTarget.dataset;
     this.data.selectItem.forEach(item => {
       if (item.id == dataset.id) {
-        if (dataset.id) {
-          this.setData({
-            searchName: '',
-            clueListOther: [],
-            clueNoOther: 1,
-            showicon: false
-          });
-        } else {
-          this.setData({
-            searchName: '',
-            clueList: [],
-            clueNo: 1,
-            showicon: false
-          });
-        }
+        this.clearClueList();
+
         this.setData({
-          currentSelect: dataset.id
+          currentSelect: dataset.id,
+          searchName: '',
+          showicon: false
         });
         item.val = true;
         this.getClueList();
@@ -905,6 +893,9 @@ Page({
               slist.push(sm);
             }
           });
+
+          m.customerName = m.customerName > 5 ? m.customerName.substring(0, 5)+'..' : m.customerName;
+          m.customerWxNickname = m.customerWxNickname > 5 ? m.customerWxNickname.substring(0, 5) + '..' : m.customerWxNickname;
           let cname = m.customerName;
           if (!cname) {
             cname = m.customerWxNickname;
@@ -928,7 +919,7 @@ Page({
             _This.setData({ clueCountOther: result.data.data.count });
             break;
           case 2:
-            _This.setData({ clueListOrder: _This.data.clueList.concat(getArray) });
+            _This.setData({ clueListOrder: _This.data.clueListOrder.concat(getArray) });
             _This.setData({ clueCountOrder: result.data.data.count });
             break;
         }

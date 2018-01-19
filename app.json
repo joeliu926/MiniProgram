@@ -1,6 +1,7 @@
 {
-  "pages": [  
-    "pages/index/home",  
+
+  "pages": [
+    "pages/index/home",
     "pages/projectcase/book/book",
     "pages/index/detail/cluedetail",
     "pages/projectcase/casedetail/casedetail",
@@ -19,12 +20,11 @@
     "pages/projectcase/casetrail/cbooking/cbooking",
     "pages/client/ccase/counselor/counselor",
     "pages/client/ccase/clinicmap/clinicmap"
-    
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarTitleText": "咨询师助手",
-    "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTextStyle": "black"
+     "navigationBarBackgroundColor": "#ffffff",
+     "navigationBarTextStyle": "black"
   }
 }

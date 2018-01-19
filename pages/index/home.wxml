@@ -3,7 +3,7 @@
     {{errorMessage}}
 </div>
 <!--线索例表-搜索-->
-<view class='h-ct b-s' style='display:{{showData==0?"":"none"}};background-color:white;margin-top:0rpx;'>
+<view class='h-ct b-s' style='display:{{showData==0?"":"none"}};background-color:white;'>
   <view class='search' style='display:{{menuType?"":"none"}}'>
     <div class="search-type">
       <div style="padding-left:20rpx;height:100rpx;display:block;">
@@ -22,7 +22,6 @@
 
   <!--线索列表-推荐-->
   <view style='display:{{menuType&&currentSelect==0?"block":"none"}};background-color:white;'>
- 
     <view   wx:for="{{clueList}}" wx:for-item="oitem" wx:key="id" class="list">
       <div class="list-body"   style="{{oitem.txtStyle}}"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"  data-index="{{index}}">
         <div class='list-img' bindtap='openItem' data-Obj='{{oitem}}'>
@@ -35,8 +34,8 @@
             <div class="list-content-top" style="line-height:45rpx;" >
               <span class='f-16 list-content-top-r' style="text-overflow:ellipsis;">{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
               <span class="list-content-status">{{oitem.statusName}}</span>
-              <span style="{{oitem.source==3?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/cule-r.png'></image></span>
-              <span style="{{oitem.source!=3?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/clue-pyq.png'></image></span>
+              <span style="{{oitem.source==3||oitem.source==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/cule-r.png'></image></span>
+              <span style="{{oitem.source==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/clue-pyq.png'></image></span>
 
               <span class='f-14 list-content-top-l' style="width:15%;float:right;vertical-align:middle;">
               <span style="{{oitem.customerWechatMobile||oitem.customerPhoneNum?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;vertical-align:middle;" src='../../public/images/clue-ph.png'></image></span>
@@ -82,8 +81,8 @@
                      <div class="list-content-top" style="line-height:45rpx;" >
               <span class='f-16 list-content-top-r' style="text-overflow:ellipsis;">{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
               <span class="list-content-status">{{oitem.statusName}}</span>
-              <span style="{{oitem.source==3?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/cule-r.png'></image></span>
-              <span style="{{oitem.source!=3?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/clue-pyq.png'></image></span>
+               <span style="{{oitem.source==3||oitem.source==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/cule-r.png'></image></span>
+              <span style="{{oitem.source==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/clue-pyq.png'></image></span>
 
               <span class='f-14 list-content-top-l' style="width:15%;float:right;vertical-align:middle;">
               <span style="{{oitem.customerWechatMobile||oitem.customerPhoneNum?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;vertical-align:middle;" src='../../public/images/clue-ph.png'></image></span>
@@ -129,8 +128,8 @@
                     <div class="list-content-top" style="line-height:45rpx;" >
               <span class='f-16 list-content-top-r' style="text-overflow:ellipsis;">{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
               <span class="list-content-status">{{oitem.statusName}}</span>
-              <span style="{{oitem.source==3?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/cule-r.png'></image></span>
-              <span style="{{oitem.source!=3?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/clue-pyq.png'></image></span>
+              <span style="{{oitem.source==3||oitem.source==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/cule-r.png'></image></span>
+              <span style="{{oitem.source==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/clue-pyq.png'></image></span>
 
               <span class='f-14 list-content-top-l' style="width:15%;float:right;vertical-align:middle;">
               <span style="{{oitem.customerWechatMobile||oitem.customerPhoneNum?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;vertical-align:middle;" src='../../public/images/clue-ph.png'></image></span>
@@ -168,14 +167,14 @@
           <div class="list-content" style="width:94%;margin:20rpx 20rpx 15rpx 20rpx;"   data-Id='{{oitem.id}}'>
             <div style="padding-left:10rpx;margin: 20rpx  10rpx  10rpx 0;">
               <div class="list-content-top">
-                <span class='f-16 list-content-top-r'>{{oitem.casesName}}</span>
-                <span style="{{oitem.type==3?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/cule-r.png'></image></span>
-                <span style="{{oitem.type!=3?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/clue-pyq.png'></image></span>
+                <span class='f-16 list-content-top-r'>{{'案例分享'}}</span>
+                <span style="{{oitem.type==3||oitem.type==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/cule-r.png'></image></span>
+                <span style="{{oitem.type==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/clue-pyq.png'></image></span>
                 <span class='f-14 list-content-top-l' style="text-align:right;float:right;">{{util.formatTime(oitem.createTime,"yyyy-MM-dd hh:mm")}}</span>
               </div>
               <div class='list-content-btm' style="margin: 0  0  0 10rpx;width:96%;">
                 <span class='f-14' wx:for="{{oitem.productsName}}" wx:for-item="pitem" wx:key="pitem">{{index==0?pitem:'、'+pitem}}</span>
-                <span class='f-14' style="text-align:right;float:right;">{{oitem.shareNum}}人</span>
+                <span class='f-14' style="text-align:right;float:right;">{{oitem.shareNum?oitem.shareNum:0}}人</span>
               </div>
             </div>
           </div>

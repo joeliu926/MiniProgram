@@ -183,6 +183,9 @@ var urlConfig = {
     },
     posterdel: {
       url: gConfig.remote + "/posterinfo/posterdel"   //海报删除
+    },
+    api:{
+      url: gConfig.remote + "/api/createposter"//保存海报图片
     }
   },
   postercategory: {
@@ -195,6 +198,9 @@ var urlConfig = {
   wxaqr:{
     genwxaqrcode:{
       url: gConfig.remote + "/wxaqr/genwxaqrcode"
+    },
+    gConfig:{
+      route: gConfig.remote
     }
   }
 }

@@ -588,10 +588,6 @@ Page({
     delete linkmandata.wechatMobile;
     let pdata = linkmandata;
 
-    if (linkmandata.name.lenght < 1) {
-      errorMessage
-    }
-
     wxRequest(wxaapi.index.linkmanupdate.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         _This.closewindow();

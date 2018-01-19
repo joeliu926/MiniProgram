@@ -905,6 +905,9 @@ Page({
               slist.push(sm);
             }
           });
+
+          m.customerName = m.customerName > 5 ? m.customerName.substring(0, 5)+'..' : m.customerName;
+          m.customerWxNickname = m.customerWxNickname > 5 ? m.customerWxNickname.substring(0, 5) + '..' : m.customerWxNickname;
           let cname = m.customerName;
           if (!cname) {
             cname = m.customerWxNickname;

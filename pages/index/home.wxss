@@ -128,11 +128,10 @@
   overflow: hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
-  width: 55%;
 }
 
 .list-content-status{
-  font-size:22rpx;border:1rpx solid #4BB9FF;border-radius:10rpx;color:#4BB9FF;vertical-align:top;margin-right:10rpx;padding:0 5rpx;
+  font-size:22rpx;border:1rpx solid #4BB9FF;border-radius:22rpx;color:#4BB9FF;vertical-align:top;margin-right:10rpx;padding:2rpx 10rpx;margin-left: 10rpx;
 }
 
 .list-content-top-l {

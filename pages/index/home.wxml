@@ -174,7 +174,7 @@
               </div>
               <div class='list-content-btm' style="margin: 0  0  0 10rpx;width:96%;">
                 <span class='f-14' wx:for="{{oitem.productsName}}" wx:for-item="pitem" wx:key="pitem">{{index==0?pitem:'、'+pitem}}</span>
-                <span class='f-14' style="text-align:right;float:right;">{{oitem.shareNum}}人</span>
+                <span class='f-14' style="text-align:right;float:right;">{{oitem.shareNum?oitem.shareNum:0}}人</span>
               </div>
             </div>
           </div>

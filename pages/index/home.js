@@ -79,8 +79,8 @@ Page({
       if (disX < disY) {
         return;
       }
-
-      if (disX > 0) {
+    
+      if (_disx > 0) {
       } else {
         disX = 365 - disX;
       }

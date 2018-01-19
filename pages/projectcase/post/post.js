@@ -181,6 +181,51 @@ Page({
         currentPoster: purl
       });
     }
+  },
+  /**
+   * 保存海报图片
+   */
+  fSavePoster(){
+    let _This = this;
+    let dns = wxaapi.wxaqr.gConfig.route; 
+    let pdata = {
+      tmpid: '1',
+      content: {
+        postPic: _This.data.currentPoster,
+        logo: _This.data.oClinic.logo,
+        clinicName:_This.data.oClinic.name,
+        qrcode: _This.data.qrCodeUrl
+      }
+    }
+    console.log("pdata---------", pdata);
+    wxRequest(wxaapi.posterinfo.api.url, pdata).then(function (result) {
+      console.log("api image ----->", result, dns);
+      if (result.data.code == 0) {
+        _This.setData({
+          currentPoster:dns+result.data.data.url
+        });
 
+        wx.downloadFile({
+          url: dns+result.data.data.url,
+          success: function (res) {
+            wx.saveImageToPhotosAlbum({
+              filePath: res.tempFilePath,
+              success: function (res) {
+                console.log("-----------------------",res);
+              },
+              fail: function (res) {
+                console.log("---------error--------------", res)
+              }
+            })
+          },
+          fail: function () {
+            console.log('fail')
+          }
+        });
+
+
+
+      }
+    })
   }
 })

@@ -8,7 +8,7 @@
             <view class='logo-pd'>
               <image class='qr-logo' src='{{qrCodeUrl}}'></image>
             </view>
-            <view class='f-26'>{{oClinic.address}}</view>
+            <view class='f-26'>{{oClinic.name}}</view>
     </view>
   </view>
   <!--选择项目-->
@@ -20,7 +20,7 @@
        </block>
    
     </view>
-    <view class='flex-c save-btn'>保存</view>
+    <view class='flex-c save-btn' bindtap='fSavePoster'>保存</view>
   </view>
   
     <view class='v-ct flex fx-wp  b-s' style="">

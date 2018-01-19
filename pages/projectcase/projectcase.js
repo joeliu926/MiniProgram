@@ -35,7 +35,11 @@ Page({
     getApp().getUserData(function (uinfo) {
      
         wxRequest(wxaapi.api.getuserid.url, {}).then(function (results) {
-          _This.getProjectList(results.data.data.unionId);
+          if (results.data.key == 1) {
+            _This.getProjectList(results.data.data.unionId);
+          }else{
+            uinfo && _This.getProjectList(uinfo.unionId);
+          }
         });
         
       //uinfo && _This.getProjectList(uinfo.unionId);

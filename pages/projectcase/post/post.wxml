@@ -1,53 +1,33 @@
 <view class='b-s post-content'>
   
-  <view class='w-10 post-ct' style='height:{{postHeight+"px"}}'>
+  <view class='w-10 b-s post-ct' style='height:{{postHeight+"px"}}'>
     <view class='w-10'>
-       <image class='w-10' mode="widthFix" src='../../../../public/images/post-demo.png'></image>
+       <image class='w-10' mode="widthFix" src='{{currentPoster}}'></image>
     </view>
     <view class='flex-c logo-ct'>
             <view class='logo-pd'>
-              <image class='qr-logo' src='../../../../public/images/qrcode.png'></image>
+              <image class='qr-logo' src='{{qrCodeUrl}}'></image>
             </view>
-            <view class='f-26'>这是诊所名称这是诊</view>
+            <view class='f-26'>{{oClinic.address}}</view>
     </view>
   </view>
   <!--选择项目-->
-  <view class='w-10 select-ct' style='height:{{selectHeight+"px"}}'> 
+  <view class='w-10 select-ct'> 
   <view class='flex'>
-    <view class='flex h-ct' style="">
-       <view class='f-14 h-scrol'>默认分类</view> <view class='f-14 h-scrol'>节日活动</view> <view class='f-14 h-scrol'>最新活动</view> <view class='f-14 h-scrol'>又一个活动</view> <view class='f-14 h-scrol'>项目分类五</view>
+    <view class='flex b-s h-ct' style="">
+       <block  wx:for="{{aCategoryList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
+          <view class='f-16 b-s h-scrol' style='color:{{(oItem.id==categoryId)?"#9083ED":""}}'  data-categoryid="{{oItem.id}}" bindtap='fSelectCate'>{{oItem.categoryName}}</view>
+       </block>
+   
     </view>
-    <view class='f-14 flex-c save-btn'>保存</view>
+    <view class='flex-c save-btn'>保存</view>
   </view>
   
-    <view class='v-ct flex fx-wp fx-jc-sb b-s' style="">
-     
-       <view class='f-14 v-scrol'>
-         <image class='post-logo' src='../../../../public/images/qrcode.png'></image>
-       </view> 
-       <view class='f-14 v-scrol'>
-         <image class='post-logo' src='../../../../public/images/qrcode.png'></image>
-       </view>
-          <view class='f-14 v-scrol'>
-         <image class='post-logo' src='../../../../public/images/qrcode.png'></image>
-       </view> 
-       <view class='f-14 v-scrol'>
-         <image class='post-logo' src='../../../../public/images/qrcode.png'></image>
-       </view>
-          <view class='f-14 v-scrol'>
-         <image class='post-logo' src='../../../../public/images/qrcode.png'></image>
-       </view> 
-       <view class='f-14 v-scrol'>
-         <image class='post-logo' src='../../../../public/images/qrcode.png'></image>
-       </view>
-          <view class='f-14 v-scrol'>
-         <image class='post-logo' src='../../../../public/images/qrcode.png'></image>
-       </view> 
-       <view class='f-14 v-scrol'>
-         <image class='post-logo' src='../../../../public/images/qrcode.png'></image>
-       </view>
+    <view class='v-ct flex fx-wp  b-s' style="">
+      <block wx:for="{{aPostList}}" wx:for-item="pItem" wx:key="pItem.id"  wx:for-index="index">
+        <view class='img-c b-s'   style='background-image:url({{pItem.fileUrl}})' data-src='{{pItem.fileUrl}}' bindtap='fSelectPosterImg'></view>
+      </block>
     </view>
   </view>
-  
-
+ 
 </view>

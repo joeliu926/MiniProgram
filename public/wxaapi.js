@@ -149,6 +149,11 @@ var urlConfig = {
       url: gConfig.remote + "/clinic/detail"   //获取诊所详情
     }
   },
+  api:{
+    getuserid:{
+      url: gConfig.remote + "/api/getuserid"   //获取诊所详情
+    }
+  },
   index:{
     cluelist: {
       url: gConfig.remote + "/index/cluelist"   //获取线索列表

@@ -548,7 +548,7 @@ Page({
     let tel = _This.data.oUserInfo.wechatMobile || "";//客户idoUserInfo.wechatMobile
     let cid = _This.data.oUserInfo.id;//客户idoUserInfo.wechatMobile
     wx.navigateTo({
-      url: '/pages/client/sharecase/tkphoto/tkphoto?consultantId=' + cstunionid + "&consultationId=" + consultationId + "&clueId=" + clueId + "&shareEventId=" + shareEventId + "&caseId=" + caseId + "&tel=" + tel + "&cid" + cid
+      url: '/pages/client/sharecase/tkphoto/tkphoto?consultantId=' + cstunionid + "&consultationId=" + consultationId + "&clueId=" + clueId + "&shareEventId=" + shareEventId + "&caseId=" + caseId + "&tel=" + tel + "&cid=" + cid
     })
   },
   fGetCaseData() {

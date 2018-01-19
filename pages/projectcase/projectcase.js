@@ -33,7 +33,12 @@ Page({
     });
     //console.log("_This.data====>",_This.data);
     getApp().getUserData(function (uinfo) {
-      uinfo && _This.getProjectList(uinfo.unionId);
+     
+        wxRequest(wxaapi.api.getuserid.url, {}).then(function (results) {
+          _This.getProjectList(results.data.data.unionId);
+        });
+        
+      //uinfo && _This.getProjectList(uinfo.unionId);
     });
 
   },

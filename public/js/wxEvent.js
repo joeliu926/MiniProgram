@@ -6,11 +6,21 @@ var eType = {
   caseLike: "caseLike",//喜欢不喜欢案例
   photoUpload: "photoUpload",//照片上传
   informationSubmit: "informationSubmit", //信息提交
-  appQuit: "appQuit" //退出程序
+  appQuit: "appQuit", //退出程序+
+  noteAdd:"noteAdd",//添加备注+
+  reserve: "reserve",//预约+
+  contactEdit: "contactEdit",//编辑联系人+
+  leadClose: "leadClose",//关闭联系人线索+
+  authPhone: "authPhone",//授权手机号+
 };
 var oEvent = {
   shareEventId: "", //当事件码是 appShare，获取该值，传值的时候带着相关的参数
   code: "", //事件码eType
+  shareEventId:"",
+  productCode:"",
+  clueId:"", //线索id
+  consultationId:"",//咨询会话ID
+  sceneId:"",//场景
   eventAttrs: {
     appletId: "hldn",
     consultingId: 0,

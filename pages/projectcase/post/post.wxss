@@ -4,13 +4,21 @@
   overflow-y: scroll;
   padding-bottom: 320rpx;
 }
+.img-c{
+  box-sizing: border-box;
+  width: 161rpx;
+  height: 161rpx;
+  margin: 8rpx;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
 .c-b-d{
 border: 1rpx solid rebeccapurple;
 }
-.post-img{
-  height: 700px;
+.post-img-ct{
+ overflow: hidden;
 }
-
 .qr-logo{
   width: 120rpx;
   height: 120rpx;
@@ -25,6 +33,18 @@ border: 1rpx solid rebeccapurple;
 }
 .logo-pd{
   padding: 40rpx;
+  height: 200rpx;
+  position: relative;
+}
+.img-logo{
+  position: absolute;
+  left:50%;
+  top:50%;
+  margin-left: -26rpx;
+  margin-top: -26rpx;
+  height: 52rpx;
+  width: 52rpx;
+  border-radius: 50%;
 }
 
 
@@ -67,12 +87,4 @@ border: 1rpx solid rebeccapurple;
    display: inline-block;
    margin: 4rpx 4rpx 10rpx 0;
 }
-.img-c{
-  box-sizing: border-box;
-  width: 161rpx;
-  height: 161rpx;
-  margin: 8rpx;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
+

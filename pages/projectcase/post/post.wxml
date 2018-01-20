@@ -1,12 +1,14 @@
 <view class='b-s post-content'>
   
   <view class='w-10 b-s post-ct' style='height:{{postHeight+"px"}}'>
-    <view class='w-10'>
+    <view class='w-10 b-s post-img-ct' style='height:{{postImageHeight+"px"}}'>
        <image class='w-10' mode="widthFix" src='{{currentPoster}}'></image>
     </view>
-    <view class='flex-c logo-ct'>
-            <view class='logo-pd'>
-              <image class='qr-logo' src='{{qrCodeUrl}}'></image>
+    <view class='flex-c b-s  logo-ct'>
+            <view class='b-s logo-pd'>
+              <image class='qr-logo' src='{{qrCodeUrl}}'>
+              </image>
+              <view class='img-c  img-logo' style='background-image:url({{oClinic.logo}})'></view>
             </view>
             <view class='f-26'>{{oClinic.name}}</view>
     </view>

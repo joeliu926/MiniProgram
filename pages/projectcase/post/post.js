@@ -7,7 +7,8 @@ Page({
    */
   data: {
     oUserInfo:{},//当前用户信息
-     postHeight:0,//海报的高度
+     postHeight:0,//海报外框的高度
+     postImageHeight:0,//海报图片的高度
      selectHeight:128,//选择框高度
      aCategoryList:[],//获取分类列表
      aPostList:[],//获取海报列表
@@ -36,11 +37,15 @@ Page({
 
     wx.getSystemInfo({
       success: function (result) {
-       // console.log("-=-=-=-=-=-=-=-=-",result);
-        let postHeight = result.windowHeight - _This.data.selectHeight;
+        console.log("-=-=-=-=-=-=-=-=-",result);
+        let postHeight = result.windowHeight;
+        let windowWidth = result.windowWidth;
         //console.log("postHeight--------->", postHeight);
+        let postImageHeight=parseInt(windowWidth*850/750);
+        console.log("postImageHeight------>", postImageHeight);
         _This.setData({
-          postHeight:result.windowHeight
+          postHeight: postHeight,
+          postImageHeight: postImageHeight
         });
       }
     });
@@ -141,7 +146,7 @@ Page({
       unionId: _This.data.oUserInfo.unionId //咨询师unionid
     };
     wxRequest(wxaapi.clinic.detail.url, pdata).then(function (result) {
-      console.log("clinic info ----->", result);
+      //console.log("clinic info ----->", result);
       if (result.data.code == 0) {
         _This.setData({
           oClinic: result.data.data

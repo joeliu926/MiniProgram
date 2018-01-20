@@ -1,7 +1,6 @@
 {
 
   "pages": [
-    "pages/projectcase/post/post",
     "pages/index/home",
     "pages/projectcase/book/book",
     "pages/index/detail/cluedetail",
@@ -15,7 +14,7 @@
     "pages/test/test",
     "pages/logs/logs",
     "pages/client/ccase/ccase",
-    
+    "pages/projectcase/post/post",
     "pages/projectcase/singletrail/singletrail",
     "pages/projectcase/casetrail/userlist/userlist",
     "pages/projectcase/casetrail/cbooking/cbooking",

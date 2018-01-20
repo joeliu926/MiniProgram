@@ -7,15 +7,15 @@ var gConfig={
 
 
   /****uat start*****/
-   //remote:"https://nihaomc.com/wxa_test",
-   //uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload",
-   //remoteWx: "https://nihaomc.com/wx_test",
+   remote:"https://nihaomc.com/wxa_test",
+   uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload",
+   remoteWx: "https://nihaomc.com/wx_test",
   /****uat end*****/
  
   /****dev start*****/
-  remoteWx: "https://nihaomc.com/wx",
-  remote: "https://nihaomc.com/wxa_dev",
-  uploadUrl: "https://nihaomc.com/uploadimg_dev/attachment/upload"
+  //remoteWx: "https://nihaomc.com/wx",
+  //remote: "https://nihaomc.com/wxa_dev",
+  //uploadUrl: "https://nihaomc.com/uploadimg_dev/attachment/upload"
   /****dev end*****/
 }
 var urlConfig = {
@@ -184,8 +184,11 @@ var urlConfig = {
     posterdel: {
       url: gConfig.remote + "/posterinfo/posterdel"   //海报删除
     },
-    api:{
-      url: gConfig.remote + "/api/createposter"//保存海报图片
+    createposter:{
+      url: gConfig.remote + "/api/createposter"//创建保存海报图片
+    },
+    deleteposter:{
+      url: gConfig.remote + "/api/deleteposter"//删除生成的海报图片 
     }
   },
   postercategory: {

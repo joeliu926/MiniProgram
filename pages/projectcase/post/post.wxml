@@ -1,6 +1,6 @@
 <view class='b-s post-content'>
   
-  <view class='w-10 b-s post-ct' style='height:{{postHeight+"px"}}'>
+  <view class='w-10 b-s post-ct' bindtap='fBottomRevert' style='height:{{postHeight+"px"}}'>
     <view class='w-10 b-s post-img-ct' style='height:{{postImageHeight+"px"}}'>
        <image class='w-10' mode="widthFix" src='{{currentPoster}}'></image>
     </view>
@@ -13,21 +13,21 @@
             <view class='f-26'>{{oClinic.name}}</view>
     </view>
   </view>
-  <!--选择项目-->
-  <view class='w-10 select-ct'> 
-  <view class='flex'>
+  <!--选择项目style='height:400rpx;'-->
+  <view class='w-10 b-s select-ct {{isDelay?"isDelay":""}}' style='height:{{selectContentHeight+"rpx"}}'> 
+  <view class='flex b-s' bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" bindtouchmove='fTouchMove'>
     <view class='flex b-s h-ct' style="">
        <block  wx:for="{{aCategoryList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
-          <view class='f-16 b-s h-scrol' style='color:{{(oItem.id==categoryId)?"#9083ED":""}}'  data-categoryid="{{oItem.id}}" bindtap='fSelectCate'>{{oItem.categoryName}}</view>
+          <view class='flex-c f-16 b-s  h-scrol' style='color:{{(oItem.id==categoryId)?"#9083ED":""}}'  data-categoryid="{{oItem.id}}" bindtap='fSelectCate'>{{oItem.categoryName}}</view>
        </block>
    
     </view>
     <view class='flex-c save-btn' bindtap='fSavePoster'>保存</view>
   </view>
   
-    <view class='v-ct flex fx-wp  b-s' style="">
+    <view class='v-ct flex fx-wp  b-s' style='height:{{selectImgHeight+"rpx"}}'>
       <block wx:for="{{aPostList}}" wx:for-item="pItem" wx:key="pItem.id"  wx:for-index="index">
-        <view class='img-c b-s'   style='background-image:url({{pItem.fileUrl}})' data-src='{{pItem.fileUrl}}' bindtap='fSelectPosterImg'></view>
+        <view class='img-c b-s {{(pItem.id==postId)?"c-b-d":""}}'   style='background-image:url({{pItem.fileUrl}})'  data-postid='{{pItem.id}}' data-src='{{pItem.fileUrl}}' bindtap='fSelectPosterImg'></view>
       </block>
     </view>
   </view>

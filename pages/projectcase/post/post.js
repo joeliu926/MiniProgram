@@ -1,15 +1,21 @@
 const wxaapi = require('../../../public/wxaapi.js');
 const wxRequest = require('../../../utils/js/wxRequest.js');
+var touchDotX = 0;//触摸时的原点
+var touchDotY = 0;//触摸时的原点
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+     oOptions:{},//传入的参数
     oUserInfo:{},//当前用户信息
      postHeight:0,//海报外框的高度
      postImageHeight:0,//海报图片的高度
+     selectContentHeight: 275,//下部选择框高度
+     selectImgHeight:200,//下部图片外框高度
      selectHeight:128,//选择框高度
+     isDelay:false,//是否延迟滑动
      aCategoryList:[],//获取分类列表
      aPostList:[],//获取海报列表
      pageNo:1,//页数
@@ -17,7 +23,9 @@ Page({
      oClinic:{},//诊所信息
      currentPoster:"",//当前的海报url
      categoryId: "",//当前分类id
+     postId:"",//海报id
      categoryName:""//当前的分类名称
+     
   },
 
   /**
@@ -25,11 +33,12 @@ Page({
    */
   onLoad: function (options) {
     let _This=this;
-    //console.log("------------------",options);
+    console.log("--------options----------",options);
 
     getApp().getUserData(function (oUserInfo) {
       _This.setData({
-        oUserInfo: oUserInfo
+        oUserInfo: oUserInfo,
+        oOptions: options
       });
       _This.fGetCategoryList();//获取分类列表
       _This.fGetClinicDetail();//获取诊所信息
@@ -37,12 +46,12 @@ Page({
 
     wx.getSystemInfo({
       success: function (result) {
-        console.log("-=-=-=-=-=-=-=-=-",result);
+        //console.log("-=-=-=-=-=-=-=-=-",result);
         let postHeight = result.windowHeight;
         let windowWidth = result.windowWidth;
         //console.log("postHeight--------->", postHeight);
         let postImageHeight=parseInt(windowWidth*850/750);
-        console.log("postImageHeight------>", postImageHeight);
+        //console.log("postImageHeight------>", postImageHeight);
         _This.setData({
           postHeight: postHeight,
           postImageHeight: postImageHeight
@@ -94,6 +103,9 @@ Page({
    */
   fGetCategoryList(){
     let _This=this;
+    wx.showLoading({
+      title: 'loading...',
+    });
     let postData = {
       userUnionId: _This.data.oUserInfo.unionId
     };
@@ -105,6 +117,7 @@ Page({
         });
         _This.fSelectCate();
       } 
+      wx.hideLoading();
     });
   },
   /**
@@ -123,6 +136,9 @@ Page({
       pageNo: _This.data.pageNo,
       pageSize: _This.data.pageSize
     };
+    wx.showLoading({
+      title: 'loading...',
+    });
     wxRequest(wxaapi.posterinfo.pagelist.url, postData).then(function (result) {
       if (result.data.code == 0) {
         let dataList = result.data.data.list;
@@ -131,10 +147,12 @@ Page({
         });
         if(!e){
           _This.setData({
-            currentPoster: dataList[0].fileUrl
+            currentPoster: dataList[0].fileUrl,
+            postId: dataList[0].id
           });
         }
       }
+      wx.hideLoading();
     });
   },
   /**
@@ -161,9 +179,12 @@ Page({
    */
   fGetQrcode(){
     let _This = this;
+    let oOptions = _This.data.oOptions;
+    let path = `/pages/client/ccase/ccase?caseIds=${oOptions.caseIds}&caseIds=${oOptions.caseIds}&itemid=${oOptions.itemid}&consultationId=${oOptions.consultationId}&shareEventId=${oOptions.shareEventId}`;
     let pdata = {
-        path: "pages/home/home?query=1",
-        width: 430,
+        //path: "pages/home/home?query=1",
+        path: path,
+        width: 200,
         scene: 123
     }
     wxRequest(wxaapi.wxaqr.genwxaqrcode.url, pdata).then(function (result) {
@@ -181,18 +202,22 @@ Page({
   fSelectPosterImg(e){
     let _This=this;
     let purl=e.target.dataset.src;
+    let postId = e.target.dataset.postid;
     if(purl){
       _This.setData({
-        currentPoster: purl
+        currentPoster: purl,
+        postId:postId
       });
-    }
+    };
+    wx.pageScrollTo({
+      scrollTop: 0
+    });
   },
   /**
    * 保存海报图片
    */
   fSavePoster(){
     let _This = this;
-    let dns = wxaapi.wxaqr.gConfig.route; 
     let pdata = {
       tmpid: '1',
       content: {
@@ -202,35 +227,120 @@ Page({
         qrcode: _This.data.qrCodeUrl
       }
     }
-    console.log("pdata---------", pdata);
-    wxRequest(wxaapi.posterinfo.api.url, pdata).then(function (result) {
-      console.log("api image ----->", result, dns);
+    wxRequest(wxaapi.posterinfo.createposter.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         _This.setData({
-          currentPoster:dns+result.data.data.url
+         // currentPoster:dns+result.data.data.url
         });
-
-        wx.downloadFile({
-          url: dns+result.data.data.url,
-          success: function (res) {
-            wx.saveImageToPhotosAlbum({
-              filePath: res.tempFilePath,
-              success: function (res) {
-                console.log("-----------------------",res);
-              },
-              fail: function (res) {
-                console.log("---------error--------------", res)
-              }
-            })
-          },
-          fail: function () {
-            console.log('fail')
-          }
-        });
-
-
-
+        _This.fDownLoadPic(result.data.data);//保存图片
       }
     })
+  },
+  /**
+   * 保存图片到本地
+   */
+  fDownLoadPic(oImg){
+    let _This=this;
+    let imgUrl = wxaapi.wxaqr.gConfig.route + oImg.url;
+    wx.downloadFile({
+      url: imgUrl,
+      success: function (res) {
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success: function (res) {
+            //console.log("-----------------------", res);
+            _This.fDeletePosterImg(oImg.id);
+          },
+          fail: function (res) {
+            //console.log("---------error--------------", res)
+          }
+        })
+      },
+      fail: function () {
+        console.log('fail')
+      }
+    });
+  },
+  /**
+   * 删除保存的海报图片
+   */
+  fDeletePosterImg(imgid){
+    let _This = this;
+    let pdata = {
+      imgid: imgid
+    }
+    wxRequest(wxaapi.posterinfo.deleteposter.url, pdata).then(function (result) {
+      if (result.data.code == 0) {   
+      }
+    })
+  },
+  /**
+   * 还原滑动
+   */
+  fBottomRevert(){
+     let _This=this;
+      _This.setData({
+        selectContentHeight:275,
+      });
+      setTimeout(function(){
+        _This.setData({
+          selectImgHeight: 200
+        });
+      },1000);
+  },
+  /**
+   * 底部滑动开始
+   */
+  fTouchStart(e){
+     touchDotX = e.touches[0].pageX; // 获取触摸时的原点touchDotX
+     touchDotY = e.touches[0].pageY; // 获取触摸时的原点touchDotY
+     this.setData({
+       isDelay: false,
+       selectImgHeight: 375
+     });
+  },
+  /**
+   * 底部滑动
+   */
+  fTouchMove(e){
+  let _This=this;
+    let tX = (e.touches[0].pageX - touchDotX);
+    let tY = (e.touches[0].pageY - touchDotY);
+    let selectContentHeight = _This.data.selectContentHeight - tY;
+    if (Math.abs(tY)>20 && Math.abs(tX) < Math.abs(tY)){
+      selectContentHeight = selectContentHeight > 450 ? 450 : selectContentHeight;
+      selectContentHeight = selectContentHeight<275 ? 275 : selectContentHeight;
+      _This.setData({
+        selectContentHeight: selectContentHeight,
+      });
+    }else {
+
+    }
+  },
+  /**
+   * 滑动结束
+   */
+  fTouchEnd(e){
+    let _This = this;
+    let tX = (e.changedTouches[0].pageX - touchDotX);
+    let tY = (e.changedTouches[0].pageY - touchDotY);
+    let selectContentHeight = _This.data.selectContentHeight;
+    if (Math.abs(tY) > 20 && Math.abs(tX) < Math.abs(tY)) {
+      selectContentHeight=tY>0?275:450;
+      _This.setData({
+        selectContentHeight: selectContentHeight
+      });
+    }
+    if (selectContentHeight<400){
+      this.setData({
+        selectImgHeight: 200
+      });
+    }
+    this.setData({
+      isDelay: true
+    });
+
   }
+  
+
 })

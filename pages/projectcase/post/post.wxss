@@ -91,4 +91,29 @@ transition: height 1s;
    display: inline-block;
    margin: 4rpx 4rpx 10rpx 0;
 }
-
+/***********mask********/
+.mask{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.3);
+}
+.pop-box{
+  width: 500rpx;
+  height: 240rpx;
+  background: #ffffff;
+  margin: 0 auto;
+  margin-top: 40%;
+  border-radius: 8rpx;
+}
+.tex-pd{
+  padding: 0 0 32rpx 0;
+}
+.auth-tel{
+   border-radius: 20px;
+  background-color: #9083ed;
+  color: #ffffff;
+  padding:0 50rpx;
+}

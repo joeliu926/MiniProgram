@@ -24,7 +24,8 @@ Page({
      currentPoster:"",//当前的海报url
      categoryId: "",//当前分类id
      postId:"",//海报id
-     categoryName:""//当前的分类名称
+     categoryName:"",//当前的分类名称
+     isShowMask:false// 是否显示弹出框
      
   },
 
@@ -214,6 +215,14 @@ Page({
     });
   },
   /**
+   * 保存完成之后的弹出框
+   */
+  fKnowShare(){
+    this.setData({
+      isShowMask:false
+    });
+  },
+  /**
    * 保存海报图片
    */
   fSavePoster(){
@@ -249,6 +258,9 @@ Page({
           filePath: res.tempFilePath,
           success: function (res) {
             //console.log("-----------------------", res);
+            _This.setData({
+              isShowMask: true
+            });
             _This.fDeletePosterImg(oImg.id);
           },
           fail: function (res) {

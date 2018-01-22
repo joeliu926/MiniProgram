@@ -2,8 +2,9 @@ const wxaapi = require('./public/wxaapi.js');
 const wxRequest = require('./utils/js/wxRequest.js');
 const wxPromise = require('./utils/js/wxPromise.js');
 App({
-  onLaunch: function () {
+  onLaunch: function (options) {
     //this.getUserData();
+    console.log("onlaunch------>", options);
   },
   globalData: {
    userInfo: null,

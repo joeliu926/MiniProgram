@@ -68,7 +68,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //console.log("ccase------>event", options)
+    console.log("ccase------>event", options)
 
     let _This = this;
     var caseIds = options.caseIds;
@@ -77,7 +77,6 @@ Page({
     _This.setData({
       aCurrentList: aCaseList.slice(0, 10)
     });
-    console.log("get user info-------------");
     /***********qiehuan******/
     getApp().getUserData(function (uinfo) {
       //console.log("---ccase----user info=====>", uinfo);

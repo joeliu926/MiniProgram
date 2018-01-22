@@ -181,18 +181,27 @@ Page({
   fGetQrcode(){
     let _This = this;
     let oOptions = _This.data.oOptions;
-    let path = `/pages/client/ccase/ccase?caseIds=${oOptions.caseIds}&caseIds=${oOptions.caseIds}&itemid=${oOptions.itemid}&consultationId=${oOptions.consultationId}&shareEventId=${oOptions.shareEventId}`;
+    let caseIds = oOptions.caseIds||"";
+    let cstUid = oOptions.cstUid||"";
+    let itemid = oOptions.itemid||"12";
+    let consultationId = oOptions.consultationId||"";
+    let shareEventId = oOptions.shareEventId||"";
+    let path = `pages/client/ccase/ccase?caseIds=${caseIds}&cstUid=${cstUid}&itemid=${itemid}&consultationId=${consultationId}&shareEventId=${shareEventId}`;
+    let scene = `${caseIds},${cstUid},${itemid},${consultationId},${shareEventId}`;
+        path="pages/test/test";
     let pdata = {
-        //path: "pages/home/home?query=1",
+        //path: "pages/test/test?query=1",
         path: path,
         width: 200,
-        scene: 123
+        scene: scene
     }
+   //console.log("wxaapi.wxaqr.genwxaqrcode.url----->", wxaapi.wxaqr.genwxaqrcode.url);
     wxRequest(wxaapi.wxaqr.genwxaqrcode.url, pdata).then(function (result) {
       console.log("fGetQrcode info ----->", result);
       if (result.data.code == 0) {
         _This.setData({
-          qrCodeUrl: result.data.data
+          qrCodeUrl: result.data.data,
+          //currentPoster: result.data.data
         });
       }
     })

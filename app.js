@@ -26,7 +26,7 @@ App({
   // console.log("data not exist------>");
    this.fGetSessionKey(true,function (sessionKey){
      //console.log("sessionKey------>", sessionKey);
-     wxPromise(wx.getUserInfo)().then(resUserInfo => {
+     wxPromise(wx.getUserInfo)().then(resUserInfo =>{
        var encryptedData = resUserInfo.encryptedData;
        var iv = resUserInfo.iv;
        var postData = {

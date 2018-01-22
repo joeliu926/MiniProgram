@@ -7,15 +7,17 @@ var gConfig={
 
 
   /****uat start*****/
-   remote:"https://nihaomc.com/wxa_dev",
-   uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload",
-   remoteWx: "https://nihaomc.com/wx_test",
+
+  //  remote:"https://nihaomc.com/wxa_test",
+  //  uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload",
+  //  remoteWx: "https://nihaomc.com/wx_test",
+
   /****uat end*****/
  
   /****dev start*****/
-  //remoteWx: "https://nihaomc.com/wx",
-  //remote: "https://nihaomc.com/wxa_dev",
-  //uploadUrl: "https://nihaomc.com/uploadimg_dev/attachment/upload"
+  remoteWx: "https://nihaomc.com/wx",
+  remote: "https://nihaomc.com/wxa_dev",
+  uploadUrl: "https://nihaomc.com/uploadimg_dev/attachment/upload"
   /****dev end*****/
 }
 var urlConfig = {
@@ -91,6 +93,9 @@ var urlConfig = {
     trail: {
       url: gConfig.remote + "/consult/trail" //获取所有咨询轨迹
     },
+    interactlist: {
+      url: gConfig.remote + "/consult/interactlist"   //线索 互动列表
+    },
     singletrail:{
       url: gConfig.remote + "/consult/singletrail" //获取单个用户咨询轨迹
     },
@@ -141,7 +146,8 @@ var urlConfig = {
   clue: {
     detail: {
       url: gConfig.remote + "/clue/detail"   //获取线索详情
-    }
+    },
+  
   },
   clinic: {
     detail: {
@@ -155,6 +161,7 @@ var urlConfig = {
     cluedetail: {
       url: gConfig.remote + "/index/cluedetail"   //获取线索详情
     },
+    
     sharelist: {
       url: gConfig.remote + "/index/sharelist"   //场景列表
     },
@@ -164,6 +171,7 @@ var urlConfig = {
     remarklist: {
       url: gConfig.remote + "/index/remarklist"   //备注列表
     },
+   
     clueclose: {
       url: gConfig.remote + "/index/clueclose"   //线索关闭
     },

@@ -169,7 +169,7 @@ Page({
     let pdata = { unionId: param };//,all:0
     // console.log("pdata------->",pdata);
     wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
-      //  console.log("000000000000000000000000===>", result);
+       console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
         // 没有案例的项目不可用
         var everyarr = [];
@@ -182,22 +182,15 @@ Page({
           })
         })
         _This.setData({
-          projectItems: result.data.data,// result.data.data,//, []
-          allarr: everyarr//
+          projectItems:  result.data.data,// result.data.data,//[],
+          allarr:everyarr//
         });
         if (_This.data.projectItems.length == 0) {
           _This.setData({
             Show: 'true',
           });
-        }  
-        
+        }          
       } else {
-       
-        // if (_This.data.projectItems.length == 0) {
-        //   _This.setData({
-        //     Show: 'true',
-        //   });
-        // }  
         console.log(result);
       }
       wx.hideLoading();
@@ -215,7 +208,6 @@ Page({
             oitem.productList.forEach(function (titem) {
               // console.log(titem.productCode);
               codearr.push(titem.productCode);
-
             })
           })
         })

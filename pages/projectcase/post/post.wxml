@@ -1,5 +1,4 @@
-<view class='b-s post-content'>
-  
+<view class='b-s post-content'>  
   <view class='w-10 b-s post-ct' bindtap='fBottomRevert' style='height:{{postHeight+"px"}}'>
     <view class='w-10 b-s post-img-ct' style='height:{{postImageHeight+"px"}}'>
        <image class='w-10' mode="widthFix" src='{{currentPoster}}'></image>
@@ -40,3 +39,4 @@
        <button class='f-14 auth-tel'  bindtap='fKnowShare'>知道了</button>
      </view>
 </view>
+

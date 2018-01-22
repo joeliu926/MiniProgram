@@ -5,13 +5,14 @@
     <!--项目滚动区  -->
     <view class="scroll-box fl">
       <scroll-view scroll-x="true" style=" white-space: nowrap;margin-left:24rpx;">
-        <view class="item-view" style="color:{{item.changeColor}} " wx:for-item="item" wx:for="{{arrData}}" wx:for-index="{{index}}" wx:key="item.itemid" data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}" bindtap="chooseitem">{{item.iname}}</view>
+        <view class="item-view" style="color:{{item.changeColor}} " wx:for-item="item" wx:for="{{arrData}}" wx:for-index="{{index}}" wx:key="item.itemid" data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}"
+          bindtap="chooseitem">{{item.iname}}</view>
         <!-- <view class="item-view f-14" bindtap="">热门项目</view>-->
       </scroll-view>
     </view>
     <!--下拉箭头  -->
     <view class="selectarrow fr " bindtap="getproductitem">
-      <image src='../../../public/images/arrow-down.png' class='btn-down' ></image>
+      <image src='../../../public/images/arrow-down.png' class='btn-down'></image>
     </view>
   </view>
   <view class='o-flex o-content' style="width:100%; background:#f7f7f7;">
@@ -25,21 +26,22 @@
                   <view class='flex b-s clearfix' style="position: relative;">
                     <text class='before f-12 bcommon'>术前</text>
                     <text class='after f-12 bcommon'>术后</text>
-                    <image  src='{{oitem.beforePicture.url||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l fl'></image>
-                    <image   src='{{oitem.afterPicture.url||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r fl'></image>
+                    <image src='{{oitem.beforePicture.url||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l fl'></image>
+                    <image src='{{oitem.afterPicture.url||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r fl'></image>
                   </view>
                 </view>
 
-                <view class='user-info' ><!--bindtap='fCaseDetail'  -->
+                <view class='user-info'>
+                  <!--bindtap='fCaseDetail'  -->
                   <view class='bef-aft flex'>
                     <image class='o-img-title' src='{{oitem.customerLogo.url}}' mode='scaleToFill'></image>
                   </view>
                   <view class='u-info'>
                     <text class='u-name'>{{oitem.customerName}}</text>
                     <view style="margin-bottom: 10rpx; ">
-                      <text class='f-14 txt-item' >{{oitem.caseName}}</text>
+                      <text class='f-14 txt-item'>{{oitem.caseName}}</text>
                     </view>
-                    
+
                     <text class='f-14'>诊疗于 {{cutil.formatTime(oitem.operationDate,"yyyy-MM-dd")}}</text>
                   </view>
                 </view>
@@ -70,12 +72,13 @@
     </view>
     <view class='extr-v' style=''></view>
     <view class='extr-v extr-b' style=''></view>
-    <button class='share-btn flex-c' bindtap='fAddToShare' wx:if='{{aCaseIds.length>0}}' style='display:{{isConsult?"flex":"none"}};' >
+    <!-- 分享按钮有分享案例  样式-->
+    <button class='share-btn flex-c' bindtap='fAddToShare' wx:if='{{aCaseIds.length>0}}' style='display:{{isConsult?"flex":"none"}};'>
       <image src='../../../public/images/icon-share.png' class='share-icon'></image>
       <text class='share-txt'>分享</text>
       <text class='tip' wx:if='{{aCaseIds.length>0}}'>{{aCaseIds.length}}</text>
     </button>
-
+    <!--分享按钮无分享案例 样式 -->
     <button class='share-btn flex-c' wx:if='{{aCaseIds.length<=0}}' style='background-color:#cccccc;display:{{isConsult?"flex":"none"}};'>
       <image src='../../../public/images/icon-share.png' class='share-icon'></image>
       <text class='share-txt'>分享</text>
@@ -84,17 +87,17 @@
     <view class='share-content' wx:if="{{isShare}}">
       <view class='flex w-10 fx-d-col share-layer '>
         <view class='flex btn-ct'>
-            <button class='flex-c fx-d-col share-b-btn' bindtap='fGeneratePost'>
-                <image class='end-share-img' src='../../../public/images/friend-icon.png'></image>
-                <view class='f-14 t-a-c' style='padding:0rpx;'>生成朋友圈海报</view>
+          <button class='flex-c fx-d-col share-b-btn' bindtap='fGeneratePost'>
+            <image class='end-share-img' src='../../../public/images/friend-icon.png'></image>
+            <view class='f-14 t-a-c' style='padding:0rpx;'>生成朋友圈海报</view>
           </button>
           <button class='fx-d-col flex-c share-b-btn' style='' open-type="share">
-                <image class='w-10  end-share-img'  src='../../../public/images/we-icon.png'></image>
-                <text class='f-14   t-a-c' style='padding:0;'>转发给好友或群</text>            
+            <image class='w-10  end-share-img' src='../../../public/images/we-icon.png'></image>
+            <text class='f-14   t-a-c' style='padding:0;'>转发给好友或群</text>
           </button>
         </view>
         <view class='flex-c f-16 cancel-btn' bindtap='fCancelShare'>取消</view>
-     </view>
+      </view>
     </view>
 
 
@@ -117,8 +120,8 @@
       </block>
       <text class=" tipunable" style="display:{{isShow=='true'?'block':'none'}}"> 当前项目下暂时无案例可选</text>
       <view style="text-align:center; margin-right:20px;" class="selBtn" bindtap="selectItems">
-         <image src='../../../public/images/arrow-up.png' class='btn-up' ></image> 
-         <!-- <button class="selend f-16 {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</button>  -->
+        <image src='../../../public/images/arrow-up.png' class='btn-up'></image>
+        <!-- <button class="selend f-16 {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</button>  -->
       </view>
     </view>
 

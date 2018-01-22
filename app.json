@@ -1,6 +1,7 @@
 {
 
-  "pages": [
+  "pages": [  
+    
     "pages/index/home",
     "pages/projectcase/book/book",
     "pages/index/detail/cluedetail",

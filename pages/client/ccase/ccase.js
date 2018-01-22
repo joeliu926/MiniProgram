@@ -99,6 +99,17 @@ Page({
 
     });
   },
+  /**
+ * 生命周期函数--监听页面隐藏
+ */
+  onHide: function () {
+  },
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    this.fUserEvent(event.eType.appQuit);//授推出事件
+  },
   imgPreview(e) {
     var dataset = e.currentTarget.dataset;
     wx.previewImage({
@@ -234,6 +245,7 @@ Page({
     };
     wxRequest(wxaapi.customer.update.url, pdata).then(function (result) {
       if (result.data.code == 0) {
+        _This.fUserEvent(event.eType.authPhone);//授权手机号码事件
         _This.fGetConsultDetail();
       } else {
         console.log("update customer info error----", result);
@@ -482,22 +494,24 @@ Page({
     var currentPage = _This.data.currentPage;
     oTempEvent.shareEventId = _This.data.shareEventId || 1;
     oTempEvent.productCode = _This.data.productCode;
-    oTempEvent.clueId = _This.data.clueId; //线索id
+    oTempEvent.clueId = _This.data.clueId; //线索id  
+    oTempEvent.leadsId = _This.data.clueId; //线索id新  leadsId
     oTempEvent.consultationId = _This.data.consultationId;//咨询会话ID
+    oTempEvent.sceneId = _This.data.consultationId;// 场景sceneId  oUserInfo.
     oTempEvent.eventAttrs = {
       consultantId: _This.data.cstUid,
       //caseId: _This.data.caseList[currentPage - 1].id,//
-      caseId: 3,//
+      caseId: _This.data.sCurrentId||"",//
       appletId: "hldn",
       consultingId: _This.data.consultationId,
-      isLike: _This.data.isLike
+      isLike: _This.data.isLike||"1"    ////0不喜欢 1喜欢2未选择
     }
     oTempEvent.subjectAttrs = {
       appid: "yxy",
       consultantId: _This.data.cstUid,
       openid: _This.data.oUserInfo.openId,
       unionid: _This.data.oUserInfo.unionId,
-      mobile: ""
+      mobile: _This.data.oUserInfo.wechatMobile||""
     };
     _This.setData({
       oEvent: oTempEvent

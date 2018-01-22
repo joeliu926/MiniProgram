@@ -9,6 +9,7 @@ Page({
   data: {
     isAddShare:false,//是否加入分享
     isShare:false,//是否分享
+    shareType: 3,//分享类型  1朋友圈 2分享到群 3分享到好友
     oUserInfo: {},
     consultationId: "",
     caseList: [
@@ -127,12 +128,13 @@ Page({
     oTempEvent.shareEventId = _This.data.shareEventId;
     oTempEvent.productCode = _This.data.productCode;
     oTempEvent.consultationId=_This.data.consultationId,
+      oTempEvent.sceneId = _This.data.consultationId;
     oTempEvent.eventAttrs = {
       consultantId: _This.data.cstUid,
       //caseId: _This.data.caseList[currentPage-1].id,
       appletId: "hldn",
       consultingId: _This.data.consultationId,
-      isLike: _This.data.isLike
+      isLike: _This.data.isLike||""
     }
     oTempEvent.subjectAttrs = {
       appid: "yxy",
@@ -172,15 +174,6 @@ Page({
     _This.setData({
       productcodes: prodcutcodearr
     })
-
-    let shareData = {
-      cases: _This.data.aCaseIds,//案例列表Id
-      consultingId: _This.data.consultationId,//会话id
-      consultantUnionid: _This.data.oUserInfo.unionId,//咨询师unionid
-      products: _This.data.productcodes,//项目列表id  [3002,3025,3028]
-      type: 3//  1朋友圈 2分享到群 3分享到好友
-    };
-    // _This.fUserEvent(event.eType.appShare); //咨询师分享事件
     var caseIds = _This.data.caseIds;
     var currentPage = _This.data.currentPage;
     if (caseIds == "") {
@@ -190,27 +183,45 @@ Page({
       title: '案例分享',
       path: '/pages/client/ccase/ccase?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
       success: function (res) {
-        console.log("shareData---result---->", res);
-        _This.fUserEvent(event.eType.appShare);
-        
+        let sType =3;
         if (res.shareTickets){
-          shareData.type = 2;//2分享到微信群   
+          sType=2;
         }
-        wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
-          // console.log("000000000000000000000000===>", result);
-          if (result.data.code == 0) {
-            _This.setData({ projectItems: result.data.data });
-          } else {
-            console.log(result);
-          }
-          wx.hideLoading();
-        });
-        // console.log("===5555555555555555555============")
-        wx.navigateTo({
-          url: '../../index/home?type=share'
+        _This.setData({
+          shareType: sType,
+          isShare: false
+        }); 
+        _This.fUpdateShare();
+        wx.redirectTo({
+          url: '../../index/home?type=share',
         })
+        /*wx.navigateTo({
+          url: '../../index/home?type=share'
+        })*/
       }
     } 
+  },
+  /**
+   * 用户分享以后更新分享内容
+   */
+  fUpdateShare(){
+    let _This=this;
+    let shareData = {
+      cases: _This.data.aCaseIds,//案例列表Id
+      consultingId: _This.data.consultationId,//会话id
+      consultantUnionid: _This.data.oUserInfo.unionId,//咨询师unionid
+      products: _This.data.productcodes,//项目列表id  [3002,3025,3028]
+      type: _This.data.shareType // 
+    };
+    wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
+      if (result.data.code == 0) {
+        _This.setData({ projectItems: result.data.data });
+        _This.fUserEvent(event.eType.appShare);
+      } else {
+        console.log(result);
+      }
+      wx.hideLoading();
+    });
   },
   /**
    * 案例详情
@@ -317,7 +328,7 @@ Page({
     var oData = _This.data.oEvent;
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
-    wxRequest(wxaapi.event.add.url, oData).then(function (result) {
+    wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
       if (result.data.code == 0) {
         if (!oData.shareEventId) {
           // oData.shareEventId = result.data.data;
@@ -340,7 +351,6 @@ Page({
       productCodes: _This.data.itemids || [],
       // caseIds: _This.data.caseIds
     };
-    // console.log("|||||||||||||||||",pdata);
     wxRequest(wxaapi.pcase.morelist.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         _This.setData({
@@ -392,7 +402,6 @@ Page({
         console.log(result);
       }
       wx.hideLoading();
-      // console.log("pdata------->", _This.data.projectItems);
     });
 
     //可选的项目
@@ -548,8 +557,10 @@ Page({
     let consultationId = _This.data.consultationId;
     let shareEventId = _This.data.shareEventId;
     _This.setData({
-      isShare: false
+      isShare: false,
+      shareType: 1
     });
+    _This.fUpdateShare();
     wx.navigateTo({
       url: `/pages/projectcase/post/post?caseIds=${caseIds}&cstUid=${cstUid}&itemid=${itemid}&consultationId=${consultationId}&shareEventId=${shareEventId}`,
     })

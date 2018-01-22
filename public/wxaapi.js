@@ -184,8 +184,11 @@ var urlConfig = {
     posterdel: {
       url: gConfig.remote + "/posterinfo/posterdel"   //海报删除
     },
-    api:{
-      url: gConfig.remote + "/api/createposter"//保存海报图片
+    createposter:{
+      url: gConfig.remote + "/api/createposter"//创建保存海报图片
+    },
+    deleteposter:{
+      url: gConfig.remote + "/api/deleteposter"//删除生成的海报图片 
     }
   },
   postercategory: {

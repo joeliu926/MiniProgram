@@ -121,7 +121,10 @@ var urlConfig = {
       url: gConfig.remote + "/consult/handelsharecase" // 客户进入咨询师分享的小程序，对某个案例进行点赞操作 或者进行 提交资料给医生操作  
     },
     getpostphoto: {
-      url: gConfig.remote + "/consult/getpostphoto" // 获取用户上传的头像图片
+      url: gConfig.remote + "/consult/getpostphoto" // 获取用户上传的头像图片 
+    },
+    getconsultinfo: {
+      url: gConfig.remote + "/consult/getconsultinfo" // 通过会话id获取咨询师信息
     }
   },
   appointment: {

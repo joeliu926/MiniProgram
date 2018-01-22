@@ -116,4 +116,5 @@ transition: height 1s;
   background-color: #9083ed;
   color: #ffffff;
   padding:0 50rpx;
+  border: none;
 }

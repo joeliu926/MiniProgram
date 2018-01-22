@@ -188,20 +188,22 @@ Page({
     let shareEventId = oOptions.shareEventId||"";
     let path = `pages/client/ccase/ccase?caseIds=${caseIds}&cstUid=${cstUid}&itemid=${itemid}&consultationId=${consultationId}&shareEventId=${shareEventId}`;
     let scene = `${caseIds},${cstUid},${itemid},${consultationId},${shareEventId}`;
+    scene = `${consultationId}`;
+    scene = encodeURI(scene);
         path="pages/test/test";
     let pdata = {
         //path: "pages/test/test?query=1",
         path: path,
         width: 200,
-        scene: scene
+        scene: scene//
     }
-   //console.log("wxaapi.wxaqr.genwxaqrcode.url----->", wxaapi.wxaqr.genwxaqrcode.url);
+    console.log("wxaapi.wxaqr.genwxaqrcode.url----->", wxaapi.wxaqr.genwxaqrcode.url, pdata);
     wxRequest(wxaapi.wxaqr.genwxaqrcode.url, pdata).then(function (result) {
       console.log("fGetQrcode info ----->", result);
       if (result.data.code == 0) {
         _This.setData({
           qrCodeUrl: result.data.data,
-          //currentPoster: result.data.data
+         // currentPoster: result.data.data
         });
       }
     })

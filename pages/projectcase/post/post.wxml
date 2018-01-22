@@ -1,6 +1,7 @@
 <view class='b-s post-content'>  
   <view class='w-10 b-s post-ct' bindtap='fBottomRevert' style='height:{{postHeight+"px"}}'>
-    <view class='w-10 b-s post-img-ct' style='height:{{postImageHeight+"px"}}'>
+   <!--style='height:{{postImageHeight+"px"}}'-->
+    <view class='w-10 b-s post-img-ct'>
        <image class='w-10' mode="widthFix" src='{{currentPoster}}'></image>
     </view>
     <view class='flex-c b-s  logo-ct'>

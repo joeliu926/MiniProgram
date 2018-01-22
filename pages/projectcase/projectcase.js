@@ -155,15 +155,14 @@ Page({
           })
         })
         _This.setData({
-          projectItems: result.data.data,// result.data.data,//, []
-          allarr: everyarr//
+          projectItems:  result.data.data,// result.data.data,//[],
+          allarr:everyarr//
         });
         if (_This.data.projectItems.length == 0) {
           _This.setData({
             Show: 'true',
           });
-        }  
-        
+        }   
       } else { 
         console.log(result);
       }
@@ -179,7 +178,6 @@ Page({
           item.productList.forEach(function (oitem) {
             oitem.productList.forEach(function (titem) {
               codearr.push(titem.productCode);
-
             })
           })
         })

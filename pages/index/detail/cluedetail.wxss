@@ -11,7 +11,6 @@
 }
 
 .top-content {
-
   margin: 0 30rpx 30rpx 30rpx;
   padding: 30rpx;
   display: block;
@@ -31,14 +30,14 @@
 .top-span {
   background-color: #ffa92f;
   border-radius: 5rpx;
-  height:30rpx;
+  /* height: 30rpx; */
   overflow: hidden;
   vertical-align: middle;
   text-align: center;
-  line-height: 30rpx;
+  /* line-height: 30rpx; */
   font-size: 22rpx;
   padding: 5rpx 8rpx 5rpx 5rpx;
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 .top-state {
@@ -53,7 +52,7 @@
   color: #8088f6;
   border-radius: 30rpx;
   line-height: 50rpx;
-  padding:0 30rpx 0 30rpx;
+  padding: 0 30rpx 0 30rpx;
   height: 50rpx;
   display: inline-block;
   text-align: center;
@@ -84,7 +83,7 @@
 
 .top-cnt>div {
   display: block;
-  padding-top:30rpx;
+  padding-top: 30rpx;
   font-size: 30rpx;
 }
 
@@ -98,24 +97,25 @@
 .top-cnt>div span {
   border-radius: 25rpx;
   font-size: 22rpx;
-  padding: 8rpx 18rpx 8rpx 18rpx ;
+  padding: 8rpx 18rpx 8rpx 18rpx;
   border: 2rpx solid #8088f6;
   color: #8088f6;
   margin-right: 10rpx;
-   margin-bottom: 10rpx;
+  margin-bottom: 10rpx;
   display: inline-block;
 }
 
 .cnt {
   display: block;
   margin-top: 20rpx;
-  background-color: white;
+   background-color: white; 
+   height: 100%; 
 }
-
 
 .cnt-content {
   padding: 20rpx;
   display: block;
+  background:#FFF;
   border-bottom: 1px solid #eee;
 }
 
@@ -159,9 +159,12 @@
 
 .cnt-tab {
   border-bottom: 1px solid #eee;
-    height: 90rpx;
-    display: block;
+  height: 90rpx;
+  display: block;
+  background:white;
+
 }
+
 .search-type-item {
   vertical-align: top;
   overflow: hidden;
@@ -175,7 +178,7 @@
 .search-type-top {
   display: block;
   font-size: 30rpx;
-  height:90rpx;
+  height: 90rpx;
   line-height: 90rpx;
 }
 
@@ -187,12 +190,108 @@
   width: 30rpx;
   position: absolute;
   display: inline-block;
-  bottom:0rpx;
-  left:47%;
+  bottom: 0rpx;
+  left: 47%;
 }
 
 .search-type-none {
   height: 10rpx;
   width: 30rpx;
   display: inline-block;
+}
+
+/*互动样式 */
+
+.interact-content {
+  width: 100%;
+  height: 100%;
+  position: relative; 
+  overflow:hidden;
+
+}
+
+.line {
+  position:absolute;
+  top:40rpx;
+  left:245rpx;
+  width:1rpx;
+  height:100%;
+  background:#ccc;
+  z-index:1;
+
+}
+
+.interact-item {
+  /* border: 2rpx solid #eee; */
+  width: 100%;
+  padding: 20rpx 20rpx 20rpx;
+  box-sizing: border-box;
+  position:relative;
+  background:#FFF;
+  border-radius:16rpx;
+
+  margin:20rpx 0 50rpx 0;
+
+}
+.item-top{
+   position: absolute;
+   top:0rpx;
+  left:-93rpx;
+
+}
+
+.cnt-item-time {
+  width:180rpx;
+  height:60rpx;
+  border-radius:35rpx;
+  display:inline-block;
+  font-size:18rpx!important;
+  color:#FFF;
+    /* background:#8088f6;   */
+   background:#4cb0ff; 
+  text-align:center;
+  line-height:60rpx;
+  padding-right:25px;
+  vertical-align:middle;
+  margin-top:10rpx;
+}
+
+.cnt-interact-imgdiv {
+  display: inline-block;
+  /* margin:20rpx 40rpx 0rpx 40rpx; */
+  vertical-align: top;
+  z-index:22;
+  position:relative;
+
+  
+}
+
+.cnt-interact-imgdiv>image {
+  width:70rpx;
+  height:70rpx;
+  vertical-align:middle;
+  border-radius:100rpx;
+  border:5rpx solid #fff;
+  margin-left:-40rpx;
+
+}
+/* photopic */
+.cnt-item-text {
+  display: inline-block;
+  width: 85%;
+  vertical-align: middle;
+}
+
+.cnt-item-name {
+  display: block;
+  font-size: 30rpx;
+}
+
+
+
+.cnt-item-txt {
+  display: block;
+  font-size: 30rpx;
+  margin: 20rpx 0 0 10rpx;
+  color: #333;
 }

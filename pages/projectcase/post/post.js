@@ -190,7 +190,6 @@ Page({
     let scene = `${caseIds},${cstUid},${itemid},${consultationId},${shareEventId}`;
     scene = `${consultationId}`;
     scene = encodeURI(scene);
-    console.log("scene--------------", scene);
         path="pages/test/test";
     let pdata = {
         //path: "pages/test/test?query=1",

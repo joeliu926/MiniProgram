@@ -75,26 +75,32 @@ Page({
     /******** qiehuan*********/
     let aCaseList = _This.data.aCaseList;
     _This.setData({
-      aCurrentList: aCaseList.slice(0, 10)
+      aCurrentList: aCaseList.slice(0, 10),
+      consultationId: options.consultationId ||options.scene|| "2491",
     });
     /***********qiehuan******/
     getApp().getUserData(function (uinfo) {
-      //console.log("---ccase----user info=====>", uinfo);
-      _This.setData({
-        caseIds: caseIds || "",
-        projectName: options.iname,
-        productCode: options.itemid,
-        cstUid: options.cstUid || uinfo.unionId,
-        oUserInfo: uinfo,
-        consultationId: options.consultationId || "2491",
-        likeItem: "",
-        shareEventId: options.shareEventId || "",
-        oEvent: event.oEvent
-      });
+      
+      _This.fGetShareInfoBySessionId(function(cstInfo){
+        _This.setData({
+          caseIds: caseIds || "",
+          projectName: options.iname||"",
+          productCode: cstInfo.productCodes,// options.itemid,
+          cstUid: cstInfo.unionId,// options.cstUid || uinfo.unionId,
+          oUserInfo: uinfo,
+          consultationId: cstInfo.id || "2491",
+          likeItem: "",
+          shareEventId: options.shareEventId || "",
+          oEvent: event.oEvent
+        });
 
-      _This.fCustomerAdd();//客户添加
-      _This.fGetCaseIDs();//会话ID获取案例ids
-      _This.fGetClinicDetail();//获取诊所信息
+        _This.fCustomerAdd();//客户添加
+        _This.fGetCaseIDs();//会话ID获取案例ids
+        _This.fGetClinicDetail();//获取诊所信息
+
+      });//通过会话id获取咨询师信息
+
+
 
     });
   },
@@ -139,6 +145,25 @@ Page({
         isFirst:false
       });
     }).exec();
+  },
+  /**
+   * 通过会话id获取咨询师分享信息（咨询师id，productcode）
+   */
+  fGetShareInfoBySessionId(callback){
+    let _This = this;
+    let pdata = {
+      sessionId: _This.data.consultationId
+    };
+    console.log("post data--->", _This.data.consultationId);
+    wxRequest(wxaapi.consult.getconsultinfo.url, pdata).then(function (result) {
+      console.log("get unionid by sessionid--->",result);
+      if (result.data.code == 0) {
+        callback(result.data.data);
+      } else {
+        console.log("get unionid by sessionid error----", result);
+        callback({});
+      }
+    });
   },
   /**
    * 客户添加或者更新,返回线索id
@@ -264,8 +289,14 @@ Page({
         };
         wxRequest(wxaapi.unionid.userinfo.url, postData).then(resPhone => {
         if (resPhone.data.userinfo) {
+          _This.setData({
+            agree:1
+          });
           callback && callback(resPhone.data.userinfo.phoneNumber);
         } else {
+          _This.setData({
+            agree: 0
+          });
           eDetail.times++;
           if (eDetail.times > 4) {
             callback && callback(false);
@@ -499,11 +530,17 @@ Page({
     oTempEvent.sceneId = _This.data.consultationId;// 场景sceneId  oUserInfo.
     oTempEvent.eventAttrs = {
       consultantId: _This.data.cstUid,
+      clueId:_This.data.clueId, //线索id  
+      leadsId: _This.data.clueId, //线索id新  leadsId
+      consultationId: _This.data.consultationId,//咨询会话ID
+      sceneId:_This.data.consultationId,// 场景sceneId  oUserInfo.
       //caseId: _This.data.caseList[currentPage - 1].id,//
       caseId: _This.data.sCurrentId||"",//
       appletId: "hldn",
       consultingId: _This.data.consultationId,
-      isLike: _This.data.isLike||"1"    ////0不喜欢 1喜欢2未选择
+      isLike: _This.data.isLike||"1",    ////0不喜欢 1喜欢2未选择
+      reserveId:"",//
+      agree: _This.data.agree  //1是允许，0是拒绝
     }
     oTempEvent.subjectAttrs = {
       appid: "yxy",

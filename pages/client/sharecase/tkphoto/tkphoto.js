@@ -193,12 +193,17 @@ Page({
     oTempEvent.leadsId = _This.data.clueId; //线索id新  leadsId
     oTempEvent.sceneId = _This.data.consultationId;// 场景sceneId  oUserInfo.
     oTempEvent.eventAttrs = {
-
+      clueId: _This.data.clueId, //线索id  
+      leadsId: _This.data.clueId, //线索id新  leadsId
+      consultationId: _This.data.consultationId,//咨询会话ID
+      sceneId: _This.data.consultationId,// 场景sceneId  oUserInfo.
       appletId: "hldn",
       consultingId: _This.data.consultationId,
       consultantId: _This.data.cstUid,
       isLike: _This.data.isLike||"",
       caseId: _This.data.caseId || "",//
+      reserveId: "",//
+      agree: _This.data.agree||"", //1是允许，0是拒绝
       image: {
         imgKey: _This.data.imgKey,
         frontface: _This.data.frontface,
@@ -388,8 +393,14 @@ Page({
       };
       wxRequest(wxaapi.unionid.userinfo.url, postData).then(resPhone => {
         if (resPhone.data.userinfo) {
+          _This.setData({
+            agree: 1
+          });
           callback && callback(resPhone.data.userinfo.phoneNumber);
         } else {
+          _This.setData({
+            agree: 0
+          });
           eDetail.times++;
           if (eDetail.times > 4) {
             callback && callback(false);

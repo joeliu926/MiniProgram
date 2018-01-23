@@ -70,25 +70,55 @@
             <text style="margin-left:10rpx ;font-size:20rpx;">{{util.formatTime(item.time,"MM/dd")}}</text>
           </div>
           <!--退出案例  -->
-          <image class='photopic' bindtap="jumpcase" style="display:{{item.code=='appQuit'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
-    
-          <image class='photopic' bindtap="sharecase" style="display:{{item.code=='appShare'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
+          <view  class='photopic' bindtap="jumpcase" style="display:{{item.code=='appQuit'?'block':'none'}}" >
+              <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
+          </view>
+         <!--分享案例  -->
+          <view class='photopic' bindtap="sharecase" style="display:{{item.code=='appShare'?'block':'none'}}">
+            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
+          </view>
+        
           <!--浏览案例  -->
-          <image class='photopic' bindtap="caseview" style="display:{{item.code=='appOpen'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
+          <view class='photopic' bindtap="caseview" style="display:{{item.code=='appOpen'?'block':'none'}}">
+            <image style="width:70rpx;height:70rpx"  src="../../../public/images/icon-tap.png"></image>
+          </view>
+         
           <!--喜欢案例  -->
-          <image class='photopic' data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="likecase" style="display:{{item.code=='caseLike'?'block':'none'}}" src="../../../public/images/icon-like.png"></image>
+          <view class='photopic' data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="likecase" style="display:{{item.code=='caseLike'?'block':'none'}}">
+              <image style="width:70rpx;height:70rpx"  src="../../../public/images/icon-like.png"></image>
+          </view>
+         
           <!--添加备注  -->
-          <image class='photopic' bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}" src="../../../public/images/icon-remark.png"></image>
+          <view  class='photopic' bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}" >
+            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-remark.png"></image>
+          </view>
+          
           <!--授权手机号  -->
-          <image class='photopic' bindtap='' style="display:{{item.code=='authPhone'?'block':'none'}}" src="../../../public/images/icon-mobile.png"></image>
+          <view class='photopic' bindtap='' style="display:{{item.code=='authPhone'?'block':'none'}}" >
+              <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-mobile.png"></image>
+          </view>
+          
           <!--跟新关键信息  -->
-          <image class='photopic' bindtap='editmsg' style="display:{{item.code=='contactEdit'?'block':'none'}}" src="../../../public/images/icon-editpeople.png"></image>
+          <view class='photopic' bindtap='editmsg' style="display:{{item.code=='contactEdit'?'block':'none'}}">
+              <image style="width:70rpx;height:70rpx"  src="../../../public/images/icon-editpeople.png"></image>
+          </view>
+          
           <!-- 预约 -->
-          <image class='photopic' bindtap="bookOption" style="display:{{item.code=='reserve'?'block':'none'}}" src="../../../public/images/icon-book.png"></image>
+          <view class='photopic' bindtap="bookOption" style="display:{{item.code=='reserve'?'block':'none'}}" >
+            <image  src="../../../public/images/icon-book.png"></image>
+          </view>
+          
           <!-- 上传图片 -->
-          <image class='photopic' bindtap="previewImage" style="display:{{item.code=='photoUpload'?'block':'none'}}" src="../../../public/images/icon-pic.png"></image>
+          <view class='photopic' bindtap="previewImage" style="display:{{item.code=='photoUpload'?'block':'none'}}" >
+            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-pic.png"></image>
+          </view>
+
+          
           <!-- 关闭案例 -->
-          <image class='photopic' bindtap="colsecase" style="display:{{item.code=='leadClose'?'block':'none'}}" src="../../../public/images/icon-close.png"></image>
+          <view class='photopic' bindtap="colsecase" style="display:{{item.code=='leadClose'?'block':'none'}}" >
+               <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-close.png"></image>
+          </view>
+         
      
         </div>
         <!--具体轨迹信息  -->

@@ -263,18 +263,13 @@
   width:40%;
 }
 .cnt-interact-imgdiv>image {
-  width:70rpx;
+  /* width:70rpx;
   height:70rpx;
   vertical-align:middle;
-  /* border-radius:100rpx; */
-  /* border-radius:50%; */
-  border-top-left-radius: 100rpx; /* 左上角 */
-  border-top-right-radius: 100rpx; /* 右上角 */
-  border-bottom-right-radius: 100rpx; /* 右下角 */
-  border-bottom-left-radius: 100rpx; /* 左下角 */
-  -webkit-appearance:none;
-  border:5rpx solid #fff;
-  margin-left:-40rpx;
+  border-radius: 70rpx; /* 左上角 */
+  /* -webkit-appearance:none; */
+  /* border:20rpx solid #fff;
+  margin-left:-40rpx;  */
 
 }
 /* photopic */
@@ -287,6 +282,13 @@
   position:absolute;
   right:20rpx;
   top:0rpx;
+  width:70rpx;
+  height:70rpx;
+  vertical-align:middle;
+  border-radius: 70rpx; /* 左上角 */
+  /* -webkit-appearance:none; */
+  border:5rpx solid #fff;
+  /* margin-left:-40rpx; */
 }
 
 .cnt-item-name {

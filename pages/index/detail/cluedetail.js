@@ -61,7 +61,7 @@ Page({
       clueId: this.data.clueDetail.id,//3
     };
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
-
+      console.log("result=========================>>",result);
       if (result.data.code == 0) {
           var interactlists =[];
            result.data.data.forEach(function(item){
@@ -72,20 +72,24 @@ Page({
           interactlists.forEach(function(item){
             imgUrlArr=imgUrlArr.concat(item.imgUrls);          
           })
-          if (_This.data.interactlist.length==0){
+          if (imgUrlArr.length==0){
             _This.setData({
-             
-              interactlist: [],
               asShow:"true"
             });
                 
           }else{
             _This.setData({
-              imgalist: imgUrlArr,
-              interactlist: interactlists,
               asShow: "false"
             });
           }
+         
+          _This.setData({
+            imgalist: imgUrlArr,
+            interactlist: interactlists,
+
+          });
+        
+         
        
       } else {
         console.log("load project info error==>", result);

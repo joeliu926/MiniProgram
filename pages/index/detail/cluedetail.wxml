@@ -62,80 +62,72 @@
       <!-- 时间轴线 -->
       <view class="line"></view>
       <!--轨迹item 测试-->
-      <view class="interact-item clearfix" wx:for="{{interactlist}}" wx:for-item="item" data-type='{{item.code}}' style="">
+      <view class="interact-item" wx:for="{{interactlist}}" wx:for-item="item" data-type='{{item.code}}'>
         <!--图标和时间  -->
-        <div class="cnt-interact-imgdiv clearfix fl">
-          <div class='cnt-item-time fl' style="background:{{item.type == 1 ?'#8088f6':'#4cb0ff'}}">
-            <!-- {{util.formatTime(interact.createTime,"yyyy/MM/dd  hh:mm:ss")}} -->
+        <div class="cnt-interact-imgdiv">
+          <div class='cnt-item-time' style="background:{{item.type == 1 ?'#8088f6':'#4cb0ff'}}">
             <text style="margin-left:20rpx;font-size:30rpx; ">14:22{{util.formatTime(interact.createTime,"hh:mm")}}</text>
             <text style="margin-left:10rpx ;font-size:20rpx;">11/20{{util.formatTime(interact.createTime,"MM/dd")}}</text>
           </div>
           <!--退出案例  -->
-          <image class='photopic fl' bindtap="" style="display:{{item.code==''?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
-          <image class='photopic fl' bindtap="jumpcase" style="display:{{item.code=='caseQuit'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
-          <!--分享案例  style="display:{{item.code=='appShare'?'block':'none'}}"-->
-          <image class='photopic fl' bindtap="sharecase" style="display:{{item.code=='appShare'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
+          <image class='photopic' bindtap="jumpcase" style="display:{{item.code=='appQuit'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
+    
+          <image class='photopic' bindtap="sharecase" style="display:{{item.code=='appShare'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
           <!--浏览案例  -->
-          <image class='photopic fl' bindtap="caseview" style="display:{{item.code=='appOpen'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
+          <image class='photopic' bindtap="caseview" style="display:{{item.code=='appOpen'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
           <!--喜欢案例  -->
-          <image class='photopic fl' bindtap="likecase" style="display:{{item.code=='caseLike'?'block':'none'}}" src="../../../public/images/icon-like.png"></image>
+          <image class='photopic' bindtap="likecase" style="display:{{item.code=='caseLike'?'block':'none'}}" src="../../../public/images/icon-like.png"></image>
           <!--添加备注  -->
-          <image class='photopic fl' bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}" src="../../../public/images/icon-remark.png"></image>
+          <image class='photopic' bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}" src="../../../public/images/icon-remark.png"></image>
           <!--授权手机号  -->
-          <image class='photopic fl' bindtap='' style="display:{{item.code=='authPhone'?'block':'none'}}" src="../../../public/images/icon-mobile.png"></image>
+          <image class='photopic' bindtap='' style="display:{{item.code=='authPhone'?'block':'none'}}" src="../../../public/images/icon-mobile.png"></image>
           <!--跟新关键信息  -->
-          <image class='photopic fl' bindtap='editmsg' style="display:{{item.code=='contactEdit'?'block':'none'}}" src="../../../public/images/icon-editpeople.png"></image>
+          <image class='photopic' bindtap='editmsg' style="display:{{item.code=='contactEdit'?'block':'none'}}" src="../../../public/images/icon-editpeople.png"></image>
           <!-- 预约 -->
-          <image class='photopic fl' bindtap="bookOption" style="display:{{item.code=='reserve'?'block':'none'}}" src="../../../public/images/icon-book.png"></image>
+          <image class='photopic' bindtap="bookOption" style="display:{{item.code=='reserve'?'block':'none'}}" src="../../../public/images/icon-book.png"></image>
           <!-- 上传图片 -->
-          <image class='photopic fl' bindtap="previewImage" style="display:{{item.code=='photoUpload'?'block':'none'}}" src="../../../public/images/icon-pic.png"></image>
+          <image class='photopic' bindtap="previewImage" style="display:{{item.code=='photoUpload'?'block':'none'}}" src="../../../public/images/icon-pic.png"></image>
           <!-- 关闭案例 -->
-          <image class='photopic fl' bindtap="colsecase" style="display:{{item.code=='leadClose'?'block':'none'}}" src="../../../public/images/icon-close.png"></image>
+          <image class='photopic' bindtap="colsecase" style="display:{{item.code=='leadClose'?'block':'none'}}" src="../../../public/images/icon-close.png"></image>
+     
         </div>
         <!--具体轨迹信息  -->
-        <div class='cnt-item-txt fl'>
+        <div class='cnt-item-txt'>
+              <div>
           <!--分享案例 style="display:{{item.code=='appShare'?'block':'none'}}" -->
-          <view style="display:{{item.code=='appShare'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="sharecase"> {{item.customerName}} 分享了 案例</view>
+          <view class='cnt-item-text' style="display:{{item.code=='appShare'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="sharecase"> {{item.customerName}} 分享了 案例</view>
           <!--浏览案例  -->
-          <view style="display:{{item.code=='appOpen'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="caseview">浏览了 {{item.customerName}} 分享的 案例</view>
+          <view class='cnt-item-text'  style="display:{{item.code=='appOpen'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="caseview">浏览了 {{item.customerName}} 分享的 案例</view>
           <!--喜欢案例  -->
-          <view style="display:{{item.code=='caseLike'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="likecase">喜欢了 {{item.customerName}} 分享的 案例</view>
+          <view class='cnt-item-text'  style="display:{{item.code=='caseLike'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="likecase">喜欢了 {{item.customerName}} 分享的 案例</view>
           <!--添加备注  -->
-          <view bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}">
+          <view class='cnt-item-text'  class='cnt-item-text'  bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}">
             <text style="">被  {{item.customerName}} 添加了  备注</text>
             <text style="display:block; color:#cccccc; margin-top:10rpx;">{{item.phoneNumber}}</text>
           </view>
           <!--授权手机号  -->
-          <view style="display:{{item.code=='authPhone'?'block':'none'}}">授权了 手机号
+          <view class='cnt-item-text'  style="display:{{item.code=='authPhone'?'block':'none'}}">授权了 手机号
             <text style="color:#8088f6;" data-num='{{item.phoneNumber}}' bindtap='callhim'>{{item.phoneNumber}}</text>
           </view>
           <!--跟新关键信息  -->
-          <view style="display:{{item.code=='contactEdit'?'block':'none'}}" bindtap="editmsg">被 {{item.customerName}} 更新了 关键信息</view>
+          <view class='cnt-item-text'  style="display:{{item.code=='contactEdit'?'block':'none'}}" bindtap="editmsg">被 {{item.customerName}} 更新了 关键信息</view>
           <!--预约信息  -->
-          <view style="display:{{item.code=='reserve'?'block':'none'}}" bindtap="bookOption">被 {{item.customerName}} 预约了 现场咨询</view>
+          <view class='cnt-item-text'  style="display:{{item.code=='reserve'?'block':'none'}}" bindtap="bookOption">被 {{item.customerName}} 预约了 现场咨询</view>
           <!--上传照片  -->
-          <view style="display:{{item.code=='photoUpload'?'block':'none'}}">
+          <view class='cnt-item-text'  style="display:{{item.code=='photoUpload'?'block':'none'}}">
             <text style="vertical-align:middle;">上传了 照片</text>
             <image bindtap="previewImage" src="../../../public/images/picture.png" style="width:60rpx;height:60rpx;vertical-align:middle; margin-left:10rpx;"></image>
           </view>
           <!-- 线索关闭 -->
-          <view style="display:{{item.code=='leadClose'?'block':'none'}};color:#000;" bindtap='colsecase'>线索被 {{item.customerName}} 关闭了</view>
+          <view class='cnt-item-text'  style="display:{{item.code=='leadClose'?'block':'none'}};color:#000;" bindtap='colsecase'>线索被 {{item.customerName}} 关闭了</view>
           <!-- 退出案例 -->
-          <view style="display:{{item.code=='caseQuit'?'block':'none'}};color:#000;" bindtap='jumpcase'>退出了 案例</view>
+          <view class='cnt-item-text'  style="display:{{item.code=='appQuit'?'block':'none'}};color:#000;" bindtap='jumpcase'>退出了 案例</view>
+          </div>
         </div>
       </view>
-
-
-
-
-
-
-
     </div>
-
-    <!-- <div class="cnt-content" style='text-align:center;font-size:30rpx;display:{{remarklist.length==0?"block":"none"}};  height: 200rpx;line-height: 200rpx;vertical-align: middle;'>
+     <div class="cnt-content" style='text-align:center;font-size:30rpx;display:{{remarklist.length==0&&isshow=="true"?"block":"none"}};height: 200rpx;line-height: 200rpx;vertical-align: middle;'>
       当前线索还没有备注！
-    </div> -->
-
+    </div>
   </div>
 </view>

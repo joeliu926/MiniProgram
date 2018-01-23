@@ -24,7 +24,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("++++++>><<", options.id)
     this.initData(options.id);
   },
   // 去 预约页面
@@ -60,15 +59,13 @@ Page({
     let pdata = {
       clueId: this.data.clueDetail.id,//3
     };
-    // console.log("this.data.clueDetail.id======>>", this.data.clueDetail.id);
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
 
-
-      console.log("result===========>>>>>",result);
       if (result.data.code == 0) {
           var interactlists =[];
            result.data.data.forEach(function(item){
             interactlists=item.events;
+            return;
           })
            var imgUrlArr=[];
           interactlists.forEach(function(item){
@@ -78,7 +75,6 @@ Page({
           imgalist: imgUrlArr,
           interactlist: interactlists,
         });
-        // console.log("imgalist++++++++++>>>", _This.data.imgalist)
       } else {
         console.log("load project info error==>", result);
       }
@@ -105,10 +101,8 @@ Page({
     let pdata = {
       id: params
     };
-    console.log("|||||||||||||", pdata);
     wxRequest(wxaapi.index.cluedetail.url, pdata).then(function (result) {
       let resultobj = result.data.data;
-      console.log('resultobj', resultobj);
       if (result.data.code == 0) {
         let cname = resultobj.customerName;
         if (!cname) {
@@ -136,8 +130,6 @@ Page({
           clueName: cname,
           bookName: _bookname
         });
-
-        console.log("======11111====", _This.data.clueName);
         _This.initInteract();
         _This.initRemark();
       } else {
@@ -233,10 +225,8 @@ Page({
 
   // 点击跳转到所喜欢的案例（单个） 
   likecase(e) {
-    console.log("e==============>>",e);
     // caseid=e.currentTarget.caseid;
     let caseid = 1;
-   
     wx.navigateTo({
       url: '/pages/index/casedetail/casedetail?caseid=' + 1
     });
@@ -252,8 +242,6 @@ Page({
   },
  // 通过点击电话号码  向客户拨打电话；
   callhim(e){
-
-    console.log("0000000000000000000====>>>>", e)
     var photonum= e.target.dataset.num;
     wx.makePhoneCall({
       phoneNumber: photonum//'1340000' //仅为示例，并非真实的电话号码
@@ -277,5 +265,4 @@ Page({
        isshow: 'true',
      }); 
   }
-
 })

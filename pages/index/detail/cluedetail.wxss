@@ -258,11 +258,10 @@
 
 .cnt-interact-imgdiv {
   display: inline-block;
-  /* margin:20rpx 40rpx 0rpx 40rpx; */
   vertical-align: top;
   z-index:22;
   position:relative;
-
+  width:40%;
   
 }
 
@@ -281,6 +280,11 @@
   width: 85%;
   vertical-align: middle;
 }
+.photopic{
+  position:absolute;
+  right:20rpx;
+  top:0rpx;
+}
 
 .cnt-item-name {
   display: block;
@@ -290,8 +294,15 @@
 
 
 .cnt-item-txt {
-  display: block;
+  display: inline-block;
+  width:60%;
   font-size: 30rpx;
-  margin: 20rpx 0 0 10rpx;
   color: #333;
+}
+.cnt-item-txt>div{
+   margin: 20rpx 0 0 10rpx;display:inline-block;width:100%;
+}
+
+.cnt-item-text{
+  width:100%;overflow:hidden; text-overflow:ellipsis;white-space:nowrap; 
 }

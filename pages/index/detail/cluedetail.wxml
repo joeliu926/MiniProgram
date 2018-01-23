@@ -95,11 +95,11 @@
         <!--具体轨迹信息  -->
         <div class='cnt-item-txt fl'>
           <!--分享案例 style="display:{{item.code=='appShare'?'block':'none'}}" -->
-          <view style="display:{{item.code=='appShare'?'block':'none'}}" data-caseId="{{item.caseid}}" data-customerName="{{item.customerName}}" bindtap="sharecase"> {{item.customerName}} 分享了 案例</view>
+          <view style="display:{{item.code=='appShare'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="sharecase"> {{item.customerName}} 分享了 案例</view>
           <!--浏览案例  -->
-          <view style="display:{{item.code=='appOpen'?'block':'none'}}" data-caseId="{{item.caseid}}" data-customerName="{{item.customerName}}" bindtap="caseview">浏览了 {{item.customerName}} 分享的 案例</view>
+          <view style="display:{{item.code=='appOpen'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="caseview">浏览了 {{item.customerName}} 分享的 案例</view>
           <!--喜欢案例  -->
-          <view style="display:{{item.code=='caseLike'?'block':'none'}}" data-caseId="{{item.caseid}}" data-customerName="{{item.customerName}}" bindtap="likecase">喜欢了 {{item.customerName}} 分享的 案例</view>
+          <view style="display:{{item.code=='caseLike'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="likecase">喜欢了 {{item.customerName}} 分享的 案例</view>
           <!--添加备注  -->
           <view bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}">
             <text style="">被  {{item.customerName}} 添加了  备注</text>

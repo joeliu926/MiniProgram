@@ -206,6 +206,7 @@ Page({
       //   frontface: _This.data.frontface,
       //   sideface: _This.data.sideface
       // },
+      remark: '',
       imgNum: imageList.length,
       imgUrls: imageList,
       triggeredTime: new Date().getTime()

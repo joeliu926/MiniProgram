@@ -71,6 +71,7 @@
             <text style="margin-left:10rpx ;font-size:20rpx;">11/20{{util.formatTime(interact.createTime,"MM/dd")}}</text>
           </div>
           <!--退出案例  -->
+          <image class='photopic fl' bindtap="" style="display:{{item.code==''?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
           <image class='photopic fl' bindtap="jumpcase" style="display:{{item.code=='caseQuit'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
           <!--分享案例  style="display:{{item.code=='appShare'?'block':'none'}}"-->
           <image class='photopic fl' bindtap="sharecase" style="display:{{item.code=='appShare'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>

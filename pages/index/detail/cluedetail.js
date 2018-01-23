@@ -225,11 +225,18 @@ Page({
 
   // 点击跳转到所喜欢的案例（单个） 
   likecase(e) {
-    // caseid=e.currentTarget.caseid;
-    let caseid = 1;
-    wx.navigateTo({
-      url: '/pages/index/casedetail/casedetail?caseid=' + 1
-    });
+    console.log("===========================",e);
+    let caseid = e.currentTarget.dataset.caseid;
+    if (caseid){
+      console.log(typeof (caseid), "============");
+    
+        wx.navigateTo({
+          url: '/pages/index/casedetail/casedetail?caseid=' + caseid
+        });
+    }else{
+        return fasle;
+    }
+   
 
   },
   //  点击跳转到预约的页面（客户） 

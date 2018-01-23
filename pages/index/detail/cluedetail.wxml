@@ -66,8 +66,8 @@
         <!--图标和时间  -->
         <div class="cnt-interact-imgdiv">
           <div class='cnt-item-time' style="background:{{item.type == 1 ?'#8088f6':'#4cb0ff'}}">
-            <text style="margin-left:20rpx;font-size:30rpx; ">14:22{{util.formatTime(interact.createTime,"hh:mm")}}</text>
-            <text style="margin-left:10rpx ;font-size:20rpx;">11/20{{util.formatTime(interact.createTime,"MM/dd")}}</text>
+            <text style="margin-left:20rpx;font-size:30rpx; ">{{util.formatTime(item.time,"hh:mm")}}</text>
+            <text style="margin-left:10rpx ;font-size:20rpx;">{{util.formatTime(item.time,"MM/dd")}}</text>
           </div>
           <!--退出案例  -->
           <image class='photopic' bindtap="jumpcase" style="display:{{item.code=='appQuit'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
@@ -76,7 +76,7 @@
           <!--浏览案例  -->
           <image class='photopic' bindtap="caseview" style="display:{{item.code=='appOpen'?'block':'none'}}" src="../../../public/images/icon-tap.png"></image>
           <!--喜欢案例  -->
-          <image class='photopic' bindtap="likecase" style="display:{{item.code=='caseLike'?'block':'none'}}" src="../../../public/images/icon-like.png"></image>
+          <image class='photopic' data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="likecase" style="display:{{item.code=='caseLike'?'block':'none'}}" src="../../../public/images/icon-like.png"></image>
           <!--添加备注  -->
           <image class='photopic' bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}" src="../../../public/images/icon-remark.png"></image>
           <!--授权手机号  -->

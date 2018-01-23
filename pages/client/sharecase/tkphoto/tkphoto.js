@@ -115,6 +115,8 @@ Page({
                   imgKey: 0
                 });
               }
+
+              console.log('loaddingphoto')
               _This.fUserEvent(event.eType.photoUpload);
             }
             // console.log('res', res);
@@ -153,22 +155,8 @@ Page({
     wx.showLoading({
       title: '上传中...',
     })
-
-
-
-
     _This.fCustomerOperate();
     _This.fUserEvent(event.eType.informationSubmit);
-   // _This.fCustomerMsg();
-   /* setTimeout(function () {
-      wx.hideLoading();
-      wx.showToast({
-        title: '成功',
-        icon: 'success',
-        duration: 2000
-      });
-      _This.setData({ isUpload: true });
-    }, 2000);*/
     wx.hideLoading();
    
 
@@ -187,11 +175,20 @@ Page({
     var _This = this;
     var oTempEvent = _This.data.oEvent;
     oTempEvent.shareEventId = _This.data.shareEventId;
-   // oTempEvent.productCode = _This.data.productCode;
+    oTempEvent.productCode = _This.data.productCode ? _This.data.productCode:'';
     oTempEvent.clueId = _This.data.clueId; //线索id
     oTempEvent.consultationId = _This.data.consultationId;//咨询会话ID
     oTempEvent.leadsId = _This.data.clueId; //线索id新  leadsId
     oTempEvent.sceneId = _This.data.consultationId;// 场景sceneId  oUserInfo.
+
+    let imageList = [];
+    if (_This.data.frontface)
+      imageList.push(_This.data.frontface);
+    if (_This.data.sideface)
+      imageList.push(_This.data.sideface);
+
+
+
     oTempEvent.eventAttrs = {
       clueId: _This.data.clueId, //线索id  
       leadsId: _This.data.clueId, //线索id新  leadsId
@@ -204,11 +201,14 @@ Page({
       caseId: _This.data.caseId || "",//
       reserveId: "",//
       agree: _This.data.agree||"", //1是允许，0是拒绝
-      image: {
-        imgKey: _This.data.imgKey,
-        frontface: _This.data.frontface,
-        sideface: _This.data.sideface
-      }
+      // image: {
+      //   imgKey: _This.data.imgKey,
+      //   frontface: _This.data.frontface,
+      //   sideface: _This.data.sideface
+      // },
+      imgNum: imageList.length,
+      imgUrls: imageList,
+      triggeredTime: new Date().getTime()
     }
     oTempEvent.subjectAttrs = {
       appid: "yxy",

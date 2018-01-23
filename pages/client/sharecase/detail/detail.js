@@ -62,9 +62,6 @@ Page({
         mobile: ""
       }
     }
-
-
-
   },
 
   /**
@@ -170,7 +167,14 @@ Page({
       consultingId: _This.data.consultationId,
       consultantId: _This.data.cstUid,
       isLike: _This.data.isLike,
-      caseId: _This.data.detailId
+      caseId: _This.data.detailId,
+      clueId: "", //线索id  
+      sceneId: "",
+      reserveId: "",//
+      agree: "",  //1是允许，0是拒绝
+      imgNum: "",
+      imgUrls: [],
+      triggeredTime: new Date().getTime()
     }
     oTempEvent.subjectAttrs = {
       appid: "yxy",

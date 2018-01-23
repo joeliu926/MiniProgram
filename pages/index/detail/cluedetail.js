@@ -16,6 +16,7 @@ Page({
     bookName: '',
     show: 'true',
     isshow: 'false',
+    asShow:'false',
     hide:'flase',
     imgalist:[],
     // imgalist: ["http://pic32.photophoto.cn/20140807/0005018763115153_b.jpg", "http://pic28.photophoto.cn/20130827/0005018371946994_b.jpg", "http://pic28.photophoto.cn/20130830/0005018667531249_b.jpg","http://pic8.nipic.com/20100801/387600_002750589396_2.jpg"],
@@ -71,10 +72,21 @@ Page({
           interactlists.forEach(function(item){
             imgUrlArr=imgUrlArr.concat(item.imgUrls);          
           })
-        _This.setData({
-          imgalist: imgUrlArr,
-          interactlist: interactlists,
-        });
+          if (_This.data.interactlist.length==0){
+            _This.setData({
+             
+              interactlist: [],
+              asShow:"true"
+            });
+                
+          }else{
+            _This.setData({
+              imgalist: imgUrlArr,
+              interactlist: interactlists,
+              asShow: "false"
+            });
+          }
+       
       } else {
         console.log("load project info error==>", result);
       }
@@ -201,14 +213,17 @@ Page({
       }
     });
     if (dataset.id == 1) {
+      this.initInteract();
       this.setData({
         show: 'true',
         isshow: 'false',
+
       })
     } else if (dataset.id == 2) {
       this.setData({
         show: 'false',
         isshow: 'true',
+        asShow: 'false'
       })
     }
 
@@ -270,6 +285,7 @@ Page({
        selectItem: this.data.selectItem,
        show: 'false',
        isshow: 'true',
+       
      }); 
   }
 })

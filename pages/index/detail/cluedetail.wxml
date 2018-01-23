@@ -126,6 +126,9 @@
         </div>
       </view>
     </div>
+    <div class="cnt-content-interact" style='text-align:center;font-size:30rpx;display:{{interactlist.length==0&&asShow=="true"?"block":"none"}};height: 200rpx;line-height: 200rpx;vertical-align: middle;'>
+      当前互动还没有轨迹！
+    </div>
      <div class="cnt-content" style='text-align:center;font-size:30rpx;display:{{remarklist.length==0&&isshow=="true"?"block":"none"}};height: 200rpx;line-height: 200rpx;vertical-align: middle;'>
       当前线索还没有备注！
     </div>

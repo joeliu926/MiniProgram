@@ -229,14 +229,13 @@
   position:relative;
   background:#FFF;
   border-radius:16rpx;
-
   margin:20rpx 0 50rpx 0;
 
 }
 .item-top{
    position: absolute;
    top:0rpx;
-  left:-93rpx;
+   left:-93rpx;
 
 }
 
@@ -262,14 +261,18 @@
   z-index:22;
   position:relative;
   width:40%;
-  
 }
-
 .cnt-interact-imgdiv>image {
   width:70rpx;
   height:70rpx;
   vertical-align:middle;
-  border-radius:100rpx;
+  /* border-radius:100rpx; */
+  /* border-radius:50%; */
+  border-top-left-radius: 100rpx; /* 左上角 */
+  border-top-right-radius: 100rpx; /* 右上角 */
+  border-bottom-right-radius: 100rpx; /* 右下角 */
+  border-bottom-left-radius: 100rpx; /* 左下角 */
+  -webkit-appearance:none;
   border:5rpx solid #fff;
   margin-left:-40rpx;
 
@@ -305,4 +308,10 @@
 
 .cnt-item-text{
   width:100%;overflow:hidden; text-overflow:ellipsis;white-space:nowrap; 
+}
+.cnt-content-interact{
+  padding: 20rpx;
+  display: block;
+  background:#FFF;
+  border-bottom: 1px solid #eee;
 }

@@ -232,6 +232,11 @@ Page({
     this.setData({
       isShowMask:false
     });
+    setTimeout(function () {
+      wx.navigateTo({
+        url: '../../index/home?type=share'
+      });
+    }, 1000);
   },
   /**
    * 保存海报图片

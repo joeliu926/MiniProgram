@@ -175,7 +175,7 @@ Page({
     var _This = this;
     var oTempEvent = _This.data.oEvent;
     oTempEvent.shareEventId = _This.data.shareEventId;
-    oTempEvent.productCode = _This.data.productCode ? _This.data.productCode:'';
+    oTempEvent.productCode = [];
     oTempEvent.clueId = _This.data.clueId; //线索id
     oTempEvent.consultationId = _This.data.consultationId;//咨询会话ID
     oTempEvent.leadsId = _This.data.clueId; //线索id新  leadsId
@@ -206,6 +206,7 @@ Page({
       //   frontface: _This.data.frontface,
       //   sideface: _This.data.sideface
       // },
+      remark: '',
       imgNum: imageList.length,
       imgUrls: imageList,
       triggeredTime: new Date().getTime()

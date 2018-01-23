@@ -174,6 +174,7 @@ Page({
       agree: "",  //1是允许，0是拒绝
       imgNum: "",
       imgUrls: [],
+      remark: '',
       triggeredTime: new Date().getTime()
     }
     oTempEvent.subjectAttrs = {

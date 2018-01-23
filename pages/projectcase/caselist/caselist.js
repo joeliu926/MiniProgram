@@ -140,6 +140,7 @@ Page({
       openid: _This.data.oUserInfo.openId,
       imgNum: "",
       imgUrls: [],
+      remark: '',
       triggeredTime: new Date().getTime()
     }
     oTempEvent.subjectAttrs = {

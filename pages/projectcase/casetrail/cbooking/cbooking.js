@@ -296,13 +296,22 @@ Page({
     var oTempEvent = _This.data.oEvent;
     oTempEvent.code ="reserve";
     oTempEvent.eventAttrs = {
-      triggeredTime:new Date().valueOf(),//触发时间
       appletId: "hldn",//app小程序
       consultingId: _This.data.options.consultingId,//会话id
       reserveId: _This.data.reserveId,//预约id
       appid: "yxy",//营销云
       openid: "",
       unionid: _This.data.options.csunionid,
+      consultantId: _This.data.cstUid,
+      caseId: _This.data.caseList[currentPage - 1].id,
+      isLike: "",
+      clueId: "",//无
+      sceneId: "",
+      agree: "",
+      imgNum: "",
+      imgUrls: [],
+      remark: '',
+      triggeredTime: new Date().getTime()
     };
     oTempEvent.subjectAttrs = {
       consultantId: _This.data.oUserInfo.unionId

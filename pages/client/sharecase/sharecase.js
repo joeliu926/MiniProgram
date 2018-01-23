@@ -109,7 +109,7 @@ Page({
     var oTempEvent = _This.data.oEvent;
     var currentPage = _This.data.currentPage;
     oTempEvent.shareEventId = _This.data.shareEventId;
-    oTempEvent.productCode = _This.data.productCode;
+    oTempEvent.productCode = _This.data.productCode ? _This.data.productCode:[];
 
     //console.log("_This.data.caseList[currentPage - 1].id===>", _This.data.caseList[currentPage - 1].id);
 
@@ -118,7 +118,14 @@ Page({
       caseId: _This.data.caseList[currentPage - 1].id,//
       appletId: "hldn",
       consultingId: _This.data.consultationId,
-      isLike: _This.data.isLike
+      isLike: _This.data.isLike,
+      clueId: "", //线索id  
+      sceneId: "",
+      reserveId: "",//
+      agree: "",  //1是允许，0是拒绝
+      imgNum: "",
+      imgUrls: [],
+      triggeredTime: new Date().getTime()
     }
     oTempEvent.subjectAttrs = {
       appid: "yxy",

@@ -88,9 +88,6 @@ Page({
     var _This = this;
     var itemids = options.itemids.split(",");
     var caseIds = options.caseIds;
-
-
-
     getApp().getUserData(function (uinfo) {
       _This.setData({
         isConsult: caseIds ? false : true,
@@ -126,15 +123,24 @@ Page({
     var oTempEvent = _This.data.oEvent;
     var currentPage = _This.data.currentPage;
     oTempEvent.shareEventId = _This.data.shareEventId;
-    oTempEvent.productCode = _This.data.productCode;
+    oTempEvent.productCode = _This.data.productCodes.length>0 ? _This.data.productCodes:[];
     oTempEvent.consultationId=_This.data.consultationId,
-      oTempEvent.sceneId = _This.data.consultationId;
+    oTempEvent.sceneId = _This.data.consultationId;
     oTempEvent.eventAttrs = {
       consultantId: _This.data.cstUid,
-      //caseId: _This.data.caseList[currentPage-1].id,
+      caseId: _This.data.caseList[currentPage-1].id,
       appletId: "hldn",
       consultingId: _This.data.consultationId,
-      isLike: _This.data.isLike||""
+      isLike: _This.data.isLike||"",
+      clueId: "",//无
+      reserveId: "",//无
+      sceneId: _This.data.consultationId,
+      agree: "",
+      unionid: _This.data.oUserInfo.unionId,
+      openid: _This.data.oUserInfo.openId,
+      imgNum: "",
+      imgUrls: [],
+      triggeredTime: new Date().getTime()
     }
     oTempEvent.subjectAttrs = {
       appid: "yxy",
@@ -179,6 +185,7 @@ Page({
     if (caseIds == "") {
       caseIds = _This.data.caseList[currentPage - 1].id;
     }
+ 
     return {
       title: '案例分享',
       path: '/pages/client/ccase/ccase?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
@@ -328,6 +335,8 @@ Page({
     var oData = _This.data.oEvent;
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
+
+    console.log('oData', oData);
     wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
       if (result.data.code == 0) {
         if (!oData.shareEventId) {
@@ -362,9 +371,6 @@ Page({
         console.log("case list----", result);
       }
     });
-
-
-
   },
   /**
    * 下拉选择 获取项目列表
@@ -583,8 +589,4 @@ Page({
       isShare:false
     });
   }
-
-
-
-
 })

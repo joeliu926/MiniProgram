@@ -112,6 +112,7 @@ Page({
     };
     wxRequest(wxaapi.index.cluedetail.url, pdata).then(function (result) {
       let resultobj = result.data.data;
+      console.log("===============resultobj", resultobj);
       if (result.data.code == 0) {
         let cname = resultobj.customerName;
         if (!cname) {

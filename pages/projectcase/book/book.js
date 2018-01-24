@@ -63,7 +63,7 @@ Page({
 
   onLoad: function (options) {
     
-    console.log("booking options=====>", options);
+    // console.log("booking options=====>", options);
    
     let _This = this;
    
@@ -175,7 +175,7 @@ Page({
     wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         _This.setData({ projectItems: result.data.data });
-        console.log("result.data.data", result.data.data)
+        // console.log("result.data.data", result.data.data)
       } else {
       }
       wx.hideLoading();
@@ -197,7 +197,7 @@ Page({
     this.setData({
       isShow:true,
     });
-    console.log("isShow", this.data.isShow)
+    // console.log("isShow", this.data.isShow)
     var timer = setTimeout(function () {
       _This.setData({
         isShow: !_This.data.isShow
@@ -304,7 +304,7 @@ Page({
     this.setData({
       clueRemark: e.detail.value
     });
-    console.log("beizhu------", this.data.clueRemark);
+    // console.log("beizhu------", this.data.clueRemark);
    // console.log("cucustomerInfo", this.data.customerInfo)
   },
   // /**
@@ -362,7 +362,7 @@ Page({
     this.setData({showpro:false,
                   showtextarea:false
     });
-    console.log("showtextarea", this.data.showtextarea)
+    // console.log("showtextarea", this.data.showtextarea)
     this.checkbook();
   },
   hideproduct:function(){
@@ -542,7 +542,7 @@ Page({
     //_This.data.appointmentId
     //console.log("pdata----1111--->", pdata);
     wxRequest(wxaapi.appointment.detail.url,pdata).then(function (result) {
-      console.log("booking==00000--appointment===>", result, typeof(result.data.data));
+      // console.log("booking==00000--appointment===>", result, typeof(result.data.data));
       let appointmentTime = result.data.data.appointmentTime;
       //console.log("appointmentTime----->", appointmentTime);
       let remark = result.data.data.remark; 
@@ -566,7 +566,7 @@ Page({
        
         //console.log("appointment=====result====",result);
         result.data.data = typeof (result.data.data) == "object" ? result.data.data : {};
-       console.log("result.data.data ", result.data.data )
+      //  console.log("result.data.data ", result.data.data )
         _This.setData({
           status: ostatus,
           sSelect: sSelects,

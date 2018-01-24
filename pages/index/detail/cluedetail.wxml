@@ -142,9 +142,9 @@
             <!--更新关键信息  -->
             <view class='cnt-item-text' style="display:{{item.code=='contactEdit'?'block':'none'}}" bindtap="editmsg">被 {{item.userName}} 更新了 关键信息</view>
             <!--预约信息  -->
-            <view class='cnt-item-text '  style="position:relative; display:{{item.code=='reserve'?'block':'none'}}" bindtap="bookOption">
+            <view class='cnt-item-text '  style="position:relative; display:{{item.code=='reserve'?'block':'none'}}"  bindtap="bookOption">
               <text style="vertical-align:middle;">被 {{item.userName}} 预约了 现场咨询</text>
-              <span style="vertical-align:middle;margin-left:10rpx; position:absolute;  top:0rpx;right:10rpx;" bindtap="bookOption">
+              <span style="vertical-align:middle;margin-left:10rpx; position:absolute;  top:0rpx;right:10rpx;">
                 <image style="width:44rpx;height:44rpx; vertical-align:middle;" src="../../../public/images/open.png">
                 </image>
               </span>

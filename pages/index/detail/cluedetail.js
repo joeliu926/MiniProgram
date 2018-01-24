@@ -27,9 +27,10 @@ Page({
     this.initData(options.id);
   },
   // 去 预约页面
-  bookOption(params) {
+  bookOption() {
     // console.log("params+++++++++++++>>>>>>>>>", params);
-    let pobj = params.target.dataset.obj;
+    // let pobj = params.target.dataset.obj;
+    // console.log("==================pobj",pobj)
     wx.navigateTo({
       url: `../../projectcase/book/book?userId=${this.data.clueDetail.userId}&userUnionId=${this.data.clueDetail.userUnionId}&appointmentId=${this.data.clueDetail.appointmentId}&tenantId=${this.data.clueDetail.tenantId}&customerId=${this.data.clueDetail.customerId}&clueId=${this.data.clueDetail.id}&clueStatus=${this.data.clueDetail.clueStatus}`,
     });
@@ -110,9 +111,10 @@ Page({
     let pdata = {
       id: params
     };
+    // console.log("999999999999999999999",pdata)
     wxRequest(wxaapi.index.cluedetail.url, pdata).then(function (result) {
       let resultobj = result.data.data;
-      console.log("===============resultobj", resultobj);
+      // console.log("===============resultobj", resultobj);
       if (result.data.code == 0) {
         let cname = resultobj.customerName;
         if (!cname) {
@@ -250,8 +252,9 @@ Page({
 
   },
   //  点击跳转到预约的页面（客户） 
-  // bookpeople() {
-  // },
+  bookpeople() {
+  
+  },
  // 通过点击电话号码  向客户拨打电话；
   callhim(e){
     var photonum= e.target.dataset.num;

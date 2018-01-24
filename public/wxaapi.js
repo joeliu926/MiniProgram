@@ -16,7 +16,7 @@ var gConfig={
  
   /****dev start*****/
   remoteWx: "https://nihaomc.com/wx_test",
-  remote: "https://nihaomc.com/wxa_test",
+  remote: "https://nihaomc.com/wxa_dev",
   uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload"
   /****dev end*****/
 }

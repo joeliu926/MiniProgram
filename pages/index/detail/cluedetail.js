@@ -13,6 +13,137 @@ Page({
     dddddd: "../../../public/images/icon-tap.png",
     remarklist: [{}],
     interactlist: [],
+    // interactlist: [
+    //   {
+    //     "code": "appShare",
+    //     "type": 1,
+    //     "appletId": "hldn",
+    //     "sceneId": 3,
+    //     "clueId": 3,
+    //     "time": 1516346784000,
+    //     "userName": "Andrew",
+    //     "desc": "分享了案例！"
+    //   },
+    //   {
+    //     "code": "appOpen",
+    //     "type": 1,
+    //     "appletId": "hldn",
+    //     "caseId": 3,
+    //     "clueId": 3,
+    //     "time": 1512704516458,
+    //     "userName": "Andrew",
+    //     "customerName": "姜士虎",
+    //     "desc": "浏览了案例"
+    //   },
+    //   {
+    //     "code": "caseLike",
+    //     "appletId": "hldn",
+    //     "caseId": 3,
+    //     "clueId": 3,
+    //     "type": 1,
+    //     "time": 1512704516458,
+    //     "userName": "Andrew",
+    //     "customerName": "姜士虎",
+    //     "desc": "喜欢了案例"
+    //   },
+    //   {
+    //     "code": "photoUpload",
+    //     "appletId": "hldn",
+    //     "sceneId": 3,
+    //     "type": 1,
+    //     "sceneCode": 3,//暂时无用
+    //     "caseId": 3,
+    //     "clueId": 3,
+    //     "time": 1512704516458,
+    //     "userName": "Andrew",
+    //     "customerName": "姜士虎",
+    //     "desc": "上传了照片",
+    //     "imgNum": 2,
+    //     "imgUrls": [
+    //       "http://111.com",
+    //       "http://111.com"
+    //     ]
+    //   },
+    //   {
+    //     "code": "authPhone",
+    //     "appletId": "hldn",
+    //     "sceneId": 3,
+    //     "clueId": 3,
+    //     "caseId": 3,
+    //     "type": 1,
+    //     "time": 1512704516458,
+    //     "userName": "Andrew",
+    //     "agree": "是否同意",
+    //     "customerName": "姜士虎",
+    //     "phoneNumber": "12345687985",
+    //     "desc": "授权了手机号"
+    //   },
+    //   {
+    //     "code": "appQuit",
+    //     "appletId": "hldn",
+    //     "type": 1,
+    //     "sceneId": 3,
+    //     "caseId": 3,
+    //     "clueId": 3,
+    //     "time": 1512704516458,
+    //     "consultantId": 15,
+    //     "customerName": "姜士虎",
+    //     "desc": "退出案例浏览"
+    //   },
+    //   {
+    //     "code": "reserve",
+    //     "appletId": "hldn",
+    //     "sceneId": 3,
+    //     "caseId": 3,
+    //     "type": 2,
+    //     "reserveId": 3,
+    //     "clueId": 3,
+    //     "time": 1512704516458,
+    //     "consultantId": 15,
+    //     "customerName": "姜士虎",
+    //     "desc": "预约了现场！"
+    //   },
+    //   {
+    //     "code": "contactEdit",
+    //     "appletId": "hldn",
+    //     "sceneId": 3,
+    //     "caseId": 3,
+    //     "clueId": 3,
+    //     "type": 2,
+    //     "items": {
+    //       "name": "原名称",
+    //       "phone": "13213174665"
+    //     },
+    //     "time": 1512704516458,
+    //     "consultantId": 15,
+    //     "customerName": "姜士虎",
+    //     "desc": "编辑联系人！"
+    //   },
+    //   {
+    //     "code": "leadClose",
+    //     "appletId": "hldn",
+    //     "sceneId": 3,
+    //     "caseId": 3,
+    //     "clueId": 3,
+    //     "type": 2,
+    //     "time": 1512704516458,
+    //     "consultantId": 15,
+    //     "customerName": "姜士虎",
+    //     "desc": "关闭编辑联系人！"
+    //   },
+    //   {
+    //     "code": "noteAdd",
+    //     "appletId": "hldn",
+    //     "sceneId": 3,
+    //     "caseId": 3,
+    //     "clueId": 3,
+    //     "type": 2,
+    //     "time": 1512704516458,
+    //     "consultantId": 15,
+    //     "customerName": "姜士虎",
+    //     "desc": "关闭编辑联系人！"
+    //   }
+    // ],
     bookName: '',
     show: 'true',
     isshow: 'false',
@@ -57,11 +188,11 @@ Page({
    */
   initInteract() {
     let _This = this;
-   
     let pdata = {
       clueId: this.data.clueDetail.id,//3
     };
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
+      console.log("result===============>",result);
       if (result.data.code == 0) {
         var interactlists = [];
         result.data.data.forEach(function (item) {
@@ -90,8 +221,8 @@ Page({
         console.log("load project info error==>", result);
       }
     });
-  }
-  ,
+  },
+  
 
   /**
    * 点击图片图标 查看详细的图片 

@@ -62,28 +62,27 @@ Page({
     };
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
       if (result.data.code == 0) {
-          var interactlists =[];
+        var interactlists = result.data.data[0].events;
            result.data.data.forEach(function(item){
             interactlists=item.events;
             return;
           })
+           if (interactlists.length == 0) {
+             _This.setData({
+               asShow: "true"
+             });
+           } else {
+             _This.setData({
+               asShow: "false"
+             });
+           }
            var imgUrlArr=[];
           interactlists.forEach(function(item){
             imgUrlArr=imgUrlArr.concat(item.imgUrls);          
-          })
-          if (imgUrlArr.length==0){
-            _This.setData({
-              asShow:"true"
-            });          
-          }else{
-            _This.setData({
-              asShow: "false"
-            });
-          }
+          }) 
           _This.setData({
             imgalist: imgUrlArr,
             interactlist: interactlists,
-
           });
       } else {
         console.log("load project info error==>", result);
@@ -111,10 +110,10 @@ Page({
     let pdata = {
       id: params
     };
-    // console.log("999999999999999999999",pdata)
+    console.log("999999999999999999999",pdata)
     wxRequest(wxaapi.index.cluedetail.url, pdata).then(function (result) {
       let resultobj = result.data.data;
-      // console.log("===============resultobj", resultobj);
+      console.log("===============resultobj", resultobj);
       if (result.data.code == 0) {
         let cname = resultobj.customerName;
         if (!cname) {

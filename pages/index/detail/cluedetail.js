@@ -1,4 +1,3 @@
-// pages/index/detail/cluedetail.js
 const wxaapi = require('../../../public/wxaapi.js');
 const wxRequest = require('../../../utils/js/wxRequest.js');
 Page({
@@ -61,7 +60,7 @@ Page({
       clueId: this.data.clueDetail.id,//3
     };
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
-      // console.log("result=========================>>",result);
+      console.log("=========result>>>>>>>>>>>=============",result);
       if (result.data.code == 0) {
           var interactlists =[];
            result.data.data.forEach(function(item){
@@ -90,8 +89,8 @@ Page({
         console.log("load project info error==>", result);
       }
     });
-  }
-  ,
+  },
+  
 
   /**
    * 点击图片图标 查看详细的图片 

@@ -62,17 +62,13 @@
       <!-- 时间轴线 -->
       <view class="line"></view>
       <!--轨迹item 测试-->
-      <view class="interact-item" wx:for="{{interactlist}}" wx:for-item="item" data-type='{{item.code}}'>
+      <view class="interact-item" wx:for="{{interactlist}}" wx:for-item="item" wx:key="index" style="display:{{item.code=='informationSubmit'?'none':'block'}};">
         <!--图标和时间  -->
-        <div class="cnt-interact-imgdiv">
-          <div class='cnt-item-time' style="background:{{item.type == 1 ?'#8088f6':'#4cb0ff'}}">
+        <div class="cnt-interact-imgdiv" >
+          <div class='cnt-item-time' style="background:{{item.type == 1 ?'#8088f6':'#4cb0ff'}}; ">
             <text style="margin-left:20rpx;font-size:30rpx; ">{{util.formatTime(item.time,"hh:mm")}}</text>
             <text style="margin-left:10rpx ;font-size:20rpx;">{{util.formatTime(item.time,"MM/dd")}}</text>
           </div>
-          <!--退出案例  -->
-          <view class='photopic' bindtap="jumpcase" style="display:{{item.code=='appQuit'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
-          </view>
           <!--分享案例  -->
           <view class='photopic' bindtap="sharecase" style="display:{{item.code=='appShare'?'block':'none'}}">
             <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
@@ -105,6 +101,10 @@
           <view class='photopic' bindtap="previewImage" style="display:{{item.code=='photoUpload'?'block':'none'}}">
             <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-pic.png"></image>
           </view>
+           <!--退出案例  -->
+          <view class='photopic' bindtap="jumpcase" style="display:{{item.code=='appQuit'?'block':'none'}}">
+            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
+          </view>
           <!-- 关闭案例 -->
           <view class='photopic' bindtap="colsecase" style="display:{{item.code=='leadClose'?'block':'none'}}">
             <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-close.png"></image>
@@ -113,20 +113,23 @@
         <!--具体轨迹信息  -->
         <div class='cnt-item-txt'>
           <div>
+             <!-- style="display:{{item.code=='appShare'?'block':'none'}}" 
+            <view class='cnt-item-text' style="display:{{item.code=='appShare'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="sharecase"> {{item.userName}} 分享了 案例</view> -->
             <!--分享案例 style="display:{{item.code=='appShare'?'block':'none'}}" -->
             <view class='cnt-item-text' style="display:{{item.code=='appShare'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="sharecase"> {{item.userName}} 分享了 案例</view>
             <!--浏览案例  -->
             <view class='cnt-item-text' style="display:{{item.code=='appOpen'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="caseview">浏览了 {{item.userName}} 分享的 案例</view>
             <!--喜欢案例  -->
-            <view style="display:{{item.code=='caseLike'?'block':'none'}}">
+            <view style=" position:relative; display:{{item.code=='caseLike'?'block':'none'}}">
               <view class='cnt-item-text' data-caseId="{{item.caseId}}" data-customerName="{{item.customerName}}" bindtap="likecase">
-                <view style="white-space: pre-wrap;padding-right: 10rpx;vertical-align:middle; ">
+                <view style="white-space: pre-wrap;padding-right: 10rpx;vertical-align:middle;margin-right: 40rpx; ">
                   <text style="vertical-align:middle;"> 喜欢了 {{item.userName}} 分享的 案例</text>
-                  <span>
+                 
+                </view>
+                 <span style=" position:absolute; top:0rpx;right:0rpx;">
                     <image style="display:inline-block; vertical-align:middle; width:44rpx;height:44rpx;margin-top:5rpx;" src="../../../public/images/open.png">
                     </image>
                   </span>
-                </view>
               </view>
             </view>
 
@@ -144,18 +147,20 @@
             <!--更新关键信息  -->
             <view class='cnt-item-text' style="display:{{item.code=='contactEdit'?'block':'none'}}" bindtap="editmsg">被 {{item.userName}} 更新了 关键信息</view>
             <!--预约信息  -->
-            <view class='cnt-item-text' style="display:{{item.code=='reserve'?'block':'none'}}" bindtap="bookOption">
+            <view class='cnt-item-text '  style="position:relative; display:{{item.code=='reserve'?'block':'none'}}" bindtap="bookOption">
               <text style="vertical-align:middle;">被 {{item.userName}} 预约了 现场咨询</text>
-              <span style="vertical-align:middle;margin-left:10rpx;">
+              <span style="vertical-align:middle;margin-left:10rpx; position:absolute;  top:0rpx;right:0rpx;">
                 <image style="width:44rpx;height:44rpx; vertical-align:middle;" src="../../../public/images/open.png">
                 </image>
               </span>
             </view>
             <!--上传照片  -->
-            <view class='cnt-item-text' style="display:{{item.code=='photoUpload'?'block':'none'}}">
-              <text style="vertical-align:middle;">上传了 照片</text>
-              <image bindtap="previewImage" src="../../../public/images/picture.png" style="width:60rpx;height:60rpx;vertical-align:middle;"></image>
-              <span style="vertical-align:middle; margin-left:10rpx;">
+            <view class='cnt-item-text ' style="position:relative;display:{{item.code=='photoUpload'?'block':'none'}}">
+              <view>
+                  <text style="vertical-align:middle;">上传了 照片</text>
+                  <image bindtap="previewImage" src="../../../public/images/picture.png" style="width:60rpx;height:60rpx;vertical-align:middle;"></image>
+              </view>
+              <span style="vertical-align:middle; position:absolute; top:0rpx;right:0rpx;">
                 <image style="width:44rpx;height:44rpx; vertical-align:middle;" src="../../../public/images/open.png">
                 </image>
               </span>

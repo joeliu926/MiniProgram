@@ -19,7 +19,7 @@ Page({
     asShow:'false',
     hide:'flase',
     imgalist:[],
-    // imgalist: ["http://pic32.photophoto.cn/20140807/0005018763115153_b.jpg", "http://pic28.photophoto.cn/20130827/0005018371946994_b.jpg", "http://pic28.photophoto.cn/20130830/0005018667531249_b.jpg","http://pic8.nipic.com/20100801/387600_002750589396_2.jpg"],
+    // imgalist: ["http://pic32.photophoto.cn/20140807/0005018763115153_b.jpg", "http://pic28.photophoto.cn/20130827/0005018371946994_b.jpg", "http://pic28.photophoto.cn/20130830/0005018667531249_b.jpg","http://pic8.nipic.com/20100801/387600_002750589396_2.jpg"],//测试数据
   },
   /**
    * 生命周期函数--监听页面加载
@@ -29,7 +29,7 @@ Page({
   },
   // 去 预约页面
   bookOption(params) {
-    console.log("params+++++++++++++>>>>>>>>>", params);
+    // console.log("params+++++++++++++>>>>>>>>>", params);
     let pobj = params.target.dataset.obj;
     wx.navigateTo({
       url: `../../projectcase/book/book?userId=${this.data.clueDetail.userId}&userUnionId=${this.data.clueDetail.userUnionId}&appointmentId=${this.data.clueDetail.appointmentId}&tenantId=${this.data.clueDetail.tenantId}&customerId=${this.data.clueDetail.customerId}&clueId=${this.data.clueDetail.id}&clueStatus=${this.data.clueDetail.clueStatus}`,
@@ -61,7 +61,7 @@ Page({
       clueId: this.data.clueDetail.id,//3
     };
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
-      console.log("result=========================>>",result);
+      // console.log("result=========================>>",result);
       if (result.data.code == 0) {
           var interactlists =[];
            result.data.data.forEach(function(item){
@@ -75,22 +75,17 @@ Page({
           if (imgUrlArr.length==0){
             _This.setData({
               asShow:"true"
-            });
-                
+            });          
           }else{
             _This.setData({
               asShow: "false"
             });
           }
-         
           _This.setData({
             imgalist: imgUrlArr,
             interactlist: interactlists,
 
           });
-        
-         
-       
       } else {
         console.log("load project info error==>", result);
       }
@@ -206,9 +201,7 @@ Page({
   // tab选项卡切换 互动和备注
   selectType(params) {
     var dataset = params.currentTarget.dataset;
-    // console.log("+++++++++++++++++++++++++++++++", dataset);
     this.data.selectItem.forEach(item => {
-      // console.log("*********************", item);
       if (item.id == dataset.id) {
         item.val = true;
       }
@@ -236,7 +229,9 @@ Page({
     });
   },
   // 分享了案例
-  sharecase(){},
+  sharecase(){
+
+  },
   // 浏览了案例
   caseview(){
 
@@ -244,11 +239,8 @@ Page({
 
   // 点击跳转到所喜欢的案例（单个） 
   likecase(e) {
-    console.log("===========================",e);
     let caseid = e.currentTarget.dataset.caseid;
     if (caseid){
-      console.log(typeof (caseid), "============");
-    
         wx.navigateTo({
           url: '/pages/index/casedetail/casedetail?caseid=' + caseid
         });
@@ -259,18 +251,13 @@ Page({
 
   },
   //  点击跳转到预约的页面（客户） 
-  bookpeople() {
-    // 需要传递神么参数   客户的信息
-
-    wx.navigateTo({
-      url: '/pages/projectcase/book/book?=' 
-    });
-  },
+  // bookpeople() {
+  // },
  // 通过点击电话号码  向客户拨打电话；
   callhim(e){
     var photonum= e.target.dataset.num;
     wx.makePhoneCall({
-      phoneNumber: photonum//'1340000' //仅为示例，并非真实的电话号码
+      phoneNumber: photonum 
     })
   },
   /**
@@ -278,7 +265,6 @@ Page({
    */
    remarklist(){
      this.data.selectItem.forEach(item => {
-      //  console.log("*********************", item);
        if (item.id == 1 ) {
          item.val = false;
        }else{

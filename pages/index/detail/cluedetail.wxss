@@ -309,7 +309,11 @@
 }
 
 .cnt-item-text{
-  width:100%;overflow:hidden; text-overflow:ellipsis;white-space:nowrap; 
+  width:100%;
+  overflow:hidden; 
+  text-overflow:ellipsis;
+   white-space:nowrap;  
+  /* white-space:pre-wrap;  */
 }
 .cnt-content-interact{
   padding: 20rpx;

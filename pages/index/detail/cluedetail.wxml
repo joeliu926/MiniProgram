@@ -120,7 +120,6 @@
             <!--喜欢案例  -->
             <view style="display:{{item.code=='caseLike'?'block':'none'}}">
               <view class='cnt-item-text' data-caseId="{{item.caseId}}" data-customerName="{{item.customerName}}" bindtap="likecase">
-                <!-- <text>喜欢了</text> -->
                 <view style="white-space: pre-wrap;padding-right: 10rpx;vertical-align:middle; ">
                   <text style="vertical-align:middle;"> 喜欢了 {{item.userName}} 分享的 案例</text>
                   <span>
@@ -128,10 +127,7 @@
                     </image>
                   </span>
                 </view>
-                <!-- <text> 分享的 案例</text> -->
               </view>
-
-
             </view>
 
             <!--添加备注  -->

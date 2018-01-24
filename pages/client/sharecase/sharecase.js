@@ -109,7 +109,7 @@ Page({
     var oTempEvent = _This.data.oEvent;
     var currentPage = _This.data.currentPage;
     oTempEvent.shareEventId = _This.data.shareEventId;
-    oTempEvent.productCode = _This.data.productCode ? _This.data.productCode:[];
+    oTempEvent.productCode = [];
 
     //console.log("_This.data.caseList[currentPage - 1].id===>", _This.data.caseList[currentPage - 1].id);
 

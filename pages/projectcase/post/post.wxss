@@ -14,7 +14,7 @@
   background-size: 100%;
 }
 .c-b-d{
-border: 1rpx solid rebeccapurple;
+  border: 2rpx solid rebeccapurple;
 }
 .post-img-ct{
  overflow: hidden;
@@ -112,9 +112,10 @@ transition: height 1s;
   padding: 0 0 32rpx 0;
 }
 .auth-tel{
-   border-radius: 20px;
+  border-radius: 20px;
   background-color: #9083ed;
   color: #ffffff;
   padding:0 50rpx;
-  border: none;
+  overflow: hidden;
+  border: 10rpx solid #ffffff;
 }

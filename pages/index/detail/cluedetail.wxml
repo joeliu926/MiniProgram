@@ -113,8 +113,6 @@
         <!--具体轨迹信息  -->
         <div class='cnt-item-txt'>
           <div>
-             <!-- style="display:{{item.code=='appShare'?'block':'none'}}" 
-            <view class='cnt-item-text' style="display:{{item.code=='appShare'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="sharecase"> {{item.userName}} 分享了 案例</view> -->
             <!--分享案例 style="display:{{item.code=='appShare'?'block':'none'}}" -->
             <view class='cnt-item-text' style="display:{{item.code=='appShare'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="sharecase"> {{item.userName}} 分享了 案例</view>
             <!--浏览案例  -->
@@ -123,10 +121,9 @@
             <view style=" position:relative; display:{{item.code=='caseLike'?'block':'none'}}">
               <view class='cnt-item-text' data-caseId="{{item.caseId}}" data-customerName="{{item.customerName}}" bindtap="likecase">
                 <view style="white-space: pre-wrap;padding-right: 10rpx;vertical-align:middle;margin-right: 40rpx; ">
-                  <text style="vertical-align:middle;"> 喜欢了 {{item.userName}} 分享的 案例</text>
-                 
+                  <text style="vertical-align:middle;">喜欢了 {{item.userName}} 分享的 案例</text>
                 </view>
-                 <span style=" position:absolute; top:0rpx;right:0rpx;">
+                 <span style=" position:absolute; top:0rpx;right:10rpx;" bindtap="likecase">
                     <image style="display:inline-block; vertical-align:middle; width:44rpx;height:44rpx;margin-top:5rpx;" src="../../../public/images/open.png">
                     </image>
                   </span>
@@ -149,18 +146,18 @@
             <!--预约信息  -->
             <view class='cnt-item-text '  style="position:relative; display:{{item.code=='reserve'?'block':'none'}}" bindtap="bookOption">
               <text style="vertical-align:middle;">被 {{item.userName}} 预约了 现场咨询</text>
-              <span style="vertical-align:middle;margin-left:10rpx; position:absolute;  top:0rpx;right:0rpx;">
+              <span style="vertical-align:middle;margin-left:10rpx; position:absolute;  top:0rpx;right:10rpx;" bindtap="bookOption">
                 <image style="width:44rpx;height:44rpx; vertical-align:middle;" src="../../../public/images/open.png">
                 </image>
               </span>
             </view>
             <!--上传照片  -->
             <view class='cnt-item-text ' style="position:relative;display:{{item.code=='photoUpload'?'block':'none'}}">
-              <view>
+              <view style="marign-top:-2rpx">
                   <text style="vertical-align:middle;">上传了 照片</text>
-                  <image bindtap="previewImage" src="../../../public/images/picture.png" style="width:60rpx;height:60rpx;vertical-align:middle;"></image>
+                  <image bindtap="previewImage" src="../../../public/images/picture.png" style="width:44rpx;height:44rpx;vertical-align:middle;"></image>
               </view>
-              <span style="vertical-align:middle; position:absolute; top:0rpx;right:0rpx;">
+              <span style="vertical-align:middle; position:absolute; top:0rpx;right:10rpx;"  bindtap="previewImage">
                 <image style="width:44rpx;height:44rpx; vertical-align:middle;" src="../../../public/images/open.png">
                 </image>
               </span>

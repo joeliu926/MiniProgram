@@ -133,9 +133,7 @@
             <!--添加备注  -->
             <view class='cnt-item-text' class='cnt-item-text' bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}">
               <text style="">被  {{item.userName}} 添加了  备注</text>
-              <view style="display:block; color:#8088f6; margin-top:10rpx;white-space: pre-wrap;padding-right: 10rpx;">
-                {{item.remark}}
-              </view>
+              <view style="display:block; color:#8088f6; margin-top:10rpx;white-space: pre-wrap;padding-right: 20px;text-align:left;">{{item.remark}}</view>
             </view>
             <!--授权手机号  -->
             <view class='cnt-item-text' style="display:{{item.code=='authPhone'?'block':'none'}}">授权了 手机号

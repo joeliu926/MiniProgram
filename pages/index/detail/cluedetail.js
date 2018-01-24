@@ -243,7 +243,7 @@ Page({
         url: '/pages/index/casedetail/casedetail?caseid=' + caseid
       });
     }else{
-        return fasle;
+      
     }
    
 

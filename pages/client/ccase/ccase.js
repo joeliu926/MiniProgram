@@ -68,52 +68,36 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("ccase------>event", options)
+    //console.log("ccase------>event", options)
 
     let _This = this;
     var caseIds = options.caseIds;
     /******** qiehuan*********/
     let aCaseList = _This.data.aCaseList;
     _This.setData({
-      aCurrentList: aCaseList.slice(0, 10),
-      consultationId: options.consultationId ||options.scene|| "2491",
+      aCurrentList: aCaseList.slice(0, 10)
     });
+    console.log("get user info-------------");
     /***********qiehuan******/
     getApp().getUserData(function (uinfo) {
-      
-      _This.fGetShareInfoBySessionId(function(cstInfo){
-        _This.setData({
-          caseIds: caseIds || "",
-          projectName: options.iname||"",
-          productCode: cstInfo.productCodes,// options.itemid,
-          cstUid: cstInfo.unionId,// options.cstUid || uinfo.unionId,
-          oUserInfo: uinfo,
-          consultationId: cstInfo.id || "2491",
-          likeItem: "",
-          shareEventId: options.shareEventId || "",
-          oEvent: event.oEvent
-        });
+      //console.log("---ccase----user info=====>", uinfo);
+      _This.setData({
+        caseIds: caseIds || "",
+        projectName: options.iname,
+        productCode: options.itemid,
+        cstUid: options.cstUid || uinfo.unionId,
+        oUserInfo: uinfo,
+        consultationId: options.consultationId || "2457",
+        likeItem: "",
+        shareEventId: options.shareEventId || "",
+        oEvent: event.oEvent
+      });
 
-        _This.fCustomerAdd();//客户添加
-        _This.fGetCaseIDs();//会话ID获取案例ids
-        _This.fGetClinicDetail();//获取诊所信息
-
-      });//通过会话id获取咨询师信息
-
-
+      _This.fCustomerAdd();//客户添加
+      _This.fGetCaseIDs();//会话ID获取案例ids
+      _This.fGetClinicDetail();//获取诊所信息
 
     });
-  },
-  /**
- * 生命周期函数--监听页面隐藏
- */
-  onHide: function () {
-  },
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    this.fUserEvent(event.eType.appQuit);//授推出事件
   },
   imgPreview(e) {
     var dataset = e.currentTarget.dataset;
@@ -145,25 +129,6 @@ Page({
         isFirst:false
       });
     }).exec();
-  },
-  /**
-   * 通过会话id获取咨询师分享信息（咨询师id，productcode）
-   */
-  fGetShareInfoBySessionId(callback){
-    let _This = this;
-    let pdata = {
-      sessionId: _This.data.consultationId
-    };
-    console.log("post data--->", _This.data.consultationId);
-    wxRequest(wxaapi.consult.getconsultinfo.url, pdata).then(function (result) {
-      console.log("get unionid by sessionid--->",result);
-      if (result.data.code == 0) {
-        callback(result.data.data);
-      } else {
-        console.log("get unionid by sessionid error----", result);
-        callback({});
-      }
-    });
   },
   /**
    * 客户添加或者更新,返回线索id
@@ -269,7 +234,6 @@ Page({
     };
     wxRequest(wxaapi.customer.update.url, pdata).then(function (result) {
       if (result.data.code == 0) {
-        _This.fUserEvent(event.eType.authPhone);//授权手机号码事件
         _This.fGetConsultDetail();
       } else {
         console.log("update customer info error----", result);
@@ -289,14 +253,8 @@ Page({
         };
         wxRequest(wxaapi.unionid.userinfo.url, postData).then(resPhone => {
         if (resPhone.data.userinfo) {
-          _This.setData({
-            agree:1
-          });
           callback && callback(resPhone.data.userinfo.phoneNumber);
         } else {
-          _This.setData({
-            agree: 0
-          });
           eDetail.times++;
           if (eDetail.times > 4) {
             callback && callback(false);
@@ -522,37 +480,24 @@ Page({
     var _This = this;
     var oTempEvent = _This.data.oEvent;
     var currentPage = _This.data.currentPage;
-
-    console.log('_This.data.productCode', _This.data.productCode);
     oTempEvent.shareEventId = _This.data.shareEventId || 1;
-    oTempEvent.productCode = _This.data.productCode ? _This.data.productCode:[""];
-    oTempEvent.clueId = _This.data.clueId; //线索id  
-    oTempEvent.leadsId = _This.data.clueId; //线索id新  leadsId
+    oTempEvent.productCode = _This.data.productCode;
+    oTempEvent.clueId = _This.data.clueId; //线索id
     oTempEvent.consultationId = _This.data.consultationId;//咨询会话ID
-    oTempEvent.sceneId = _This.data.consultationId;// 场景sceneId  oUserInfo.
     oTempEvent.eventAttrs = {
       consultantId: _This.data.cstUid,
-      clueId:_This.data.clueId, //线索id  
-      leadsId: _This.data.clueId, //线索id新  leadsId
-      consultationId: _This.data.consultationId,//咨询会话ID
-      sceneId:_This.data.consultationId,// 场景sceneId  oUserInfo.
-      caseId: _This.data.sCurrentId||"",//
+      //caseId: _This.data.caseList[currentPage - 1].id,//
+      caseId: 3,//
       appletId: "hldn",
       consultingId: _This.data.consultationId,
-      isLike: _This.data.isLike||"1",    ////0不喜欢 1喜欢2未选择
-      reserveId:"",//
-      agree: _This.data.agree,  //1是允许，0是拒绝
-      imgNum:"",
-      imgUrls: [],
-      remark:'',
-      triggeredTime:new Date().getTime()
+      isLike: _This.data.isLike
     }
     oTempEvent.subjectAttrs = {
       appid: "yxy",
       consultantId: _This.data.cstUid,
       openid: _This.data.oUserInfo.openId,
       unionid: _This.data.oUserInfo.unionId,
-      mobile: _This.data.oUserInfo.wechatMobile||""
+      mobile: ""
     };
     _This.setData({
       oEvent: oTempEvent
@@ -568,8 +513,8 @@ Page({
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
 
-    console.log('oData', oData);
-    wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
+    // console.log("app get into-----", oData);
+    wxRequest(wxaapi.event.add.url, oData).then(function (result) {
       //console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
 

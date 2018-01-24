@@ -967,18 +967,33 @@ Page({
     });
   },
   /**
-   * 验证用户信息
-   */
+    * 验证用户信息
+    */
   fGetCUserInfo(unionid) {
     var _This = this;
     let pdata = { unionid: unionid };
     wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
 
       if (result.data.code != 0 || result.data.data.type != "1") {
-        _This.setData({
-          showData: 1
+
+        wxRequest(wxaapi.api.getuserid.url, {}).then(function (results) {
+          if (results.data.key == 1) {
+            // getApp().globalData.userInfo = results.data.data;
+
+            _This.setData({
+              oUInfo: results.data.data
+            });
+          }
+          else {
+            _This.setData({
+              showData: 1
+            });
+            wx.setNavigationBarTitle({ title: '欢颜小助手' })
+          }
+
+          _This.getClueList();
+          _This.getShareList();
         });
-        wx.setNavigationBarTitle({ title: '欢颜小助手' })
       }
     });
   }

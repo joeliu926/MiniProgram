@@ -62,7 +62,7 @@
       <!-- 时间轴线 -->
       <view class="line"></view>
       <!--轨迹item 测试-->
-      <view class="interact-item" wx:for="{{interactlist}}" wx:for-item="item" style="display:{{item.code=='informationSubmit'?'none':'block'}}">
+      <view class="interact-item" wx:for="{{interactlist}}" wx:for-item="item" wx:key="index" style="display:{{item.code=='informationSubmit'?'none':'block'}};">
         <!--图标和时间  -->
         <div class="cnt-interact-imgdiv" >
           <div class='cnt-item-time' style="background:{{item.type == 1 ?'#8088f6':'#4cb0ff'}}; ">
@@ -113,6 +113,8 @@
         <!--具体轨迹信息  -->
         <div class='cnt-item-txt'>
           <div>
+             <!-- style="display:{{item.code=='appShare'?'block':'none'}}" 
+            <view class='cnt-item-text' style="display:{{item.code=='appShare'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="sharecase"> {{item.userName}} 分享了 案例</view> -->
             <!--分享案例 style="display:{{item.code=='appShare'?'block':'none'}}" -->
             <view class='cnt-item-text' style="display:{{item.code=='appShare'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="sharecase"> {{item.userName}} 分享了 案例</view>
             <!--浏览案例  -->

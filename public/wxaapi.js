@@ -1,4 +1,5 @@
 var gConfig={
+
  /****production start*****/
   //remote:"https://nihaomc.com/wxa",
   //uploadUrl: "https://nihaomc.com/uploadimg/attachment/upload",
@@ -13,12 +14,12 @@ var gConfig={
   //  remoteWx: "https://nihaomc.com/wx_test",
 
   /****uat end*****/
- 
    /****dev start*****/
-  remoteWx: "https://nihaomc.com/wx",
+  remoteWx: "https://nihaomc.com/wx_test",
   remote: "https://nihaomc.com/wxa_dev",
   uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload"
   /****dev end*****/
+
 }
 var urlConfig = {
   img:{

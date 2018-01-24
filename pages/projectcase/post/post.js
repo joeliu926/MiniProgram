@@ -190,12 +190,15 @@ Page({
     let scene = `${caseIds},${cstUid},${itemid},${consultationId},${shareEventId}`;
     scene = `${consultationId}`;
     scene = encodeURI(scene);
-        path="pages/test/test";
+        //path="pages/test/test";
+        //暂时先用小程序二维码第一个接口生成
     let pdata = {
         //path: "pages/test/test?query=1",
         path: path,
         width: 200,
-        scene: scene//
+        auto_color:false,
+        line_color: { "r": "0", "g": "0", "b": "0" }
+        //scene: scene//
     }
     console.log("wxaapi.wxaqr.genwxaqrcode.url----->", wxaapi.wxaqr.genwxaqrcode.url, pdata);
     wxRequest(wxaapi.wxaqr.genwxaqrcode.url, pdata).then(function (result) {

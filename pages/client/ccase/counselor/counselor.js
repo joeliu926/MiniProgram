@@ -20,7 +20,15 @@ Page({
      });
      this.fGetConsultDetail();
   },
-
+  /**
+   * 拨打电话
+   */
+  fMakePhone() {
+    let _This = this;
+    wx.makePhoneCall({
+      phoneNumber: _This.data.oCstData.mobile
+    })
+  },
   /**
   * 获取咨询师详情
   */

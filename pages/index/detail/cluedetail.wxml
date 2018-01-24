@@ -138,7 +138,7 @@
             <view class='cnt-item-text' class='cnt-item-text' bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}">
               <text style="">被  {{item.userName}} 添加了  备注</text>
               <view style="display:block; color:#8088f6; margin-top:10rpx;white-space: pre-wrap;padding-right: 10rpx;">
-                {{item.phoneNumber}}
+                {{item.remark}}
               </view>
             </view>
             <!--授权手机号  -->

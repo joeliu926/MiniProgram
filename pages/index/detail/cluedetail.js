@@ -60,7 +60,6 @@ Page({
       clueId: this.data.clueDetail.id,//3
     };
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
-      console.log("=========result>>>>>>>>>>>=============",result);
       if (result.data.code == 0) {
           var interactlists =[];
            result.data.data.forEach(function(item){
@@ -240,11 +239,11 @@ Page({
   likecase(e) {
     let caseid = e.currentTarget.dataset.caseid;
     if (caseid){
-        wx.navigateTo({
-          url: '/pages/index/casedetail/casedetail?caseid=' + caseid
-        });
+      wx.navigateTo({
+        url: '/pages/index/casedetail/casedetail?caseid=' + caseid
+      });
     }else{
-        return fasle;
+      
     }
    
 

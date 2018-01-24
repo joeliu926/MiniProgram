@@ -123,7 +123,7 @@ Page({
     var oTempEvent = _This.data.oEvent;
     var currentPage = _This.data.currentPage;
     oTempEvent.shareEventId = _This.data.shareEventId;
-    oTempEvent.productCode = _This.data.productCodes ? _This.data.productCodes:[""];
+    oTempEvent.productCode =[""];
     oTempEvent.consultationId=_This.data.consultationId,
     oTempEvent.sceneId = _This.data.consultationId;
     oTempEvent.eventAttrs = {

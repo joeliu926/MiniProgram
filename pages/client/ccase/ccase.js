@@ -525,7 +525,7 @@ Page({
 
     console.log('_This.data.productCode', _This.data.productCode);
     oTempEvent.shareEventId = _This.data.shareEventId || 1;
-    oTempEvent.productCode = _This.data.productCode ? _This.data.productCode:[""];
+    oTempEvent.productCode = [""];
     oTempEvent.clueId = _This.data.clueId; //线索id  
     oTempEvent.leadsId = _This.data.clueId; //线索id新  leadsId
     oTempEvent.consultationId = _This.data.consultationId;//咨询会话ID

@@ -50,7 +50,11 @@ var urlConfig = {
     share: {
       url: gConfig.remote +"/case/share" //
     },
-
+  },
+  api: {
+    getuserid: {
+      url: gConfig.remote + "/api/getuserid"   //获取诊所详情
+    }
   },
   customer: {
     add: {

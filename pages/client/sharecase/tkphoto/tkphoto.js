@@ -175,7 +175,7 @@ Page({
     var _This = this;
     var oTempEvent = _This.data.oEvent;
     oTempEvent.shareEventId = _This.data.shareEventId;
-    oTempEvent.productCode = [];
+    oTempEvent.productCode = [""];
     oTempEvent.clueId = _This.data.clueId; //线索id
     oTempEvent.consultationId = _This.data.consultationId;//咨询会话ID
     oTempEvent.leadsId = _This.data.clueId; //线索id新  leadsId
@@ -231,8 +231,7 @@ Page({
     var oData = _This.data.oEvent;
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
-
-    wxRequest(wxaapi.event.add.url, oData).then(function (result) {
+    wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
       // console.log("000000000000000000000000===>", result);
       //console.log("photo--Event---" + eType + "---", result);
       if (result.data.code == 0) {

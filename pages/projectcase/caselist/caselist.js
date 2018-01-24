@@ -123,7 +123,7 @@ Page({
     var oTempEvent = _This.data.oEvent;
     var currentPage = _This.data.currentPage;
     oTempEvent.shareEventId = _This.data.shareEventId;
-    oTempEvent.productCode = _This.data.productCodes.length>0 ? _This.data.productCodes:[];
+    oTempEvent.productCode = _This.data.productCodes ? _This.data.productCodes:[""];
     oTempEvent.consultationId=_This.data.consultationId,
     oTempEvent.sceneId = _This.data.consultationId;
     oTempEvent.eventAttrs = {
@@ -199,6 +199,8 @@ Page({
           shareType: sType,
           isShare: false
         }); 
+
+        console.log(' _This.fUpdateShare()')
         _This.fUpdateShare();
         wx.redirectTo({
           url: '../../index/home?type=share',
@@ -221,6 +223,8 @@ Page({
       products: _This.data.productcodes,//项目列表id  [3002,3025,3028]
       type: _This.data.shareType // 
     };
+
+    console.log('shareData', shareData);
     wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
       if (result.data.code == 0) {
         _This.setData({ projectItems: result.data.data });

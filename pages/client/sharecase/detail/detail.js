@@ -161,6 +161,7 @@ Page({
   fGetTempEvent() {
     var _This = this;
     var oTempEvent = _This.data.oEvent;
+    oTempEvent.productCode = [""];
     oTempEvent.shareEventId = _This.data.shareEventId;
     oTempEvent.eventAttrs = {
       appletId: "hldn",

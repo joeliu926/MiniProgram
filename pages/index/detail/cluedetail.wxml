@@ -69,7 +69,6 @@
             <text style="margin-left:20rpx;font-size:30rpx; ">{{util.formatTime(item.time,"hh:mm")}}</text>
             <text style="margin-left:10rpx ;font-size:20rpx;">{{util.formatTime(item.time,"MM/dd")}}</text>
           </div>
-         
           <!--分享案例  -->
           <view class='photopic' bindtap="sharecase" style="display:{{item.code=='appShare'?'block':'none'}}">
             <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>

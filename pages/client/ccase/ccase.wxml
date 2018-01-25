@@ -9,7 +9,7 @@
 <block wx:for="{{aCaseList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
 
     <view class='w-10 b-s case-item-ct {{isEndPage?"hide":""}}'     bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{aItemLeft["case"+oItem.id].zindex}};left:{{aItemLeft["case"+oItem.id].zleft}};background-color:#F0F0F0;padding:30rpx;'>
-    <view class='b-d-tb bk-c-w QQQ' style='height:{{oHeight+"px"}};overflow: hidden;border-top-left-radius:30rpx;border-top-right-radius:30rpx;'>
+    <view class='b-d-tb bk-c-w QQQ' style='height:{{aHeight[currentPage]+"px"}};overflow: hidden;border-top-left-radius:30rpx;border-top-right-radius:30rpx;'>
   <!------------------before after start------------left:{{index==0?itemLeft:"0px"}};-------->
       <view class='w-10 b-after-ct'> 
             <view class='flex b-s' style="position: relative;">

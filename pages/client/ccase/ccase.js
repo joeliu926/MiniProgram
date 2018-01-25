@@ -27,6 +27,7 @@ Page({
     sCurrentId: 0,//当前案例的id
     oClinic: {},
     oHeight:"",//案例内容的高度
+    aHeight:[],//高度集合
     isFirst:true,//首次进来
     picCount:0,//获取用户上传图片
     clueId: "",
@@ -140,17 +141,19 @@ Page({
     }
 
     
-
+    let aHeight=[];
     var query = wx.createSelectorQuery().selectAll('.QQQ').boundingClientRect(function (rect) {
       let oHeight=[];
       rect.forEach(item=>{
       oHeight.push(item.height);
+      aHeight.push(item.height);
     });
     oHeight=oHeight.sort((one,two)=>{
       return one<two;
     });
       _This.setData({
         oHeight: oHeight[0],
+        aHeight: aHeight,
         isFirst:false
       });
     }).exec();

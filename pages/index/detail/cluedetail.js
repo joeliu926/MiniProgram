@@ -11,11 +11,11 @@ Page({
     clueStage: '',
     dddddd:"../../../public/images/icon-tap.png",
     remarklist: [{}],
-    interactlist: [ ],
+    interactlist:[],
     bookName: '',
     show: 'true',
     isshow: 'false',
-    asShow:'false',
+    asShow:'true',
     hide:'flase',
     imgalist:[],
     // imgalist: ["http://pic32.photophoto.cn/20140807/0005018763115153_b.jpg", "http://pic28.photophoto.cn/20130827/0005018371946994_b.jpg", "http://pic28.photophoto.cn/20130830/0005018667531249_b.jpg","http://pic8.nipic.com/20100801/387600_002750589396_2.jpg"],//测试数据
@@ -71,6 +71,12 @@ Page({
     };
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
       if (result.data.code == 0) {
+        console.log('result', result);
+        if (result.data.data.length==0){ 
+          _This.setData({
+            asShow: "true"
+          });
+          return;}
         var interactlists = result.data.data[0].events;
            result.data.data.forEach(function(item){
             interactlists=item.events;

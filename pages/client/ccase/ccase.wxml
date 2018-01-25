@@ -73,7 +73,7 @@
     <image wx:if="{{currentLikeState}}"  class='cm-img'  src='../../../public/images/like-icon.png' ></image>
 </view>
 
-<view class='bk-c-w b-r flex-c com-right-icon phone-icon {{isEndPage?"hide":""}} {{oUserInfo.wechatMobile?"hide":""}}' style=''>
+<view wx:if="{{(!oUserInfo.wechatMobile)&&(!isEndPage)}}" class='bk-c-w b-r flex-c com-right-icon phone-icon' style=''>
    <image  class='cm-img '  src='../../../public/images/wx-icon.png' ></image>
       <button class='' style='position:absolute;' plain="true" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
 </view>
@@ -123,8 +123,7 @@
  </view>
  <view class='clinic-ct w-10'>
   <block wx:for="{{oClinic.fileVo}}" wx:for-item="cItem" wx:key="cItem.id"  wx:for-index="index">
-  
-    <view class='img-c b-s'   style='width: 214rpx;height:200rpx;display: inline-block;background-image:url({{cItem.url}})' data-src='{{cItem.url}}' bindtap='imgPreview'></view>
+    <image class='img-c b-s' style='width: 214rpx;height:200rpx;' data-src='{{cItem.url}}' bindtap='imgPreview' src='{{cItem.url}}' mode="aspectFill"></image>
   </block>
  </view>
    </view>

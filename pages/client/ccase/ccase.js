@@ -124,6 +124,12 @@ Page({
   },
   onReady: function () {
   },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  },
   /**
    * 获取案例列表的内容高度
    */
@@ -132,6 +138,9 @@ Page({
     if (!_This.data.isFirst){
        return false;
     }
+
+    
+
     var query = wx.createSelectorQuery().selectAll('.QQQ').boundingClientRect(function (rect) {
       let oHeight=[];
       rect.forEach(item=>{
@@ -154,9 +163,9 @@ Page({
     let pdata = {
       sessionId: _This.data.consultationId
     };
-    console.log("post data--->", _This.data.consultationId);
+    //console.log("post data--->", _This.data.consultationId);
     wxRequest(wxaapi.consult.getconsultinfo.url, pdata).then(function (result) {
-      console.log("get unionid by sessionid--->",result);
+      //console.log("get unionid by sessionid--->",result);
       if (result.data.code == 0) {
         callback(result.data.data);
       } else {
@@ -434,6 +443,7 @@ Page({
       caseIds: _This.data.aCaseIds
     };
     wxRequest(wxaapi.consult.getsharelike.url, pdata).then(function (result) {
+      //console.log("olikeResult--------", result.data.data);
       if (result.data.code == 0) {
         _This.setData({
           olikeResult: result.data.data
@@ -523,9 +533,9 @@ Page({
     var oTempEvent = _This.data.oEvent;
     var currentPage = _This.data.currentPage;
 
-    console.log('_This.data.productCode', _This.data.productCode);
+   // console.log('_This.data.productCode', _This.data.productCode);
     oTempEvent.shareEventId = _This.data.shareEventId || 1;
-    oTempEvent.productCode = _This.data.productCode ? _This.data.productCode:[""];
+    oTempEvent.productCode = [""];
     oTempEvent.clueId = _This.data.clueId; //线索id  
     oTempEvent.leadsId = _This.data.clueId; //线索id新  leadsId
     oTempEvent.consultationId = _This.data.consultationId;//咨询会话ID
@@ -568,7 +578,6 @@ Page({
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
 
-    console.log('oData', oData);
     wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
       //console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
@@ -708,9 +717,9 @@ Page({
         });
         _This.fFilterData(clist[0].id);
       }
-      wx.pageScrollTo({
+      wx.pageScrollTo && wx.pageScrollTo({
         scrollTop: 0
-      })
+      });
     }
 
     ///////////////////////////////////////////

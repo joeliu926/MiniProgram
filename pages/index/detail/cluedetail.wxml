@@ -2,19 +2,23 @@
 <wxs src="../../../utils/wxs/cutil.wxs" module="util" />
 <view class='page'>
   <div class='top'>
-    <div class='top-content'>
+    <div class='top-content' style="position:relative;">
       <div class="top-right">
         <div>
-          <span style="margin-right:30rpx;vertical-align:middle;max-width:155px;overflow:hidden; text-overflow:ellipsis;white-space:nowrap;display:inline-block;">{{clueName}}</span>
+          <span class="top-clineName">{{clueName}}</span>
           <span class="top-span" style="display:inline-block;">{{clueDetail.statusName}}</span>
         </div>
         <div class='top-state'>{{!clueDetail.appointmentId?"未预约":util.formatTime(bookName,"yyyy年MM月dd日 hh:mm")}}</div>
         <div class='top-book' bindtap='bookOption'>{{bookName=='去预约'?bookName:"已预约"}}</div>
       </div>
-      <div class='top-imgdiv'>
+      <div class='top-imgdiv' >
         <image class='top-img' src='{{clueDetail.customerLogo.length<5?"../../../public/images/defimag.png":clueDetail.customerLogo}}'></image>
+  
       </div>
-    </div>
+            <div  bindtap='fMakePhone' style='position:absolute;right:50rpx;top:200rpx;height:50rpx;font-size:22rpx;'> 
+            <image  style='width:20px;height:20px;vertical-align:top;{{clueDetail.customerWechatMobile||clueDetail.customerPhoneNum?"":"display:none;"}}' src='../../../public/images/phone-con.png'></image>
+            <span style="vertical-align:top;line-height:40rpx;">{{clueDetail.customerWechatMobile?clueDetail.customerWechatMobile:clueDetail.customerPhoneNum}}</span></div>
+      </div>
     <div>
       <div class='top-cnt'>
         <div>

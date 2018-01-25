@@ -34,8 +34,7 @@ Page({
    */
   onLoad: function (options) {
     let _This=this;
-    console.log("--------options----------",options);
-
+    //console.log("--------options----------",options);
     getApp().getUserData(function (oUserInfo) {
       _This.setData({
         oUserInfo: oUserInfo,
@@ -47,12 +46,9 @@ Page({
 
     wx.getSystemInfo({
       success: function (result) {
-        //console.log("-=-=-=-=-=-=-=-=-",result);
         let postHeight = result.windowHeight;
         let windowWidth = result.windowWidth;
-        //console.log("postHeight--------->", postHeight);
         let postImageHeight=parseInt(windowWidth*850/750);
-        //console.log("postImageHeight------>", postImageHeight);
         _This.setData({
           postHeight: postHeight,
           postImageHeight: postImageHeight
@@ -146,7 +142,7 @@ Page({
         _This.setData({
           aPostList: dataList
         });
-        if(!e){
+        if (!e && dataList.length>0){
           _This.setData({
             currentPoster: dataList[0].fileUrl,
             postId: dataList[0].id
@@ -200,7 +196,7 @@ Page({
         line_color: { "r": "0", "g": "0", "b": "0" }
         //scene: scene//
     }
-    console.log("wxaapi.wxaqr.genwxaqrcode.url----->", wxaapi.wxaqr.genwxaqrcode.url, pdata);
+    //console.log("wxaapi.wxaqr.genwxaqrcode.url----->", wxaapi.wxaqr.genwxaqrcode.url, pdata);
     wxRequest(wxaapi.wxaqr.genwxaqrcode.url, pdata).then(function (result) {
       console.log("fGetQrcode info ----->", result);
       if (result.data.code == 0) {
@@ -224,7 +220,8 @@ Page({
         postId:postId
       });
     };
-    wx.pageScrollTo({
+    console.log("wx.pageScrollTo------>", wx.pageScrollTo);
+    wx.pageScrollTo&&wx.pageScrollTo({
       scrollTop: 0
     });
   },

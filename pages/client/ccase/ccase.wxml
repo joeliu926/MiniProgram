@@ -5,11 +5,10 @@
    <view class='o-title w-10'>
       <text><text wx:if="{{!isEndPage}}" class='f-14 f-c-3'>{{currentPage+1}}</text><text wx:if="{{isEndPage}}" class='f-14 f-c-3'>{{totalCount+1}}</text><text class='f-14'>/{{totalCount+1}}</text></text>
    </view>
- 
   <view class='case-ct w-h-10  bk-c-w'  style='background-color:#F0F0F0;'>
 <block wx:for="{{aCaseList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
 
-    <view class='w-10 b-s case-item-ct {{isEndPage?"hide":""}}'     bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{aItemLeft["case"+oItem.id].zindex}};left:{{aItemLeft["case"+oItem.id].zleft}};background-color:#F0F0F0;padding:30rpx;display:block;'>
+    <view class='w-10 b-s case-item-ct {{isEndPage?"hide":""}}'     bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{aItemLeft["case"+oItem.id].zindex}};left:{{aItemLeft["case"+oItem.id].zleft}};background-color:#F0F0F0;padding:30rpx;'>
     <view class='b-d-tb bk-c-w QQQ' style='height:{{oHeight+"px"}};overflow: hidden;border-top-left-radius:30rpx;border-top-right-radius:30rpx;'>
   <!------------------before after start------------left:{{index==0?itemLeft:"0px"}};-------->
       <view class='w-10 b-after-ct'> 
@@ -91,7 +90,8 @@
 
 
 <!------------------end page start-------------------->
-<view class='b-s end-ct {{!isEndPage?"hide":""}}'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
+<view class='b-s end-ct {{!isEndPage?"hide":""}}' style='background-color:#F0F0F0;height:97%;'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
+  <div style="background-color:#fff;display:inline-block;border-top-left-radius:30rpx;border-top-right-radius:30rpx;">
    <view class='end-cmy-ct b-s flex fx-jc-sb'>
      <view class='flex-c fx-d-col e-cmy-major'>
         <text class='f-16 w-10 e-cmy-name'>{{oClinic.name}}</text>
@@ -127,6 +127,7 @@
   </block>
  </view>
    </view>
+   </div>
 </view>
 <!------------------end page end-------------------->
 

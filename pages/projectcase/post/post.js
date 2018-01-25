@@ -220,7 +220,8 @@ Page({
         postId:postId
       });
     };
-    wx.pageScrollTo({
+    console.log("wx.pageScrollTo------>", wx.pageScrollTo);
+    wx.pageScrollTo&&wx.pageScrollTo({
       scrollTop: 0
     });
   },

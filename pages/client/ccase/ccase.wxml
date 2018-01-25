@@ -1,21 +1,23 @@
 <wxs src="../../../utils/wxs/cutil.wxs" module="cutil"  />
 
-<view class='c-case-ct b-s bk-c-w ' style=''>
+
+<view class='c-case-ct b-s bk-c-w ' style='background-color:#F0F0F0;'>
    <view class='o-title w-10'>
       <text><text wx:if="{{!isEndPage}}" class='f-14 f-c-3'>{{currentPage+1}}</text><text wx:if="{{isEndPage}}" class='f-14 f-c-3'>{{totalCount+1}}</text><text class='f-14'>/{{totalCount+1}}</text></text>
    </view>
-  <view class='case-ct w-h-10  bk-c-w'  style=''>
+ 
+  <view class='case-ct w-h-10  bk-c-w'  style='background-color:#F0F0F0;'>
 <block wx:for="{{aCaseList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
 
-    <view class='w-10 b-s case-item-ct {{isEndPage?"hide":""}}'  bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{aItemLeft["case"+oItem.id].zindex}};left:{{aItemLeft["case"+oItem.id].zleft}};'>
-    <view class='b-d-tb bk-c-w QQQ' style='height:{{oHeight+"px"}};overflow: hidden;'>
+    <view class='w-10 b-s case-item-ct {{isEndPage?"hide":""}}'     bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{aItemLeft["case"+oItem.id].zindex}};left:{{aItemLeft["case"+oItem.id].zleft}};background-color:#F0F0F0;padding:30rpx;display:block;'>
+    <view class='b-d-tb bk-c-w QQQ' style='height:{{oHeight+"px"}};overflow: hidden;border-top-left-radius:30rpx;border-top-right-radius:30rpx;'>
   <!------------------before after start------------left:{{index==0?itemLeft:"0px"}};-------->
       <view class='w-10 b-after-ct'> 
             <view class='flex b-s' style="position: relative;">
                  <text class='before f-10 bcommon'>术前</text>
                  <text class='after f-10 bcommon'>术后</text>
                  
-                  <image src='{{oItem.beforePicture.url||"../../../public/images/front-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}' ></image>
+                  <image src='{{oItem.beforePicture.url||"../../../public/images/front-face.png"}}' mode='aspectFill'  data-uid='{{oItem.id}}' ></image>
                   <image  src='{{oItem.afterPicture.url||"../../../public/images/side-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}'></image>
             </view>
       </view>
@@ -39,7 +41,7 @@
         <block wx:for="{{oItem.contentList}}" wx:for-item="oContent" wx:key="oContent.id">
         <view class='bk-c-w'>
           <view class='t-a-c'><view class='diary f-14' style=''>{{oContent.title}}</view></view>
-          <view class='b-pd w-10  b-s' style='margin:20rpx 0;'>
+          <view class='b-pd w-10  b-s' style='margin:20rpx 0 20rpx 10rpx;'>
             <view class='flex fx-wp w-10 b-s'>
                <block wx:for="{{oContent.pictures}}" wx:for-item="imgItem" wx:key="ids" >
                <view class='img-c b-s'   style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreview'></view>
@@ -122,7 +124,7 @@
  <view class='clinic-ct w-10'>
   <block wx:for="{{oClinic.fileVo}}" wx:for-item="cItem" wx:key="cItem.id"  wx:for-index="index">
   
-    <view class='img-c b-s'   style='width: 214rpx;display: inline-block;background-image:url({{cItem.url}})' data-src='{{cItem.url}}' bindtap='imgPreview'></view>
+    <view class='img-c b-s'   style='width: 214rpx;height:200rpx;display: inline-block;background-image:url({{cItem.url}})' data-src='{{cItem.url}}' bindtap='imgPreview'></view>
   </block>
  </view>
    </view>
@@ -133,3 +135,4 @@
    <text class=''>授权失败 请重试！</text>
 </view>
 
+ 

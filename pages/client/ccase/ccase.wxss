@@ -21,10 +21,10 @@ page{
 }
 .case-item-ct{
   position:absolute;
- padding:40rpx;
-box-sizing:border-box;
-top:36rpx;
-left:0;
+  padding:40rpx;
+  box-sizing:border-box;
+  top:36rpx;
+  left:0;
 }
 .content-bd{
   

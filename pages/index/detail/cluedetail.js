@@ -35,6 +35,15 @@ Page({
       url: `../../projectcase/book/book?userId=${this.data.clueDetail.userId}&userUnionId=${this.data.clueDetail.userUnionId}&appointmentId=${this.data.clueDetail.appointmentId}&tenantId=${this.data.clueDetail.tenantId}&customerId=${this.data.clueDetail.customerId}&clueId=${this.data.clueDetail.id}&clueStatus=${this.data.clueDetail.clueStatus}`,
     });
   },
+  /**
+ * 拨打电话
+ */
+  fMakePhone() {
+    let _This = this;
+    wx.makePhoneCall({
+      phoneNumber: this.data.clueDetail.customerWechatMobile ? this.data.clueDetail.customerWechatMobile : this.data.customerPhoneNum
+    })
+  },
   // 初始化 备注
   initRemark() {
     let _This = this;

@@ -90,8 +90,8 @@
 
 
 <!------------------end page start-------------------->
-<view class='b-s end-ct {{!isEndPage?"hide":""}}' style='background-color:#F0F0F0;height:97%;'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
-  <div style="background-color:#fff;display:inline-block;border-top-left-radius:30rpx;border-top-right-radius:30rpx;">
+<view class='b-s end-ct {{!isEndPage?"hide":""}}' style='background-color:#F0F0F0;'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
+  <div style="background-color:#fff;display:inline-block;border-top-left-radius:30rpx;border-top-right-radius:30rpx;width:100%;">
    <view class='end-cmy-ct b-s flex fx-jc-sb'>
      <view class='flex-c fx-d-col e-cmy-major'>
         <text class='f-16 w-10 e-cmy-name'>{{oClinic.name}}</text>

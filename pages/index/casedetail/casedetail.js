@@ -69,11 +69,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("ccase------>event", options);
-
     let _This = this;
     var caseId = Number(options.caseid);
-    console.log("caseId------->>>>>>", caseId);
+   
     /******** qiehuan*********/
     // let aCaseList = _This.data.aCaseList;
     // _This.setData({
@@ -272,12 +270,8 @@ Page({
     var oData = _This.data.oEvent;
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
-
-    // console.log("app get into-----", oData);
     wxRequest(wxaapi.event.add.url, oData).then(function (result) {
-      //console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
-
       } else {
         console.log("add  event error---", result);
       }

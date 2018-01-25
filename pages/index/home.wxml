@@ -34,8 +34,8 @@
             <div class="list-content-top" style="line-height:45rpx;" >
               <span class='f-16 list-content-top-r' style="text-overflow:ellipsis;">{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
               <span class="list-content-status">{{oitem.statusName}}</span>
-              <span style="{{oitem.source==3||oitem.source==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/cule-r.png'></image></span>
-              <span style="{{oitem.source==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/clue-pyq.png'></image></span>
+              <span style="{{oitem.source==3||oitem.source==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/cule-r.png'></image></span>
+              <span style="{{oitem.source==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/clue-pyq.png'></image></span>
 
               <span class='f-14 list-content-top-l' style="width:15%;float:right;vertical-align:middle;">
               <span style="{{oitem.customerWechatMobile||oitem.customerPhoneNum?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;vertical-align:middle;" src='../../public/images/clue-ph.png'></image></span>
@@ -81,8 +81,8 @@
                      <div class="list-content-top" style="line-height:45rpx;" >
               <span class='f-16 list-content-top-r' style="text-overflow:ellipsis;">{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
               <span class="list-content-status">{{oitem.statusName}}</span>
-               <span style="{{oitem.source==3||oitem.source==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/cule-r.png'></image></span>
-              <span style="{{oitem.source==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/clue-pyq.png'></image></span>
+               <span style="{{oitem.source==3||oitem.source==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/cule-r.png'></image></span>
+              <span style="{{oitem.source==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/clue-pyq.png'></image></span>
 
               <span class='f-14 list-content-top-l' style="width:15%;float:right;vertical-align:middle;">
               <span style="{{oitem.customerWechatMobile||oitem.customerPhoneNum?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;vertical-align:middle;" src='../../public/images/clue-ph.png'></image></span>
@@ -128,8 +128,8 @@
                     <div class="list-content-top" style="line-height:45rpx;" >
               <span class='f-16 list-content-top-r' style="text-overflow:ellipsis;">{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
               <span class="list-content-status">{{oitem.statusName}}</span>
-              <span style="{{oitem.source==3||oitem.source==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/cule-r.png'></image></span>
-              <span style="{{oitem.source==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/clue-pyq.png'></image></span>
+              <span style="{{oitem.source==3||oitem.source==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/cule-r.png'></image></span>
+              <span style="{{oitem.source==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/clue-pyq.png'></image></span>
 
               <span class='f-14 list-content-top-l' style="width:15%;float:right;vertical-align:middle;">
               <span style="{{oitem.customerWechatMobile||oitem.customerPhoneNum?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;vertical-align:middle;" src='../../public/images/clue-ph.png'></image></span>

@@ -6,7 +6,7 @@
     <view class='cst-pd b-s' style=''>
        微信：{{oCstData.wxAccount}}
        </view>
-    <view class='cst-pd b-s' style=''>电话：{{oCstData.mobile}}</view>
+    <view class='cst-pd b-s' style='' bindtap='fMakePhone'>电话：{{oCstData.mobile}}</view>
   </view>
   <view class='cs-des flex-c fx-d-col f-16'>
     <text class=''>专属咨询师，为您提供一对一服务！</text>

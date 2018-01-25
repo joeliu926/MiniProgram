@@ -522,8 +522,10 @@ Page({
     var _This = this;
     var oTempEvent = _This.data.oEvent;
     var currentPage = _This.data.currentPage;
+
+    console.log('_This.data.productCode', _This.data.productCode);
     oTempEvent.shareEventId = _This.data.shareEventId || 1;
-    oTempEvent.productCode = _This.data.productCode;
+    oTempEvent.productCode = [""];
     oTempEvent.clueId = _This.data.clueId; //线索id  
     oTempEvent.leadsId = _This.data.clueId; //线索id新  leadsId
     oTempEvent.consultationId = _This.data.consultationId;//咨询会话ID
@@ -534,13 +536,16 @@ Page({
       leadsId: _This.data.clueId, //线索id新  leadsId
       consultationId: _This.data.consultationId,//咨询会话ID
       sceneId:_This.data.consultationId,// 场景sceneId  oUserInfo.
-      //caseId: _This.data.caseList[currentPage - 1].id,//
       caseId: _This.data.sCurrentId||"",//
       appletId: "hldn",
       consultingId: _This.data.consultationId,
       isLike: _This.data.isLike||"1",    ////0不喜欢 1喜欢2未选择
       reserveId:"",//
-      agree: _This.data.agree  //1是允许，0是拒绝
+      agree: _This.data.agree,  //1是允许，0是拒绝
+      imgNum:"",
+      imgUrls: [],
+      remark:'',
+      triggeredTime:new Date().getTime()
     }
     oTempEvent.subjectAttrs = {
       appid: "yxy",
@@ -562,6 +567,8 @@ Page({
     var oData = _This.data.oEvent;
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
+
+    console.log('oData', oData);
     wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
       //console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {

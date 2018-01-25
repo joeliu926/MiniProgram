@@ -191,21 +191,17 @@ Page({
         list = this.data.clueListOrder;
       break;
     } 
-
     if (diraction == 'left') {
       list[index].txtStyle = "left:-365rpx;";
     }
     else {
       list[index].txtStyle = "left:0rpx;";
     }
-
     list.forEach((m, _index) => {
       if (_index != index) {
         m.txtStyle = "left:0rpx;";
       }
     });
-
-
     switch (this.data.currentSelect) {
       case 0:
         this.setData({

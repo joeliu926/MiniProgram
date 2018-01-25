@@ -1,9 +1,6 @@
 {
-
-  "pages": [  
-    
+  "pages": [
     "pages/index/home",
-   
     "pages/index/detail/cluedetail",
     "pages/index/casedetail/casedetail",
     "pages/projectcase/book/book",
@@ -30,5 +27,5 @@
     "navigationBarTitleText": "咨询师助手",
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black"
-  }
+  } 
 }

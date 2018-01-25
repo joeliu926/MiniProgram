@@ -62,9 +62,6 @@ Page({
         mobile: ""
       }
     }
-
-
-
   },
 
   /**
@@ -164,13 +161,22 @@ Page({
   fGetTempEvent() {
     var _This = this;
     var oTempEvent = _This.data.oEvent;
+    oTempEvent.productCode = [""];
     oTempEvent.shareEventId = _This.data.shareEventId;
     oTempEvent.eventAttrs = {
       appletId: "hldn",
       consultingId: _This.data.consultationId,
       consultantId: _This.data.cstUid,
       isLike: _This.data.isLike,
-      caseId: _This.data.detailId
+      caseId: _This.data.detailId,
+      clueId: "", //线索id  
+      sceneId: "",
+      reserveId: "",//
+      agree: "",  //1是允许，0是拒绝
+      imgNum: "",
+      imgUrls: [],
+      remark: '',
+      triggeredTime: new Date().getTime()
     }
     oTempEvent.subjectAttrs = {
       appid: "yxy",

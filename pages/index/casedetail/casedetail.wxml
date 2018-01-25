@@ -12,7 +12,7 @@
               <text class='after f-10 bcommon'>术后</text>
               
               <image src='{{oCaseDetail.beforePicture.url||"../../../public/images/front-face.png"}}'></image>
-              <image src='{{oCaseDetail.beforePicture.url||"../../../public/images/side-face.png"}}'></image>
+              <image src='{{oCaseDetail.afterPicture.url||"../../../public/images/side-face.png"}}'></image>
             </view>
           </view>
           <!------------------before after end-------------------->

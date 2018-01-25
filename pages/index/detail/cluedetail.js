@@ -1,4 +1,3 @@
-// pages/index/detail/cluedetail.js
 const wxaapi = require('../../../public/wxaapi.js');
 const wxRequest = require('../../../utils/js/wxRequest.js');
 Page({
@@ -12,155 +11,26 @@ Page({
     clueStage: '',
     dddddd:"../../../public/images/icon-tap.png",
     remarklist: [{}],
-    interactlist: [
-      {
-        "code": "appShare",
-        "type": 1,
-        "appletId": "hldn",
-        "sceneId": 3,
-        "clueId": 3,
-        "time": 1516346784000,
-        "userName": "Andrew",
-        "desc": "分享了案例！"
-      },
-      {
-        "code": "appOpen",
-        "type": 1,    
-        "appletId": "hldn",
-        "caseId": 3,
-        "clueId": 3,
-        "time": 1512704516458,
-        "userName": "Andrew",
-        "customerName": "姜士虎",
-        "desc": "浏览了案例"
-      },
-      {
-        "code": "caseLike",
-        "appletId": "hldn",
-        "caseId": 3,
-        "clueId": 3,
-        "type": 1,
-        "time": 1512704516458,
-        "userName": "Andrew",
-        "customerName": "姜士虎",
-        "desc": "喜欢了案例"
-      },
-      {
-        "code": "photoUpload",
-        "appletId": "hldn",
-        "sceneId": 3,
-        "type": 1,
-        "sceneCode": 3,//暂时无用
-        "caseId": 3,
-        "clueId": 3,
-        "time": 1512704516458,
-        "userName": "Andrew",
-        "customerName": "姜士虎",
-        "desc": "上传了照片",
-        "imgNum": 2,
-        "imgUrls": [
-          "http://111.com",
-          "http://111.com"
-        ]
-      },
-      {
-        "code": "authPhone",
-        "appletId": "hldn",
-        "sceneId": 3,
-        "clueId": 3,
-        "caseId": 3,
-        "type": 1,
-        "time": 1512704516458,
-        "userName": "Andrew",
-        "agree": "是否同意",
-        "customerName": "姜士虎",
-        "phoneNumber": "12345687985",
-        "desc": "授权了手机号"
-      },
-      {
-        "code": "caseQuit",
-        "appletId": "hldn",
-        "type": 1,
-        "sceneId": 3,
-        "caseId": 3,
-        "clueId": 3,
-        "time": 1512704516458,
-        "consultantId": 15,
-        "customerName": "姜士虎",
-        "desc": "退出案例浏览"
-      },
-      {
-        "code": "reserve",
-        "appletId": "hldn",
-        "sceneId": 3,
-        "caseId": 3,
-        "type": 2,
-        "reserveId": 3,
-        "clueId": 3,
-        "time": 1512704516458,
-        "consultantId": 15,
-        "customerName": "姜士虎",
-        "desc": "预约了现场！"
-      },
-      {
-        "code": "contactEdit",
-        "appletId": "hldn",
-        "sceneId": 3,
-        "caseId": 3,
-        "clueId": 3,
-        "type": 2,
-        "items": {
-          "name": "原名称",
-          "phone": "13213174665"
-        },
-        "time": 1512704516458,
-        "consultantId": 15,
-        "customerName": "姜士虎",
-        "desc": "编辑联系人！"
-      },
-      {
-        "code": "leadClose",
-        "appletId": "hldn",
-        "sceneId": 3,
-        "caseId": 3,
-        "clueId": 3,
-        "type": 2,
-        "time": 1512704516458,
-        "consultantId": 15,
-        "customerName": "姜士虎",
-        "desc": "关闭编辑联系人！"
-      },
-      {
-        "code": "noteAdd",
-        "appletId": "hldn",
-        "sceneId": 3,
-        "caseId": 3,
-        "clueId": 3,
-        "type": 2,
-        "time": 1512704516458,
-        "consultantId": 15,
-        "customerName": "姜士虎",
-        "desc": "关闭编辑联系人！"
-      }
-    ],
+    interactlist: [ ],
     bookName: '',
     show: 'true',
     isshow: 'false',
+    asShow:'false',
     hide:'flase',
     imgalist:[],
-    // imgalist: ["http://pic32.photophoto.cn/20140807/0005018763115153_b.jpg", "http://pic28.photophoto.cn/20130827/0005018371946994_b.jpg", "http://pic28.photophoto.cn/20130830/0005018667531249_b.jpg","http://pic8.nipic.com/20100801/387600_002750589396_2.jpg"],
+    // imgalist: ["http://pic32.photophoto.cn/20140807/0005018763115153_b.jpg", "http://pic28.photophoto.cn/20130827/0005018371946994_b.jpg", "http://pic28.photophoto.cn/20130830/0005018667531249_b.jpg","http://pic8.nipic.com/20100801/387600_002750589396_2.jpg"],//测试数据
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("++++++>><<", options.id)
     this.initData(options.id);
   },
   // 去 预约页面
-  bookOption(params) {
-    console.log("params+++++++++++++>>>>>>>>>", params);
-    let pobj = params.target.dataset.obj;
+  bookOption() {
+    // console.log("params+++++++++++++>>>>>>>>>", params);
+    // let pobj = params.target.dataset.obj;
+    // console.log("==================pobj",pobj)
     wx.navigateTo({
       url: `../../projectcase/book/book?userId=${this.data.clueDetail.userId}&userUnionId=${this.data.clueDetail.userUnionId}&appointmentId=${this.data.clueDetail.appointmentId}&tenantId=${this.data.clueDetail.tenantId}&customerId=${this.data.clueDetail.customerId}&clueId=${this.data.clueDetail.id}&clueStatus=${this.data.clueDetail.clueStatus}`,
     });
@@ -190,31 +60,36 @@ Page({
     let pdata = {
       clueId: this.data.clueDetail.id,//3
     };
-    // console.log("this.data.clueDetail.id======>>", this.data.clueDetail.id);
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
-
-
-      console.log("result===========>>>>>",result);
       if (result.data.code == 0) {
-          var interactlists =[];
+        var interactlists = result.data.data[0].events;
            result.data.data.forEach(function(item){
             interactlists=item.events;
+            return;
           })
+           if (interactlists.length == 0) {
+             _This.setData({
+               asShow: "true"
+             });
+           } else {
+             _This.setData({
+               asShow: "false"
+             });
+           }
            var imgUrlArr=[];
           interactlists.forEach(function(item){
             imgUrlArr=imgUrlArr.concat(item.imgUrls);          
-          })
-        _This.setData({
-          imgalist: imgUrlArr,
-          interactlist: interactlists,
-        });
-        // console.log("imgalist++++++++++>>>", _This.data.imgalist)
+          }) 
+          _This.setData({
+            imgalist: imgUrlArr,
+            interactlist: interactlists,
+          });
       } else {
         console.log("load project info error==>", result);
       }
     });
-  }
-  ,
+  },
+  
 
   /**
    * 点击图片图标 查看详细的图片 
@@ -235,10 +110,10 @@ Page({
     let pdata = {
       id: params
     };
-    console.log("|||||||||||||", pdata);
+    console.log("999999999999999999999",pdata)
     wxRequest(wxaapi.index.cluedetail.url, pdata).then(function (result) {
       let resultobj = result.data.data;
-      console.log('resultobj', resultobj);
+      console.log("===============resultobj", resultobj);
       if (result.data.code == 0) {
         let cname = resultobj.customerName;
         if (!cname) {
@@ -266,8 +141,6 @@ Page({
           clueName: cname,
           bookName: _bookname
         });
-
-        console.log("======11111====", _This.data.clueName);
         _This.initInteract();
         _This.initRemark();
       } else {
@@ -328,9 +201,7 @@ Page({
   // tab选项卡切换 互动和备注
   selectType(params) {
     var dataset = params.currentTarget.dataset;
-    // console.log("+++++++++++++++++++++++++++++++", dataset);
     this.data.selectItem.forEach(item => {
-      // console.log("*********************", item);
       if (item.id == dataset.id) {
         item.val = true;
       }
@@ -339,14 +210,17 @@ Page({
       }
     });
     if (dataset.id == 1) {
+      this.initInteract();
       this.setData({
         show: 'true',
         isshow: 'false',
+
       })
     } else if (dataset.id == 2) {
       this.setData({
         show: 'false',
         isshow: 'true',
+        asShow: 'false'
       })
     }
 
@@ -355,7 +229,9 @@ Page({
     });
   },
   // 分享了案例
-  sharecase(){},
+  sharecase(){
+
+  },
   // 浏览了案例
   caseview(){
 
@@ -363,30 +239,26 @@ Page({
 
   // 点击跳转到所喜欢的案例（单个） 
   likecase(e) {
-    console.log("e==============>>",e);
-    // caseid=e.currentTarget.caseid;
-    let caseid = 1;
+    let caseid = e.currentTarget.dataset.caseid;
+    if (caseid){
+      wx.navigateTo({
+        url: '/pages/index/casedetail/casedetail?caseid=' + caseid
+      });
+    }else{
+      
+    }
    
-    wx.navigateTo({
-      url: '/pages/index/casedetail/casedetail?caseid=' + 1
-    });
 
   },
   //  点击跳转到预约的页面（客户） 
   bookpeople() {
-    // 需要传递神么参数   客户的信息
-
-    wx.navigateTo({
-      url: '/pages/projectcase/book/book?=' 
-    });
+  
   },
  // 通过点击电话号码  向客户拨打电话；
   callhim(e){
-
-    console.log("0000000000000000000====>>>>", e)
     var photonum= e.target.dataset.num;
     wx.makePhoneCall({
-      phoneNumber: photonum//'1340000' //仅为示例，并非真实的电话号码
+      phoneNumber: photonum 
     })
   },
   /**
@@ -394,7 +266,6 @@ Page({
    */
    remarklist(){
      this.data.selectItem.forEach(item => {
-      //  console.log("*********************", item);
        if (item.id == 1 ) {
          item.val = false;
        }else{
@@ -405,7 +276,7 @@ Page({
        selectItem: this.data.selectItem,
        show: 'false',
        isshow: 'true',
+       
      }); 
   }
-
 })

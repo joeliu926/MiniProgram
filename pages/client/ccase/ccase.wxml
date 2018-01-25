@@ -14,9 +14,8 @@
             <view class='flex b-s' style="position: relative;">
                  <text class='before f-10 bcommon'>术前</text>
                  <text class='after f-10 bcommon'>术后</text>
-                 
-                  <image src='{{oItem.beforePicture.url||"../../../public/images/front-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}' ></image>
-                  <image  src='{{oItem.afterPicture.url||"../../../public/images/side-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}'></image>
+                  <image data-src='{{oItem.beforePicture.url}}' bindtap='imgPreview' src='{{oItem.beforePicture.url||"../../../public/images/front-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}' ></image>
+                  <image  data-src='{{oItem.afterPicture.url}}' bindtap='imgPreview' src='{{oItem.afterPicture.url||"../../../public/images/side-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}'></image>
             </view>
       </view>
 <!------------------before after end-------------------->

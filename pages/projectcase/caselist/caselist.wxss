@@ -278,7 +278,7 @@ button::after {
   top: 0;
   left: 0;
   box-sizing: border-box;
-  padding-bottom: 300rpx;
+  /* padding-bottom: 300rpx; */
   background: #fff;
 }
 
@@ -290,10 +290,12 @@ button::after {
 }
 
 .case-item-content {
-  width: 100%;
-  box-sizing: border-box;
-  margin: 20px 0 20px 0;
-  padding-top: 30rpx;
+    width:100%;
+    box-sizing:border-box;
+    padding:20px 0 20px 0;
+    /* padding-top:30rpx; */
+    background:#FFF;
+
 }
 
 .case-item-detail {

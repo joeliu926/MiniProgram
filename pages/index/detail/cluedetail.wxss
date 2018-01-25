@@ -40,6 +40,11 @@
   box-sizing: border-box;
 }
 
+.top-clineName{
+  
+margin-right:30rpx;vertical-align:middle;max-width:155px;overflow:hidden; text-overflow:ellipsis;white-space:nowrap;display:inline-block;
+}
+
 .top-state {
   font-size: 26rpx;
   line-height: 50rpx;

@@ -34,7 +34,7 @@
                 <view class='user-info'>
                   <!--bindtap='fCaseDetail'  -->
                   <view class='bef-aft flex'>
-                    <image class='o-img-title' src='{{oitem.customerLogo.url}}' mode='scaleToFill'></image>
+                    <image class='o-img-title' src='{{oitem.customerLogo.url||"../../../public/images/defimag.png"}}' mode='scaleToFill'></image>
                   </view>
                   <view class='u-info'>
                     <text class='u-name'>{{oitem.customerName}}</text>

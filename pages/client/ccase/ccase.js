@@ -714,9 +714,9 @@ Page({
         });
         _This.fFilterData(clist[0].id);
       }
-      wx.pageScrollTo({
+      wx.pageScrollTo && wx.pageScrollTo({
         scrollTop: 0
-      })
+      });
     }
 
     ///////////////////////////////////////////

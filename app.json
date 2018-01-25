@@ -20,7 +20,6 @@
     "pages/projectcase/casetrail/cbooking/cbooking",
     "pages/client/ccase/counselor/counselor",
     "pages/client/ccase/clinicmap/clinicmap"
-    
   ],
   "window": {
     "backgroundTextStyle": "light",

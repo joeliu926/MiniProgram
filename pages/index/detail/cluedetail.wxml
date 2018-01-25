@@ -16,8 +16,8 @@
   
       </div>
             <div  bindtap='fMakePhone' style='position:absolute;right:50rpx;top:200rpx;height:50rpx;font-size:22rpx;'> 
-            <image  style='width:20px;height:20px;vertical-align:top;' src='../../../public/images/phone-con.png'></image>
-            <span style="vertical-align:top;line-height:40rpx;">{{clueDetail.customerWechatMobile?clueDetail.customerWechatMobile:customerPhoneNum}}</span></div>
+            <image  style='width:20px;height:20px;vertical-align:top;{{clueDetail.customerWechatMobile||clueDetail.customerPhoneNum?"":"display:none;"}}' src='../../../public/images/phone-con.png'></image>
+            <span style="vertical-align:top;line-height:40rpx;">{{clueDetail.customerWechatMobile?clueDetail.customerWechatMobile:clueDetail.customerPhoneNum}}</span></div>
       </div>
     <div>
       <div class='top-cnt'>

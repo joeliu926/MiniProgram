@@ -389,7 +389,6 @@ Page({
           aItemLeft: aItemLeft
         });
         _This.fGetCaseDetailById();//获取案例详情
-        //_This.fGetLikeState();//获取点赞状态
       } else {
         console.log("case ids error----", result);
       }
@@ -424,7 +423,8 @@ Page({
           _This.setData({
             aCurrentList: aCaseList
           });
-          _This.fGetLikeState();//获取点赞状态
+         // _This.fGetLikeState();//获取点赞状态 旧版
+          _This.fGetClickLike();//获取点赞状态 新版
         }
         _This.fGetCaseDetailById();    
       } else {
@@ -433,7 +433,7 @@ Page({
     });
   },
   /**
-   * 获取点赞状态
+   * 获取点赞状态 旧版
    */
   fGetLikeState() {
     let _This = this;
@@ -475,12 +475,13 @@ Page({
   fLikeCase() {
     let _This = this;  //olikeResult
     let olikeResult = _This.data.olikeResult;
-    // console.log("like case---", _This.data.sCurrentId,_This.data.currentLikeState); //_This.data.currentLikeState
-    _This.fCustomerOperate(1);
+    
+    //_This.fCustomerOperate(1);
+    _This.fClickLike();
     _This.fUserEvent(event.eType.caseLike);
   },
   /**
-   * 获取用户操作状态 1喜欢案例 2提交资料
+   * 获取用户操作状态 1喜欢案例 2提交资料  旧版的点击喜欢
    */
   fCustomerOperate(operateType) {
     let _This = this;
@@ -507,6 +508,66 @@ Page({
       }
     });
   },
+
+  /**
+   * 客户点击喜欢不喜欢，，，0 不喜欢  1 喜欢+++++++++++
+   */
+  fClickLike() {
+    let _This = this;
+    let currentLikeState = _This.data.currentLikeState;
+    let operationType =currentLikeState ?0:1;
+    let pdata = {
+      customerUnionid: _This.data.oUserInfo.unionId,
+      consultantUnionid: _This.data.cstUid,//咨询师unionid
+      sessionId: _This.data.consultationId,//当前会话id
+      caseId: _This.data.sCurrentId, //案例id
+      operationType: operationType, //1喜欢案例 0不喜欢
+      positiveFace: "",
+      sideFace: ""
+    };
+    wxRequest(wxaapi.consult.handlelike.url, pdata).then(function (result) {
+      console.log("olikeResult--------", result.data.data);
+      if (result.data.code == 0) {
+       // let currentLikeState = _This.data.currentLikeState;
+        let olikeResult = _This.data.olikeResult;
+        olikeResult[_This.data.sCurrentId] = !currentLikeState;
+        _This.setData({
+          currentLikeState: !currentLikeState,
+          olikeResult: olikeResult
+        });
+      
+      } else {
+        console.log("click like state  error----", result);
+      }
+    });
+  },
+
+  /**
+ * 获取点击喜欢不喜欢，，，0 不喜欢  1 喜欢+++++++++++
+ */
+  fGetClickLike() {
+
+    let _This = this;
+    let pdata = {
+      sessionId: _This.data.consultationId,
+      customerUnionid: _This.data.oUserInfo.unionId,
+      caseIds: _This.data.aCaseIds
+    };
+    wxRequest(wxaapi.consult.gethandlelike.url, pdata).then(function (result) {
+      console.log("get click like result---->",result);
+      if (result.data.code == 0) {
+        _This.setData({
+          olikeResult: result.data.data
+        });
+        _This.fGetCurrentLikeState();
+      } else {
+        console.log("like state  error----", result);
+      }
+    });
+  },
+
+
+
   /**
    * 获取诊所详情信息
    */

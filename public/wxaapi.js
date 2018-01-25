@@ -1,7 +1,7 @@
 var gConfig={
 
   remoteWx: "https://nihaomc.com/wx_test",
-  remote: "https://nihaomc.com/wxa_dev",
+  remote: "https://nihaomc.com/wxa_test",
   uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload"
 
 }
@@ -77,6 +77,12 @@ var urlConfig = {
     },
     trail: {
       url: gConfig.remote + "/consult/trail" //获取所有咨询轨迹
+    },
+    handlelike:{
+      url: gConfig.remote + "/consult/handlelike"   //用户操作喜欢不喜欢  
+    },
+    gethandlelike: {
+      url: gConfig.remote + "/consult/gethandlelike"   //获取操作喜欢不喜欢  
     },
     interactlist: {
       url: gConfig.remote + "/consult/interactlist"   //线索 互动列表

@@ -44,7 +44,7 @@
             </div>
             <div class='list-content-btm'>
               <span class='f-14'>
-                项目：
+                <!-- 项目： -->
                 <span wx:for="{{oitem.productList}}" wx:for-item="pitem" wx:key="productCode">{{index==0?pitem.productName:'、'+pitem.productName}}</span>
               </span>
             </div>
@@ -91,7 +91,7 @@
             </div>
               <div class='list-content-btm'>
                 <span class='f-14'>
-                  项目：
+                  <!-- 项目： -->
                   <span wx:for="{{oitem.productList}}" wx:for-item="pitem" wx:key="productCode">{{index==0?pitem.productName:'、'+pitem.productName}}</span>
                 </span>
               </div>
@@ -138,7 +138,7 @@
             </div>
               <div class='list-content-btm'>
                 <span class='f-14'>
-                  项目：
+                  <!-- 项目： -->
                   <span wx:for="{{oitem.productList}}" wx:for-item="pitem" wx:key="productCode">{{index==0?pitem.productName:'、'+pitem.productName}}</span>
                 </span>
               </div>

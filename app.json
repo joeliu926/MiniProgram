@@ -12,7 +12,7 @@
     "pages/client/sharecase/detail/detail",
     "pages/client/sharecase/tkphoto/tkphoto",
     "pages/test/test",
-    "pages/logs/logs", 
+    "pages/logs/logs",
     "pages/client/ccase/ccase",
     "pages/projectcase/post/post",
     "pages/projectcase/singletrail/singletrail",

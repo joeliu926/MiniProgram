@@ -2,22 +2,30 @@
 <wxs src="../../../utils/wxs/cutil.wxs" module="util" />
 <view class='page'>
   <div class='top'>
-    <div class='top-content' style="position:relative;">
-      <div class="top-right">
+    <div class='top-content'>
+        <!--客户头像  -->
+      <div class='top-imgdiv'>
+        <image class='top-img' src='{{clueDetail.customerLogo.length<5?"../../../public/images/defimag.png":clueDetail.customerLogo}}'></image>
+      </div>
+      <!-- 客户详情 -->
+      <div class="top-right" style="position:relative;height:100%;">
         <div>
           <span class="top-clineName">{{clueName}}</span>
           <span class="top-span" style="display:inline-block;">{{clueDetail.statusName}}</span>
         </div>
         <div class='top-state'>{{!clueDetail.appointmentId?"未预约":util.formatTime(bookName,"yyyy年MM月dd日 hh:mm")}}</div>
-        <div class='top-book' bindtap='bookOption'>{{bookName=='去预约'?bookName:"已预约"}}</div>
+        <!-- 电话号码 -->
+        <div bindtap='fMakePhone' style='width:100%; height:50rpx;font-size:22rpx; margin-left: -10rpx;'>
+        <!--{{clueDetail.customerWechatMobile||clueDetail.customerPhoneNum?"":"display:none;"}}  -->
+          <image style='width:20px;height:20px;vertical-align:top;' src='../../../public/images/phone-con.png'></image>
+          <span style="vertical-align:top;line-height:40rpx;">13838389438{{clueDetail.customerWechatMobile?clueDetail.customerWechatMobile:clueDetail.customerPhoneNum}}</span>
+        </div>
+        <!--预约按钮  -->
+        <div class='top-book' style="position:absolute;bottom:10rpx;right:0rpx;" bindtap='bookOption'>{{bookName=='去预约'?bookName:"已预约"}}</div>
       </div>
-      <div class='top-imgdiv'>
-        <image class='top-img' src='{{clueDetail.customerLogo.length<5?"../../../public/images/defimag.png":clueDetail.customerLogo}}'></image>
-      </div>
-      <!-- <div bindtap='fMakePhone' style='position:absolute;right:50rpx;top:200rpx;height:50rpx;font-size:22rpx;'>
-        <image style='width:20px;height:20px;vertical-align:top;{{clueDetail.customerWechatMobile||clueDetail.customerPhoneNum?"":"display:none;"}}' src='../../../public/images/phone-con.png'></image>
-        <span style="vertical-align:top;line-height:40rpx;">{{clueDetail.customerWechatMobile?clueDetail.customerWechatMobile:clueDetail.customerPhoneNum}}</span>
-      </div> -->
+    
+       
+
     </div>
     <div>
       <div class='top-cnt'>
@@ -154,12 +162,12 @@
               </span>
             </view>
             <!--上传照片  -->
-            <view class='cnt-item-text ' style="position:relative;display:{{item.code=='photoUpload'?'block':'none'}}">
+            <view class='cnt-item-text ' bindtap="previewImage"  data-src=""  style="position:relative;display:{{item.code=='photoUpload'?'block':'none'}}">
               <view style="marign-top:-2rpx">
                 <text style="vertical-align:middle;">上传了 照片</text>
-                <image bindtap="previewImage" src="../../../public/images/picture.png" style="width:44rpx;height:44rpx;vertical-align:middle;"></image>
+                <image  src="../../../public/images/picture.png" style="width:44rpx;height:44rpx;vertical-align:middle;"></image>
               </view>
-              <span style="vertical-align:middle; position:absolute; top:0rpx;right:10rpx;" bindtap="previewImage">
+              <span style="vertical-align:middle; position:absolute; top:0rpx;right:10rpx;">
                 <image style="width:44rpx;height:44rpx; vertical-align:middle;" src="../../../public/images/open.png">
                 </image>
               </span>

@@ -1,6 +1,5 @@
 {
   "pages": [
-      "pages/client/ccase/ccase",
     "pages/index/home",
     "pages/index/detail/cluedetail",
     "pages/index/casedetail/casedetail",
@@ -14,7 +13,7 @@
     "pages/client/sharecase/tkphoto/tkphoto",
     "pages/test/test",
     "pages/logs/logs",
-  
+    "pages/client/ccase/ccase",
     "pages/projectcase/post/post",
     "pages/projectcase/singletrail/singletrail",
     "pages/projectcase/casetrail/userlist/userlist",

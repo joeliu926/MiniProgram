@@ -1,4 +1,3 @@
-const wxCustomerMsg = require('../../../../public/js/wxCustomerMsg.js');
 const event = require('../../../../public/js/wxEvent.js');
 const tools = require('../../../../utils/js/util.js');
 const wxaapi = require('../../../../public/wxaapi.js');
@@ -66,12 +65,13 @@ Page({
  * 生命周期函数--监听页面隐藏
  */
   onHide: function () {
+    //this.fUserEvent(event.eType.appQuit);//授退出事件
   },
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    this.fUserEvent(event.eType.appQuit);//授推出事件
+    //this.fUserEvent(event.eType.appQuit);//授退出事件
   },
 
 
@@ -146,7 +146,7 @@ Page({
     var _This = this;
     if (!_This.data.frontface && !_This.data.sideface) {
       wx.showToast({
-        title: '请选择图片',
+        title: '请选择照片',
         icon: "loading",
         duration: 1000
       });
@@ -232,24 +232,11 @@ Page({
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
     wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
-      // console.log("000000000000000000000000===>", result);
-      //console.log("photo--Event---" + eType + "---", result);
       if (result.data.code == 0) {
       } else {
         console.log("add  event error---", result);
       }
     });
-  },
-  /**
-   * 发送客服消息
-   */
-  fCustomerMsg() {
-    var _This = this;
-    if (_This.data.oUserInfo.unionId == _This.data.cstUid) {//自己查看不返回事件通知
-      return false;
-    }
-    var sendMsg = "您的客户 " + _This.data.oUserInfo.nickName + " 于" + tools.formatTime() + " 提交了个人资料";
-    wxCustomerMsg.fSendWxMsg(_This.data.cstUid, sendMsg);
   },
   /**
    * 获取用户上传的图片
@@ -301,7 +288,7 @@ Page({
           });
         }else{
           _This.setData({ isUpload: true });
-          _This.fRedirectBack();
+          _This.fRedirectBack();//如果用户已近授权过手机号码直接跳转回前一个页面
         
         }
       }

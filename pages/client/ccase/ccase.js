@@ -30,6 +30,7 @@ Page({
     aHeight:[],//高度集合
     isFirst:true,//首次进来
     picCount:0,//获取用户上传图片
+    isLike:2,//用户点击事件的喜欢状态
     clueId: "",
     currentPage: 0,
     totalCount: 1,
@@ -114,8 +115,11 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    this.fUserEvent(event.eType.appQuit);//授推出事件
+   // this.fUserEvent(event.eType.appQuit);//授推出事件
   },
+  /**
+   * 图片预览
+   */
   imgPreview(e) {
     var dataset = e.currentTarget.dataset;
     wx.previewImage({
@@ -478,13 +482,8 @@ Page({
   fLikeCase() {
     let _This = this;  //olikeResult
     let olikeResult = _This.data.olikeResult;
-    
     //_This.fCustomerOperate(1);
     _This.fClickLike();
-
-    if (!_This.data.currentLikeState){
-      _This.fUserEvent(event.eType.caseLike);
-    }
   },
   /**
    * 获取用户操作状态 1喜欢案例 2提交资料  旧版的点击喜欢
@@ -534,13 +533,14 @@ Page({
     wxRequest(wxaapi.consult.handlelike.url, pdata).then(function (result) {
       console.log("olikeResult--------", result.data.data);
       if (result.data.code == 0) {
-       // let currentLikeState = _This.data.currentLikeState;
         let olikeResult = _This.data.olikeResult;
         olikeResult[_This.data.sCurrentId] = !currentLikeState;
         _This.setData({
           currentLikeState: !currentLikeState,
-          olikeResult: olikeResult
+          olikeResult: olikeResult,
+          isLike: operationType
         });
+        _This.fUserEvent(event.eType.caseLike);//用户喜欢案例事件上报
       
       } else {
         console.log("click like state  error----", result);
@@ -599,8 +599,6 @@ Page({
     var _This = this;
     var oTempEvent = _This.data.oEvent;
     var currentPage = _This.data.currentPage;
-
-   // console.log('_This.data.productCode', _This.data.productCode);
     oTempEvent.shareEventId = _This.data.shareEventId || 1;
     oTempEvent.productCode = [""];
     oTempEvent.clueId = _This.data.clueId; //线索id  
@@ -616,7 +614,7 @@ Page({
       caseId: _This.data.sCurrentId||"",//
       appletId: "hldn",
       consultingId: _This.data.consultationId,
-      isLike: _This.data.isLike||"1",    ////0不喜欢 1喜欢2未选择
+      isLike: _This.data.isLike,    ////0不喜欢 1喜欢2未选择
       reserveId:"",//
       agree: _This.data.agree,  //1是允许，0是拒绝
       imgNum:"",
@@ -644,9 +642,7 @@ Page({
     var oData = _This.data.oEvent;
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
-
     wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
-      //console.log("000000000000000000000000===>", result);
       if (result.data.code == 0) {
 
       } else {
@@ -654,15 +650,6 @@ Page({
       }
     });
   },
-
-
-
-
-
-
-
-
-
   /**
    * 跳转至上传图片页面
    */
@@ -706,10 +693,6 @@ Page({
       url: './clinicmap/clinicmap?unionId=' + unionId
     })
   },
-
-
-
-
   /*************** 滚动事件 开始************************/
   // 触摸开始事件
   fTouchStart: function (e) {
@@ -733,7 +716,6 @@ Page({
     if (iIndex <= 0 && tX > 0) {
       return false;
     }
-
     let olock = _This.data.olock;
     if (Math.abs(tX) > Math.abs(tY) + 40) {
       if (!olock) {
@@ -752,10 +734,6 @@ Page({
         olock: false
       });
     }
-
-
-
-    //if (Math.abs(tY) < Math.abs(tX)) {
     if (Math.abs(tX) > Math.abs(tY) + 60) {
       let aItemLeft = _This.data.aItemLeft;
       aItemLeft["case" + currentItemId].zleft = tX + "px";

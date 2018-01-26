@@ -198,7 +198,7 @@ Page({
       consultingId: _This.data.consultationId,
       consultantId: _This.data.cstUid,
       isLike: _This.data.isLike||"",
-      caseId: _This.data.caseId || "",//
+      caseId: _This.data.caseId,//
       reserveId: "",//
       agree: _This.data.agree, //1是允许，0是拒绝
       // image: {
@@ -279,8 +279,8 @@ Page({
       operationType: 2, //1喜欢案例 2提交资料
       positiveFace: _This.data.frontface||"",
       sideFace: _This.data.sideface||""
-    };
-    wxRequest(wxaapi.consult.handelsharecase.url, pdata).then(function (result) {
+    };  //handlelike  handelsharecase
+    wxRequest(wxaapi.consult.handlelike.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         if (!_This.data.tel){
           _This.setData({

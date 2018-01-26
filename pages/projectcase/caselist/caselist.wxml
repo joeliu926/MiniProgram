@@ -26,15 +26,15 @@
                   <view class='flex b-s clearfix' style="position: relative;">
                     <text class='before f-12 bcommon'>术前</text>
                     <text class='after f-12 bcommon'>术后</text>
-                    <image src='{{oitem.beforePicture.url||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l fl'></image>
-                    <image src='{{oitem.afterPicture.url||"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r fl'></image>
+                    <image src='{{oitem.beforePicture.url?oitem.beforePicture.url:"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-l fl'></image>
+                    <image src='{{oitem.afterPicture.url?oitem.afterPicture.url:"../../../public/images/bk-photo.png"}}' mode='aspectFill' data-uid='{{oitem.id}}' bindtap='fCaseDetail' class='cmp-img b-s cmp-r fl'></image>
                   </view>
                 </view>
 
                 <view class='user-info'>
                   <!--bindtap='fCaseDetail'  -->
                   <view class='bef-aft flex'>
-                    <image class='o-img-title' src='{{oitem.customerLogo.url||"../../../public/images/defimag.png"}}' mode='scaleToFill'></image>
+                    <image class='o-img-title' src='{{oitem.customerLogo.url?oitem.customerLogo.url:"../../../public/images/defimag.png"}}' mode='scaleToFill'></image>
                   </view>
                   <view class='u-info'>
                     <text class='u-name'>{{oitem.customerName}}</text>

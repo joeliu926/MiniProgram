@@ -1,14 +1,27 @@
 
 <view class='counselor-ct flex'>
   <view class='w-10 flex fx-d-col color-w'>
-    <view class='title-ct' style='background-image:url({{oCstData.headImgUrl||"../../../../public/images/front-face.png"}})'></view>
-    <view class='name-pd' style=''>{{oCstData.name}}</view>
-    <view class='cst-pd b-s' style=''>
-       微信：{{oCstData.wxAccount}}
-       </view>
-    <view class='cst-pd b-s' style='' bindtap='fMakePhone'>电话：{{oCstData.mobile}}</view>
+  <view class='round-ct'>
+    <view class='round-ct'>
+      <view class='round-ct'> <view class='title-ct' style='background-image:url({{oCstData.headImgUrl?oCstData.headImgUrl:"../../../../public/images/front-face.png"}})'></view></view>
+    </view>
   </view>
-  <view class='cs-des flex-c fx-d-col f-16'>
-    <text class=''>专属咨询师，为您提供一对一服务！</text>
+  
+    <view class='name-pd' style='font-size:36rpx;'>{{oCstData.name}}</view>
+    <view class='flex-c fx-jc-sb b-s contact' style=''>
+       <view class='b-s cm-contact contact-phone'>
+         <image class='phone-icon'  src='../../../../public/images/phone-icon.png'></image>
+       </view>
+       <view class='b-s cm-contact contact-we'>
+          <image class='phone-icon'  src='../../../../public/images/wea-icon.png'></image>
+       </view>
+    </view>
+    <view class='cst-pd f-14 b-s' style='font-size:30rpx;'>
+       微信：{{oCstData.wxAccount}}
+    </view>
+    <view class='cst-pd f-14 b-s' style='font-size:30rpx;' bindtap='fMakePhone'>电话：{{oCstData.mobile}}</view>
+  </view>
+  <view class='cs-des flex-c b-s fx-d-col f-16'>
+    <text class='f-12'>专属咨询师，为您提供一对一服务！</text>
   </view>
 </view>

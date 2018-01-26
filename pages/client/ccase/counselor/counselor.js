@@ -16,7 +16,7 @@ Page({
   onLoad: function (options) {
     //console.log("options---->", options);
      this.setData({
-       cstUid: options.cstUid
+       cstUid: options.cstUid ||"oDOgS0kCV5its31fROZtbdqcpMAE"
      });
      this.fGetConsultDetail();
   },
@@ -38,7 +38,7 @@ Page({
       unionid: _This.data.cstUid,
     };
     wxRequest(wxaapi.user.userinfo.url, pdata).then(function (result) {
-      //console.log("get consult detail result---->", result);
+      console.log("get consult detail result---->", result);
       if (result.data.code == 0) {
          _This.setData({
            oCstData:result.data.data

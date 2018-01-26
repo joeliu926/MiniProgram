@@ -78,7 +78,7 @@ Page({
     let aCaseList = _This.data.aCaseList;
     _This.setData({
       aCurrentList: aCaseList.slice(0, 10),
-      consultationId: options.consultationId ||options.scene|| "2491",
+      consultationId: options.consultationId ||options.scene|| "1670",
     });
     /***********qiehuan******/
     getApp().getUserData(function (uinfo) {
@@ -90,7 +90,7 @@ Page({
           productCode: cstInfo.productCodes,// options.itemid,
           cstUid: cstInfo.unionId,// options.cstUid || uinfo.unionId,
           oUserInfo: uinfo,
-          consultationId: cstInfo.id || "2491",
+          consultationId: cstInfo.id || "1670",
           likeItem: "",
           shareEventId: options.shareEventId || "",
           oEvent: event.oEvent

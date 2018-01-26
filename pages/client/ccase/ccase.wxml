@@ -74,7 +74,7 @@
    <image  class='cm-img '  src='../../../public/images/wx-icon.png' ></image>
       <button class='' style='position:absolute;' plain="true" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
 </view>
-<view bindtap='fGetConsultDetail' class='bk-c-w b-r flex-c com-right-icon phone-icon {{isEndPage?"hide":""}} {{!oUserInfo.wechatMobile?"hide":""}}' style=''>
+<view wx:if="{{(oUserInfo.wechatMobile)&&(!isEndPage)}}" bindtap='fGetConsultDetail' class='bk-c-w b-r flex-c com-right-icon phone-icon' style=''>
    <image  class='cm-img '  src='../../../public/images/wx-icon.png' ></image>
 </view>
 <view class='bk-c-w b-r flex-c com-right-icon tk-photo-icon {{isEndPage?"hide":""}}' bindtap='fTakePhoto' style=''>

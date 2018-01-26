@@ -106,11 +106,11 @@
             <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-editpeople.png"></image>
           </view>
           <!-- 预约 -->
-          <view class='photopic' bindtap="bookOption" style="display:{{item.code=='reserve'?'block':'none'}}">
+          <view class='photopic' bindtap="bookOption"  style="display:{{item.code=='reserve'?'block':'none'}}">
             <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-book.png"></image>
           </view>
           <!-- 上传图片 -->
-          <view class='photopic' bindtap="previewImage" style="display:{{item.code=='photoUpload'?'block':'none'}}">
+          <view class='photopic' data-urls="{{item.imgUrls}}" data-src='../../../public/images/icon-pic.png' bindtap="previewImage" style="display:{{item.code=='photoUpload'?'block':'none'}}">
             <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-pic.png"></image>
           </view>
           <!--退出案例  -->
@@ -162,7 +162,7 @@
               </span>
             </view>
             <!--上传照片  -->
-            <view class='cnt-item-text ' bindtap="previewImage"  data-src=""  style="position:relative;display:{{item.code=='photoUpload'?'block':'none'}}">
+            <view class='cnt-item-text ' bindtap="previewImage" data-urls="{{item.imgUrls}}" data-src=""  style="position:relative;display:{{item.code=='photoUpload'?'block':'none'}}">
               <view style="marign-top:-2rpx">
                 <text style="vertical-align:middle;">上传了 照片</text>
                 <image  src="../../../public/images/picture.png" style="width:44rpx;height:44rpx;vertical-align:middle;"></image>

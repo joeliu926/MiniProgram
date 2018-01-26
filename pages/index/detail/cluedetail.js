@@ -59,8 +59,8 @@ Page({
     //     "desc": "上传了照片",
     //     "imgNum": 2,
     //     "imgUrls": [
-    //       "http://111.com",
-    //       "http://111.com"
+    //       "http://pic32.photophoto.cn/20140807/0005018763115153_b.jpg",
+    //       "http://pic28.photophoto.cn/20130830/0005018667531249_b.jpg"
     //     ]
     //   },
     //   {
@@ -88,6 +88,24 @@ Page({
     //     "consultantId": 15,
     //     "customerName": "姜士虎",
     //     "desc": "退出案例浏览"
+    //   },
+    //   {
+    //     "code": "photoUpload",
+    //     "appletId": "hldn",
+    //     "sceneId": 3,
+    //     "type": 1,
+    //     "sceneCode": 3,//暂时无用
+    //     "caseId": 3,
+    //     "clueId": 3,
+    //     "time": 1512704516458,
+    //     "userName": "Andrew",
+    //     "customerName": "姜士虎",
+    //     "desc": "上传了照片",
+    //     "imgNum": 2,
+    //     "imgUrls": [
+    //      "http://pic28.photophoto.cn/20130827/0005018371946994_b.jpg", 
+    //      "http://pic8.nipic.com/20100801/387600_002750589396_2.jpg"
+    //     ]
     //   },
     //   {
     //     "code": "reserve",
@@ -192,7 +210,6 @@ Page({
       }
     });
   },
-
   /**
    *  获取预约页面中  互动轨迹的数据 
    */ 
@@ -202,7 +219,7 @@ Page({
       clueId: this.data.clueDetail.id,//3
     };
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
-      console.log("result==========2222222222222222222222================>",result)
+      // console.log("result==========2222222222222222222222================>",result)
       if (result.data.code == 0) {
         
         if (result.data.data.length==0){ 
@@ -224,19 +241,20 @@ Page({
                asShow: "false"
              });
            }
-           var imgUrlArr=[];
-          interactlists.forEach(function(item){
-            if (item.imgUrls && item.code =="photoUpload"){
-              imgUrlArr = imgUrlArr.concat(item.imgUrls); 
-            }
-          }) 
-          // 过滤去重图片数组
-          imgUrlArr = imgUrlArr.filter(function (item, index, oProduct) {
-            return oProduct.indexOf(item) == index;
-          })
-
+//  不要删除  暂时注释
+          //  var imgUrlArr=[];  
+          // interactlists.forEach(function(item){
+          //   if (item.imgUrls && item.code =="photoUpload"){
+          //     imgUrlArr = imgUrlArr.concat(item.imgUrls); 
+          //   }
+          // }) 
+          // // 过滤去重图片数组
+          // imgUrlArr = imgUrlArr.filter(function (item, index, oProduct) {
+          //   return oProduct.indexOf(item) == index;
+          // })
+//  不要删除  暂时注释
           _This.setData({
-            imgalist: imgUrlArr,
+            // imgalist: imgUrlArr,//暂时注释
             interactlist: interactlists,
           });
       } else {
@@ -250,10 +268,13 @@ Page({
    * 点击图片图标 查看详细的图片 
    */
   previewImage: function (e) {
-    var current = e.target.dataset.src;
+    var current = e.currentTarget.dataset.src;
+
+    console.log(e,"====================");
     wx.previewImage({
-      current: current, // 当前显示图片的http链接  
-      urls: this.data.imgalist // 需要预览的图片http链接列表  
+      current: current, // 当前显示图片的http链接 
+      urls: e.currentTarget.dataset.urls
+      //urls: this.data.imgalist // 需要预览的图片http链接列表  
     })
   },
   /**
@@ -268,7 +289,7 @@ Page({
     // console.log("999999999999999999999",pdata)
     wxRequest(wxaapi.index.cluedetail.url, pdata).then(function (result) {
       let resultobj = result.data.data;
-      console.log("========1111111111111111111=======resultobj", resultobj);
+      // console.log("========1111111111111111111=======resultobj", resultobj);
       if (result.data.code == 0) {
         let cname = resultobj.customerName;
         if (!cname) {

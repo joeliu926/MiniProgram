@@ -99,6 +99,18 @@ Page({
 
     });
   },
+
+  /**
+   * 术前术后图片的 缩略图展示
+   */
+  imgPreview(e) {
+    var dataset = e.currentTarget.dataset;
+    wx.previewImage({
+      current: dataset.src,
+      urls: [dataset.src]
+    })
+  }, 
+
   /**
  * 通过案例ID获取案例详情
  */

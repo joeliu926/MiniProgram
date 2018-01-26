@@ -1,18 +1,16 @@
 <wxs src="../../../utils/wxs/cutil.wxs" module="cutil"  />
-
-
-<view class='c-case-ct b-s bk-c-w ' style='background-color:#F0F0F0;'>
-   <view class='o-title w-10'>
-      <text><text wx:if="{{!isEndPage}}" class='f-14 f-c-3'>{{currentPage+1}}</text><text wx:if="{{isEndPage}}" class='f-14 f-c-3'>{{totalCount+1}}</text><text class='f-14'>/{{totalCount+1}}</text></text>
+<view class='c-case-ct b-s bk-c-w ' style='background-color:#9083ED;'>
+   <view class='o-title w-10' >
+      <text><text style='color:white;' wx:if="{{!isEndPage}}" class='f-14 f-c-3'>{{currentPage+1}}</text><text style='color:white;' wx:if="{{isEndPage}}" class='f-14 f-c-3'>{{totalCount+1}}</text><text style='color:white;' class='f-14'>/{{totalCount+1}}</text></text>
    </view>
-  <view class='case-ct w-h-10  bk-c-w'  style='background-color:#F0F0F0;'>
+  <view class='case-ct w-h-10  bk-c-w'  style='background-color:#9083ED;'>
 <block wx:for="{{aCaseList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
 
-    <view class='w-10 b-s case-item-ct {{isEndPage?"hide":""}}'     bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{aItemLeft["case"+oItem.id].zindex}};left:{{aItemLeft["case"+oItem.id].zleft}};background-color:#F0F0F0;padding:30rpx;'>
-    <view class='b-d-tb bk-c-w QQQ' style='height:{{aHeight[currentPage]+"px"}};overflow: hidden;border-top-left-radius:30rpx;border-top-right-radius:30rpx;'>
+    <view class='w-10 b-s case-item-ct {{isEndPage?"hide":""}}'     bindtouchstart="fTouchStart" bindtouchend="fTouchEnd" data-caseItem="{{oItem.id}}" bindtouchmove='fTouchMove' style='z-index:{{aItemLeft["case"+oItem.id].zindex}};left:{{aItemLeft["case"+oItem.id].zleft}};background-color:#9083ED;padding:10rpx;'>
+    <view class='b-d-tb bk-c-w QQQ' style='height:{{aHeight[currentPage]+"px"}};overflow: hidden;border-top-left-radius:20rpx;border-top-right-radius:20rpx;border-top:10rpx solid #fff;border-left:10rpx solid #fff;border-right:10rpx solid #fff;'>
   <!------------------before after start------------left:{{index==0?itemLeft:"0px"}};-------->
       <view class='w-10 b-after-ct'> 
-            <view class='flex b-s' style="position: relative;">
+            <view class='flex b-s' style="position: relative; ">
                  <text class='before f-10 bcommon'>术前</text>
                  <text class='after f-10 bcommon'>术后</text>
                   <image data-src='{{oItem.beforePicture.url}}' bindtap='imgPreview' src='{{oItem.beforePicture.url?oItem.beforePicture.url:"../../../public/images/front-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}' ></image>
@@ -90,7 +88,7 @@
 
 
 <!------------------end page start-------------------->
-<view class='b-s end-ct {{!isEndPage?"hide":""}}' style='background-color:#F0F0F0;'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
+<view class='b-s end-ct {{!isEndPage?"hide":""}}' style='background-color:#9083ED;'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
   <div style="background-color:#fff;display:inline-block;border-top-left-radius:30rpx;border-top-right-radius:30rpx;width:100%;">
    <view class='end-cmy-ct b-s flex fx-jc-sb'>
      <view class='flex-c fx-d-col e-cmy-major'>

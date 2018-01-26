@@ -226,9 +226,15 @@ Page({
            }
            var imgUrlArr=[];
           interactlists.forEach(function(item){
-            
-            imgUrlArr=imgUrlArr.concat(item.imgUrls);          
+            if (item.imgUrls && item.code =="photoUpload"){
+              imgUrlArr = imgUrlArr.concat(item.imgUrls); 
+            }
           }) 
+          // 过滤去重图片数组
+          imgUrlArr = imgUrlArr.filter(function (item, index, oProduct) {
+            return oProduct.indexOf(item) == index;
+          })
+
           _This.setData({
             imgalist: imgUrlArr,
             interactlist: interactlists,

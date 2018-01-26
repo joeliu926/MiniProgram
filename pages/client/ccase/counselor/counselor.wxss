@@ -2,30 +2,42 @@ page{
   background: #ffffff;
 }
 .counselor-ct{
-  background: linear-gradient(#9083ed, #5A9BFC);
+  box-shadow: 0 0 8rpx 10rpx #eeeeee;
   position: absolute;
   top: 40rpx;
-  bottom: 40rpx;
-  right: 40rpx;
-  left: 40rpx;
-  padding-top: 20%;
+  bottom: 300rpx;
+  right: 60rpx;
+  left: 60rpx;
+  padding: 40rpx 0;
+  border-radius: 10rpx;
+    
 }
 .color-w{
-   color: #ffffff;
    font-size: 32rpx;
    align-items: center;
 
 }
 .name-pd{
-  padding:40rpx;
+  padding:20rpx;
+  color:#333;
+  width: 100%;
+  text-align: center;
+  font-weight:600;
 }
 .cst-pd{
-  padding:10rpx;
-  width:100%;padding-left:32%;
+  width:100%;
+  text-align: center;
+  margin-top:40rpx;
+}
+.round-ct{
+  border-radius: 50%;
+  border: 1rpx solid #eeeeee;
+  padding: 30rpx;
+  
 }
 .title-ct{
-  width: 300rpx;
-  height: 300rpx;
+  width: 200rpx;
+  height: 200rpx;
   border-radius: 50%;
   border: 4rpx solid #ffffff;
   background-position: center center;
@@ -34,9 +46,33 @@ page{
 }
 .cs-des{
   position: fixed;
-  bottom: 15%;
+  bottom: 80rpx;
   height: 160rpx;
-  background: rgba(255, 255, 255, 0.2);
   width: 100%;
-  color: #ffffff;
+  margin-left: -60rpx;
+}
+.contact{
+  height:100rpx;
+  width:100%;
+ 
+}
+.cm-contact{
+  width: 180rpx;
+  height: 100%;
+   background:#9083ed;
+   line-height: 100rpx;
+}
+.contact-phone{
+   text-align: right;
+   padding-right: 40rpx;
+   border-radius: 0 70rpx 70rpx 0;
+}
+.contact-we{
+border-radius:70rpx 0 0 70rpx;
+   padding-left: 40rpx;
+}
+.phone-icon{
+  width: 60rpx;
+  height: 60rpx;
+  vertical-align: middle;
 }

@@ -200,7 +200,7 @@ Page({
       isLike: _This.data.isLike||"",
       caseId: _This.data.caseId || "",//
       reserveId: "",//
-      agree: _This.data.agree||"", //1是允许，0是拒绝
+      agree: _This.data.agree, //1是允许，0是拒绝
       // image: {
       //   imgKey: _This.data.imgKey,
       //   frontface: _This.data.frontface,

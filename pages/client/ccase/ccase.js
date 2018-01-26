@@ -485,6 +485,7 @@ Page({
     if (!_This.data.currentLikeState){
       _This.fUserEvent(event.eType.caseLike);
     }
+
   },
   /**
    * 获取用户操作状态 1喜欢案例 2提交资料  旧版的点击喜欢

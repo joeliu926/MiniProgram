@@ -88,7 +88,7 @@
 
 
 <!------------------end page start-------------------->
-<view class='b-s end-ct {{!isEndPage?"hide":""}}' style='background-color:#9083ED;'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
+<view class='b-s end-ct {{!isEndPage?"hide":""}}' style='background-color:#9083ED;height:100%;'  bindtouchstart="fEndPageStart" bindtouchend="fEndPageEnd">
   <div style="background-color:#fff;display:inline-block;border-top-left-radius:30rpx;border-top-right-radius:30rpx;width:100%;">
    <view class='end-cmy-ct b-s flex fx-jc-sb'>
      <view class='flex-c fx-d-col e-cmy-major'>

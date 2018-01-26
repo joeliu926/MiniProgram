@@ -11,14 +11,14 @@
         <div class='top-state'>{{!clueDetail.appointmentId?"未预约":util.formatTime(bookName,"yyyy年MM月dd日 hh:mm")}}</div>
         <div class='top-book' bindtap='bookOption'>{{bookName=='去预约'?bookName:"已预约"}}</div>
       </div>
-      <div class='top-imgdiv' >
+      <div class='top-imgdiv'>
         <image class='top-img' src='{{clueDetail.customerLogo.length<5?"../../../public/images/defimag.png":clueDetail.customerLogo}}'></image>
-  
       </div>
-            <div  bindtap='fMakePhone' style='position:absolute;right:50rpx;top:200rpx;height:50rpx;font-size:22rpx;'> 
-            <image  style='width:20px;height:20px;vertical-align:top;{{clueDetail.customerWechatMobile||clueDetail.customerPhoneNum?"":"display:none;"}}' src='../../../public/images/phone-con.png'></image>
-            <span style="vertical-align:top;line-height:40rpx;">{{clueDetail.customerWechatMobile?clueDetail.customerWechatMobile:clueDetail.customerPhoneNum}}</span></div>
-      </div>
+      <!-- <div bindtap='fMakePhone' style='position:absolute;right:50rpx;top:200rpx;height:50rpx;font-size:22rpx;'>
+        <image style='width:20px;height:20px;vertical-align:top;{{clueDetail.customerWechatMobile||clueDetail.customerPhoneNum?"":"display:none;"}}' src='../../../public/images/phone-con.png'></image>
+        <span style="vertical-align:top;line-height:40rpx;">{{clueDetail.customerWechatMobile?clueDetail.customerWechatMobile:clueDetail.customerPhoneNum}}</span>
+      </div> -->
+    </div>
     <div>
       <div class='top-cnt'>
         <div>
@@ -46,7 +46,7 @@
     <!--备注列表  remark -->
     <div wx:for="{{remarklist}}" style="display:{{isshow=='true'?'block':'none'}}" wx:for-item="remark" wx:key="id" class="cnt-content">
       <div class="cnt-imgdiv">
-        <image src='{{remark.headImgUrl||"../../../public/images/default-title.png"}}'></image>
+        <image src='{{remark.headImgUrl?remark.headImgUrl:"../../../public/images/default-title.png"}}'></image>
       </div>
       <div class='cnt-text'>
         <div class='cnt-text-name'>
@@ -68,7 +68,7 @@
       <!--轨迹item 测试-->
       <view class="interact-item" wx:for="{{interactlist}}" wx:for-item="item" wx:key="index" style="display:{{item.code=='informationSubmit'?'none':'block'}};">
         <!--图标和时间  -->
-        <div class="cnt-interact-imgdiv" >
+        <div class="cnt-interact-imgdiv">
           <div class='cnt-item-time' style="background:{{item.type == 1 ?'#8088f6':'#4cb0ff'}}; ">
             <text style="margin-left:20rpx;font-size:30rpx; ">{{util.formatTime(item.time,"hh:mm")}}</text>
             <text style="margin-left:10rpx ;font-size:20rpx;">{{util.formatTime(item.time,"MM/dd")}}</text>
@@ -105,7 +105,7 @@
           <view class='photopic' bindtap="previewImage" style="display:{{item.code=='photoUpload'?'block':'none'}}">
             <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-pic.png"></image>
           </view>
-           <!--退出案例  -->
+          <!--退出案例  -->
           <view class='photopic' bindtap="jumpcase" style="display:{{item.code=='appQuit'?'block':'none'}}">
             <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
           </view>
@@ -127,10 +127,10 @@
                 <view style="white-space: pre-wrap;padding-right: 10rpx;vertical-align:middle;margin-right: 40rpx; ">
                   <text style="vertical-align:middle;">喜欢了 {{item.userName}} 分享的 案例</text>
                 </view>
-                 <span style=" position:absolute; top:0rpx;right:10rpx;" bindtap="likecase">
-                    <image style="display:inline-block; vertical-align:middle; width:44rpx;height:44rpx;margin-top:5rpx;" src="../../../public/images/open.png">
-                    </image>
-                  </span>
+                <span style=" position:absolute; top:0rpx;right:10rpx;" bindtap="likecase">
+                  <image style="display:inline-block; vertical-align:middle; width:44rpx;height:44rpx;margin-top:5rpx;" src="../../../public/images/open.png">
+                  </image>
+                </span>
               </view>
             </view>
 
@@ -146,7 +146,7 @@
             <!--更新关键信息  -->
             <view class='cnt-item-text' style="display:{{item.code=='contactEdit'?'block':'none'}}" bindtap="editmsg">被 {{item.userName}} 更新了 关键信息</view>
             <!--预约信息  -->
-            <view class='cnt-item-text '  style="position:relative; display:{{item.code=='reserve'?'block':'none'}}"  bindtap="bookOption">
+            <view class='cnt-item-text ' style="position:relative; display:{{item.code=='reserve'?'block':'none'}}" bindtap="bookOption">
               <text style="vertical-align:middle;">被 {{item.userName}} 预约了 现场咨询</text>
               <span style="vertical-align:middle;margin-left:10rpx; position:absolute;  top:0rpx;right:10rpx;">
                 <image style="width:44rpx;height:44rpx; vertical-align:middle;" src="../../../public/images/open.png">
@@ -156,10 +156,10 @@
             <!--上传照片  -->
             <view class='cnt-item-text ' style="position:relative;display:{{item.code=='photoUpload'?'block':'none'}}">
               <view style="marign-top:-2rpx">
-                  <text style="vertical-align:middle;">上传了 照片</text>
-                  <image bindtap="previewImage" src="../../../public/images/picture.png" style="width:44rpx;height:44rpx;vertical-align:middle;"></image>
+                <text style="vertical-align:middle;">上传了 照片</text>
+                <image bindtap="previewImage" src="../../../public/images/picture.png" style="width:44rpx;height:44rpx;vertical-align:middle;"></image>
               </view>
-              <span style="vertical-align:middle; position:absolute; top:0rpx;right:10rpx;"  bindtap="previewImage">
+              <span style="vertical-align:middle; position:absolute; top:0rpx;right:10rpx;" bindtap="previewImage">
                 <image style="width:44rpx;height:44rpx; vertical-align:middle;" src="../../../public/images/open.png">
                 </image>
               </span>

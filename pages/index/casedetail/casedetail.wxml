@@ -11,8 +11,8 @@
               <text class='before f-10 bcommon'>术前</text>
               <text class='after f-10 bcommon'>术后</text>
               
-              <image src='{{oCaseDetail.beforePicture.url||"../../../public/images/front-face.png"}}'></image>
-              <image src='{{oCaseDetail.afterPicture.url||"../../../public/images/side-face.png"}}'></image>
+              <image data-src='{{oCaseDetail.beforePicture.url}}' bindtap='imgPreview' src='{{oCaseDetail.beforePicture.url?oCaseDetail.beforePicture.url:"../../../public/images/front-face.png"}}'></image>
+              <image  data-src='{{oCaseDetail.afterPicture.url}}' bindtap='imgPreview' src='{{oCaseDetail.afterPicture.url?oCaseDetail.afterPicture.url:"../../../public/images/side-face.png"}}'></image>
             </view>
           </view>
           <!------------------before after end-------------------->
@@ -20,14 +20,11 @@
 
           <!------------------case hospital start-------------------->
           <view class='t-a-c bk-c-w host-des-ct'>
-          <!--{{oItem.caseName}}  硅胶隆鼻-->
+          <!-- 硅胶隆鼻-->
             <view class='f-16 p-d-bottom'>{{oCaseDetail.caseName}}</view>
-            <!-- {{oItem.doctor.name}} · {{oItem.clinic.name}} tiger · 一刀美容 -->
             <view class='f-14 txt-pd'>{{oCaseDetail.doctor.name}} · {{oCaseDetail.clinic.name}}</view>
-            <!-- {{cutil.formatTime(oItem.operationDate,"yyyy-MM-dd")}} -->
             <view class='f-14 p-d-bottom'>{{cutil.formatTime(oCaseDetail.operationDate,"yyyy-MM-dd")}}</view>
             <view class='f-14 flex-c fx-wp des-project-ct'>
-            <!-- wx:for="{{oItem.products}}" wx:for-item='oProduct' wx:key="oProduct.id"{{oProduct.productName}} 硅胶隆鼻-->
               <text class='f-14 pro-item' wx:for="{{oCaseDetail.products}}" wx:for-item='oProduct' wx:key="oProduct.id">{{oProduct.productName}}</text>
             </view>
           </view>

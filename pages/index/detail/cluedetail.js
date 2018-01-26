@@ -15,7 +15,7 @@ Page({
     bookName: '',
     show: 'true',
     isshow: 'false',
-    asShow:'true',
+    asShow:'false',
     hide:'flase',
     imgalist:[],
     // imgalist: ["http://pic32.photophoto.cn/20140807/0005018763115153_b.jpg", "http://pic28.photophoto.cn/20130827/0005018371946994_b.jpg", "http://pic28.photophoto.cn/20130830/0005018667531249_b.jpg","http://pic8.nipic.com/20100801/387600_002750589396_2.jpg"],//测试数据

@@ -659,13 +659,18 @@ Page({
             }, 3000);
             // wx.hideLoading();
           } else {
-            // wx.showToast({
-            //   title: '预约失败',
-            //   image: '../../public/images/no_data.png',
-            //   icon: 'success',
-            //   duration: 4000
-            // });
-           // wx.hideLoading();
+
+            wx.showModal({
+              title: 'Sorry',
+              content: result.data.msg,
+              success: function (res) {
+                if (res.confirm) {
+                 
+                } else if (res.cancel) {
+           
+                }
+              }
+            }); 
           }
         });
       } else {

@@ -9,10 +9,10 @@
   
     <view class='name-pd' style='font-size:36rpx;'>{{oCstData.name}}</view>
     <view class='flex-c fx-jc-sb b-s contact' style=''>
-       <view class='b-s cm-contact contact-phone'>
+       <view class='b-s cm-contact contact-phone' bindtap='fMakePhone'>
          <image class='phone-icon'  src='../../../../public/images/phone-icon.png'></image>
        </view>
-       <view class='b-s cm-contact contact-we'>
+       <view class='b-s cm-contact contact-we' bindtap='fCopyWeNum'>
           <image class='phone-icon'  src='../../../../public/images/wea-icon.png'></image>
        </view>
     </view>

@@ -30,6 +30,22 @@ Page({
     })
   },
   /**
+   * 复制微信号码
+   */
+  fCopyWeNum(){
+    let _This=this;
+    wx.setClipboardData({
+      data: _This.data.oCstData.wxAccount,
+      success: function (res) {
+        wx.showToast({
+          title: '复制微信号成功',
+          icon: 'success',
+          duration: 2000
+        })
+      }
+    })
+  },
+  /**
   * 获取咨询师详情
   */
   fGetConsultDetail() {

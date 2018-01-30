@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    formId:"",//获取formid用户客户模板消息通知
     isShowMask:false,
     photoSide: true,
     frontface: null,
@@ -274,7 +275,8 @@ Page({
       caseId: _This.data.caseId, //案例id
       operationType: 2, //1喜欢案例 2提交资料
       positiveFace: _This.data.frontface||"",
-      sideFace: _This.data.sideface||""
+      sideFace: _This.data.sideface||"",
+      formId: _This.data.formId //一次提交的formid
     };  //handlelike  handelsharecase
     wxRequest(wxaapi.consult.handlelike.url, pdata).then(function (result) {
       if (result.data.code == 0) {
@@ -395,5 +397,29 @@ Page({
         }
       });
     });
+  },
+  /**
+   * 用户上传照片时候的formid
+   */
+  fFormTakePhoto(e){
+    let _This = this;
+    console.log("------get formid------", e);
+    _This.setData({
+      formId: e.detail.formId
+    });
+
+    _This.fTakePhoto();
+  },
+  /**
+   * 用户提交资料的时候的formid
+   */
+  fFormSubmit(e){
+    let _This=this;
+    console.log("----post--get formid------", e);
+    _This.setData({
+      formId: e.detail.formId
+    });
+    _This.fSendMsg();
+  
   }
 })

@@ -59,9 +59,15 @@ if($enSure -eq  "y"){
 	  }
 	  Write-Output ( "++++++++++++++++++++"+($Today)+"++++++++++++++++++++++++++") | out-file -Append -Encoding utf8 -Filepath ($ResultPath+"\result.txt");
 	 $excludePublicPic|Foreach{   	   
-		      Move-Item  $_.Fullname $ResultPath  #-ErrorAction "SilentlyContinue";
+		   $pName=$_.Name;
+		   Try{
+		      Move-Item  $_.Fullname $ResultPath  -ErrorAction Stop;
 			  Write-Host "=============yes========"+($_) -foregroundcolor Green;
-			  Write-Output ($_.Name) | out-file -Append -Encoding utf8 -Filepath ($ResultPath+"\result.txt");
+			  Write-Output ($pName) | out-file -Append -Encoding utf8 -Filepath ($ResultPath+"\result.txt");
+		   }Catch{
+		      Write-Host $pName+"=============failed========"+($_) -foregroundcolor Red;
+		      Write-Output ($pName+"-----"+($_)) | out-file -Append -Encoding utf8 -Filepath ($ResultPath+"\result.txt");
+		   }
 	 }	 
 	 
 }else{

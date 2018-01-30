@@ -5,7 +5,13 @@
         <view class='b-s  fx-d-col photo'>
             <image style='' class='b-s p-img  w-10 {{photoSide?"":"hide"}}'  src='{{frontface?frontface:"../../../../public/images/front-face.png"}}' mode='widthFix'></image>
             <image class='b-s p-img w-10 {{!photoSide?"":"hide"}}' src='{{sideface?sideface:"../../../../public/images/side-face.png"}}' mode='widthFix'></image>
-            <image class='cam' bindtap='fTakePhoto' src='../../../../public/images/icon-came.png' ></image>
+            <view class='cam  b-r'>
+              <form  report-submit  bindsubmit="fFormTakePhoto" >
+              <image class='form-img' style='' src='../../../../public/images/icon-came.png' ></image>
+        <button class='form-img' style='border:none;' plain="true" formType="submit"></button>
+      </form>
+            </view>
+            <image class='cam hide' bindtap='fTakePhoto' src='../../../../public/images/icon-came.png' ></image>
         </view>
         <view class='flex-c'>
           <text class='face f-14 {{photoSide?"s-side":""}}' data-choose='{{photoSide}}' bindtap='fChangeSide'>正面</text>
@@ -18,9 +24,12 @@
   <view class='dp-arr'></view>
 </view>
    <view class='footer  b-s'>  
-      <view class='flex-c b-s btn-sub'> 
-            <text class='f-16 btn-back'  bindtap='fSendMsg' style='' >立即上传</text>
-      </view>           
+      <form  report-submit  bindsubmit="fFormSubmit" >
+         <view class='flex-c b-s btn-sub'> 
+           <text class='f-16 btn-back hide'  bindtap='fSendMsg' style='' >立即上传</text>       
+           <button class='form-img' style='border:none;color:#fff;line-height:80rpx;' plain="true" formType="submit">立即上传</button>
+          </view>
+       </form>           
     </view>
 
     <view class='footer  b-s hide' style='display:{{isUpload?"":"none"}}' >  

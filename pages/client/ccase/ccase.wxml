@@ -68,6 +68,9 @@
 <view class='bk-c-w b-r flex-c com-right-icon b-s like-icon {{isEndPage?"hide":""}}' bindtap='fLikeCase' style=''>
     <image  wx:if="{{!currentLikeState}}" class='cm-img'  src='../../../public/images/unlike-icon.png' ></image>
     <image wx:if="{{currentLikeState}}"  class='cm-img'  src='../../../public/images/like-icon.png' ></image>
+     <form  report-submit  bindsubmit="fFormLike" > 
+           <button class='form-fid' style='border:none;' plain="true" formType="submit"></button>
+     </form>
 </view>
 
 <view wx:if="{{(!oUserInfo.wechatMobile)&&(!isEndPage)}}" class='bk-c-w b-r flex-c com-right-icon phone-icon' style=''>

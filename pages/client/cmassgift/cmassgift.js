@@ -9,10 +9,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    oGift:{},//礼品对象
     aGiftList:["11","22","33"],//礼品列表
     isShowMask:false,//显示授权手机号码提示框
     oUserInfo:{},//当前用户信息
-    indicatorDots: true,
+    indicatorDots: false,
     autoplay: false,
     interval: 5000,
     current:0
@@ -24,10 +25,13 @@ Page({
   onLoad: function (options) {
     let _This=this;
     getApp().getUserData(function (uinfo) {
-      console.log("uinfo------------->", uinfo);
+      //console.log("uinfo------------->", uinfo);
       _This.setData({
         oUserInfo: uinfo
         });
+
+      _This.fGiftDetail();
+
     });
   },
 
@@ -79,6 +83,27 @@ Page({
   onShareAppMessage: function () {
   
   },
+  /**
+   * 获取礼品详情
+   */
+  fGiftDetail(){
+    let _This = this;
+    let pdata = {
+      id: 1
+    };
+    //console.log("post data--->", pdata);
+    wxRequest(wxaapi.gift.giftdetail.url, pdata).then(function (result) {
+      //console.log("get giftdetail --->", result);
+      if (result.data.code == 0) {
+        _This.setData({
+          oGift: result.data.data
+        });
+      }
+    });
+  },
+   
+
+
   /**
    * 切换改变
    */

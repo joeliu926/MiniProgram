@@ -1,31 +1,22 @@
 <view class='b-s w-10 bk-c-w gift-ct'>
    <view class='b-s w-10 pic-ct'>
        <swiper indicator-dots="{{indicatorDots}}" class="w-10 o-swiper" style=''  current="{{current}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
-        <block wx:for="{{aGiftList}}" wx:for-item="oitem" wx:key="id">
+        <block wx:for="{{oGift.giftPictures}}" wx:for-item="oitem" wx:key="id">
           <swiper-item>
               <view class='h-w-10 item-ct'>
-                 <image class='h-w-10 item-img' mode='aspectFill' src="../../../public/images/post-demo.png" ></image>
+                 <image class='h-w-10 item-img' mode='aspectFill' src="{{oitem.url}}" ></image>
               </view>
           </swiper-item>
         </block>
       </swiper>
       <view class='w-10 f-16 gift-title'>
-          领取玻尿酸补水面膜12片
+          {{oGift.name}}
       </view>
    </view>
    <view>
      <view class='f-14 des-title'>礼品描述</view>
      <view class='f-12' style='line-height:40rpx;'>
-        1、这是礼品的描述信息，这个礼品不错，还是值得去领取的，而且你也可以去看看好的项目，这样不是挺好的吗？不错，这就去。
-        -------------------
-     </view>
-      <view class='f-12' style='line-height:40rpx;'>
-        2、这是礼品的描述信息，这个礼品不错，还是值得去领取的，而且你也可以去看看好的项目，这样不是挺好的吗？不错，这就去。
-        -------------------
-     </view>
-     <view class='f-12' style='line-height:40rpx;'>
-        3、这是礼品的描述信息，这个礼品不错，还是值得去领取的，而且你也可以去看看好的项目，这样不是挺好的吗？不错，这就去。
-        -------------------
+       {{oGift.des}}
      </view>
    </view>
    <view class='flex w-10 b-s fx-jc-sa bottom-ct'>

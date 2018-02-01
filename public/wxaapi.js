@@ -216,7 +216,10 @@ var urlConfig = {
   },
   gift:{
     pagelist:{
-      url: gConfig.remote + "/gift/pagelist"  //获取礼品列表
+      url: gConfig.remote + "/gift/pagelist"  //获取礼品列表 
+    },
+    giftdetail: {
+      url: gConfig.remote + "/gift/giftdetail"  //获取礼品详情 giftdetail
     }
   }
 }

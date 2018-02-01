@@ -71,7 +71,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("ccase------>event", options)
+    //console.log("ccase------>event", options)
 
     let _This = this;
     var caseIds = options.caseIds;
@@ -83,7 +83,7 @@ Page({
     });
     /***********qiehuan******/
     getApp().getUserData(function (uinfo) {
-      
+      console.log("uinfo------------->",uinfo);
       _This.fGetShareInfoBySessionId(function(cstInfo){
         _This.setData({
           caseIds: caseIds || "",
@@ -496,6 +496,26 @@ Page({
    _This.setData({
      formId: e.detail.formId
    });
+   _This.fGetCustomerFormid();
+  },
+  /**
+   * 获取客户的formid
+   */
+  fGetCustomerFormid(){
+    let _This = this;
+    let pdata = {
+      customerUnionid: _This.data.oUserInfo.unionId,
+      customerOpenid: _This.data.oUserInfo.openId,
+      consultUnionid: _This.data.cstUid,//咨询师unionid
+      sessionId: _This.data.consultationId,//当前会话id
+      formId: _This.data.formId //一次提交的formid
+    };
+    wxRequest(wxaapi.wxaqr.addformid.url, pdata).then(function (result) {
+      console.log("insert into customer formid----",result);
+      if (result.data.code == 0) {
+         
+      }
+    });
   },
   /**
    * 获取用户操作状态 1喜欢案例 2提交资料  旧版的点击喜欢
@@ -573,7 +593,7 @@ Page({
       caseIds: _This.data.aCaseIds
     };
     wxRequest(wxaapi.consult.gethandlelike.url, pdata).then(function (result) {
-      console.log("get click like result---->",result);
+      //console.log("get click like result---->",result);
       if (result.data.code == 0) {
         _This.setData({
           olikeResult: result.data.data

@@ -116,6 +116,9 @@ var urlConfig = {
     },
     getconsultinfo: {
       url: gConfig.remote + "/consult/getconsultinfo" // 通过会话id获取咨询师信息
+    },
+    getcluesbyconsultid: {
+      url: gConfig.remote + "/consult/getcluesbyconsultid" // 获取目标人群接口V0.3.3
     }
   },
   appointment: {
@@ -209,6 +212,11 @@ var urlConfig = {
     },
     gConfig:{
       route: gConfig.remote
+    }
+  },
+  gift:{
+    pagelist:{
+      url: gConfig.remote + "/gift/pagelist"  //获取礼品列表
     }
   }
 }

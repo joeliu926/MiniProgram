@@ -1,0 +1,11 @@
+<view class='b-s h-w-10 bk-c-w dest-mass'>
+  <view>
+    <view class='b-s  item-mass'>
+      <text class='com-pd  f-16 item-type'>无手机号人群</text>
+      <text class='com-pd  f-14 item-type'>{{noPhoneCount}}人</text>
+    </view>
+  </view>
+</view>
+<view class='flex-c w-10 b-s  com-bottom-ct'>
+      <view class='f-14 b-s t-a-c com-btn-txt' bindtap='fChooseNext'>下一步</view>
+   </view>

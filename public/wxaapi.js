@@ -204,6 +204,9 @@ var urlConfig = {
     genwxaqrcode:{
       url: gConfig.remote + "/wxaqr/genwxaqrcode"
     },
+    addformid:{
+      url: gConfig.remote + "/wxa/formid"
+    },
     gConfig:{
       route: gConfig.remote
     }

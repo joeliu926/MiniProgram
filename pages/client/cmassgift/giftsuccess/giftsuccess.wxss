@@ -1,0 +1,18 @@
+.gift-success{
+   padding: 20rpx 40rpx;
+}
+.suc-ct{
+ padding: 100rpx 0;
+}
+.txt-com{
+  margin: 20rpx 0;
+}
+.btn-com{
+  padding: 10rpx 40rpx;
+  border-radius: 20px;
+  background-color: #9083ed;
+  color: #ffffff;
+  width: 450rpx;
+  text-align: center;
+  margin: 40rpx auto;
+}

@@ -1,0 +1,71 @@
+.gift-ct{
+  padding: 20rpx 40rpx 150rpx;
+}
+.pic-ct{
+
+}
+.o-swiper{
+  height: 700rpx;
+}
+.item-ct{
+   background: purple;
+}
+.item-img{
+}
+.gift-title{
+ text-align: center;
+ padding: 20rpx 0;
+}
+.des-title{
+  padding: 20rpx 0;
+  color: #333333;
+}
+.bottom-ct{
+ position: fixed;
+ bottom: 0;
+ left: 0;
+ padding: 40rpx;
+}
+.cb-btn{
+   border-radius: 20px;
+   background-color: #9083ed;
+   color: #ffffff;
+   padding:15rpx 50rpx;
+   width: 250rpx;
+   position: relative;
+}
+.share-btn{
+  position:absolute;
+  left: 0;
+  top: 0;
+ 
+}
+
+/*****授权手机号码弹出层 start*****/
+.mask{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.3);
+}
+.pop-box{
+  width: 600rpx;
+  height: 360rpx;
+  background: #ffffff;
+  margin: 0 auto;
+  margin-top: 40%;
+  border-radius: 8rpx;
+}
+.tex-pd{
+  padding: 0 0 32rpx 0;
+}
+.auth-tel{
+   border-radius: 20px;
+  background-color: #9083ed;
+  color: #ffffff;
+  padding:0 50rpx;
+}
+
+/*****授权手机号码弹出层 end*****/

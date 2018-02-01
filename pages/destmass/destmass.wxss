@@ -1,0 +1,10 @@
+.dest-mass{
+ border-top: 2rpx solid  #eeeeee;
+}
+.item-mass{
+  border-bottom: 2rpx solid  #eeeeee;
+}
+.item-type{
+  display: inline-block;
+  vertical-align: middle;
+}

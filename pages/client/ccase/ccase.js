@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    formId: "",//获取formid用户客户模板消息通知
     olock: false,
     aCaseList: [],
     isErrorUpload: false,//授权手机号码失败
@@ -479,11 +480,22 @@ Page({
   /**
    * 点击喜欢不喜欢案例
    */
-  fLikeCase() {
+  fLikeCase(e) {
+    //console.log("case like----->",e);
     let _This = this;  //olikeResult
     let olikeResult = _This.data.olikeResult;
     //_This.fCustomerOperate(1);
     _This.fClickLike();
+  },
+  /**
+   * like获取formid
+   */
+  fFormLike(e){
+   //console.log("----form like---",e);
+   let _This=this;
+   _This.setData({
+     formId: e.detail.formId
+   });
   },
   /**
    * 获取用户操作状态 1喜欢案例 2提交资料  旧版的点击喜欢
@@ -497,7 +509,8 @@ Page({
       caseId: _This.data.sCurrentId, //案例id
       operationType: operateType, //1喜欢案例 2提交资料
       positiveFace: "",
-      sideFace: ""
+      sideFace: "",
+      formId: _This.data.formId //一次提交的formid
     };
     if (_This.data.currentLikeState){
        return false;

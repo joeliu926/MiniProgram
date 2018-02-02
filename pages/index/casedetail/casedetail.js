@@ -34,6 +34,8 @@ Page({
     currentPage: 0,
     totalCount: 1,
     caseList: [],
+    bfimgurls:[],
+    imgarr:[],
     detailInfo: {
       "doctorName": "",
       "contentList": [
@@ -90,7 +92,8 @@ Page({
         consultationId: options.consultationId || "1616",
         likeItem: "",
         shareEventId: options.shareEventId || "",
-        oEvent: event.oEvent
+        oEvent: event.oEvent,
+      
       });
 
       // _This.fCustomerAdd();//客户添加
@@ -107,7 +110,8 @@ Page({
     var dataset = e.currentTarget.dataset;
     wx.previewImage({
       current: dataset.src,
-      urls: [dataset.src]
+      // urls: [dataset.src]
+      urls: e.currentTarget.dataset.urls
     })
   }, 
 
@@ -126,15 +130,29 @@ Page({
       did: aCaseId
     };
     wxRequest(wxaapi.pcase.detail.url, pdata).then(function (result) {
-      console.log("casedetail=========00000000000000------->",result);
+      // console.log("casedetail=========00000000000000------->",result);
       if (result.data.code == 0 && typeof (result.data.data) == "object") {
         let oCase = result.data.data;
+        var imgurls=[];
+        imgurls = imgurls.concat(oCase.beforePicture.url)
+        imgurls = imgurls.concat(oCase.afterPicture.url);
         let aCaseList = _This.data.aCaseList;
-
+        let contentList = result.data.data.contentList
+        // console.log("oCase================》》》》》", contentList);
+        var arr = [];
+        contentList.forEach(function(item){
+          item.pictures.forEach(function(item){
+              arr=arr.concat(item.url);
+          })
+          _This.setData({
+            imgarr: arr
+          })
+        })
         _This.setData({
           oCaseDetail: oCase,
           aCaseList: aCaseList,
-
+          bfimgurls: imgurls,
+          
         });
 
 
@@ -146,16 +164,6 @@ Page({
   },
 
 
-/**
- *点击图片查看预览 
- */  
-  imgPreview(e) {
-    var dataset = e.currentTarget.dataset;
-    wx.previewImage({
-      current: dataset.src,
-      urls: [dataset.src]
-    })
-  },
   onReady: function () {
   },
   /**

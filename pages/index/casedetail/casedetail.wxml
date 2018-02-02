@@ -10,9 +10,9 @@
             <view class='flex b-s' style="position: relative;">
               <text class='before f-10 bcommon'>术前</text>
               <text class='after f-10 bcommon'>术后</text>
-              
-              <image data-src='{{oCaseDetail.beforePicture.url}}' bindtap='imgPreview' src='{{oCaseDetail.beforePicture.url?oCaseDetail.beforePicture.url:"../../../public/images/front-face.png"}}'></image>
-              <image  data-src='{{oCaseDetail.afterPicture.url}}' bindtap='imgPreview' src='{{oCaseDetail.afterPicture.url?oCaseDetail.afterPicture.url:"../../../public/images/side-face.png"}}'></image>
+              <!-- data-urls="{{imgUrls}}" -->
+              <image data-src='{{oCaseDetail.beforePicture.url}}' data-urls="{{bfimgurls}}"  bindtap='imgPreview' src='{{oCaseDetail.beforePicture.url?oCaseDetail.beforePicture.url:"../../../public/images/front-face.png"}}'></image>
+              <image  data-src='{{oCaseDetail.afterPicture.url}}' data-urls="{{bfimgurls}}"  bindtap='imgPreview' src='{{oCaseDetail.afterPicture.url?oCaseDetail.afterPicture.url:"../../../public/images/side-face.png"}}'></image>
             </view>
           </view>
           <!------------------before after end-------------------->
@@ -41,7 +41,7 @@
                 <view class='b-pd w-10  b-s' style='margin:20rpx 0;'>
                   <view class='flex fx-wp w-10 b-s'>
                     <block wx:for="{{oContent.pictures}}" wx:for-item="imgItem" wx:key="ids">
-                      <view class='img-c b-s' style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreview'></view>
+                      <view class='img-c b-s' style='background-image:url({{imgItem.url}})' data-urls="{{imgarr}}" data-src='{{imgItem.url}}' bindtap='imgPreview'></view>
                     </block>
                   </view>
                   <view>

@@ -6,7 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    aGiftList:[],
+    aGiftList:[],//获取列表
+    giftId:0,//选中的id
+    isActive:false, //按钮是否处于激活状态
     pageNo:1,
     pageSize:2,
     oUserInfo: {}
@@ -79,7 +81,9 @@ Page({
    * 选择改变
    */
   fSelectChange(e){
-   console.log("select change---------------",e);
+   this.setData({
+     giftId:e.detail.value
+   });
   },
   /**
    * 获取礼品列表
@@ -89,16 +93,27 @@ Page({
     let pdata = {
       pageNo: _This.data.pageNo,
       pageSize: _This.data.pageSize,
-      userUnionId: _This.data.oUserInfo.unionId
+      userUnionId: _This.data.oUserInfo.unionId,
+      status:0
     };
-    console.log("post data--->", pdata);
     wxRequest(wxaapi.gift.pagelist.url, pdata).then(function (result) {
-      console.log("get gift by sessionid--->",result);
       if (result.data.code == 0) {
         _This.setData({
           aGiftList: result.data.data.list
         });
       } 
     });
+  },
+  /**
+   * 跳转至预览
+   */
+  fChooseNext(){
+    let giftid = this.data.giftId;
+    if (giftid<=0) {
+      return false;
+    }
+  wx.navigateTo({
+    url: `/pages/destmass/previewgift/preview?giftid=${giftid}`,
+  })
   }
 })

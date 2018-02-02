@@ -177,6 +177,9 @@ background-color: #ffffff;
    line-height: 80rpx;
    position: relative;
 }
+.n-active{
+  background-color:#ccc;
+}
 /**********bottom button end************/
 
 

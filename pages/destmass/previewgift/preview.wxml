@@ -1,5 +1,5 @@
 <view class='b-s h-w-10 bk-c-w dest-mass'>
-  <view class='{{isActive?"":"hide"}}'>
+  <view class=''>
     <view class='b-s flex-c fx-jc-sb item-mass'>
       <view class='b-s item-type'>
         <image class='item-img' mode="aspectFill" src='/public/images/no-phone-group.png'></image>
@@ -7,16 +7,19 @@
       </view>
       <text class='f-14 item-type'>{{noPhoneCount}}人</text>
     </view>
+
+    <view class='flex-c  fx-d-col' style='margin:60rpx;'>
+      <image class='preview-img' src="{{oGift.giftCover.url}}"></image>
+      <view class='f-16'>{{oGift.name}}</view>
+    </view>
+
+
   </view>
-   <view class='flex-c h-w-10 fx-d-col {{!isActive?"":"hide"}}'>
-     <image class='no-data-img' src="/public/images/no_data.png"></image>
-     <view class='f-14'>还没有手机号码为空的客户哦~</view>
-   </view>
 </view>
 
 
 
-<view class='flex-c w-10 b-s  com-bottom-ct' >
+<view class='flex-c w-10 b-s  com-bottom-ct'>
       <view class='f-14 flex-c note-ct'><icon class='n-icon' style='' type="info_circle" size="20" color="green"/>为防止造成客户骚扰，排除m天内已发送过n客户</view>
-      <view class='f-14 b-s t-a-c com-btn-txt {{isActive?"":"n-active"}}'  bindtap='fChooseNext'>下一步</view>
+      <view class='f-14 b-s t-a-c com-btn-txt' bindtap='fSendGift'>发送</view>
    </view>

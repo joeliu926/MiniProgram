@@ -1,11 +1,7 @@
 var gConfig={
-
   remoteWx: "https://nihaomc.com/wx_test",
- 
   remote: "https://nihaomc.com/wxa_test",
- 
   uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload"
-
 }
 var urlConfig = {
   img:{
@@ -20,6 +16,13 @@ var urlConfig = {
       }
     }
   },
+  api: {
+    getuserid: {
+      url: gConfig.remote + "/api/getuserid"   //获取诊所详情
+    }
+  },
+
+
   user:{
     userinfo: {
       url: gConfig.remote+"/user/userinfo"

@@ -2,9 +2,29 @@
  border-top: 2rpx solid  #eeeeee;
 }
 .item-mass{
-  border-bottom: 2rpx solid  #eeeeee;
+  margin: 40rpx 40rpx 0 40rpx;
+  background: #9083ed;
+  padding: 30rpx 40rpx;
+  border-radius: 10rpx;
+}
+.item-img{
+  width:50rpx;
+  height:50rpx;
+  vertical-align: middle;
+  margin:20rpx 40rpx;
 }
 .item-type{
+   color: #ffffff;
   display: inline-block;
   vertical-align: middle;
+}
+.note-ct{
+  position: absolute;
+  top:-100rpx;
+  background: #eeeeee;
+  padding: 20rpx;
+}
+.n-icon{
+  vertical-align:middle;
+  margin-right: 20rpx;
 }

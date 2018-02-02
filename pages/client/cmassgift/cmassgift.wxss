@@ -1,16 +1,21 @@
 .gift-ct{
   padding: 20rpx 40rpx 150rpx;
 }
-.pic-ct{
-
-}
 .o-swiper{
   height: 700rpx;
 }
 .item-ct{
-   background: purple;
+   position: relative;
 }
-.item-img{
+.count-item{
+  position: absolute;
+  right: 40rpx;
+  bottom: 20rpx;
+  color: #ffffff;
+  padding: 10rpx 0 8rpx 0;
+  background: rgba(0,0,0,0.6);
+  width: 120rpx;
+  border-radius: 30rpx;
 }
 .gift-title{
  text-align: center;

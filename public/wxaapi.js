@@ -2,6 +2,7 @@ var gConfig={
 
   remoteWx: "https://nihaomc.com/wx_test",
   remote: "https://nihaomc.com/wxa_dev",
+  // remote: "https://nihaomc.com/wxa_test",
   uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload"
 
 }

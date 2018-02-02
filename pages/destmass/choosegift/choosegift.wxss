@@ -1,0 +1,19 @@
+.select-gift{
+ border-top: 2rpx solid #eeeeee;
+}
+.item-ct{
+ border-bottom: 2rpx solid #eeeeee;
+ padding: 20rpx  0;
+}
+.item-img{
+  height: 160rpx;
+  width: 160rpx;
+ padding: 0 20rpx;
+ 
+}
+.des-ct{
+  height:160rpx;
+}
+.d-date{
+  padding: 20rpx 0;
+}

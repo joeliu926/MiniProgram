@@ -162,6 +162,22 @@ background-color: #ffffff;
 .com-line{
   border-color: #eeeeee;
 }
+/**********bottom button start************/
+.com-bottom-ct{
+ position: fixed;
+ bottom: 40rpx;
+ left: 0;
+}
+.com-btn-txt{
+   border-radius: 20px;
+   background-color: #9083ed;
+   color: #ffffff;
+   width: 450rpx;
+   height: 80rpx;
+   line-height: 80rpx;
+   position: relative;
+}
+/**********bottom button end************/
 
 
 

@@ -1,6 +1,5 @@
 {
   "pages": [
-      
     "pages/index/home",
     "pages/index/detail/cluedetail",
     "pages/index/casedetail/casedetail",
@@ -14,12 +13,17 @@
     "pages/client/sharecase/tkphoto/tkphoto",
     "pages/test/test",
     "pages/logs/logs",
+    "pages/destmass/destmass",
+    "pages/destmass/choosegift/choosegift",
+    "pages/destmass/receivedetail/receivedetail",
     "pages/client/ccase/ccase",
     "pages/projectcase/post/post",
     "pages/projectcase/singletrail/singletrail",
     "pages/projectcase/casetrail/userlist/userlist",
     "pages/projectcase/casetrail/cbooking/cbooking",
     "pages/client/ccase/counselor/counselor",
+    "pages/client/cmassgift/cmassgift",
+    "pages/client/cmassgift/giftsuccess/giftsuccess",
     "pages/client/ccase/clinicmap/clinicmap"
   ],
   "window": {
@@ -27,5 +31,5 @@
     "navigationBarTitleText": "咨询师助手",
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black"
-  } 
+  }
 }

@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    formId:"",//获取formid用户客户模板消息通知
     isShowMask:false,
     photoSide: true,
     frontface: null,
@@ -17,6 +18,7 @@ Page({
     oUserInfo: {},
     isUpload: false,
     isErrorUpload:false,//授权手机号码失败
+    imageList:[],//上传图片集合
     shareEventId: "",
     oEvent: {
       code: "",
@@ -104,19 +106,21 @@ Page({
             //console.log(oData);
             if (oData.code == 0) {
               var iurl = oData.data[0];
+              let imageList = [iurl]; //需要上传的图片集合
+              //imageList.push(iurl);
               if (_This.data.photoSide) {
                 _This.setData({
                   frontface: iurl,
-                  imgKey: 1
+                  imgKey: 1,
+                  imageList: imageList
                 });
               } else {
                 _This.setData({
                   sideface: iurl,
+                  imageList: imageList,
                   imgKey: 0
                 });
               }
-
-              console.log('loaddingphoto')
               _This.fUserEvent(event.eType.photoUpload);
             }
             // console.log('res', res);
@@ -152,14 +156,20 @@ Page({
       });
       return false;
     }
+
+    let imageList = _This.data.imageList||[]; //需要上传的图片集合
+    _This.data.frontface && imageList.push(_This.data.frontface);
+    _This.data.sideface && imageList.push(_This.data.sideface);
+    _This.setData({
+      imageList: imageList
+    });
+
     wx.showLoading({
       title: '上传中...',
     })
     _This.fCustomerOperate();
     _This.fUserEvent(event.eType.informationSubmit);
     wx.hideLoading();
-   
-
   },
   fClose() {
     this.fUserEvent(event.eType.appQuit);//退出页面
@@ -180,15 +190,7 @@ Page({
     oTempEvent.consultationId = _This.data.consultationId;//咨询会话ID
     oTempEvent.leadsId = _This.data.clueId; //线索id新  leadsId
     oTempEvent.sceneId = _This.data.consultationId;// 场景sceneId  oUserInfo.
-
-    let imageList = [];
-    if (_This.data.frontface)
-      imageList.push(_This.data.frontface);
-    if (_This.data.sideface)
-      imageList.push(_This.data.sideface);
-
-
-
+    let imageList = _This.data.imageList;
     oTempEvent.eventAttrs = {
       clueId: _This.data.clueId, //线索id  
       leadsId: _This.data.clueId, //线索id新  leadsId
@@ -198,14 +200,9 @@ Page({
       consultingId: _This.data.consultationId,
       consultantId: _This.data.cstUid,
       isLike: _This.data.isLike||"",
-      caseId: _This.data.caseId || "",//
+      caseId: _This.data.caseId,//
       reserveId: "",//
       agree: _This.data.agree, //1是允许，0是拒绝
-      // image: {
-      //   imgKey: _This.data.imgKey,
-      //   frontface: _This.data.frontface,
-      //   sideface: _This.data.sideface
-      // },
       remark: '',
       imgNum: imageList.length,
       imgUrls: imageList,
@@ -248,18 +245,18 @@ Page({
       sessionId: _This.data.consultationId//会话id
     };
     wxRequest(wxaapi.consult.getpostphoto.url, postData).then(function (result) {
-      console.log("get photo result---------->", postData,result);
+      //console.log("get photo result---------->", postData,result);
       if (result.data.code == 0) {
         _This.setData({
           frontface: result.data.data.positiveFace,
           sideface: result.data.data.sideFace
         });
-        setTimeout(function(){ 
+      /*  setTimeout(function(){ 
           _This.setData({
             frontface: result.data.data.positiveFace,
             sideface: result.data.data.sideFace
           });
-        },2000);
+        },2000);*/
 
       } else {
         console.log("add  event error---", result);
@@ -278,9 +275,10 @@ Page({
       caseId: _This.data.caseId, //案例id
       operationType: 2, //1喜欢案例 2提交资料
       positiveFace: _This.data.frontface||"",
-      sideFace: _This.data.sideface||""
-    };
-    wxRequest(wxaapi.consult.handelsharecase.url, pdata).then(function (result) {
+      sideFace: _This.data.sideface||"",
+      formId: _This.data.formId //一次提交的formid
+    };  //handlelike  handelsharecase
+    wxRequest(wxaapi.consult.handlelike.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         if (!_This.data.tel){
           _This.setData({
@@ -399,5 +397,48 @@ Page({
         }
       });
     });
-  }
+  },
+  /**
+   * 用户上传照片时候的formid
+   */
+  fFormTakePhoto(e){
+    let _This = this;
+    console.log("------get formid------", e);
+    _This.setData({
+      formId: e.detail.formId
+    });
+    _This.fGetCustomerFormid();//获取用户formid
+    _This.fTakePhoto();
+  },
+  /**
+   * 用户提交资料的时候的formid
+   */
+  fFormSubmit(e){
+    let _This=this;
+    console.log("----post--get formid------", e);
+    _This.setData({
+      formId: e.detail.formId
+    });
+    _This.fGetCustomerFormid();//获取用户formid
+    _This.fSendMsg(); 
+  },
+    /**
+   * 获取客户的formid
+   */
+  fGetCustomerFormid() {
+    let _This = this;
+    let pdata = {
+      customerUnionid: _This.data.oUserInfo.unionId,
+      customerOpenid: _This.data.oUserInfo.openId,
+      consultUnionid: _This.data.cstUid,//咨询师unionid
+      sessionId: _This.data.consultationId,//当前会话id
+      formId: _This.data.formId //一次提交的formid
+    };
+    wxRequest(wxaapi.wxaqr.addformid.url, pdata).then(function (result) {
+      console.log("post data insert into customer formid----", result);
+      if (result.data.code == 0) {
+
+      }
+    });
+  },
 })

@@ -13,6 +13,8 @@ Page({
     oGift:{},//礼品详情
     noPhoneCount:0,//目标人群
     giftid:0,//获取的礼品id
+    shareType: 4,//分享类型  1朋友圈 2分享到群 3分享到好友 4召回有礼
+    consultationId:""//会话id
   },
 
   /**
@@ -25,7 +27,9 @@ Page({
       //console.log("uinfo------------->", uinfo);
       _This.setData({
         oUserInfo: uinfo,
-        options: options
+        cstUid:uinfo.unionId,
+        options: options,
+        oEvent: event.oEvent //事件参数
       });
 
       _This.fGiftDetail();
@@ -123,5 +127,113 @@ Page({
    */
   fSendGift(){
    console.log("send gift---'");
-  }
+   let _This=this;
+   _This.fGetConsultationId();
+  },
+  /**
+ * 获取会话ID，咨询师获取会话ID进行消息分享
+ */
+  fGetConsultationId() {
+    let _This = this;
+      wx.showLoading({
+        title: '发送中...',
+      });
+    let pdata = {
+      wxaOpenId: _This.data.oUserInfo.openId,
+      unionId: _This.data.oUserInfo.unionId,
+      consultationId: _This.data.consultationId,
+      userLoginName: "",
+      productCode: "",
+      wxNickName: _This.data.oUserInfo.nickName,
+    };
+    console.log("post data----->",pdata);
+    wxRequest(wxaapi.consult.add.url, pdata).then(function (result) {
+      if (result.data.code != 0) {
+        return false;
+      } 
+      _This.setData({
+        consultationId: result.data.data
+      });
+      let shareData = {
+        cases: _This.data.aCaseIds || [""],//案例列表Id
+        consultingId: result.data.data,//会话id
+        consultantUnionid: _This.data.oUserInfo.unionId,//咨询师unionid
+        products: _This.data.productcodes || [""],//项目列表id  [3002,3025,3028]
+        type: _This.data.shareType // 
+      };
+      return wxRequest(wxaapi.consult.consultantupdate.url, shareData);
+    }).then(function(updateresult){
+      console.log("update result----->", updateresult);
+      if (updateresult && updateresult.data.code==0){
+         wx.hideLoading();
+         wx.showToast({
+           title: '已发送',
+         });  
+         wx.redirectTo({
+           url: '/pages/index/home?type=share',
+         });
+      }
+    });
+  },
+
+
+  /**
+ * 用户事件
+ */
+  fUserEvent(eType) {
+    let _This = this;
+    _This.fGetTempEvent();
+    var oData = _This.data.oEvent;
+    oData.code = eType;
+    wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
+      if (result.data.code == 0) {
+        if (!oData.shareEventId) {
+          // oData.shareEventId = result.data.data;
+          _This.setData({
+            shareEventId: result.data.data
+          });
+        };
+      } else {
+        console.log("add  event error---", result);
+      }
+    });
+  },
+  /*
+ *事件参数 
+ */
+  fGetTempEvent() {
+    var _This = this;
+    var oTempEvent = _This.data.oEvent;
+    oTempEvent.shareEventId = _This.data.shareEventId;
+    oTempEvent.productCode = [""];
+    oTempEvent.consultationId = _This.data.consultationId,
+      oTempEvent.sceneId = _This.data.consultationId;
+    oTempEvent.eventAttrs = {
+      consultantId: _This.data.cstUid,
+      caseId:"",
+      appletId: "hldn",
+      consultingId: _This.data.consultationId,
+      isLike:"",
+      clueId: "",//无
+      reserveId: "",//无
+      sceneId: _This.data.consultationId, //会话id
+      agree: "",
+      unionid: _This.data.oUserInfo.unionId,
+      openid: _This.data.oUserInfo.openId,
+      imgNum: "",
+      imgUrls: [],
+      remark: '',
+      triggeredTime: new Date().valueOf()
+    }
+    oTempEvent.subjectAttrs = {
+      appid: "yxy",
+      consultantId: _This.data.cstUid,
+      openid: _This.data.oUserInfo.openId,
+      unionid: _This.data.oUserInfo.unionId,
+      mobile: ""
+    };
+    _This.setData({
+      oEvent: oTempEvent
+    });
+  },
 })

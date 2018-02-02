@@ -12,6 +12,7 @@ var eType = {
   contactEdit: "contactEdit",//编辑联系人+
   leadClose: "leadClose",//关闭联系人线索+
   authPhone: "authPhone",//授权手机号+
+  giftSend:"giftSend",//群发有礼
 };
 var oEvent = {
   shareEventId: "", //当事件码是 appShare，获取该值，传值的时候带着相关的参数

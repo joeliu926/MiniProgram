@@ -14,7 +14,7 @@
     "pages/test/test",
     "pages/logs/logs",
     "pages/destmass/destmass",
-   "pages/destmass/previewgift/preview",
+    "pages/destmass/previewgift/preview",
     "pages/destmass/choosegift/choosegift",
     "pages/destmass/receivedetail/receivedetail",
     "pages/client/ccase/ccase",

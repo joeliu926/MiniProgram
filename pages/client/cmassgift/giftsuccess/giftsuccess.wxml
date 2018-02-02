@@ -1,0 +1,11 @@
+<view class='b-s h-w-10 f-16 bk-c-w gift-success'>
+   <view class='flex-c fx-d-col suc-ct'>
+     <icon type="success" size="120" color="green"/>
+     <view class='f-16 txt-com'>已领取</view>
+     <view class='f-16 txt-com'>小礼物都已经等不及了，快快来抱回家吧~</view>
+  </view>
+  <view class='f-16'>
+    <view class='btn-com' bindtap='fGoBack'>返回</view>
+    <view class='btn-com' bindtap='fGoToMap'>查看地图</view>
+  </view>
+</view>

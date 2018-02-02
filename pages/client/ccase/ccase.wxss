@@ -100,6 +100,9 @@ page{
   z-index: 1000
 
 }
+.form-fid{
+  position:absolute;left:0;top:0;width:100%;height:100%;
+}
 .cm-img{
   height: 60rpx;
   width: 60rpx;

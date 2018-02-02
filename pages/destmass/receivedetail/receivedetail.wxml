@@ -1,0 +1,58 @@
+<view class='b-s w-10 bk-c-w receive-ct'>
+   <view class='b-s w-10 pic-ct'>
+       <swiper indicator-dots="{{indicatorDots}}" class="w-10 o-swiper" style=''  current="{{current}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
+        <block wx:for="{{oGift.giftPictures}}" wx:for-item="oitem" wx:key="id">
+          <swiper-item>
+              <view class='h-w-10 item-ct'>
+                 <image class='h-w-10 item-img' mode='aspectFill' src="{{oitem.url}}" ></image>
+                 <view class='f-14 flex-c count-item'><text>3/5</text></view>
+              </view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class='w-10 f-16 gift-title'>
+          {{oGift.name}}
+      </view>
+   </view>
+   <view class='f-14 b-s static-ct'>
+       <view class='flex item-static'>
+         <view class='b-s s-title'>收礼客户</view>
+          <view class='gradient-ct'>
+           <view class='f-12 gradient' style='width:100%;'>1113人</view>
+         </view>
+       </view>
+       <view class='flex item-static'>
+         <view class='b-s s-title'>领取客户</view>
+         <view class='gradient-ct'>
+           <view class='f-12 gradient' style='width:60%;'>670人</view>
+         </view>
+       </view>
+      <view class='flex item-static'>
+          <view class='b-s s-title'>预约到店</view>
+          <view class='gradient-ct'>
+           <view class='f-12 gradient' style='width:30%;'>11人</view>
+          </view>
+       </view>
+   </view>
+  
+   <view class='b-s w-10 f-16'>
+      <view class='b-s t-a-c tab-ct'>
+        <text class='b-s bk-tab {{isTab?"cge-col":""}}' bindtap='fChangeTab'>领取未预约</text>
+        <text class='b-s bk-tab {{!isTab?"cge-col":""}}' data-istab="1" bindtap='fChangeTab'>已预约</text>
+      </view>
+      <view class='book-ct'>
+        <view class='flex fx-jc-sb b-s f-14 b-d bk-item'>
+          <view class='f-14'>15654555555</view>
+          <view>Roland兰789</view>
+          <view class='flex-c'><image class='right-icon' style='' src="../../../public/images/item-right-icon.png"></image></view>
+        </view>
+            <view class='flex fx-jc-sb b-s f-14 b-d bk-item'>
+          <view >15654555555</view>
+          <view>Roland兰789</view>
+          <view class='flex-c'><image class='right-icon' style='' src="../../../public/images/item-right-icon.png"></image> </view>
+        </view>
+      </view>
+   </view>
+    
+</view>
+

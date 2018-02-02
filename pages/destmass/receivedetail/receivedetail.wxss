@@ -1,0 +1,82 @@
+.receive-ct{
+ padding: 40rpx 0;
+}
+.o-swiper{
+  height: 800rpx;
+}
+.item-ct{
+   position: relative;
+}
+.count-item{
+  position: absolute;
+  right: 40rpx;
+  bottom: 20rpx;
+  color: #ffffff;
+  padding: 10rpx 0 8rpx 0;
+  background: rgba(0,0,0,0.6);
+  width: 120rpx;
+  border-radius: 30rpx;
+}
+.gift-title{
+ text-align: center;
+ padding: 20rpx 0;
+}
+.static-ct{
+ box-shadow: 0 0 8rpx 10rpx #dddddd;
+ margin: 40rpx;
+}
+.s-title{
+  padding: 0 10rpx 0 0;
+  flex:0 0 140rpx;
+}
+.item-static{
+  padding: 20rpx;
+  align-items: center;
+}
+.gradient-ct{
+ padding: 0 10rpx;
+ flex:1 0 140rpx;
+}
+.gradient{
+    padding: 0 10rpx 0 0;
+    height: 32rpx;
+    line-height: 32rpx;
+    background: linear-gradient(to right, #d8d3fd 0%,#bcb4f7 100%);
+    border-radius: 20rpx;
+    color: #ffffff;
+    text-align: right;
+}
+.box-shadow{
+  box-shadow: 0 0 8rpx 10rpx #eeeeee;
+}
+.book-ct{
+  padding:0rpx 40rpx;
+  
+}
+.bk-item{
+  padding:0 20rpx;
+  margin-top: 20rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 8rpx;
+  
+}
+.right-icon{
+  height:40rpx;width:50rpx;
+}
+.tab-ct{
+  border-bottom: 2rpx solid #eeeeee;
+  margin-top: 80rpx;
+}
+.bk-tab{
+  background: #9083ed;
+  margin: 0 10rpx;
+  display: inline-block;
+  width: 250rpx;
+  padding: 10rpx;
+  border-radius: 20rpx 20rpx 0 0;
+  color: #ffffff;
+}
+.cge-col{
+  background: #bcb4f7;
+}

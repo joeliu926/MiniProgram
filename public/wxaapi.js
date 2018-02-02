@@ -117,6 +117,9 @@ var urlConfig = {
     },
     getconsultinfo: {
       url: gConfig.remote + "/consult/getconsultinfo" // 通过会话id获取咨询师信息
+    },
+    getcluesbyconsultid: {
+      url: gConfig.remote + "/consult/getcluesbyconsultid" // 获取目标人群接口V0.3.3
     }
   },
   appointment: {
@@ -205,8 +208,19 @@ var urlConfig = {
     genwxaqrcode:{
       url: gConfig.remote + "/wxaqr/genwxaqrcode"
     },
+    addformid:{
+      url: gConfig.remote + "/wxa/formid"
+    },
     gConfig:{
       route: gConfig.remote
+    }
+  },
+  gift:{
+    pagelist:{
+      url: gConfig.remote + "/gift/pagelist"  //获取礼品列表 
+    },
+    giftdetail: {
+      url: gConfig.remote + "/gift/giftdetail"  //获取礼品详情 giftdetail
     }
   }
 }

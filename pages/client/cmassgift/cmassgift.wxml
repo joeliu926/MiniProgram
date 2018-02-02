@@ -1,0 +1,39 @@
+<view class='b-s w-10 bk-c-w gift-ct'>
+   <view class='b-s w-10 pic-ct'>
+       <swiper indicator-dots="{{indicatorDots}}" class="w-10 o-swiper" style=''  current="{{current}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
+        <block wx:for="{{oGift.giftPictures}}" wx:for-item="oitem" wx:key="id">
+          <swiper-item>
+              <view class='h-w-10 item-ct'>
+                 <image class='h-w-10 item-img' mode='aspectFill' src="{{oitem.url}}" ></image>
+                  <view class='f-14 flex-c count-item'><text>3/5</text></view>
+              </view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class='w-10 f-16 gift-title'>
+          {{oGift.name}}
+      </view>
+   </view>
+   <view>
+     <view class='f-14 des-title'>礼品描述</view>
+     <view class='f-12' style='line-height:40rpx;'>
+       {{oGift.des}}
+     </view>
+   </view>
+   <view class='flex w-10 b-s fx-jc-sa bottom-ct'>
+      <view class='f-14 b-s t-a-c cb-btn'>立即领取
+         <form  report-submit  bindsubmit="fFormRightNow" > 
+            <button class='h-w-10 share-btn' style='border:none;' plain="true" formType="submit"></button>
+         </form>
+      </view>
+      <view class='f-14 b-s t-a-c cb-btn'>分享
+          <button  class='h-w-10 share-btn' plain='true' open-type="share" style='border:none;'></button>
+      </view>
+   </view>
+</view>
+<view class='mask {{isShowMask?"":"hide"}}'>
+     <view class='pop-box flex-c fx-d-col'>
+       <text class='f-14 tex-pd'>请提供手机号哦~它将是你领取礼品的凭证</text>
+       <button class='f-14 auth-tel'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">授权手机号</button>
+     </view>
+</view>

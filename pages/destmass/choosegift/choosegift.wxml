@@ -21,5 +21,5 @@
 </radio-group>
 </view>
 <view class='flex-c w-10 b-s  com-bottom-ct'>
-      <view class='f-14 b-s t-a-c com-btn-txt' bindtap='fChooseNext'>下一步</view>
+      <view class='f-14 b-s t-a-c com-btn-txt {{giftId>0?"":"n-active"}}' bindtap='fChooseNext'>下一步</view>
    </view>

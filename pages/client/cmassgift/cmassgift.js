@@ -13,6 +13,9 @@ Page({
     aGiftList:["11","22","33"],//礼品列表
     isShowMask:false,//显示授权手机号码提示框
     oUserInfo:{},//当前用户信息
+    iTop:false,//向上移动
+    currentRecoder:{name:"张雪勇",image:""},//当前的弹框
+    aAuthRecoder: [{ name: "AAAA", image: "" }, { name: "BBBB", image: "" }, { name: "CCCC", image: "" }],//所有授权手机人
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
@@ -33,6 +36,27 @@ Page({
       _This.fGiftDetail();
 
     });
+ 
+ let mType=false;
+ let i=1;
+ let aLength = _This.data.aAuthRecoder.length||1;
+ setInterval(function(){
+   mType=!mType;
+   let citem = _This.data.aAuthRecoder[i%aLength];
+   _This.setData({
+     iTop: mType,
+     currentRecoder: citem
+   }); 
+   if (!mType){
+     mType = !mType;
+     _This.setData({
+       iTop: mType
+     });
+   } 
+ 
+   i++;
+ },3000);
+
   },
 
   /**
@@ -118,6 +142,15 @@ Page({
     console.log("-------right now-------",e);
     _This.setData({
       isShowMask: true
+    });
+  },
+  /**
+   * 关闭授权手机
+   */
+  fClose(){
+    let _This = this;
+    _This.setData({
+      isShowMask: false
     });
   },
   /**

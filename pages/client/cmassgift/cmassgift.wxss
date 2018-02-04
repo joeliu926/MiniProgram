@@ -45,7 +45,33 @@
   top: 0;
  
 }
-
+/***********弹出的领取start***********/
+.pop-item{
+  border-radius: 60rpx;
+  padding: 15rpx 25rpx;
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  background: rgba(0, 0, 0, 0.6);
+ 
+}
+.u-title{ 
+  border-radius: 50%;
+  margin-right:20rpx;  
+  width: 60rpx;
+  height: 60rpx;
+  vertical-align: middle;
+}
+.tip{
+  color: #ffffff;
+}
+.transition{
+  transition: 0.5s;
+}
+.translate{
+  top:10%; 
+}
+/***********弹出的领取end***********/
 /*****授权手机号码弹出层 start*****/
 .mask{
   position: fixed;
@@ -62,6 +88,14 @@
   margin: 0 auto;
   margin-top: 40%;
   border-radius: 8rpx;
+  position: relative;
+}
+.close{
+  position: absolute;
+  right: -20rpx;
+  top:-20rpx;
+  height: 30rpx;
+  width: 30rpx;
 }
 .tex-pd{
   padding: 0 0 32rpx 0;

@@ -5,7 +5,7 @@
           <swiper-item>
               <view class='h-w-10 item-ct'>
                  <image class='h-w-10 item-img' mode='aspectFill' src="{{oitem.url}}" ></image>
-                 <view class='f-14 flex-c count-item'><text>3/5</text></view>
+                 <view class='f-14 flex-c count-item'><text>{{current+1}}/{{totalPic}}</text></view>
               </view>
           </swiper-item>
         </block>

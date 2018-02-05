@@ -162,6 +162,9 @@ background-color: #ffffff;
 .com-line{
   border-color: #eeeeee;
 }
+.com-b-shadow{
+  box-shadow: 0 0 8rpx 6rpx #eeeeee;
+}
 /**********bottom button start************/
 .com-bottom-ct{
  position: fixed;

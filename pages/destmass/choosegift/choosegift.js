@@ -10,7 +10,7 @@ Page({
     giftId:0,//选中的id
     isActive:false, //按钮是否处于激活状态
     pageNo:1,
-    pageSize:2,
+    pageSize:10,
     oUserInfo: {}
   },
 
@@ -97,6 +97,7 @@ Page({
       status:0
     };
     wxRequest(wxaapi.gift.pagelist.url, pdata).then(function (result) {
+      console.log("result------->",result);
       if (result.data.code == 0) {
         _This.setData({
           aGiftList: result.data.data.list

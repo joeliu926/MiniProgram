@@ -19,7 +19,8 @@ Page({
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
-    current:0
+    current: 0,//图片当前页
+    totalPic: 1,//图片总数
   },
 
   /**
@@ -30,8 +31,12 @@ Page({
     getApp().getUserData(function (uinfo) {
       //console.log("uinfo------------->", uinfo);
       _This.setData({
-        oUserInfo: uinfo
-        });
+        oUserInfo: uinfo,
+        giftid: options.giftid||8,
+        cstUid: options.cstUid,
+        consultationId: options.consultationId,
+        options: options
+      });
 
       _This.fGiftDetail();
 
@@ -47,7 +52,10 @@ Page({
      iTop: mType,
      currentRecoder: citem
    }); 
+   //console.log("1111--i--mType------>", mType);
    if (!mType){
+     console.log("i--mType------>", mType);
+     //console.log("---------------------");
      mType = !mType;
      _This.setData({
        iTop: mType
@@ -63,7 +71,15 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+     let pdata={
+       clueId :"",
+       consultUnId: "",
+       customerUnId : "",
+       giftId:"",
+       giftName:"",
+       sessionId:"",
+       wechatMobile: "",
+     }
   },
 
   /**
@@ -113,26 +129,48 @@ Page({
   fGiftDetail(){
     let _This = this;
     let pdata = {
-      id: 1
+      id: _This.data.giftid
     };
     //console.log("post data--->", pdata);
     wxRequest(wxaapi.gift.giftdetail.url, pdata).then(function (result) {
       //console.log("get giftdetail --->", result);
       if (result.data.code == 0) {
         _This.setData({
-          oGift: result.data.data
+          oGift: result.data.data,
+          totalPic: result.data.data.giftPictures.length
         });
       }
     });
   },
-   
+  /**
+   * 获取领取详情
+   */
+  fGetReceiveDetail(){
+     let _This = this;
+     let pdata = {
+       sessionId: _This.data.sessionId,
+       customerUnId: _This.data.oUserInfo.unionId,
+       consultUnId: _This.data.cstUid
+     };
+     //console.log("post data--->", pdata);
+     wxRequest(wxaapi.activityrecord.getdetail.url, pdata).then(function (result) {
+        console.log("activityrecord iftdetail --->", result);
+       if (result.data.code == 0) {
+         _This.setData({
+          // oGift: result.data.data,
+         });
+       }
+     });
+   },
 
 
   /**
    * 切换改变
    */
   fSwiperChange(e){
-    console.log("change switch----",e);
+    this.setData({
+      current:e.detail.current
+    });
   },
   /**
    * 立即领取formId

@@ -3,7 +3,7 @@ const wxRequest = require('./utils/js/wxRequest.js');
 const wxPromise = require('./utils/js/wxPromise.js');
 App({
   onLaunch: function (options) {
-    //this.getUserData();
+    //this.getUserData(); 
     console.log("onlaunch------>", options);
   },
   globalData: {

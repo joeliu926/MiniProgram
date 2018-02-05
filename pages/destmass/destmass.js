@@ -7,7 +7,8 @@ Page({
    */
   data: {
     oUserInfo:{},
-    noPhoneCount:""
+    noPhoneCount:"",
+    isActive:false,// 是否可进入下一步
   },
 
   /**
@@ -76,6 +77,9 @@ Page({
    * 选择人群下一步
    */
   fChooseNext(){
+    if (!this.data.isActive){
+      return false;
+    }
     wx.navigateTo({
       url: '/pages/destmass/choosegift/choosegift',
     })
@@ -89,14 +93,17 @@ Page({
       types: 1,
       consultUnionId: _This.data.oUserInfo.unionId
     };
-    console.log("post data--->", pdata);
+    //console.log("post data--->", pdata);
     wxRequest(wxaapi.consult.getcluesbyconsultid.url, pdata).then(function (result) {
-      console.log("get getcluesbyconsultid by sessionid--->", result);
+     // console.log("get getcluesbyconsultid by sessionid--->", result);
       if (result.data.code == 0) {
+       // let noCount =0;
         _This.setData({
-          noPhoneCount: result.data.data["1"]
+          noPhoneCount: result.data.data["1"],
+          isActive:true
         });
       }
     });
   }
+     
 })

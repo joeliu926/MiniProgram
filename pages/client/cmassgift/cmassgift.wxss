@@ -1,5 +1,5 @@
 .gift-ct{
-  padding: 20rpx 40rpx 150rpx;
+  padding: 0 0 150rpx;
 }
 .o-swiper{
   height: 700rpx;
@@ -21,6 +21,17 @@
  text-align: center;
  padding: 20rpx 0;
 }
+.gift-statue{
+  padding: 20rpx;
+  margin: 0 40rpx;
+  background: #EDEBFF;
+  color: #9083Ed;
+}
+.g-des-ct{
+  box-shadow: 0 0 8rpx 6rpx #eeeeee;
+  margin:40rpx;
+  padding:0 20rpx 20rpx;
+}
 .des-title{
   padding: 20rpx 0;
   color: #333333;
@@ -35,9 +46,11 @@
    border-radius: 20px;
    background-color: #9083ed;
    color: #ffffff;
-   padding:15rpx 50rpx;
+   padding:0rpx 50rpx;
    width: 250rpx;
    position: relative;
+   height: 80rpx;
+   line-height: 80rpx;
 }
 .share-btn{
   position:absolute;
@@ -45,7 +58,33 @@
   top: 0;
  
 }
-
+/***********弹出的领取start***********/
+.pop-item{
+  border-radius: 60rpx;
+  padding: 15rpx 25rpx;
+  position: absolute;
+  top: 20%;
+  left:20rpx;
+  background: rgba(0, 0, 0, 0.6);
+ 
+}
+.u-title{ 
+  border-radius: 50%;
+  margin-right:20rpx;  
+  width: 60rpx;
+  height: 60rpx;
+  vertical-align: middle;
+}
+.tip{
+  color: #ffffff;
+}
+.transition{
+  transition: 0.5s;
+}
+.translate{
+  top:10%; 
+}
+/***********弹出的领取end***********/
 /*****授权手机号码弹出层 start*****/
 .mask{
   position: fixed;
@@ -57,11 +96,17 @@
 }
 .pop-box{
   width: 600rpx;
-  height: 360rpx;
+  height: 300rpx;
   background: #ffffff;
   margin: 0 auto;
   margin-top: 40%;
   border-radius: 8rpx;
+  position: relative;
+}
+.close{
+  position: absolute;
+  right:10rpx;
+  top:5rpx;
 }
 .tex-pd{
   padding: 0 0 32rpx 0;

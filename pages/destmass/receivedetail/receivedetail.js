@@ -17,7 +17,8 @@ Page({
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
-    current: 0
+    current: 0,
+    totalPic:1
   },
 
   /**
@@ -28,7 +29,8 @@ Page({
     getApp().getUserData(function (uinfo) {
       //console.log("uinfo------------->", uinfo);
       _This.setData({
-        oUserInfo: uinfo
+        oUserInfo: uinfo,
+        options: options
       });
 
       _This.fGiftDetail();
@@ -88,7 +90,9 @@ Page({
  * 切换改变
  */
   fSwiperChange(e) {
-    console.log("change switch----", e);
+    this.setData({
+      current: e.detail.current
+    });
   },
   /**
  * 获取礼品详情
@@ -96,15 +100,17 @@ Page({
   fGiftDetail() {
     let _This = this;
     let pdata = {
-      id: 1
+      id: _This.data.options.giftid||1
     };
     //console.log("post data--->", pdata);
     wxRequest(wxaapi.gift.giftdetail.url, pdata).then(function (result) {
-      //console.log("get giftdetail --->", result);
+      console.log("get giftdetail --->", result);
       if (result.data.code == 0) {
         _This.setData({
-          oGift: result.data.data
+          oGift: result.data.data,
+          totalPic: result.data.data.giftPictures.length
         });
+        
       }
     });
   },

@@ -322,6 +322,7 @@ Page({
       userLoginName: "",
       productCode: sItem,
       wxNickName: _This.data.oUserInfo.nickName,
+      consultType:1
     };
     wxRequest(wxaapi.consult.add.url, pdata).then(function (result) {
       if (result.data.code == 0) {

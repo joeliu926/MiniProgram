@@ -121,6 +121,9 @@ var urlConfig = {
     },
     getcluesbyconsultid: {
       url: gConfig.remote + "/consult/getcluesbyconsultid" // 获取目标人群接口V0.3.3
+    },
+    addconsultrecord: {
+      url: gConfig.remote + "/consult/addconsultrecord" //  保存活动目标人群接口
     }
   },
   appointment: {
@@ -222,6 +225,23 @@ var urlConfig = {
     },
     giftdetail: {
       url: gConfig.remote + "/gift/giftdetail"  //获取礼品详情 giftdetail
+    }
+  },
+  activityrecord: {
+    create: {
+      url: gConfig.remote + "/activityrecord/create"  //保存领取记录 
+    },
+    getnum: {
+      url: gConfig.remote + "/activityrecord/getnum"  //领取总数 
+    },
+    pagelist: {
+      url: gConfig.remote + "/activityrecord/pagelist"  // 获取列表 
+    },
+    getdetail: {
+      url: gConfig.remote + "/activityrecord/getdetail"  //获取领取详情 
+    },
+    getalreadyappointmentnum: {
+      url: gConfig.remote + "/activityrecord/getalreadyappointmentnum"  // 已经领取总数  
     }
   }
 }

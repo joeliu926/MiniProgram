@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "目标客户"
+  "navigationBarTitleText": "目标客户",
+  "enablePullDownRefresh": true
 }

@@ -61,7 +61,7 @@
 /***********弹出的领取start***********/
 .pop-item{
   border-radius: 60rpx;
-  padding: 15rpx 25rpx;
+  padding: 10rpx 15rpx;
   position: absolute;
   top: 20%;
   left:20rpx;

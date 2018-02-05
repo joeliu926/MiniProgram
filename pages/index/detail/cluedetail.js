@@ -12,6 +12,177 @@ Page({
     dddddd: "../../../public/images/icon-tap.png",
     remarklist: [{}],
     interactlist: [],
+    // interactlist: [
+    //   {
+    //   "code": "appShare",
+    //   "type": 1,
+    //   "appletId": "hldn",
+    //   "sceneId": 3,
+    //   "clueId": 3,
+    //   "time": 1516346784000,
+    //   "userName": "Andrew",
+    //   "desc": "分享了案例！"
+    // },
+    // {
+    //   "code": "appOpen",
+    //   "type": 1,
+    //   "appletId": "hldn",
+    //   "caseId": 3,
+    //   "clueId": 3,
+    //   "time": 1512704516458,
+    //   "userName": "Andrew",
+    //   "customerName": "姜士虎",
+    //   "desc": "浏览了案例"
+    // },
+    // {
+    //   "code": "caseLike",
+    //   "appletId": "hldn",
+    //   "caseId": 3,
+    //   "clueId": 3,
+    //   "type": 1,
+    //   "time": 1512704516458,
+    //   "userName": "Andrew",
+    //   "customerName": "姜士虎",
+    //   "desc": "喜欢了案例"
+    // },
+    // {
+    //   "code": "photoUpload",
+    //   "appletId": "hldn",
+    //   "sceneId": 3,
+    //   "type": 1,
+    //   "sceneCode": 3,//暂时无用
+    //   "caseId": 3,
+    //   "clueId": 3,
+    //   "time": 1512704516458,
+    //   "userName": "Andrew",
+    //   "customerName": "姜士虎",
+    //   "desc": "上传了照片",
+    //   "imgNum": 2,
+    //   "imgUrls": [
+    //     "http://pic32.photophoto.cn/20140807/0005018763115153_b.jpg",
+    //     "http://pic28.photophoto.cn/20130830/0005018667531249_b.jpg"
+    //   ]
+    // },
+    // {
+    //   "code": "authPhone",
+    //   "appletId": "hldn",
+    //   "sceneId": 3,
+    //   "clueId": 3,
+    //   "caseId": 3,
+    //   "type": 1,
+    //   "time": 1512704516458,
+    //   "userName": "Andrew",
+    //   "agree": "是否同意",
+    //   "customerName": "姜士虎",
+    //   "phoneNumber": "12345687985",
+    //   "desc": "授权了手机号"
+    // },
+    // {
+    //   "code": "getGift",
+    //   "type": 1,
+    //   "appletId": "hldn",
+    //   "giftId": 3,
+    //   "clueId": 3,
+    //   "time": 1512704516458,
+    //   "userName": "Andrew",
+    //   "customerName": "姜士虎",
+    //   "desc": "浏览了案例"
+    // },
+    // {
+    //   "code": "openGift",
+    //   "type": 1,
+    //   "appletId": "hldn",
+    //   "giftId": 3,
+    //   "clueId": 3,
+    //   "time": 1512704516458,
+    //   "userName": "Andrew",
+    //   "customerName": "姜士虎",
+    //   // "desc": "浏览了案例"
+    // },
+    // {
+    //   "code": "appQuit",
+    //   "appletId": "hldn",
+    //   "type": 1,
+    //   "sceneId": 3,
+    //   "caseId": 3,
+    //   "clueId": 3,
+    //   "time": 1512704516458,
+    //   "consultantId": 15,
+    //   "customerName": "姜士虎",
+    //   "desc": "退出案例浏览"
+    // },
+    // {
+    //   "code": "photoUpload",
+    //   "appletId": "hldn",
+    //   "sceneId": 3,
+    //   "type": 1,
+    //   "sceneCode": 3,//暂时无用
+    //   "caseId": 3,
+    //   "clueId": 3,
+    //   "time": 1512704516458,
+    //   "userName": "Andrew",
+    //   "customerName": "姜士虎",
+    //   "desc": "上传了照片",
+    //   "imgNum": 2,
+    //   "imgUrls": [
+    //     "http://pic28.photophoto.cn/20130827/0005018371946994_b.jpg",
+    //     "http://pic8.nipic.com/20100801/387600_002750589396_2.jpg"
+    //   ]
+    // },
+    // {
+    //   "code": "reserve",
+    //   "appletId": "hldn",
+    //   "sceneId": 3,
+    //   "caseId": 3,
+    //   "type": 2,
+    //   "reserveId": 3,
+    //   "clueId": 3,
+    //   "time": 1512704516458,
+    //   "consultantId": 15,
+    //   "customerName": "姜士虎",
+    //   "desc": "预约了现场！"
+    // },
+    // {
+    //   "code": "contactEdit",
+    //   "appletId": "hldn",
+    //   "sceneId": 3,
+    //   "caseId": 3,
+    //   "clueId": 3,
+    //   "type": 2,
+    //   "items": {
+    //     "name": "原名称",
+    //     "phone": "13213174665"
+    //   },
+    //   "time": 1512704516458,
+    //   "consultantId": 15,
+    //   "customerName": "姜士虎",
+    //   "desc": "编辑联系人！"
+    // },
+    // {
+    //   "code": "leadClose",
+    //   "appletId": "hldn",
+    //   "sceneId": 3,
+    //   "caseId": 3,
+    //   "clueId": 3,
+    //   "type": 2,
+    //   "time": 1512704516458,
+    //   "consultantId": 15,
+    //   "customerName": "姜士虎",
+    //   "desc": "关闭编辑联系人！"
+    // },
+    // {
+    //   "code": "noteAdd",
+    //   "appletId": "hldn",
+    //   "sceneId": 3,
+    //   "caseId": 3,
+    //   "clueId": 3,
+    //   "type": 2,
+    //   "time": 1512704516458,
+    //   "consultantId": 15,
+    //   "customerName": "姜士虎",
+    //   "desc": "关闭编辑联系人！",
+    //   "remark": "的垃圾地方了距离飞机电力建设埃及赔付金额及安静啊安静多了基拉"
+    // }],
     bookName: '',
     show: 'true',
     isshow: 'false',
@@ -42,6 +213,8 @@ Page({
       phoneNumber: this.data.clueDetail.customerWechatMobile ? this.data.clueDetail.customerWechatMobile : this.data.customerPhoneNum
     })
   },
+
+
   // 初始化 备注
   initRemark() {
     let _This = this;
@@ -67,7 +240,7 @@ Page({
       clueId: this.data.clueDetail.id,//3
     };
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
-      // console.log("result==========2222222222222222222222================>",result)
+      console.log("result==========2222222222222222222222================>",result)
       if (result.data.code == 0) {
 
         if (result.data.data.length == 0) {
@@ -268,12 +441,16 @@ Page({
     } else {
 
     }
-
-
   },
-  //  点击跳转到预约的页面（客户） 
-  bookpeople() {
+  /**
+   *  领取了礼品  跳转到礼品页面 
+   */
+  getgift(e) {
 
+    let giftid = e.currentTarget.dataset.giftid;
+    wx.navigateTo({
+      url: '/pages/index/casedetail/casedetail?giftid=' + giftid
+    });
   },
   // 通过点击电话号码  向客户拨打电话；
   callhim(e) {

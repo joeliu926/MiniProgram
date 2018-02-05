@@ -102,6 +102,16 @@
           <view class='photopic' data-num="{{item.phoneNumber}}" bindtap='' style="display:{{item.code=='authPhone'?'block':'none'}}">
             <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-mobile.png"></image>
           </view>
+
+           <!--浏览==礼品  -->
+          <view class='photopic' bindtap="opengift" style="display:{{item.code=='openGift'?'block':'none'}}">
+            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
+          </view>
+            <!--领取==礼品  -->
+          <view class='photopic' data-num="{{item.phoneNumber}}" bindtap='getgift' style="display:{{item.code=='getGift'?'block':'none'}}"> 
+            <image style="width:70rpx;height:70rpx" src="../../../public/images/gift.png"></image>
+          </view> 
+
           <!--跟新关键信息  -->
           <view class='photopic' bindtap='editmsg' style="display:{{item.code=='contactEdit'?'block':'none'}}">
             <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-editpeople.png"></image>
@@ -123,13 +133,36 @@
             <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-close.png"></image>
           </view>
         </div>
-        <!--具体轨迹信息  -->
+
+
+
+        <!--具体轨迹信息    -->
         <div class='cnt-item-txt'>
           <div>
             <!--分享案例 style="display:{{item.code=='appShare'?'block':'none'}}" -->
             <view class='cnt-item-text' style="display:{{item.code=='appShare'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="sharecase"> {{item.userName}} 分享了 案例</view>
             <!--浏览案例  -->
             <view class='cnt-item-text' style="display:{{item.code=='appOpen'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="caseview">浏览了 {{item.userName}} 分享的 案例</view>
+
+             <!--浏览礼品  -->
+          <view class='cnt-item-text' style="display:{{item.code=='openGift'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="">
+              <view style="white-space: pre-wrap;padding-right: 10rpx;vertical-align:middle;margin-right: 40rpx; ">
+                <text style="vertical-align:middle;">浏览了 {{item.userName}} 分享的礼品</text>
+              </view>
+            </view>
+            <!--领取礼品  -->
+            <view style=" position:relative; display:{{item.code=='getGift'?'block':'none'}}">
+              <view class='cnt-item-text' data-giftid="{{item.giftid}}" data-customerName="{{item.customerName}}" bindtap="getgift">
+                <view style="white-space: pre-wrap;padding-right: 10rpx;vertical-align:middle;margin-right: 40rpx; ">
+                  <text style="vertical-align:middle;">领取了 {{item.userName}} 分享的礼品</text>
+                </view>
+                <span style=" position:absolute; top:0rpx;right:10rpx;" bindtap="getgift">
+                  <image style="display:inline-block; vertical-align:middle; width:44rpx;height:44rpx;margin-top:5rpx;" src="../../../public/images/open.png">
+                  </image>
+                </span>
+              </view>
+            </view>
+
             <!--喜欢案例  -->
             <view style=" position:relative; display:{{item.code=='caseLike'?'block':'none'}}">
               <view class='cnt-item-text' data-caseId="{{item.caseId}}" data-customerName="{{item.customerName}}" bindtap="likecase">
@@ -152,6 +185,7 @@
             <view class='cnt-item-text' style="display:{{item.code=='authPhone'?'block':'none'}}">授权了 手机号
               <view style="color:#8088f6; margin-top:20rpx;" data-num='{{item.phoneNumber}}' bindtap='callhim'>{{item.phoneNumber}}</view>
             </view>
+            
             <!--更新关键信息  -->
             <view class='cnt-item-text' style="display:{{item.code=='contactEdit'?'block':'none'}}" bindtap="editmsg">被 {{item.userName}} 更新了 关键信息</view>
             <!--预约信息  -->

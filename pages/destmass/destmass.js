@@ -58,6 +58,9 @@ Page({
    */
   onPullDownRefresh: function () {
   
+    let _This = this;
+    _This.fGetCroudList();
+     wx.stopPullDownRefresh();
   },
 
   /**

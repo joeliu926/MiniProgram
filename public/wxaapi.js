@@ -242,6 +242,9 @@ var urlConfig = {
     },
     getalreadyappointmentnum: {
       url: gConfig.remote + "/activityrecord/getalreadyappointmentnum"  // 已经领取总数  
+    },
+    getbubbleprompt: {
+      url: gConfig.remote + "/activityrecord/getbubbleprompt"  // 气泡  
     }
   }
 }

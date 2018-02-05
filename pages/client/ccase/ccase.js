@@ -212,7 +212,7 @@ Page({
     });
   },
   /**
-   * 通过会话id和用户unionid获取客户信息
+   * 通过咨询师unionid和客户unionid获取客户信息
    */
   fGetCustomerByUnionid() {
     let _This = this;

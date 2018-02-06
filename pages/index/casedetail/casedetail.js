@@ -154,9 +154,6 @@ Page({
           bfimgurls: imgurls,
           
         });
-
-
-        
       } else {
         console.log("case detail error----", result);
       }

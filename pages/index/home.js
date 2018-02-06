@@ -51,6 +51,7 @@ Page({
     moreWidth: 365,
     startX: 0,
     startY: 0,
+    showChoose:false
   },
   //移动开始
   touchS: function (e) {
@@ -386,8 +387,18 @@ Page({
   //打开线索详情
   openItem(params) {
     var dataset = params.currentTarget.dataset;
+    if (dataset.obj.consultType==3){
+      wx.navigateTo({
+        url: './detail/cluedetail?id=' + dataset.obj.id
+      });
+    }
+  },
+  //打开分享详情
+  openShare(params) {
+    var dataset = params.currentTarget.dataset;
+    console.log('dataset.obj', dataset.obj);
     wx.navigateTo({
-      url: './detail/cluedetail?id=' + dataset.obj.id
+      url: '../destmass/receivedetail/receivedetail?giftid=' + dataset.obj.giftid + '&consultationId=' + dataset.obj.sessionId
     });
   },
   alertMessage(content, types, times = 3000) {
@@ -719,6 +730,24 @@ Page({
       linkMan: _linkman
     });
   },
+
+  //
+  navToCase(params){
+    wx.navigateTo({
+      url: '../projectcase/projectcase',
+    });
+  },
+  navToGift(params) {
+    wx.navigateTo({
+      url: '../destmass/destmass',
+    });
+  },
+  navToCancel(){
+    this.setData({
+      showChoose: false
+    });
+ 
+  },
   //菜单点击
   menuClick(params) {
     console.log('params', params);
@@ -730,8 +759,8 @@ Page({
         wx.setNavigationBarTitle({ title: '我的潜客' })
         break;
       case "2":
-        wx.navigateTo({
-          url: '../projectcase/projectcase',
+        this.setData({
+          showChoose: true
         });
         break;
       case "3":

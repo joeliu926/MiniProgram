@@ -25,9 +25,38 @@ page{
   font-weight:600;
 }
 .cst-pd{
-  width:100%;
+  width: 80%;
   text-align: center;
   margin-top:40rpx;
+  position: relative;
+}
+.wx-txt{
+  padding: 15rpx 40rpx;
+  font-size:30rpx;
+  background:#eeeeee;
+  border-radius: 40rpx;
+}
+.click-cp{
+  position: absolute;
+  right: -20rpx;
+  top: -20rpx;
+  padding: 0 20rpx; 
+  height: 48rpx;
+  line-height: 48rpx;
+  background: #9083ed;
+  color: #ffffff;
+  transform: rotate(-15deg);
+  border-radius: 5rpx 10rpx 10rpx 5rpx;
+}
+.cp-ang{
+  position: absolute;
+  width: 0rpx;
+  top: 0;
+  left:-43rpx;
+  border: 24rpx solid #9083ed;
+  border-top: 25rpx solid transparent;
+  border-left: 24rpx solid transparent;
+  border-bottom: 24rpx solid transparent;
 }
 .round-ct{
   border-radius: 50%;
@@ -49,7 +78,6 @@ page{
   bottom: 80rpx;
   height: 160rpx;
   width: 100%;
-  margin-left: -60rpx;
 }
 .contact{
   height:100rpx;
@@ -57,15 +85,19 @@ page{
  
 }
 .cm-contact{
-  width: 180rpx;
-  height: 100%;
+  width: 120rpx;
+  height:  120rpx;
    background:#9083ed;
-   line-height: 100rpx;
+   line-height: 120rpx;
 }
 .contact-phone{
-   text-align: right;
-   padding-right: 40rpx;
-   border-radius: 0 70rpx 70rpx 0;
+   text-align:center;
+   border-radius: 50%;
+}
+.mid-phone{
+  position:absolute;bottom:-60rpx;
+  left: 50%;
+  margin-left: -60rpx;
 }
 .contact-we{
 border-radius:70rpx 0 0 70rpx;

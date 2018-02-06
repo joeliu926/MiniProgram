@@ -387,19 +387,20 @@ Page({
   //打开线索详情
   openItem(params) {
     var dataset = params.currentTarget.dataset;
-    if (dataset.obj.consultType==3){
+
       wx.navigateTo({
         url: './detail/cluedetail?id=' + dataset.obj.id
       });
-    }
+ 
   },
   //打开分享详情
   openShare(params) {
     var dataset = params.currentTarget.dataset;
-    console.log('dataset.obj', dataset.obj);
-    wx.navigateTo({
-      url: '../destmass/receivedetail/receivedetail?giftid=' + dataset.obj.giftid + '&consultationId=' + dataset.obj.sessionId
-    });
+    if (dataset.obj.consultType==3) {
+      wx.navigateTo({
+        url: '../destmass/receivedetail/receivedetail?giftid=' + dataset.obj.giftid + '&consultationId=' + dataset.obj.sessionId
+      });
+    }
   },
   alertMessage(content, types, times = 3000) {
     let color = "#F76260";

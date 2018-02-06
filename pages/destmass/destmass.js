@@ -103,7 +103,7 @@ Page({
        // let noCount =0;
         _This.setData({
           noPhoneCount: result.data.data["1"]||0,
-          isActive:true
+          isActive: result.data.data["1"]?true:false
         });
       }
     });

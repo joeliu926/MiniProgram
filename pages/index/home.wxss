@@ -200,14 +200,14 @@
 }
 
 .add-but {
-  position: fixed;
-  left: 42%;
-  bottom: 250rpx;
-  border-radius: 100rpx;
-  height: 240rpx;
-  width: 280rpx;
   line-height: 240rpx;
   font-size: 22rpx;
+   position: fixed;
+   top:0;
+   bottom: 0;  
+   left: 0;
+   right: 0;
+   background: rgba(0, 0, 0, 0.5);
 }
 
 .add-img {

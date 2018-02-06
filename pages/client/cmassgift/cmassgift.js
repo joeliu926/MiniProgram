@@ -220,7 +220,7 @@ Page({
         _This.setData({
           clueId: result.data.data.clueId
         });
-       // _This.fUserEvent(event.eType.appOpen);//进入小程序事件
+        _This.fUserEvent(event.eType.openGift);//进入打开礼品
       } else {
         console.log("addcustomer error----", result);
       }
@@ -239,7 +239,7 @@ Page({
     wxRequest(wxaapi.customer.update.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         _This.fReceiveGift();//领取礼物
-        //_This.fUserEvent(event.eType.authPhone);//授权手机号码事件
+        _This.fUserEvent(event.eType.getGift);//领取礼品号码事件
       } else {
         console.log("update customer info error----", result);
       }
@@ -445,7 +445,7 @@ fReceiveGift(){
       clueId: "",//无
       reserveId: "",//无
       sceneId: _This.data.consultationId, //会话id
-      giftId: _This.data.oGift.id,
+      giftId: _This.data.giftId,
       agree: "",
       unionid: _This.data.oUserInfo.unionId,
       openid: _This.data.oUserInfo.openId,

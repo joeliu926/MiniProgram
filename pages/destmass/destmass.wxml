@@ -16,7 +16,7 @@
 
 
 
-<view class='flex-c w-10 b-s  com-bottom-ct' >
-      <view class='f-14 flex-c note-ct'><icon class='n-icon' style='' type="info_circle" size="20" color="green"/>为防止造成客户骚扰，排除m天内已发送过n客户</view>
+<view class='flex-c w-10 b-s   com-bottom-ct' >
+      <view class='f-14 flex-c note-ct'><icon class='n-icon' style='' type="info_circle" size="20" color="green"/>已排除m天内发送过n个客户</view>
       <view class='f-14 b-s t-a-c com-btn-txt {{isActive?"":"n-active"}}'  bindtap='fChooseNext'>下一步</view>
    </view>

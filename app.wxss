@@ -111,6 +111,10 @@ background-color: #ffffff;
 .t-l{
   text-align: left;
 }
+.i-b{
+  display: inline-block;
+  vertical-align: middle;
+}
 .mg-b{
   margin-bottom: 24rpx;
 }

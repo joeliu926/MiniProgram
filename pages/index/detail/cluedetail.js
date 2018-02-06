@@ -81,7 +81,7 @@ Page({
     //   "code": "getGift",
     //   "type": 1,
     //   "appletId": "hldn",
-    //   "giftId": 3,
+    //   "giftId": 8,
     //   "clueId": 3,
     //   "time": 1512704516458,
     //   "userName": "Andrew",
@@ -92,7 +92,7 @@ Page({
     //   "code": "openGift",
     //   "type": 1,
     //   "appletId": "hldn",
-    //   "giftId": 3,
+    //   "giftId": 8,
     //   "clueId": 3,
     //   "time": 1512704516458,
     //   "userName": "Andrew",
@@ -182,7 +182,7 @@ Page({
     //   "customerName": "姜士虎",
     //   "desc": "关闭编辑联系人！",
     //   "remark": "的垃圾地方了距离飞机电力建设埃及赔付金额及安静啊安静多了基拉"
-    // }],
+    // }],//测试数据
     bookName: '',
     show: 'true',
     isshow: 'false',
@@ -197,7 +197,9 @@ Page({
   onLoad: function (options) {
     this.initData(options.id);
   },
-  // 去 预约页面
+  /**
+   *去 预约页面
+   */ 
   bookOption() {
     // let pobj = params.target.dataset.obj;
     wx.navigateTo({
@@ -205,8 +207,8 @@ Page({
     });
   },
   /**
- * 拨打电话
- */
+   * 拨打电话
+   */
   fMakePhone() {
     let _This = this;
     wx.makePhoneCall({
@@ -215,7 +217,9 @@ Page({
   },
 
 
-  // 初始化 备注
+  /**
+   *  初始化 备注
+   */
   initRemark() {
     let _This = this;
     let pdata = {
@@ -242,7 +246,6 @@ Page({
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
       console.log("result==========2222222222222222222222================>",result)
       if (result.data.code == 0) {
-
         if (result.data.data.length == 0) {
           _This.setData({
             asShow: "true"
@@ -439,18 +442,29 @@ Page({
         url: '/pages/index/casedetail/casedetail?caseid=' + caseid
       });
     } else {
-
+      // console.log("该案例id不存在");
+      return false;
     }
   },
   /**
    *  领取了礼品  跳转到礼品页面 
    */
   getgift(e) {
-
     let giftid = e.currentTarget.dataset.giftid;
-    wx.navigateTo({
-      url: '/pages/index/casedetail/casedetail?giftid=' + giftid
-    });
+    // let giftid =8;
+    console.log("e===========================>>>>>", e, giftid);
+    if (giftid){
+      wx.navigateTo({
+        url: '../../client/cmassgift/cmassgift?giftid=' + giftid
+      });
+    }else{
+      // console.log("该礼品id不存在");
+      return false;
+    }
+  },
+  // 跳转到浏览的礼品页面去
+  opengift(){
+
   },
   // 通过点击电话号码  向客户拨打电话；
   callhim(e) {

@@ -224,6 +224,7 @@ Page({
       clueId: "",//无
       reserveId: "",//无
       sceneId: _This.data.consultationId, //会话id
+      giftId: _This.data.oGift.id,
       agree: "",
       unionid: _This.data.oUserInfo.unionId,
       openid: _This.data.oUserInfo.openId,

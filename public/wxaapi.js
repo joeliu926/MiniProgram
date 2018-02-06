@@ -124,6 +124,9 @@ var urlConfig = {
     },
     addconsultrecord: {
       url: gConfig.remote + "/consult/addconsultrecord" //  保存活动目标人群接口
+    },
+    getrecordnum:{
+      url: gConfig.remote + "/consult/getrecordnum" //  获取收礼客户
     }
   },
   appointment: {

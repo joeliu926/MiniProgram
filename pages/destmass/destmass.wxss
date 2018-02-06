@@ -18,12 +18,15 @@
   display: inline-block;
   vertical-align: middle;
 }
+.com-out-ct{
+  padding:0 40rpx;
+}
 .note-ct{
   position: absolute;
   top:-100rpx;
   background: #eeeeee;
   padding: 20rpx;
-
+  width: 85%;
 }
 .n-icon{
   vertical-align:middle;

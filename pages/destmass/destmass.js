@@ -98,11 +98,11 @@ Page({
     };
     //console.log("post data--->", pdata);
     wxRequest(wxaapi.consult.getcluesbyconsultid.url, pdata).then(function (result) {
-     // console.log("get getcluesbyconsultid by sessionid--->", result);
+      console.log("get getcluesbyconsultid by sessionid--->", result);
       if (result.data.code == 0) {
        // let noCount =0;
         _This.setData({
-          noPhoneCount: result.data.data["1"],
+          noPhoneCount: result.data.data["1"]||0,
           isActive:true
         });
       }

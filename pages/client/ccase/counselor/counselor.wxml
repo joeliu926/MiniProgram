@@ -8,15 +8,15 @@
   </view>
   
     <view class='name-pd' style='font-size:36rpx;'>{{oCstData.name}}</view>
-    <view class='cst-pd f-14 b-s' style=''>
+    <view class='cst-pd f-14 b-s' wx:if="{{oCstData.wxAccount}}" style=''>
      <view class='i-b wx-txt'>
           微信：{{oCstData.wxAccount}}
       </view>
       <view class='f-12 b-s click-cp' bindtap='fCopyWeNum'>点击复制 <view class='cp-ang'></view></view>
     </view>
-    <view class='cst-pd f-14 b-s' style='font-size:30rpx;' bindtap='fMakePhone'>电话：{{oCstData.mobile}}</view>
+    <view wx:if="{{oCstData.mobile}}" class='cst-pd f-14 b-s' style='font-size:30rpx;' bindtap='fMakePhone'>电话：{{oCstData.mobile}}</view>
   </view>
-  <view  class='mid-phone' style=''>
+  <view wx:if="{{oCstData.mobile}}" class='mid-phone' style=''>
       <view class='b-s cm-contact contact-phone' bindtap='fMakePhone'>
          <image class='phone-icon'  src='/public/images/phone-icon.png'></image>
        </view>

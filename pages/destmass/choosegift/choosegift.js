@@ -11,6 +11,8 @@ Page({
     isActive:false, //按钮是否处于激活状态
     pageNo:1,
     pageSize:10,
+    lastPage:false,
+    pageNum:1,//第几页
     oUserInfo: {}
   },
 
@@ -33,7 +35,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+   
   },
 
   /**
@@ -68,7 +70,21 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    
+    let pageNo = this.data.pageNo;
+    let lastPage = this.data.lastPage;
+    if (lastPage){
+      wx.showToast({
+        title: '没有更多数据',
+      });
+      return false;
+    }
+    pageNo++;
+    console.log("reach bottom------>", pageNo);
+    this.setData({
+      pageNo: pageNo
+    });
+    this.fGetGiftList();
   },
 
   /**
@@ -90,6 +106,10 @@ Page({
    */
   fGetGiftList(){
     let _This = this;
+    wx.showLoading({
+      title: 'loading...',
+    });
+   // let pNum = _This.data.pageNum;
     let pdata = {
       pageNo: _This.data.pageNo,
       pageSize: _This.data.pageSize,
@@ -98,11 +118,16 @@ Page({
     };
     wxRequest(wxaapi.gift.pagelist.url, pdata).then(function (result) {
       console.log("result------->",result);
+      let aGiftList = _This.data.aGiftList||[];
       if (result.data.code == 0) {
+        let aList = result.data.data.list;
+        aGiftList.push(...aList)
         _This.setData({
-          aGiftList: result.data.data.list
+          aGiftList: aGiftList,
+          lastPage: result.data.data.lastPage
         });
-      } 
+      };
+      wx.hideLoading();
     });
   },
   /**

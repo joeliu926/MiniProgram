@@ -111,6 +111,10 @@
           <view class='photopic' data-giftid="{{item.giftId}}" bindtap='getgift' style="display:{{item.code=='getGift'?'block':'none'}}"> 
             <image style="width:70rpx;height:70rpx" src="../../../public/images/gift.png"></image>
           </view> 
+          <!-- 分享了礼品  style="display:{{item.code=='giftSend'?'block':'none'}}"-->
+           <view class='photopic' data-giftid="{{item.giftId}}" bindtap='getgift' style="display:none"> 
+            <image style="width:70rpx;height:70rpx" src="../../../public/images/gift.png"></image>
+          </view> 
 <!-- *****************新增线索事件end  ******************************** -->
           <!--跟新关键信息  -->
           <view class='photopic' bindtap='editmsg' style="display:{{item.code=='contactEdit'?'block':'none'}}">
@@ -144,6 +148,7 @@
             <!--浏览案例  -->
             <view class='cnt-item-text' style="display:{{item.code=='appOpen'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="caseview">浏览了 {{item.userName}} 分享的 案例</view>
 <!-- *******************新增线索事件 内容start*******************************************  -->
+
              <!--浏览礼品  -->
           <view class='cnt-item-text' style="display:{{item.code=='openGift'?'block':'none'}}" data-giftid="{{item.giftId}}" data-customerName="{{item.customerName}}" bindtap="">
               <view style="white-space: pre-wrap;padding-right: 10rpx;vertical-align:middle;margin-right: 40rpx; ">

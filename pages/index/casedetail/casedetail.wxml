@@ -39,8 +39,8 @@
                   <view class='diary f-14' style=''>{{oContent.title}}</view>
                 </view>
                 <view class='b-pd w-10  b-s' style='margin:20rpx 0;'>
-                  <view class='flex fx-wp w-10 b-s'>
-                    <block wx:for="{{oContent.pictures}}" wx:for-item="imgItem" wx:key="ids">
+                  <view class='flex fx-wp w-10 b-s' style="margin-bottom:10rpx;">
+                    <block wx:for="{{oContent.pictures}}" wx:for-item="imgItem" wx:key="ids" >
                       <view class='img-c b-s' style='background-image:url({{imgItem.url}})' data-urls="{{imgarr}}" data-src='{{imgItem.url}}' bindtap='imgPreview'></view>
                     </block>
                   </view>

@@ -45,24 +45,25 @@
         <text class='b-s bk-tab {{!isTab?"cge-col":""}}' data-istab="1" bindtap='fChangeTab'>已预约</text>
       </view>
       <view class='book-ct {{isTab?"hide":""}}'>
-        <view class='flex fx-jc-sb b-s f-14 b-d bk-item' data-clueid="358" bindtap='fGoToClueDetail'>
-          <view class='f-14'>15654555555</view>
-          <view>Roland兰789</view>
-          <view class='flex-c'><image class='right-icon' style='' src="../../../public/images/item-right-icon.png"></image></view>
+
+     <block wx:for="{{aNoApponitList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
+        <view class='flex fx-jc-sb b-s f-14 b-d bk-item' data-clueid="{{oItem.clueId}}" bindtap='fGoToClueDetail'>
+          <view class='f-14'>{{oItem.wechatMobile}}</view>
+          <view>{{oItem.customerName}}</view>
+          <view class='flex-c'><image class='right-icon' style='' src="/public/images/item-right-icon.png"></image></view>
         </view>
-            <view class='flex fx-jc-sb b-s f-14 b-d bk-item' data-clueid="356" bindtap='fGoToClueDetail'>
-          <view >15654555555</view>
-          <view>Roland兰789</view>
-          <view class='flex-c'><image class='right-icon' style='' src="../../../public/images/item-right-icon.png"></image> </view>
-        </view>
+     </block>
+
       </view>
       <view class='book-ct {{!isTab?"hide":""}}'>
-        <view class='flex fx-jc-sb b-s f-14 b-d bk-item' data-clueid="362" bindtap='fGoToClueDetail'>
-          <view class='f-14'>15654555555</view>
-          <view>22222</view>
-          <view class='flex-c'><image class='right-icon' style='' src="../../../public/images/item-right-icon.png"></image></view>
+
+     <block wx:for="{{aApponitList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
+        <view class='flex fx-jc-sb b-s f-14 b-d bk-item' data-clueid="{{oItem.clueId}}" bindtap='fGoToClueDetail'>
+          <view class='f-14'>{{oItem.wechatMobile}}</view>
+          <view>{{oItem.customerName}}</view>
+          <view class='flex-c'><image class='right-icon' style='' src="/public/images/item-right-icon.png"></image></view>
         </view>
-    
+     </block>
       </view>
    </view>
     

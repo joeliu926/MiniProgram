@@ -139,24 +139,6 @@ Page({
       wx.showLoading({
         title: '发送中...',
       });
-
-    let pSendData = {
-      types: 1,
-      consultUnionId: _This.data.oUserInfo.unionId,
-      giftId: _This.data.oGift.id,
-      sessionId: _This.data.consultationId
-    };
-    wxRequest(wxaapi.consult.addconsultrecord.url, pSendData).then(function (updateresult){
-      console.log("add consultrecord result----->", updateresult);
-      if (updateresult.data.code!= 0) {
-        wx.hideLoading();
-        wx.showToast({
-          title: '发送失败',
-          icon: 'loading',
-          duration: 2000
-        });
-        return false;
-      }
       let pdata = {
         wxaOpenId: _This.data.oUserInfo.openId,
         unionId: _This.data.oUserInfo.unionId,
@@ -165,21 +147,45 @@ Page({
         productCode: "",
         wxNickName: _This.data.oUserInfo.nickName,
         consultType: _This.data.consultType
-      
       };
-      return wxRequest(wxaapi.consult.add.url, pdata);
-    }).then(function(result){
-      console.log("consultationId------------->",result);
-      if (result&&result.data.code== 0){
-        _This.setData({
+    wxRequest(wxaapi.consult.add.url, pdata).then(function (result){
+      console.log("consultationId------------->", result);
+      if (result && result.data.code == 0) {
+         _This.setData({
           consultationId: result.data.data
-        });
+         });
+          wx.hideLoading();
+          _This.fUpdateShare();
+      }
+
+      let pSendData = {
+        types: 1,
+        consultUnionId: _This.data.oUserInfo.unionId,
+        giftId: _This.data.oGift.id,
+        sessionId: _This.data.consultationId
+      };
+      console.log("a pSendData sult----->", pSendData);
+      return wxRequest(wxaapi.consult.addconsultrecord.url, pSendData);
+    }).then(function (updateresult){
+      console.log("add consultrecord result----->", updateresult);
+      if (updateresult.data.code != 0) {
         wx.hideLoading();
-    
-        _This.fUpdateShare();
+        wx.showToast({
+          title: '发送失败',
+          icon: 'loading',
+          duration: 2000
+        });
+       // return false;
+      }else{
+        wx.showToast({
+          title: '已发送',
+        });
+        wx.redirectTo({
+          url: '/pages/index/home?type=share',
+        });
       }
      
-     // wx.hideLoading();
+       wx.hideLoading();
     });
   },
 
@@ -199,12 +205,7 @@ Page({
     };
     wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
       if (result.data.code == 0) {
-        wx.showToast({
-          title: '已发送',
-        });
-        wx.redirectTo({
-          url: '/pages/index/home?type=share',
-        });
+ 
       } else {
         console.log(result);
       }

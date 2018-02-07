@@ -10,11 +10,11 @@
     <view class='b-d-tb bk-c-w QQQ' style='height:{{aHeight[currentPage]+"px"}};overflow: hidden;border-top-left-radius:20rpx;border-top-right-radius:20rpx;border-top:15rpx solid #fff;border-left:15rpx solid #fff;border-right:15rpx solid #fff;'>
   <!------------------before after start------------left:{{index==0?itemLeft:"0px"}};-------->
       <view class='w-10 b-after-ct'> 
-            <view class='flex b-s' style="position: relative; ">
+            <view class='flex b-s' style="position: relative;">
                  <text class='before f-10 bcommon'>术前</text>
                  <text class='after f-10 bcommon'>术后</text>
-                  <image data-src='{{oItem.beforePicture.url}}' bindtap='imgPreview' src='{{oItem.beforePicture.url?oItem.beforePicture.url:"../../../public/images/front-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}' ></image>
-                  <image  data-src='{{oItem.afterPicture.url}}' bindtap='imgPreview' src='{{oItem.afterPicture.url?oItem.afterPicture.url:"../../../public/images/side-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}'></image>
+                  <image data-src='{{oItem.beforePicture.url}}' data-item="before" data-nextimg="{{oItem.afterPicture.url}}" bindtap='imgPreview' src='{{oItem.beforePicture.url?oItem.beforePicture.url:"/public/images/front-face.png"}}' mode='aspectFill' data-uid='{{oItem.id}}' ></image>
+                  <image  data-src='{{oItem.afterPicture.url}}' bindtap='imgPreview' src='{{oItem.afterPicture.url?oItem.afterPicture.url:"/public/images/side-face.png"}}' data-nextimg="{{oItem.beforePicture.url}}" mode='aspectFill' data-uid='{{oItem.id}}'></image>
 
             </view>
       </view>

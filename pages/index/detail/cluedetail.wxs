@@ -17,6 +17,14 @@ var trailImage = function (param) {
   }
   return imgIcon;
 }
+var replaceName=function(param,name){
+  param = param||"";
+  let result="";
+  result=param.replace("",name);
+  return result;
+
+}
 module.exports = {
-  trailImage: trailImage
+  trailImage: trailImage,
+  replaceName: replaceName
 }

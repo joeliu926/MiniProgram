@@ -204,6 +204,7 @@ Page({
   fCustomerAdd() {
     let _This = this;
     let pdata = {
+      wxaOpenid: _This.data.oUserInfo.openId,
       openid: _This.data.oUserInfo.openId,
       wxNickname: _This.data.oUserInfo.nickName,
       gender: _This.data.oUserInfo.gender,

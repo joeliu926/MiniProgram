@@ -259,6 +259,7 @@ fReceiveGift(){
     giftName: _This.data.oGift.name,
     sessionId: _This.data.consultationId,
     wechatMobile: _This.data.wechatMobile,
+    customerLogo: _This.data.oUserInfo.avatarUrl
   }
   wxRequest(wxaapi.activityrecord.create.url, pdata).then(function (result) {
     if (result.data.code == 0) {

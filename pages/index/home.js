@@ -400,6 +400,8 @@ Page({
       wx.navigateTo({
         url: '../destmass/receivedetail/receivedetail?giftid=' + dataset.obj.gifts + '&consultationId=' + dataset.obj.id
       });
+    }else{
+      //this.alertMessage("此次分享没有详细！", 'yellow');
     }
   },
   alertMessage(content, types, times = 3000) {

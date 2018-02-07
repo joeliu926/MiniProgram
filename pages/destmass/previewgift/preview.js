@@ -272,4 +272,24 @@ Page({
       oEvent: oTempEvent
     });
   },
+  /**
+  * 获取m 和n
+  */
+  fGetPrompt() {
+    let _This = this;
+    let pdata = {
+      sessionId: 12,
+      consultUnId: _This.data.oUserInfo.unionId
+    };
+    wxRequest(wxaapi.consult.getprompt.url, pdata).then(function (result) {
+      if (result.data.code == 0) {
+        // let noCount =0;
+        _This.setData({
+          oMn: result.data.data
+        });
+      }
+    });
+  }
+
+
 })

@@ -10,7 +10,7 @@ Page({
    */
   data: {
     oGift:{},//礼品对象
-    aGiftList:["11","22","33"],//礼品列表
+    aGiftList:[],//礼品列表
     isShowMask:false,//显示授权手机号码提示框
     oUserInfo:{},//当前用户信息
     iTop:false,//向上移动

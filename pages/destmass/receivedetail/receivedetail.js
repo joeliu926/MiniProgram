@@ -40,7 +40,6 @@ Page({
   onLoad: function (options) {
     let _This = this;
     getApp().getUserData(function (uinfo) {
-     // console.log("uinfo------------->", uinfo);
       _This.setData({
         oUserInfo: uinfo,
         consultationId: options.consultationId||"1727",
@@ -128,7 +127,7 @@ Page({
     let pdata = {
       id: _This.data.options.giftid||1
     };
-    //console.log("post data--->", pdata);
+    console.log("giftid--- post data--->", pdata);
     wxRequest(wxaapi.gift.giftdetail.url, pdata).then(function (result) {
       //console.log("get giftdetail --->", result);
       if (result.data.code == 0) {

@@ -1,6 +1,5 @@
 {
   "pages": [
-   
     "pages/index/home",
     "pages/index/detail/cluedetail",
     "pages/index/casedetail/casedetail",
@@ -27,7 +26,6 @@
     "pages/client/cmassgift/cmassgift",
     "pages/client/cmassgift/giftsuccess/giftsuccess",
     "pages/client/ccase/clinicmap/clinicmap"
-    
   ],
   "window": {
     "backgroundTextStyle": "light",

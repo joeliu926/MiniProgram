@@ -78,7 +78,6 @@ Page({
    * 查看诊所地图
    */
   fGoToMap(){
-   console.log("go to map");
    wx.navigateTo({
      url: '/pages/client/ccase/clinicmap/clinicmap?unionId=' + this.data.unionId,
    })

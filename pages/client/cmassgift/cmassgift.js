@@ -288,6 +288,19 @@ fReceiveGift(){
     });
   },
   /**
+   * 访问地图
+   */
+  fFormRightMap(e){
+    let _This = this;
+    wx.navigateTo({
+      url: '/pages/client/ccase/clinicmap/clinicmap?unionId='+_This.data.cstUid,
+    });
+    _This.setData({
+      formId: e.detail.formId
+    });
+    _This.fGetCustomerFormid();
+  },
+  /**
    * 立即领取formId
    */
   fFormRightNow(e){

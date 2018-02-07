@@ -127,6 +127,9 @@ var urlConfig = {
     },
     getrecordnum:{
       url: gConfig.remote + "/consult/getrecordnum" //  获取收礼客户
+    },
+    getprompt: {
+      url: gConfig.remote + "/consult/getprompt" //  获取M和N
     }
   },
   appointment: {

@@ -12,7 +12,6 @@ Page({
     pageNo:1,
     pageSize:10,
     lastPage:false,
-    pageNum:1,//第几页
     oUserInfo: {}
   },
 
@@ -109,7 +108,6 @@ Page({
     wx.showLoading({
       title: 'loading...',
     });
-   // let pNum = _This.data.pageNum;
     let pdata = {
       pageNo: _This.data.pageNo,
       pageSize: _This.data.pageSize,

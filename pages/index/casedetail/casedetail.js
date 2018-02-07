@@ -114,7 +114,21 @@ Page({
       urls: e.currentTarget.dataset.urls
     })
   }, 
-
+  /**
+    * 浏览案例图片
+    */
+  imgPreviewCase(e) {
+    let dataset = e.currentTarget.dataset;
+    let pictures = dataset.pictures || [];
+    let oPictures = [];
+    pictures.forEach(item => {
+      oPictures.push(item.url);
+    });
+    wx.previewImage({
+      current: dataset.src,
+      urls: oPictures
+    })
+  },
   /**
  * 通过案例ID获取案例详情
  */
@@ -294,18 +308,6 @@ Page({
       }
     });
   },
-
-
-
-
-
-
-
-
-
-
-
-
   /*************** 滚动事件 开始************************/
   // 触摸开始事件
   fTouchStart: function (e) {

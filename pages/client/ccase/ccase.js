@@ -121,6 +121,7 @@ Page({
    * 图片预览
    */
   imgPreview(e) {
+    console.log("e=======imgPreview=======>",e);
     var dataset = e.currentTarget.dataset;
     let aUrl = [dataset.src];
     dataset.item ? aUrl.push(dataset.nextimg) : aUrl.unshift(dataset.nextimg);

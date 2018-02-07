@@ -122,9 +122,11 @@ Page({
    */
   imgPreview(e) {
     var dataset = e.currentTarget.dataset;
+    let aUrl = [dataset.src];
+    dataset.item ? aUrl.push(dataset.nextimg) : aUrl.unshift(dataset.nextimg);
     wx.previewImage({
       current: dataset.src,
-      urls: [dataset.src]
+      urls: aUrl
     })
   },
   /**

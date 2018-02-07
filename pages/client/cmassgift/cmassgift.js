@@ -443,10 +443,10 @@ fReceiveGift(){
       appletId: "hldn",
       consultingId: _This.data.consultationId,
       isLike: "",
-      clueId: "",//无
+      clueId: _This.data.clueId,//无
       reserveId: "",//无
       sceneId: _This.data.consultationId, //会话id
-      giftId: _This.data.giftId,
+      giftId: _This.data.giftid,
       agree: "",
       unionid: _This.data.oUserInfo.unionId,
       openid: _This.data.oUserInfo.openId,

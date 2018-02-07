@@ -35,13 +35,13 @@
 <!------------------case history start-------------------->
       <view class='case-his-ct'>
         <view class='f-16 t-a-c bk-c-w his-title'>术后日记</view>
-        <block wx:for="{{oItem.contentList}}" wx:for-item="oContent" wx:key="oContent.id">
+        <block wx:for="{{oItem.contentList}}" wx:for-item="oContent" wx:key="oContent.id" wx:for-index="ctIndex">
         <view class='bk-c-w'>
           <view class='t-a-c'><view class='diary f-14' style=''>{{oContent.title}}</view></view>
           <view class='b-pd w-10  b-s' style='margin:20rpx 0 20rpx 0rpx;'>
             <view class='flex fx-wp w-10 b-s'>
-               <block wx:for="{{oContent.pictures}}" wx:for-item="imgItem" wx:key="ids" >
-               <view class='img-c b-s'   style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreview'></view>
+               <block wx:for="{{oContent.pictures}}" wx:for-item="imgItem" wx:key="ids" wx:for-index="iIndex" >
+               <view class='img-c b-s'   style='background-image:url({{imgItem.url}})' data-ctItdex="{{ctIndex}}" data-iIndex="{{iIndex}}" data-src='{{imgItem.url}}' data-pictures="{{oContent.pictures}}" bindtap='imgPreviewCase'></view>
                </block>
             </view>
             <view style="padding-top:20rpx;"><view class='f-14 com-left'>{{oContent.description}}</view></view>
@@ -127,7 +127,7 @@
  </view>
  <view class='clinic-ct w-10'>
   <block wx:for="{{oClinic.fileVo}}" wx:for-item="cItem" wx:key="cItem.id"  wx:for-index="index">
-    <image class='img-c b-s' style='width: 214rpx;height:200rpx;' data-src='{{cItem.url}}' bindtap='imgPreview' src='{{cItem.url}}' mode="aspectFill"></image>
+    <image class='img-c b-s' style='width: 214rpx;height:200rpx;' data-pictures="{{oClinic.fileVo}}" data-src='{{cItem.url}}' bindtap='imgPreviewCase' src='{{cItem.url}}' mode="aspectFill"></image>
   </block>
  </view>
    </view>

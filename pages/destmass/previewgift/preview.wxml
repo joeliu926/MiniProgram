@@ -20,6 +20,6 @@
 
 
 <view class='flex-c w-10 b-s  com-bottom-ct'>
-      <view wx:if="{{oMn.m>0}}" class='f-14 flex-c note-ct'><icon class='n-icon' style='' type="info_circle" size="20" color="green"/>已排除{{oMn.m}}天内发送过{{oMn.n}}个客户</view>
+      <view wx:if="{{oMn.n>0}}" class='f-14 flex-c note-ct'><icon class='n-icon' style='' type="info_circle" size="20" color="green"/>已排除{{oMn.m}}天内发送过{{oMn.n}}个客户</view>
       <view class='f-14 b-s t-a-c com-btn-txt' bindtap='fSendGift'>发送</view>
    </view>

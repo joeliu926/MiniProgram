@@ -220,6 +220,7 @@ Page({
         _This.setData({
           clueId: result.data.data.clueId
         });
+        _This.fUserEvent(event.eType.appOpen);//进入打开
         _This.fUserEvent(event.eType.openGift);//进入打开礼品
       } else {
         console.log("addcustomer error----", result);

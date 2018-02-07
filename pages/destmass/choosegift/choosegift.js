@@ -21,7 +21,7 @@ Page({
   onLoad: function (options) {
     let _This = this;
     getApp().getUserData(function (uinfo) {
-      console.log("uinfo------------->", uinfo);
+      //console.log("uinfo------------->", uinfo);
       _This.setData({
         oUserInfo: uinfo
       });
@@ -79,7 +79,7 @@ Page({
       return false;
     }
     pageNo++;
-    console.log("reach bottom------>", pageNo);
+    //console.log("reach bottom------>", pageNo);
     this.setData({
       pageNo: pageNo
     });
@@ -112,10 +112,11 @@ Page({
       pageNo: _This.data.pageNo,
       pageSize: _This.data.pageSize,
       userUnionId: _This.data.oUserInfo.unionId,
-      status:0
+      status:0,
+      dateFilter:0
     };
     wxRequest(wxaapi.gift.pagelist.url, pdata).then(function (result) {
-      console.log("result------->",result);
+      //console.log("result------->",result);
       let aGiftList = _This.data.aGiftList||[];
       if (result.data.code == 0) {
         let aList = result.data.data.list;

@@ -53,8 +53,16 @@
           <view class='flex-c'><image class='right-icon' style='' src="/public/images/item-right-icon.png"></image></view>
         </view>
      </block>
-
+  <view class='{{aNoApponitList.length<=0?"":"hide"}}'>
+    <view class="list-none">
+      <view class="list-none-div">
+          <image style="" class='nodata-img' src='/public/images/no_data.png'></image>
       </view>
+    </view>
+  </view>
+      </view>
+
+
       <view class='book-ct {{!isTab?"hide":""}}'>
 
      <block wx:for="{{aApponitList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
@@ -64,6 +72,15 @@
           <view class='flex-c'><image class='right-icon' style='' src="/public/images/item-right-icon.png"></image></view>
         </view>
      </block>
+   
+  <view class='{{aApponitList.length<=0?"":"hide"}}'>
+    <view class="list-none">
+      <view class="list-none-div">
+          <image style="" class='nodata-img' src='/public/images/no_data.png'></image>
+      </view>
+    </view>
+  </view>
+
       </view>
    </view>
     

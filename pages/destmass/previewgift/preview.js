@@ -142,7 +142,9 @@ Page({
 
     let pSendData = {
       types: 1,
-      consultUnionId: _This.data.oUserInfo.unionId
+      consultUnionId: _This.data.oUserInfo.unionId,
+      giftId: _This.data.oGift.id,
+      sessionId: _This.data.consultationId
     };
     wxRequest(wxaapi.consult.addconsultrecord.url, pSendData).then(function (updateresult){
       console.log("add consultrecord result----->", updateresult);
@@ -163,6 +165,7 @@ Page({
         productCode: "",
         wxNickName: _This.data.oUserInfo.nickName,
         consultType: _This.data.consultType
+      
       };
       return wxRequest(wxaapi.consult.add.url, pdata);
     }).then(function(result){
@@ -172,17 +175,42 @@ Page({
           consultationId: result.data.data
         });
         wx.hideLoading();
+    
+        _This.fUpdateShare();
+      }
+     
+     // wx.hideLoading();
+    });
+  },
+
+  /**
+   * 用户分享以后更新分享内容
+   */
+  fUpdateShare() {
+    let _This = this;
+    let shareData = {
+      cases: _This.data.aCaseIds,//案例列表Id
+      consultingId: _This.data.consultationId,//会话id
+      consultantUnionid: _This.data.oUserInfo.unionId,//咨询师unionid
+      products: _This.data.productcodes||[],//项目列表id  [3002,3025,3028]
+      type: _This.data.shareType, // 
+      consultType: _This.data.consultType,
+      gifts: [_This.data.oGift.id]
+    };
+    wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
+      if (result.data.code == 0) {
         wx.showToast({
           title: '已发送',
         });
         wx.redirectTo({
           url: '/pages/index/home?type=share',
         });
+      } else {
+        console.log(result);
       }
-     // wx.hideLoading();
+      wx.hideLoading();
     });
   },
-
 
   /**
  * 用户事件

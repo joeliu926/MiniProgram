@@ -132,7 +132,21 @@ Page({
       urls: [dataset.src] 
     })
   },
-
+  /**
+    * 浏览案例图片
+    */
+  imgPreviewCase(e) {
+    let dataset = e.currentTarget.dataset;
+    let pictures=dataset.pictures||[];
+    let oPictures=[];
+    pictures.forEach(item=>{
+      oPictures.push(item.url);
+    });
+    wx.previewImage({
+      current: dataset.src,
+      urls: oPictures
+    })
+  },
   /**
    * 用户点击右上角分享
    */

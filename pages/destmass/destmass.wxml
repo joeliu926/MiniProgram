@@ -8,15 +8,23 @@
       <text class='f-14 item-type'>{{noPhoneCount}}人</text>
     </view>
   </view>
-   <view class='flex-c h-w-10 fx-d-col {{!isActive?"":"hide"}}'>
-     <image class='no-data-img' src="/public/images/no_data.png"></image>
-     <view class='f-14'>还没有手机号码为空的客户哦~</view>
-   </view>
+  <view class='{{!isActive?"":"hide"}}'>
+    <view class="list-none" style="margin-top:200rpx;">
+      <view class="list-none-div">
+          <image style="" class='nodata-img' src='/public/images/no_data.png'></image>
+          <view class='f-14 com-pd'>还没有手机号码为空的客户哦~</view>
+      </view>
+    </view>
+  </view>
+
 </view>
 
 
 
-<view class='flex-c w-10 b-s  com-bottom-ct' >
-      <view class='f-14 flex-c note-ct'><icon class='n-icon' style='' type="info_circle" size="20" color="green"/>为防止造成客户骚扰，排除m天内已发送过n客户</view>
+
+
+
+<view class='flex-c w-10 b-s   com-bottom-ct' >
+      <view wx:if="{{oMn.n>0}}" class='f-14 flex-c note-ct {{isActive?"":"hide"}}'><icon class='n-icon' style='' type="info_circle" size="20" color="green"/>已排除{{oMn.m}}天内发送过{{oMn.n}}个客户</view>
       <view class='f-14 b-s t-a-c com-btn-txt {{isActive?"":"n-active"}}'  bindtap='fChooseNext'>下一步</view>
    </view>

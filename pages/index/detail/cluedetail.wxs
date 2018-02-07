@@ -1,0 +1,22 @@
+var trailImage = function (param) {
+  var imgIcon = "";
+  switch (param) {
+    case "appShare": imgIcon = "/public/images/icon-tap.png"; break;
+    case "appOpen": imgIcon = "/public/images/icon-tap.png"; break;
+    case "caseLike": imgIcon = "/public/images/icon-like.png"; break;
+    case "noteAdd": imgIcon = "/public/images/icon-remark.png"; break;
+    case "authPhone": imgIcon = "/public/images/icon-mobile.png"; break;
+    case "openGift": imgIcon = "/public/images/icon-tap.png"; break;
+    case "getGift": imgIcon = "/public/images/gift.png"; break;
+    case "contactEdit": imgIcon = "/public/images/icon-editpeople.png"; break;
+    case "reserve": imgIcon = "/public/images/icon-book.png"; break;
+    case "photoUpload": imgIcon = "/public/images/icon-pic.png"; break;
+    case "appQuit": imgIcon = "/public/images/icon-tap.png"; break;
+    case "leadClose": imgIcon = "/public/images/icon-close.png"; break;
+    default: break;
+  }
+  return imgIcon;
+}
+module.exports = {
+  trailImage: trailImage
+}

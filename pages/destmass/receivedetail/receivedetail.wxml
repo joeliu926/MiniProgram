@@ -17,21 +17,25 @@
    <view class='f-14 b-s static-ct'>
        <view class='flex item-static'>
          <view class='b-s s-title'>收礼客户</view>
-          <view class='gradient-ct'>
-           <view class='f-12 gradient' style='width:100%;'>1113人</view>
+          <view class='gradient-ct flex'>
+           <view class='f-12 gradient' style='width:{{(aCount[0]/maxCount)*100}}%;'><text wx:if="{{aCount[0]/maxCount>=0.15}}">{{aCount[0]}}人</text></view>
+             <view  wx:if="{{aCount[0]/maxCount<0.15}}" class='f-12'>{{aCount[0]}}人</view>
          </view>
        </view>
        <view class='flex item-static'>
          <view class='b-s s-title'>领取客户</view>
-         <view class='gradient-ct'>
-           <view class='f-12 gradient' style='width:60%;'>670人</view>
+         <view class='gradient-ct flex'>
+           <view class='f-12 gradient' style='width:{{(aCount[1]/maxCount)*100}}%;'><text wx:if="{{aCount[1]/maxCount>=0.15}}">{{aCount[1]}}人</text></view>
+           <view  wx:if="{{aCount[1]/maxCount<0.15}}" class='f-12'>{{aCount[1]}}人</view>
          </view>
        </view>
       <view class='flex item-static'>
           <view class='b-s s-title'>预约到店</view>
-          <view class='gradient-ct'>
-           <view class='f-12 gradient' style='width:30%;'>11人</view>
+          <view class='gradient-ct flex'>
+           <view class='f-12 gradient' style='width:{{(aCount[2]/maxCount)*100}}%;'><text wx:if="{{aCount[2]/maxCount>=0.15}}">{{aCount[2]}}人</text></view>
+             <view  wx:if="{{aCount[2]/maxCount<0.15}}" class='f-12'>{{aCount[2]}}人</view>
           </view>
+          <view></view>
        </view>
    </view>
   
@@ -40,17 +44,43 @@
         <text class='b-s bk-tab {{isTab?"cge-col":""}}' bindtap='fChangeTab'>领取未预约</text>
         <text class='b-s bk-tab {{!isTab?"cge-col":""}}' data-istab="1" bindtap='fChangeTab'>已预约</text>
       </view>
-      <view class='book-ct'>
-        <view class='flex fx-jc-sb b-s f-14 b-d bk-item'>
-          <view class='f-14'>15654555555</view>
-          <view>Roland兰789</view>
-          <view class='flex-c'><image class='right-icon' style='' src="../../../public/images/item-right-icon.png"></image></view>
+      <view class='book-ct {{isTab?"hide":""}}'>
+
+     <block wx:for="{{aNoApponitList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
+        <view class='flex fx-jc-sb b-s f-14 b-d bk-item' data-clueid="{{oItem.clueId}}" bindtap='fGoToClueDetail'>
+          <view class='f-14'>{{oItem.wechatMobile}}</view>
+          <view>{{oItem.customerName}}</view>
+          <view class='flex-c'><image class='right-icon' style='' src="/public/images/item-right-icon.png"></image></view>
         </view>
-            <view class='flex fx-jc-sb b-s f-14 b-d bk-item'>
-          <view >15654555555</view>
-          <view>Roland兰789</view>
-          <view class='flex-c'><image class='right-icon' style='' src="../../../public/images/item-right-icon.png"></image> </view>
+     </block>
+  <view class='{{aNoApponitList.length<=0?"":"hide"}}'>
+    <view class="list-none">
+      <view class="list-none-div">
+          <image style="" class='nodata-img' src='/public/images/no_data.png'></image>
+      </view>
+    </view>
+  </view>
+      </view>
+
+
+      <view class='book-ct {{!isTab?"hide":""}}'>
+
+     <block wx:for="{{aApponitList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
+        <view class='flex fx-jc-sb b-s f-14 b-d bk-item' data-clueid="{{oItem.clueId}}" bindtap='fGoToClueDetail'>
+          <view class='f-14'>{{oItem.wechatMobile}}</view>
+          <view>{{oItem.customerName}}</view>
+          <view class='flex-c'><image class='right-icon' style='' src="/public/images/item-right-icon.png"></image></view>
         </view>
+     </block>
+   
+  <view class='{{aApponitList.length<=0?"":"hide"}}'>
+    <view class="list-none">
+      <view class="list-none-div">
+          <image style="" class='nodata-img' src='/public/images/no_data.png'></image>
+      </view>
+    </view>
+  </view>
+
       </view>
    </view>
     

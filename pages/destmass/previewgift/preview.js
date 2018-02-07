@@ -139,22 +139,6 @@ Page({
       wx.showLoading({
         title: '发送中...',
       });
-
-    let pSendData = {
-      types: 1,
-      consultUnionId: _This.data.oUserInfo.unionId
-    };
-    wxRequest(wxaapi.consult.addconsultrecord.url, pSendData).then(function (updateresult){
-      console.log("add consultrecord result----->", updateresult);
-      if (updateresult.data.code!= 0) {
-        wx.hideLoading();
-        wx.showToast({
-          title: '发送失败',
-          icon: 'loading',
-          duration: 2000
-        });
-        return false;
-      }
       let pdata = {
         wxaOpenId: _This.data.oUserInfo.openId,
         unionId: _This.data.oUserInfo.unionId,
@@ -164,14 +148,35 @@ Page({
         wxNickName: _This.data.oUserInfo.nickName,
         consultType: _This.data.consultType
       };
-      return wxRequest(wxaapi.consult.add.url, pdata);
-    }).then(function(result){
-      console.log("consultationId------------->",result);
-      if (result&&result.data.code== 0){
-        _This.setData({
+    wxRequest(wxaapi.consult.add.url, pdata).then(function (result){
+      console.log("consultationId------------->", result);
+      if (result && result.data.code == 0) {
+         _This.setData({
           consultationId: result.data.data
-        });
+         });
+          wx.hideLoading();
+          _This.fUpdateShare();
+      }
+
+      let pSendData = {
+        types: 1,
+        consultUnionId: _This.data.oUserInfo.unionId,
+        giftId: _This.data.oGift.id,
+        sessionId: _This.data.consultationId
+      };
+      console.log("a pSendData sult----->", pSendData);
+      return wxRequest(wxaapi.consult.addconsultrecord.url, pSendData);
+    }).then(function (updateresult){
+      console.log("add consultrecord result----->", updateresult);
+      if (updateresult.data.code != 0) {
         wx.hideLoading();
+        wx.showToast({
+          title: '发送失败',
+          icon: 'loading',
+          duration: 2000
+        });
+       // return false;
+      }else{
         wx.showToast({
           title: '已发送',
         });
@@ -179,10 +184,34 @@ Page({
           url: '/pages/index/home?type=share',
         });
       }
-     // wx.hideLoading();
+     
+       wx.hideLoading();
     });
   },
 
+  /**
+   * 用户分享以后更新分享内容
+   */
+  fUpdateShare() {
+    let _This = this;
+    let shareData = {
+      cases: _This.data.aCaseIds,//案例列表Id
+      consultingId: _This.data.consultationId,//会话id
+      consultantUnionid: _This.data.oUserInfo.unionId,//咨询师unionid
+      products: _This.data.productcodes||[],//项目列表id  [3002,3025,3028]
+      type: _This.data.shareType, // 
+      consultType: _This.data.consultType,
+      gifts: [_This.data.oGift.id]
+    };
+    wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
+      if (result.data.code == 0) {
+ 
+      } else {
+        console.log(result);
+      }
+      wx.hideLoading();
+    });
+  },
 
   /**
  * 用户事件
@@ -224,6 +253,7 @@ Page({
       clueId: "",//无
       reserveId: "",//无
       sceneId: _This.data.consultationId, //会话id
+      giftId: _This.data.oGift.id,
       agree: "",
       unionid: _This.data.oUserInfo.unionId,
       openid: _This.data.oUserInfo.openId,
@@ -243,4 +273,24 @@ Page({
       oEvent: oTempEvent
     });
   },
+  /**
+  * 获取m 和n
+  */
+  fGetPrompt() {
+    let _This = this;
+    let pdata = {
+      sessionId: 12,
+      consultUnId: _This.data.oUserInfo.unionId
+    };
+    wxRequest(wxaapi.consult.getprompt.url, pdata).then(function (result) {
+      if (result.data.code == 0) {
+        // let noCount =0;
+        _This.setData({
+          oMn: result.data.data
+        });
+      }
+    });
+  }
+
+
 })

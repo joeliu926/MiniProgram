@@ -10,7 +10,7 @@ Page({
    */
   data: {
     oGift:{},//礼品对象
-    aGiftList:["11","22","33"],//礼品列表
+    aGiftList:[],//礼品列表
     isShowMask:false,//显示授权手机号码提示框
     oUserInfo:{},//当前用户信息
     iTop:false,//向上移动
@@ -33,6 +33,7 @@ Page({
     getApp().getUserData(function (uinfo) {
       //console.log("uinfo------------->", uinfo);
       _This.setData({
+        oEvent: event.oEvent, //事件参数
         oUserInfo: uinfo,
         giftid: options.giftid||8,
         cstUid: options.cstUid || uinfo.unionId,
@@ -219,7 +220,8 @@ Page({
         _This.setData({
           clueId: result.data.data.clueId
         });
-       // _This.fUserEvent(event.eType.appOpen);//进入小程序事件
+        _This.fUserEvent(event.eType.appOpen);//进入打开
+        _This.fUserEvent(event.eType.openGift);//进入打开礼品
       } else {
         console.log("addcustomer error----", result);
       }
@@ -238,7 +240,7 @@ Page({
     wxRequest(wxaapi.customer.update.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         _This.fReceiveGift();//领取礼物
-        //_This.fUserEvent(event.eType.authPhone);//授权手机号码事件
+        _This.fUserEvent(event.eType.getGift);//领取礼品号码事件
       } else {
         console.log("update customer info error----", result);
       }
@@ -404,6 +406,66 @@ fReceiveGift(){
       }
     });
   },
+  /**
+* 用户事件
+*/
+  fUserEvent(eType) {
+    let _This = this;
+    _This.fGetTempEvent();
+    var oData = _This.data.oEvent;
+    oData.code = eType;
+    wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
+      if (result.data.code == 0) {
+        if (!oData.shareEventId) {
+          // oData.shareEventId = result.data.data;
+          _This.setData({
+            shareEventId: result.data.data
+          });
+        };
+      } else {
+        console.log("add  event error---", result);
+      }
+    });
+  },
+  /*
+ *事件参数 
+ */
+  fGetTempEvent() {
+    var _This = this;
+    var oTempEvent = _This.data.oEvent;
+    oTempEvent.shareEventId = _This.data.shareEventId;
+    oTempEvent.productCode = [""];
+    oTempEvent.consultationId = _This.data.consultationId,
+      oTempEvent.sceneId = _This.data.consultationId;
+    oTempEvent.eventAttrs = {
+      consultantId: _This.data.cstUid,
+      caseId: "",
+      appletId: "hldn",
+      consultingId: _This.data.consultationId,
+      isLike: "",
+      clueId: "",//无
+      reserveId: "",//无
+      sceneId: _This.data.consultationId, //会话id
+      giftId: _This.data.giftId,
+      agree: "",
+      unionid: _This.data.oUserInfo.unionId,
+      openid: _This.data.oUserInfo.openId,
+      imgNum: "",
+      imgUrls: [],
+      remark: '',
+      triggeredTime: new Date().valueOf()
+    }
+    oTempEvent.subjectAttrs = {
+      appid: "yxy",
+      consultantId: _This.data.cstUid,
+      openid: _This.data.oUserInfo.openId,
+      unionid: _This.data.oUserInfo.unionId,
+      mobile: ""
+    };
+    _This.setData({
+      oEvent: oTempEvent
+    });
+  }
 
 
 })

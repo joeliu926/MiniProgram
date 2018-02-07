@@ -1,3 +1,4 @@
+const event = require('../../public/js/wxEvent.js'); //事件上报相关参数
 const wxaapi = require('../../public/wxaapi.js');
 const wxRequest = require('../../utils/js/wxRequest.js');
 Page({
@@ -243,7 +244,8 @@ Page({
     getApp().getUserData(function (result) {
       _This.fGetCUserInfo(result.unionId);
       _This.setData({
-        oUInfo: result
+        oUInfo: result,
+        oEvent: event.oEvent
       });
       _This.getClueList();
       _This.getShareList();
@@ -605,7 +607,8 @@ Page({
           title: '更新成功',
           icon: 'success',
           duration: 2000
-        })
+        });
+        _This.fUserEvent(event.eType.contactEdit);//编辑联系人
       }
     });
   },
@@ -753,7 +756,7 @@ Page({
   },
   //菜单点击
   menuClick(params) {
-    console.log('params', params);
+    //console.log('params', params);
     switch (params.currentTarget.dataset.type) {
       case "1":
         this.setData({
@@ -777,6 +780,7 @@ Page({
   //线索更多点击
   bindPickerChange(params) {
     let remark = params.currentTarget.dataset.obj;
+    //console.log("currentClue------------", remark);
     this.setData({
       currentClue: remark
     });
@@ -971,7 +975,7 @@ Page({
       pageSize: this.data.pageSize
     };
     wxRequest(wxaapi.index.sharelist.url, pdata).then(function (result) {
-      console.log("sharelist result------------>", result);
+      //console.log("sharelist result------------>", result);
       if (result.data.code == 0) {
         _This.setData({ shareCount: result.data.data.count });
         let getArray = result.data.data.list;
@@ -1014,5 +1018,63 @@ Page({
         wx.setNavigationBarTitle({ title: '欢颜小助手' })
       }
     });
+  },
+  /*
+*事件参数 
+*/
+  fGetTempEvent() {
+    var _This = this;
+    let clueId = _This.data.currentClue.id;
+    var oTempEvent = _This.data.oEvent;
+    oTempEvent.shareEventId = _This.data.shareEventId || 1;
+    oTempEvent.productCode = [""];
+    oTempEvent.clueId = clueId; //线索id  
+    oTempEvent.leadsId = clueId; //线索id新  leadsId
+    oTempEvent.consultationId = _This.data.consultationId;//咨询会话ID
+    oTempEvent.sceneId = _This.data.consultationId;// 场景sceneId  oUInfo.
+    oTempEvent.eventAttrs = {
+      consultantId: _This.data.oUInfo.unionId,
+      clueId: clueId, //线索id  
+      leadsId: clueId, //线索id新  leadsId
+      consultationId: _This.data.consultationId,//咨询会话ID
+      sceneId: _This.data.consultationId,// 场景sceneId  oUInfo.
+      caseId: _This.data.sCurrentId || "",//
+      appletId: "hldn",
+      consultingId: _This.data.consultationId,
+      isLike: _This.data.isLike,    ////0不喜欢 1喜欢2未选择
+      reserveId: "",//
+      agree: "",  //1是允许，0是拒绝
+      imgNum: "",
+      imgUrls: [],
+      remark: '',
+      triggeredTime: new Date().valueOf()
+    }
+    oTempEvent.subjectAttrs = {
+      appid: "yxy",
+      consultantId: _This.data.cstUid,
+      openid: _This.data.oUInfo.openId,
+      unionid: _This.data.oUInfo.unionId,
+      mobile: _This.data.oUInfo.wechatMobile || ""
+    };
+    _This.setData({
+      oEvent: oTempEvent
+    });
+  },
+  /**
+  * 用户事件
+  */
+  fUserEvent(eType) {
+    let _This = this;
+    _This.fGetTempEvent();
+    var oData = _This.data.oEvent;
+    oData.code = eType;
+    wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
+      //console.log("edit event-----",result);
+      if (result.data.code == 0) {
+      } 
+    });
   }
+
+
+
 })

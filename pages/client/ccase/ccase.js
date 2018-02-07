@@ -121,10 +121,13 @@ Page({
    * 图片预览
    */
   imgPreview(e) {
+    console.log("e=======imgPreview=======>",e);
     var dataset = e.currentTarget.dataset;
+    let aUrl = [dataset.src];
+    dataset.item ? aUrl.push(dataset.nextimg) : aUrl.unshift(dataset.nextimg);
     wx.previewImage({
       current: dataset.src,
-      urls: [dataset.src]
+      urls: aUrl
     })
   },
   /**
@@ -202,6 +205,7 @@ Page({
   fCustomerAdd() {
     let _This = this;
     let pdata = {
+      wxaOpenid: _This.data.oUserInfo.openId,
       openid: _This.data.oUserInfo.openId,
       wxNickname: _This.data.oUserInfo.nickName,
       gender: _This.data.oUserInfo.gender,

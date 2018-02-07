@@ -340,7 +340,7 @@
         </view>
         <view class='f-16'>
 
-        <picker   disabled="{{currentClue.clueStatus==1?false:true}}"  mode="date" value="{{linkMan.birthday}}" start="{{clueStartDate}}"   bindchange="linkchangeage">
+        <picker   disabled="{{currentClue.clueStatus==1?false:true}}"  mode="date" value="{{linkMan.birthday}}"    bindchange="linkchangeage">
           <view style="width:240rpx;height:60rpx;line-height:60rpx;text-align:center;">
             {{linkMan.birthday}}
           </view>

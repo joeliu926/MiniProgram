@@ -84,28 +84,28 @@
           </div>
           <!--分享案例  -->
           <view class='photopic' bindtap="sharecase" style="display:{{item.code=='appShare'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-tap.png"></image>
           </view>
           <!--浏览案例  -->
           <view class='photopic' bindtap="caseview" style="display:{{item.code=='appOpen'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-tap.png"></image>
           </view>
           <!--喜欢案例  -->
           <view class='photopic' data-caseId="{{item.caseId}}" data-customerName="{{item.customerName}}" bindtap="likecase" style="display:{{item.code=='caseLike'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-like.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-like.png"></image>
           </view>
           <!--添加备注  -->
           <view class='photopic' bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-remark.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-remark.png"></image>
           </view>
           <!--授权手机号  -->
           <view class='photopic' data-num="{{item.phoneNumber}}" bindtap='' style="display:{{item.code=='authPhone'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-mobile.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-mobile.png"></image>
           </view>
 <!-- *****************新增线索事件start******************************** -->
            <!--浏览==礼品  -->
           <view class='photopic' bindtap="opengift" style="display:{{item.code=='openGift'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-tap.png"></image>
           </view>
             <!--领取==礼品  -->
           <view class='photopic' data-giftid="{{item.giftId}}" bindtap='getgift' style="display:{{item.code=='getGift'?'block':'none'}}"> 
@@ -113,28 +113,28 @@
           </view> 
           <!-- 分享了礼品  style="display:{{item.code=='giftSend'?'block':'none'}}"-->
            <view class='photopic' data-giftid="{{item.giftId}}" bindtap='getgift' style="display:none"> 
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/gift.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/gift.png"></image>
           </view> 
 <!-- *****************新增线索事件end  ******************************** -->
           <!--跟新关键信息  -->
           <view class='photopic' bindtap='editmsg' style="display:{{item.code=='contactEdit'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-editpeople.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-editpeople.png"></image>
           </view>
           <!-- 预约 -->
           <view class='photopic' bindtap="bookOption" style="display:{{item.code=='reserve'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-book.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-book.png"></image>
           </view>
           <!-- 上传图片 -->
-          <view class='photopic' data-urls="{{item.imgUrls}}" data-src='../../../public/images/icon-pic.png' bindtap="previewImage" style="display:{{item.code=='photoUpload'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-pic.png"></image>
+          <view class='photopic' data-urls="{{item.imgUrls}}" data-src='/public/images/icon-pic.png' bindtap="previewImage" style="display:{{item.code=='photoUpload'?'block':'none'}}">
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-pic.png"></image>
           </view>
           <!--退出案例  -->
           <view class='photopic' bindtap="jumpcase" style="display:{{item.code=='appQuit'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-tap.png"></image>
           </view>
           <!-- 关闭案例 -->
           <view class='photopic' bindtap="colsecase" style="display:{{item.code=='leadClose'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-close.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-close.png"></image>
           </view>
         </div>
 

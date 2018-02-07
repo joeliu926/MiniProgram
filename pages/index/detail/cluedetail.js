@@ -241,10 +241,10 @@ Page({
   initInteract() {
     let _This = this;
     let pdata = {
-      clueId: this.data.clueDetail.id,//3
+      clueId: this.data.clueDetail.id,  //this.data.clueDetail.id,
     };
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
-      console.log("result==========2222222222222222222222================>",result)
+      // console.log("result==========2222222222222222222222================>",result)
       if (result.data.code == 0) {
         if (result.data.data.length == 0) {
           _This.setData({

@@ -398,7 +398,7 @@ Page({
     var dataset = params.currentTarget.dataset;
     if (dataset.obj.consultType==3) {
       wx.navigateTo({
-        url: '../destmass/receivedetail/receivedetail?giftid=' + dataset.obj.giftid + '&consultationId=' + dataset.obj.sessionId
+        url: '../destmass/receivedetail/receivedetail?giftid=' + dataset.obj.gifts + '&consultationId=' + dataset.obj.id
       });
     }
   },
@@ -969,6 +969,7 @@ Page({
       pageSize: this.data.pageSize
     };
     wxRequest(wxaapi.index.sharelist.url, pdata).then(function (result) {
+      console.log("sharelist result------------>", result);
       if (result.data.code == 0) {
         _This.setData({ shareCount: result.data.data.count });
         let getArray = result.data.data.list;

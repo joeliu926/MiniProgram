@@ -167,13 +167,14 @@
           <div class="list-content" style="width:94%;margin:20rpx 20rpx 15rpx 20rpx;"   data-Id='{{oitem.id}}'>
             <div style="padding-left:10rpx;margin: 20rpx  10rpx  10rpx 0;">
               <div class="list-content-top">
-                <span class='f-16 list-content-top-r'>{{oitem.consultType==3?'分享有礼':oitem.consultType==2?'海报':'案例分享'}}</span>
+                <span class='f-16 list-content-top-r {{oitem.consultType==3?"":"f-c-9"}}'>{{oitem.consultType==3?'分享有礼':oitem.consultType==2?'海报':'案例分享'}}</span>
                 <span style="{{oitem.type==3||oitem.type==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/cule-r.png'></image></span>
                 <span style="{{oitem.type==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/clue-pyq.png'></image></span>
                 <span class='f-14 list-content-top-l' style="text-align:right;float:right;">{{util.formatTime(oitem.createTime,"yyyy-MM-dd hh:mm")}}</span>
               </div>
               <div class='list-content-btm' style="margin: 0  0  0 10rpx;width:96%;">
-                <span class='f-14' wx:for="{{oitem.productsName}}" wx:for-item="pitem" wx:key="pitem">{{index==0?pitem:'、'+pitem}}</span>
+                <span wx:if="{{oitem.consultType!=3}}" class='f-14' wx:for="{{oitem.productsName}}" wx:for-item="pitem" wx:key="pitem">{{index==0?pitem:'、'+pitem}}</span>
+                 <span wx:if="{{oitem.consultType==3}}" class='f-14' wx:for="{{oitem.giftsName}}" wx:for-item="pitem" wx:key="pitem">{{index==0?pitem:'、'+pitem}}</span>
                 <span class='f-14' style="text-align:right;float:right;">{{oitem.shareNum?oitem.shareNum:0}}人</span>
               </div>
             </div>

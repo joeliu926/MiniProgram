@@ -42,7 +42,7 @@ Page({
     getApp().getUserData(function (uinfo) {
       _This.setData({
         oUserInfo: uinfo,
-        consultationId: options.consultationId||"1727",
+        consultationId: options.consultationId||"0",//"1727",
         cstUid: uinfo.unionId,
         options: options
       });
@@ -127,7 +127,7 @@ Page({
     let pdata = {
       id: _This.data.options.giftid||1
     };
-    console.log("giftid--- post data--->", pdata);
+    //console.log("giftid--- post data--->", pdata);
     wxRequest(wxaapi.gift.giftdetail.url, pdata).then(function (result) {
       //console.log("get giftdetail --->", result);
       if (result.data.code == 0) {
@@ -177,9 +177,9 @@ Page({
     wx.showLoading({
       title: 'loading...',
     })
-    console.log("post pagelist--->", pdata);
+    //console.log("post pagelist--->", pdata);
     wxRequest(wxaapi.activityrecord.pagelist.url, pdata).then(function (result) {
-      console.log("get pagelist --->", result);
+      //console.log("get pagelist --->", result);
       if (result.data.code == 0) {
         let rsList = result.data.data.list;
         let aApponitList = _This.data.aApponitList;

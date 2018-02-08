@@ -2,7 +2,7 @@ page{
   background: #ffffff;
 }
 .counselor-ct{
-  box-shadow: 0 0 8rpx 10rpx #eeeeee;
+  box-shadow: 0 0 8rpx 4rpx #e8e8e8;
   position: absolute;
   top: 40rpx;
   bottom: 300rpx;
@@ -31,10 +31,11 @@ page{
   position: relative;
 }
 .wx-txt{
-  padding: 15rpx 40rpx;
+  padding: 10rpx 40rpx;
   font-size:30rpx;
-  background:#eeeeee;
+  background:#f7f7f7;
   border-radius: 40rpx;
+  border: 1rpx solid #E8E8E8;
 }
 .click-cp{
   position: absolute;

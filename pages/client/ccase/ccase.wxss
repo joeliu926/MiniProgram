@@ -101,7 +101,10 @@ page{
 
 }
 .form-fid{
-  position:absolute;left:0;top:0;width:100%;height:100%;
+  position:absolute;
+  left:0;top:0;
+  width:100%;
+  height:100%;
 }
 .cm-img{
   height: 60rpx;

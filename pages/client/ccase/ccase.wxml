@@ -69,7 +69,7 @@
     <image  wx:if="{{!currentLikeState}}" class='cm-img'  src='../../../public/images/unlike-icon.png' ></image>
     <image wx:if="{{currentLikeState}}"  class='cm-img'  src='../../../public/images/like-icon.png' ></image>
      <form  report-submit  bindsubmit="fFormLike" > 
-           <button class='form-fid' style='border:none;' plain="true" formType="submit"></button>
+           <button class='form-fid' style='border:none;width:100%;height:100%;' plain="true" formType="submit"></button>
      </form>
 </view>
 

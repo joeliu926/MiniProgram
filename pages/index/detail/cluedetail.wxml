@@ -161,7 +161,7 @@
                 <view style="white-space: pre-wrap;padding-right: 10rpx;vertical-align:middle;margin-right: 40rpx; ">
                   <text style="vertical-align:middle;">领取了 {{item.userName}} 分享的礼品</text>
                 </view>
-                <span style=" position:absolute; top:0rpx;right:10rpx;" data-giftid="{{item.giftId}}" bindtap="getgift">
+                <span style=" position:absolute; top:0rpx;right:10rpx;" data-giftid="{{item.giftId}}">
                   <image style="display:inline-block; vertical-align:middle; width:44rpx;height:44rpx;margin-top:5rpx;" src="../../../public/images/open.png">
                   </image>
                 </span>

@@ -53,15 +53,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-     let pdata={
-       clueId :"",
-       consultUnId: "",
-       customerUnId : "",
-       giftId:"",
-       giftName:"",
-       sessionId:"",
-       wechatMobile: "",
-     }
   },
 
   /**
@@ -128,16 +119,14 @@ Page({
         iTop: mType,
         currentRecoder: citem
       });
-      //console.log("1111--i--mType------>", mType);
-      if (!mType) {
-        console.log("i--mType------>", mType);
-        //console.log("---------------------");
-        mType = !mType;
-        _This.setData({
-          iTop: mType
-        });
-      }
-
+      setTimeout(function(){
+        if (!mType) {
+          mType = !mType;
+          _This.setData({
+            iTop: mType
+          });
+        }
+      },50);
       i++;
     }, 3000);
   },

@@ -367,11 +367,19 @@ fReceiveGift(){
       return false;
     }
     _This.fAuthorization(eDetail, function (resPhone) {
+      wx.hideLoading();
+      if (!resPhone){
+        wx.showToast({
+          title: '领取失败',
+          duration: 2000
+        });
+        return false;
+      }
       _This.setData({
         wechatMobile: resPhone
       });
       _This.fUpdateCustomerInfo(); //授权手机号码更新客户信息
-      wx.hideLoading();
+    
     });
   },
   /**

@@ -397,6 +397,7 @@ Page({
   },
   //打开分享详情
   openShare(params) {
+    //console.log("-------------dataset----------", dataset);
     var dataset = params.currentTarget.dataset;
     if (dataset.obj.consultType==3) {
       wx.navigateTo({

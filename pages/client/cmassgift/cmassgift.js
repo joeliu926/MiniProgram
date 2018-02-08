@@ -32,7 +32,7 @@ Page({
   onLoad: function (options) {
     let _This=this;
     getApp().getUserData(function (uinfo) {
-      let isMyself = (uinfo.unionId == options.cstUid);
+      let isMyself = (uinfo.unionId==options.cstUid?true:false);
       _This.setData({
         isMyself: isMyself,//进来人类型
         oEvent: event.oEvent, //事件参数
@@ -42,6 +42,7 @@ Page({
         consultationId: options.consultationId||0,//||"1727",
         options: options
       });
+      console.log("isMyself------------", uinfo.unionId, options.cstUid, isMyself);
       _This.fGiftDetail();//获取礼品详情
       _This.fCustomerAdd();//添加客户，生成线索
       _This.fGetCustomerByUnionid();//获取客户信息

@@ -389,7 +389,6 @@ Page({
   //打开线索详情
   openItem(params) {
     var dataset = params.currentTarget.dataset;
-
       wx.navigateTo({
         url: './detail/cluedetail?id=' + dataset.obj.id
       });

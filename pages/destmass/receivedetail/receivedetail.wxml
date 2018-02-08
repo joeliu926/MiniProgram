@@ -41,7 +41,7 @@
   
    <view class='b-s w-10 f-16'>
       <view class='b-s t-a-c tab-ct'>
-        <text class='b-s bk-tab {{isTab?"cge-col":""}}' bindtap='fChangeTab'>领取未预约</text>
+        <text class='b-s bk-tab {{isTab?"cge-col":""}}' bindtap='fChangeTab'>未预约</text>
         <text class='b-s bk-tab {{!isTab?"cge-col":""}}' data-istab="1" bindtap='fChangeTab'>已预约</text>
       </view>
       <view class='book-ct {{isTab?"hide":""}}'>

@@ -397,11 +397,14 @@ Page({
   },
   //打开分享详情
   openShare(params) {
+    //console.log("-------------dataset----------", dataset);
     var dataset = params.currentTarget.dataset;
     if (dataset.obj.consultType==3) {
       wx.navigateTo({
         url: '../destmass/receivedetail/receivedetail?giftid=' + dataset.obj.gifts + '&consultationId=' + dataset.obj.id
       });
+    }else{
+      //this.alertMessage("此次分享没有详细！", 'yellow');
     }
   },
   alertMessage(content, types, times = 3000) {

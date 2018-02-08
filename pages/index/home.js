@@ -542,7 +542,8 @@ Page({
               title: '成功关闭',
               icon: 'success',
               duration: 2000
-            })
+            });
+            _This.fUserEvent(event.eType.leadClose);//关闭联系人
           }
         });
       }

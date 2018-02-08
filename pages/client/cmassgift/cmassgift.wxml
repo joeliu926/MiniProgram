@@ -52,6 +52,6 @@
 </view>
 
 <view class='flex-c w-10 b-s  com-bottom-ct {{isPast&&(status<=0)?"":"hide"}}'>
-      <view class='f-14 b-s t-a-c com-btn-txt'  bindtap='fConnectCst'>联系咨询师{{isPast}}</view>
+      <view class='f-14 b-s t-a-c com-btn-txt'  bindtap='fConnectCst'>联系咨询师</view>
    </view>
 

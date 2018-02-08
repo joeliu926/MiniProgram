@@ -76,7 +76,7 @@
       <view class="line"></view>
       <!--轨迹item 测试-->
       <view class="interact-item" wx:for="{{interactlist}}" wx:for-item="item" wx:key="index" style="display:{{item.code=='informationSubmit'?'none':'block'}};">
-        <!--图标和时间  -->
+        <!--图标和时间  left-->
         <div class="cnt-interact-imgdiv">
           <div class='cnt-item-time' style="background:{{item.type == 1 ?'#8088f6':'#4cb0ff'}}; ">
             <text style="margin-left:20rpx;font-size:30rpx; ">{{util.formatTime(item.time,"hh:mm")}}</text>
@@ -112,9 +112,9 @@
             <image style="width:70rpx;height:70rpx" src="../../../public/images/gift.png"></image>
           </view> 
           <!-- 分享了礼品  style="display:{{item.code=='giftSend'?'block':'none'}}"-->
-           <view class='photopic' data-giftid="{{item.giftId}}" bindtap='getgift' style="display:none"> 
+           <!-- <view class='photopic' data-giftid="{{item.giftId}}" bindtap='getgift' style="display:none"> 
             <image style="width:70rpx;height:70rpx" src="/public/images/gift.png"></image>
-          </view> 
+          </view>  -->
 <!-- *****************新增线索事件end  ******************************** -->
           <!--跟新关键信息  -->
           <view class='photopic' bindtap='editmsg' style="display:{{item.code=='contactEdit'?'block':'none'}}">
@@ -140,7 +140,7 @@
 
 
 
-        <!--具体轨迹信息    -->
+        <!--具体轨迹信息   right -->
         <div class='cnt-item-txt'>
           <div>
             <!--分享案例 style="display:{{item.code=='appShare'?'block':'none'}}" -->
@@ -180,7 +180,6 @@
                 </span>
               </view>
             </view>
-
             <!--添加备注  -->
             <view class='cnt-item-text' class='cnt-item-text' bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}">
               <text style="">被  {{item.userName}} 添加了  备注</text>

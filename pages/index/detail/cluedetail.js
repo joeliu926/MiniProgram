@@ -279,15 +279,10 @@ Page({
    */
   getgift(e) {
     let giftid = e.currentTarget.dataset.giftid;
-    // let giftid =8;
-    console.log("e===========================>>>>>", e, giftid);
     if (giftid){
       wx.navigateTo({
-        url: '../../client/cmassgift/cmassgift?giftid=' + giftid
+        url: '/pages/client/cmassgift/cmassgift?giftid=' + giftid
       });
-    }else{
-      // console.log("该礼品id不存在");
-      return false;
     }
   },
   // 跳转到浏览的礼品页面去

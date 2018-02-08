@@ -177,9 +177,9 @@ Page({
     wx.showLoading({
       title: 'loading...',
     })
-    //console.log("post pagelist--->", pdata);
+    console.log("post pagelist--->", pdata);
     wxRequest(wxaapi.activityrecord.pagelist.url, pdata).then(function (result) {
-      //console.log("get pagelist --->", result);
+      console.log("get pagelist --->", result);
       if (result.data.code == 0) {
         let rsList = result.data.data.list;
         let aApponitList = _This.data.aApponitList;

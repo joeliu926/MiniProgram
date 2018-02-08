@@ -37,7 +37,7 @@ Page({
         oUserInfo: uinfo,
         giftid: options.giftid||8,
         cstUid: options.cstUid || uinfo.unionId,
-        consultationId: options.consultationId||"1727",
+        consultationId: options.consultationId||0,//||"1727",
         options: options
       });
       _This.fGiftDetail();//获取礼品详情
@@ -149,7 +149,7 @@ Page({
       consultUnId: _This.data.cstUid
     };
     wxRequest(wxaapi.activityrecord.getbubbleprompt.url, pdata).then(function (result) {
-      console.log("------bubble----",result);
+      //console.log("------bubble----",result);
       if (result.data.code == 0) {
         _This.setData({
           aAuthRecoder: result.data.data,
@@ -169,7 +169,7 @@ Page({
     };
     //console.log("post data--->", pdata);
     wxRequest(wxaapi.gift.giftdetail.url, pdata).then(function (result) {
-      console.log("get giftdetail --->", result);
+      //console.log("get giftdetail --->", result);
       if (result.data.code == 0) {
         _This.setData({
           oGift: result.data.data,
@@ -267,7 +267,7 @@ fReceiveGift(){
         title: '领取成功',
         duration: 2000,
         complete:function(res){
-          console.log("-=-=-=-=-=-=-=-=-=-=-",res);
+          //console.log("-=-=-=-=-=-=-=-=-=-=-",res);
           wx.navigateTo({
             url: 'giftsuccess/giftsuccess?unionId=' + _This.data.cstUid,
           })
@@ -327,7 +327,7 @@ fReceiveGift(){
       formId: _This.data.formId //一次提交的formid
     };
     wxRequest(wxaapi.wxaqr.addformid.url, pdata).then(function (result) {
-      console.log("post data insert into customer formid----", result);
+      //console.log("post data insert into customer formid----", result);
       if (result.data.code == 0) {
       }
     });

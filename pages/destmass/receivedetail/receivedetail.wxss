@@ -22,7 +22,7 @@
  padding: 20rpx 0;
 }
 .static-ct{
- box-shadow: 0 0 8rpx 10rpx #dddddd;
+ box-shadow: 0 0 8rpx 4rpx #e8e8e8;
  margin: 40rpx;
  border-radius: 8rpx;
 }

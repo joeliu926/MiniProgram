@@ -87,11 +87,11 @@ page{
     box-sizing: border-box;
 }
 .b-d{
-  border: 2rpx solid #eeeeee; 
+  border: 1rpx solid #E8E8E8; 
 }
 .b-d-tb{
-  border-top: 2rpx solid #eeeeee; 
-  border-bottom: 2rpx solid #eeeeee; 
+  border-top: 1rpx solid #E8E8E8; 
+  border-bottom: 1rpx solid #E8E8E8; 
 }
 .b-r{
   border-radius: 50%;

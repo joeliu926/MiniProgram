@@ -21,7 +21,6 @@ function wxRequest() {
    oParams.method = aArguments[1];
    oParams.data = aArguments[2]||{};
  };
-  oParams.data.v=1.0;
   var wRequest = wxPromise(wx.request);
   return wRequest(oParams);
 }

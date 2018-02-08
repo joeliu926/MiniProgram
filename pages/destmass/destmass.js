@@ -115,7 +115,7 @@ Page({
   fGetPrompt() {
     let _This = this;
     let pdata = {
-      sessionId:12,
+      sessionId:"",
       consultUnId: _This.data.oUserInfo.unionId
     };
     console.log("post data--->", pdata);

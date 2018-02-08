@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isActive:false,//
      oOptions:{},//传入的参数
     oUserInfo:{},//当前用户信息
      postHeight:0,//海报外框的高度
@@ -107,13 +108,20 @@ Page({
       userUnionId: _This.data.oUserInfo.unionId
     };
     wxRequest(wxaapi.postercategory.list.url, postData).then(function (result) {
+      console.log("----------postercategory---------",result);
       if (result.data.code == 0&&result.data.data.length>0) {
         _This.setData({
           aCategoryList:result.data.data,
-          categoryId: result.data.data[0].id
+          categoryId: result.data.data[0].id,
+          isActive:true
         });
         _This.fSelectCate();
-      } 
+        _This.fGetQrcode();
+      }else{
+        _This.setData({
+          isActive:false
+        });
+      }
       wx.hideLoading();
     });
   },
@@ -137,6 +145,7 @@ Page({
       title: 'loading...',
     });
     wxRequest(wxaapi.posterinfo.pagelist.url, postData).then(function (result) {
+      console.log("--------fSelectCate-----------", result);
       if (result.data.code == 0) {
         let dataList = result.data.data.list;
         _This.setData({
@@ -168,7 +177,7 @@ Page({
         });
       }
 
-      _This.fGetQrcode();
+     // _This.fGetQrcode();
     });
   },
   /**

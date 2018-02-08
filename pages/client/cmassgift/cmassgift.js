@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isMyself:false,//是否是咨询师自己打开
     oGift:{},//礼品对象
     aGiftList:[],//礼品列表
     isShowMask:false,//显示授权手机号码提示框
@@ -31,8 +32,9 @@ Page({
   onLoad: function (options) {
     let _This=this;
     getApp().getUserData(function (uinfo) {
-      //console.log("uinfo------------->", uinfo);
+      let isMyself = (uinfo.unionId == options.cstUid);
       _This.setData({
+        isMyself: isMyself,//进来人类型
         oEvent: event.oEvent, //事件参数
         oUserInfo: uinfo,
         giftid: options.giftid||8,

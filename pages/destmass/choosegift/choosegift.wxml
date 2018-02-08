@@ -1,9 +1,9 @@
 <wxs src="../../../utils/wxs/cutil.wxs" module="cutil"  />
 <view class='b-s w-10 bk-c-w select-gift'>
 
-<radio-group class="radio-group {{aGiftList.length>0?'':'hide'}}" bindchange="fSelectChange">
+<radio-group class="radio-group {{aGiftList.length>0?'':'hide'}}"  bindchange="fSelectChange">
    <block wx:for="{{aGiftList}}" wx:for-item="oItem" wx:key="oItem.id"  wx:for-index="index">
-      <view class='w-10 fx-jc-sb flex-c item-ct' style=''>
+      <view class='w-10 fx-jc-sb flex-c item-ct' style='' data-itemid="{{oItem.id}}" bindtap='fCheckItem' >
           <view class='flex-c'>
             <view>
               <image class='item-img' mode="aspectFill" src='{{oItem.giftCover.url}}'></image>
@@ -14,7 +14,7 @@
             </view>
           </view>
           <view style='padding:20rpx 40rpx;'>
-            <radio value="{{oItem.id}}"/>
+            <radio value="{{oItem.id}}" checked='{{giftId==oItem.id}}' />
           </view>
       </view>
     </block>

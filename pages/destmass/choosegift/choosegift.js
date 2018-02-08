@@ -101,6 +101,14 @@ Page({
    });
   },
   /**
+   * 选择正行条目
+   */
+  fCheckItem(e){
+  this.setData({
+    giftId: e.currentTarget.dataset.itemid
+  });
+  },
+  /**
    * 获取礼品列表
    */
   fGetGiftList(){

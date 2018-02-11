@@ -13,6 +13,8 @@ var eType = {
   leadClose: "leadClose",//关闭联系人线索+
   authPhone: "authPhone",//授权手机号+
   giftSend:"giftSend",//群发有礼
+  openGift:"openGift",//浏览礼品
+  getGift:"getGift" //领取礼品
 };
 var oEvent = {
   shareEventId: "", //当事件码是 appShare，获取该值，传值的时候带着相关的参数

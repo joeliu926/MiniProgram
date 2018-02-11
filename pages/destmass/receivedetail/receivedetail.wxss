@@ -22,11 +22,12 @@
  padding: 20rpx 0;
 }
 .static-ct{
- box-shadow: 0 0 8rpx 10rpx #dddddd;
+ box-shadow: 0 0 8rpx 4rpx #e8e8e8;
  margin: 40rpx;
+ border-radius: 8rpx;
 }
 .s-title{
-  padding: 0 10rpx 0 0;
+  padding: 0 1rpx 0 0;
   flex:0 0 140rpx;
 }
 .item-static{
@@ -45,6 +46,8 @@
     border-radius: 20rpx;
     color: #ffffff;
     text-align: right;
+    overflow: hidden;
+    display: inline-block;
 }
 .box-shadow{
   box-shadow: 0 0 8rpx 10rpx #eeeeee;

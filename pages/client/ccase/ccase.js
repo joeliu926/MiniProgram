@@ -121,10 +121,28 @@ Page({
    * 图片预览
    */
   imgPreview(e) {
+    console.log("e=======imgPreview=======>",e);
     var dataset = e.currentTarget.dataset;
+    let aUrl = [dataset.src];
+    dataset.item ? aUrl.push(dataset.nextimg) : aUrl.unshift(dataset.nextimg);
     wx.previewImage({
       current: dataset.src,
-      urls: [dataset.src]
+      urls: aUrl
+    })
+  },
+  /**
+    * 浏览案例图片
+    */
+  imgPreviewCase(e) {
+    let dataset = e.currentTarget.dataset;
+    let pictures = dataset.pictures || [];
+    let oPictures = [];
+    pictures.forEach(item => {
+      oPictures.push(item.url);
+    });
+    wx.previewImage({
+      current: dataset.src,
+      urls: oPictures
     })
   },
   onReady: function () {
@@ -187,6 +205,7 @@ Page({
   fCustomerAdd() {
     let _This = this;
     let pdata = {
+      wxaOpenid: _This.data.oUserInfo.openId,
       openid: _This.data.oUserInfo.openId,
       wxNickname: _This.data.oUserInfo.nickName,
       gender: _This.data.oUserInfo.gender,
@@ -212,7 +231,7 @@ Page({
     });
   },
   /**
-   * 通过会话id和用户unionid获取客户信息
+   * 通过咨询师unionid和客户unionid获取客户信息
    */
   fGetCustomerByUnionid() {
     let _This = this;
@@ -852,6 +871,35 @@ Page({
         isEndPage: false
       });
     }
+  },
+  /**
+   * 获取用户的formid
+   */
+  fFormLike(e){
+    let _This = this;
+    _This.setData({
+      formId: e.detail.formId
+    });
+    _This.fGetCustomerFormid();//获取用户formid
+  },
+      /**
+   * 获取客户的formid
+   */
+  fGetCustomerFormid() {
+    let _This = this;
+    let pdata = {
+      customerUnionid: _This.data.oUserInfo.unionId,
+      customerOpenid: _This.data.oUserInfo.openId,
+      consultUnionid: _This.data.cstUid,//咨询师unionid
+      sessionId: _This.data.consultationId,//当前会话id
+      formId: _This.data.formId //一次提交的formid
+    };
+    wxRequest(wxaapi.wxaqr.addformid.url, pdata).then(function (result) {
+      console.log("post data insert into customer formid----", result);
+      if (result.data.code == 0) {
+
+      }
+    });
   }
 
 })

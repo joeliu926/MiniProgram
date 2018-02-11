@@ -9,6 +9,7 @@ Page({
     oUserInfo:{},
     noPhoneCount:"",
     isActive:false,// 是否可进入下一步
+    oMn:{},//返回m天的n个客户
   },
 
   /**
@@ -21,7 +22,7 @@ Page({
         oUserInfo: uinfo
       });
       _This.fGetCroudList();
-
+      _This.fGetPrompt();
     });
   },
 
@@ -58,6 +59,9 @@ Page({
    */
   onPullDownRefresh: function () {
   
+    let _This = this;
+    _This.fGetCroudList();
+     wx.stopPullDownRefresh();
   },
 
   /**
@@ -95,12 +99,32 @@ Page({
     };
     //console.log("post data--->", pdata);
     wxRequest(wxaapi.consult.getcluesbyconsultid.url, pdata).then(function (result) {
-     // console.log("get getcluesbyconsultid by sessionid--->", result);
+      console.log("get getcluesbyconsultid by sessionid--->", result);
       if (result.data.code == 0) {
        // let noCount =0;
         _This.setData({
-          noPhoneCount: result.data.data["1"],
-          isActive:true
+          noPhoneCount: result.data.data["1"]||0,
+          isActive: result.data.data["1"]?true:false
+        });
+      }
+    });
+  },  
+  /**
+   * 获取m 和n
+   */
+  fGetPrompt() {
+    let _This = this;
+    let pdata = {
+      sessionId:"",
+      consultUnId: _This.data.oUserInfo.unionId
+    };
+    console.log("post data--->", pdata);
+    wxRequest(wxaapi.consult.getprompt.url, pdata).then(function (result) {
+      console.log("get fGetPrompt by sessionid--->", result);
+      if (result.data.code == 0) {
+        // let noCount =0;
+        _This.setData({
+          oMn: result.data.data
         });
       }
     });

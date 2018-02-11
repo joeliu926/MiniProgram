@@ -26,7 +26,9 @@ Page({
   onLoad: function (options) {
     this.initData(options.id);
   },
-  // 去 预约页面
+  /**
+   *去 预约页面
+   */ 
   bookOption() {
     // let pobj = params.target.dataset.obj;
     wx.navigateTo({
@@ -34,15 +36,19 @@ Page({
     });
   },
   /**
- * 拨打电话
- */
+   * 拨打电话
+   */
   fMakePhone() {
     let _This = this;
     wx.makePhoneCall({
       phoneNumber: this.data.clueDetail.customerWechatMobile ? this.data.clueDetail.customerWechatMobile : this.data.customerPhoneNum
     })
   },
-  // 初始化 备注
+
+
+  /**
+   *  初始化 备注
+   */
   initRemark() {
     let _This = this;
     let pdata = {
@@ -64,12 +70,10 @@ Page({
   initInteract() {
     let _This = this;
     let pdata = {
-      clueId: this.data.clueDetail.id,//3
+      clueId: this.data.clueDetail.id,  //this.data.clueDetail.id,
     };
     wxRequest(wxaapi.consult.interactlist.url, pdata).then(function (result) {
-      // console.log("result==========2222222222222222222222================>",result)
       if (result.data.code == 0) {
-
         if (result.data.data.length == 0) {
           _This.setData({
             asShow: "true"
@@ -266,13 +270,23 @@ Page({
         url: '/pages/index/casedetail/casedetail?caseid=' + caseid
       });
     } else {
-
+      // console.log("该案例id不存在");
+      return false;
     }
-
-
   },
-  //  点击跳转到预约的页面（客户） 
-  bookpeople() {
+  /**
+   *  领取了礼品  跳转到礼品页面 
+   */
+  getgift(e) {
+    let giftid = e.currentTarget.dataset.giftid;
+    if (giftid){
+      wx.navigateTo({
+        url: '/pages/client/cmassgift/cmassgift?giftid=' + giftid
+      });
+    }
+  },
+  // 跳转到浏览的礼品页面去
+  opengift(){
 
   },
   // 通过点击电话号码  向客户拨打电话；

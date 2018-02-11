@@ -1,4 +1,4 @@
-<view class='b-s post-content'>  
+<view class='b-s post-content {{isActive?"":"hide"}}'>  
   <view class='w-10 b-s post-ct' bindtap='fBottomRevert' style='height:{{postHeight+"px"}}'>
    <!--style='height:{{postImageHeight+"px"}}'-->
     <view class='w-10 b-s post-img-ct'>
@@ -32,6 +32,17 @@
   </view>
  
 </view>
+
+
+  <view class='{{!isActive?"":"hide"}}'>
+    <view class="list-none" style="margin-top:200rpx;">
+      <view class="list-none-div">
+          <image style="" class='nodata-img' src='/public/images/no_data.png'></image>
+    
+      </view>
+    </view>
+  </view>
+
 
 <view class='mask {{isShowMask?"":"hide"}}'>
      <view class='pop-box flex-c fx-d-col'>

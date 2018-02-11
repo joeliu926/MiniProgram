@@ -57,15 +57,15 @@
    <text>术后日记</text>
 </view>
 
-<block wx:for="{{detailInfo.contentList}}" wx:for-item="oitem" wx:if="{{oitem.nodeType!=1000}}" wx:key="id">
+<block wx:for="{{detailInfo.contentList}}" wx:for-index="ctIndex" wx:for-item="oitem" wx:if="{{oitem.nodeType!=1000}}" wx:key="id">
   <view class='bk-c-w mg-b'>
       <text class='f-14 diary'>{{oitem.title}}</text>
       
       <view class='b-pd w-10  b-s'>
           <view class='flex fx-wp w-10 b-s'>
-             <block wx:for="{{oitem.pictures}}" wx:for-item="imgItem" wx:key="ids" >
-              <view class='img-c b-s' style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreview'>
-             <!--<image mode='aspectFit' class='c-image' src='{{imgItem.url}}' data-src='{{imgItem.url}}' bindtap='imgPreview' ></image>--> 
+             <block wx:for="{{oitem.pictures}}" wx:for-item="imgItem" wx:key="ids"  wx:for-index="iIndex" >
+              <view class='img-c b-s' style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreviewCase' data-ctItdex="{{ctIndex}}" data-iIndex="{{iIndex}}" data-pictures="{{oitem.pictures}}">
+      
               </view>
             </block>
          </view>

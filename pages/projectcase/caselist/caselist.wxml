@@ -88,12 +88,12 @@
       <view class='flex w-10 fx-d-col share-layer '>
         <view class='flex btn-ct'>
           <button class='flex-c fx-d-col share-b-btn' bindtap='fGeneratePost'>
-            <image class='end-share-img' src='../../../public/images/friend-icon.png'></image>
-            <view class='f-14 t-a-c' style='padding:0rpx;'>生成朋友圈海报</view>
+            <image class='end-share-img' src='/public/images/share-fre.png'></image>
+            <view class='f-12 t-a-c' style='padding:0rpx;'>生成朋友圈海报</view>
           </button>
           <button class='fx-d-col flex-c share-b-btn' style='' open-type="share">
-            <image class='w-10  end-share-img' src='../../../public/images/we-icon.png'></image>
-            <text class='f-14   t-a-c' style='padding:0;'>转发给好友或群</text>
+            <image class='w-10  end-share-img' src='/public/images/we-icon.png'></image>
+            <text class='f-12   t-a-c' style='padding:0;'>转发给好友或群</text>
           </button>
         </view>
         <view class='flex-c f-16 cancel-btn' bindtap='fCancelShare'>取消</view>

@@ -10,7 +10,8 @@ Page({
     giftId:0,//选中的id
     isActive:false, //按钮是否处于激活状态
     pageNo:1,
-    pageSize:2,
+    pageSize:10,
+    lastPage:false,
     oUserInfo: {}
   },
 
@@ -20,7 +21,7 @@ Page({
   onLoad: function (options) {
     let _This = this;
     getApp().getUserData(function (uinfo) {
-      console.log("uinfo------------->", uinfo);
+      //console.log("uinfo------------->", uinfo);
       _This.setData({
         oUserInfo: uinfo
       });
@@ -33,7 +34,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+   
   },
 
   /**
@@ -68,7 +69,21 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    
+    let pageNo = this.data.pageNo;
+    let lastPage = this.data.lastPage;
+    if (lastPage){
+      wx.showToast({
+        title: '没有更多数据',
+      });
+      return false;
+    }
+    pageNo++;
+    //console.log("reach bottom------>", pageNo);
+    this.setData({
+      pageNo: pageNo
+    });
+    this.fGetGiftList();
   },
 
   /**
@@ -86,22 +101,40 @@ Page({
    });
   },
   /**
+   * 选择正行条目
+   */
+  fCheckItem(e){
+  this.setData({
+    giftId: e.currentTarget.dataset.itemid
+  });
+  },
+  /**
    * 获取礼品列表
    */
   fGetGiftList(){
     let _This = this;
+    wx.showLoading({
+      title: 'loading...',
+    });
     let pdata = {
       pageNo: _This.data.pageNo,
       pageSize: _This.data.pageSize,
       userUnionId: _This.data.oUserInfo.unionId,
-      status:0
+      status:0,
+      dateFilter:0
     };
     wxRequest(wxaapi.gift.pagelist.url, pdata).then(function (result) {
+      //console.log("result------->",result);
+      let aGiftList = _This.data.aGiftList||[];
       if (result.data.code == 0) {
+        let aList = result.data.data.list;
+        aGiftList.push(...aList)
         _This.setData({
-          aGiftList: result.data.data.list
+          aGiftList: aGiftList,
+          lastPage: result.data.data.lastPage
         });
-      } 
+      };
+      wx.hideLoading();
     });
   },
   /**

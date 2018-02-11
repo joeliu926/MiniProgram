@@ -163,17 +163,18 @@
   <!--场景列表-->
   <view style='display:{{menuType?"none":"block"}};background-color:white;overflow:hidden;'>
       <view class="list" style="background-color:white;"  wx:for="{{shareList}}" wx:for-item="oitem" wx:key="id">
-        <div class="list-body" style="width:100%;">
+        <div class="list-body" style="width:100%;" bindtap='openShare' data-Obj='{{oitem}}' >
           <div class="list-content" style="width:94%;margin:20rpx 20rpx 15rpx 20rpx;"   data-Id='{{oitem.id}}'>
             <div style="padding-left:10rpx;margin: 20rpx  10rpx  10rpx 0;">
               <div class="list-content-top">
-                <span class='f-16 list-content-top-r'>{{'案例分享'}}</span>
+                <span class='f-16 list-content-top-r {{oitem.consultType==3?"":"f-c-9"}}'>{{oitem.consultType==3?'分享有礼':oitem.consultType==2?'海报':'案例分享'}}</span>
                 <span style="{{oitem.type==3||oitem.type==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/cule-r.png'></image></span>
                 <span style="{{oitem.type==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/clue-pyq.png'></image></span>
                 <span class='f-14 list-content-top-l' style="text-align:right;float:right;">{{util.formatTime(oitem.createTime,"yyyy-MM-dd hh:mm")}}</span>
               </div>
               <div class='list-content-btm' style="margin: 0  0  0 10rpx;width:96%;">
-                <span class='f-14' wx:for="{{oitem.productsName}}" wx:for-item="pitem" wx:key="pitem">{{index==0?pitem:'、'+pitem}}</span>
+                <span wx:if="{{oitem.consultType!=3}}" class='f-14' wx:for="{{oitem.productsName}}" wx:for-item="pitem" wx:key="pitem">{{index==0?pitem:'、'+pitem}}</span>
+                 <span wx:if="{{oitem.consultType==3}}" class='f-14' wx:for="{{oitem.giftsName}}" wx:for-item="pitem" wx:key="pitem">{{index==0?pitem:'、'+pitem}}</span>
                 <span class='f-14' style="text-align:right;float:right;">{{oitem.shareNum?oitem.shareNum:0}}人</span>
               </div>
             </div>
@@ -231,19 +232,26 @@
       <span style="{{menuType?'color:#999999;':'color:#8F82E8;'}}">分享</span>
     </div>
   </view>
-  <!--
-  <div class='add-but'>
-    <div style="display:block;height:150rpx;text-align:left;vertical-align:middle;">
-      <image style="vertical-align:middle;" class='add-img'  src='../../public/images/clue-more.png'></image>
-      <span style="vertical-align:middle;margin-left:20rpx;">敬请期待</span>
-    </div>
-    <div style="display:block;height:150rpx;text-align:left;vertical-align:middle;">
-      <image style="vertical-align:middle;" class='add-img' src='../../public/images/clue-anli.png'></image>
-      <span style="vertical-align:middle;margin-left:20rpx;">分享案例</span>
+ 
+  <div   bindtap='navToCancel'  class='add-but' style="display:{{showChoose?'':'none'}}">
+    <div style="display:block;height:25%;width:100%;background-color:#F1F1F1;position:absolute;bottom:0rpx;">
+        <div  bindtap='navToCase' style='width:50%;height:80%;display:inline-block;text-align:right;position:relative; overflow:hidden;'>
+          <div style="position:absolute;right:80rpx;top:20rpx;">
+              <image class='add-img' src='../../public/images/nav-case.png'></image>
+          </div>
+          <div style="position:absolute;right:100rpx;top:60rpx;">案例分享</div>
+        </div>
+        <div  bindtap='navToGift' style='width:50%;height:80%;display:inline-block;text-align:right;position:relative; overflow:hidden;'>
+          <div style="position:absolute;left:80rpx;top:20rpx;">
+              <image class='add-img' src='../../public/images/nav-gift.png'></image>
+          </div>
+          <div style="position:absolute;left:100rpx;top:60rpx;">到店有礼</div>
+        </div>
+       <div  bindtap='navToCancel'  style='position:absolute;bottom:0rpx;left:0px;width:100%;height:80rpx;text-align:center;'>
+            <div style="position:absolute;bottom:-75rpx;left:48%; font-size:30rpx;">✖</div> 
+       </div>
     </div>
   </div>
--->
-
 </view>
 
 <!--没权限默认页-->
@@ -332,7 +340,7 @@
         </view>
         <view class='f-16'>
 
-        <picker   disabled="{{currentClue.clueStatus==1?false:true}}"  mode="date" value="{{linkMan.birthday}}" start="{{clueStartDate}}"   bindchange="linkchangeage">
+        <picker   disabled="{{currentClue.clueStatus==1?false:true}}"  mode="date" value="{{linkMan.birthday}}"    bindchange="linkchangeage">
           <view style="width:240rpx;height:60rpx;line-height:60rpx;text-align:center;">
             {{linkMan.birthday}}
           </view>

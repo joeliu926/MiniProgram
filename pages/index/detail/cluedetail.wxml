@@ -76,7 +76,7 @@
       <view class="line"></view>
       <!--轨迹item 测试-->
       <view class="interact-item" wx:for="{{interactlist}}" wx:for-item="item" wx:key="index" style="display:{{item.code=='informationSubmit'?'none':'block'}};">
-        <!--图标和时间  -->
+        <!--图标和时间  left-->
         <div class="cnt-interact-imgdiv">
           <div class='cnt-item-time' style="background:{{item.type == 1 ?'#8088f6':'#4cb0ff'}}; ">
             <text style="margin-left:20rpx;font-size:30rpx; ">{{util.formatTime(item.time,"hh:mm")}}</text>
@@ -84,52 +84,90 @@
           </div>
           <!--分享案例  -->
           <view class='photopic' bindtap="sharecase" style="display:{{item.code=='appShare'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-tap.png"></image>
           </view>
           <!--浏览案例  -->
           <view class='photopic' bindtap="caseview" style="display:{{item.code=='appOpen'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-tap.png"></image>
           </view>
           <!--喜欢案例  -->
           <view class='photopic' data-caseId="{{item.caseId}}" data-customerName="{{item.customerName}}" bindtap="likecase" style="display:{{item.code=='caseLike'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-like.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-like.png"></image>
           </view>
           <!--添加备注  -->
           <view class='photopic' bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-remark.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-remark.png"></image>
           </view>
           <!--授权手机号  -->
           <view class='photopic' data-num="{{item.phoneNumber}}" bindtap='' style="display:{{item.code=='authPhone'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-mobile.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-mobile.png"></image>
           </view>
+<!-- *****************新增线索事件start******************************** -->
+           <!--浏览==礼品  -->
+          <view class='photopic' bindtap="opengift" style="display:{{item.code=='openGift'?'block':'none'}}">
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-tap.png"></image>
+          </view>
+            <!--领取==礼品  -->
+          <view class='photopic' data-giftid="{{item.giftId}}" bindtap='getgift' style="display:{{item.code=='getGift'?'block':'none'}}"> 
+            <image style="width:70rpx;height:70rpx" src="../../../public/images/gift.png"></image>
+          </view> 
+          <!-- 分享了礼品  style="display:{{item.code=='giftSend'?'block':'none'}}"-->
+           <!-- <view class='photopic' data-giftid="{{item.giftId}}" bindtap='getgift' style="display:none"> 
+            <image style="width:70rpx;height:70rpx" src="/public/images/gift.png"></image>
+          </view>  -->
+<!-- *****************新增线索事件end  ******************************** -->
           <!--跟新关键信息  -->
           <view class='photopic' bindtap='editmsg' style="display:{{item.code=='contactEdit'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-editpeople.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-editpeople.png"></image>
           </view>
           <!-- 预约 -->
           <view class='photopic' bindtap="bookOption" style="display:{{item.code=='reserve'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-book.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-book.png"></image>
           </view>
           <!-- 上传图片 -->
-          <view class='photopic' data-urls="{{item.imgUrls}}" data-src='../../../public/images/icon-pic.png' bindtap="previewImage" style="display:{{item.code=='photoUpload'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-pic.png"></image>
+          <view class='photopic' data-urls="{{item.imgUrls}}" data-src='/public/images/icon-pic.png' bindtap="previewImage" style="display:{{item.code=='photoUpload'?'block':'none'}}">
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-pic.png"></image>
           </view>
           <!--退出案例  -->
           <view class='photopic' bindtap="jumpcase" style="display:{{item.code=='appQuit'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-tap.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-tap.png"></image>
           </view>
           <!-- 关闭案例 -->
           <view class='photopic' bindtap="colsecase" style="display:{{item.code=='leadClose'?'block':'none'}}">
-            <image style="width:70rpx;height:70rpx" src="../../../public/images/icon-close.png"></image>
+            <image style="width:70rpx;height:70rpx" src="/public/images/icon-close.png"></image>
           </view>
         </div>
-        <!--具体轨迹信息  -->
+
+
+
+        <!--具体轨迹信息   right -->
         <div class='cnt-item-txt'>
           <div>
             <!--分享案例 style="display:{{item.code=='appShare'?'block':'none'}}" -->
             <view class='cnt-item-text' style="display:{{item.code=='appShare'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="sharecase"> {{item.userName}} 分享了 案例</view>
             <!--浏览案例  -->
             <view class='cnt-item-text' style="display:{{item.code=='appOpen'?'block':'none'}}" data-caseId="{{item.clueId}}" data-customerName="{{item.customerName}}" bindtap="caseview">浏览了 {{item.userName}} 分享的 案例</view>
+<!-- *******************新增线索事件 内容start*******************************************  -->
+
+             <!--浏览礼品  -->
+          <view class='cnt-item-text' style="display:{{item.code=='openGift'?'block':'none'}}" data-giftid="{{item.giftId}}" data-customerName="{{item.customerName}}" bindtap="">
+              <view style="white-space: pre-wrap;padding-right: 10rpx;vertical-align:middle;margin-right: 40rpx; ">
+                <text style="vertical-align:middle;">浏览了 {{item.userName}} 分享的礼品</text>
+              </view>
+            </view>
+            <!--领取礼品  -->
+            <view style=" position:relative; display:{{item.code=='getGift'?'block':'none'}}">
+              <view class='cnt-item-text' data-giftid="{{item.giftId}}" data-customerName="{{item.customerName}}" bindtap="getgift">
+                <view style="white-space: pre-wrap;padding-right: 10rpx;vertical-align:middle;margin-right: 40rpx; ">
+                  <text style="vertical-align:middle;">领取了 {{item.userName}} 分享的礼品</text>
+                </view>
+                <span style=" position:absolute; top:0rpx;right:10rpx;" data-giftid="{{item.giftId}}">
+                  <image style="display:inline-block; vertical-align:middle; width:44rpx;height:44rpx;margin-top:5rpx;" src="../../../public/images/open.png">
+                  </image>
+                </span>
+              </view>
+            </view>
+<!-- ******************新增线索事件内容  end    ******************************* -->
             <!--喜欢案例  -->
             <view style=" position:relative; display:{{item.code=='caseLike'?'block':'none'}}">
               <view class='cnt-item-text' data-caseId="{{item.caseId}}" data-customerName="{{item.customerName}}" bindtap="likecase">
@@ -142,16 +180,16 @@
                 </span>
               </view>
             </view>
-
             <!--添加备注  -->
             <view class='cnt-item-text' class='cnt-item-text' bindtap='' style="display:{{item.code=='noteAdd'?'block':'none'}}">
               <text style="">被  {{item.userName}} 添加了  备注</text>
               <view style="display:block; color:#8088f6; margin-top:10rpx;white-space: pre-wrap;padding-right: 20px;text-align:left;">{{item.remark}}</view>
             </view>
             <!--授权手机号  -->
-            <view class='cnt-item-text' style="display:{{item.code=='authPhone'?'block':'none'}}">授权了 手机号
+            <view class='cnt-item-text' style="display:{{item.code=='authPhone'?'block':'none'}}">授权了 手机号{{item.desc}}
               <view style="color:#8088f6; margin-top:20rpx;" data-num='{{item.phoneNumber}}' bindtap='callhim'>{{item.phoneNumber}}</view>
             </view>
+            
             <!--更新关键信息  -->
             <view class='cnt-item-text' style="display:{{item.code=='contactEdit'?'block':'none'}}" bindtap="editmsg">被 {{item.userName}} 更新了 关键信息</view>
             <!--预约信息  -->

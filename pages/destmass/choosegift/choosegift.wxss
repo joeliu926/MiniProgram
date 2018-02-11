@@ -17,3 +17,7 @@
 .d-date{
   padding: 20rpx 0;
 }
+.no-data-img{
+  width: 364rpx;
+   height: 252rpx;
+}

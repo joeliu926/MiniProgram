@@ -3,7 +3,7 @@
     <view class='b-s flex-c fx-jc-sb item-mass'>
       <view class='b-s item-type'>
         <image class='item-img' mode="aspectFill" src='/public/images/no-phone-group.png'></image>
-        <text class=' f-16 item-type'>无手机号人群</text>
+        <text class=' f-16 item-type'>3天内互动过无手机号人群</text>
       </view>
       <text class='f-14 item-type'>{{noPhoneCount}}人</text>
     </view>
@@ -20,6 +20,6 @@
 
 
 <view class='flex-c w-10 b-s  com-bottom-ct'>
-      <view class='f-14 flex-c note-ct'><icon class='n-icon' style='' type="info_circle" size="20" color="green"/>为防止造成客户骚扰，排除m天内已发送过n客户</view>
+      <view wx:if="{{oMn.n>0}}" class='f-14 flex-c note-ct'><icon class='n-icon' style='' type="info_circle" size="20" color="green"/>已排除{{oMn.m}}天内发送过{{oMn.n}}个客户</view>
       <view class='f-14 b-s t-a-c com-btn-txt' bindtap='fSendGift'>发送</view>
    </view>

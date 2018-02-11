@@ -12,7 +12,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let _This=this;
+    _This.setData({
+      unionId: options.unionId
+    });
   },
 
   /**
@@ -75,9 +78,8 @@ Page({
    * 查看诊所地图
    */
   fGoToMap(){
-   console.log("go to map");
    wx.navigateTo({
-     url: '/pages/client/ccase/clinicmap/clinicmap',
+     url: '/pages/client/ccase/clinicmap/clinicmap?unionId=' + this.data.unionId,
    })
   }
 })

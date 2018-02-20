@@ -15,7 +15,7 @@ App({
    * 获取用户登录信息
    */
  getUserData:function(callback){
-
+ let _This=this;
    if (this.globalData.userInfo&&this.globalData.userInfo.unionId){
      if (callback) {
       // console.log("exist-------->");
@@ -24,17 +24,13 @@ App({
      return false;
    };
   // console.log("data not exist------>");
-   this.fGetSessionKey(true,function (sessionKey){
+   _This.fGetSessionKey(true,function (sessionKey){
      //console.log("sessionKey------>", sessionKey);
-     wxPromise(wx.getUserInfo)().then(resUserInfo =>{
-       var encryptedData = resUserInfo.encryptedData;
-       var iv = resUserInfo.iv;
-       var postData = {
-         encryptedData: encryptedData,
-         sessionKey: sessionKey, iv: iv
-       };
-       return wxRequest(wxaapi.unionid.userinfo.url, postData);
-     }).then(resAll => {
+     _This.fAuthUserData(sessionKey).then(resAll => {
+      // console.log("resAll------>", resAll);
+       if (!resAll){
+         return false;
+       }
        getApp().globalData.userInfo = resAll.data.userinfo;
        if (callback) {
          callback(resAll.data.userinfo);
@@ -42,6 +38,29 @@ App({
      });
    });
 
+ },
+ /**
+  * 用户授权用户信息
+  */
+ fAuthUserData(sessionKey){
+   let _This=this;
+  return wxPromise(wx.getUserInfo)().then(resUserInfo => {
+     //console.log("----------resUserInfo-----------", resUserInfo);
+     if (resUserInfo.errMsg.indexOf("ok") < 0) {
+       wxPromise(wx.openSetting)().then(settingResult => {
+         //console.log("settingResult------", settingResult);
+         return _This.fAuthUserData(sessionKey);
+       });
+     }else{
+       var encryptedData = resUserInfo.encryptedData;
+       var iv = resUserInfo.iv;
+       var postData = {
+         encryptedData: encryptedData,
+         sessionKey: sessionKey, iv: iv
+       };
+       return wxRequest(wxaapi.unionid.userinfo.url, postData);
+     }
+   })
  },
  /**
   * 获取sessionKey

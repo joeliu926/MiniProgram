@@ -363,11 +363,21 @@ Page({
     * 页面相关事件处理函数--监听用户下拉动作
     */
   onPullDownRefresh: function () {
+    let _This = this;
+    getApp().getUserData(function (result) {
+      _This.fGetCUserInfo(result.unionId);
+      _This.setData({
+        oUInfo: result,
+        oEvent: event.oEvent
+      });
+      //_This.getClueList();
+     // _This.getShareList();
+    });
     wx.stopPullDownRefresh();
 
-    let _this = this;
+    //let _This = this;
     setTimeout(function () {
-      _this.pullRefresh();
+      _This.pullRefresh();
 
     }, 1000);
 

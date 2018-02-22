@@ -3,7 +3,6 @@ const wxRequest = require('./utils/js/wxRequest.js');
 const wxPromise = require('./utils/js/wxPromise.js');
 App({
   onLaunch: function (options) {
-    //this.getUserData(); 
     console.log("onlaunch------>", options);
   },
   globalData: {
@@ -27,12 +26,14 @@ App({
    _This.fGetSessionKey(true,function (sessionKey){
      //console.log("sessionKey------>", sessionKey);
      _This.fAuthUserData(sessionKey).then(resAll => {
-      // console.log("resAll------>", resAll);
+       //console.log("resAll------>", resAll);
        if (!resAll){
+         callback({});
          return false;
        }
        getApp().globalData.userInfo = resAll.data.userinfo;
        if (callback) {
+        // console.log("auth----end---", resAll.data.userinfo);
          callback(resAll.data.userinfo);
        }
      });
@@ -55,10 +56,14 @@ App({
       wxPromise(wx.showModal)(authData).then(ares=>{
          if (ares.confirm) {
            wxPromise(wx.openSetting)().then(settingResult => {
+             if (settingResult.authSetting["scope.userInfo"]){
+               getApp().globalData.reauth=true;
+             }
              return _This.fAuthUserData(sessionKey);
            });
          } else {
-           return _This.fAuthUserData(sessionKey);
+           console.log("user cancel------");
+           //return _This.fAuthUserData(sessionKey);
          }
        });
      }else{

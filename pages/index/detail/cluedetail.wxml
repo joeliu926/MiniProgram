@@ -207,7 +207,7 @@
                 <image src="../../../public/images/picture.png" style="width:44rpx;height:44rpx;vertical-align:middle;"></image>
               </view>
               <span style="vertical-align:middle; position:absolute; top:0rpx;right:10rpx;">
-                <image style="width:44rpx;height:44rpx; vertical-align:middle;" src="../../../public/images/open.png">
+                <image style="width:44rpx;height:44rpx; vertical-align:middle;" src="/public/images/open.png">
                 </image>
               </span>
             </view>

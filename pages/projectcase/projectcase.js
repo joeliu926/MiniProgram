@@ -32,6 +32,8 @@ Page({
     getApp().getUserData(function (uinfo) {
       uinfo && _This.getProjectList(uinfo.unionId);
     });
+    //wx.hideLoading();
+    //console.log("-------222222222222---------->");
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

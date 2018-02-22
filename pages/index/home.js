@@ -364,14 +364,12 @@ Page({
     */
   onPullDownRefresh: function () {
     let _This = this;
-    getApp().getUserData(function (result) {
-      _This.fGetCUserInfo(result.unionId);
-      _This.setData({
-        oUInfo: result,
-        oEvent: event.oEvent
-      });
-      //_This.getClueList();
-     // _This.getShareList();
+    let oUInfo= _This.data.oUInfo;
+     (!oUInfo.unionId)&&getApp().getUserData(function (result) {
+       _This.fGetCUserInfo(result.unionId);
+       _This.setData({
+         oUInfo: result
+       });
     });
     wx.stopPullDownRefresh();
 
@@ -1026,7 +1024,9 @@ Page({
         _This.setData({
           showData: 1
         });
-        wx.setNavigationBarTitle({ title: '欢颜小助手' })
+        wx.setNavigationBarTitle({ title: '欢颜小助手' });
+      }else{
+        (_This.data.showData==1)&&_This.setData({showData:0});
       }
     });
   },

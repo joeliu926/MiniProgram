@@ -47,9 +47,19 @@ App({
   return wxPromise(wx.getUserInfo)().then(resUserInfo => {
      //console.log("----------resUserInfo-----------", resUserInfo);
      if (resUserInfo.errMsg.indexOf("ok") < 0) {
-       wxPromise(wx.openSetting)().then(settingResult => {
-         //console.log("settingResult------", settingResult);
-         return _This.fAuthUserData(sessionKey);
+      let authData={
+        title: '微信授权',
+        content: '为能正常使用小程序，请授权您的公开信息(昵称、头像等)',
+        confirmText: "去授权"
+      };
+      wxPromise(wx.showModal)(authData).then(ares=>{
+         if (ares.confirm) {
+           wxPromise(wx.openSetting)().then(settingResult => {
+             return _This.fAuthUserData(sessionKey);
+           });
+         } else {
+           return _This.fAuthUserData(sessionKey);
+         }
        });
      }else{
        var encryptedData = resUserInfo.encryptedData;

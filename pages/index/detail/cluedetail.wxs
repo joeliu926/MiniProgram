@@ -1,18 +1,20 @@
 var trailImage = function (param) {
   var imgIcon = "";
   switch (param) {
-    case "appShare": imgIcon = "/public/images/icon-tap.png"; break;
-    case "appOpen": imgIcon = "/public/images/icon-tap.png"; break;
-    case "caseLike": imgIcon = "/public/images/icon-like.png"; break;
-    case "noteAdd": imgIcon = "/public/images/icon-remark.png"; break;
-    case "authPhone": imgIcon = "/public/images/icon-mobile.png"; break;
-    case "openGift": imgIcon = "/public/images/icon-tap.png"; break;
-    case "getGift": imgIcon = "/public/images/gift.png"; break;
-    case "contactEdit": imgIcon = "/public/images/icon-editpeople.png"; break;
-    case "reserve": imgIcon = "/public/images/icon-book.png"; break;
-    case "photoUpload": imgIcon = "/public/images/icon-pic.png"; break;
-    case "appQuit": imgIcon = "/public/images/icon-tap.png"; break;
-    case "leadClose": imgIcon = "/public/images/icon-close.png"; break;
+    case "appShare": imgIcon = "/public/images/icon-tap.png"; break;//咨询师分享
+    case "appOpen": imgIcon = "/public/images/icon-tap.png"; break;//打开小程序
+    case "caseLike": imgIcon = "/public/images/icon-like.png"; break;//喜欢不喜欢案例
+    case "photoUpload": imgIcon = "/public/images/icon-pic.png"; break; //照片上传
+    case "informationSubmit": imgIcon = ""; break; //信息提交
+    case "appQuit": imgIcon = "/public/images/icon-tap.png"; break; //退出程序+
+    case "noteAdd": imgIcon = "/public/images/icon-remark.png"; break;//添加备注+
+    case "reserve": imgIcon = "/public/images/icon-book.png"; break;//预约+
+    case "contactEdit": imgIcon = "/public/images/icon-editpeople.png"; break;//编辑联系人+
+    case "leadClose": imgIcon = "/public/images/icon-close.png"; break;//关闭联系人线索+
+    case "authPhone": imgIcon = "/public/images/icon-mobile.png"; break;//授权手机号+
+    case "giftSend": imgIcon = "/public/images/gift.png"; break; //群发有礼
+    case "openGift": imgIcon = "/public/images/icon-tap.png"; break;//浏览礼品
+    case "getGift": imgIcon = "/public/images/gift.png"; break; ///领取礼品 
     default: break;
   }
   return imgIcon;

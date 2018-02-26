@@ -197,6 +197,7 @@
   <view style='display:{{clueListOther.length==0&&menuType&&currentSelect==1?"":"none"}}'>
     <div class="list-none">
       <div class="list-none-div">
+         
           <image style="vertical-align:middle;" class='nodata-img' src='../../public/images/no_data.png'></image>
       </div>
     </div>

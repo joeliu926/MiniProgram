@@ -5,7 +5,7 @@ function wxRequest() {
  var oParams = {
    header: {
      'Content-Type': 'application/json;charset=UTF-8',
-     'v':"1.0"
+     'v':"4.0"
    },
  };
  if (aArguments.length==1){

@@ -410,10 +410,7 @@ Page({
     wx.stopPullDownRefresh();
 
     //let _This = this;
-    setTimeout(function () {
-      _This.pullRefresh();
-
-    }, 1000);
+    _This.pullRefresh();
 
   },
   pullRefresh() {
@@ -529,6 +526,7 @@ Page({
   //待跟进
   followOption(params) {
     let remark = params.currentTarget.dataset.obj;
+    let _This =this;
     let pdata = {
       clueId: remark.id,
     };
@@ -539,6 +537,8 @@ Page({
           icon: 'success',
           duration: 2000
         });
+
+        _This.pullRefresh();
       }
    
     });
@@ -834,9 +834,9 @@ Page({
         break;
       case "2":
         this.setData({
-          showChoose: true
+          showChoose: true,
+          isfristTime: false
         });
-
         wx.setStorageSync('isfirsttime', false);
         break;
       case "3":
@@ -1078,6 +1078,11 @@ Page({
     wxRequest(wxaapi.index.cluelist.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         let getArray = result.data.data.list;
+
+        if (getArray.length>0){
+          _This.setData({ isfristTime: false });
+        }
+
         getArray.forEach(m => {
           let slist = [];
           m.productList.forEach((sm, index) => {

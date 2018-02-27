@@ -1,7 +1,5 @@
 var gConfig={
-
-  remoteWx: "https://nihaomc.com/wx_test",
- 
+  remoteWx: "https://nihaomc.com/wx_dev",
   remote: "https://nihaomc.com/wxa_dev",
   uploadUrl: "https://nihaomc.com/uploadimg_dev/attachment/upload"
 }
@@ -186,6 +184,9 @@ var urlConfig = {
     },
     linkman: {
       url: gConfig.remote + "/index/linkman"   //联系人信息
+    },
+    waitflow: {
+      url: gConfig.remote + "/index/waitflow"   //待跟进
     }
   },
   posterinfo:{

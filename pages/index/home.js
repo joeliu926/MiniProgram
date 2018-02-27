@@ -11,14 +11,16 @@ Page({
     cluereMark: "",//线索备注
     clueClose: "",//关闭备注
     autoFocus: false,
-    selectItem: [{ id: 0, text: '智能推荐', val: true }, { id: 2, text: '已预约', val: false }, { id: 1, text: '其它', val: false }],
+    selectItem: [{ id: 0, text: '新潜客', val: true }, { id: 3, text: '再跟进', val: false }, { id: 2, text: '已预约', val: false }, { id: 1, text: '其它', val: false }],
     currentSelect: 0,//当前tab 已选择内容
+    moreItem_rp: ['备注','编辑客户', '不再跟进'], //更多弹出选项
     moreItem: ['编辑客户', '不再跟进'], //更多弹出选项
     menuType: true,//菜单类型 //true左 fase 右
     shareList: [],
     clueList: [],
     clueListOther: [],
     clueListOrder: [],
+    followList:[],
     oUInfo: {},
     showData: 0,
     clueNo: 1,
@@ -27,6 +29,8 @@ Page({
     clueCountOther: 0,
     clueNoOrder: 1,
     clueCountOrder: 0,
+    clueNoFollow: 1,
+    clueCountFollow: 0,
     shareNo: 1,
     shareCount: 0,
     pageSize: 10,
@@ -52,7 +56,8 @@ Page({
     moreWidth: 365,
     startX: 0,
     startY: 0,
-    showChoose:false
+    showChoose:false,
+    isfristTime:true
   },
   //移动开始
   touchS: function (e) {
@@ -114,6 +119,9 @@ Page({
         case 2:
           list = this.data.clueListOrder;
           break;
+        case 3:
+          list = this.data.followList;
+          break;
       } 
    
       if (list[index].txtStyle == 'left:0rpx;' || !list[index].txtStyle) {
@@ -137,6 +145,11 @@ Page({
         case 2:
           this.setData({
             clueListOrder: list
+          });
+          break;
+        case 3:
+          this.setData({
+            followList: list
           });
           break;
       }
@@ -165,6 +178,9 @@ Page({
         case 2:
           list = this.data.clueListOrder;
           break;
+        case 3:
+          list = this.data.followList;
+          break;
       } 
  
       if (list[index].txtStyle == 'left:0rpx;' || !list[index].txtStyle) {
@@ -192,6 +208,9 @@ Page({
       case 2:
         list = this.data.clueListOrder;
       break;
+      case 3:
+        list = this.data.followList;
+        break;
     } 
     if (diraction == 'left') {
       list[index].txtStyle = "left:-365rpx;";
@@ -223,6 +242,12 @@ Page({
           startX: 0
         });
         break;
+      case 3:
+        this.setData({
+          followList: list,
+          startX: 0
+        });
+        break;
     } 
     return;
   },
@@ -230,6 +255,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let _This = this;
+    wx.getStorage({
+      key: 'isfirsttime',
+      success: function (res) {
+        _This.setData({
+          isfristTime: false
+        })
+      }
+    });
+
     if (options.type && options.type == 'share') {
       this.menuClick({
         currentTarget: {
@@ -240,7 +275,7 @@ Page({
     if (options.init) {
       // getApp().globalData.flag=false;
     }
-    var _This = this;
+ 
     getApp().getUserData(function (result) {
       _This.fGetCUserInfo(result.unionId);
       _This.setData({
@@ -250,6 +285,7 @@ Page({
       _This.getClueList();
       _This.getShareList();
     });
+
   },
 
   /**
@@ -490,6 +526,23 @@ Page({
       currentClue: remark
     });
   },
+  //待跟进
+  followOption(params) {
+    let remark = params.currentTarget.dataset.obj;
+    let pdata = {
+      clueId: remark.id,
+    };
+    wxRequest(wxaapi.index.waitflow.url, pdata).then(function (result) {
+      if (result.data.code == 0) {
+        wx.showToast({
+          title: '设置成功！',
+          icon: 'success',
+          duration: 2000
+        });
+      }
+   
+    });
+  },
   //提交备注
   submitRemark(params) {
     if (this.data.cluereMark.length < 1) {
@@ -591,16 +644,18 @@ Page({
   },
   //提交联系人
   submitLinkman(params) {
-    if (!this.data.linkMansubmit || this.data.currentClue.clueStatus != 1) {
+    if (!this.data.linkMansubmit) {
       return
     }
     let remark = this.data.currentClue;
-    if (remark.clueStatus != 1) {
-      this.alertMessage("已预约客户不可以编辑！", 'yellow');
-      return;
-    }
+
     if (remark.clueStatus == 5) {
       this.alertMessage("已关闭客户不可以编辑！", 'yellow');
+      return;
+    }
+
+    if (remark.clueStatus != 1) {
+      this.alertMessage("已预约客户不可以编辑！", 'yellow');
       return;
     }
     let _This = this;
@@ -659,6 +714,11 @@ Page({
         this.setData({
           clueListOrder: [],
           clueNoOrder: 1
+        });
+      case 3:
+        this.setData({
+          followList: [],
+          clueCountFollow: 1
         });
         break;
     }
@@ -745,7 +805,6 @@ Page({
       linkMan: _linkman
     });
   },
-
   //
   navToCase(params){
     wx.navigateTo({
@@ -777,6 +836,8 @@ Page({
         this.setData({
           showChoose: true
         });
+
+        wx.setStorageSync('isfirsttime', false);
         break;
       case "3":
         this.setData({
@@ -857,6 +918,91 @@ Page({
         break;
     }
   },
+
+  //线索更多点击
+  bindPickerChange_rp(params) {
+    let remark = params.currentTarget.dataset.obj;
+    this.setData({
+      currentClue: remark
+    });
+    let reobj = params.currentTarget.dataset.obj;
+    switch (params.detail.value) {
+      case "0":
+        if (reobj.clueStatus == 5) {
+          this.alertMessage("关闭客户不可以备注！", 'yellow');
+          return;
+        }
+        if (reobj.clueStatus == 7) {
+          this.alertMessage("已成交客户不可以备注！", 'yellow');
+          return;
+        }
+        this.setData({
+          showData: 3
+        });
+      break;
+      case "1":
+        this.setData({
+          showData: 4
+        });
+        let remark = this.data.currentClue;
+        let _This = this;
+        let pdata = {
+          "id": remark.customerId
+        };
+        wxRequest(wxaapi.index.linkman.url, pdata).then(function (result) {
+          if (result.data.code == 0) {
+            let getobj = result.data.data;
+            let linkman = {
+              "id": getobj.id,
+              "name": getobj.name,//name
+              "phoneNum": getobj.phoneNum,//phoneNum
+              "gender": getobj.gender,//gender
+              "wechatNum": getobj.wechatNum,//wechatNum
+              "wechatMobile": getobj.wechatMobile,//wechatMobile
+              "birthday": getobj.birthday
+            }
+
+            let sexitems = [
+              { name: '男', value: 1 },
+              { name: '女', value: 2, checked: true }
+            ];
+
+            if (getobj.gender == 1) {
+              sexitems = [
+                { name: '男', value: 1, checked: true },
+                { name: '女', value: 2, checked: false }
+              ];
+            }
+            linkman.phoneNum = linkman.wechatMobile ? linkman.wechatMobile : linkman.phoneNum;
+
+            _This.setData({
+              linkMan: linkman,
+              sexitems: sexitems
+            });
+            _This.regixlinkman('init');
+          }
+        });
+        break;
+      case "2":
+  
+        if (reobj.clueStatus == 5) {
+          this.alertMessage("已关闭！", 'yellow');
+          return;
+        }
+
+        if (reobj.clueStatus != 1) {
+          this.alertMessage("已预约客户不可以关闭！", 'yellow');
+          return;
+        }
+        this.setData({
+          showData: 5
+        });
+        break;
+      case "2":
+
+        break;
+    }
+  },
   //验证联系人
   regixlinkman(params) {
 
@@ -915,7 +1061,12 @@ Page({
       case 2:
         _pageNo = this.data.clueNoOrder;
       break;
+      case 3:
+        _pageNo = this.data.clueNoFollow;
+        break;
     }
+    //    clueNoFollow: 1,
+   // clueCountFollow: 0,
 
     let pdata = {
       userUnionId: _This.data.oUInfo.unionId || "",
@@ -962,6 +1113,9 @@ Page({
           case 2:
             _This.setData({ clueListOrder: _This.data.clueListOrder.concat(getArray) });
             _This.setData({ clueCountOrder: result.data.data.count });
+          case 3:
+            _This.setData({ followList: _This.data.followList.concat(getArray) });
+            _This.setData({ clueCountFollow: result.data.data.count });
             break;
         }
 
@@ -1085,7 +1239,4 @@ Page({
       } 
     });
   }
-
-
-
 })

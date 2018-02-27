@@ -9,7 +9,6 @@ Page({
     clueDetail: {},
     clueName: '',
     clueStage: '',
-    dddddd: "../../../public/images/icon-tap.png",
     remarklist: [{}],
     interactlist: [],
     bookName: '',
@@ -18,7 +17,9 @@ Page({
     asShow: 'false',
     hide: 'flase',
     imgalist: [],
-    // imgalist: ["http://pic32.photophoto.cn/20140807/0005018763115153_b.jpg", "http://pic28.photophoto.cn/20130827/0005018371946994_b.jpg", "http://pic28.photophoto.cn/20130830/0005018667531249_b.jpg","http://pic8.nipic.com/20100801/387600_002750589396_2.jpg"],//测试数据
+    showData:0,//显示状态0 是显示线索，5是关闭线索
+    cluereMark:"",//提交备注
+    clueClose: "",//关闭备注
   },
   /**
    * 生命周期函数--监听页面加载
@@ -138,8 +139,10 @@ Page({
       id: params
     };
     wxRequest(wxaapi.index.cluedetail.url, pdata).then(function (result) {
+
+      console.log("result-----------", result);
+
       let resultobj = result.data.data;
-      // console.log("========1111111111111111111=======resultobj", resultobj);
       if (result.data.code == 0) {
         let cname = resultobj.customerName;
         if (!cname) {
@@ -313,5 +316,180 @@ Page({
       isshow: 'true',
 
     });
-  }
+  },
+  /**
+   * 备注用户
+   */
+  fRemark(){
+    console.log("remark data------------");
+    this.setData({
+      showData: 3
+    });
+  },
+  /**
+   * 点击再跟进
+   */
+  fFollowUp(){
+  console.log("follow up data");
+  },
+  /**
+   * 去预约
+   */
+  fGoToBook(){
+    this.bookOption();
+  },
+  /**
+   * 关闭线索
+   */
+  fCloseClue(){
+    let clueDetail = this.data.clueDetail;
+    if (clueDetail.clueStatus == 5) {
+      this.alertMessage("客户已是关闭状态！", 'yellow');
+      return;
+    }
+
+    if (clueDetail.clueStatus != 1) {
+      this.alertMessage("已预约客户不可以关闭！", 'yellow');
+      return;
+    }
+    this.setData({
+      showData:5
+    });
+  },
+/**
+ * 关闭文本框备注
+ */
+  closeinput(params) {
+    this.setData({
+      clueClose: params.detail.value
+    });
+  },
+  //关闭备注
+  submitClose(params) {
+
+    if (this.data.clueClose.length < 1) {
+      return;
+    }
+    let clueDetail = this.data.clueDetail;
+    let _This = this;
+    let pdata = {
+      "id": clueDetail.id
+    };
+    wxRequest(wxaapi.index.clueclose.url, pdata).then(function (result) {
+      //console.log("wxaapi.index.clueclose.url-----", result);
+      if (result.data.code == 0) {
+        let fpdata = {
+          "clueId": clueDetail.id,
+          "clueStage": clueDetail.clueStage,
+          "creater": clueDetail.creator,
+          "customerId": clueDetail.customerId,
+          "id": clueDetail.id,
+          "remark": _This.data.clueClose,
+          "userId": clueDetail.userId
+        };
+        return wxRequest(wxaapi.index.clueremark.url, fpdata);
+      }else{
+        return {data:{}};
+      }
+    }).then(function (result){
+      //console.log("wxaapi.index.clueremark.url-----", result);
+      if (result.data.code == 0) {
+        _This.closewindow();
+        wx.showToast({
+          title: '成功关闭',
+          icon: 'success',
+          duration: 2000
+        });
+        _This.initData(clueDetail.id);
+        //_This.fUserEvent(event.eType.leadClose);//关闭联系人
+      }
+    });
+  },
+  /**
+   * 关闭弹出框
+   */
+  closewindow(params) {
+    this.setData({
+      showData: 0,
+      autoFocus: false,
+      errorType: false,
+      cluereMark: "",
+      clueClose: ""
+    });
+  },
+  /**
+   * 备注文本框
+   */
+  remarkinput(params) {
+    this.setData({
+      cluereMark: params.detail.value
+    });
+  },
+  //提交备注
+  submitRemark(params) {
+    let clueDetail = this.data.clueDetail;
+    //console.log("------clueDetail--------", clueDetail);
+    if (this.data.cluereMark.length < 1) {
+      return;
+    }
+    let _This = this;
+    let pdata = {
+      "clueId": clueDetail.id,
+      "clueStage": clueDetail.clueStage,
+      "creater": clueDetail.creator,
+      "customerId": clueDetail.customerId,
+      "id": clueDetail.id,
+      "remark": this.data.cluereMark,
+      "userId": clueDetail.userId
+    };
+    wxRequest(wxaapi.index.clueremark.url, pdata).then(function (result) {
+      //console.log("添加备注------",result);
+      if (result.data.code == 0) {
+        _This.closewindow();
+
+        wx.showToast({
+          title: '备注成功',
+          icon: 'success',
+          duration: 2000
+        });
+       // _This.initInteract(); 
+      }
+    });
+  },
+  /**
+   * 编辑客户
+   */
+  fEditCustomer(){
+   //console.log("edit customer-----");
+   let clueDetail = this.data.clueDetail;
+   wx.navigateTo({
+     url: `/pages/index/editcustomer/editcustomer?customerId=${clueDetail.customerId}&clueStatus=${clueDetail.clueStatus}`,
+   })
+  },
+  /**
+   * 弹出消息
+   */
+  alertMessage(content, types, times = 3000) {
+    let color = "#F76260";
+    if (types == 1 || types == 'green') {
+      color = '#09BB07';
+    }
+    if (types == 2 || types == 'yellow') {
+      color = '#FFBE00';
+    }
+    if (types == 3 || types == 'red') {
+      color = ' #F76260';
+    }
+    this.setData({
+      errorMessage: content,
+      errorType: true,
+      errorColor: color
+    });
+    let _this = this;
+    setTimeout(function () {
+      _this.setData({
+        errorType: false
+      });
+    }, times);
+  },
 })

@@ -1,0 +1,64 @@
+<div class="err-msg" style="display:{{errorType?'block':'none'}}; background-color:{{errorColor}};">
+    {{errorMessage}}
+</div>
+
+<view class='h-ct w-10 edit-ct' style=''>
+  <div>
+    <view class='p-d-ct mg-b' style='background-color:white;'>
+      <view class='flex bk-c-w fx-jc-sb contect-line'>
+        <view class='f-16'>
+          姓名
+        </view>
+        <view class='f-16'>
+          <input name="name"   class='t-r' value="{{linkMan.name}}" placeholder-style='font-size:26rpx;color:#999999;' bindinput="flinkchangeName" bindblur="fValidateName" placeholder='填写姓名'></input>
+        </view>
+      </view>
+      <view class='flex bk-c-w fx-jc-sb contect-line'>
+        <view class='f-16'>
+          性别
+        </view>
+        <view class='f-16'>
+          <radio-group class="radio-group" bindchange="fradioChange">
+            <label class="radio" wx:for="{{sexitems}}" wx:for-item="oitem" wx:key="value">
+              <radio value="{{oitem.value}}" checked="{{oitem.checked}}" />{{oitem.name}}
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class='flex bk-c-w fx-jc-sb' style='margin:0 40rpx;padding:30rpx 0;'>
+        <view class='f-16'>
+          出生日期
+        </view>
+        <view class='f-16'>
+
+        <picker  mode="date" value="{{linkMan.birthday}}"    bindchange="flinkchangeAge">
+          <view style="width:240rpx;height:60rpx;line-height:60rpx;text-align:center;">
+            {{linkMan.birthday}}
+          </view>
+        </picker>
+        </view>
+      </view>
+    </view>
+    <view class='p-d-ct mg-b' style='background-color:white;'>
+      <view class='flex bk-c-w fx-jc-sb c-p-d contect-line'>
+        <view class='f-16'>
+          电话
+        </view>
+        <view class='f-16'>
+          <input  name="name" placeholder-style='font-size:24rpx;color:#999999;'    class='t-r' value="{{linkMan.phoneNum}}" bindinput="flinkchangePhone" bindblur='fValidatePhone' placeholder='输入电话'></input>
+        </view>
+      </view>
+      <view class='flex bk-c-w fx-jc-sb c-p-d' style='margin:0 40rpx;padding:30rpx 0;'>
+        <view class='f-16'>
+          微信
+        </view>
+        <view class='f-16'>
+          <input name="name" placeholder-style='font-size:26rpx;color:#999999;'  class='t-r' value="{{linkMan.wechatNum}}" bindinput="flinkchangeWechat" placeholder='输入微信'></input>
+        </view>
+      </view>
+    </view>
+    <div wx:if="{{options.clueStatus==1}}" class='submit-btn'>
+      <div style='{{linkMansubmit?"":"background:#E5E5E5;"}}'   bindtap='fSubmitLinkman'>提交</div>
+    </div>
+  </div>
+</view>

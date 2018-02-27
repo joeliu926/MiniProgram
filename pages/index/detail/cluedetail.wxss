@@ -1,3 +1,4 @@
+
 .page {
   width: 100%;
   margin-top: 0px;
@@ -10,32 +11,32 @@
   background-color: white;
   display: block;
 }
-
-.top-content {
-  margin: 0 30rpx 30rpx 30rpx;
-  padding: 30rpx;
-  display: block;
-  height: 200rpx;
-  background-color: #8088f6;
-  border-radius: 15rpx;
-  color: white;
-  font-size: 30rpx;
+.customer-edit{
+  position: absolute;
+  right: 40rpx;
+  top: 40rpx;
+  border: 1rpx solid #9080ed;
+  padding: 4rpx 40rpx;
+  color: #9083ed;
+  border-radius: 4rpx;
 }
 
-.top-imgdiv {
-  display: inline-block;
-  width: 20%;
-  line-height: 100rpx;
-  height: 200rpx;
-  text-align: center;
+.top-ct{
+ margin-bottom: 24rpx;
+}
+.sender-img{
+  width:32rpx;
+  height:32rpx;
   vertical-align: middle;
+  margin-left: 8rpx;
 }
+
 
 .top-img {
-  width: 100rpx;
-  height: 100rpx;
+  width: 120rpx;
+  height: 120rpx;
   vertical-align: middle;
-  border-radius: 100rpx;
+  border-radius: 120rpx;
   border: 2rpx solid #fff;
 }
 
@@ -50,25 +51,13 @@
 .top-span {
   background-color: #ffa92f;
   border-radius: 15rpx;
-  /* height: 30rpx; 
-  line-height: 30rpx;  */
-  overflow: hidden;
-  vertical-align: middle;
-  text-align: center;
   font-size: 22rpx;
-  padding: 0rpx 15rpx;
-  box-sizing: border-box;
+  color: #ffffff;
+  padding: 2rpx 15rpx;
+  margin: 4rpx 0;
 }
 
-.top-clineName {
-  margin-right: 30rpx;
-  vertical-align: middle;
-  max-width: 155px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: inline-block;
-}
+
 .makePhoto{
   width:100%;
    height:50rpx;
@@ -122,35 +111,30 @@
   font-size: 30rpx;
 }
 
-.top-cnt>div {
-  display: block;
-  padding-top: 30rpx;
-  font-size: 30rpx;
+.top-cnt-item{
+  margin: 8rpx 0;
+}
+.i-title{
+  width: 160rpx;
+  vertical-align: top;
+}
+.i-ct{
+ max-width: 520rpx;
+}
+.i-ct .i-product{
+  color: #9083ed;
+  padding-right: 24rpx;
 }
 
-.top-cnt>div image {
-  width: 35rpx;
-  height: 35rpx;
-  vertical-align: middle;
-  border: 5rpx solid #fff;
-}
 
-.top-cnt>div span {
-  border-radius: 25rpx;
-  font-size: 22rpx;
-  padding: 8rpx 18rpx 8rpx 18rpx;
-  border: 2rpx solid #8088f6;
-  color: #8088f6;
-  margin-right: 10rpx;
-  margin-bottom: 10rpx;
-  display: inline-block;
-}
+
 
 .cnt {
   display: block;
   margin-top: 20rpx;
   background-color: white;
   height: 100%;
+  padding-bottom: 120rpx;
 }
 
 .cnt-content {
@@ -364,3 +348,58 @@
   background: #fff;
   border-bottom: 1px solid #eee;
 }
+
+/****************底部导航 start*****************/
+.b-nav{
+  position:fixed;bottom:0;
+  width: 100%;
+  padding: 10rpx 0;
+  /*height: 100rpx;
+  line-height:100rpx;*/
+  z-index: 100;
+  border-top: 1rpx solid #eeeeee;
+}
+.bt-img{
+  width: 50rpx;
+  height: 50rpx;
+}
+/****************底部导航 end*****************/
+
+/***************关闭线索添加备注 start***************/
+.h-ct {
+  height: 100%;
+  background-color:white;
+  position:relative;
+}
+.close-wind{
+  position:absolute;right:20rpx;top:50rpx;width:40rpx;height:40rpx;font-size:50rpx;display: block;
+}
+.close-content{
+  margin: 0 auto;
+  padding: 10rpx 20rpx;
+  margin-bottom: 24rpx;
+  text-align: left;
+  height: 255rpx;
+  color: rebeccapurple;
+}
+.submit-btn {
+  padding: 10rpx 0rpx;
+  margin-bottom: 24rpx;
+  display: block;
+  text-align: center;
+}
+.submit-btn>div {
+  margin: 0 auto;
+  display: block;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  background: #9083ed;
+  color: #fff;
+  font-size: 40rpx;
+  width: 450rpx;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/***************关闭线索添加备注 end***************/

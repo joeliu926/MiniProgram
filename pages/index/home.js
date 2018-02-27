@@ -11,7 +11,7 @@ Page({
     cluereMark: "",//线索备注
     clueClose: "",//关闭备注
     autoFocus: false,
-    selectItem: [{ id: 0, text: '新潜客', val: true }, { id: 3, text: '再跟进', val: false }, { id: 2, text: '已预约', val: false }, { id: 1, text: '其它', val: false }],
+    selectItem: [{ id: 0, text: '新潜客', val: true }, { id: 3, text: '再跟进', val: false }, { id: 2, text: '已预约', val: false }, { id: 1, text: '已结束', val: false }],
     currentSelect: 0,//当前tab 已选择内容
     moreItem_rp: ['备注','编辑客户', '不再跟进'], //更多弹出选项
     moreItem: ['编辑客户', '不再跟进'], //更多弹出选项

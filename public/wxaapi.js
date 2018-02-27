@@ -3,7 +3,7 @@ var gConfig={
   remoteWx: "https://nihaomc.com/wx_test",
  
   remote: "https://nihaomc.com/wxa_dev",
-  uploadUrl: "https://nihaomc.com/uploadimg_test/attachment/upload"
+  uploadUrl: "https://nihaomc.com/uploadimg_dev/attachment/upload"
 }
 var urlConfig = {
   img:{

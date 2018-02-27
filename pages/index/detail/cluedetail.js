@@ -140,7 +140,7 @@ Page({
     };
     wxRequest(wxaapi.index.cluedetail.url, pdata).then(function (result) {
 
-      console.log("result-----------", result);
+      //console.log("result-----------", result);
 
       let resultobj = result.data.data;
       if (result.data.code == 0) {
@@ -189,7 +189,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let clueDetail = this.data.clueDetail;
+    this.initData(clueDetail.id);
   },
 
   /**
@@ -321,7 +322,6 @@ Page({
    * 备注用户
    */
   fRemark(){
-    console.log("remark data------------");
     this.setData({
       showData: 3
     });
@@ -330,7 +330,20 @@ Page({
    * 点击再跟进
    */
   fFollowUp(){
-  console.log("follow up data");
+  //待跟进
+    let clueDetail = this.data.clueDetail;
+    let pdata = {
+      clueId: clueDetail.id,
+    };
+    wxRequest(wxaapi.index.waitflow.url, pdata).then(function (result) {
+      if (result.data.code == 0) {
+        wx.showToast({
+          title: '设置成功！',
+          icon: 'success',
+          duration: 2000
+        });
+      }
+    });
   },
   /**
    * 去预约

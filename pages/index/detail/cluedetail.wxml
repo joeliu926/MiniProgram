@@ -14,8 +14,8 @@
       </view>
          <view>
            <text class="f-16">{{clueName}}</text>
-           <image wx:if="{{clueDetail.gender==1}}" class='sender-img' src='/public/images/man-icon.png' mode="aspectFit" style='' ></image>
-           <image wx:if="{{clueDetail.gender==2}}" class='sender-img' src='/public/images/women-icon.png' mode="aspectFit" style='' ></image>
+           <image wx:if="{{clueDetail.custGender==1}}" class='sender-img' src='/public/images/man-icon.png' mode="aspectFit" style='' ></image>
+           <image wx:if="{{clueDetail.custGender==2}}" class='sender-img' src='/public/images/women-icon.png' mode="aspectFit" style='' ></image>
          </view>
          
          <view>

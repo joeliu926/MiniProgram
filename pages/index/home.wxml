@@ -24,10 +24,11 @@
   <view style='display:{{menuType&&currentSelect==0?"block":"none"}};background-color:white;'>
     <view   wx:for="{{clueList}}" wx:for-item="oitem" wx:key="id" class="list">
       <div class="list-body"   style="{{oitem.txtStyle}}"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"  data-index="{{index}}">
-        <div class='list-img' bindtap='openItem' data-Obj='{{oitem}}'>
+        <div class='list-img' bindtap='openItem' data-Obj='{{oitem}}' style='position:relative;'>
           <div style='margin:10rpx 15rpx 0rpx 15rpx;display:block;'>
             <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/def-userimg.png"}}'></image>
           </div>
+          <div style='display:{{oitem.point?"":"none"}};background-color:red;border-radius:30rpx;position:absolute;top:0rpx;right:0rpx;width:4rpx;height:4rpx;'></div>
         </div>
         <div class="list-content" bindtap='openItem' data-Obj='{{oitem}}'>
           <div style='margin-left:10rpx;display:block;'>
@@ -43,9 +44,63 @@
       
             </div>
             <div class='list-content-btm'>
-              <span class='f-14'>
+              <span class='f-14' style="{{oitem.remark?'display:none':''}}">
                 <!-- 项目： -->
-                <span wx:for="{{oitem.productList}}" wx:for-item="pitem" wx:key="productCode">{{index==0?pitem.productName:'、'+pitem.productName}}</span>
+                  意向项目：<span wx:for="{{oitem.productList}}" wx:for-item="pitem" wx:key="productCode">{{index==0?pitem.productName:'、'+pitem.productName}}</span>
+              </span>
+
+              <span class='f-14' style="{{oitem.remark?'':'display:none'}}">
+                <!-- 项目： -->
+                  备注：<span>{{oitem.remark}}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class='more-btn' style='background-color:#CCCCCC;'>
+          <picker class='f-14' style='height:100%;' data-Obj='{{oitem}}' bindchange="bindPickerChange_rp" mode="selector" range="{{moreItem_rp}}">
+            <text class='f-14' style='color:white'>更多</text>
+          </picker>
+        </div>
+        <div class='more-btn' style='background-color:#2FAEFF;'>
+          <text bindtap='bookOption'  data-Obj='{{oitem}}'  class='f-14' style='color:white'>预约</text>
+        </div>
+        <div class='more-btn' style='background-color:#FFA92F;'>
+          <text bindtap='followOption' data-Obj='{{oitem}}'  class='f-14' style='color:white'>再跟进</text>
+        </div>
+      </div>
+    </view>
+    <view style='display:block;height:100rpx;background-color:white;margin-top:10rpx; font-size:26rpx;text-align:center;'>
+    </view>
+  </view>
+  <!--线索列表-再跟进-->
+  <view style='display:{{menuType&&currentSelect==3?"block":"none"}};background-color:white;'>
+    <view   wx:for="{{followList}}" wx:for-item="oitem" wx:key="id" class="list">
+      <div class="list-body"   style="{{oitem.txtStyle}}"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"  data-index="{{index}}">
+        <div class='list-img' bindtap='openItem' data-Obj='{{oitem}}'>
+          <div style='margin:10rpx 15rpx 0rpx 15rpx;display:block;'>
+            <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/def-userimg.png"}}'></image>
+          </div>
+        </div>
+        <div class="list-content" bindtap='openItem' data-Obj='{{oitem}}'>
+          <div style='margin-left:10rpx;display:block;'>
+            <div class="list-content-top" style="line-height:45rpx;" >
+              <span class='f-16 list-content-top-r' style="text-overflow:ellipsis;">{{oitem.customerName?oitem.customerName:oitem.customerWxNickname}}</span>
+              <span class="list-content-status">{{oitem.statusName}}</span>
+              <span style="{{oitem.source==3||oitem.source==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/cule-r.png'></image></span>
+              <span style="{{oitem.source==1?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;" src='../../public/images/clue-pyq.png'></image></span>
+              <span class='f-14 list-content-top-l' style="width:15%;float:right;vertical-align:middle;">
+              <span style="{{oitem.customerWechatMobile||oitem.customerPhoneNum?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;vertical-align:middle;" src='../../public/images/clue-ph.png'></image></span>
+              </span>
+            </div>
+                   <div class='list-content-btm'>
+              <span class='f-14' style="{{oitem.remark?'display:none':''}}">
+                <!-- 项目： -->
+                  意向项目：<span wx:for="{{oitem.productList}}" wx:for-item="pitem" wx:key="productCode">{{index==0?pitem.productName:'、'+pitem.productName}}</span>
+              </span>
+
+              <span class='f-14' style="{{oitem.remark?'':'display:none'}}">
+                <!-- 项目： -->
+                  备注：<span>{{oitem.remark}}</span>
               </span>
             </div>
           </div>
@@ -66,7 +121,6 @@
     <view style='display:block;height:100rpx;background-color:white;margin-top:10rpx; font-size:26rpx;text-align:center;'>
     </view>
   </view>
-
    <!--线索列表-已预约-->
   <view style='display:{{menuType&&currentSelect==2?"block":"none"}};background-color:white;'>
       <view class="list" wx:for="{{clueListOrder}}" wx:for-item="oitem" wx:key="id">
@@ -89,12 +143,17 @@
               </span>
       
             </div>
-              <div class='list-content-btm'>
-                <span class='f-14'>
-                  <!-- 项目： -->
-                  <span wx:for="{{oitem.productList}}" wx:for-item="pitem" wx:key="productCode">{{index==0?pitem.productName:'、'+pitem.productName}}</span>
-                </span>
-              </div>
+                       <div class='list-content-btm'>
+              <span class='f-14' style="{{oitem.remark?'display:none':''}}">
+                <!-- 项目： -->
+                  意向项目：<span wx:for="{{oitem.productList}}" wx:for-item="pitem" wx:key="productCode">{{index==0?pitem.productName:'、'+pitem.productName}}</span>
+              </span>
+
+              <span class='f-14' style="{{oitem.remark?'':'display:none'}}">
+                <!-- 项目： -->
+                  备注：<span>{{oitem.remark}}</span>
+              </span>
+            </div>
             </div>
           </div>
           <div class='more-btn' style='background-color:#CCCCCC;'>
@@ -136,12 +195,17 @@
               </span>
       
             </div>
-              <div class='list-content-btm'>
-                <span class='f-14'>
-                  <!-- 项目： -->
-                  <span wx:for="{{oitem.productList}}" wx:for-item="pitem" wx:key="productCode">{{index==0?pitem.productName:'、'+pitem.productName}}</span>
-                </span>
-              </div>
+                       <div class='list-content-btm'>
+              <span class='f-14' style="{{oitem.remark?'display:none':''}}">
+                <!-- 项目： -->
+                  意向项目：<span wx:for="{{oitem.productList}}" wx:for-item="pitem" wx:key="productCode">{{index==0?pitem.productName:'、'+pitem.productName}}</span>
+              </span>
+
+              <span class='f-14' style="{{oitem.remark?'':'display:none'}}">
+                <!-- 项目： -->
+                  备注：<span>{{oitem.remark}}</span>
+              </span>
+            </div>
             </div>
           </div>
           <div class='more-btn' style='background-color:#CCCCCC;'>
@@ -165,7 +229,9 @@
       <view class="list" style="background-color:white;"  wx:for="{{shareList}}" wx:for-item="oitem" wx:key="id">
         <div class="list-body" style="width:100%;" bindtap='openShare' data-Obj='{{oitem}}' >
           <div class="list-content" style="width:94%;margin:20rpx 20rpx 15rpx 20rpx;"   data-Id='{{oitem.id}}'>
-            <div style="padding-left:10rpx;margin: 20rpx  10rpx  10rpx 0;">
+              <div style='display:inline-block; width:15%;'>
+                <image class='cst-img' style='width:80rpx;height:80rpx;' src='{{oitem.consultType==3?"../../public/images/share_gift.png":"../../public/images/share_case.png"}}'></image>
+            </div><div style="display:inline-block; width:83%;">
               <div class="list-content-top">
                 <span class='f-16 list-content-top-r {{oitem.consultType==3?"":"f-c-9"}}'>{{oitem.consultType==3?'分享有礼':oitem.consultType==2?'海报':'案例分享'}}</span>
                 <span style="{{oitem.type==3||oitem.type==2?'':'display:none'}}"><image  style="width:40rpx;height:40rpx;margin-left:10rpx;" src='../../public/images/cule-r.png'></image></span>
@@ -186,7 +252,18 @@
     <view style='display:block;height:100rpx;background-color:white;margin-top:10rpx; font-size:26rpx;text-align:center;'>
     </view>
   </view>
+
+  <!--为空显示-->
   <view style='display:{{clueList.length==0&&menuType&&currentSelect==0?"":"none"}}'>
+    <div class="list-none">
+      <div class="list-none-div">
+          <image style="display:{{isfristTime?'none':''}};vertical-align:middle;" class='nodata-img' src='../../public/images/no_data.png'></image>
+          <span style="display:{{isfristTime?'':'none'}}">暂无潜客，去找找案例分享出去吧</span>
+      </div>
+    </div>
+  </view>
+
+  <view style='display:{{followList.length==0&&menuType&&currentSelect==3?"":"none"}}'>
     <div class="list-none">
       <div class="list-none-div">
           <image style="vertical-align:middle;" class='nodata-img' src='../../public/images/no_data.png'></image>
@@ -203,7 +280,7 @@
     </div>
   </view>
 
-    <view style='display:{{clueListOrder.length==0&&menuType&&currentSelect==2?"":"none"}}'>
+  <view style='display:{{clueListOrder.length==0&&menuType&&currentSelect==2?"":"none"}}'>
     <div class="list-none">
       <div class="list-none-div">
           <image style="vertical-align:middle;" class='nodata-img' src='../../public/images/no_data.png'></image>
@@ -228,12 +305,17 @@
     <div class="menu-m" data-Type='2' bindtap='menuClick'>
       <image src='../../public/images/clue-addmore.png'></image>
     </div>
+    <div class='tip-content' style="display:{{isfristTime?'':'none'}}">
+      <text>点我</text>
+      <view class='tip-arr'></view>
+    </div>
+          
     <div class='menu-r' data-Type='3' bindtap='menuClick'>
       <image src='{{menuType?"../../public/images/menu-r-f.png":"../../public/images/menu-r-t.png"}}'></image>
       <span style="{{menuType?'color:#999999;':'color:#8F82E8;'}}">分享</span>
     </div>
   </view>
- 
+
   <div   bindtap='navToCancel'  class='add-but' style="display:{{showChoose?'':'none'}}">
     <div style="display:block;height:25%;width:100%;background-color:#F1F1F1;position:absolute;bottom:0rpx;">
         <div  bindtap='navToCase' style='width:50%;height:80%;display:inline-block;text-align:right;position:relative; overflow:hidden;'>

@@ -375,3 +375,17 @@
    width: 364rpx;
    height: 252rpx;
 }
+
+.tip-content{
+  position:absolute;left:41%;top:-100rpx; background-color:#8F82E8;border-radius:50rpx;padding: 15rpx 40rpx;color:white;font-size:28rpx;
+}
+.tip-arr{
+  border: 12rpx solid #8F82E8;
+  position: absolute;
+  border-bottom: 16rpx solid transparent;
+  border-right: 16rpx solid transparent;
+  border-left: 15rpx solid transparent;
+  right:55rpx;
+  top: 78rpx;
+  margin-top: -12rpx;
+}

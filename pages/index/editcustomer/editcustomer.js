@@ -21,7 +21,6 @@ Page({
    */
   onLoad: function (options) {
     let _This=this;
-    console.log("options------", options);
     _This.setData({
       options: options
     });

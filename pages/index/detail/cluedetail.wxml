@@ -1,58 +1,86 @@
 <!--pages/index/detail/cluedetail.wxml-->
 <wxs src="../../../utils/wxs/cutil.wxs" module="util" />
-<view class='page'>
+
+<div style="height:70rpx;line-height:70rpx;display:{{errorType?'block':'none'}};position:fixed;top:0rpx;z-index:1000;left:0rpx;width:100%; background-color:{{errorColor}};text-align:center;font-size:30rpx;color:white;vertical-align:middle;margin-top:0rpx;">
+    {{errorMessage}}
+</div>
+
+<view class='page' style='display:{{showData==0?"":"none"}};'>
   <div class='top'>
-    <div class='top-content'>
-      <!--客户头像  -->
-      <div class='top-imgdiv'>
-        <image class='top-img' src='{{clueDetail.customerLogo.length<5?"../../../public/images/defimag.png":clueDetail.customerLogo}}'></image>
-      </div>
-      <!-- 客户详情 -->
-      <div class="top-right" style="position:relative;height:100%;">
-        <div>
-          <span class="top-clineName">{{clueName}}</span>
-          <span class="top-span" style="display:inline-block;">{{clueDetail.statusName}}</span>
-        </div>
-        <div class='top-state'>{{!clueDetail.appointmentId?"未预约":util.formatTime(bookName,"yyyy年MM月dd日 hh:mm")}}</div>
-        <!-- 电话号码 -->
-        <div bindtap='fMakePhone' class="makePhoto" style='{{clueDetail.customerWechatMobile==""&&clueDetail.customerPhoneNum==""?"display:none":""}}'>
-          <image style='width:20px;height:20px;vertical-align:top;' src='../../../public/images/phone-con.png'></image>
-          <span class="photoNum" style="vertical-align:top;line-height:40rpx;">{{clueDetail.customerWechatMobile?clueDetail.customerWechatMobile:clueDetail.customerPhoneNum}}</span>
-        </div>
-        <!--预约按钮  -->
-        <div class='top-book' style="position:absolute;bottom:10rpx;right:0rpx;" bindtap='bookOption'>{{bookName=='去预约'?bookName:"已预约"}}</div>
-      </div>
-    </div>
-    <div>
-      <div class='top-cnt'>
-        <div>
-          <image src="../../../public/images/clue-man.png"></image>拥有者：
-          <text class="creatorName"> {{clueDetail.creatorName}}</text>
-        </div>
-        <div>
-          <image src="../../../public/images/clue-yumyue.png"></image> 当前跟进：
-          <text class="followUseName">{{clueDetail.followUseName}}</text>
-        </div>
-        <text></text>
-        <div>
-          <div style="display:inline-block;width:30%;vertical-align: top;">
-            <image src="../../../public/images/clue-connect.png"></image> 当前项目：
-          </div>
-          <div style="display:inline-block;width:70%;vertical-align: top;">
-            <span wx:for="{{clueDetail.productList}}" wx:for-item="pitem" wx:key="productCode">{{pitem.productName}}</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <view bindtap='fEditCustomer' class='f-14 customer-edit'>编辑</view>
+    <view class='flex-c fx-d-col top-ct'>
+       <view class=''>
+        <image class='top-img' src='{{clueDetail.customerLogo.length<5?"/public/images/defimag.png":clueDetail.customerLogo}}'></image>
+      </view>
+         <view>
+           <text class="f-16">{{clueName}}</text>
+           <image wx:if="{{clueDetail.custGender==1}}" class='sender-img' src='/public/images/man-icon.png' mode="aspectFit" style='' ></image>
+           <image wx:if="{{clueDetail.custGender==2}}" class='sender-img' src='/public/images/women-icon.png' mode="aspectFit" style='' ></image>
+         </view>
+         
+         <view>
+            <view class="top-span" style="">{{clueDetail.statusName}}</view>
+         </view>       
+    </view>
+
+
+
+    <view>
+      <view class='top-cnt'>
+
+         <view wx:if="{{clueDetail.custBirthday}}" class='top-cnt-item' style=''>
+            <text class='i-b b-s f-14 i-title'>生日</text> 
+            <text class="i-b b-s f-16 i-ct"> {{util.formatTime(clueDetail.custBirthday,"yyyy年MM月dd日")}}</text>
+         </view>
+
+        <view wx:if="{{clueDetail.customerWechatMobile||clueDetail.customerPhoneNum}}" class='top-cnt-item' style=''>
+            <text class='i-b b-s f-14 i-title'>手机号</text> 
+            <text class="i-b b-s f-16 i-ct">{{clueDetail.customerWechatMobile?clueDetail.customerWechatMobile:clueDetail.customerPhoneNum}}</text>
+         </view>
+
+        <view class='top-cnt-item' style=''>
+            <text class='i-b b-s f-14 i-title'>预约状态</text> 
+            <text class="i-b b-s f-16 i-ct" style='margin-right:8rpx;'>{{!clueDetail.appointmentId?"未预约":"已预约"}}</text>
+             <text class="i-b b-s f-16 i-ct">{{util.formatTime(clueDetail.appointmentTime,"yyyy年MM月dd日 hh:mm")}}</text>
+         </view>
+
+          <view class='top-cnt-item' style=''>
+            <text class='i-b b-s f-14 i-title'>拥有者</text> 
+            <text class="i-b b-s f-16 i-ct"> {{clueDetail.creatorName}}</text>
+         </view>
+
+          <view class='top-cnt-item' style=''>
+            <text class='i-b b-s f-14 i-title'>当前跟进</text> 
+            <text class="i-b b-s f-16 i-ct"> {{clueDetail.followUseName}}</text>
+         </view>
+
+         <view class='top-cnt-item' style=''>
+            <text class='i-b b-s f-14 i-title'>意向需求</text> 
+            <text class="i-b b-s f-16 i-ct">
+              <text class='i-product' wx:for="{{clueDetail.productList}}" wx:for-item="pitem" wx:key="productCode">#{{pitem.productName}}</text>
+            </text>
+         </view>
+
+
+      </view>
+    </view>
+
   </div>
-  <div class="cnt">
-    <div class='cnt-tab'>
-      <div bindtap='selectType' data-id='{{item.id}}' wx:for="{{selectItem}}" wx:for-item="item" wx:key="id" class="search-type-item" style="{{item.val?'color:#8F82EC;':''}}">
-        <span class="search-type-top">{{item.text}}</span>
-        <span class="{{item.val?'search-type-bottom':'search-type-none'}}"></span>
-      </div>
-    </div>
-    <!--备注列表  remark -->
+
+
+
+
+
+  <div class="cnt" style="">
+  <!---------------------切换----------------->
+    <view class='cnt-tab'>
+      <view bindtap='selectType' data-id='{{item.id}}' wx:for="{{selectItem}}" wx:for-item="item" wx:key="id" class="search-type-item" style="{{item.val?'color:#8F82EC;':''}}">
+        <text class="search-type-top">{{item.text}}</text>
+        <text class="{{item.val?'search-type-bottom':'search-type-none'}}"></text>
+      </view>
+    </view>
+   <!-------------------------------------->
+    <!--备注列表 -----start------- remark -->
     <div wx:for="{{remarklist}}" style="display:{{isshow=='true'?'block':'none'}}" wx:for-item="remark" wx:key="id" class="cnt-content">
       <div class="cnt-imgdiv">
         <image src='{{remark.headImgUrl?remark.headImgUrl:"../../../public/images/default-title.png"}}'></image>
@@ -69,7 +97,7 @@
         </div>
       </div>
     </div>
-
+  <!--备注列表 -----end------- remark -->
     <!--互动轨迹列表	interact bindtap="typeEvent"-->
     <div style="display:{{show=='true'?'block':'none'}}" wx:key="id" class="interact-content">
       <!-- 时间轴线 -->
@@ -226,4 +254,52 @@
       当前线索还没有备注！
     </div>
   </div>
+
+
+  <view class='flex fx-jc-sa f-12 bk-c-w b-s b-nav' style=''>
+    <view class='t-a-c' bindtap='fRemark'>
+      <view><image class='bt-img' mode='' src='/public/images/remark-icon.png'></image></view>
+      <text>备注</text>
+    </view>
+    <view class='t-a-c' bindtap='fFollowUp'>
+       <view><image class='bt-img' mode='' src='/public/images/follow-icon.png'></image></view>
+      <text>再跟进</text>
+    </view>
+    <view class='t-a-c' bindtap='fGoToBook'>
+        <view><image class='bt-img' mode='' src='/public/images/book-icon.png'></image></view>
+      <text>预约</text></view>
+    <view class='t-a-c' bindtap='fCloseClue'>
+        <view><image class='bt-img' mode='' src='/public/images/close-remark-icon.png'></image></view>
+      <text>关闭</text></view>
+  </view>
+</view>
+
+<!--关闭备注-->
+<view class='h-ct w-10' style='display:{{showData==5?"":"none"}};'>
+  <view class="close-wind" bindtap ="closewindow">×</view>
+  <view style="display:block;height:100rpx;">
+  </view>
+  <view class='w-10 b-s close-content'>
+    <view class="b-s close-content">
+      <textarea class='f-16 w-10 area-ct' bindinput="closeinput"  name="clueClose" value="{{clueClose}}" placeholder='补充备注' placeholder-class='f-12 c-9' placeholder-style='text-align:left;font-size:30rpx;color:#999999;'></textarea>
+    </view>
+    <view class='submit-btn'>
+      <div style='{{clueClose.length<1?"background:#E5E5E5;":""}}' bindtap='submitClose'>提交</div>
+    </view>
+  </view>
+</view>
+
+<!--线索备注-->
+<view class='h-ct w-10' style='display:{{showData==3?"":"none"}};background-color:white;position:relative;'>
+  <view class="close-wind" bindtap ="closewindow">×</view>
+    <view style="display:block;height:100rpx;">
+  </view>
+  <view class='w-10 b-s close-content'>
+    <view class="b-s close-content">
+      <textarea class='f-16 w-10'  bindinput="remarkinput" name="cluereMark" value="{{cluereMark}}" placeholder='补充一些线索备注' placeholder-class='f-12 c-9' placeholder-style='font-size:30rpx;color:#999999;'></textarea>
+    </view>
+    <view class='submit-btn'>
+      <div style='{{cluereMark.length<1?"background:#E5E5E5;":""}}' bindtap='submitRemark'>提交</div>
+    </view>
+  </view>
 </view>

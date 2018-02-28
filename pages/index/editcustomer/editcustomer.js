@@ -143,7 +143,8 @@ Page({
     let _linkman = this.data.linkMan;
     let linkMansubmit = this.data.linkMansubmit;
    
-    linkMansubmit= _linkman.name&&_linkman.name.length<=6&&(/^1\d{10}$/.test(_linkman.phoneNum))?true:false;
+    //linkMansubmit= _linkman.name&&_linkman.name.length<=6&&(/^1\d{10}$/.test(_linkman.phoneNum))?true:false;
+    linkMansubmit = _linkman.name && _linkman.name.length <= 6 && (_linkman.phoneNum==""||/^1\d{10}$/.test(_linkman.phoneNum)) ? true : false;
     this.setData({
       linkMansubmit: linkMansubmit
     });
@@ -180,6 +181,7 @@ Page({
     this.setData({
       linkMan: _linkman
     });
+    this.fValidateInfo();
   },
   /**
    * 验证手机号码
@@ -194,13 +196,11 @@ Page({
    * 修改微信
    */
   flinkchangeWechat(e) {
-    console.log("----3333------------");
     let _linkman = this.data.linkMan;
     _linkman.wechatNum = e.detail.value;
     this.setData({
       linkMan: _linkman
     });
-    console.log("----------------");
     this.fValidateInfo();
   },
   /**

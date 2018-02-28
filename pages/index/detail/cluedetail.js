@@ -25,6 +25,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //clueStatus
     this.initData(options.id);
   },
   /**
@@ -190,7 +191,8 @@ Page({
    */
   onShow: function () {
     let clueDetail = this.data.clueDetail;
-    this.initData(clueDetail.id);
+    //console.log("clueDetail----------", clueDetail);
+    clueDetail.id&&this.initData(clueDetail.id);
   },
 
   /**
@@ -332,6 +334,16 @@ Page({
   fFollowUp(){
   //待跟进
     let clueDetail = this.data.clueDetail;
+    if (clueDetail.clueStatus != 1) {
+     // this.alertMessage("已预约客户不可以关闭！", 'yellow');
+      return;
+    }
+    if (clueDetail.groupFlag == 1){
+      this.alertMessage("客户已是再跟进状态！", 'yellow');
+      return false;
+    }
+
+   
     let pdata = {
       clueId: clueDetail.id,
     };

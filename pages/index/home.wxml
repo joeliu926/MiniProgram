@@ -28,7 +28,7 @@
           <div style='margin:10rpx 15rpx 0rpx 15rpx;display:block;'>
             <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/def-userimg.png"}}'></image>
           </div>
-          <div style='display:{{oitem.point?"":"none"}};background-color:red;border-radius:30rpx;position:absolute;top:0rpx;right:0rpx;width:4rpx;height:4rpx;'></div>
+          <div style='display:{{oitem.point?"":"none"}};background-color:red;border-radius:20rpx;position:absolute;top:12rpx;right:10rpx;width:20rpx;height:20rpx;padding:0rpx;'></div>
         </div>
         <div class="list-content" bindtap='openItem' data-Obj='{{oitem}}'>
           <div style='margin-left:10rpx;display:block;'>
@@ -322,7 +322,7 @@
           <div style="position:absolute;right:80rpx;top:20rpx;">
               <image class='add-img' src='../../public/images/nav-case.png'></image>
           </div>
-          <div style="position:absolute;right:100rpx;top:60rpx;">查找案例</div>
+          <div style="position:absolute;right:100rpx;top:60rpx;">案例分享</div>
         </div>
         <div  bindtap='navToGift' style='width:50%;height:80%;display:inline-block;text-align:right;position:relative; overflow:hidden;'>
           <div style="position:absolute;left:80rpx;top:20rpx;">

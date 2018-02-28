@@ -11,7 +11,7 @@ Page({
     cluereMark: "",//线索备注
     clueClose: "",//关闭备注
     autoFocus: false,
-    selectItem: [{ id: 0, text: '新潜客', val: true }, { id: 3, text: '再跟进', val: false }, { id: 2, text: '已预约', val: false }, { id: 1, text: '其它', val: false }],
+    selectItem: [{ id: 0, text: '新潜客', val: true }, { id: 3, text: '再跟进', val: false }, { id: 2, text: '已预约', val: false }, { id: 1, text: '已结束', val: false }],
     currentSelect: 0,//当前tab 已选择内容
     moreItem_rp: ['备注','编辑客户', '不再跟进'], //更多弹出选项
     moreItem: ['编辑客户', '不再跟进'], //更多弹出选项
@@ -410,10 +410,7 @@ Page({
     wx.stopPullDownRefresh();
 
     //let _This = this;
-    setTimeout(function () {
-      _This.pullRefresh();
-
-    }, 1000);
+    _This.pullRefresh();
 
   },
   pullRefresh() {
@@ -529,6 +526,7 @@ Page({
   //待跟进
   followOption(params) {
     let remark = params.currentTarget.dataset.obj;
+    let _This =this;
     let pdata = {
       clueId: remark.id,
     };
@@ -539,6 +537,8 @@ Page({
           icon: 'success',
           duration: 2000
         });
+
+        _This.pullRefresh();
       }
    
     });
@@ -834,9 +834,9 @@ Page({
         break;
       case "2":
         this.setData({
-          showChoose: true
+          showChoose: true,
+          isfristTime: false
         });
-
         wx.setStorageSync('isfirsttime', false);
         break;
       case "3":
@@ -1078,6 +1078,11 @@ Page({
     wxRequest(wxaapi.index.cluelist.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         let getArray = result.data.data.list;
+
+        if (getArray.length>0){
+          _This.setData({ isfristTime: false });
+        }
+
         getArray.forEach(m => {
           let slist = [];
           m.productList.forEach((sm, index) => {

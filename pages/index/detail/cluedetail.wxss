@@ -2,7 +2,6 @@
 .page {
   width: 100%;
   margin-top: 0px;
-
 }
 
 .top {
@@ -135,13 +134,14 @@
   background-color: white;
   height: 100%;
   padding-bottom: 120rpx;
+  min-height: 550rpx;
 }
 
 .cnt-content {
   padding: 20rpx;
   display: block;
   background: #fff;
-  border-bottom: 1px solid #eee;
+  border-bottom: 0px solid #eee;
 }
 
 .cnt-imgdiv {

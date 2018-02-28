@@ -334,7 +334,7 @@ Page({
   fFollowUp(){
   //待跟进
     let clueDetail = this.data.clueDetail;
-    if (clueDetail.clueStatus != 1) {
+    if (clueDetail.clueStatus != 1 ||clueDetail.groupFlag== 1) {
      // this.alertMessage("已预约客户不可以关闭！", 'yellow');
       return;
     }
@@ -361,6 +361,10 @@ Page({
    * 去预约
    */
   fGoToBook(){
+    let clueDetail = this.data.clueDetail;
+    if (clueDetail.clueStatus != 1) {
+      return;
+    }
     this.bookOption();
   },
   /**
@@ -368,6 +372,10 @@ Page({
    */
   fCloseClue(){
     let clueDetail = this.data.clueDetail;
+    if (clueDetail.clueStatus != 1) {
+      return;
+    }
+
     if (clueDetail.clueStatus == 5) {
       this.alertMessage("客户已是关闭状态！", 'yellow');
       return;

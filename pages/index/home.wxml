@@ -322,7 +322,7 @@
           <div style="position:absolute;right:80rpx;top:20rpx;">
               <image class='add-img' src='../../public/images/nav-case.png'></image>
           </div>
-          <div style="position:absolute;right:100rpx;top:60rpx;">案例分享</div>
+          <div style="position:absolute;right:100rpx;top:60rpx;">查找案例</div>
         </div>
         <div  bindtap='navToGift' style='width:50%;height:80%;display:inline-block;text-align:right;position:relative; overflow:hidden;'>
           <div style="position:absolute;left:80rpx;top:20rpx;">

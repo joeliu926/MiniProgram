@@ -20,6 +20,7 @@ Page({
     showData:0,//显示状态0 是显示线索，5是关闭线索
     cluereMark:"",//提交备注
     clueClose: "",//关闭备注
+    clueFlow: "",//再跟进备注
   },
   /**
    * 生命周期函数--监听页面加载
@@ -332,24 +333,13 @@ Page({
    * 点击再跟进
    */
   fFollowUp(){
-  //待跟进
-    let clueDetail = this.data.clueDetail;
-    //console.log("clueDetail----", clueDetail);
-    if (clueDetail.clueStatus != 1 ||clueDetail.groupFlag== 1) {
-     // this.alertMessage("已预约客户不可以关闭！", 'yellow');
-      return;
-    }
-    if (clueDetail.groupFlag == 1){
-      this.alertMessage("客户已是再跟进状态！", 'yellow');
-      return false;
-    }
-
-   
+    let _This =this;
     let pdata = {
-      clueId: clueDetail.id,
+      clueId: this.data.clueDetail.id,
     };
     wxRequest(wxaapi.index.waitflow.url, pdata).then(function (result) {
-      //console.log("--------------",result);
+      _This.closewindow();
+      _This.initData(_This.data.clueDetail.id);
       if (result.data.code == 0) {
         wx.showToast({
           title: '设置成功！',
@@ -435,8 +425,54 @@ Page({
           icon: 'success',
           duration: 2000
         });
-        _This.initData(clueDetail.id);
+        _This.initData(_This.data.clueDetail.id);
         //_This.fUserEvent(event.eType.leadClose);//关闭联系人
+      }
+    });
+  },
+
+  //待跟进打开
+  openFlow() {
+    //待跟进
+    let clueDetail = this.data.clueDetail;
+    if (clueDetail.clueStatus != 1 || clueDetail.groupFlag == 1) {
+      return;
+    }
+    if (clueDetail.groupFlag == 1) {
+      this.alertMessage("客户已是再跟进状态！", 'yellow');
+      return false;
+    }
+
+    this.setData({
+      showData: 6
+    });
+  },
+  //待跟进备注
+  submitFlow(params) {
+    let clueDetail = this.data.clueDetail;
+    if (this.data.clueFlow.length < 1) {
+      return;
+    }
+    let _This = this;
+    let pdata = {
+      "clueId": clueDetail.id,
+      "clueStage": clueDetail.clueStage,
+      "creater": clueDetail.creator,
+      "customerId": clueDetail.customerId,
+      "id": clueDetail.id,
+      "remark": this.data.clueFlow,
+      "userId": clueDetail.userId
+    };
+    wxRequest(wxaapi.index.clueremark.url, pdata).then(function (result) {
+      if (result.data.code == 0) {
+        _This.fFollowUp();
+      }
+      else{
+        wx.showToast({
+          title: '待跟进备注失败！',
+          icon: 'success',
+          duration: 2000
+        });
       }
     });
   },
@@ -458,6 +494,14 @@ Page({
   remarkinput(params) {
     this.setData({
       cluereMark: params.detail.value
+    });
+  },
+  /**
+ * 待跟进文本框
+ */
+  flowinput(params) {
+    this.setData({
+      clueFlow: params.detail.value
     });
   },
   //提交备注
@@ -487,7 +531,7 @@ Page({
           icon: 'success',
           duration: 2000
         });
-       // _This.initInteract(); 
+        _This.initData(_This.data.clueDetail.id);
       }
     });
   },

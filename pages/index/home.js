@@ -257,7 +257,7 @@ Page({
   onLoad: function (options) {
     let _This = this;
     wx.getStorage({
-      key: 'isfirsttime',
+      key: 'isfirsttime1',
       success: function (res) {
         _This.setData({
           isfristTime: false
@@ -837,7 +837,7 @@ Page({
           showChoose: true,
           isfristTime: false
         });
-        wx.setStorageSync('isfirsttime', false);
+        wx.setStorageSync('isfirsttime1', false);
         break;
       case "3":
         this.setData({

@@ -334,6 +334,7 @@ Page({
   fFollowUp(){
   //待跟进
     let clueDetail = this.data.clueDetail;
+    //console.log("clueDetail----", clueDetail);
     if (clueDetail.clueStatus != 1 ||clueDetail.groupFlag== 1) {
      // this.alertMessage("已预约客户不可以关闭！", 'yellow');
       return;
@@ -348,6 +349,7 @@ Page({
       clueId: clueDetail.id,
     };
     wxRequest(wxaapi.index.waitflow.url, pdata).then(function (result) {
+      //console.log("--------------",result);
       if (result.data.code == 0) {
         wx.showToast({
           title: '设置成功！',

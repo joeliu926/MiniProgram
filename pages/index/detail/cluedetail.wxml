@@ -7,7 +7,7 @@
 
 <view class='page' style='display:{{showData==0?"":"none"}};'>
   <div class='top'>
-    <view bindtap='fEditCustomer' class='f-14 customer-edit'>编辑</view>
+    <view wx:if="{{clueDetail.clueStatus==1}}" bindtap='fEditCustomer' class='f-14 customer-edit'>编辑</view>
     <view class='flex-c fx-d-col top-ct'>
        <view class=''>
         <image class='top-img' src='{{clueDetail.customerLogo.length<5?"/public/images/defimag.png":clueDetail.customerLogo}}'></image>
@@ -262,15 +262,15 @@
       <text>备注</text>
     </view>
     <view class='t-a-c' bindtap='fFollowUp'>
-       <view><image class='bt-img' mode='' src='/public/images/follow-icon.png'></image></view>
-      <text>再跟进</text>
+       <view class='{{(clueDetail.groupFlag==1||clueDetail.clueStatus!=1)?"disable-img":""}}'><image class='bt-img' mode='' src='/public/images/follow-icon.png'></image></view>
+      <text style='color:{{(clueDetail.groupFlag==1||clueDetail.clueStatus!=1)?"#cccccc":""}};'>再跟进</text>
     </view>
     <view class='t-a-c' bindtap='fGoToBook'>
-        <view><image class='bt-img' mode='' src='/public/images/book-icon.png'></image></view>
-      <text>预约</text></view>
+        <view class='{{clueDetail.clueStatus!=1?"disable-img":""}}'><image class='bt-img ' mode='' src='/public/images/book-icon.png'></image></view>
+      <text style='color:{{clueDetail.clueStatus!=1?"#cccccc":""}};' >预约</text></view>
     <view class='t-a-c' bindtap='fCloseClue'>
-        <view><image class='bt-img' mode='' src='/public/images/close-remark-icon.png'></image></view>
-      <text>关闭</text></view>
+        <view class='{{clueDetail.clueStatus!=1?"disable-img":""}}'><image class='bt-img' mode='' src='/public/images/close-remark-icon.png'></image></view>
+      <text style='color:{{clueDetail.clueStatus!=1?"#cccccc":""}};'>关闭</text></view>
   </view>
 </view>
 

@@ -113,7 +113,8 @@ Page({
     });
     wx.showShareMenu({
       withShareTicket: true //要求小程序返回分享目标信息
-    })
+    });
+    wx.hideShareMenu();
   },
   /*
    *事件参数 

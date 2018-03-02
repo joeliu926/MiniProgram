@@ -1,12 +1,5 @@
-page {
-  height: 100%;
-  /* background-color: #fff; */
-  position: relative;
-}
-
 .case-content {
   width: 100%;
-  height: 100%;
 }
 
 .o-flex {
@@ -16,11 +9,7 @@ page {
 }
 
 .o-content {
-  /* padding: 30rpx 30rpx 0rpx 30rpx; */
-  height: 100%;
-  box-sizing: border-box;
-  padding: 20rpx;
-  /* position:relative; */
+  padding-bottom: 160rpx;
 }
 
 .topshow {
@@ -28,7 +17,12 @@ page {
   padding: 20rpx 0rpx;
   overflow: hidden;
   background-color: #fff;
-  /* margin-bottom: 30rpx;  */
+}
+
+.topshow .scroll-box {
+  width: 85%;
+  height: 60rpx;
+  overflow: hidden;
 }
 
 .pdactive {
@@ -57,11 +51,7 @@ page {
   overflow: hidden;
 }
 
-.topshow .scroll-box {
-  width: 85%;
-  height: 60rpx;
-  overflow: hidden;
-}
+
 
 scroll-view {
   display: block;
@@ -81,19 +71,16 @@ scroll-view {
 }
 
 .o-item {
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  border: 1px solid #eee;
-  border-radius: 15rpx;
+  padding:30rpx 0;
+
+  border-bottom: 1rpx solid #eeeeee;
 }
 
 .o-project {
   background-color: #fff;
   box-sizing: border-box;
-  border-radius: 8px;
-  overflow: hidden;
 }
 
 .u-icon {
@@ -206,20 +193,6 @@ button::after {
   width: 20px;
   height: 20px;
 }
-
-.extr-v {
-  height: 5px;
-  background: #fff;
-  width: 95%;
-  border-radius: 0 0 20px 20px;
-  border: 1px solid #eee;
-  border-top: none;
-}
-
-.extr-b {
-  width: 90%;
-}
-
 .like-content {
   display: flex;
   align-items: center;
@@ -272,13 +245,11 @@ button::after {
   margin: 0;
   width: 100%;
   height: 100%;  
-  /* padding-top: 60px;  */
   position: absolute;
   z-index: 100;
   top: 0;
   left: 0;
   box-sizing: border-box;
-  /* padding-bottom: 300rpx; */
   background: #fff;
 }
 
@@ -372,7 +343,6 @@ span {
   box-sizing: border-box;
   background-color: #ccc;
   border-radius: 40rpx;
-  /* padding: 10rpx 50rpx 0rpx; */
   margin: 0 20rpx 40rpx 0;
   color: #fff;
   font-size: 30rpx !important;
@@ -388,7 +358,6 @@ button::after {
   position: fixed;
   top: 0;
   left: 0;
-  /* bottom: 120rpx; */
   width: 100%;
   height: 60rpx;
   line-height: 60rpx;
@@ -405,10 +374,6 @@ button::after {
   position: fixed; 
   top:20rpx;
   right:0rpx;
-  /* bottom: 20rpx; */
-  /* left: 50%; */
-  /* margin-left: -215rpx; */
-  /* margin-left: -80rpx; */
   z-index: 50;
 }
 .btn-up{

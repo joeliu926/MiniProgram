@@ -1,26 +1,35 @@
 <wxs src="../../../utils/wxs/cutil.wxs" module="cutil" />
 <wxs src="./caselist.wxs" module="caselist" />
 <view class="o-flex case-content">
+
+
   <view class="topshow clearfix">
     <!--项目滚动区  -->
     <view class="scroll-box fl">
       <scroll-view scroll-x="true" style=" white-space: nowrap;margin-left:24rpx;">
-        <view class="item-view" style="color:{{item.changeColor}} " wx:for-item="item" wx:for="{{arrData}}" wx:for-index="{{index}}" wx:key="item.itemid" data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}"
+        
+        <block wx:for-item="item" wx:for="{{arrData}}" wx:for-index="{{index}}" wx:key="item.itemid" >
+          <view class="item-view" style="color:{{item.changeColor}} "  data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}"
           bindtap="chooseitem">{{item.iname}}</view>
-        <!-- <view class="item-view f-14" bindtap="">热门项目</view>-->
+        </block>
+        
+
       </scroll-view>
     </view>
     <!--下拉箭头  -->
-    <view class="selectarrow fr " bindtap="getproductitem">
+    <view class="selectarrow fr " bindtap="fGetproductItem">
       <image src='../../../public/images/arrow-down.png' class='btn-down'></image>
     </view>
   </view>
-  <view class='o-flex o-content' style="width:100%; background:#f7f7f7;">
+
+
+
+  <view class='w-10 b-s bk-c-w o-content' style="">
+
     <view class='o-project w-10'>
-      <swiper indicator-dots="{{indicatorDots}}" class="o-swiper" style='' autoplay="{{autoplay}}" current="{{current}}" interval="{{interval}}" duration="{{duration}}" bindchange="fSwiperChange">
         <block wx:for="{{caseList}}" wx:for-item="oitem" wx:key="id">
-          <swiper-item>
-            <view class='o-item'>
+            <view class='b-s o-item'>
+
               <view class='w-10'>
                 <view>
                   <view class='flex b-s clearfix' style="position: relative;">
@@ -32,7 +41,6 @@
                 </view>
 
                 <view class='user-info'>
-                  <!--bindtap='fCaseDetail'  -->
                   <view class='bef-aft flex'>
                     <image class='o-img-title' src='{{oitem.customerLogo.url?oitem.customerLogo.url:"../../../public/images/defimag.png"}}' mode='scaleToFill'></image>
                   </view>
@@ -41,49 +49,52 @@
                     <view style="margin-bottom: 10rpx; ">
                       <text class='f-14 txt-item'>{{oitem.caseName}}</text>
                     </view>
-
-                    <text class='f-14'>诊疗于 {{cutil.formatTime(oitem.operationDate,"yyyy-MM-dd")}}</text>
-                  </view>
-                </view>
-              </view>
-              <view style="padding:5px 15px 0 10px;">
-                <view>
-                  <text class='f-14 txt-item hide'>{{oitem.caseName}}</text>
-                </view>
-                <view class='flex mg-b ho-info'>
+                    <text class='f-14'>{{oitem.doctor.name}} · 诊疗于 {{cutil.formatTime(oitem.operationDate,"yyyy-MM-dd")}}</text>
+                
+                    <view class='flex mg-b ho-info'>
                   <image class='u-icon' src='../../../public/images/icon-hos.png' mode='scaleToFill'></image>
                   <text class='f-14 u-local mg-l'> {{oitem.clinic.name}}</text>
                 </view>
 
+                  </view>
+                </view>
               </view>
+      
               <view style='padding-right:10px;'>
                 <view class="flex fx-jc-ed">
-                  <view class='flex-c txt-item-share b-s' bindtap='fChangeShare' data-indexi='{{index}}' data-itemid='{{oitem.id}}' style='display:{{isConsult?"show":"none"}};'>
+                  <view class='flex-c txt-item-share b-s' bindtap='fChangeShare' data-indexi='{{index}}' data-itemid='{{oitem.id}}' style='display:show;'>
                     <image wx:if='{{caselist.inArray(aCaseIds,oitem.id)}}' src='../../../public/images/icon-ashare.png' class='share-icon'></image>
                     <image wx:if='{{!caselist.inArray(aCaseIds,oitem.id)}}' src='../../../public/images/icon-rshare.png' class='share-icon'></image>
                     <text class='f-14'>加入分享</text>
                   </view>
                 </view>
               </view>
+
+
             </view>
-          </swiper-item>
         </block>
-      </swiper>
+
     </view>
-    <view class='extr-v' style=''></view>
-    <view class='extr-v extr-b' style=''></view>
+
+ 
+
+
+
+
     <!-- 分享按钮有分享案例  样式-->
-    <button class='share-btn flex-c' bindtap='fAddToShare' wx:if='{{aCaseIds.length>0}}' style='display:{{isConsult?"flex":"none"}};'>
+    <button class='share-btn flex-c' bindtap='fAddToShare' wx:if='{{aCaseIds.length>0}}' style='display:flex;'>
       <image src='../../../public/images/icon-share.png' class='share-icon'></image>
       <text class='share-txt'>分享</text>
       <text class='tip' wx:if='{{aCaseIds.length>0}}'>{{aCaseIds.length}}</text>
     </button>
     <!--分享按钮无分享案例 样式 -->
-    <button class='share-btn flex-c' wx:if='{{aCaseIds.length<=0}}' style='background-color:#cccccc;display:{{isConsult?"flex":"none"}};'>
+    <button class='share-btn flex-c' wx:if='{{aCaseIds.length<=0}}' style='background-color:#cccccc;display:flex;'>
       <image src='../../../public/images/icon-share.png' class='share-icon'></image>
       <text class='share-txt'>分享</text>
       <text class='tip' wx:if='{{aCaseIds.length>0}}'>{{aCaseIds.length}}</text>
     </button>
+
+
     <view class='share-content' wx:if="{{isShare}}">
       <view class='flex w-10 fx-d-col share-layer '>
         <view class='flex btn-ct'>
@@ -101,15 +112,16 @@
     </view>
 
 
-    <!-- 案例选项弹层 -->
-    <view class='product-content' style="display: {{ishow?'block':'none'}}">
+
+
+    <!-- 案例选项弹层 start -->
+    <view class='product-content' style="display: {{isSelectProduct?'block':'none'}}">
       <block wx:for="{{projectItems}}" wx:for-item="oitem" wx:key="id">
         <view class='o-flex case-item-content'>
           <text class='case-title' bindtap='selectTitle'>{{oitem.productName}}</text>
           <view class='case-item-detail'>
             <block wx:for="{{oitem.productList}}" wx:for-item="secitem" wx:key="id">
               <block wx:for="{{secitem.productList}}" wx:for-item="item" wx:key="id">
-                <!-- {{jSelect==item.productCode?"case-sele":""}} {{projectcase.inArray(jSelect,item.productCode)?"case-sele":""}}-->
                 <!-- {{item.productCode}}  -->
                 <text class='case-item  {{caselist.inArray(sSelect,item.productCode)?"case-sele":""}} {{caselist.inArray(selable,item.productCode)?"":"unable"}}' data-paid='{{item.parentCode}}' data-paname='{{oitem.productName}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}'
                   bindtap='selectItem'>{{item.productName}}</text>
@@ -121,9 +133,10 @@
       <text class=" tipunable" style="display:{{isShow=='true'?'block':'none'}}"> 当前项目下暂时无案例可选</text>
       <view style="text-align:center; margin-right:20px;" class="selBtn" bindtap="selectItems">
         <image src='../../../public/images/arrow-up.png' class='btn-up'></image>
-        <!-- <button class="selend f-16 {{isactive?'active':''}} " size="mini" bindtap="selectItems">选好了</button>  -->
       </view>
     </view>
+     <!-- 案例选项弹层 end -->
+
 
   </view>
 </view>

@@ -11,8 +11,6 @@
     "pages/client/sharecase/sharecase",
     "pages/client/sharecase/detail/detail",
     "pages/client/sharecase/tkphoto/tkphoto",
-    "pages/test/test",
-    "pages/logs/logs",
     "pages/destmass/destmass",
     "pages/destmass/previewgift/preview",
     "pages/destmass/choosegift/choosegift",

@@ -69,7 +69,7 @@ Page({
     }
   },
   //移动
-  touchM: function (e) {
+  touchM: function (e) {8
     var that = this
     if (e.touches.length == 1) {
       var moveX = e.touches[0].clientX;

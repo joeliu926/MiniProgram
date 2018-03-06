@@ -3,7 +3,7 @@
 <view class="o-flex case-content">
 
 
-  <view class="topshow clearfix">
+  <view class="topshow clearfix" wx:if="{{!isSelectDropProduct}}">
     <!--项目滚动区  -->
     <view class="scroll-box fl">
       <scroll-view scroll-x="true" style=" white-space: nowrap;margin-left:24rpx;">

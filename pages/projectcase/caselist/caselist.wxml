@@ -7,13 +7,10 @@
     <!--项目滚动区  -->
     <view class="scroll-box fl">
       <scroll-view scroll-x="true" style=" white-space: nowrap;margin-left:24rpx;">
-        
-        <block wx:for-item="item" wx:for="{{arrData}}" wx:for-index="{{index}}" wx:key="item.itemid" >
+        <block wx:for-item="item" wx:for="{{aSelectObj}}" wx:for-index="{{index}}" wx:key="item.itemid" >
           <view class="item-view" style="color:{{item.changeColor}} "  data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}"
           bindtap="chooseitem">{{item.iname}}</view>
         </block>
-        
-
       </scroll-view>
     </view>
     <!--下拉箭头  -->
@@ -82,17 +79,12 @@
 
 
     <!-- 分享按钮有分享案例  样式-->
-    <button class='share-btn flex-c' bindtap='fAddToShare' wx:if='{{aCaseIds.length>0}}' style='display:flex;'>
+    <button class='share-btn flex-c' bindtap='fAddToShare' wx:if='{{!isSelectDropProduct}}' style='background-color:{{aCaseIds.length>0?"":"#cccccc"}};'>
       <image src='../../../public/images/icon-share.png' class='share-icon'></image>
       <text class='share-txt'>分享</text>
       <text class='tip' wx:if='{{aCaseIds.length>0}}'>{{aCaseIds.length}}</text>
     </button>
-    <!--分享按钮无分享案例 样式 -->
-    <button class='share-btn flex-c' wx:if='{{aCaseIds.length<=0}}' style='background-color:#cccccc;display:flex;'>
-      <image src='../../../public/images/icon-share.png' class='share-icon'></image>
-      <text class='share-txt'>分享</text>
-      <text class='tip' wx:if='{{aCaseIds.length>0}}'>{{aCaseIds.length}}</text>
-    </button>
+
 
 
     <view class='share-content' wx:if="{{isShare}}">
@@ -124,7 +116,7 @@
               <block wx:for="{{secitem.productList}}" wx:for-item="item" wx:key="id">
                 <!-- {{item.productCode}}  -->
                 <text class='case-item  {{caselist.inArray(sSelect,item.productCode)?"case-sele":""}} {{caselist.inArray(selable,item.productCode)?"":"unable"}}' data-paid='{{item.parentCode}}' data-paname='{{oitem.productName}}' data-itemid='{{item.productCode}}' data-iname='{{item.productName}}'
-                  bindtap='selectItem'>{{item.productName}}</text>
+                  bindtap='fSelectItem'>{{item.productName}}</text>
               </block>
             </block>
           </view>
@@ -136,6 +128,47 @@
       </view>
     </view>
      <!-- 案例选项弹层 end -->
+         <!-- 案例选项弹层 new start -->
+    <view class='w-10 b-s bk-c-w pro-drop-content' style="display: {{isSelectDropProduct?'block':'none'}}">
+      <view class='f-16 b-s title-pd'>
+      <scroll-view scroll-x="true" style="white-space: nowrap;margin-left:24rpx;">
+        <block wx:for-item="item" wx:for="{{aSelectObj}}" wx:for-index="{{index}}" wx:key="item.itemid" >
+          <view class="item-view" style="color:{{item.changeColor}} "  data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}"
+          bindtap="chooseitem">{{item.iname}}</view>
+        </block>
+      </scroll-view>
+
+        </view>
+      <view class='b-s w-10 flex pro-ct'>
+        <view class='b-s t-a-c  dp-left' style='width:200rpx;'>
+          <block wx:for="{{projectItems}}" wx:for-item="oitem" wx:key="id">
+            <view class="b-s t-a-c p-name-ct {{isCurrentCate==oitem.productCode?'ca-current':''}}" data-products="{{oitem.productList}}" data-pcode="{{oitem.productCode}}" bindtap="fChooseProduct">
+              {{oitem.productName}}
+              <view  class='red-radio {{caselist.isSelectCate(oitem.productList,sSelect)||(oitem.productCode=="0"&&caselist.inArray(sSelect,"0"))?"":"hide"}}'></view>
+            </view>
+          </block>
+        </view>
+        <view class='b-s dp-right'>
+          <block wx:for="{{oProductCollection}}" wx:for-item="item" wx:key="id">
+            <view class='item-ct' style=''>
+              <text class='c-item {{caselist.inArray(sSelect,item.productCode)?"case-sele":""}} {{caselist.inArray(selable,item.productCode)?"":"unable"}}'  data-itemid='{{item.productCode}}' data-iname='{{item.productName}}'
+                  bindtap='fSelectItem'>{{item.productName}}</text> 
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class='w-10 b-s bt-btn hide'>
+         <view class='f-14 b-d ensure-btn'>确定</view>
+      </view>
+ 
+ 
+      <text class="tipunable" style="display:{{isShow=='true'?'block':'none'}}"> 当前项目下暂时无案例可选</text>
+      <view style="text-align:center; margin-right:20px;" class="selBtn" bindtap="selectItems">
+        <image src='../../../public/images/arrow-up.png' class='btn-up'></image>
+      </view>
+    </view>
+     <!-- 案例选项弹层 new  end -->
+
 
 
   </view>

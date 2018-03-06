@@ -73,9 +73,9 @@ scroll-view {
 .o-item {
   display: flex;
   flex-direction: column;
-  padding:30rpx 0;
-
+  padding:0 0 30rpx 0;
   border-bottom: 1rpx solid #eeeeee;
+  margin-bottom: 30rpx;
 }
 
 .o-project {
@@ -424,3 +424,101 @@ button::after {
   padding: 30rpx 0;
   border-top: 1rpx solid #e8e8e8;
 }
+
+
+
+.pro-drop-content{
+  height: 850rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0 0 10rpx #ddd;
+}
+
+.title-pd{
+  padding: 10rpx 0;
+}
+.pro-drop-content .pro-ct{
+  border-top: 1rpx solid #eeeeee;
+}
+.pro-ct .dp-left{
+  width: 300rpx;
+  height: 700rpx;
+  overflow: scroll;
+   background-color: #f7f7f7;
+   
+}
+.p-name-ct{
+  overflow: scroll;
+ /* word-break:keep-all;border: 1rpx solid #9083ed;*/   
+  white-space:nowrap; 
+
+  font-size: 28rpx;
+  color: #333333; 
+   padding: 25rpx 10rpx;
+   position: relative;
+   border-right: 1rpx solid #eeeeee;
+  
+}
+.red-radio{
+  width: 20rpx;
+  height: 20rpx;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  top:5rpx;
+  right: 15rpx;
+}
+.ca-current{
+  background-color: #ffffff;
+  border-right:none;
+}
+.dp-right{
+  width: 500rpx;
+  padding: 20rpx 10rpx;
+  height: 700rpx;
+  overflow: scroll;
+}
+.dp-right .item-ct{
+  display: inline-block;
+  margin: 0rpx 5rpx;
+
+}
+
+.c-item {
+  display: block;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  border-radius: 40rpx;
+  padding: 10rpx 36rpx;
+  margin:0 0 10rpx 0;
+  font-size: 24rpx;
+}
+
+.bt-btn{
+  position: absolute;
+  bottom: 0;
+}
+.bt-btn .ensure-btn{
+  margin: 30rpx auto;
+  width: 120rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  border-radius: 8rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

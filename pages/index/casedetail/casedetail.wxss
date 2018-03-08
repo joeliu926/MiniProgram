@@ -64,6 +64,10 @@ page{
   background-repeat: no-repeat;
   background-size: cover;
 }
+.dia-ct{
+  padding:24rpx 0;
+  border-bottom: 1rpx solid #eeeeee;
+}
 /*****************history end******************/
 
 /*****************project description start******************/

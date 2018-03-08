@@ -516,6 +516,8 @@ button::after {
   line-height: 60rpx;
   text-align: center;
   border-radius: 8rpx;
+  background: #9083ed;
+  color: #ffffff;
 }
 
 

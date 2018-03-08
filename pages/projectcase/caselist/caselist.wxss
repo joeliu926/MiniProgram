@@ -80,12 +80,15 @@ scroll-view {
   display: flex;
   flex-direction: column;
   padding:0 0 30rpx 0;
-  border-bottom: 1rpx solid #eeeeee;
-  margin-bottom: 30rpx;
+  box-shadow: 0 0 8rpx 4rpx #e8e8e8;
+  border-radius: 10rpx;
+  overflow: hidden;
+  width:92%;
+  margin:20rpx auto 30rpx;
 }
 
 .o-project {
-  background-color: #fff;
+  
   box-sizing: border-box;
 }
 
@@ -122,15 +125,15 @@ scroll-view {
 
 .user-info {
   display: flex;
-  padding: 5px 10px;
-  margin-top: 45rpx;
+  padding: 0px;
+  margin-top: 20rpx;
 }
 
 .u-info {
   display: flex;
   flex-direction: column;
   /* flex-direction: row;  */
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 .u-name {
@@ -144,15 +147,16 @@ scroll-view {
 }
 
 .txt-item-share {
-  border: 1px solid #ccc;
-  border-radius: 13px;
-  padding: 2px 10px;
+  padding: 2rpx 0;
 }
 
 .ho-info {
   font-size: 16px;
-  color: #666;
   margin: 10px 0;
+}
+.pro-item{
+  padding: 0 20rpx 0 0;
+  display: inline-block;
 }
 
 .share-btn {
@@ -172,9 +176,9 @@ scroll-view {
 }
 
 .share-icon {
-  height: 20px;
-  width: 20px;
-  margin-right: 10px;
+  height: 40rpx;
+  width: 40rpx;
+  margin:0 10rpx;
 }
 
 button::after {
@@ -434,7 +438,7 @@ button::after {
 
 
 .pro-drop-content{
-  height: 850rpx;
+  height: 900rpx;
   position: fixed;
   top: 0;
   left: 0;

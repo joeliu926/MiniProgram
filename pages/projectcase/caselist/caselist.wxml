@@ -7,9 +7,11 @@
     <!--项目滚动区  -->
     <view class="scroll-box fl">
       <scroll-view scroll-x="true" style=" white-space: nowrap;margin-left:24rpx;">
+          <view class="item-view" style="color:{{isCurrentTabProduct==0?'#9083ED':'#333333'}}"  data-itemid="0"  data-iname="全部项目" 
+          bindtap="fTopTabItem">全部项目</view>
         <block wx:for-item="item" wx:for="{{aSelectObj}}" wx:for-index="{{index}}" wx:key="item.itemid" >
-          <view class="item-view" style="color:{{item.changeColor}} "  data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}"
-          bindtap="chooseitem">{{item.iname}}</view>
+          <view class="item-view" style="color:{{isCurrentTabProduct==item.itemid?'#9083ED':'#333333'}}"  data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}"
+          bindtap="fTopTabItem">{{item.iname}}</view>
         </block>
       </scroll-view>
     </view>
@@ -108,9 +110,11 @@
     <view class='w-10 b-s bk-c-w pro-drop-content' style="display: {{isSelectDropProduct?'block':'none'}}">
       <view class='f-16 b-s title-pd'>
       <scroll-view scroll-x="true" style="white-space: nowrap;margin-left:24rpx;">
-        <block wx:for-item="item" wx:for="{{aSelectObj}}" wx:for-index="{{index}}" wx:key="item.itemid" >
-          <view class="item-view" style="color:{{item.changeColor}} "  data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}"
-          bindtap="chooseitem">{{item.iname}}</view>
+        <view class="item-view" style=" "  data-itemid="0"  data-iname="全部项目" 
+          >全部项目</view>
+        <block wx:for-item="item" wx:for="{{aTmpSelectObj}}" wx:for-index="{{index}}" wx:key="item.itemid" >
+          <view class="item-view" data-itemid="{{item.itemid}}" data-paid="{{item.paid}}" data-iname="{{item.iname}}" data-paname="{{item.paname}}"
+          >{{item.iname}}</view>
         </block>
       </scroll-view>
 
@@ -120,26 +124,26 @@
           <block wx:for="{{projectItems}}" wx:for-item="oitem" wx:key="id">
             <view class="b-s t-a-c p-name-ct {{isCurrentCate==oitem.productCode?'ca-current':''}}" data-products="{{oitem.productList}}" data-pcode="{{oitem.productCode}}" bindtap="fChooseProduct">
               {{oitem.productName}}
-              <view  class='red-radio {{caselist.isSelectCate(oitem.productList,sSelect)||(oitem.productCode=="0"&&caselist.inArray(sSelect,"0"))?"":"hide"}}'></view>
+              <view  class='red-radio {{caselist.isSelectCate(oitem.productList,sTmpSelect)||(oitem.productCode=="0"&&caselist.inArray(sTmpSelect,"0"))?"":"hide"}}'></view>
             </view>
           </block>
         </view>
         <view class='b-s dp-right'>
           <block wx:for="{{oProductCollection}}" wx:for-item="item" wx:key="id">
             <view class='item-ct' style=''>
-              <text class='c-item {{caselist.inArray(sSelect,item.productCode)?"case-sele":""}} {{caselist.inArray(selable,item.productCode)?"":"unable"}}'  data-itemid='{{item.productCode}}' data-iname='{{item.productName}}'
+              <text class='c-item {{caselist.inArray(sTmpSelect,item.productCode)?"case-sele":""}} {{caselist.inArray(selable,item.productCode)?"":"unable"}}'  data-itemid='{{item.productCode}}' data-iname='{{item.productName}}'
                   bindtap='fSelectItem'>{{item.productName}}</text> 
             </view>
           </block>
         </view>
       </view>
-      <view class='w-10 b-s bt-btn hide'>
-         <view class='f-14 b-d ensure-btn'>确定</view>
+      <view class='w-10 b-s bt-btn'>
+         <view class='f-14 b-d ensure-btn' bindtap="fConfirmSelect">确定</view>
       </view>
  
  
       <text class="tipunable" style="display:{{isShow=='true'?'block':'none'}}"> 当前项目下暂时无案例可选</text>
-      <view style="text-align:center; margin-right:20px;" class="selBtn" bindtap="selectItems">
+      <view style="text-align:center; margin-right:20px;" class="selBtn" bindtap="fUpProductItems">
         <image src='../../../public/images/arrow-up.png' class='btn-up'></image>
       </view>
     </view>

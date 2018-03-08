@@ -60,8 +60,8 @@ Page({
     oUserInfo: {},
     consultationId: "",
     projectItems: [],
-    sSelect: [],//选中的productcode
-    aSelectObj: [],//选中的product obj
+    sSelect: ["0"],//选中的productcode
+    aSelectObj: [{ iname: "全部项目", itemid: "0" }],//选中的product obj
     cases: [],
     changeColor: "#999999",
     productlistArr: [],
@@ -79,7 +79,7 @@ Page({
    */
   onLoad: function (options) {
     var _This = this;
-    var sSelect = options.itemids.split(",");//获取前一个页面的选中项目Code
+   // var sSelect =[];// options.itemids.split(",");//获取前一个页面的选中项目Code
     getApp().getUserData(function (uinfo) {
       _This.setData({
         caseIds: "",
@@ -91,17 +91,17 @@ Page({
         likeItem: "",
         shareEventId: options.shareEventId || "",
         oEvent: event.oEvent,
-        aSelectObj: JSON.parse(options.pdata),//从上一个页面跳转的数据 初始化数据
-        sSelect: sSelect,
+       // aSelectObj: JSON.parse(options.pdata),//从上一个页面跳转的数据 初始化数据
+       // sSelect: sSelect,
       });
       _This.fGetCaseList(uinfo);//获取案例
       _This.fGetDropdownProductList();//获取下拉选项的项目列表
     });
     //设置第一个项目是选中的；
-    this.data.aSelectObj[0].changeColor = '#9083ed';
+   /* this.data.aSelectObj[0].changeColor = '#9083ed';
     this.setData({
       aSelectObj: this.data.aSelectObj
-    });
+    });*/
     wx.showShareMenu({
       withShareTicket: true //要求小程序返回分享目标信息
     });
@@ -344,8 +344,8 @@ Page({
     let _This = this;
     var pdata = {
       unionid: uinfo.unionId,
-      productCodes: _This.data.sSelect || [],
-      // caseIds: _This.data.caseIds
+      //productCodes: _This.data.sSelect || [],
+      productCodes: [],
     };
     wxRequest(wxaapi.pcase.morelist.url, pdata).then(function (result) {
       if (result.data.code == 0) {
@@ -353,7 +353,7 @@ Page({
           caseList: result.data.data,
           totalCount: result.data.data.length
         });
-         //console.log("case list----", _This.data.caseList);
+         console.log("case list----", _This.data.caseList);
       } else {
         console.log("case list----", result);
       }
@@ -434,12 +434,12 @@ Page({
     for (let i = 0; i < this.data.aSelectObj.length; i++) {
       if (e.target.dataset.itemid == this.data.aSelectObj[i].itemid) {
 
-        this.data.aSelectObj[i].changeColor = '#9083ed';
+        this.data.aSelectObj[i].changeColor = '#9083ed'// '#9083ed';
         this.setData({
           aSelectObj: this.data.aSelectObj
         })
       } else {
-        this.data.aSelectObj[i].changeColor = "#000000";
+        this.data.aSelectObj[i].changeColor = "#333333";
         this.setData({
           aSelectObj: this.data.aSelectObj
         })
@@ -509,6 +509,7 @@ Page({
       pdata.productCodes =[];
     }
     wxRequest(wxaapi.pcase.morelist.url, pdata).then(function (result) {
+      console.log("-----------------eee---",result);
       if (result.data.code == 0) {
         _This.setData({
           caseList: result.data.data,

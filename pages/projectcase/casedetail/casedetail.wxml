@@ -64,9 +64,12 @@
       <view class='b-pd w-10  b-s'>
           <view class='flex fx-wp w-10 b-s'>
              <block wx:for="{{oitem.pictures}}" wx:for-item="imgItem" wx:key="ids"  wx:for-index="iIndex" >
-              <view class='img-c b-s' style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreviewCase' data-ctItdex="{{ctIndex}}" data-iIndex="{{iIndex}}" data-pictures="{{oitem.pictures}}">
-      
+              <view wx:if="{{imgItem.type==1}}" class='img-c b-s' style='background-image:url({{imgItem.url}})' data-src='{{imgItem.url}}' bindtap='imgPreviewCase' data-ctItdex="{{ctIndex}}" data-iIndex="{{iIndex}}" data-pictures="{{oitem.pictures}}">
               </view>
+            <view class="video-ct" wx:if="{{imgItem.type==2}}" >
+              <video class="video-ct" src="{{imgItem.url}}"  poster="{{imgItem.thumbnailUrl}}"  controls ></video>
+            </view>
+
             </block>
          </view>
          <view>

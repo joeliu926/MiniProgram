@@ -230,8 +230,11 @@ Page({
   fCaseDetail: function (item) {
     var _This = this;
     var did = item.target.dataset.uid;
-    wx.navigateTo({
+   /* wx.navigateTo({
       url: '../casedetail/casedetail?did=' + did + "&cstUid=" + _This.data.cstUid + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId
+    })*/
+    wx.navigateTo({
+      url: `/pages/index/casedetail/casedetail?caseid=${did}`
     })
   },
   /**

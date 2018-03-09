@@ -13,16 +13,6 @@ Page({
     oUserInfo: {},
     consultationId: "",
     caseList: [
-      {
-        "id": 0,
-        "doctorName": "",
-        "customerLogo": "",
-        "customerName": "",
-        "caseName": "",
-        "productName": "",
-        "frondFile": "",
-        "backFile": ""
-      }
     ],
     caseIds: "",
     aCaseIds: [],
@@ -75,6 +65,9 @@ Page({
     isCurrentCate:"",//当前选中的分类
     isCurrentTabProduct:0,//切换当前项目的code
     chooseSingle:[],//选择单个项目
+    pageNo:1,//分页数据
+    pageSize:2,//每页显示
+    lastPage:false,//是否是最后一页
   },
 
   /**
@@ -101,6 +94,23 @@ Page({
       withShareTicket: true //要求小程序返回分享目标信息
     });
     wx.hideShareMenu();
+  },
+  /**
+   * 到达底部
+   */
+  onReachBottom:function(){
+  console.log("fffffffffff---------");
+  let _This=this;
+  if (!_This.data.lastPage){
+    let pageNo=_This.data.pageNo;
+    pageNo++;
+    _This.setData({
+      pageNo: pageNo
+    });
+    _This.fGetCaseList();
+  }
+ 
+
   },
   /*
    *事件参数 
@@ -332,20 +342,33 @@ Page({
   /**
    *  根据传递的项目的productcode 获取案例列表  
    */
-  fGetCaseList(uinfo) {
+  fGetCaseList() {
     let _This = this;
     var pdata = {
-      unionid: uinfo.unionId,
-      productCodes: [],
+      unionid: _This.data.oUserInfo.unionId,
+      pageNo: _This.data.pageNo,
+      pageSize: _This.data.pageSize,
+      productCodes: _This.data.chooseSingle,
     };
-    wxRequest(wxaapi.pcase.morelist.url, pdata).then(function (result) {
+    wx.showLoading({
+      title: 'loading',
+    });
+   console.log("pdata-------",pdata);
+    // morelist
+    wxRequest(wxaapi.pcase.listpagebyproducts.url, pdata).then(function (result) {
+      console.log("listpagebyproducts----", result);
       if (result.data.code == 0) {
+        let caseList = _This.data.caseList||[];
+        caseList= caseList.concat(result.data.data.list);
         _This.setData({
-          caseList: result.data.data,
-          totalCount: result.data.data.length
+          caseList: caseList,
+          totalCount: result.data.data.count,
+          lastPage: result.data.data.lastPage
         });
+        wx.hideLoading();
       } else {
         console.log("case list----", result);
+        wx.hideLoading();
       }
     });
   },
@@ -474,17 +497,22 @@ Page({
     let tmpSingle = eitem.target.dataset.itemid||(sSelect.length > 0 ? sSelect[0]:""); 
     let chooseSingle = tmpSingle && tmpSingle!="0"?[tmpSingle]:[];
     _This.setData({
-      chooseSingle: chooseSingle
+      chooseSingle: chooseSingle,
+      pageNo: 1
     });
     var pdata = {
       unionid: _This.data.oUserInfo.unionId,
+      pageNo: _This.data.pageNo,
+      pageSize: _This.data.pageSize,
       productCodes: chooseSingle,
     };
-    wxRequest(wxaapi.pcase.morelist.url, pdata).then(function (result) {
+    //morelist  
+    wxRequest(wxaapi.pcase.listpagebyproducts.url, pdata).then(function (result) {
+      console.log("more list-----", result,chooseSingle,typeof(chooseSingle));
       if (result.data.code == 0) {
         _This.setData({
-          caseList: result.data.data,
-          totalCount: result.data.data.length,
+          caseList: result.data.data.list,
+          totalCount: result.data.data.count,
           isSelectDropProduct:false,
           aSelectObj:aSelectObj,
           sSelect: sSelect

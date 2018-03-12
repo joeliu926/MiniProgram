@@ -66,7 +66,7 @@ Page({
     isCurrentTabProduct:0,//切换当前项目的code
     chooseSingle:[],//选择单个项目
     pageNo:1,//分页数据
-    pageSize:2,//每页显示
+    pageSize:10,//每页显示
     lastPage:false,//是否是最后一页
   },
 
@@ -99,7 +99,7 @@ Page({
    * 到达底部
    */
   onReachBottom:function(){
-  console.log("fffffffffff---------");
+   // console.log("fffffffffff---------", this.data.lastPage);
   let _This=this;
   if (!_This.data.lastPage){
     let pageNo=_This.data.pageNo;
@@ -353,10 +353,10 @@ Page({
     wx.showLoading({
       title: 'loading',
     });
-   console.log("pdata-------",pdata);
+   //console.log("pdata-------",pdata);
     // morelist
     wxRequest(wxaapi.pcase.listpagebyproducts.url, pdata).then(function (result) {
-      console.log("listpagebyproducts----", result);
+      //console.log("listpagebyproducts----", result);
       if (result.data.code == 0) {
         let caseList = _This.data.caseList||[];
         caseList= caseList.concat(result.data.data.list);
@@ -508,10 +508,11 @@ Page({
     };
     //morelist  
     wxRequest(wxaapi.pcase.listpagebyproducts.url, pdata).then(function (result) {
-      console.log("more list-----", result,chooseSingle,typeof(chooseSingle));
+      //console.log("more list-----", result,chooseSingle,typeof(chooseSingle));
       if (result.data.code == 0) {
         _This.setData({
           caseList: result.data.data.list,
+          lastPage: result.data.data.lastPage,
           totalCount: result.data.data.count,
           isSelectDropProduct:false,
           aSelectObj:aSelectObj,

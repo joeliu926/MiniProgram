@@ -154,7 +154,8 @@ Page({
   //关闭按钮
   closewindow:function(params){
     this.setData({
-      showType: 0
+      showType: 0,
+      history:[]
     });
   },
   //输入标签
@@ -384,7 +385,7 @@ Page({
       showicon: false,
       searchName: "",
       his_showicon: false,
-      his_searchName: "",
+      his_searchName: ""
     });
   },
   chooseItem:function(params){

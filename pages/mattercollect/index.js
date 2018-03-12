@@ -317,6 +317,7 @@ Page({
     let cansubmit = true;
     let linkman = this.data.linkMan;
     if (linkman.name.length < 1 || linkman.phoneNum.length < 1) {
+      this.alertMessage("电话与姓名为必填项！", 'red')
       cansubmit = false;
     }
     let message = false;
@@ -472,6 +473,7 @@ Page({
     this.setData({
       showUpload: false
     });
+    wx.hideLoading();
   },
   delMedia:function(params){
     var tag = params.currentTarget.dataset.obj;
@@ -742,6 +744,7 @@ Page({
         wx.hideLoading();
         break;
     }
+    wx.hideLoading();
   },
   preImage:function(params){
     var tag = params.currentTarget.dataset.obj;

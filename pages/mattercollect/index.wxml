@@ -229,7 +229,7 @@
     <div style="display:block;height:100rpx;background-color:white;">
   </div>
   <div class="photo-list" >
-      <div class="photo-desc" wx:for="{{history_detail.fileVo}}" wx:for-item="oitem" wx:key="id" >
+      <div class="photo-desc" style="margin-bottom:80rpx;" wx:for="{{history_detail.fileVo}}" wx:for-item="oitem" wx:key="id" >
         <div style="{{oitem.type==1&&oitem.status!=2?'':'display:none;'}}">
             <icon type="success_no_circle" size="30" style='position:absolute;left:50rpx;top:20rpx;'/>
             <image  bindtap ="preImage" data-Obj='{{oitem}}'  style="width:100%;height:100%;" src='{{oitem.url}}'></image>
@@ -240,13 +240,14 @@
             <video  style="width:100%;height:100%;"  show-fullscreen-btn='true' id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
         </div>
 
-        <div bindtap='his_reupload'  data-Obj='{{oitem}}'  style="{{oitem.type==1&&oitem.status==2?'':'display:none;'}}">
-           <div  style='position:absolute;left:50rpx;top:20rpx;'>重新上传</div>
+        <div  style="{{oitem.type==1&&oitem.status==2?'':'display:none;'}}">
             <image style="width:100%;height:100%;" src='{{oitem.url}}'></image>
+            <div  bindtap='his_reupload'  data-Obj='{{oitem}}'  style='position:absolute;left:0px;bottom:-40px;color:white;background-color:#9083ed;height:60rpx;text-align:center;font-size:26rpx;width:145rpx;line-height:60rpx;border-radius:8rpx;'>重新上传</div>
         </div>
 
-        <div bindtap='his_reupload'  data-Obj='{{oitem}}'  style="{{oitem.type==2&&oitem.status==2?'':'display:none;'}}">
+        <div   style="{{oitem.type==2&&oitem.status==2?'':'display:none;'}}">
             <video  style="width:100%;height:100%;" show-fullscreen-btn='true' id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
+            <div  bindtap='his_reupload'  data-Obj='{{oitem}}'  style='position:absolute;left:0px;bottom:-40px;color:white;background-color:#9083ed;height:60rpx;text-align:center;font-size:26rpx;width:145rpx;line-height:60rpx;border-radius:8rpx;'>重新上传</div>
         </div>
       </div>
   </div>
@@ -280,7 +281,7 @@
   <div class="button">
     <div class='submit-btn'>
       <div style='background-color:white;color:#9083ed;border:2rpx solid #9083ed;'   bindtap='his_submit_cancel'>取消</div>
-      <div   bindtap='his_submit_OK'>重新上传</div>
+      <div   bindtap='his_submit_OK'>上传</div>
     </div>
   </div>
 </div>

@@ -1,7 +1,8 @@
 {
   "pages": [
-        "pages/mattercollect/index",
-    "pages/index/home",
+        "pages/index/home",
+    "pages/mattercollect/index",
+
     "pages/index/detail/cluedetail",
     "pages/index/casedetail/casedetail",
     "pages/projectcase/book/book",

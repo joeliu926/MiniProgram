@@ -12,7 +12,7 @@
 
         <div style="{{oitem.type==2?'':'display:none;'}}">
             <image class='cst-img'  bindtap ="delMedia"  data-Obj='{{oitem}}' style="width:35rpx;height:35rpx;position:absolute;left:-10rpx;top:-10rpx;z-index:1000;" src="../../public/images/delete-red.png"></image>
-            <video  style="width:100%;height:100%;"  id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
+            <video  style="width:100%;height:100%;"  id="myVideo" show-fullscreen-btn='true'  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
         </div>
       </div>
       <div class="photo-desc"  bindtap ="addMedia" style="font-size:50rpx;color:#eee;">+</div>
@@ -231,19 +231,22 @@
   <div class="photo-list" >
       <div class="photo-desc" wx:for="{{history_detail.fileVo}}" wx:for-item="oitem" wx:key="id" >
         <div style="{{oitem.type==1&&oitem.status!=2?'':'display:none;'}}">
+            <icon type="success_no_circle" size="30" style='position:absolute;left:50rpx;top:20rpx;'/>
             <image  bindtap ="preImage" data-Obj='{{oitem}}'  style="width:100%;height:100%;" src='{{oitem.url}}'></image>
         </div>
 
         <div style="{{oitem.type==2&&oitem.status!=2?'':'display:none;'}}">
-            <video  style="width:100%;height:100%;"  id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
+            <icon type="success_no_circle" size="30" style='position:absolute;left:50rpx;top:20rpx;z-index:1000'/>
+            <video  style="width:100%;height:100%;"  show-fullscreen-btn='true' id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
         </div>
 
         <div bindtap='his_reupload'  data-Obj='{{oitem}}'  style="{{oitem.type==1&&oitem.status==2?'':'display:none;'}}">
+           <div  style='position:absolute;left:50rpx;top:20rpx;'>重新上传</div>
             <image style="width:100%;height:100%;" src='{{oitem.url}}'></image>
         </div>
 
         <div bindtap='his_reupload'  data-Obj='{{oitem}}'  style="{{oitem.type==2&&oitem.status==2?'':'display:none;'}}">
-            <video  style="width:100%;height:100%;"  id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
+            <video  style="width:100%;height:100%;" show-fullscreen-btn='true' id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
         </div>
       </div>
   </div>

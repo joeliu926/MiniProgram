@@ -503,6 +503,16 @@ Page({
       "uploadNum": 0
     };
 
+    if (this.data.picList.length<1){
+      _this.alertMessage("上传失败，请选择图片或视频", 'red');
+      return;
+    }
+
+    if ( this.data.currentCustomer.name.length < 1) {
+      _this.alertMessage("上传失败，请选择客户", 'red');
+      return;
+    }
+
     //数据填充
     postdata.customerId = this.data.currentCustomer.id;
     postdata.unionId = this.data.oUInfo.unionId;
@@ -519,21 +529,28 @@ Page({
     wxRequest(wxaapi.collect.create.url, pdata).then(function (result) {
       if (result.data.code == 0) {
         wx.showToast({
-          title: '上传成功！',
+          title: '上传成功，待管理员审核！',
           icon: 'success',
           duration: 2000
         });
         _this.setData({ 
           history_detail: _this.data.history_detail ,
-          showType: 4
+          showType: 4,
+          currentTag:[],
+          currentCustomer: {
+            "id": 0,
+            "logo": "",
+            "name": "",
+            "phoneNum": "",
+            "gender": 1,
+            "wechatMobile": "",
+            "wxNickname": ""
+          },
+          picList:[]
         });
-        _this.getHistory(this.data.his_searchName);
+        _this.getHistory(_this.data.his_searchName);
       }else{
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none',
-          duration: 2000
-        });
+        _this.alertMessage("上传失败", 'red')
       }
     });
   },
@@ -631,6 +648,11 @@ Page({
     });
     postdata.uploadNum = postdata.fileVo.length;
 
+    if(postdata.uploadNum<1){
+      _this.alertMessage("内容无变更，无须重新上传", 'yellow')
+      return;
+    }
+
     let pdata = {
       "postobj": JSON.stringify(postdata)
     };
@@ -647,11 +669,7 @@ Page({
           showType: 4
         });
       }else{
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none',
-          duration: 2000
-        });
+        _this.alertMessage("上传失败", 'red')
       }
     });
   },

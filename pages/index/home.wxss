@@ -138,7 +138,7 @@
   vertical-align: top;
   display: inline-block;
   width: 35%;
-    text-overflow:ellipsis;
+  text-overflow:ellipsis;
   white-space:nowrap;
   text-align: right;
 }
@@ -147,10 +147,9 @@
   height: 50rpx;
   vertical-align: top;
   text-overflow: ellipsis;
-      white-space:nowrap;
+  white-space:nowrap;
   display: inline-block;
-
-    overflow: hidden;
+  overflow: hidden;
   width: 90%;
 }
 

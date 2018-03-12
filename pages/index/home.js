@@ -816,6 +816,11 @@ Page({
       url: '../destmass/destmass',
     });
   },
+  navTocollect(params){
+    wx.navigateTo({
+      url: '../mattercollect/index',
+    });
+  },
   navToCancel(){
     this.setData({
       showChoose: false

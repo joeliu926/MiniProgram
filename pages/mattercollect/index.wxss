@@ -1,0 +1,234 @@
+/* pages/mattercollect/index.wxss */
+.page{
+  background: white;
+  font-size: 30rpx;
+  display: block;
+  height:100%;
+}
+.photo-list{
+  border-bottom: 1rpx solid #eee;
+  display: block;
+  padding:20rpx 30rpx;
+}
+
+.photo-desc{
+  display: inline-block;width:145rpx;height:145rpx;
+  border: 1rpx solid #eee;
+  border-radius:10rpx;
+  line-height: 145rpx;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+  margin: 0 10rpx 10rpx 10rpx;
+}
+
+.customer{
+    border-bottom: 1rpx solid #eee;
+    display: block;
+    padding:20rpx 30rpx;
+}
+
+.tag-list{
+    border-bottom: 1rpx solid #eee;
+    display: block;
+    padding:20rpx 30rpx;
+}
+
+.history{
+    display: block;
+    padding:40rpx 30rpx;
+}
+.his-btn{
+  float:right;
+  font-size: 26rpx;
+  padding:12rpx;
+  color:#C8C2F7;
+  border-radius: 5rpx;
+  border: 1rpx solid #C8C2F7;
+}
+
+.button{
+  position: absolute;
+  bottom:0rpx;
+  display: block;
+  margin-bottom:40rpx;
+}
+
+.submit-btn {
+  padding: 10rpx 0rpx;
+  margin-bottom: 24rpx;
+
+}
+
+.submit-btn>div {
+  margin: 0 auto;
+  display: inline-block;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  background: #9083ed;
+  color: #fff;
+  font-size: 30rpx;
+  width: 320rpx;
+  text-align: center;
+  box-sizing: border-box;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+/*选择客户*/
+.choose-customer{
+  display: block;
+  background-color: white;
+  height:100%;
+}
+.opensh {
+  border-bottom: 1rpx solid #eee;
+  height: 70rpx;
+  display: block;
+  padding: 30rpx;
+}
+
+.opensh-input {
+  display: inline-block;
+  width: 100%;
+}
+
+.opensh-btn {
+  display: inline-block;
+  width: 15%;
+  color: #63da65;
+  text-align: center;
+  font-size: 30rpx;
+  vertical-align: top;
+  line-height: 70rpx;
+}
+.s-input {
+  height: 55rpx;
+  width: 590rpx;
+  text-align: center;
+  padding-left: 2rpx;
+  font-size: 30rpx;
+}
+
+.input-o {
+  margin: 0 auto;
+  padding: 6rpx 10rpx;
+  border-radius: 8px;
+  align-items: center;
+    height: 60rpx;
+  background-color: #f0eff5;
+}
+
+ .cst-img {
+  height: 66rpx;
+  width: 66rpx;
+  border-radius: 12rpx;
+  vertical-align: middle;
+}
+
+.customer-list{
+
+}
+.customer-info{
+  display: block;
+  padding: 10rpx 30rpx;
+    background-color: white;
+  border-bottom: 1rpx solid #eee;
+}
+.customer-info>div{
+    display: inline-block;
+    margin-right: 10rpx;
+    height: 90rpx;
+    line-height:  90rpx;
+    vertical-align: middle;
+}
+
+/*选择标签*/
+.choose-tag{
+  font-size: 30rpx;
+  background-color: white;
+  width:100%;
+  height:100%;
+  display: block;
+}
+
+.tag-add{
+    border-bottom: 1rpx solid #eee;
+    height: 70rpx;
+    line-height: 70rpx;
+    padding: 0rpx 30rpx;
+    display: block;
+}
+.tag-add-input{
+  width:82%;
+      height: 70rpx;
+  display:inline-block;
+}
+.tag-add-btn{
+    width:18%;
+    float: right;
+    display:inline-block;color:white;background-color:#8F82EC;
+    width:100rpx;
+    text-align: center;
+    height: 50rpx;
+    font-size: 26rpx;
+    line-height: 50rpx;
+    border-radius: 5rpx;
+}
+
+.tag-choose{
+    padding: 20rpx 30rpx;
+    display: block;
+}
+
+.tag-choose-list{
+      padding: 20rpx 0rpx;
+      display: block;
+}
+
+.tag-des{
+  padding:8rpx 8rpx 11rpx 18rpx;
+  display: inline-block;
+  margin: 20rpx 20rpx 0 0;
+  background-color: #EDEDED;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+}
+
+
+.tag-img{width:35rpx;height:35rpx;margin-left:10rpx; vertical-align:bottom;}
+
+/*添加客户*/
+
+.h-ct {
+  height: 100%;
+}
+.close-wind{
+  position:absolute;right:20rpx;top:40rpx;width:50rpx;height:50rpx;font-size:50rpx;display: block;
+}
+.contect-line {
+  border-bottom: 1rpx solid #eee;
+  margin: 0 40rpx;
+  padding: 30rpx 0;
+}
+
+/*历史上传*/
+
+.historyupload{
+    display: block;
+    height: 100%;
+    background-color: white;
+}
+
+.upload{
+  dispaly:block;width:100%;height:100%;position:absolute;left:0rpx;top:0rpx;background: rgba(0, 0, 0, 0.5);
+}
+.upload-img{
+  position:absolute;left:0rpx;bottom:300rpx;background-color:white;display:block;width:100%;text-align:center;padding:20rpx;
+}
+.upload-vid{
+  position:absolute;left:0rpx;bottom:200rpx;background-color:white;display:block;width:100%;text-align:center;padding:20rpx;
+}
+.upload-cancel{
+  position:absolute;left:0rpx;bottom:0rpx;background-color:white;display:block;width:100%;text-align:center;padding:20rpx;
+}

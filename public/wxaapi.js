@@ -1,12 +1,16 @@
 var gConfig={
-  remoteWx: "https://nihaomc.com/wx",
-  remote: "https://nihaomc.com/wxa",
-  uploadUrl: "https://nihaomc.com/uploadimg/attachment/upload"
+  remoteWx: "https://nihaomc.com/wx_dev",
+  remote: "https://nihaomc.com/wxa_dev",
+  uploadUrl: "https://nihaomc.com/uploadimg_dev/attachment/upload",
+  uploadUrlV3: "https://nihaomc.com/uploadimg_dev/attachment/upload/v3"
 }
 var urlConfig = {
   img:{
     upload:{
       url: gConfig.uploadUrl
+    },
+    uploadv3: {
+      url: gConfig.uploadUrlV3
     }
   },
   wx:{
@@ -250,6 +254,35 @@ var urlConfig = {
     },
     getbubbleprompt: {
       url: gConfig.remote + "/activityrecord/getbubbleprompt"  // 气泡  
+    }
+  },
+  collect:{
+    createtag:{
+      url: gConfig.remote +'/collect/createtag'
+    },
+    taglist: {
+      url: gConfig.remote + '/collect/taglist'
+    },
+    customerlist: {
+      url: gConfig.remote + '/collect/customerlist'
+    },
+    createcustomer: {
+      url: gConfig.remote + '/collect/createcustomer'
+    },
+    list: {
+      url: gConfig.remote + '/collect/list'
+    },
+    create: {
+      url: gConfig.remote + '/collect/create'
+    },
+    recreate: {
+      url: gConfig.remote + '/collect/recreate'
+    },
+    detail: {
+      url: gConfig.remote + '/collect/detail'
+    },
+    getthubm: {
+      url: gConfig.remote + '/collect/getthubm'
     }
   }
 }

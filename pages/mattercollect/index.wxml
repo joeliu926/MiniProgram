@@ -1,0 +1,285 @@
+<!--首页-->
+<div style="height:70rpx;line-height:70rpx;display:{{errorType?'block':'none'}};position:fixed;top:0rpx;z-index:1000;left:0rpx;width:100%; background-color:{{errorColor}};text-align:center;font-size:30rpx;color:white;vertical-align:middle;margin-top:0rpx;">
+    {{errorMessage}}
+</div>
+<div class="page" style="{{showType==0?'':'display:none;'}}">
+  <div class="photo-list" >
+      <div class="photo-desc" wx:for="{{picList}}" wx:for-item="oitem" wx:key="id" >
+        <div style="{{oitem.type==1?'':'display:none;'}}">
+            <image class='cst-img'  bindtap ="delMedia"  data-Obj='{{oitem}}' style="width:35rpx;height:35rpx;position:absolute;left:-10rpx;top:-10rpx;z-index:1000" src="../../public/images/delete-red.png"></image>
+            <image  bindtap ="preImage" data-Obj='{{oitem}}' style="width:100%;height:100%;" src='{{oitem.url}}'></image>
+        </div>
+
+        <div style="{{oitem.type==2?'':'display:none;'}}">
+            <image class='cst-img'  bindtap ="delMedia"  data-Obj='{{oitem}}' style="width:35rpx;height:35rpx;position:absolute;left:-10rpx;top:-10rpx;z-index:1000;" src="../../public/images/delete-red.png"></image>
+            <video  style="width:100%;height:100%;"  id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
+        </div>
+      </div>
+      <div class="photo-desc"  bindtap ="addMedia" style="font-size:50rpx;color:#eee;">+</div>
+  </div>
+
+  <div bindtap ="chooseShow" data-Obj='1'  class="customer">
+    <span>选择客户</span>
+    <span style="float:right;color:#999;">{{currentCustomer.name}}  ></span>
+  </div>
+
+  <div class="tag-list">
+    <div bindtap ="chooseShow" data-Obj='2' style="width:100%;display:block;">
+        <span>添加标签</span>
+        <span style="float:right;color:#999;">></span>
+    </div>
+    <div class="tag-choose-list" style="{{currentTag.length==0?'padding:0rpx 0rpx':''}}">
+        <div class="tag-des" wx:for="{{currentTag}}" wx:for-item="oitem" wx:key="id" >{{oitem.name}}<image  bindtap="deleteTag"  data-Obj='{{oitem}}' class="tag-img" src="../../public/images/delete.png"></image></div>
+    </div>
+  </div>
+
+  <div  bindtap ="chooseShow" data-Obj='4'   class="history">
+      <div class="his-btn">查看历史提交</div>
+  </div>
+
+  <div class="button">
+    <div class='submit-btn'>
+      <div style='background-color:white;color:#9083ed;border:2rpx solid #9083ed;'   bindtap='submit_cancel'>取消</div>
+      <div   bindtap='submit_OK'>上传</div>
+    </div>
+  </div>
+</div>
+
+<!--选择客户-->
+<div  class ="choose-customer" style="{{showType==1?'':'display:none;'}}">
+ <div class="close-wind" bindtap ="closewindow">×</div>
+    <div style="display:block;height:100rpx;background-color:white;">
+  </div>
+    <div class="opensh">
+      <div class="opensh-input">
+        <div class='flex input-o'>
+          <icon type='search' size='16' style='margin-right:10rpx;'></icon>
+          <input class='s-input f-16' style='text-align:left;' bindinput="searchInput" bindconfirm="searchCustomerinput" name="searchName" value="{{searchName}}" focus='{{autoFocus}}' placeholder='请输入客户名称' placeholder-class='f-12 c-9' placeholder-style='font-size:30rpx;color:#999999;' maxlength='36'
+            placeholder-class="place"></input>
+          <icon bindtap='fClearData' size='16' type='clear' class='{{showicon?"show":"hide"}}'></icon>
+        </div>
+      </div>
+    </div>
+    <div class="customer-list">
+      <div class='customer-info'>
+        <div>
+            <image class='cst-img' style="width:50rpx;height:50rpx;" src="../../public/images/bookaddicon.png"></image>
+        </div>
+        <div  bindtap ="chooseShow" data-Obj='3'  style="font-size:30rpx;">
+            新建客户
+        </div>
+      </div>
+
+      <div class='customer-info'  bindtap ="chooseItem" data-Obj='{{oitem}}'  wx:for="{{customerList}}" wx:for-item="oitem" wx:key="id" >
+        <div>
+            <image class='cst-img' src='{{oitem.logo||"../../public/images/def-userimg.png"}}'></image>
+        </div>
+        <div style="font-size:30rpx;">
+            {{oitem.name}}
+        </div>
+        <div style="font-size:28rpx;color:#999">
+            {{oitem.wechatMobile?oitem.wechatMobile:oitem.phoneNum}}
+        </div>
+      </div>
+     </div>
+</div>
+
+<!--选择标签-->
+<div class ="choose-tag"  style="{{showType==2?'':'display:none;'}}">
+ <div class="close-wind" bindtap ="closewindow">×</div>
+    <div style="display:block;height:100rpx;background-color:white;">
+  </div>
+  <div class="tag-add" style="margin-top:20rpx;">
+    <div class="tag-add-input"><input placeholder='请输入标签名称'  bindinput="inputTagText" name="tagText" value="{{tagText}}"  /></div>
+    <div class="tag-add-btn"  bindtap ="addTag" >添加</div>
+  </div>
+
+  <div bindtap="selectTag"  data-Obj='{{oitem}}'  class='customer-info' style="height:60rpx;line-height:60rpx;"  wx:for="{{tagList}}" wx:for-item="oitem" wx:key="id" >
+        <div style="font-size:30rpx;line-height:60rpx;">
+            {{oitem.name}}
+        </div>
+  </div>
+
+  <div class="tag-choose">
+    <div style="color:#999;">已选标签({{currentTag.length}})</div>
+    <div class="tag-choose-list">
+        <div class="tag-des" wx:for="{{currentTag}}" wx:for-item="oitem" wx:key="id" >{{oitem.name}}<image  bindtap="deleteTag"  data-Obj='{{oitem}}' class="tag-img" src="../../public/images/delete.png"></image></div>
+    </div>
+  </div>
+
+   <div class="button" style="width:100%;text-align:center;">
+    <div class='submit-btn'>
+      <div  bindtap='closewindow' style="width:520rpx;">完成</div>
+    </div>
+  </div>
+</div>
+
+<!--添加客户-->
+<div  style="{{showType==3?'':'display:none;'}}">
+  <div class="close-wind" bindtap ="closewindow">×</div>
+    <div style="display:block;height:100rpx;background-color:white;"></div>
+  <div>
+    <view class='p-d-ct mg-b' style='background-color:white;'>
+      <view class='flex bk-c-w fx-jc-sb contect-line'>
+        <view class='f-16'>
+          姓名
+        </view>
+        <view class='f-16'>
+          <input name="name"   class='t-r' value="{{linkMan.name}}" placeholder-style='font-size:26rpx;color:#999999;' bindinput="linkchangeName" placeholder='填写姓名'></input>
+        </view>
+      </view>
+      <view class='flex bk-c-w fx-jc-sb contect-line'>
+        <view class='f-16'>
+          性别
+        </view>
+        <view class='f-16'>
+          <radio-group class="radio-group" bindchange="radioChange">
+            <label class="radio" wx:for="{{sexitems}}" wx:for-item="oitem" wx:key="value">
+              <radio value="{{oitem.value}}" checked="{{oitem.checked}}" />{{oitem.name}}
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class='flex bk-c-w fx-jc-sb' style=' margin:0 40rpx;padding:30rpx 0;'>
+        <view class='f-16'>
+          出生日期
+        </view>
+        <view class='f-16'>
+          <picker   mode="date" value="{{linkMan.birthday}}"    bindchange="linkchangeage">
+            <view style="width:240rpx;height:60rpx;line-height:60rpx;text-align:center;">
+              {{linkMan.birthday}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class='p-d-ct mg-b' style='background-color:white;'>
+      <view class='flex bk-c-w fx-jc-sb c-p-d contect-line'>
+        <view class='f-16'>
+          电话
+        </view>
+        <view class='f-16'>
+          <input name="name" placeholder-style='font-size:24rpx;color:#999999;' class='t-r' value="{{linkMan.phoneNum}}" bindinput="linkchangephone" placeholder='输入电话'></input>
+        </view>
+      </view>
+      <view class='flex bk-c-w fx-jc-sb c-p-d' style='margin:0 40rpx;padding:30rpx 0;'>
+        <view class='f-16'>
+          微信
+        </view>
+        <view class='f-16'>
+          <input name="name" placeholder-style='font-size:26rpx;color:#999999;' class='t-r' value="{{linkMan.wechatNum}}" bindinput="linkchangewechat" placeholder='输入微信'></input>
+        </view>
+      </view>
+    </view>
+    <div class='submit-btn' style="width:100%;text-align:center;display:block;">
+      <div style='width:520rpx;'  bindtap='submitLinkman'>提交</div>
+    </div>`
+  </div>
+</div>
+<!--历史上传-->
+<div class="historyupload" style="{{showType==4?'':'display:none;'}}">
+ <div class="close-wind" bindtap ="closewindow">×</div>
+    <div style="display:block;height:100rpx;background-color:white;">
+  </div>
+    <div class="opensh">
+      <div class="opensh-input">
+        <div class='flex input-o'>
+          <icon type='search' size='16' style='margin-right:10rpx;'></icon>
+          <input class='s-input f-16' style='text-align:left;' bindinput="his_searchInput" bindconfirm="his_searchCustomerinput" name="his_searchName" value="{{his_searchName}}" focus='{{his_autoFocus}}' placeholder='请输入客户名称' placeholder-class='f-12 c-9' placeholder-style='font-size:30rpx;color:#999999;' maxlength='36'
+            placeholder-class="place"></input>
+          <icon bindtap='fClearData' size='16' type='clear' class='{{his_showicon?"show":"hide"}}'></icon>
+        </div>
+      </div>
+    </div>
+    <div class="customer-list">
+      <div class='customer-info'  bindtap="his_select"   data-Obj='{{oitem}}'  wx:for="{{history}}" wx:for-item="oitem" wx:key="id">
+        <div>
+            <image class='cst-img' src='{{oitem.customerLogo||"../../public/images/def-userimg.png"}}'></image>
+        </div>
+        <div style="font-size:30rpx;">
+            {{oitem.customerName}}
+        </div>
+        <div style="font-size:26rpx;color:#999">
+            {{oitem.customerPhone}}
+        </div>
+        <div style="font-size:26rpx;color:green;float:right;{{oitem.busStatus==2?'':'display:none;'}}">
+            已审核
+        </div>
+        <div style="font-size:26rpx;color:#FFD365;float:right;{{oitem.busStatus==1?'':'display:none;'}}">
+            待审核
+        </div>
+        <div style="font-size:26rpx;color:red;float:right;{{oitem.busStatus==3?'':'display:none;'}}">
+            未通过
+        </div>
+      </div>
+     </div>
+</div>
+
+<!--上传选择-->
+<div class="upload" style="{{showUpload==true?'':'display:none;'}}">
+  <div class="upload-img" bindtap ="selceItem" data-Obj='1'>上传图片</div>
+  <div class="upload-vid" bindtap ="selceItem" data-Obj='2'>上传视频</div>
+  <div class="upload-cancel" bindtap ="selceItem" data-Obj='3'>取消</div>
+</div>
+
+
+<!--历史详情-->
+<div class="page" style="{{showType==5?'':'display:none;'}}">
+ <div class="close-wind" bindtap ="closewindow">×</div>
+    <div style="display:block;height:100rpx;background-color:white;">
+  </div>
+  <div class="photo-list" >
+      <div class="photo-desc" wx:for="{{history_detail.fileVo}}" wx:for-item="oitem" wx:key="id" >
+        <div style="{{oitem.type==1&&oitem.status!=2?'':'display:none;'}}">
+            <image  bindtap ="preImage" data-Obj='{{oitem}}'  style="width:100%;height:100%;" src='{{oitem.url}}'></image>
+        </div>
+
+        <div style="{{oitem.type==2&&oitem.status!=2?'':'display:none;'}}">
+            <video  style="width:100%;height:100%;"  id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
+        </div>
+
+        <div bindtap='his_reupload'  data-Obj='{{oitem}}'  style="{{oitem.type==1&&oitem.status==2?'':'display:none;'}}">
+            <image style="width:100%;height:100%;" src='{{oitem.url}}'></image>
+        </div>
+
+        <div bindtap='his_reupload'  data-Obj='{{oitem}}'  style="{{oitem.type==2&&oitem.status==2?'':'display:none;'}}">
+            <video  style="width:100%;height:100%;"  id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
+        </div>
+      </div>
+  </div>
+
+  <div class="customer">
+    <span>选择客户</span>
+    <span style="float:right;color:#999;">{{history_detail.customerName}}  ></span>
+  </div>
+
+  <div class="tag-list">
+    <div style="width:100%;display:block;">
+        <span>添加标签</span>
+        <span style="float:right;color:#999;">></span>
+    </div>
+    <div class="tag-choose-list" style="{{history_detail.tagNames.length==0?'padding:0rpx 0rpx':''}}">
+        <div class="tag-des" wx:for="{{history_detail.tagNames}}" wx:for-item="oitem" wx:key="id" >{{oitem}}<image class="tag-img" src="../../public/images/delete.png"></image></div>
+    </div>
+  </div>
+
+  <div class="history">
+      <div style="display:block;width:100%;text-align:center;">
+            <div style="margin:20rpx 20rpx;background-color:#F6F6F6;display:block;padding:10rpx 10rpx; border-radius:5rpx;">
+              <div style="display:inline-block;width:10%;float:left;">
+                  <icon class='n-icon' type="info_circle" size="20" color="green"/>
+              </div>
+              <div style="display:inline-block;width:90%;">
+                  <div style="display:block;text-align:left;font-size:28rpx;">审核备注</div>
+                  <div style="display:block;text-align:left;font-size:24rpx;color:#666;">{{history_detail.remark?history_detail.remark:'暂无'}}  </div>
+              </div>
+            </div>
+      </div>
+  </div>
+  <div class="button">
+    <div class='submit-btn'>
+      <div style='background-color:white;color:#9083ed;border:2rpx solid #9083ed;'   bindtap='his_submit_cancel'>取消</div>
+      <div   bindtap='his_submit_OK'>重新上传</div>
+    </div>
+  </div>
+</div>

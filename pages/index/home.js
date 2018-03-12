@@ -808,7 +808,7 @@ Page({
   //
   navToCase(params){
     wx.navigateTo({
-      url: '../projectcase/projectcase',
+      url: '/pages/projectcase/caselist/caselist',
     });
   },
   navToGift(params) {

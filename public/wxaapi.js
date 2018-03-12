@@ -48,6 +48,9 @@ var urlConfig = {
     morelist: {
       url: gConfig.remote + "/case/morelist" //获取多案例列表
     },
+    listpagebyproducts: {
+      url: gConfig.remote + "/case/listpagebyproducts" //获取多案例列表带分页
+    },
     detail: {
       url: gConfig.remote +"/case/detail" //项目案例详情
     },

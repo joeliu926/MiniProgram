@@ -11,7 +11,20 @@ var inArray = function (arr, item) {
     return true;
   }
 }
+var isSelectCate=function(plist,pitems){
+  pitems=pitems||[];
+  var result=false;
+  plist.forEach(function(oItem, oIndex){
+    oItem.productList.forEach(function(item, index){
+      if (pitems.indexOf(item.productCode) >= 0) {
+        result = true;
+      }
+    });
+  });
+  return result;
+}
 module.exports = {
   arrayFilter: arrayFilter,
-   inArray: inArray
+   inArray: inArray,
+   isSelectCate: isSelectCate
 }

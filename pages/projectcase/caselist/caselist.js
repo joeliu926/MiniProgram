@@ -13,16 +13,6 @@ Page({
     oUserInfo: {},
     consultationId: "",
     caseList: [
-      {
-        "id": 0,
-        "doctorName": "",
-        "customerLogo": "",
-        "customerName": "",
-        "caseName": "",
-        "productName": "",
-        "frondFile": "",
-        "backFile": ""
-      }
     ],
     caseIds: "",
     aCaseIds: [],
@@ -55,30 +45,29 @@ Page({
     likeCount: 0,
     isLikeItems: {},
     /////////////////////////////////////////////////////
-    indicatorDots: false,
-    autoplay: false,
-    interval: 5000,
-    duration: 500,
-    isConsult: true,
     // 弹层
     uicondata: "",
     oUserInfo: {},
     consultationId: "",
-    itemids: [],
-    jSelect: "",
-    isactive: false,
-    ishow: false,
     projectItems: [],
-    sSelect: [],
-    arrData: [],
+    sSelect:[],// //选中的productcode
+    sTmpSelect: [],////临时的productcode
+    aSelectObj:[],// [{ iname: "全部项目", itemid: "0" }],//选中的product obj
+    aTmpSelectObj: [],// 临时选中项目
     cases: [],
-    changeColor: "#999999",
     productlistArr: [],
     selable: [],
-    allarr: [],
-    isShow: 'false',
-    current: 0,
-    productcodes: []
+    isShow: 'false',  //显示无案例提示框
+    isSelectProduct:false,//before是否打开选择项目下拉
+    productcodes: [],
+    isSelectDropProduct:true,//new是否下拉选择项目列表
+    oProductCollection:[],//下拉项目集合
+    isCurrentCate:"",//当前选中的分类
+    isCurrentTabProduct:0,//切换当前项目的code
+    chooseSingle:[],//选择单个项目
+    pageNo:1,//分页数据
+    pageSize:10,//每页显示
+    lastPage:false,//是否是最后一页
   },
 
   /**
@@ -86,12 +75,9 @@ Page({
    */
   onLoad: function (options) {
     var _This = this;
-    var itemids = options.itemids.split(",");
-    var caseIds = options.caseIds;
     getApp().getUserData(function (uinfo) {
       _This.setData({
-        isConsult: caseIds ? false : true,
-        caseIds: caseIds || "",
+        caseIds: "",
         projectName: options.iname,
         productCode: options.itemid,
         cstUid: uinfo.unionId,
@@ -100,21 +86,31 @@ Page({
         likeItem: "",
         shareEventId: options.shareEventId || "",
         oEvent: event.oEvent,
-        arrData: JSON.parse(options.pdata),//从上一个页面跳转的数据 初始化数据
-        itemids: options.itemids.split(","),
-        sSelect: itemids,
       });
       _This.fGetCaseList(uinfo);//获取案例
-    });
-    //设置第一个项目是选中的；
-    this.data.arrData[0].changeColor = '#9083ed';
-    this.setData({
-      arrData: this.data.arrData
+      _This.fGetDropdownProductList();//获取下拉选项的项目列表
     });
     wx.showShareMenu({
       withShareTicket: true //要求小程序返回分享目标信息
     });
     wx.hideShareMenu();
+  },
+  /**
+   * 到达底部
+   */
+  onReachBottom:function(){
+   // console.log("fffffffffff---------", this.data.lastPage);
+  let _This=this;
+  if (!_This.data.lastPage){
+    let pageNo=_This.data.pageNo;
+    pageNo++;
+    _This.setData({
+      pageNo: pageNo
+    });
+    _This.fGetCaseList();
+  }
+ 
+
   },
   /*
    *事件参数 
@@ -192,7 +188,6 @@ Page({
       title: '案例分享',
       path: '/pages/client/ccase/ccase?caseIds=' + caseIds + "&cstUid=" + _This.data.cstUid + "&itemid=" + _This.data.productCode + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId,
       success: function (res) {
-        console.log("share result------->",res);
         let sType =3;
         if (res.shareTickets){
           sType=2;
@@ -202,14 +197,10 @@ Page({
           isShare: false
         }); 
 
-        console.log(' _This.fUpdateShare()')
         _This.fUpdateShare();
         wx.redirectTo({
           url: '../../index/home?type=share',
         })
-        /*wx.navigateTo({
-          url: '../../index/home?type=share'
-        })*/
       }
     } 
   },
@@ -226,7 +217,7 @@ Page({
       type: _This.data.shareType // 
     };
 
-    console.log('shareData', shareData);
+
     wxRequest(wxaapi.consult.consultantupdate.url, shareData).then(function (result) {
       if (result.data.code == 0) {
         _This.setData({ projectItems: result.data.data });
@@ -244,7 +235,7 @@ Page({
     var _This = this;
     var did = item.target.dataset.uid;
     wx.navigateTo({
-      url: '../casedetail/casedetail?did=' + did + "&cstUid=" + _This.data.cstUid + '&consultationId=' + _This.data.consultationId + '&shareEventId=' + _This.data.shareEventId
+      url: `/pages/index/casedetail/casedetail?caseid=${did}`
     })
   },
   /**
@@ -254,7 +245,7 @@ Page({
 
     let _This=this;
     if (!_This.data.isAddShare){
-      _This.fGetConsultationId(_This.data.itemids.join(","), function (result) {
+      _This.fGetConsultationId(_This.data.sTmpSelect.join(","), function (result) {
         _This.setData({
           consultationId: result || "",
           isAddShare:true
@@ -264,11 +255,12 @@ Page({
     }
     var prodcutcodearr = this.data.productcodes;
     var citem = e.currentTarget.dataset.itemid;
+
     var cindex = e.currentTarget.dataset.indexi;
     var tmpList = this.data.caseList;
     var oItems = this.data.aCaseIds;
     var dindex = oItems.indexOf(citem);
-    this.data.caseList.forEach(function (item) {
+ /*   this.data.caseList.forEach(function (item) {
       if (item.id == citem) {
         item.products.forEach(item => {
           if (prodcutcodearr.indexOf(item.productCode) == -1) {
@@ -282,7 +274,7 @@ Page({
     })
     prodcutcodearr = prodcutcodearr.filter(function (pitem, pindex, oProduct) { 
       return oProduct.indexOf(pitem) == pindex;
-    })
+    })*/
 
     if (dindex < 0) {
       oItems.push(citem);
@@ -299,15 +291,6 @@ Page({
       likeItem: oItems.toString()
     });
   },
-  /**
-   * 滑动事件，改变当前的信息
-   */
-  fSwiperChange: function (e) {
-    this.setData({
-      currentPage: e.detail.current + 1
-    });
-  },
-
   /**
    * 获取会话ID，咨询师获取会话ID进行消息分享
    */
@@ -343,8 +326,6 @@ Page({
     var oData = _This.data.oEvent;
     oData.eventAttrs.triggeredTime = new Date().valueOf();
     oData.code = eType;
-
-    console.log('oData', oData);
     wxRequest(wxaapi.event.v2.url, oData).then(function (result) {
       if (result.data.code == 0) {
         if (!oData.shareEventId) {
@@ -361,204 +342,189 @@ Page({
   /**
    *  根据传递的项目的productcode 获取案例列表  
    */
-  fGetCaseList(uinfo) {
+  fGetCaseList() {
     let _This = this;
     var pdata = {
-      unionid: uinfo.unionId,
-      productCodes: _This.data.itemids || [],
-      // caseIds: _This.data.caseIds
+      unionid: _This.data.oUserInfo.unionId,
+      pageNo: _This.data.pageNo,
+      pageSize: _This.data.pageSize,
+      productCodes: _This.data.chooseSingle,
     };
-    wxRequest(wxaapi.pcase.morelist.url, pdata).then(function (result) {
+    wx.showLoading({
+      title: 'loading',
+    });
+   //console.log("pdata-------",pdata);
+    // morelist
+    wxRequest(wxaapi.pcase.listpagebyproducts.url, pdata).then(function (result) {
+      //console.log("listpagebyproducts----", result);
       if (result.data.code == 0) {
+        let caseList = _This.data.caseList||[];
+        caseList= caseList.concat(result.data.data.list);
         _This.setData({
-          caseList: result.data.data,
-          totalCount: result.data.data.length
+          caseList: caseList,
+          totalCount: result.data.data.count,
+          lastPage: result.data.data.lastPage
         });
-        // console.log("case list----", _This.data.caseList);
+        wx.hideLoading();
       } else {
         console.log("case list----", result);
+        wx.hideLoading();
+      }
+    });
+  },
+  /**
+   * 获取下拉选项项目列表
+   */
+  fGetDropdownProductList(){
+    let _This = this;
+    //全部的项目================all:0是所有有案例的项目
+    let pdata = { unionId: _This.data.oUserInfo.unionId };//,all:0
+    wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
+     
+      if (result.data.code == 0) {
+        let oCate=result.data.data;
+       // oCate.unshift({productCode: 0,productName: "全部项目",productList:[]});
+        _This.setData({
+          projectItems: oCate,
+        });
+        //console.log("get product list 所有 all--------", oCate);
+        _This.fChooseProduct();
+        //可选的项目
+        let abledata = { unionId: _This.data.oUserInfo.unionId, all: 0 };//,all:0
+        return wxRequest(wxaapi.product.list.url, abledata);
+      } else {
+        return {data:{}};
+      }
+    }).then(function (result) {
+      //console.log("get product list result all=0--------", result);
+      var codearr = ["0"];
+      if (result.data.code == 0) {
+        result.data.data.forEach(function (item) {
+          item.productList.forEach(function (oitem) {
+            oitem.productList.forEach(function (titem) {
+              codearr.push(titem.productCode);
+            });
+          });
+        });
+        _This.setData({
+          selable: codearr
+        });
+      } else {
+        console.log(result);
       }
     });
   },
   /**
    * 下拉选择 获取项目列表
    */
-  getproductitem() {
+  fGetproductItem() {
     let _This = this;
-
-    if (this.data.itemids.length > 0) {
       _This.setData({
-        isConsult: false,
-        isactive: true
-      })
-    }
-    //全部的项目================
-    let pdata = { unionId: _This.data.oUserInfo.unionId };//,all:0
-    wxRequest(wxaapi.product.list.url, pdata).then(function (result) {
-      if (result.data.code == 0) {
-        // 没有案例的项目不可用
-        var everyarr = [];
-        result.data.data.forEach(function (item) {
-          item.productList.forEach(function (oitem) {
-            oitem.productList.forEach(function (titem) {
-              // console.log(titem.productCode);
-              everyarr.push(titem.productCode);
-            })
-          })
-        })
-        _This.setData({
-          projectItems: result.data.data,
-          allarr: everyarr,
-          ishow: !_This.data.ishow,
-          isactive: _This.data.isactive,
-        });
-      } else {
-        console.log(result);
-      }
-      wx.hideLoading();
-    });
+        isSelectDropProduct:true//
+      });
+  },
+    /**
+   * 收起项目选择
+   */
+  fUpProductItems(){
+    let _This = this;
+    let sSelect = _This.data.sSelect;
+    let sTmpSelect = JSON.parse(JSON.stringify(sSelect));
 
-    //可选的项目
-    let abledata = { unionId: _This.data.oUserInfo.unionId, all: 0 };//,all:0
-    wxRequest(wxaapi.product.list.url, abledata).then(function (result) {
-      // console.log("3333333333333333333===>", result.data.data);
-      var codearr = [];
-      if (result.data.code == 0) {
-        result.data.data.forEach(function (item) {
-          item.productList.forEach(function (oitem) {
-            oitem.productList.forEach(function (titem) {
-              // console.log(titem.productCode);
-              codearr.push(titem.productCode);
-
-            })
-          })
-        })
-        _This.setData({
-          // projectItems: result.data.data,
-          selable: codearr
-        });
-      } else {
-        console.log(result);
-      }
-      wx.hideLoading();
+    let aSelectObj = _This.data.aSelectObj;
+    let aTmpSelectObj = JSON.parse(JSON.stringify(aSelectObj));
+    _This.setData({
+      isSelectDropProduct: false,//
+      sTmpSelect: sTmpSelect,
+      aTmpSelectObj: aTmpSelectObj
     });
   },
   /**
    *选择项目切换样式 （顶部）
    * 
    */
-  chooseitem(e) {
+  fTopTabItem(e) {
     var _This = this;
     var targetproductcode = e.target.dataset.itemid;
-    // 对应的案例选中
-    this.data.caseList.forEach(function (oitem, index) {
-      oitem.products.forEach(function (item, k) {
-        // console.log(item);
-        if (item.productCode == targetproductcode) {  
-          _This.setData({
-            current: index
-          })
-        }
-      })
-    })
-    // 选择对应的项目  添加选中的样式
-    for (let i = 0; i < this.data.arrData.length; i++) {
-      if (e.target.dataset.itemid == this.data.arrData[i].itemid) {
-
-        this.data.arrData[i].changeColor = '#9083ed';
-        this.setData({
-          arrData: this.data.arrData
-        })
-      } else {
-        this.data.arrData[i].changeColor = "#000000";
-        this.setData({
-          arrData: this.data.arrData
-        })
-      }
-    }
-
+    _This.setData({
+      isCurrentTabProduct: targetproductcode
+    });
+    _This.fConfirmSelect(e);
   },
   // 下拉的项目列表中选中
-  selectItem(item) {
+  fSelectItem(item) {
     let _This = this;
     let sItem = item.target.dataset;
     // 不可选
-    clearTimeout(timer);
-    if (this.data.selable.indexOf(sItem.itemid) == -1) {
-      this.setData({
+    if (this.data.selable.indexOf(sItem.itemid)<0) {
+      _This.setData({
         isShow: 'true',
-
       });
       var timer = setTimeout(function () {
         _This.setData({
           isShow: 'false'
         });
       }, 2000);
-      // clearTimeout(timer);
     } else {
-      var arr = this.data.sSelect;
-      var arrData = this.data.arrData;
-      // console.log(arr.indexOf(sItem.itemid));
-      if (arr.indexOf(sItem.itemid) == -1) {
-        arr.push(sItem.itemid);
-        arrData.push(sItem);
-        // console.log(arrData);
-      } else {
-        var index = arr.indexOf(sItem.itemid);
-        if (index > -1) {
-          arr.splice(index, 1);
-          arrData.splice(index, 1);
-          // console.log(arrData);
-        }
+      let sTmpSelect = this.data.sTmpSelect;
+      let aTmpSelectObj = this.data.aTmpSelectObj;
+    
+      let index = sTmpSelect.indexOf(sItem.itemid);
+      if (index<0) {
+        sTmpSelect.push(sItem.itemid);
+        aTmpSelectObj.push(sItem);
+      } else {   
+        sTmpSelect.splice(index, 1);
+        aTmpSelectObj.splice(index, 1);    
       }
       this.setData({
-        sSelect: arr,
-        arrData: this.data.arrData,
-        itemids: this.data.sSelect,
-        isactive: _This.data.sSelect.length > 0 ? true : false
+        sTmpSelect: sTmpSelect,
+        aTmpSelectObj: aTmpSelectObj
       });
-      // 传递相关的参数到借口
     }
-    this.setData({
-      jSelect: sItem.itemid,
-    });
-
   }
   ,
   /**
-   *在 下拉中的项目列表选好项目并更新项目的案例 
+   *在下拉中的项目列表选好项目并更新项目的案例 
    */
-  selectItems() {
+  fConfirmSelect(eitem) {
     // 选好项目从新请求案例列表
     let _This = this;
-    if (this.data.itemids.length <= 0) {
-      return false;
-    }
+    let sTmpSelect = _This.data.sTmpSelect;
+    let sSelect = JSON.parse(JSON.stringify(sTmpSelect));
+    let aTmpSelectObj = _This.data.aTmpSelectObj;
+    let aSelectObj = JSON.parse(JSON.stringify(aTmpSelectObj));
+    let tmpSingle = eitem.target.dataset.itemid||(sSelect.length > 0 ? sSelect[0]:""); 
+    let chooseSingle = tmpSingle && tmpSingle!="0"?[tmpSingle]:[];
+    _This.setData({
+      chooseSingle: chooseSingle,
+      pageNo: 1
+    });
     var pdata = {
       unionid: _This.data.oUserInfo.unionId,
-      productCodes: _This.data.itemids || [],
-      // caseIds: _This.data.caseIds
+      pageNo: _This.data.pageNo,
+      pageSize: _This.data.pageSize,
+      productCodes: chooseSingle,
     };
-    wxRequest(wxaapi.pcase.morelist.url, pdata).then(function (result) {
+    //morelist  
+    wxRequest(wxaapi.pcase.listpagebyproducts.url, pdata).then(function (result) {
+      //console.log("more list-----", result,chooseSingle,typeof(chooseSingle));
       if (result.data.code == 0) {
         _This.setData({
-          caseList: result.data.data,
-          totalCount: result.data.data.length,
-          ishow: !_This.data.ishow,
-          arrData: _This.data.arrData,
-          itemids: _This.data.sSelect,
+          caseList: result.data.data.list,
+          lastPage: result.data.data.lastPage,
+          totalCount: result.data.data.count,
+          isSelectDropProduct:false,
+          aSelectObj:aSelectObj,
+          sSelect: sSelect
         });
       } else {
-        //console.log("case list----", result);
+        console.log("case list----", result);
       }
     });
-
-    //设置第一个项目是选中的；
-    this.data.arrData[0].changeColor = '#9083ed';
-    this.setData({
-      arrData: this.data.arrData,
-      isConsult: !_This.data.isConsult,
-    })
+    !eitem.target.dataset.itemid&&aTmpSelectObj.length > 0 && _This.setData({
+      isCurrentTabProduct: aTmpSelectObj[0].itemid
+    });
   },
   /**
    * 生成海报
@@ -584,6 +550,9 @@ Page({
    */
   fAddToShare(){
     let _This = this;
+    if (_This.data.aCaseIds.length<=0){
+      return false;
+    }
     _This.setData({
       isShare: true
     });
@@ -595,6 +564,35 @@ Page({
     let _This=this;
     _This.setData({
       isShare:false
+    });
+  },
+  /**
+   * 通关分类选择项目
+   */
+  fChooseProduct(e){
+    let _This=this;
+    let projectItems=_This.data.projectItems;
+ 
+    if (projectItems.length<=0){
+      return false;
+    }
+    let products = e?e.target.dataset.products:projectItems[0].productList;
+    let isCurrentCate =e?e.target.dataset.pcode:projectItems[0].productCode;
+
+   
+
+    let oProductCollection=[];
+    products.forEach((oItem,oIndex)=>{
+      oItem.productList.forEach((item,index)=>{
+        oProductCollection.push(item);
+      });
+    });
+    if(isCurrentCate==0){
+      oProductCollection = [{ productName: "全部项目", productCode:"0"}];
+    }
+    _This.setData({
+      oProductCollection: oProductCollection,
+      isCurrentCate: isCurrentCate
     });
   }
 })

@@ -255,17 +255,15 @@
     <span>选择客户</span>
     <span style="float:right;color:#999;">{{history_detail.customerName}}  ></span>
   </div>
-
   <div class="tag-list">
     <div style="width:100%;display:block;">
         <span>添加标签</span>
         <span style="float:right;color:#999;">></span>
     </div>
     <div class="tag-choose-list" style="{{history_detail.tagNames.length==0?'padding:0rpx 0rpx':''}}">
-        <div class="tag-des" wx:for="{{history_detail.tagNames}}" wx:for-item="oitem" wx:key="id" >{{oitem}}<image class="tag-img" src="../../public/images/delete.png"></image></div>
+        <div class="tag-des" wx:for="{{history_detail.tagNames}}" wx:for-item="oitem" wx:key="id" style="padding-left:10rpx;" >{{oitem}}</div>
     </div>
   </div>
-
   <div class="history">
       <div style="display:block;width:100%;text-align:center;">
             <div style="margin:20rpx 20rpx;background-color:#F6F6F6;display:block;padding:10rpx 10rpx; border-radius:5rpx;">

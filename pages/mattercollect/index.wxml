@@ -7,17 +7,15 @@
       <div class="photo-desc" wx:for="{{picList}}" wx:for-item="oitem" wx:key="id" >
         <div style="{{oitem.type==1?'':'display:none;'}}">
             <image class='cst-img'  bindtap ="delMedia"  data-Obj='{{oitem}}' style="width:35rpx;height:35rpx;position:absolute;left:-10rpx;top:-10rpx;" src="../../public/images/delete-red.png"></image>
-            <image  bindtap ="preImage" data-Obj='{{oitem}}' style="width:100%;height:100%;" src='{{oitem.url}}'></image>
+            <image  bindtap ="preImage" mode="aspectFill" data-Obj='{{oitem}}' style="width:100%;height:100%;" src='{{oitem.url}}'></image>
         </div>
 
         <div style="{{oitem.type==2?'':'display:none;'}}">
             <image class='cst-img'  bindtap ="delMedia"  data-Obj='{{oitem}}' style="width:35rpx;height:35rpx;position:absolute;left:-10rpx;top:-10rpx;" src="../../public/images/delete-red.png"></image>
-            <image  bindtap ="preVideo" data-Obj='{{oitem}}' style="width:100%;height:100%;" src='../../public/images/video.png'></image>
+            <image  bindtap ="preVideo"  mode="aspectFill"  data-Obj='{{oitem}}' style="width:100%;height:100%;" src='../../public/images/video.png'></image>
         </div>
       </div>
       <div class="photo-desc"  bindtap ="addMedia" style="font-size:50rpx;color:#999;">+</div>
-
-        
   </div>
 
   <div bindtap ="chooseShow" data-Obj='1'  class="customer">
@@ -31,7 +29,7 @@
         <span style="float:right;color:#999;">></span>
     </div>
     <div class="tag-choose-list" style="{{currentTag.length==0?'padding:0rpx 0rpx':''}}">
-        <div class="tag-des" wx:for="{{currentTag}}" wx:for-item="oitem" wx:key="id" >{{oitem.name}}<image  bindtap="deleteTag"  data-Obj='{{oitem}}' class="tag-img" src="../../public/images/delete.png"></image></div>
+        <div class="tag-des" wx:for="{{currentTag}}" wx:for-item="oitem" wx:key="id" ><span style='margin-left:10rpx;'>{{oitem.name}}</span><image  bindtap="deleteTag"  data-Obj='{{oitem}}' class="tag-img" src="../../public/images/delete.png"></image></div>
     </div>
   </div>
 
@@ -45,12 +43,13 @@
       <div   bindtap='submit_OK'>上传</div>
     </div>
   </div>
-  <div style="width:100%;height:100%;padding:100rpx 0rpx 100rpx 0rpx;display:{{playShow?'':'none'}};position:absolute;left:0rpx;top:0rpx;background-color:white;">
-      <image class='cst-img'  bindtap ="closeVideo" style="width:55rpx;height:55rpx;position:absolute;right:16rpx;top:16rpx;z-index:1000" src="../../public/images/delete-red.png"></image>
-      <video  style="width:100%;height:80%;" autoplay="true" id="topVideo"  show-fullscreen-btn='true' objectFit="full"  src="{{playsrc}}" poster="../../public/images/play-btn.png" controls='true'></video>
-  </div>
-</div>
 
+</div>
+<div style="width:100%;height:100%;padding:100rpx 0rpx 100rpx 0rpx;display:{{playShow?'':'none'}};position:absolute;left:0rpx;top:0rpx;background-color:black;z-index:10002">
+      <!-- <image class='cst-img'  bindtap ="closeVideo" style="width:55rpx;height:55rpx;position:absolute;right:16rpx;top:16rpx;z-index:1000" src="../../public/images/delete-red.png"></image> -->
+      <div class='cst-img'  bindtap ="closeVideo" style="width:75rpx;height:75rpx;position:absolute;right:16rpx;top:16rpx;z-index:1000;color:white;font-size:30rpx;" >关闭</div>
+      <video  style="width:100%;height:80%;" autoplay="true" id="topVideo"  show-fullscreen-btn='true' objectFit="full"  src="{{playsrc}}" poster="../../public/images/play-btn.png" controls='true'></video>
+</div>
 <!--选择客户-->
 <div  class ="choose-customer" style="{{showType==1?'':'display:none;'}}">
  <div class="close-wind" bindtap ="closewindow">×</div>
@@ -249,21 +248,22 @@
       <div class="photo-desc" style="margin-bottom:80rpx;" wx:for="{{history_detail.fileVo}}" wx:for-item="oitem" wx:key="id" >
         <div style="{{oitem.type==1&&oitem.status!=2?'':'display:none;'}}">
             <icon  type="success_no_circle" size="30" style='position:absolute;left:50rpx;top:20rpx;{{oitem.status==1?"":"display:none;"}}'/>
-            <image  bindtap ="preImage" data-Obj='{{oitem}}'  style="width:100%;height:100%;" src='{{oitem.url}}'></image>
+            <image  bindtap ="preImage" data-Obj='{{oitem}}'  mode="aspectFill"   style="width:100%;height:100%;" src='{{oitem.url}}'></image>
         </div>
 
         <div style="{{oitem.type==2&&oitem.status!=2?'':'display:none;'}}">
             <icon type="success_no_circle" size="30" style='position:absolute;left:50rpx;top:20rpx;z-index:1000;{{oitem.status==1?"":"display:none;"}}'/>
-            <video  style="width:100%;height:100%;"  show-fullscreen-btn='true'  id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
+            <!-- <video  style="width:100%;height:100%;"  show-fullscreen-btn='true'  id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video> -->
+            <image  bindtap ="preVideo"  mode="aspectFill"  data-Obj='{{oitem}}' style="width:100%;height:100%;" src='../../public/images/video.png'></image>
         </div>
 
         <div  style="{{oitem.type==1&&oitem.status==2?'':'display:none;'}}">
-            <image style="width:100%;height:100%;" src='{{oitem.url}}'></image>
+            <image style="width:100%;height:100%;"  mode="aspectFill"  src='{{oitem.url}}'></image>
             <div  bindtap='his_reupload'  data-Obj='{{oitem}}'  style='position:absolute;left:0px;bottom:-40px;color:white;background-color:#9083ed;height:60rpx;text-align:center;font-size:26rpx;width:172rpx;line-height:60rpx;border-radius:8rpx;'>重新上传</div>
         </div>
 
         <div   style="{{oitem.type==2&&oitem.status==2?'':'display:none;'}}">
-            <video  style="width:100%;height:100%;" show-fullscreen-btn='true' id="myVideo"  poster="../../public/images/play-btn.png"  src="{{oitem.url}}" controls='true'></video>
+            <image  bindtap ="preVideo"  mode="aspectFill"  data-Obj='{{oitem}}' style="width:100%;height:100%;" src='../../public/images/video.png'></image>
             <div  bindtap='his_reupload'  data-Obj='{{oitem}}'  style='position:absolute;left:0px;bottom:-40px;color:white;background-color:#9083ed;height:60rpx;text-align:center;font-size:26rpx;width:172rpx;line-height:60rpx;border-radius:8rpx;'>重新上传</div>
         </div>
       </div>
@@ -279,7 +279,7 @@
         <span style="float:right;color:#999;">></span>
     </div>
     <div class="tag-choose-list" style="{{history_detail.tagNames.length==0?'padding:0rpx 0rpx':''}}">
-        <div class="tag-des" wx:for="{{history_detail.tagNames}}" wx:for-item="oitem" wx:key="id" style="padding-left:10rpx;" >{{oitem}}</div>
+        <div class="tag-des" wx:for="{{history_detail.tagNames}}" wx:for-item="oitem" wx:key="id" style="padding-left:10rpx;" ><span style='margin-left:10rpx;'>{{oitem}}</span></div>
     </div>
   </div>
   <div class="history">

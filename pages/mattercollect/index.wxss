@@ -12,31 +12,34 @@
 }
 
 .photo-desc{
-  display: inline-block;width:145rpx;height:145rpx;
-  border: 1rpx solid #eee;
+  display: inline-block;width:175rpx;height:175rpx;
+  border: 1rpx solid #999;
   border-radius:10rpx;
-  line-height: 145rpx;
+  line-height: 175rpx;
   vertical-align: middle;
   text-align: center;
   position: relative;
+  color:black;
   margin: 0 10rpx 10rpx 10rpx;
 }
 
 .customer{
     border-bottom: 1rpx solid #eee;
     display: block;
-    padding:20rpx 30rpx;
+    padding:30rpx 30rpx;
+    font-size: 30rpx;
 }
 
 .tag-list{
     border-bottom: 1rpx solid #eee;
     display: block;
-    padding:20rpx 30rpx;
+    padding:30rpx 30rpx;
+    font-size: 30rpx;
 }
 
 .history{
     display: block;
-    padding:40rpx 30rpx;
+    padding:60rpx 30rpx;
 }
 .his-btn{
   float:right;
@@ -80,6 +83,7 @@
   display: block;
   background-color: white;
   height:100%;
+  
 }
 .opensh {
   border-bottom: 1rpx solid #eee;
@@ -196,7 +200,7 @@
 }
 
 
-.tag-img{width:35rpx;height:35rpx;margin-left:10rpx; vertical-align:bottom;}
+.tag-img{width:35rpx;height:35rpx;margin-left:10rpx;margin-right:5rpx;  vertical-align:bottom;}
 
 /*添加客户*/
 
@@ -205,6 +209,13 @@
 }
 .close-wind{
   position:absolute;right:20rpx;top:40rpx;width:50rpx;height:50rpx;font-size:50rpx;display: block;
+}
+
+.close-content{
+display:block;height:100rpx;background-color:#eee;padding-top:20rpx;
+}
+.close-top{
+  width:100%;height:100%;display:block;border-top-right-radius:50rpx;border-top-left-radius:50rpx;background-color:white;
 }
 .contect-line {
   border-bottom: 1rpx solid #eee;
@@ -221,13 +232,15 @@
 }
 
 .upload{
-  dispaly:block;width:100%;height:100%;position:absolute;left:0rpx;top:0rpx;background: rgba(0, 0, 0, 0.5);
+  display:block;width:100%;height:100%;position:absolute;left:0rpx;top:0rpx;background: rgba(0, 0, 0, 0.5);
 }
 .upload-img{
-  position:absolute;left:0rpx;bottom:300rpx;background-color:white;display:block;width:100%;text-align:center;padding:20rpx;
+  position:absolute;left:0rpx;bottom:182rpx;background-color:white;display:block;width:100%;text-align:center;padding:20rpx;
+  height: 40rpx;
 }
 .upload-vid{
-  position:absolute;left:0rpx;bottom:200rpx;background-color:white;display:block;width:100%;text-align:center;padding:20rpx;
+  position:absolute;left:0rpx;bottom:100rpx;background-color:white;display:block;width:100%;text-align:center;padding:20rpx;
+  height: 40rpx;
 }
 .upload-cancel{
   position:absolute;left:0rpx;bottom:0rpx;background-color:white;display:block;width:100%;text-align:center;padding:20rpx;

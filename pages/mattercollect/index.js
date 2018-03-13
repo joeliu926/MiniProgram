@@ -51,6 +51,9 @@ Page({
       pageNo: 1,
       pageSize: 20,
       pageCount:0,
+      showAddNewCustomer:false,
+      playsrc:'',
+      playShow:false
   },
   alertMessage(content, types, times = 3000) {
     let color = "#F76260";
@@ -97,7 +100,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    wx.hideShareMenu({});
+    this.initcustomer('');
   },
 
   /**
@@ -117,7 +121,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    wx.stopPullDownRefresh();
   },
   /**
    * 页面上拉触底事件的处理函数
@@ -138,7 +142,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
   },
   //显示弹层
   chooseShow: function (params){
@@ -150,12 +153,18 @@ Page({
     if (stype==4){
       this.getHistory(this.data.his_searchName);
     }
+
+    if (stype == 1) {
+      this.initcustomer('');
+    }
   },
   //关闭按钮
   closewindow:function(params){
     this.setData({
       showType: 0,
-      history:[]
+      history:[],
+      showAddNewCustomer:false,
+      searchName:''
     });
   },
   //输入标签
@@ -190,6 +199,12 @@ Page({
   addTag:function(params){
     if (this.data.tagText.length<1)
       return;
+    if (this.data.tagText.length > 10)
+    {
+      this.alertMessage("标签不能超过十个字符", 'yellow');
+      return;
+    }
+     
     let _this = this;
     let pdata = {
       "userUnionId": this.data.oUInfo.unionId,
@@ -200,7 +215,8 @@ Page({
         let taglist = _this.data.currentTag;
         taglist.push(result.data.data);
         _this.setData({
-          currentTag: taglist
+          currentTag: taglist,
+          tagText:''
         });
       }
       else if (result.data.code==13001){
@@ -353,11 +369,16 @@ Page({
         searchName: ""
       });
     }
-
+    this.setData({
+      showAddNewCustomer: true
+    });
+    this.initcustomer(params.detail.value);
+  },
+  initcustomer:function(params){
     let _this = this;
     let pdata = {
       "userUnionid": this.data.oUInfo.unionId,
-      "fieldValue": this.data.searchName,
+      "fieldValue": params,
       "pageNo": 0,
       "pageSize": 10
     };
@@ -414,21 +435,27 @@ Page({
         wx.chooseImage({
           success: function (res) {
             var tempFilePaths = res.tempFilePaths
-            wx.uploadFile({
-              url: wxaapi.img.uploadv3.url, 
-              filePath: tempFilePaths[0],
-              name: 'file',
-              formData: {},
-              success: function (res) {
-                wx.hideLoading();
-                let oldlist = _this.data.picList;
-                let resultlist = JSON.parse(res.data).data;
-                resultlist.forEach(m=>{
-                  oldlist.push({ name: m.name,url:m.url,pic:m.url,type:1});
-                });
-                _this.setData({picList: oldlist});
-              }
+
+            tempFilePaths.forEach(m=>{
+              wx.uploadFile({
+                url: wxaapi.img.uploadv3.url,
+                filePath: m,
+                name: 'file',
+                formData: {},
+                success: function (res) {
+                  wx.hideLoading();
+                  let oldlist = _this.data.picList;
+                  let resultlist = JSON.parse(res.data).data;
+
+                  console.log('resultlist', resultlist);
+                  resultlist.forEach(m => {
+                    oldlist.push({ name: m.name, url: m.url, pic: m.url, type: 1 });
+                  });
+                  _this.setData({ picList: oldlist });
+                }
+              })
             })
+           
           }
         })
       break;
@@ -562,12 +589,14 @@ Page({
     if (params.detail.value.length > 0) {
       this.setData({
         his_showicon: true,
-        his_searchName: params.detail.value
+        his_searchName: params.detail.value,
+        history:[]
       });
     } else {
       this.setData({
         his_showicon: false,
-        his_searchName: ""
+        his_searchName: "",
+        history:[]
       });
     }
 
@@ -749,9 +778,32 @@ Page({
   },
   preImage:function(params){
     var tag = params.currentTarget.dataset.obj;
+    var picl = [];
+    this.data.picList.forEach(m=>{
+      if(m.type==1){
+        picl.push(m.url);
+      }
+    })
+
     wx.previewImage({
       current: tag.url, // 当前显示图片的http链接
-      urls: [tag.url] // 需要预览的图片http链接列表
+      urls: picl // 需要预览的图片http链接列表
     })
+  },
+  preVideo:function(params){
+    var tag = params.currentTarget.dataset.obj;
+    this.setData({
+      playShow: true,
+      playsrc: tag.url
+    });
+    let videoContext = wx.createVideoContext('topVideo');
+    videoContext.play();
+  },
+  closeVideo:function(params){
+    let videoContext = wx.createVideoContext('topVideo');
+    videoContext.pause();
+    this.setData({
+      playShow: false
+    });
   }
 })

@@ -421,9 +421,15 @@ Page({
       showUpload: true
     });
   },
+  addMedia_v: function (params) {
+    this.selceItem(2)
+  },
+  addMedia_p: function (params) {
+    this.selceItem(1)
+  },
   //上传媒体
-  selceItem:function(params){
-    var tag = params.currentTarget.dataset.obj;
+  selceItem: function (tag){
+  //  var tag = params.currentTarget.dataset.obj;
     let _this =this;
    
     wx.showLoading({
@@ -431,7 +437,7 @@ Page({
     });
 
     switch (tag){
-      case '1':
+      case 1:
         wx.chooseImage({
           success: function (res) {
             var tempFilePaths = res.tempFilePaths
@@ -459,7 +465,7 @@ Page({
           }
         })
       break;
-      case '2':
+      case 2:
         wx.chooseVideo({
           success: function (res) {
             var tempFilePaths = res.tempFilePath
@@ -538,7 +544,10 @@ Page({
       return;
     }
 
-    if ( this.data.currentCustomer.name.length < 1) {
+    if (this.data.currentCustomer.name.length < 1 && this.data.currentCustomer.wxNickname.length<1) {
+
+
+      //currentCustomer.name?currentCustomer.name:currentCustomer.wxNickname}}
       _this.alertMessage("上传失败，请选择客户", 'red');
       return;
     }
@@ -717,25 +726,30 @@ Page({
         wx.chooseImage({
           success: function (res) {
             var tempFilePaths = res.tempFilePaths
-            wx.uploadFile({
-              url: wxaapi.img.uploadv3.url,
-              filePath: tempFilePaths[0],
-              name: 'file',
-              formData: {
-                'user': 'test'
-              },
-              success: function (res) {
-                wx.hideLoading();
-                _this.data.history_detail.fileVo.forEach(m => {
-                   if(m.id==tag.id){
-                     m.name=JSON.parse(res.data).data[0].name;
-                     m.url = JSON.parse(res.data).data[0].url;
-                     m.rstatus =2;
-                   }
-                });
-                _this.setData({ history_detail: _this.data.history_detail });
-              }
+
+            tempFilePaths.forEach(m=>{
+              wx.uploadFile({
+                url: wxaapi.img.uploadv3.url,
+                filePath: m,
+                name: 'file',
+                formData: {
+                  'user': 'test'
+                },
+                success: function (res) {
+                  wx.hideLoading();
+                  _this.data.history_detail.fileVo.forEach(m => {
+                    if (m.id == tag.id) {
+                      m.name = JSON.parse(res.data).data[0].name;
+                      m.url = JSON.parse(res.data).data[0].url;
+                      m.rstatus = 2;
+                    }
+                  });
+                  _this.setData({ history_detail: _this.data.history_detail });
+                }
+              })
+
             })
+           
           }
         })
         break;
@@ -752,21 +766,35 @@ Page({
               },
               success: function (res) {
                 wx.hideLoading();
-                let oldlist = _this.data.picList;
-                let resultlist = JSON.parse(res.data).data;
-                resultlist.forEach(m => {
-                  let pdata = {
-                    "videoname": m.name
-                  };
-                  wxRequest(wxaapi.collect.getthubm.url, pdata).then(function (result) {
-                    if (result.data.code == 0) {
-                      oldlist.push({ name: m.name, url: m.url, pic: result.data.data, typ: 2 });
-                      _this.setData({ picList: oldlist });
-                    }
-                  });
+              //   let oldlist = _this.data.picList;
+              //   let resultlist = JSON.parse(res.data).data;
+
+
+              //   resultlist.forEach(m => {
+              //     let pdata = {
+              //       "videoname": m.name
+              //     };
+              //     wxRequest(wxaapi.collect.getthubm.url, pdata).then(function (result) {
+              //       if (result.data.code == 0) {
+              //         oldlist.push({ name: m.name, url: m.url, pic: result.data.data, type: 2 });
+              //         _this.setData({ picList: oldlist });
+              //       }
+              //     });
+              //   });
+
+
+                _this.data.history_detail.fileVo.forEach(m => {
+                  if (m.id == tag.id) {
+                    m.name = JSON.parse(res.data).data[0].name;
+                    m.url = JSON.parse(res.data).data[0].url;
+                    m.thumbnailUrl ="../../public/images/video.png";
+                    m.rstatus = 2;
+                  }
                 });
-              }
-            })
+                _this.setData({ history_detail: _this.data.history_detail });
+
+               }
+              })
           }
         })
         break;
